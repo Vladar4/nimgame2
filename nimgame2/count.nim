@@ -1,0 +1,88 @@
+# nimgame2/count.nim
+# Copyright (c) 2016 Vladar
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+# Vladar vladar4@gmail.com
+
+
+import
+  sdl2/sdl
+
+
+############
+# CountMgr #
+############
+
+type
+  CountMgr* = ref object
+    counter: int
+    timerId: sdl.TimerID
+    # Public
+    current*: int ##  Current counter value
+
+
+proc update*(mgr: CountMgr) {.inline.} =
+  ##  Increase the counter by one.
+  ##
+  inc(mgr.counter)
+
+
+proc countTimer(interval: uint32, param: pointer): uint32 {.cdecl.} =
+  let obj = cast[CountMgr](param)
+  obj.current = obj.counter
+  obj.counter = 0
+  return interval
+
+
+proc start*(mgr: CountMgr, interval: uint32 = 1000) =
+  ##  Start the timer.
+  ##
+  ##  ``interval`` Timer interval in ms.
+  ##
+  mgr.timerId = sdl.addTimer(interval, countTimer, cast[pointer](mgr))
+
+proc stop*(mgr: CountMgr) =
+  ##  Stop the timer.
+  ##
+  if mgr.timerId > 0:
+    discard sdl.removeTimer(mgr.timerId)
+    mgr.timerId = 0
+
+
+proc free*(mgr: CountMgr) =
+  mgr.stop()
+
+
+proc newCountMgr*(): CountMgr =
+  new result, free
+
+
+########
+# MISC #
+########
+
+proc timeDiff*(first, second: uint64): int {.inline.} =
+  ##  ``first``, ``second`` two results of ``sdl.getPerformanceCounter()``.
+  ##
+  ##  ``Return`` time difference between two time stamps (in ms).
+  ##
+  int(((second - first) * 1000) div sdl.getPerformanceFrequency())
+
+
