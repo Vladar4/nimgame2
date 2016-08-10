@@ -1,11 +1,11 @@
 import
   sdl2/sdl,
   random,
-  ../nimgame2/nimgame,
-  ../nimgame2/entity,
-  ../nimgame2/graphic,
-  ../nimgame2/scene,
-  ../nimgame2/types
+  nimgame2/nimgame,
+  nimgame2/entity,
+  nimgame2/graphic,
+  nimgame2/scene,
+  nimgame2/types
 
 type
   Spaceman* = ref object of Entity

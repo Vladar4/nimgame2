@@ -1,5 +1,5 @@
 import
-  ../nimgame2/nimgame,
+  nimgame2/nimgame,
   mainscene
 
 game = new Game
