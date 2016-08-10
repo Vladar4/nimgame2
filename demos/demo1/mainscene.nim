@@ -19,22 +19,15 @@ const
 type
   MainScene = ref object of Scene
     spacemanG: Graphic
-    spacemanL: SpacemanLogic
+    spacemanP: SpacemanPhysics
     spacemanCenter: Coord
     count: int
 
-  SpacemanLogic = ref object of Logic
+  SpacemanPhysics = ref object of Physics
 
 
-method update*(logic: SpacemanLogic, entity: Spaceman, elapsed: float) =
-  # Movement
-  entity.pos.x += entity.vel.x * elapsed
-  entity.pos.y += entity.vel.y * elapsed
-
-  # Rotation
-  entity.rot += entity.rotVel * elapsed
-  if entity.rot >= 360.0: entity.rot -= 360.0
-  elif entity.rot < 0.0: entity.rot += 360.0
+method update*(physics: SpacemanPhysics, entity: Spaceman, elapsed: float) =
+  physics.updatePhysics(entity, elapsed)
 
   # Screen collision
   if entity.pos.x < -MainScene(entity.scene).spacemanCenter.x:
@@ -53,10 +46,10 @@ proc init*(scene: MainScene) =
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.spacemanCenter.x = scene.spacemanG.w / 2
   scene.spacemanCenter.y = scene.spacemanG.h / 2
-  scene.spacemanL = new SpacemanLogic
+  scene.spacemanP = new SpacemanPhysics
   scene.count = CountStart
   for i in 1..scene.count:
-    scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanL))
+    scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
 
 
 proc free*(scene: MainScene) =
@@ -77,7 +70,7 @@ method event*(scene: MainScene, event: Event) =
       if scene.count < CountMax:
         scene.count += CountStep
         for i in scene.list.len..scene.count-1:
-          scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanL))
+          scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
     of K_Down:
       if scene.count > CountMin:
         scene.count -= CountStep
