@@ -23,7 +23,7 @@
 
 
 import
-  math, random,
+  math, parseutils, random,
   sdl2/sdl,
   sdl2/sdl_image as img,
   sdl2/sdl_gfx_primitives as gfx,
@@ -71,6 +71,7 @@ proc init*(
     bgColor = sdl.Color(r: 0, g: 0, b: 0, a: 255),
     windowFlags: uint32 = 0,
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
+    scaleQuality: range[0..2] = 0,
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitMP3
     ): bool =
@@ -81,6 +82,7 @@ proc init*(
   ##  ``bgColor``       window background color
   ##  ``windowFlags``   sdl window flags
   ##  ``rendererFlags`` sdl renderer flags
+  ##  ``scaleQuality``  scale quality (pixel sampling)
   ##  ``imageFlags``    sdl_image flags
   ##  ``mixerFlags``    sdl_mixer flags
   ##
@@ -148,6 +150,15 @@ proc init*(
       sdl.LogCategoryError, "Can't create renderer: %s", sdl.getError())
     return false
 
+  # Set renderer logical size
+  if game.renderer.renderSetLogicalSize(game.fDim.w, game.fDim.h) != 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
+        sdl.getError())
+
+  # Set renderer scale quality
+  discard sdl.setHint(sdl.HintRenderScaleQuality, $scaleQuality)
+
   # Initialize the random number generator
   randomize()
 
@@ -162,6 +173,23 @@ proc dim*(game: Game): Dim {.inline.} =
 proc title*(game: Game): string {.inline.} =
   ##  ``Return`` game window title.
   return game.fTitle
+
+
+proc logicalSize*(game: Game): Dim =
+  ##  Get logical size of the game renderer.
+  ##
+  var w, h: cint
+  game.renderer.renderGetLogicalSize(addr(w), addr(h))
+  return (w.int, h.int)
+
+
+proc `logicalSize=`*(game: Game, size: Dim) =
+  ##  Set logical size of the game renderer.
+  ##
+  if game.renderer.renderSetLogicalSize(size.w, size.h) != 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
+        sdl.getError())
 
 
 proc run*(game: Game) =
