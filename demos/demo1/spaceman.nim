@@ -1,5 +1,4 @@
 import
-  sdl2/sdl,
   random,
   nimgame2/nimgame,
   nimgame2/entity,
@@ -30,7 +29,7 @@ proc newSpaceman*(sc: Scene, gr: Graphic, lo: Logic): Spaceman =
   result.init(sc, gr, lo)
 
 
-proc renderSpaceman*(entity: Spaceman, renderer: sdl.Renderer) =
+proc renderSpaceman*(entity: Spaceman, renderer: Renderer) =
   entity.graphic.drawEx(game.renderer,
                         entity.pos,
                         entity.rot,
@@ -39,10 +38,6 @@ proc renderSpaceman*(entity: Spaceman, renderer: sdl.Renderer) =
                         entity.flip)
 
 
-method render*(entity: Spaceman, renderer: sdl.Renderer) =
+method render*(entity: Spaceman, renderer: Renderer) =
   renderSpaceman(entity, renderer)
-
-
-method update*(entity: Spaceman, elapsed: float) =
-  entity.updateEntity(elapsed)
 

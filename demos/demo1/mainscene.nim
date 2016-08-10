@@ -1,5 +1,4 @@
 import
-  sdl2/sdl,
   sdl2/sdl_gfx_primitives as gfx,
   sdl2/sdl_gfx_primitives_font as gfx_font,
   nimgame2/nimgame,
@@ -69,8 +68,8 @@ proc newMainScene*(): MainScene =
   result.init()
 
 
-method event*(scene: MainScene, event: sdl.Event) =
-  if event.kind == sdl.KeyDown:
+method event*(scene: MainScene, event: Event) =
+  if event.kind == KeyDown:
     case event.key.keysym.sym:
     of K_Escape:
       game.running = false
@@ -87,11 +86,11 @@ method event*(scene: MainScene, event: sdl.Event) =
     else: discard
 
 
-method render*(scene: MainScene, renderer: sdl.Renderer) =
+method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
   discard renderer.boxColor(
     x1 = 4, y1 = 60,
-    x2 = 258, y2 = 84,
+    x2 = 260, y2 = 84,
     0xCC000000'u32)
   discard renderer.stringColor(
     x = 8, y = 64, "Arrow Up - more entities", 0xFF0000FF'u32)
