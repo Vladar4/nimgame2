@@ -32,6 +32,8 @@ type
     logic*: Logic
     physics*: Physics
     pos*, vel*, acc*: Coord     ##  position, velocity, acceleration
+    # RenderEx
+    renderEx*: bool             ##  render with rotation and flip status
     rot*: Angle                 ##  rotation angle
     rotVel*, rotAcc: float      ##  rotation velocity, rotation acceleration
     rotCentered*: bool          ##  `true` if rotation anchor is in center
@@ -75,6 +77,7 @@ proc initEntity*(entity: Entity) =
   entity.pos = (0.0, 0.0)
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
+  entity.renderEx = false
   entity.rot = 0.0
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
@@ -89,7 +92,12 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   ##  Call it from your entity render method.
   ##
   if not (entity.graphic == nil):
-    entity.graphic.draw(renderer, entity.pos)
+    if not entity.renderEx:
+      entity.graphic.draw(renderer, entity.pos)
+    else:
+      entity.graphic.drawEx(renderer, entity.pos, entity.rot,
+                            entity.rotCentered, entity.rotAnchor,
+                            entity.flip)
 
 
 method render*(entity: Entity, renderer: sdl.Renderer) {.base.} =
