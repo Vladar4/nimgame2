@@ -59,6 +59,23 @@ proc changeBlendMod(scene: MainScene, increase = true) =
   scene.s.graphic.blendMod = b
 
 
+const
+  Resolutions = [(266, 200), (320, 240), (426, 320), (512, 384), (640, 480), (800, 600), (1024, 760), (1280, 960)]
+
+
+proc changeResolution(scene: MainScene, increase = true) =
+  # get current resolution
+  var idx = Resolutions.find(game.logicalSize)
+  # change resolution
+  if increase:
+    if idx < Resolutions.high:
+      inc(idx)
+  else: # decrease
+    if idx > 0:
+      dec(idx)
+  # set resolution
+  game.logicalSize = Resolutions[idx]
+
 
 method event*(scene: MainScene, event: Event) =
   if event.kind == KeyDown:
@@ -69,15 +86,20 @@ method event*(scene: MainScene, event: Event) =
       scene.changeBlendMod()
     of K_G:
       scene.changeBlendMod(false)
+    of K_Y:
+      scene.changeResolution()
+    of K_H:
+      scene.changeResolution(false)
     else: discard
 
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
   let c = scene.s.graphic.colorMod
+  let res = game.logicalSize
   discard renderer.boxColor(
     x1 = 4, y1 = 60,
-    x2 = 196, y2 = 108,
+    x2 = 220, y2 = 116,
     0xCC000000'u32)
   discard renderer.stringColor(
     x = 8, y = 64, "Q/A - red mod: " & $c.r,
@@ -93,6 +115,9 @@ method render*(scene: MainScene, renderer: Renderer) =
     0xFF0000FF'u32)
   discard renderer.stringColor(
     x = 8, y = 96, "T/G - blend mod: " & $scene.s.graphic.blendMod,
+    0xFF0000FF'u32)
+  discard renderer.stringColor(
+    x = 8, y = 104, "Y/H - resolution: " & $res.w & "x" & $res.h,
     0xFF0000FF'u32)
 
 
