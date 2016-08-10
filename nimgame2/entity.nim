@@ -58,7 +58,7 @@ method update*(logic: Logic, entity: Entity, elapsed: float) {.base.} =
 ###########
 
 
-method updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
+proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
   ##  Default physics procedure. Disabled by default.
   ##
   ##  Call it from your entity physics update method.
