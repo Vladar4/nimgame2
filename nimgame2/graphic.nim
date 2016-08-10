@@ -144,11 +144,11 @@ proc draw*(graphic: Graphic,
   if graphic.texture == nil:
     return
 
+  var srcRect = region
   var dstRect = sdl.Rect(x: pos.x.int,
                       y: pos.y.int,
                       w: size.w,
                       h: size.h)
-  var srcRect = region
   discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
 
 
@@ -269,11 +269,11 @@ proc drawEx*(graphic: Graphic,
     drawEx(graphic, renderer, pos, angle, centered, anchor, flip)
     return
 
+  var srcRect = region
   var dstRect = sdl.Rect(x: pos.x.int,
                          y: pos.y.int,
                          w: size.w,
                          h: size.h)
-  var srcRect = region
   var anchorPoint: sdl.Point
   if not centered:
     anchorPoint.x = anchor.x.cint
@@ -282,4 +282,75 @@ proc drawEx*(graphic: Graphic,
                                 angle,
                                 if centered: nil else: addr(anchorPoint),
                                 sdl.RendererFlip(flip))
+
+
+########
+# MODS #
+########
+
+proc colorMod*(graphic: Graphic): Color =
+  ##  TODO
+  ##
+  var r, g, b: uint8
+  result = Color(r: 0, g: 0, b: 0, a: 0)
+
+  if graphic.texture.getTextureColorMod(addr(r), addr(g), addr(b)) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't get texture color mod: %s",
+                    sdl.getError())
+    return
+
+  return Color(r: r, g: g, b: b, a: 0xFF)
+
+
+proc `colorMod=`*(graphic: Graphic, color: Color) =
+  ##  TODO
+  ##
+  if graphic.texture.setTextureColorMod(color.r, color.g, color.b) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't set texture color mod: %s",
+                    sdl.getError())
+
+
+proc alphaMod*(graphic: Graphic): uint8 =
+  ##  TODO
+  ##
+  var a: uint8
+  if graphic.texture.getTextureAlphaMod(addr(a)) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't get texture alpha mod: %s",
+                    sdl.getError())
+    return 0xFF
+  return a
+
+
+proc `alphaMod=`*(graphic: Graphic, alpha: uint8) =
+  ##  TODO
+  ##
+  if graphic.texture.setTextureAlphaMod(alpha) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't set texture alpha mod: %s",
+                    sdl.getError())
+
+
+proc blendMod*(graphic: Graphic): Blend =
+  ##  TODO
+  ##
+  var blend: sdl.BlendMode
+
+  if graphic.texture.getTextureBlendMode(addr(blend)) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't get texture blend mode: %s",
+                    sdl.getError())
+    return Blend.none
+  return Blend(blend)
+
+
+proc `blendMod=`*(graphic: Graphic, blend: Blend) =
+  ##  TODO
+  ##
+  if graphic.texture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't set texture blend mode: %s",
+                    sdl.getError())
 

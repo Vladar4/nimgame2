@@ -30,7 +30,7 @@ import
   sdl2/sdl_gfx_primitives_font as gfx_font,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  count, scene, types
+  count, input, scene, types
 
 
 type
@@ -196,6 +196,8 @@ proc run*(game: Game) =
     lag += elapsed
 
     # Events handling
+    updateKeyboard()
+
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
@@ -230,7 +232,7 @@ proc run*(game: Game) =
     if game.showInfo:
       # Background
       discard game.renderer.boxColor(
-        x1 = 4, y1 = 4, x2 = 258, y2 = 52, 0xCC000000'u32)
+        x1 = 4, y1 = 4, x2 = 260, y2 = 52, 0xCC000000'u32)
       # Show FPS
       discard game.renderer.stringColor(
         x = 8, y = 8, $fpsMgr.current & " FPS", 0xFFFFFFFF'u32)
