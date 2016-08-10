@@ -38,8 +38,8 @@ type
   Blend* {.size: sizeof(cint), pure.} = enum
     none  = sdl.BlendModeNone
     blend = sdl.BlendModeBlend
-    `add` = sdl.BlendModeAdd
-    `mod` = sdl.BlendModeMod
+    bAdd = sdl.BlendModeAdd
+    bMod = sdl.BlendModeMod
 
   Flip* {.size: sizeof(cint), pure.} = enum
     none        = sdl.FlipNone,
