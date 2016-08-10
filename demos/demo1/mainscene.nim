@@ -14,7 +14,7 @@ const
   CountMin = 100
   CountMax = 50_000
   CountStep = 100
-  CountStart = 1_000
+  CountStart = 500
 
 
 type
@@ -60,8 +60,12 @@ proc init*(scene: MainScene) =
     scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanL))
 
 
+proc free*(scene: MainScene) =
+  scene.spacemanG.free
+
+
 proc newMainScene*(): MainScene =
-  result = new MainScene
+  new result, free
   result.init()
 
 
