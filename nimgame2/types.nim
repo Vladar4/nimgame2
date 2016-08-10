@@ -22,12 +22,27 @@
 # Vladar vladar4@gmail.com
 
 
+import
+  sdl2/sdl
+
+
+export
+  sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Renderer
+
+
 type
   Coord* = tuple[x: float, y: float]  ##  Coordinates type
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
+
+  Blend* {.size: sizeof(cint), pure.} = enum
+    none  = sdl.BlendModeNone
+    blend = sdl.BlendModeBlend
+    `add` = sdl.BlendModeAdd
+    `mod` = sdl.BlendModeMod
+
   Flip* {.size: sizeof(cint), pure.} = enum
-    none =        0x00000000,
-    horizontal =  0x00000001,
-    vertical =    0x00000002,
-    both =        0x00000003
+    none        = sdl.FlipNone,
+    horizontal  = sdl.FlipHorizontal,
+    vertical    = sdl.FlipVertical,
+    both        = sdl.FlipBoth
