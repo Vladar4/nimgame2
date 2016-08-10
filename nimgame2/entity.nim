@@ -31,14 +31,14 @@ type
     graphic*: Graphic
     logic*: Logic
     physics*: Physics
-    pos*, vel*, acc*: Coord     ##  position, velocity, acceleration
+    pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
     # RenderEx
-    renderEx*: bool             ##  render with rotation and flip status
-    rot*: Angle                 ##  rotation angle
-    rotVel*, rotAcc: float      ##  rotation velocity, rotation acceleration
-    rotCentered*: bool          ##  `true` if rotation anchor is in center
-    rotAnchor*: Coord           ##  rotation anchor position
-    flip*: Flip                 ##  texture flip status
+    renderEx*: bool               ##  render with rotation and flip status
+    rot*: Angle                   ##  rotation angle
+    rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
+    rotCentered*: bool            ##  `true` if rotation anchor is in center
+    rotAnchor*: Coord             ##  rotation anchor position
+    flip*: Flip                   ##  texture flip status
 
   Logic* = ref object of RootObj
 
@@ -56,6 +56,28 @@ method update*(logic: Logic, entity: Entity, elapsed: float) {.base.} =
 ###########
 # Physics #
 ###########
+
+
+method updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
+  ##  Default physics procedure. Disabled by default.
+  ##
+  ##  Call it from your entity physics update method.
+  ##
+
+  # velocity
+  entity.vel.x += entity.acc.x * elapsed - entity.drg.x * elapsed
+  entity.vel.y += entity.acc.y * elapsed - entity.drg.y * elapsed
+
+  # position
+  entity.pos.x += entity.vel.x * elapsed
+  entity.pos.y += entity.vel.y * elapsed
+
+  # rotation velocity
+  entity.rotVel += entity.rotAcc * elapsed - entity.rotDrg * elapsed
+
+  # rotatiton
+  entity.rot += entity.rotVel * elapsed
+
 
 method update*(physics: Physics, entity: Entity, elapsed: float) {.base.} =
   discard
@@ -77,10 +99,12 @@ proc initEntity*(entity: Entity) =
   entity.pos = (0.0, 0.0)
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
+  entity.drg = (0.0, 0.0)
   entity.renderEx = false
   entity.rot = 0.0
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
+  entity.rotDrg = 0.0
   entity.rotCentered = true
   entity.rotAnchor = (0.0, 0.0)
   entity.flip = Flip.none
