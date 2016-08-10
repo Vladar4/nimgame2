@@ -192,6 +192,31 @@ proc `logicalSize=`*(game: Game, size: Dim) =
         sdl.getError())
 
 
+proc viewport*(game: Game): Rect =
+  ##  Get current viewport.
+  ##
+  var rect: Rect
+  game.renderer.renderGetViewport(addr(rect))
+  return rect
+
+
+proc `viewport=`*(game: Game, rect: Rect) =
+  ##  Set current viewport.
+  ##
+  var r: sdl.Rect = rect
+  if game.renderer.renderSetViewport(addr(r)) != 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't set viewport: %s",
+        sdl.getError())
+
+
+proc resetViewport*(game: Game) =
+  if game.renderer.renderSetViewport(nil) != 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't reset viewport: %s",
+        sdl.getError())
+
+
 proc run*(game: Game) =
   ##  Start the game.
   ##

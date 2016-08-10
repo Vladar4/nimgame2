@@ -27,7 +27,7 @@ import
 
 
 export
-  sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Renderer
+  sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Rect, sdl.Renderer
 
 
 type
