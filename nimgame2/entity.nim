@@ -64,18 +64,44 @@ proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
   ##  Call it from your entity physics update method.
   ##
 
-  # velocity
-  entity.vel.x += entity.acc.x * elapsed - entity.drg.x * elapsed
-  entity.vel.y += entity.acc.y * elapsed - entity.drg.y * elapsed
+  # acceleration -> velocity
+  entity.vel.x += entity.acc.x * elapsed
+  entity.vel.y += entity.acc.y * elapsed
 
-  # position
+  # drag -> velocity
+  let absx = entity.vel.x.abs
+  if absx > 0.0:
+    var dx = entity.drg.x * elapsed
+    if dx > absx:
+      entity.vel.x = 0.0
+    else:
+      entity.vel.x += (if entity.vel.x > 0.0: -dx else: dx)
+
+  let absy = entity.vel.y.abs
+  if absy > 0.0:
+    var dy = entity.drg.y * elapsed
+    if dy > absy:
+      entity.vel.y = 0.0
+    else:
+      entity.vel.y += (if entity.vel.y > 0.0: -dy else: dy)
+
+  # velocity -> position
   entity.pos.x += entity.vel.x * elapsed
   entity.pos.y += entity.vel.y * elapsed
 
-  # rotation velocity
-  entity.rotVel += entity.rotAcc * elapsed - entity.rotDrg * elapsed
+  # rotation acceleration -> rotation velocity
+  entity.rotVel += entity.rotAcc * elapsed
 
-  # rotatiton
+  # rotation drag -> rotation velocity
+  let absr = entity.rotVel.abs
+  if absr > 0.0:
+    var dr = entity.rotDrg * elapsed
+    if dr > absr:
+      entity.rotVel = 0.0
+    else:
+      entity.rotVel += (if entity.rotVel > 0.0: -dr else: dr)
+
+  # rotatiton velocity -> rotation
   entity.rot += entity.rotVel * elapsed
 
 
