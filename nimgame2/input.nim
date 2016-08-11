@@ -23,24 +23,89 @@
 
 
 import
-  sdl2/sdl
+  sdl2/sdl,
+  types
 
 
 export
   sdl.Scancode, sdl.Keymod
 
 
-var kbd: ptr array[sdl.NumScancodes.int, uint8]
+type
+  Button* {.size: sizeof(int32), pure.} = enum
+    left = sdl.ButtonLeft,
+    middle = sdl.ButtonMiddle,
+    right = sdl.ButtonRight,
+    x1 = sdl.ButtonX1,
+    x2 = sdl.ButtonX2
 
+
+var
+  kbd: ptr array[sdl.NumScancodes.int, uint8]
+  m: Coord2
+  mBtn: int32
+
+
+############
+# KEYBOARD #
+############
 
 template updateKeyboard*() =
+  ##  Called automatically from the main game cycle.
+  ##
   kbd = sdl.getKeyboardState(nil)
 
 
 template pressed*(scancode: Scancode): bool =
+  ##  Check if ``scancode`` (keyboard key) is pressed.
+  ##
   kbd[scancode.int] > 0'u8
 
 
 template pressed*(keymod: Keymod): bool =
+  ##  Check if ``keymod`` (keyboard mod key) is pressed.
+  ##
   sdl.getModState() and keymod
+
+
+#########
+# MOUSE #
+#########
+
+template updateMouse*() =
+  ##  Called automatically from the main game cycle.
+  ##
+  var ax, ay, rx, ry: cint
+  mBtn = sdl.getMouseState(addr(ax), addr(ay)).int
+  discard sdl.getRelativeMouseState(addr(rx), addr(ry))
+  m = ((ax.float, ay.float), (rx.float, ry.float))
+
+
+template mouse*(): Coord2 =
+  ##  ``Return`` current mouse position.
+  ##
+  m
+
+
+template mouseRelative*(enabled: bool): bool =
+  ##  Set relative mouse mode.
+  ##
+  sdl.setRelativeMouseMode(enabled) == 0
+
+
+template mouseCapture*(enabled: bool): bool =
+  ##  Capture mouse
+  sdl.captureMouse(enabled) == 0
+
+
+template pressed*(button: Button): bool =
+  ##  Check if mouse ``button`` is pressed.
+  ##
+  (sdl.button(button.int32) and mBtn) > 0
+
+
+template pressed*(button: int32): bool =
+  ##  Check if mouse ``button`` is pressed.
+  ##
+  (sdl.button(button) and mBtn) > 0
 

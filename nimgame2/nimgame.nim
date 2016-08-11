@@ -250,6 +250,7 @@ proc run*(game: Game) =
 
     # Events handling
     updateKeyboard()
+    updateMouse()
 
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
