@@ -36,7 +36,8 @@ import
 type
   Game* = ref object
     # Private
-    fDim: Dim
+    fSize, fLogicalSize: Dim
+    fScale: Coord
     fTitle: string
     # Public
     bgColor*: sdl.Color     ##  Screen clearing color
@@ -88,8 +89,11 @@ proc init*(
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
-  game.fDim.w = w
-  game.fDim.h = h
+  game.fSize.w = w
+  game.fSize.h = h
+  game.fLogicalSize.w = w
+  game.fLogicalSize.h = h
+  game.fScale = (1.0, 1.0)
   game.fTitle = title
   game.bgColor = bgColor
 
@@ -136,7 +140,7 @@ proc init*(
   game.window = sdl.createWindow(
     game.fTitle,
     sdl.WindowPosUndefined, sdl.WindowPosUndefined,
-    game.fDim.w, game.fDim.h,
+    game.fSize.w, game.fSize.h,
     windowFlags)
   if game.window == nil:
     sdl.logCritical(
@@ -151,7 +155,7 @@ proc init*(
     return false
 
   # Set renderer logical size
-  if game.renderer.renderSetLogicalSize(game.fDim.w, game.fDim.h) != 0:
+  if game.renderer.renderSetLogicalSize(game.fSize.w, game.fSize.h) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
         sdl.getError())
@@ -165,9 +169,9 @@ proc init*(
   return true
 
 
-proc dim*(game: Game): Dim {.inline.} =
+proc size*(game: Game): Dim {.inline.} =
   ##  ``Return`` game window dimensions.
-  return game.fDim
+  return game.fSize
 
 
 proc title*(game: Game): string {.inline.} =
@@ -175,12 +179,10 @@ proc title*(game: Game): string {.inline.} =
   return game.fTitle
 
 
-proc logicalSize*(game: Game): Dim =
+proc logicalSize*(game: Game): Dim {.inline.} =
   ##  Get logical size of the game renderer.
   ##
-  var w, h: cint
-  game.renderer.renderGetLogicalSize(addr(w), addr(h))
-  return (w.int, h.int)
+  return game.fLogicalSize
 
 
 proc `logicalSize=`*(game: Game, size: Dim) =
@@ -190,6 +192,29 @@ proc `logicalSize=`*(game: Game, size: Dim) =
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
         sdl.getError())
+    return
+  game.fLogicalSize = size
+  game.fScale.x = game.fSize.w / game.fLogicalSize.w
+  game.fScale.y = game.fSize.h / game.fLogicalSize.h
+
+
+proc scale*(game: Game): Coord {.inline.} =
+  ##  Get scale of the game renderer.
+  ##
+  return game.fScale
+
+
+proc `scale=`*(game: Game, scale: Coord) =
+  ##  Set scale of the game renderer.
+  ##
+  if game.renderer.renderSetScale(scale.x, scale.y) != 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't set renderer scale: %s",
+      sdl.getError())
+    return
+  game.fScale = scale
+  game.fLogicalSize.w = int(game.fSize.w.float / game.fScale.x)
+  game.fLogicalSize.h = int(game.fSize.h.float / game.fScale.y)
 
 
 proc viewport*(game: Game): Rect =

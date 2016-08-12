@@ -34,9 +34,11 @@ method update*(physics: SpacemanPhysics, entity: Spaceman, elapsed: float) =
     entity.vel.x *= -1
   if entity.pos.y < -MainScene(entity.scene).spacemanCenter.y:
     entity.vel.y *= -1
-  if entity.pos.x >= game.dim.w.float + MainScene(entity.scene).spacemanCenter.x:
+  if entity.pos.x >= game.size.w.float +
+                     MainScene(entity.scene).spacemanCenter.x:
     entity.vel.x *= -1
-  if entity.pos.y >= game.dim.h.float + MainScene(entity.scene).spacemanCenter.y:
+  if entity.pos.y >= game.size.h.float +
+                     MainScene(entity.scene).spacemanCenter.y:
     entity.vel.y *= -1
 
 

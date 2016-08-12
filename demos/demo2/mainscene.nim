@@ -1,4 +1,5 @@
 import
+  math,
   sdl2/sdl_gfx_primitives as gfx,
   sdl2/sdl_gfx_primitives_font as gfx_font,
   nimgame2/nimgame,
@@ -60,21 +61,24 @@ proc changeBlendMod(scene: MainScene, increase = true) =
 
 
 const
-  Resolutions = [(266, 200), (320, 240), (426, 320), (512, 384), (640, 480), (800, 600), (1024, 760), (1280, 960)]
-
+  ScaleMax = 3
+  ScaleMin = 0.5
+  ScaleMod = 0.25
 
 proc changeResolution(scene: MainScene, increase = true) =
-  # get current resolution
-  var idx = Resolutions.find(game.logicalSize)
-  # change resolution
+  # get current scale
+  var scale = game.scale
+  # change scale
   if increase:
-    if idx < Resolutions.high:
-      inc(idx)
+    if scale.x < ScaleMax:
+      scale.x += ScaleMod
+      scale.y += ScaleMod
   else: # decrease
-    if idx > 0:
-      dec(idx)
+    if scale.x > ScaleMin:
+      scale.x -= ScaleMod
+      scale.y -= ScaleMod
   # set resolution
-  game.logicalSize = Resolutions[idx]
+  game.scale = scale
 
 
 method event*(scene: MainScene, event: Event) =
@@ -97,9 +101,10 @@ method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
   let c = scene.s.graphic.colorMod
   let res = game.logicalSize
+  let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
   discard renderer.boxColor(
     x1 = 4, y1 = 60,
-    x2 = 220, y2 = 116,
+    x2 = 220, y2 = 124,
     0xCC000000'u32)
   discard renderer.stringColor(
     x = 8, y = 64, "Q/A - red mod: " & $c.r,
@@ -118,6 +123,9 @@ method render*(scene: MainScene, renderer: Renderer) =
     0xFF0000FF'u32)
   discard renderer.stringColor(
     x = 8, y = 104, "Y/H - resolution: " & $res.w & "x" & $res.h,
+    0xFF0000FF'u32)
+  discard renderer.stringColor(
+    x = 8, y = 112, "Scale: " & $scale.x & "x" & $scale.y,
     0xFF0000FF'u32)
 
 
