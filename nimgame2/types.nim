@@ -47,3 +47,172 @@ type
     horizontal  = sdl.FlipHorizontal,
     vertical    = sdl.FlipVertical,
     both        = sdl.FlipBoth
+
+
+#########
+# COORD #
+#########
+
+proc `+`*(c1, c2: Coord): Coord {.inline.} =
+  result.x = c1.x + c2.x
+  result.y = c1.y + c2.y
+
+
+proc `+=`*(c1: var Coord, c2: Coord) {.inline.} =
+  c1.x += c2.x
+  c1.y += c2.y
+
+
+proc `-`*(c1, c2: Coord): Coord {.inline.} =
+  result.x = c1.x - c2.x
+  result.y = c1.y - c2.y
+
+
+proc `-=`*(c1: var Coord, c2: Coord) {.inline.} =
+  c1.x -= c2.x
+  c1.x -= c2.y
+
+
+proc `*`*(c1, c2: Coord): Coord {.inline.} =
+  result.x = c1.x * c2.x
+  result.y = c1.y * c2.y
+
+
+proc `*=`*(c1: var Coord, c2: Coord) {.inline.} =
+  c1.x *= c2.x
+  c1.y *= c2.y
+
+
+proc `/`*(c1, c2: Coord): Coord {.inline.} =
+  result.x = c1.x / c2.x
+  result.y = c1.y / c2.y
+
+
+proc `/=`*(c1: var Coord, c2: Coord) {.inline.} =
+  c1.x /= c2.x
+  c1.y /= c2.y
+
+
+proc `+`*(c: Coord, v: float): Coord {.inline.} =
+  result.x = c.x + v
+  result.y = c.y + v
+
+
+proc `+=`*(c: var Coord, v: float) {.inline.} =
+  c.x += v
+  c.y += v
+
+
+proc `-`*(c: Coord, v: float): Coord {.inline.} =
+  result.x = c.x - v
+  result.y = c.y - v
+
+
+proc `-=`*(c: var Coord, v: float) {.inline.} =
+  c.x -= v
+  c.y -= v
+
+
+proc `*`*(c: Coord, v: float): Coord {.inline.} =
+  result.x = c.x * v
+  result.y = c.y * v
+
+
+proc `*=`*(c: var Coord, v: float) {.inline.} =
+  c.x *= v
+  c.y *= v
+
+
+proc `/`*(c: Coord, v: float): Coord {.inline.} =
+  result.x = c.x / v
+  result.y = c.y / v
+
+
+proc `/=`*(c: var Coord, v: float) {.inline.} =
+  c.x /= v
+  c.y /= v
+
+
+#######
+# DIM #
+#######
+
+proc `+`*(d1, d2: Dim): Dim {.inline.} =
+  result.w = d1.w + d2.w
+  result.h = d1.h + d2.h
+
+
+proc `+=`*(d1: var Dim, d2: Dim) {.inline.} =
+  d1.w += d2.w
+  d1.h += d2.h
+
+
+proc `-`*(d1, d2: Dim): Dim {.inline.} =
+  result.w = d1.w - d2.w
+  result.h = d1.h - d2.h
+
+
+proc `-=`*(d1: var Dim, d2: Dim) {.inline.} =
+  d1.w -= d2.w
+  d1.h -= d2.h
+
+
+proc `*`*(d1, d2: Dim): Dim {.inline.} =
+  result.w = d1.w * d2.w
+  result.h = d1.h * d2.h
+
+
+proc `*=`*(d1: var Dim, d2: Dim) {.inline.} =
+  d1.w *= d2.w
+  d1.h *= d2.h
+
+
+proc `/`*(d1, d2: Dim): Dim {.inline.} =
+  result.w = d1.w div d2.w
+  result.h= d1.h div d2.h
+
+
+proc `/=`*(d1: var Dim, d2: Dim) {.inline.} =
+  d1.w = d1.w div d2.w
+  d1.h = d1.h div d2.h
+
+
+proc `+`*(d: Dim, v: int): Dim {.inline.} =
+  result.w = d.w + v
+  result.h = d.h + v
+
+
+proc `+=`*(d: var Dim, v: int) {.inline.} =
+  d.w += v
+  d.h += v
+
+
+proc `-`*(d: Dim, v: int): Dim {.inline.} =
+  result.w = d.w - v
+  result.h = d.h - v
+
+
+proc `-=`*(d: var Dim, v: int) {.inline.} =
+  d.w -= v
+  d.h -= v
+
+
+proc `*`*(d: Dim, v: int): Dim {.inline.} =
+  result.w = d.w * v
+  result.h = d.h * v
+
+
+proc `*=`*(d: var Dim, v: int) {.inline.} =
+  d.w *= v
+  d.h *= v
+
+
+proc `/`*(d: Dim, v: int): Dim {.inline.} =
+  result.w = d.w div v
+  result.h= d.h div v
+
+
+proc `/=`*(d: var Dim, v: int): Dim {.inline.} =
+  d.w = d.w div v
+  d.h = d.h div v
+
