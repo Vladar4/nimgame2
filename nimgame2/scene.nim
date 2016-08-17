@@ -29,7 +29,10 @@ import
 
 type
   Scene* = ref object of RootObj
-    list*: seq[Entity]
+    when defined(faststack):
+      list*: FastStack[Entity]
+    else:
+      list*: seq[Entity]
 
 
 #########
@@ -38,7 +41,10 @@ type
 
 
 proc init*(scene: Scene) =
-  scene.list = @[]
+  when defined(faststack):
+    scene.list = newFastStack[Entity](1_000)
+  else:
+    scene.list = @[]
 
 
 method event*(scene: Scene, e: sdl.Event) {.base.} = discard
