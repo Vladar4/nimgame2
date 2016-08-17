@@ -31,7 +31,7 @@ import
 type
   Graphic* = ref object of RootObj
     texture*: sdl.Texture
-    dim: Dim
+    fSize: Dim
 
 
 ########
@@ -70,16 +70,20 @@ proc load*(graphic: Graphic, renderer: sdl.Renderer, file: string): bool =
                     sdl.getError)
     sdl.destroyTexture(graphic.texture)
     return false
-  graphic.dim.w = w
-  graphic.dim.h = h
+  graphic.fSize.w = w
+  graphic.fSize.h = h
 
 
 proc w*(graphic: Graphic): int {.inline.} =
-  graphic.dim.w
+  graphic.fSize.w
 
 
 proc h*(graphic: Graphic): int {.inline.} =
-  graphic.dim.h
+  graphic.fSize.h
+
+
+proc size*(graphic: Graphic): Dim {.inline.} =
+  graphic.fSize
 
 
 ########
@@ -99,8 +103,8 @@ proc draw*(graphic: Graphic,
 
   var dstRect = sdl.Rect(x: pos.x.int,
                          y: pos.y.int,
-                         w: graphic.dim.w,
-                         h: graphic.dim.h)
+                         w: graphic.fSize.w,
+                         h: graphic.fSize.h)
   discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
 
 
@@ -178,8 +182,8 @@ proc drawEx*(graphic: Graphic,
 
   var dstRect = sdl.Rect(x: pos.x.int,
                          y: pos.y.int,
-                         w: graphic.dim.w,
-                         h: graphic.dim.h)
+                         w: graphic.fSize.w,
+                         h: graphic.fSize.h)
   var anchorPoint: sdl.Point
   if not centered:
     anchorPoint.x = anchor.x.cint

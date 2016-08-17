@@ -31,13 +31,13 @@ type
     graphic*: Graphic
     logic*: Logic
     physics*: Physics
-    pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
+    pos*, vel*, acc*, drg*: Coord ##  velocity, acceleration, drag
+    center*: Coord                ##  Center for drawing and rotating
     # RenderEx
     renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle
     rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
     rotCentered*: bool            ##  `true` if rotation anchor is in center
-    rotAnchor*: Coord             ##  rotation anchor position
     flip*: Flip                   ##  texture flip status
 
   Logic* = ref object of RootObj
@@ -86,8 +86,7 @@ proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
       entity.vel.y += (if entity.vel.y > 0.0: -dy else: dy)
 
   # velocity -> position
-  entity.pos.x += entity.vel.x * elapsed
-  entity.pos.y += entity.vel.y * elapsed
+  entity.pos = entity.pos + entity.vel * elapsed
 
   # rotation acceleration -> rotation velocity
   entity.rotVel += entity.rotAcc * elapsed
@@ -126,13 +125,13 @@ proc initEntity*(entity: Entity) =
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
   entity.drg = (0.0, 0.0)
+  entity.center = (0.0, 0.0)
   entity.renderEx = false
   entity.rot = 0.0
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
   entity.rotDrg = 0.0
   entity.rotCentered = true
-  entity.rotAnchor = (0.0, 0.0)
   entity.flip = Flip.none
 
 
@@ -143,10 +142,10 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   ##
   if not (entity.graphic == nil):
     if not entity.renderEx:
-      entity.graphic.draw(renderer, entity.pos)
+      entity.graphic.draw(renderer, entity.pos - entity.center)
     else:
-      entity.graphic.drawEx(renderer, entity.pos, entity.rot,
-                            entity.rotCentered, entity.rotAnchor,
+      entity.graphic.drawEx(renderer, entity.pos - entity.center, entity.rot,
+                            entity.rotCentered, entity.center,
                             entity.flip)
 
 
@@ -167,3 +166,4 @@ proc updateEntity*(entity: Entity, elapsed: float) =
 
 method update*(entity: Entity, elapsed: float) {.base.} =
   entity.updateEntity(elapsed)
+
