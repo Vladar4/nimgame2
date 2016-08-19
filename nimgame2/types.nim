@@ -137,6 +137,11 @@ proc `/=`*(c: var Coord, v: float) {.inline.} =
   c.y /= v
 
 
+converter toDim*(c: Coord): Dim =
+  result.w = c.x.int
+  result.h = c.y.int
+
+
 #######
 # DIM #
 #######
@@ -219,4 +224,9 @@ proc `/`*(d: Dim, v: int): Dim {.inline.} =
 proc `/=`*(d: var Dim, v: int): Dim {.inline.} =
   d.w = d.w div v
   d.h = d.h div v
+
+
+converter toCoord*(d: Dim): Coord =
+  result.x = d.w.float
+  result.y = d.h.float
 

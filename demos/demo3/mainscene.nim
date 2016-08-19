@@ -33,8 +33,7 @@ proc init*(scene: MainScene) =
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.physics = new Physics
-  scene.s.center.x = scene.s.graphic.size.w / 2
-  scene.s.center.y = scene.s.graphic.size.h / 2
+  scene.s.center = scene.s.graphic.size / 2
   scene.list.add(scene.s)
   # Mouse
   #discard mouseRelative(true)
