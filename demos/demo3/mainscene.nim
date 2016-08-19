@@ -19,10 +19,18 @@ type
 
 method update*(logic: Physics, entity: Spaceman, elapsed: float) =
   logic.updatePhysics(entity, elapsed)
-  if entity.pos.x.int < 0: entity.pos.x = 0
-  if entity.pos.x.int > game.size.w: entity.pos.x = game.size.w.float
-  if entity.pos.y.int < 0: entity.pos.y = 0
-  if entity.pos.y.int > game.size.h: entity.pos.y = game.size.h.float
+  if entity.pos.x.int < 0:
+    entity.pos.x = 0
+    entity.vel.x = 0
+  if entity.pos.x.int > game.size.w:
+    entity.pos.x = game.size.w.float
+    entity.vel.x = 0
+  if entity.pos.y.int < 0:
+    entity.pos.y = 0
+    entity.vel.y = 0
+  if entity.pos.y.int > game.size.h:
+    entity.pos.y = game.size.h.float
+    entity.vel.y = 0
 
 
 proc init*(scene: MainScene) =
