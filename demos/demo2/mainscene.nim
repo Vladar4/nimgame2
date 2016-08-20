@@ -1,8 +1,7 @@
 import
   math,
-  sdl2/sdl_gfx_primitives as gfx,
-  sdl2/sdl_gfx_primitives_font as gfx_font,
   nimgame2/nimgame,
+  nimgame2/draw,
   nimgame2/entity,
   nimgame2/graphic,
   nimgame2/input,
@@ -102,31 +101,21 @@ method render*(scene: MainScene, renderer: Renderer) =
   let c = scene.s.graphic.colorMod
   let res = game.logicalSize
   let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
-  discard renderer.boxColor(
-    x1 = 4, y1 = 60,
-    x2 = 220, y2 = 124,
-    0xCC000000'u32)
-  discard renderer.stringColor(
-    x = 8, y = 64, "Q/A - red mod: " & $c.r,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 72, "W/S - green mod: " & $c.g,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 80, "E/D - blue mod: " & $c.b,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 88, "R/F - alpha mod: " & $scene.s.graphic.alphaMod,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 96, "T/G - blend mod: " & $scene.s.graphic.blendMod,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 104, "Y/H - resolution: " & $res.w & "x" & $res.h,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 112, "Scale: " & $scale.x & "x" & $scale.y,
-    0xFF0000FF'u32)
+  discard renderer.box((4, 60), (220, 124), 0x000000CC'u32)
+  discard renderer.string(
+    (8, 64), "Q/A - red mod: " & $c.r, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 72), "W/S - green mod: " & $c.g, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 80), "E/D - blue mod: " & $c.b, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 88), "R/F - alpha mod: " & $scene.s.graphic.alphaMod, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 96), "T/G - blend mod: " & $scene.s.graphic.blendMod, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 104), "Y/H - resolution: " & $res.w & "x" & $res.h, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 112), "Scale: " & $scale.x & "x" & $scale.y, 0xFF0000FF'u32)
 
 
 type

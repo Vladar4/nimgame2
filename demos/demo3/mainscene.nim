@@ -1,8 +1,6 @@
 import
-  sdl2/sdl,
-  sdl2/sdl_gfx_primitives as gfx,
-  sdl2/sdl_gfx_primitives_font as gfx_font,
   nimgame2/nimgame,
+  nimgame2/draw,
   nimgame2/entity,
   nimgame2/graphic,
   nimgame2/input,
@@ -66,9 +64,7 @@ method event*(scene: MainScene, event: Event) =
 method render*(scene: MainScene, renderer: Renderer) =
   # Draw line between the spaceman and the mouse position if LMB is pressed
   if Button.left.pressed:
-    discard game.renderer.setRenderDrawColor(0xFF, 0x00, 0x00, 0xFF)
-    discard game.renderer.renderDrawLine(scene.s.pos.x.int, scene.s.pos.y.int,
-                                        mouse.abs.x.int, mouse.abs.y.int)
+    discard game.renderer.line(scene.s.pos, mouse.abs, 0xFF0000FF'u32)
 
   scene.renderScene(renderer)
 
@@ -95,22 +91,15 @@ method render*(scene: MainScene, renderer: Renderer) =
   if Button.x2.pressed: buttons &= "X2 "
 
 
-  discard renderer.boxColor(
-    x1 = 4, y1 = 60,
-    x2 = 260, y2 = 100,
-    0xCC000000'u32)
-  discard renderer.stringColor(
-    x = 8, y = 64, "Arrows: " & arrows,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 72, "WSAD: " & wsad,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 80, "Mouse: " & mouse,
-    0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 88, "Mouse buttons: " & buttons,
-    0xFF0000FF'u32)
+  discard renderer.box((4, 60), (260, 100), 0xCC000000'u32)
+  discard renderer.string(
+    (8, 64), "Arrows: " & arrows, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 72), "WSAD: " & wsad, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 80), "Mouse: " & mouse, 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 88), "Mouse buttons: " & buttons, 0xFF0000FF'u32)
 
 const
   Acc = 100.0

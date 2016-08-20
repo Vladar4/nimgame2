@@ -1,7 +1,6 @@
 import
-  sdl2/sdl_gfx_primitives as gfx,
-  sdl2/sdl_gfx_primitives_font as gfx_font,
   nimgame2/nimgame,
+  nimgame2/draw,
   nimgame2/entity,
   nimgame2/graphic,
   nimgame2/scene,
@@ -78,14 +77,11 @@ method event*(scene: MainScene, event: Event) =
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
-  discard renderer.boxColor(
-    x1 = 4, y1 = 60,
-    x2 = 260, y2 = 84,
-    0xCC000000'u32)
-  discard renderer.stringColor(
-    x = 8, y = 64, "Arrow Up - more entities", 0xFF0000FF'u32)
-  discard renderer.stringColor(
-    x = 8, y = 72, "Arrow Down - less entities", 0xFF0000FF'u32)
+  discard renderer.box((4, 60), (260, 84), 0x000000CC'u32)
+  discard renderer.string(
+    (8, 64), "Arrow Up - more entities", 0xFF0000FF'u32)
+  discard renderer.string(
+    (8, 72), "Arrow Down - less entities", 0xFF0000FF'u32)
 
 
 method update*(scene: MainScene, elapsed: float) =
