@@ -26,11 +26,9 @@ import
   math, parseutils, random,
   sdl2/sdl,
   sdl2/sdl_image as img,
-  sdl2/sdl_gfx_primitives as gfx,
-  sdl2/sdl_gfx_primitives_font as gfx_font,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  count, input, scene, types
+  count, draw, input, scene, types
 
 
 type
@@ -264,7 +262,7 @@ proc run*(game: Game) =
   fpsMgr.start()
   upsMgr.start()
   timePrev = sdl.getPerformanceCounter()
-  gfx.gfxPrimitivesSetFont(addr(gfx_font.gfxPrimitivesFontData), 8, 8)
+  draw.setFont()
 
   # Main loop
   while game.running:
@@ -310,23 +308,22 @@ proc run*(game: Game) =
     # Render info
     if game.showInfo:
       # Background
-      discard game.renderer.boxColor(
-        x1 = 4, y1 = 4, x2 = 260, y2 = 52, 0xCC000000'u32)
+      discard game.renderer.box((4, 4), (260, 52), 0x000000CC'u32)
       # Show FPS
-      discard game.renderer.stringColor(
-        x = 8, y = 8, $fpsMgr.current & " FPS", 0xFFFFFFFF'u32)
+      discard game.renderer.string(
+        (8, 8), $fpsMgr.current & " FPS", 0xFFFFFFFF'u32)
       # Show updates per second
-      discard game.renderer.stringColor(
-        x = 8, y = 16, $upsMgr.current & " updates per second", 0xFFFFFFFF'u32)
+      discard game.renderer.string(
+        (8, 16), $upsMgr.current & " updates per second", 0xFFFFFFFF'u32)
       # Show updates per frame
-      discard game.renderer.stringColor(
-        x = 8, y = 24, $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
+      discard game.renderer.string(
+        (8, 24), $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
       # Show entities count
-      discard game.renderer.stringColor(
-        x = 8, y = 32, $game.scene.list.len & " entities", 0xFFFFFFFF'u32)
+      discard game.renderer.string(
+        (8, 32), $game.scene.list.len & " entities", 0xFFFFFFFF'u32)
       # Show memory usage
-      discard game.renderer.stringColor(
-        x = 8, y = 40,
+      discard game.renderer.string(
+        (8, 40),
         $(getOccupiedMem() shr 10) & " KB used of " &
         $(getTotalMem() shr 10) & " KB total",
         0xFFFFFFFF'u32)

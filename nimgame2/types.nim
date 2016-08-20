@@ -53,6 +53,16 @@ type
     both        = sdl.FlipBoth
 
 
+converter toUint32*(c: Color): uint32 =
+  ##  Color(r, g, b, a) to 0xRRGGBBAA
+  uint32((c.r shl 24) or (c.g shl 16) or (c.b shl 8) or (c.a))
+
+
+converter toColor*(u: uint32): Color =
+  ##  0xRRGGBBAA to Color(r, g, b, a)
+  Color(r: uint8(u shr 24), g: uint8(u shr 16), b: uint8(u shr 8), a: uint8(u))
+
+
 #########
 # COORD #
 #########
