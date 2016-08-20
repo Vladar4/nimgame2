@@ -8,4 +8,4 @@ license       = "MIT"
 # Dependencies
 
 requires "nim >= 0.14.2"
-
+requires "sdl2_nim"
