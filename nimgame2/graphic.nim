@@ -91,9 +91,9 @@ proc size*(graphic: Graphic): Dim {.inline.} =
 ########
 
 
-proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
-           pos: Coord) =
+method draw*(graphic: Graphic,
+             renderer: sdl.Renderer,
+             pos: Coord) {.base.} =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -108,10 +108,10 @@ proc draw*(graphic: Graphic,
   discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
 
 
-proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
-           pos: Coord,
-           size: Dim) =
+method draw*(graphic: Graphic,
+             renderer: sdl.Renderer,
+             pos: Coord,
+             size: Dim) {.base.} =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -132,16 +132,16 @@ proc draw*(graphic: Graphic,
   discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
 
 
-proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
-           pos: Coord,
-           size: Dim,
-           region = sdl.Rect) =
+method draw*(graphic: Graphic,
+             renderer: sdl.Renderer,
+             pos: Coord,
+             size: Dim,
+             region: sdl.Rect) {.base.} =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
   ##
-  ##  ``size`` Output dimensions. Leave (0, 0) for default texture size.
+  ##  ``size`` Output dimensions.
   ##
   ##  ``region``  Source texture region to draw.
   ##
@@ -150,19 +150,19 @@ proc draw*(graphic: Graphic,
 
   var srcRect = region
   var dstRect = sdl.Rect(x: pos.x.int,
-                      y: pos.y.int,
-                      w: size.w,
-                      h: size.h)
+                         y: pos.y.int,
+                         w: size.w,
+                         h: size.h)
   discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
 
 
-proc drawEx*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             angle: Angle,
-             centered: bool = true,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
+method drawEx*(graphic: Graphic,
+               renderer: sdl.Renderer,
+               pos: Coord,
+               angle: Angle = 0.0,
+               centered: bool = true,
+               anchor: Coord = (0.0, 0.0),
+               flip: Flip = Flip.none) {.base.} =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -194,14 +194,14 @@ proc drawEx*(graphic: Graphic,
                                 sdl.RendererFlip(flip))
 
 
-proc drawEx*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             size: Dim,
-             angle: Angle,
-             centered: bool = true,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
+method drawEx*(graphic: Graphic,
+               renderer: sdl.Renderer,
+               pos: Coord,
+               size: Dim,
+               angle: Angle = 0.0,
+               centered: bool = true,
+               anchor: Coord = (0.0, 0.0),
+               flip: Flip = Flip.none) {.base.} =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -239,15 +239,15 @@ proc drawEx*(graphic: Graphic,
                                 sdl.RendererFlip(flip))
 
 
-proc drawEx*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             size: Dim,
-             region: sdl.Rect,
-             angle: Angle,
-             centered: bool = true,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
+method drawEx*(graphic: Graphic,
+               renderer: Renderer,
+               pos: Coord,
+               size: Dim,
+               region: Rect,
+               angle: Angle = 0.0,
+               centered: bool = true,
+               anchor: Coord = (0.0, 0.0),
+               flip: Flip = Flip.none) {.base.} =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -274,10 +274,10 @@ proc drawEx*(graphic: Graphic,
     return
 
   var srcRect = region
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: size.w,
-                         h: size.h)
+  var dstRect = Rect(x: pos.x.int,
+                     y: pos.y.int,
+                     w: size.w,
+                     h: size.h)
   var anchorPoint: sdl.Point
   if not centered:
     anchorPoint.x = anchor.x.cint

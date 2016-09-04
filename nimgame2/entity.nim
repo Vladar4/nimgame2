@@ -45,6 +45,14 @@ type
   Physics* = ref object of RootObj
 
 
+###########
+# Graphic #
+###########
+
+method update*(graphic: Graphic, entity: Entity, elapsed: float) {.base.} =
+  discard
+
+
 #########
 # Logic #
 #########
@@ -158,6 +166,8 @@ proc updateEntity*(entity: Entity, elapsed: float) =
   ##
   ##  Call it from your entity update method.
   ##
+  if not(entity.graphic == nil):
+    entity.graphic.update(entity, elapsed)
   if not(entity.logic == nil):
     entity.logic.update(entity, elapsed)
   if not(entity.physics == nil):
