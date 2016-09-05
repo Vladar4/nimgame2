@@ -292,7 +292,7 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
                               entity.sprite.frames[
                                 anim.frames[entity.sprite.currentFrame]],
                               entity.rot, entity.rotCentered, entity.center,
-                              anim.flip)
+                              Flip(entity.flip.cint xor anim.flip.cint))
     elif not entity.renderEx:
       entity.graphic.draw(renderer, entity.pos - entity.center)
     else:
