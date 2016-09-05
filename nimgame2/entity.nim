@@ -27,8 +27,29 @@ import
   graphic, scene, types
 
 type
+  Animation = object
+    frames*: seq[int]
+    frameRate*: float
+    looped*: bool
+    flip*: Flip
+
+
+  Sprite = ref object
+    animationKeys*: seq[string]
+    animations*: seq[Animation]
+    currentAnimation*: int
+    currentFrame*: int
+    time*: float
+    playing*: bool
+    frameSize*: Dim
+    offset*: Dim
+    frames*: seq[Rect]
+
+
   Entity* = ref object of RootObj
+    tags*: seq[string]
     graphic*: Graphic
+    sprite*: Sprite
     logic*: Logic
     physics*: Physics
     pos*, vel*, acc*, drg*: Coord ##  velocity, acceleration, drag
@@ -45,12 +66,118 @@ type
   Physics* = ref object of RootObj
 
 
-###########
-# Graphic #
-###########
+##########
+# Sprite #
+##########
 
-method update*(graphic: Graphic, entity: Entity, elapsed: float) {.base.} =
-  discard
+proc initSprite*(entity: Entity,
+                 frameSize: Dim,
+                 offset: Dim = (0, 0)) =
+  ##  Creeate a sprite for a given ``entity`` with attached Graphic.
+  ##
+  ##  ``frameSize`` Dimensions of one frame.
+  ##
+  ##  ``offset``  Offset from the edge of the texture.
+  ##
+  entity.sprite = new Sprite
+  entity.sprite.animationKeys = @[]
+  entity.sprite.animations = @[]
+  entity.sprite.currentAnimation = -1
+  entity.sprite.currentFrame = 0
+  entity.sprite.time = 0
+  entity.sprite.playing = false
+  entity.sprite.frameSize = frameSize
+  entity.sprite.offset = offset
+  entity.sprite.frames = @[]
+
+  var cols = (entity.graphic.w - entity.sprite.offset.w) div
+              entity.sprite.frameSize.w
+  var rows = (entity.graphic.h - entity.sprite.offset.h) div
+              entity.sprite.frameSize.h
+
+  for r in 0..(rows - 1):
+    for c in 0..(cols - 1):
+      entity.sprite.frames.add(Rect(
+        x: entity.sprite.offset.w + entity.sprite.frameSize.w * c,
+        y: entity.sprite.offset.h + entity.sprite.frameSize.h * r,
+        w: entity.sprite.frameSize.w,
+        h: entity.sprite.frameSize.h))
+
+
+proc animationIndex*(entity: Entity, name: string): int {.inline.} =
+  if entity.sprite == nil:
+    return -1
+  entity.sprite.animationKeys.find(name)
+
+
+proc animation*(entity: Entity, name: string): var Animation =
+  let index = entity.animationIndex(name)
+  if index < 0:
+    return
+  entity.sprite.animations[index]
+
+
+proc animation*(entity: Entity, index: int): var Animation =
+  if index < 0 or index >= entity.sprite.animations.len:
+    return
+  entity.sprite.animations[index]
+
+
+template animation*(entity: Entity): var Animation =
+  entity.animation(entity.sprite.currentAnimation)
+
+
+proc addAnimation*(entity: Entity,
+                   name: string,
+                   frames: openarray[int],
+                   frameRate: float = 0.1,
+                   looped: bool = false,
+                   flip: Flip = Flip.none): bool =
+  result = true
+
+  if entity.sprite == nil:
+    return false
+
+  if frames.len < 1:
+    return false
+
+  if entity.animationIndex(name) >= 0:
+    return false
+
+  for frame in frames:
+    if frame < 0 or frame >= entity.sprite.frames.len:
+      return false
+
+  entity.sprite.animationKeys.add(name)
+  entity.sprite.animations.add(Animation(
+    frames: @frames, frameRate: frameRate, looped: looped, flip: flip))
+
+
+
+proc play*(entity: Entity, anim: string) =
+  if entity.sprite == nil:
+    return
+  if entity.animationIndex(anim) < 0:
+    return
+  entity.sprite.currentAnimation = entity.animationIndex(anim)
+  entity.sprite.time = 0.0
+  entity.sprite.playing = true
+
+
+method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
+  if entity.sprite == nil:
+    return
+  if (entity.sprite.currentAnimation < 0) or (not entity.sprite.playing):
+    return
+  let frameRate = entity.animation.frameRate
+  entity.sprite.time += elapsed
+  while entity.sprite.time >= frameRate:
+    entity.sprite.time -= frameRate
+    inc entity.sprite.currentFrame
+    if entity.sprite.currentFrame >= entity.animation.frames.len:
+      if not entity.animation.looped:
+        entity.sprite.playing = false
+      entity.sprite.currentFrame = 0
 
 
 #########
@@ -126,7 +253,9 @@ proc initEntity*(entity: Entity) =
   ##
   ##  Call it after creating a new entity.
   ##
+  entity.tags = @[]
   entity.graphic = nil
+  entity.sprite = nil
   entity.logic = nil
   entity.physics = nil
   entity.pos = (0.0, 0.0)
@@ -149,11 +278,26 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   ##  Call it from your entity render method.
   ##
   if not (entity.graphic == nil):
-    if not entity.renderEx:
+    if not (entity.sprite == nil):
+      if entity.sprite.currentAnimation < 0:
+        entity.graphic.drawEx(renderer, entity.pos - entity.center,
+                              entity.sprite.frameSize,
+                              entity.sprite.frames[0],
+                              entity.rot, entity.rotCentered, entity.center,
+                              entity.flip)
+      else:
+        let anim = entity.animation
+        entity.graphic.drawEx(renderer, entity.pos - entity.center,
+                              entity.sprite.frameSize,
+                              entity.sprite.frames[
+                                anim.frames[entity.sprite.currentFrame]],
+                              entity.rot, entity.rotCentered, entity.center,
+                              anim.flip)
+    elif not entity.renderEx:
       entity.graphic.draw(renderer, entity.pos - entity.center)
     else:
-      entity.graphic.drawEx(renderer, entity.pos - entity.center, entity.rot,
-                            entity.rotCentered, entity.center,
+      entity.graphic.drawEx(renderer, entity.pos - entity.center,
+                            entity.rot, entity.rotCentered, entity.center,
                             entity.flip)
 
 
@@ -166,8 +310,8 @@ proc updateEntity*(entity: Entity, elapsed: float) =
   ##
   ##  Call it from your entity update method.
   ##
-  if not(entity.graphic == nil):
-    entity.graphic.update(entity, elapsed)
+  if not(entity.sprite == nil):
+    entity.sprite.update(entity, elapsed)
   if not(entity.logic == nil):
     entity.logic.update(entity, elapsed)
   if not(entity.physics == nil):

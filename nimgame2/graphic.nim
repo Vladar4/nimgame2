@@ -91,9 +91,9 @@ proc size*(graphic: Graphic): Dim {.inline.} =
 ########
 
 
-method draw*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord) {.base.} =
+proc draw*(graphic: Graphic,
+           renderer: sdl.Renderer,
+           pos: Coord) =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -108,10 +108,10 @@ method draw*(graphic: Graphic,
   discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
 
 
-method draw*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             size: Dim) {.base.} =
+proc draw*(graphic: Graphic,
+           renderer: sdl.Renderer,
+           pos: Coord,
+           size: Dim) =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -132,11 +132,11 @@ method draw*(graphic: Graphic,
   discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
 
 
-method draw*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             size: Dim,
-             region: sdl.Rect) {.base.} =
+proc draw*(graphic: Graphic,
+           renderer: sdl.Renderer,
+           pos: Coord,
+           size: Dim,
+           region: sdl.Rect) =
   ##  Default draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -156,13 +156,13 @@ method draw*(graphic: Graphic,
   discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
 
 
-method drawEx*(graphic: Graphic,
-               renderer: sdl.Renderer,
-               pos: Coord,
-               angle: Angle = 0.0,
-               centered: bool = true,
-               anchor: Coord = (0.0, 0.0),
-               flip: Flip = Flip.none) {.base.} =
+proc drawEx*(graphic: Graphic,
+             renderer: sdl.Renderer,
+             pos: Coord,
+             angle: Angle = 0.0,
+             centered: bool = true,
+             anchor: Coord = (0.0, 0.0),
+             flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -194,14 +194,14 @@ method drawEx*(graphic: Graphic,
                                 sdl.RendererFlip(flip))
 
 
-method drawEx*(graphic: Graphic,
-               renderer: sdl.Renderer,
-               pos: Coord,
-               size: Dim,
-               angle: Angle = 0.0,
-               centered: bool = true,
-               anchor: Coord = (0.0, 0.0),
-               flip: Flip = Flip.none) {.base.} =
+proc drawEx*(graphic: Graphic,
+             renderer: sdl.Renderer,
+             pos: Coord,
+             size: Dim,
+             angle: Angle = 0.0,
+             centered: bool = true,
+             anchor: Coord = (0.0, 0.0),
+             flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
@@ -239,15 +239,15 @@ method drawEx*(graphic: Graphic,
                                 sdl.RendererFlip(flip))
 
 
-method drawEx*(graphic: Graphic,
-               renderer: Renderer,
-               pos: Coord,
-               size: Dim,
-               region: Rect,
-               angle: Angle = 0.0,
-               centered: bool = true,
-               anchor: Coord = (0.0, 0.0),
-               flip: Flip = Flip.none) {.base.} =
+proc drawEx*(graphic: Graphic,
+             renderer: Renderer,
+             pos: Coord,
+             size: Dim,
+             region: Rect,
+             angle: Angle = 0.0,
+             centered: bool = true,
+             anchor: Coord = (0.0, 0.0),
+             flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
