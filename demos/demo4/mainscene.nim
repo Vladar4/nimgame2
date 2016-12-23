@@ -1,0 +1,103 @@
+import
+  math,
+  nimgame2/nimgame,
+  nimgame2/draw,
+  nimgame2/entity,
+  nimgame2/graphic,
+  nimgame2/input,
+  nimgame2/scene,
+  nimgame2/types,
+  dwarf
+
+
+type
+  MainScene = ref object of Scene
+    dG: Graphic
+    d: Dwarf
+
+
+const framerate = 1/12
+
+
+proc init*(scene: MainScene) =
+  Scene(scene).init()
+  # Dwarf
+  scene.dG = newGraphic()
+  discard scene.dG.load(game.renderer, "../assets/gfx/dwarf.png")
+  scene.d = newDwarf()
+  scene.d.pos = (200, 100)
+  scene.d.graphic = scene.dG
+  scene.d.initSprite((24, 48))
+  discard scene.d.addAnimation(
+    "down", [0, 1, 2, 3, 4, 5], framerate)
+  discard scene.d.addAnimation(
+    "up", [6, 7, 8, 9, 10, 11], framerate)
+  discard scene.d.addAnimation(
+    "left", [12, 13, 14, 15, 16, 17], framerate)
+  discard scene.d.addAnimation(
+    "right", [12, 13, 14, 15, 16, 17], framerate, Flip.horizontal)
+  scene.d.physics = new Physics
+  scene.list.add(scene.d)
+
+
+proc free*(scene: MainScene) =
+  scene.dG.free
+
+
+proc newMainScene*(): MainScene =
+  new result, free
+  result.init()
+
+
+method event*(scene: MainScene, event: Event) =
+  if event.kind == KeyDown:
+      case event.key.keysym.sym:
+      of K_Escape:
+        game.running = false
+      else: discard
+
+
+method render*(scene: MainScene, renderer: Renderer) =
+  scene.renderScene(renderer)
+
+
+const speed = 50
+
+
+method update*(scene: MainScene, elapsed: float) =
+  scene.updateScene(elapsed)
+
+  # Controls and speed
+  type Direction = enum none, down, up, left, right
+  var direction =
+    if ScancodeDown.pressed: down
+    elif ScancodeUp.pressed: up
+    elif ScancodeLeft.pressed: left
+    elif ScancodeRight.pressed: right
+    else: none
+
+  case direction:
+  of none:
+    if not scene.d.sprite.playing:
+      scene.d.vel = (0, 0)
+  of down:
+    if  not scene.d.sprite.playing or
+        (scene.d.currentAnimationName != "down"):
+      scene.d.play("down", 1)
+      scene.d.vel = (0, speed)
+  of up:
+    if  not scene.d.sprite.playing or
+        (scene.d.currentAnimationName != "up"):
+      scene.d.play("up", 1)
+      scene.d.vel = (0, -speed)
+  of left:
+    if  not scene.d.sprite.playing or
+        (scene.d.currentAnimationName != "left"):
+      scene.d.play("left", 1)
+      scene.d.vel = (-speed, 0)
+  of right:
+    if  not scene.d.sprite.playing or
+        (scene.d.currentAnimationName != "right"):
+      scene.d.play("right", 1)
+      scene.d.vel = (speed, 0)
+

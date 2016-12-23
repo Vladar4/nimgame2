@@ -24,37 +24,37 @@
 
 import
   sdl2/sdl,
-  graphic, scene, types
+  graphic, types
 
 type
   Animation = object
-    frames*: seq[int]
-    frameRate*: float
-    looped*: bool
-    flip*: Flip
+    frames*: seq[int] ##  list of animation's frame indexes
+    frameRate*: float ##  frame rate in frames per second
+    flip*: Flip       ##  flip flag
 
 
   Sprite = ref object
-    animationKeys*: seq[string]
-    animations*: seq[Animation]
-    currentAnimation*: int
-    currentFrame*: int
-    time*: float
-    playing*: bool
-    frameSize*: Dim
-    offset*: Dim
-    frames*: seq[Rect]
+    animationKeys*: seq[string] ##  list of animation names
+    animations*: seq[Animation] ##  list of animations
+    currentAnimation*: int      ##  index of currently playing animation
+    currentFrame*: int          ##  incex of current frame
+    cycles*: int                ##  animation cycles counter (-1 is looping)
+    time*: float                ##  animation timer
+    playing*: bool              ##  animation playing flag
+    frameSize*: Dim             ##  sprite frame dimensions
+    offset*: Dim                ##  sprite graphic offset
+    frames*: seq[Rect]          ##  frames' coordinates
 
 
   Entity* = ref object of RootObj
-    tags*: seq[string]
+    tags*: seq[string]            ##  list of entity tags
     graphic*: Graphic
     sprite*: Sprite
     logic*: Logic
     physics*: Physics
     pos*, vel*, acc*, drg*: Coord ##  velocity, acceleration, drag
     center*: Coord                ##  Center for drawing and rotating
-    # RenderEx
+    # RenderEx Options
     renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle
     rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
@@ -84,6 +84,7 @@ proc initSprite*(entity: Entity,
   entity.sprite.animations = @[]
   entity.sprite.currentAnimation = -1
   entity.sprite.currentFrame = 0
+  entity.sprite.cycles = 0
   entity.sprite.time = 0
   entity.sprite.playing = false
   entity.sprite.frameSize = frameSize
@@ -105,12 +106,16 @@ proc initSprite*(entity: Entity,
 
 
 proc animationIndex*(entity: Entity, name: string): int {.inline.} =
+  ##  ``Return`` index of the animation named ``name``.
+  ##
   if entity.sprite == nil:
     return -1
   entity.sprite.animationKeys.find(name)
 
 
 proc animation*(entity: Entity, name: string): var Animation =
+  ##  ``Return`` animation named ``name``.
+  ##
   let index = entity.animationIndex(name)
   if index < 0:
     return
@@ -118,21 +123,42 @@ proc animation*(entity: Entity, name: string): var Animation =
 
 
 proc animation*(entity: Entity, index: int): var Animation =
+  ##  ``Return`` animation under given ``index``.
+  ##
   if index < 0 or index >= entity.sprite.animations.len:
     return
   entity.sprite.animations[index]
 
 
-template animation*(entity: Entity): var Animation =
+template currentAnimation*(entity: Entity): var Animation =
+  ##  ``Return`` current animation.
+  ##
   entity.animation(entity.sprite.currentAnimation)
+
+
+proc currentAnimationName*(entity: Entity): string =
+  ##  ``Return`` name of the current animation.
+  ##
+  if entity.sprite.currentAnimation < 0:
+    return ""
+  return entity.sprite.animationKeys[entity.sprite.currentAnimation]
 
 
 proc addAnimation*(entity: Entity,
                    name: string,
                    frames: openarray[int],
                    frameRate: float = 0.1,
-                   looped: bool = false,
                    flip: Flip = Flip.none): bool =
+  ##  Add animation to the ``entity``.
+  ##
+  ##  ``name`` Name of the animation.
+  ##
+  ##  ``frames`` Array of animation frames' indexes.
+  ##
+  ##  ``frameRate`` Animation speed in frames per second.
+  ##
+  ##  ``flip``  Animation flip flag.
+  ##
   result = true
 
   if entity.sprite == nil:
@@ -150,18 +176,27 @@ proc addAnimation*(entity: Entity,
 
   entity.sprite.animationKeys.add(name)
   entity.sprite.animations.add(Animation(
-    frames: @frames, frameRate: frameRate, looped: looped, flip: flip))
+    frames: @frames, frameRate: frameRate, flip: flip))
 
 
 
-proc play*(entity: Entity, anim: string) =
+proc play*(entity: Entity, anim: string, cycles = -1) =
+  ##  Start playing the animation.
+  ##
+  ##  ``anim`` Name of the animation.
+  ##
+  ##  ``cycles`` Number of times to repeat the animation cycles.
+  ##  `-1` for looping.
+  ##
   if entity.sprite == nil:
     return
   if entity.animationIndex(anim) < 0:
     return
   entity.sprite.currentAnimation = entity.animationIndex(anim)
+  entity.sprite.cycles = cycles
   entity.sprite.time = 0.0
-  entity.sprite.playing = true
+  if cycles != 0:
+    entity.sprite.playing = true
 
 
 method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
@@ -169,14 +204,21 @@ method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
     return
   if (entity.sprite.currentAnimation < 0) or (not entity.sprite.playing):
     return
-  let frameRate = entity.animation.frameRate
+  let frameRate = entity.currentAnimation.frameRate
   entity.sprite.time += elapsed
   while entity.sprite.time >= frameRate:
     entity.sprite.time -= frameRate
-    inc entity.sprite.currentFrame
-    if entity.sprite.currentFrame >= entity.animation.frames.len:
-      if not entity.animation.looped:
-        entity.sprite.playing = false
+    inc entity.sprite.currentFrame  # next frame
+    if entity.sprite.currentFrame >= entity.currentAnimation.frames.len:
+      # Animation has ended
+      if entity.sprite.cycles > 0:
+        # Reduce cycles counter
+        dec entity.sprite.cycles
+        if entity.sprite.cycles == 0:
+          # No more cycles left
+          entity.sprite.playing = false
+      # cycles <= 0 - animation either stopped or looped
+      # Set current frame to first one of the current animation
       entity.sprite.currentFrame = 0
 
 
@@ -286,7 +328,7 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
                               entity.rot, entity.rotCentered, entity.center,
                               entity.flip)
       else:
-        let anim = entity.animation
+        let anim = entity.currentAnimation
         entity.graphic.drawEx(renderer, entity.pos - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[

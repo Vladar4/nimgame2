@@ -15,8 +15,8 @@ type
     s: Spaceman
 
 
-method update*(logic: Physics, entity: Spaceman, elapsed: float) =
-  logic.updatePhysics(entity, elapsed)
+method update*(physics: Physics, entity: Spaceman, elapsed: float) =
+  physics.updatePhysics(entity, elapsed)
   if entity.pos.x.int < 0:
     entity.pos.x = 0
     entity.vel.x = 0

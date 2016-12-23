@@ -38,12 +38,13 @@ type
     fScale: Coord
     fTitle: string
     # Public
+    # SDL2
     bgColor*: sdl.Color     ##  Screen clearing color
     renderer*: sdl.Renderer ##  Game renderer pointer
     window*: sdl.Window     ##  Game window pointer
-    #
+    # Scene
     scene*: Scene   ##  Current scene
-    #
+    # Options
     running*: bool  ##  If `false` - break main loop
     showInfo*: bool ##  Show info panel
     fpsLimit*: int  ##  Limit frames per second to `fpsLimit`, if `0` - no limit
