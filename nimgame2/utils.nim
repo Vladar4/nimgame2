@@ -1,0 +1,55 @@
+# nimgame2/utils.nim
+# Copyright (c) 2016 Vladar
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+# Vladar vladar4@gmail.com
+
+
+import
+  math,
+  types
+
+
+proc distance*(a, b: Coord): float {.inline.} =
+  ##  ``Return`` distance between two coordinates.
+  ##
+  return sqrt( pow(b.x - a.x, 2) + pow(b.y - a.y, 2) )
+
+
+proc direction*(a, b: Coord): float =
+  ##  ``Return`` angle direction from coordinate ``a`` to ``b``.
+  ##
+  let
+    dx = a.x - b.x
+    dy = a.y - b.y
+  return -(arctan2(dy, dx) / Pi) * 180 + 90
+
+
+template rad*(a: float): float =
+  ##  Convert degrees to radians.
+  ##
+  (a * Pi / 180)
+
+
+template deg*(a: float): float =
+  ##  Convert radians to degrees.
+  ##
+  (a * 180 / Pi)
+
