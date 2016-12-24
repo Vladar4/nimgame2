@@ -46,13 +46,25 @@ type
     frames*: seq[Rect]          ##  frames' coordinates
 
 
+  Collider* = ref object of RootObj
+    parent*: Entity
+    pos*: Coord
+
+  BoxCollider* = ref object of Collider
+    dim*: Dim
+
+  CircleCollider* = ref object of Collider
+    radius*: float
+
+
   Entity* = ref object of RootObj
     tags*: seq[string]            ##  list of entity tags
     graphic*: Graphic
     sprite*: Sprite
     logic*: Logic
     physics*: Physics
-    pos*, vel*, acc*, drg*: Coord ##  velocity, acceleration, drag
+    collider*: Collider
+    pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
     center*: Coord                ##  Center for drawing and rotating
     # RenderEx Options
     renderEx*: bool               ##  render with rotation and flip status
@@ -300,6 +312,7 @@ proc initEntity*(entity: Entity) =
   entity.sprite = nil
   entity.logic = nil
   entity.physics = nil
+  entity.collider = nil
   entity.pos = (0.0, 0.0)
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
@@ -363,3 +376,8 @@ proc updateEntity*(entity: Entity, elapsed: float) =
 method update*(entity: Entity, elapsed: float) {.base.} =
   entity.updateEntity(elapsed)
 
+
+method onCollide*(entity, target: Entity) {.base.} =
+  ##  Called when ``entity`` collides with ``target``.
+  ##
+  discard

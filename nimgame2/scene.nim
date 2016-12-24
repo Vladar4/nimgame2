@@ -24,7 +24,7 @@
 
 import
   sdl2/sdl,
-  entity, types
+  collider, entity, types
 
 
 type
@@ -63,15 +63,28 @@ method render*(scene: Scene, renderer: sdl.Renderer) {.base.} =
   scene.renderScene(renderer)
 
 
+proc checkCollisions*(scene: Scene, entity: Entity) =
+  for target in scene.list:
+    if target.collider == nil: continue
+    if entity == target: continue
+    if collide(entity.collider, target.collider):
+      entity.onCollide(target)
+
+
 proc updateScene*(scene: Scene, elapsed: float) =
   ##  Default scene update procedure.
   ##
   ##  Call it from your scene update method.
   ##
   for entity in scene.list:
+    # update
     entity.update(elapsed)
+    # collisions
+    if entity.collider != nil:
+      scene.checkCollisions(entity)
 
 
 method update*(scene: Scene, elapsed: float) {.base.} =
   scene.updateScene(elapsed)
+
 

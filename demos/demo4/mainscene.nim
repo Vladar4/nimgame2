@@ -16,7 +16,7 @@ type
     d: Dwarf
 
 
-const framerate = 1/12
+const Framerate = 1/12
 
 
 proc init*(scene: MainScene) =
@@ -29,13 +29,13 @@ proc init*(scene: MainScene) =
   scene.d.graphic = scene.dG
   scene.d.initSprite((24, 48))
   discard scene.d.addAnimation(
-    "down", [0, 1, 2, 3, 4, 5], framerate)
+    "down", [0, 1, 2, 3, 4, 5], Framerate)
   discard scene.d.addAnimation(
-    "up", [6, 7, 8, 9, 10, 11], framerate)
+    "up", [6, 7, 8, 9, 10, 11], Framerate)
   discard scene.d.addAnimation(
-    "left", [12, 13, 14, 15, 16, 17], framerate)
+    "left", [12, 13, 14, 15, 16, 17], Framerate)
   discard scene.d.addAnimation(
-    "right", [12, 13, 14, 15, 16, 17], framerate, Flip.horizontal)
+    "right", [12, 13, 14, 15, 16, 17], Framerate, Flip.horizontal)
   scene.d.physics = new Physics
   scene.list.add(scene.d)
 
@@ -61,7 +61,7 @@ method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
 
 
-const speed = 50
+const Speed = 50
 
 
 method update*(scene: MainScene, elapsed: float) =
@@ -84,20 +84,20 @@ method update*(scene: MainScene, elapsed: float) =
     if  not scene.d.sprite.playing or
         (scene.d.currentAnimationName != "down"):
       scene.d.play("down", 1)
-      scene.d.vel = (0, speed)
+      scene.d.vel = (0, Speed)
   of up:
     if  not scene.d.sprite.playing or
         (scene.d.currentAnimationName != "up"):
       scene.d.play("up", 1)
-      scene.d.vel = (0, -speed)
+      scene.d.vel = (0, -Speed)
   of left:
     if  not scene.d.sprite.playing or
         (scene.d.currentAnimationName != "left"):
       scene.d.play("left", 1)
-      scene.d.vel = (-speed, 0)
+      scene.d.vel = (-Speed, 0)
   of right:
     if  not scene.d.sprite.playing or
         (scene.d.currentAnimationName != "right"):
       scene.d.play("right", 1)
-      scene.d.vel = (speed, 0)
+      scene.d.vel = (Speed, 0)
 

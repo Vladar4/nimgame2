@@ -82,7 +82,7 @@ proc h*(graphic: Graphic): int {.inline.} =
   graphic.fSize.h
 
 
-proc size*(graphic: Graphic): Dim {.inline.} =
+proc dim*(graphic: Graphic): Dim {.inline.} =
   graphic.fSize
 
 

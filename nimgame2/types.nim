@@ -67,6 +67,10 @@ converter toColor*(u: uint32): Color =
 # COORD #
 #########
 
+proc `==`*(c1, c2: Coord): bool {.inline.} =
+  return (c1.x == c2.x) and (c1.y == c2.y)
+
+
 proc `+`*(c1, c2: Coord): Coord {.inline.} =
   result.x = c1.x + c2.x
   result.y = c1.y + c2.y
@@ -155,6 +159,10 @@ converter toDim*(c: Coord): Dim =
 #######
 # DIM #
 #######
+
+proc `==`*(d1, d2: Dim): bool {.inline.} =
+  return (d1.w == d2.w) and (d1.h == d2.h)
+
 
 proc `+`*(d1, d2: Dim): Dim {.inline.} =
   result.w = d1.w + d2.w
