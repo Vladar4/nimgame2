@@ -24,7 +24,7 @@
 
 import
   sdl2/sdl,
-  collider, entity, types
+  collider, entity, settings, types
 
 
 type
@@ -57,6 +57,10 @@ proc renderScene*(scene: Scene, renderer: sdl.Renderer) =
   ##
   for entity in scene.list:
     entity.render(renderer)
+  if colliderOutline:
+    for entity in scene.list:
+      if entity.collider != nil:
+        entity.collider.render(renderer)
 
 
 method render*(scene: Scene, renderer: sdl.Renderer) {.base.} =

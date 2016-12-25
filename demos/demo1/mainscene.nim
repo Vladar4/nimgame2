@@ -4,6 +4,7 @@ import
   nimgame2/entity,
   nimgame2/graphic,
   nimgame2/scene,
+  nimgame2/settings,
   nimgame2/types,
   spaceman
 
@@ -61,7 +62,7 @@ method event*(scene: MainScene, event: Event) =
   if event.kind == KeyDown:
     case event.key.keysym.sym:
     of K_Escape:
-      game.running = false
+      gameRunning = false
     of K_Up:
       if scene.count < CountMax:
         scene.count += CountStep

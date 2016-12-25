@@ -5,6 +5,7 @@ import
   nimgame2/graphic,
   nimgame2/input,
   nimgame2/scene,
+  nimgame2/settings,
   nimgame2/types,
   spaceman
 
@@ -39,7 +40,7 @@ proc init*(scene: MainScene) =
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.physics = new Physics
-  scene.s.center = scene.s.graphic.size / 2
+  scene.s.center = scene.s.graphic.dim / 2
   scene.list.add(scene.s)
   # Mouse
   #discard mouseRelative(true)
@@ -57,7 +58,7 @@ method event*(scene: MainScene, event: Event) =
   if event.kind == KeyDown:
     case event.key.keysym.sym:
     of K_Escape:
-      game.running = false
+      gameRunning = false
     else: discard
 
 

@@ -23,7 +23,7 @@
 
 
 import
-  entity, types, utils
+  nimgame, draw, entity, settings, types, utils
 
 
 ##  Collider types are declared in `entity.nim`.
@@ -60,6 +60,19 @@ proc newCollider*(parent: Entity, pos: Coord = (0, 0)): Collider =
   result.init(parent, pos)
 
 
+proc renderCollider*(a: Collider, renderer: Renderer) =
+  let
+    pos = a.position
+    rad = 4.0
+  discard renderer.hline(pos - (rad, 0.0), 8, colliderOutlineColor)
+  discard renderer.vline(pos - (0.0, rad), 8, colliderOutlineColor)
+  discard renderer.circle(pos, rad, colliderOutlineColor)
+
+
+method render*(a: Collider, renderer: Renderer) {.base.} =
+  a.renderCollider(renderer)
+
+
 # Point - Point
 method collide*(a1, a2: Collider): bool {.base, inline.} =
   return a1.position == a2.position
@@ -90,6 +103,11 @@ proc newBoxCollider*(parent: Entity, pos: Coord = (0, 0),
                      dim: Dim = (0, 0)): BoxCollider =
   result = new BoxCollider
   result.init(parent, pos, dim)
+
+
+method render*(b: BoxCollider, renderer: Renderer) =
+  discard renderer.rect(b.position, (b.right, b.bottom), colliderOutlineColor)
+  b.renderCollider(renderer)
 
 
 # Box - Point
@@ -136,6 +154,11 @@ proc newCircleCollider*(parent: Entity, pos: Coord = (0, 0),
                         radius: float = 0): CircleCollider =
   result = new CircleCollider
   result.init(parent, pos, radius)
+
+
+method render*(c: CircleCollider, renderer: Renderer) =
+  discard renderer.circle(c.position, c.radius, colliderOutlineColor)
+  c.renderCollider(renderer)
 
 
 # Circle - Point

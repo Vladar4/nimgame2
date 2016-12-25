@@ -6,6 +6,7 @@ import
   nimgame2/graphic,
   nimgame2/input,
   nimgame2/scene,
+  nimgame2/settings,
   nimgame2/types,
   dwarf
 
@@ -53,7 +54,7 @@ method event*(scene: MainScene, event: Event) =
   if event.kind == KeyDown:
       case event.key.keysym.sym:
       of K_Escape:
-        game.running = false
+        gameRunning = false
       else: discard
 
 

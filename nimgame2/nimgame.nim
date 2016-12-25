@@ -28,7 +28,7 @@ import
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  count, draw, input, scene, types
+  count, draw, input, scene, settings, types
 
 
 type
@@ -44,11 +44,6 @@ type
     window*: sdl.Window     ##  Game window pointer
     # Scene
     scene*: Scene   ##  Current scene
-    # Options
-    running*: bool  ##  If `false` - break main loop
-    showInfo*: bool ##  Show info panel
-    fpsLimit*: int  ##  Limit frames per second to `fpsLimit`, if `0` - no limit
-    updateInterval*: int  ## Call update() each `updateInterval` ms
 
 
 var
@@ -97,10 +92,12 @@ proc init*(
   game.bgColor = bgColor
 
   # Default options
-  game.running = false
-  game.showInfo = false
-  game.fpsLimit = 0
-  game.updateInterval = 10
+  gameRunning = false
+  showInfo = false
+  fpsLimit = 0
+  updateInterval = 10
+  colliderOutline = false
+  colliderOutlineColor = sdl.Color(r: 0, g: 255, b: 0, a: 255)
 
   # Init SDL
   if sdl.init(sdl.InitEverything) != 0:
@@ -244,11 +241,11 @@ proc resetViewport*(game: Game) =
 proc run*(game: Game) =
   ##  Start the game.
   ##
-  if game.running:
+  if gameRunning:
     sdl.logError(sdl.LogCategoryError, "Already running")
     return
 
-  game.running = true
+  gameRunning = true
 
   # Init FPS and UPS managers
   var
@@ -258,7 +255,7 @@ proc run*(game: Game) =
     elapsed, lag, msPerFrame: int
 
   let
-    updateIntervalSec = game.updateInterval / 1000
+    updateIntervalSec = updateInterval / 1000
 
   fpsMgr.start()
   upsMgr.start()
@@ -266,7 +263,7 @@ proc run*(game: Game) =
   draw.setFont()
 
   # Main loop
-  while game.running:
+  while gameRunning:
     timeCurr = sdl.getPerformanceCounter()
     elapsed = timeDiff(timePrev, timeCurr)
     timePrev = timeCurr
@@ -279,7 +276,7 @@ proc run*(game: Game) =
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
-        game.running = false
+        gameRunning = false
         break
       else:
         game.scene.event(event)
@@ -287,14 +284,14 @@ proc run*(game: Game) =
 
     # Update
     var updateCounter = 0
-    while lag >= game.updateInterval:
+    while lag >= updateInterval:
       game.scene.update(updateIntervalSec)
-      lag -= game.updateInterval
+      lag -= updateInterval
       inc(updateCounter)
 
     # Limit FPS
-    if game.fpsLimit > 0:
-      msPerFrame = 1000 div game.fpsLimit
+    if fpsLimit > 0:
+      msPerFrame = 1000 div fpsLimit
       if lag < msPerFrame:
         sdl.delay(uint32(msPerFrame - lag))
 
@@ -307,7 +304,7 @@ proc run*(game: Game) =
       game.scene.render(game.renderer)
 
     # Render info
-    if game.showInfo:
+    if showInfo:
       # Background
       discard game.renderer.box((4, 4), (260, 52), 0x000000CC'u32)
       # Show FPS
