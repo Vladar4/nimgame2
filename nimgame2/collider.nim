@@ -26,6 +26,9 @@ import
   math,
   nimgame, draw, entity, settings, types, utils
 
+from fenv import epsilon
+let Eps = epsilon(float)
+
 
 ##  Collider types are declared in `entity.nim`.
 ##
@@ -45,6 +48,27 @@ template right(b: BoxCollider): float =
 
 template bottom(b: BoxCollider): float =
   (b.position.y + b.dim.h.float)
+
+
+template pointInBox(p: Coord, b: BoxCollider): bool =
+  ( ((p.x >= b.position.x) and (p.x <= b.right)) and
+    ((p.y >= b.position.y) and (p.y <= b.bottom)) )
+
+
+proc linesIntersect(p1, p2, p3, p4: Coord): bool =
+  ##  ``Return`` `true` if line segment `p1`-`p2` intersects with `p3`-`p4`,
+  ##  or `false` otherwise.
+  ##
+  let
+    a = ( (p4.x - p3.x) * (p1.y - p3.y) -
+          (p4.y - p3.y) * (p1.x - p3.x) ) /
+        ( (p4.y - p3.y) * (p2.x - p1.x) -
+          (p4.x - p3.x) * (p2.y - p1.y) )
+    b = ( (p2.x - p1.x) * (p1.y - p3.y) -
+          (p2.y - p1.y) * (p1.x - p3.x) ) /
+        ( (p4.y - p3.y) * (p2.x - p1.x) -
+          (p4.x - p3.x) * (p2.y - p1.y) )
+  return ( a >= 0 and a <= 1 ) and (b >= 0 and b <= 1)
 
 
 ############
@@ -81,8 +105,7 @@ method collide*(a1, a2: Collider): bool {.base, inline.} =
 
 # Point - Box
 method collide*(a: Collider, b: BoxCollider): bool {.inline.} =
-  return ((a.position.x >= b.position.x) and (a.position.x <= b.right)) and
-         ((a.position.y >= b.position.y) and (a.position.y <= b.bottom))
+  return pointInBox(a.position, b)
 
 
 # Point - Circle
@@ -96,7 +119,7 @@ method collide*(a: Collider, d: LineCollider): bool =
     pos0 = a.position
     pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
     pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
-  if distance(pos0, pos1, pos2) > 1.0:
+  if distanceToLine(pos0, pos1, pos2) > 1.0:
     return false
   if distance(pos0, pos1) + distance(pos0, pos2) >= distance(pos1, pos2) + 1.0:
     return false
@@ -157,7 +180,27 @@ method collide*(b: BoxCollider, c: CircleCollider): bool =
 
 # Box - Line
 method collide*(b: BoxCollider, d: LineCollider): bool =
-  discard #TODO
+  let
+    b1 = b.position
+    b2 = (b.right, b1.y)
+    b3 = (b.right, b.bottom)
+    b4 = (b1.x, b.bottom)
+    d1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
+    d2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+  if pointInBox(d1, b):
+    return true
+  elif pointInBox(d2, b):
+    return true
+  elif linesIntersect(b1, b2, d1, d2):
+    return true
+  elif linesIntersect(b2, b3, d1, d2):
+    return true
+  elif linesIntersect(b3, b4, d1, d2):
+    return true
+  elif linesIntersect(b4, b1, d1, d2):
+    return true
+  else:
+    return false
 
 
 ##################
@@ -198,7 +241,32 @@ method collide*(c1, c2: CircleCollider): bool {.inline.} =
 
 # Circle - Line
 method collide*(c: CircleCollider, d: LineCollider): bool =
-  discard #TODO
+  let
+    cc = c.position
+    d1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
+    d2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+    dd = d2 - d1
+    a = pow(dd.x, 2) + pow(dd.y, 2)
+    b = 2 * (dd.x * (d1.x - cc.x) + dd.y * (d1.y - cc.y))
+    c = pow(cc.x, 2) + pow(cc.y, 2) +
+        pow(d1.x, 2) + pow(d1.y, 2) -
+        2 * (cc.x * d1.x + cc.y * d1.y) -
+        pow(c.radius, 2)
+    i = b * b - 4 * a * c;
+  if i < 0:
+    return false
+  elif abs(a) < Eps:
+    return false
+  else:
+    let
+      a2 = 2 * a
+      ri = sqrt(i)
+      n1 = (-b + ri) / a2
+      n2 = (-b - ri) / a2
+    if ((n1 < 0) and (n2 < 0)) or ((n1 > 1) and (n2 > 1)):
+      return false
+    else:
+      return true
 
 
 #################
@@ -243,5 +311,10 @@ method collide*(d: LineCollider, c: CircleCollider): bool {.inline.} =
 
 # Line - Line
 method collide*(d1, d2: LineCollider): bool =
-  discard #TODO
+  let
+    p1 = rotateEx(d1.pos, d1.parent.center, d1.parent.pos, d1.parent.rot)
+    p2 = rotateEx(d1.pos2, d1.parent.center, d1.parent.pos, d1.parent.rot)
+    p3 = rotateEx(d2.pos, d2.parent.center, d2.parent.pos, d2.parent.rot)
+    p4 = rotateEx(d2.pos2, d2.parent.center, d2.parent.pos, d2.parent.rot)
+  return linesIntersect(p1, p2, p3, p4)
 

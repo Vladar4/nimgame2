@@ -45,7 +45,7 @@ proc distance*(a, b: Coord): float {.inline.} =
   return sqrt( pow(b.x - a.x, 2) + pow(b.y - a.y, 2) )
 
 
-proc distance*(a, d1, d2: Coord): float =
+proc distanceToLine*(a, d1, d2: Coord): float =
   ##  ``Return`` distance between point ``a`` and line ``d1``-``d2``.
   ##
   let d = d2 - d1

@@ -17,7 +17,7 @@ type
     cursorG, earthG, spacemanG: Graphic
     c: Cursor
     e: Earth
-    d: Line
+    d1, d2: Line
     s: Spaceman
 
 
@@ -31,9 +31,16 @@ proc init*(scene: MainScene) =
   scene.c.graphic = scene.cursorG
   scene.c.collider = newCollider(scene.c)
 
-  # Line
-  scene.d = newLine()
-  scene.d.collider = scene.d.newLineCollider((0, 0), (100, 0))
+  # Line 1
+  scene.d1 = newLine()
+  scene.d1.pos = (50.0, 420.0)
+  scene.d1.center = (50.0, 0.0)
+  scene.d1.collider = scene.d1.newLineCollider((0, 0), (100, 0))
+
+  # Line 2
+  scene.d2 = newLine()
+  scene.d2.pos = (50.0, 450.0)
+  scene.d2.collider = scene.d2.newLineCollider((0, 0), (100, 0))
 
   # Earth
   scene.e = newEarth()
@@ -50,7 +57,8 @@ proc init*(scene: MainScene) =
   scene.s.graphic = scene.spacemanG
   scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.s.graphic.dim)
 
-  scene.list.add(scene.d)
+  scene.list.add(scene.d1)
+  scene.list.add(scene.d2)
   scene.list.add(scene.e)
   scene.list.add(scene.s)
   scene.list.add(scene.c)
@@ -95,7 +103,7 @@ method render*(scene: MainScene, renderer: Renderer) =
     0xFFFFFFFF'u32)
 
   discard renderer.string(
-    (8, 72), generateCollisionString("Line", scene.d.collidedWith),
+    (8, 72), generateCollisionString("Line", scene.d1.collidedWith),
     0xFFFFFFFF'u32)
 
   discard renderer.string(
@@ -123,10 +131,10 @@ method update*(scene: MainScene, elapsed: float) =
   if ScancodeDown.pressed: scene.s.pos.y += 1
   if ScancodeUp.pressed: scene.s.pos.y -= 1
   # Line
-  if ScancodeD.pressed: scene.d.pos.x += 1
-  if ScancodeA.pressed: scene.d.pos.x -= 1
-  if ScancodeS.pressed: scene.d.pos.y += 1
-  if ScancodeW.pressed: scene.d.pos.y -= 1
-  if ScancodeQ.pressed: scene.d.rot -= 1
-  if ScancodeE.pressed: scene.d.rot += 1
+  if ScancodeD.pressed: scene.d1.pos.x += 1
+  if ScancodeA.pressed: scene.d1.pos.x -= 1
+  if ScancodeS.pressed: scene.d1.pos.y += 1
+  if ScancodeW.pressed: scene.d1.pos.y -= 1
+  if ScancodeQ.pressed: scene.d1.rot -= 1
+  if ScancodeE.pressed: scene.d1.rot += 1
 

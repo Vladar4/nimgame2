@@ -10,8 +10,6 @@ type
 proc init*(entity: Line) =
   entity.initEntity()
   entity.tags.add("Line")
-  entity.pos = (50.0, 420.0)
-  entity.center = (50.0, 0.0)
   entity.collidedWith = @[]
 
 
