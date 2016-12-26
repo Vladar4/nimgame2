@@ -23,6 +23,7 @@
 
 
 import
+  math,
   nimgame, draw, entity, settings, types, utils
 
 
@@ -35,7 +36,7 @@ import
 ###########
 
 template position(a: Collider): Coord =
-  (a.parent.pos + a.pos)
+  (a.parent.pos + a.parent.center + a.pos)
 
 
 template right(b: BoxCollider): float =
@@ -89,6 +90,20 @@ method collide*(a: Collider, c: CircleCollider): bool {.inline.} =
   return distance(a.position, c.position) <= c.radius
 
 
+# Point - Line
+method collide*(a: Collider, d: LineCollider): bool =
+  let
+    pos0 = a.position
+    pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
+    pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+  if distance(pos0, pos1, pos2) > 1.0:
+    return false
+  if distance(pos0, pos1) + distance(pos0, pos2) >= distance(pos1, pos2) + 1.0:
+    return false
+  else:
+    return true
+
+
 ###############
 # BoxCollider #
 ###############
@@ -111,7 +126,7 @@ method render*(b: BoxCollider, renderer: Renderer) =
 
 
 # Box - Point
-method collide*(b: BoxCollider, a: Collider): bool =
+method collide*(b: BoxCollider, a: Collider): bool {.inline.} =
   return collide(a, b)
 
 
@@ -140,6 +155,11 @@ method collide*(b: BoxCollider, c: CircleCollider): bool =
   return distance(c.position, closest) < c.radius
 
 
+# Box - Line
+method collide*(b: BoxCollider, d: LineCollider): bool =
+  discard #TODO
+
+
 ##################
 # CircleCollider #
 ##################
@@ -162,16 +182,66 @@ method render*(c: CircleCollider, renderer: Renderer) =
 
 
 # Circle - Point
-method collide*(c: CircleCollider, a: Collider): bool =
+method collide*(c: CircleCollider, a: Collider): bool {.inline.} =
   return collide(a, c)
 
 
 # Circle - Box
-method collide*(c: CircleCollider, b: BoxCollider): bool =
+method collide*(c: CircleCollider, b: BoxCollider): bool {.inline.} =
   return collide(b, c)
 
 
 # Circle - Circle
 method collide*(c1, c2: CircleCollider): bool {.inline.} =
   return distance(c1.position, c2.position) < (c1.radius + c2.radius)
+
+
+# Circle - Line
+method collide*(c: CircleCollider, d: LineCollider): bool =
+  discard #TODO
+
+
+#################
+# Line Collider #
+#################
+
+proc init*(d: LineCollider, parent: Entity, pos: Coord = (0, 0),
+           pos2: Coord = (0, 0)) =
+  Collider(d).init(parent, pos)
+  d.pos2 = pos2
+
+
+proc newLineCollider*(parent: Entity, pos: Coord = (0, 0),
+                      pos2: Coord = (0, 0)): LineCollider =
+  result = new LineCollider
+  result.init(parent, pos, pos2)
+
+
+method render*(d: LineCollider, renderer: Renderer) =
+  let
+    pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
+    pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+
+  discard renderer.line(pos1, pos2, colliderOutlineColor)
+  d.renderCollider(renderer)
+
+
+# Line - Point
+method collide*(d: LineCollider, a: Collider): bool {.inline.} =
+  collide(a, d)
+
+
+# Line - Box
+method collide*(d: LineCollider, b: BoxCollider): bool {.inline.} =
+  collide(b, d)
+
+
+# Line - Circle
+method collide*(d: LineCollider, c: CircleCollider): bool {.inline.} =
+  collide(c, d)
+
+
+# Line - Line
+method collide*(d1, d2: LineCollider): bool =
+  discard #TODO
 

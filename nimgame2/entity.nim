@@ -56,6 +56,9 @@ type
   CircleCollider* = ref object of Collider
     radius*: float
 
+  LineCollider* = ref object of Collider
+    pos2*: Coord
+
 
   Entity* = ref object of RootObj
     tags*: seq[string]            ##  list of entity tags
@@ -68,7 +71,7 @@ type
     center*: Coord                ##  Center for drawing and rotating
     # RenderEx Options
     renderEx*: bool               ##  render with rotation and flip status
-    rot*: Angle                   ##  rotation angle
+    rot*: Angle                   ##  rotation angle in degrees
     rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
     rotCentered*: bool            ##  `true` if rotation anchor is in center
     flip*: Flip                   ##  texture flip status

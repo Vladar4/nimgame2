@@ -27,10 +27,30 @@ import
   types
 
 
+template rad*(a: float): float =
+  ##  Convert degrees to radians.
+  ##
+  (a * Pi / 180)
+
+
+template deg*(a: float): float =
+  ##  Convert radians to degrees.
+  ##
+  (a * 180 / Pi)
+
+
 proc distance*(a, b: Coord): float {.inline.} =
   ##  ``Return`` distance between two coordinates.
   ##
   return sqrt( pow(b.x - a.x, 2) + pow(b.y - a.y, 2) )
+
+
+proc distance*(a, d1, d2: Coord): float =
+  ##  ``Return`` distance between point ``a`` and line ``d1``-``d2``.
+  ##
+  let d = d2 - d1
+  return abs( d.y * a.x - d.x * a.y + d2.x * d1.y - d2.y * d1.x ) /
+         sqrt( pow(d.y, 2) + pow(d.x, 2) )
 
 
 proc direction*(a, b: Coord): float =
@@ -42,14 +62,28 @@ proc direction*(a, b: Coord): float =
   return -(arctan2(dy, dx) / Pi) * 180 + 90
 
 
-template rad*(a: float): float =
-  ##  Convert degrees to radians.
+proc rotate*(a: Coord, angle: float): Coord =
+  ##  Rotate point ``a`` by the given ``angle`` (in degrees).
   ##
-  (a * Pi / 180)
+  let
+    rot = rad(angle)
+    c = cos(rot)
+    s = sin(rot)
+  result.x = a.x * c - a.y * s
+  result.y = a.x * s + a.y * c
 
 
-template deg*(a: float): float =
-  ##  Convert radians to degrees.
+proc rotateEx*(point, center, offset: Coord, angle: float): Coord =
+  ##  Rotate ``point`` by the given ``angle`` around ``center``
+  ##  and with given ``offset``.
   ##
-  (a * 180 / Pi)
+  ##  ``offset``  Offset coordinate (parent position)
+  ##  ``point``   Point to rotate
+  ##  ``center``  Center of rotation
+  ##  ``angle``   Angle of rotation (in degrees)
+  ##
+  var base = offset + center
+  result = offset + point
+  if angle != 0:
+    result = rotate(point - center, angle) + base
 

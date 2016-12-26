@@ -3,28 +3,29 @@ import
   nimgame2/entity
 
 type
-  Earth* = ref object of Entity
+  Line* = ref object of Entity
     collidedWith*: seq[string]
 
 
-proc init*(entity: Earth) =
+proc init*(entity: Line) =
   entity.initEntity()
-  entity.tags.add("Earth")
-  entity.pos = (0.0, 150.0)
+  entity.tags.add("Line")
+  entity.pos = (50.0, 420.0)
+  entity.center = (50.0, 0.0)
   entity.collidedWith = @[]
 
 
-proc newEarth*(): Earth =
-  result = new Earth
+proc newLine*(): Line =
+  result = new Line
   result.init()
 
 
-method update*(entity: Earth, elapsed: float) =
+method update*(entity: Line, elapsed: float) =
   entity.updateEntity(elapsed)
   entity.collidedWith = @[]
 
 
-method onCollide*(entity: Earth, target: Entity) =
+method onCollide*(entity: Line, target: Entity) =
   if target.tags.len > 0:
     entity.collidedWith.add(target.tags[0])
 

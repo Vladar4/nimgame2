@@ -36,7 +36,7 @@ when defined(faststack):
 
 type
   Coord* = tuple[x: float, y: float]  ##  Coordinates type
-  Coord2* = tuple[abs: Coord, rel: Coord] ## Abs + Rel coordinates type
+  Coord2* = tuple[abs, rel: Coord]    ##  Abs + Rel coordinates type
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
 
