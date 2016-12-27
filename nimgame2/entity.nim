@@ -59,6 +59,9 @@ type
   LineCollider* = ref object of Collider
     pos2*: Coord
 
+  PolyCollider* = ref object of Collider
+    points*: seq[Coord]
+
 
   Entity* = ref object of RootObj
     tags*: seq[string]            ##  list of entity tags

@@ -71,9 +71,9 @@ proc linesIntersect(p1, p2, p3, p4: Coord): bool =
   return ( a >= 0 and a <= 1 ) and (b >= 0 and b <= 1)
 
 
-############
-# Collider #
-############
+####################
+# Collider (Point) #
+####################
 
 proc init*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
   a.parent = parent
@@ -119,12 +119,43 @@ method collide*(a: Collider, d: LineCollider): bool =
     pos0 = a.position
     pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
     pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
-  if distanceToLine(pos0, pos1, pos2) > 1.0:
+  if distanceToLine(pos0, pos1, pos2) >= 1.0:
     return false
   if distance(pos0, pos1) + distance(pos0, pos2) >= distance(pos1, pos2) + 1.0:
     return false
   else:
     return true
+
+
+# Point - Poly
+method collide*(a: Collider, p: PolyCollider): bool =
+  if p.points.len < 1:    # No points
+    return false
+  elif p.points.len < 2:  # One point
+    return collide(a, Collider(parent: p.parent,
+                               pos: p.points[0]))
+  elif p.points.len < 3:  # Two points
+    return collide(a, LineCollider(parent: p.parent,
+                                   pos: p.points[0],
+                                   pos2: p.points[1]))
+  let
+    p0 = rotateEx(a.pos, a.parent.center, a.parent.pos, a.parent.rot)
+  var
+    i = 0
+    j = p.points.high
+    c = 0
+  while i < p.points.len:
+    let
+      pi = rotateEx(p.points[i], p.parent.center, p.parent.pos, p.parent.rot)
+      pj = rotateEx(p.points[j], p.parent.center, p.parent.pos, p.parent.rot)
+    if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
+         ((pj.y <= p0.y) and (p0.y < pi.y)) ) and
+       ( p0.x < (pj.x - pi.x) * (p0.y - pi.y) / (pj.y - pi.y) + pi.x ):
+      c = if c == 0: 1 else: 0
+    # increment
+    j = i
+    inc i
+  return c > 0
 
 
 ###############
@@ -197,10 +228,33 @@ method collide*(b: BoxCollider, d: LineCollider): bool =
     return true
   elif linesIntersect(b3, b4, d1, d2):
     return true
-  elif linesIntersect(b4, b1, d1, d2):
-    return true
   else:
     return false
+
+
+# Box - Poly
+method collide*(b: BoxCollider, p: PolyCollider): bool =
+  if p.points.len < 1:    # No points
+    return false
+  elif p.points.len < 2:  # One point
+    return collide(b, Collider(parent: p.parent,
+                               pos: p.points[0]))
+  elif p.points.len < 3:  # Two points
+    return collide(b, LineCollider(parent: p.parent,
+                                   pos: p.points[0],
+                                   pos2: p.points[1]))
+  var
+    i = 0
+    j = p.points.high
+  while i < p.points.len:
+    if collide(b, LineCollider(parent: p.parent,
+                               pos: p.points[i],
+                               pos2: p.points[j])):
+      return true
+    # increment
+    j = i
+    inc i
+  return false
 
 
 ##################
@@ -268,6 +322,30 @@ method collide*(c: CircleCollider, d: LineCollider): bool =
     else:
       return true
 
+# Circle - Poly
+method collide*(c: CircleCollider, p: PolyCollider): bool =
+  if p.points.len < 1:    # No points
+    return false
+  elif p.points.len < 2:  # One point
+    return collide(c, Collider(parent: p.parent,
+                               pos: p.points[0]))
+  elif p.points.len < 3:  # Two points
+    return collide(c, LineCollider(parent: p.parent,
+                                   pos: p.points[0],
+                                   pos2: p.points[1]))
+  var
+    i = 0
+    j = p.points.high
+  while i < p.points.len:
+    if collide(c, LineCollider(parent: p.parent,
+                               pos: p.points[i],
+                               pos2: p.points[j])):
+      return true
+    # increment
+    j = i
+    inc i
+  return false
+
 
 #################
 # Line Collider #
@@ -317,4 +395,130 @@ method collide*(d1, d2: LineCollider): bool =
     p3 = rotateEx(d2.pos, d2.parent.center, d2.parent.pos, d2.parent.rot)
     p4 = rotateEx(d2.pos2, d2.parent.center, d2.parent.pos, d2.parent.rot)
   return linesIntersect(p1, p2, p3, p4)
+
+
+# Line - Poly
+method collide*(d: LineCollider, p: PolyCollider): bool =
+  if p.points.len < 1:    # No points
+    return false
+  elif p.points.len < 2:  # One point
+    return collide(d, Collider(parent: p.parent,
+                               pos: p.points[0]))
+  elif p.points.len < 3:  # Two points
+    return collide(d, LineCollider(parent: p.parent,
+                                   pos: p.points[0],
+                                   pos2: p.points[1]))
+
+  if collide(Collider(parent: d.parent, pos: d.pos), p):
+    return true
+  if collide(Collider(parent: d.parent, pos: d.pos2), p):
+    return true
+  var
+    i = 0
+    j = p.points.high
+  while i < p.points.len:
+    if collide(d, LineCollider(parent: p.parent,
+                               pos: p.points[i],
+                               pos2: p.points[j])):
+      return true
+    # increment
+    j = i
+    inc i
+  return false
+
+
+################
+# PolyCollider #
+################
+
+proc init*(p: PolyCollider, parent: Entity, pos: Coord = (0, 0),
+           points: openarray[Coord]) =
+  Collider(p).init(parent, pos)
+  p.points = @points
+
+
+proc newPolyCollider*(parent: Entity, pos: Coord = (0, 0),
+                      points: openarray[Coord]): PolyCollider =
+  result = new PolyCollider
+  result.init(parent, pos, points)
+
+
+method render*(p: PolyCollider, renderer: Renderer) =
+  if p.points.len < 1:    # No points
+    return
+  elif p.points.len < 2:  # One point
+    render(Collider(parent: p.parent, pos: p.points[0]),
+           renderer)
+  elif p.points.len < 3:  # Two points
+    render(LineCollider(parent: p.parent, pos: p.points[0], pos2: p.points[1]),
+           renderer)
+  var
+    i = 0
+    j = p.points.high
+  while i < p.points.len:
+    let
+      pi = rotateEx(p.points[i], p.parent.center, p.parent.pos, p.parent.rot)
+      pj = rotateEx(p.points[j], p.parent.center, p.parent.pos, p.parent.rot)
+    discard renderer.line(pi, pj, colliderOutlineColor)
+    # increment
+    j = i
+    inc i
+  p.renderCollider(renderer)
+
+
+# Poly - Point
+method collide*(p: PolyCollider, a: Collider): bool {.inline.} =
+  collide(a, p)
+
+
+# Poly - Box
+method collide*(p: PolyCollider, b: BoxCollider): bool {.inline.} =
+  collide(b, p)
+
+
+# Poly - Circle
+method collide*(p: PolyCollider, c: CircleCollider): bool {.inline.} =
+  collide(c, p)
+
+
+# Poly - Line
+method collide*(p: PolyCollider, d: LineCollider): bool {.inline.} =
+  collide(d, p)
+
+
+# Poly - Poly
+method collide*(p1, p2: PolyCollider): bool =
+  if p1.points.len < 1 or p2.points.len < 1:   # P1 or P2 no points
+    return false
+  elif p1.points.len < 2: # P1 one point
+    return collide(Collider(parent: p1.parent,
+                            pos: p1.points[0]),
+                   p2)
+  elif p2.points.len < 2: # P2 one point
+    return collide(Collider(parent: p2.parent,
+                            pos: p2.points[0]),
+                   p1)
+  elif p1.points.len < 3: # P1 two points
+    return collide(LineCollider(parent: p1.parent,
+                                pos: p1.points[0],
+                                pos2: p1.points[1]),
+                   p2)
+  elif p2.points.len < 3: # P2 two points
+    return collide(LineCOllider(parent: p2.parent,
+                                pos: p2.points[0],
+                                pos2: p2.points[1]),
+                   p1)
+  var
+    i = 0
+    j = p1.points.high
+  while i < p1.points.len:
+    if collide(LineCollider(parent: p1.parent,
+                            pos: p1.points[i],
+                            pos2: p1.points[j]),
+               p2):
+      return true
+    # increment
+    j = i
+    inc i
+  return false
 

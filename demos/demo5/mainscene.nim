@@ -9,7 +9,7 @@ import
   nimgame2/scene,
   nimgame2/settings,
   nimgame2/types,
-  cursor, earth, line, spaceman
+  cursor, earth, line, poly1, poly2, poly3, poly9, spaceman
 
 
 type
@@ -19,6 +19,10 @@ type
     e: Earth
     d1, d2: Line
     s: Spaceman
+    p1: Poly1
+    p2: Poly2
+    p3: Poly3
+    p9: Poly9
 
 
 proc init*(scene: MainScene) =
@@ -34,8 +38,8 @@ proc init*(scene: MainScene) =
   # Line 1
   scene.d1 = newLine()
   scene.d1.pos = (50.0, 420.0)
-  scene.d1.center = (50.0, 0.0)
-  scene.d1.collider = scene.d1.newLineCollider((0, 0), (100, 0))
+  scene.d1.center = (25.0, 0.0)
+  scene.d1.collider = scene.d1.newLineCollider((0, 0), (50, 0))
 
   # Line 2
   scene.d2 = newLine()
@@ -57,11 +61,32 @@ proc init*(scene: MainScene) =
   scene.s.graphic = scene.spacemanG
   scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.s.graphic.dim)
 
+  # Poly1
+  scene.p1 = newPoly1()
+  scene.p1.pos = (350, 160)
+
+  # Poly2
+  scene.p2 = newPoly2()
+  scene.p2.pos = (350, 210)
+
+  # Poly3
+  scene.p3 = newPoly3()
+  scene.p3.pos = (350, 260)
+
+  # Poly9
+  scene.p9 = newPoly9()
+  scene.p9.pos = (350, 360)
+
+  # add to scene
   scene.list.add(scene.d1)
   scene.list.add(scene.d2)
   scene.list.add(scene.e)
   scene.list.add(scene.s)
   scene.list.add(scene.c)
+  scene.list.add(scene.p1)
+  scene.list.add(scene.p2)
+  scene.list.add(scene.p3)
+  scene.list.add(scene.p9)
 
 
 proc free*(scene: MainScene) =
@@ -96,7 +121,7 @@ proc generateCollisionString(name: string, list: seq[string]): string =
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
-  discard renderer.box((4, 60), (400, 140), 0x000000CC'u32)
+  discard renderer.box((4, 60), (380, 140), 0x000000CC'u32)
 
   discard renderer.string(
     (8, 64), generateCollisionString("Cursor", scene.c.collidedWith),
@@ -115,11 +140,15 @@ method render*(scene: MainScene, renderer: Renderer) =
     0xFFFFFFFF'u32)
 
   discard renderer.string(
-    (8, 120), "Space - toggle outlines",
+    (8, 96), generateCollisionString("Poly9", scene.p9.collidedWith),
     0xFFFFFFFF'u32)
 
   discard renderer.string(
-    (8, 128), "Arrows control spaceman, WSADQE control line",
+    (8, 120), "Space toggles outlines, Arrows control spaceman",
+    0xFFFFFFFF'u32)
+
+  discard renderer.string(
+    (8, 128), "WASDQE control line, IJKLUO control polygon",
     0xFFFFFFFF'u32)
 
 
@@ -137,4 +166,11 @@ method update*(scene: MainScene, elapsed: float) =
   if ScancodeW.pressed: scene.d1.pos.y -= 1
   if ScancodeQ.pressed: scene.d1.rot -= 1
   if ScancodeE.pressed: scene.d1.rot += 1
+  # Poly9
+  if ScancodeL.pressed: scene.p9.pos.x += 1
+  if ScancodeJ.pressed: scene.p9.pos.x -= 1
+  if ScancodeK.pressed: scene.p9.pos.y += 1
+  if ScancodeI.pressed: scene.p9.pos.y -= 1
+  if ScancodeU.pressed: scene.p9.rot -= 1
+  if ScancodeO.pressed: scene.p9.rot += 1
 

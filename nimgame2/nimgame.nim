@@ -68,7 +68,7 @@ proc init*(
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
     imageFlags: cint = img.InitPNG,
-    mixerFlags: cint = mix.InitMP3
+    mixerFlags: cint = mix.InitOGG
     ): bool =
   ##  Init game.
   ##

@@ -10,7 +10,7 @@ type
 proc init*(entity: Spaceman) =
   entity.initEntity()
   entity.tags.add("Spaceman")
-  entity.pos = (400.0, 100.0)
+  entity.pos = (450.0, 100.0)
   entity.collidedWith = @[]
 
 
