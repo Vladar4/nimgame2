@@ -51,6 +51,8 @@ template bottom(b: BoxCollider): float =
 
 
 template pointInBox(p: Coord, b: BoxCollider): bool =
+  ##  ``Return`` `true` if ``p`` is contained in ``b``, or `false` otherwise.
+  ##
   ( ((p.x >= b.position.x) and (p.x <= b.right)) and
     ((p.y >= b.position.y) and (p.y <= b.bottom)) )
 

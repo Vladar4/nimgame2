@@ -70,8 +70,9 @@ type
     logic*: Logic
     physics*: Physics
     collider*: Collider
+    colliding*: seq[Entity]       ##  list of Entities currently colliding with
     pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
-    center*: Coord                ##  Center for drawing and rotating
+    center*: Coord                ##  center for drawing and rotating
     # RenderEx Options
     renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle in degrees
@@ -319,6 +320,7 @@ proc initEntity*(entity: Entity) =
   entity.logic = nil
   entity.physics = nil
   entity.collider = nil
+  entity.colliding = @[]
   entity.pos = (0.0, 0.0)
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
@@ -331,6 +333,11 @@ proc initEntity*(entity: Entity) =
   entity.rotDrg = 0.0
   entity.rotCentered = true
   entity.flip = Flip.none
+
+
+proc newEntity*(): Entity =
+  result = new Entity
+  result.initEntity()
 
 
 proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =

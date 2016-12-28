@@ -69,10 +69,13 @@ method render*(scene: Scene, renderer: sdl.Renderer) {.base.} =
 
 proc checkCollisions*(scene: Scene, entity: Entity) =
   for target in scene.list:
-    if target.collider == nil: continue
-    if entity == target: continue
+    if target.collider == nil: continue # no collider on target
+    if entity == target: continue # entity is target
+    if target in entity.colliding: continue # already collided with target
     if collide(entity.collider, target.collider):
+      target.colliding.add(entity) # mark target as already collided with entity
       entity.onCollide(target)
+      target.onCollide(entity)
 
 
 proc updateScene*(scene: Scene, elapsed: float) =
@@ -81,9 +84,11 @@ proc updateScene*(scene: Scene, elapsed: float) =
   ##  Call it from your scene update method.
   ##
   for entity in scene.list:
-    # update
     entity.update(elapsed)
-    # collisions
+    if entity.collider != nil:
+      entity.colliding = @[]
+
+  for entity in scene.list:
     if entity.collider != nil:
       scene.checkCollisions(entity)
 
