@@ -82,8 +82,7 @@ proc rotateEx*(point, center, offset: Coord, angle: float): Coord =
   ##  ``center``  Center of rotation
   ##  ``angle``   Angle of rotation (in degrees)
   ##
-  var base = offset + center
-  result = offset + point
+  result = offset - center + point
   if angle != 0:
-    result = rotate(point - center, angle) + base
+    result = rotate(point - center, angle) + offset
 

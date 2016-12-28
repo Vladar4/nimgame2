@@ -39,7 +39,7 @@ let Eps = epsilon(float)
 ###########
 
 template position(a: Collider): Coord =
-  (a.parent.pos + a.parent.center + a.pos)
+  (a.parent.pos + a.pos)
 
 
 template right(b: BoxCollider): float =

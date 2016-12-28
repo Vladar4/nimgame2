@@ -60,6 +60,7 @@ proc init*(scene: MainScene) =
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.s.graphic.dim)
+  scene.s.renderEx = true
 
   # Poly1
   scene.p1 = newPoly1()

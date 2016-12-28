@@ -77,7 +77,6 @@ type
     renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle in degrees
     rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
-    rotCentered*: bool            ##  `true` if rotation anchor is in center
     flip*: Flip                   ##  texture flip status
 
   Logic* = ref object of RootObj
@@ -331,13 +330,19 @@ proc initEntity*(entity: Entity) =
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
   entity.rotDrg = 0.0
-  entity.rotCentered = true
   entity.flip = Flip.none
 
 
 proc newEntity*(): Entity =
   result = new Entity
   result.initEntity()
+
+
+proc centrify*(entity: Entity) =
+  ##  Set ``center`` to the graphic's central point.
+  ##
+  if entity.graphic != nil:
+    entity.center = entity.graphic.dim / 2
 
 
 proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
@@ -351,7 +356,7 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
         entity.graphic.drawEx(renderer, entity.pos - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[0],
-                              entity.rot, entity.rotCentered, entity.center,
+                              entity.rot, entity.center,
                               entity.flip)
       else:
         let anim = entity.currentAnimation
@@ -359,13 +364,13 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
                               entity.sprite.frameSize,
                               entity.sprite.frames[
                                 anim.frames[entity.sprite.currentFrame]],
-                              entity.rot, entity.rotCentered, entity.center,
+                              entity.rot, entity.center,
                               Flip(entity.flip.cint xor anim.flip.cint))
     elif not entity.renderEx:
       entity.graphic.draw(renderer, entity.pos - entity.center)
     else:
       entity.graphic.drawEx(renderer, entity.pos - entity.center,
-                            entity.rot, entity.rotCentered, entity.center,
+                            entity.rot, entity.center,
                             entity.flip)
 
 

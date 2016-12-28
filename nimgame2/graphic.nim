@@ -160,7 +160,6 @@ proc drawEx*(graphic: Graphic,
              renderer: sdl.Renderer,
              pos: Coord,
              angle: Angle = 0.0,
-             centered: bool = true,
              anchor: Coord = (0.0, 0.0),
              flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
@@ -168,9 +167,6 @@ proc drawEx*(graphic: Graphic,
   ##  ``pos`` Draw coordinates.
   ##
   ##  ``angle`` Rotation angle in degrees.
-  ##
-  ##  ``centered`` Set to `true` to set the rotation `anchor`
-  ##  in the center of the texture.
   ##
   ##  ``anchor``  Rotation anchor position.
   ##
@@ -185,12 +181,11 @@ proc drawEx*(graphic: Graphic,
                          w: graphic.fSize.w,
                          h: graphic.fSize.h)
   var anchorPoint: sdl.Point
-  if not centered:
-    anchorPoint.x = anchor.x.cint
-    anchorPoint.y = anchor.y.cint
+  anchorPoint.x = anchor.x.cint
+  anchorPoint.y = anchor.y.cint
   discard renderer.renderCopyEx(graphic.texture, nil, addr(dstRect),
                                 angle,
-                                if centered: nil else: addr(anchorPoint),
+                                addr(anchorPoint),
                                 sdl.RendererFlip(flip))
 
 
@@ -199,7 +194,6 @@ proc drawEx*(graphic: Graphic,
              pos: Coord,
              size: Dim,
              angle: Angle = 0.0,
-             centered: bool = true,
              anchor: Coord = (0.0, 0.0),
              flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
@@ -210,9 +204,6 @@ proc drawEx*(graphic: Graphic,
   ##
   ##  ``angle`` Rotation angle in degrees.
   ##
-  ##  ``centered`` Set to `true` to set the rotation `anchor`
-  ##  in the center of the texture.
-  ##
   ##  ``anchor``  Rotation anchor position.
   ##
   ##  ``flip``  ``RendererFlip`` value, could be set to:
@@ -222,7 +213,7 @@ proc drawEx*(graphic: Graphic,
     return
 
   if size == (0, 0):
-    drawEx(graphic, renderer, pos, angle, centered, anchor, flip)
+    drawEx(graphic, renderer, pos, angle, anchor, flip)
     return
 
   var dstRect = sdl.Rect(x: pos.x.int,
@@ -230,12 +221,11 @@ proc drawEx*(graphic: Graphic,
                          w: size.w,
                          h: size.h)
   var anchorPoint: sdl.Point
-  if not centered:
-    anchorPoint.x = anchor.x.cint
-    anchorPoint.y = anchor.y.cint
+  anchorPoint.x = anchor.x.cint
+  anchorPoint.y = anchor.y.cint
   discard renderer.renderCopyEx(graphic.texture, nil, addr(dstRect),
                                 angle,
-                                if centered: nil else: addr(anchorPoint),
+                                addr(anchorPoint),
                                 sdl.RendererFlip(flip))
 
 
@@ -245,7 +235,6 @@ proc drawEx*(graphic: Graphic,
              size: Dim,
              region: Rect,
              angle: Angle = 0.0,
-             centered: bool = true,
              anchor: Coord = (0.0, 0.0),
              flip: Flip = Flip.none) =
   ##  Advanced draw procedure.
@@ -258,9 +247,6 @@ proc drawEx*(graphic: Graphic,
   ##
   ##  ``angle`` Rotation angle in degrees.
   ##
-  ##  ``centered`` Set to `true` to set the rotation `anchor`
-  ##  in the center of the texture.
-  ##
   ##  ``anchor``  Rotation anchor position.
   ##
   ##  ``flip``  ``RendererFlip`` value, could be set to:
@@ -270,7 +256,7 @@ proc drawEx*(graphic: Graphic,
     return
 
   if size == (0, 0):
-    drawEx(graphic, renderer, pos, angle, centered, anchor, flip)
+    drawEx(graphic, renderer, pos, angle, anchor, flip)
     return
 
   var srcRect = region
@@ -279,12 +265,11 @@ proc drawEx*(graphic: Graphic,
                      w: size.w,
                      h: size.h)
   var anchorPoint: sdl.Point
-  if not centered:
-    anchorPoint.x = anchor.x.cint
-    anchorPoint.y = anchor.y.cint
+  anchorPoint.x = anchor.x.cint
+  anchorPoint.y = anchor.y.cint
   discard renderer.renderCopyEx(graphic.texture, addr(srcRect), addr(dstRect),
                                 angle,
-                                if centered: nil else: addr(anchorPoint),
+                                addr(anchorPoint),
                                 sdl.RendererFlip(flip))
 
 
