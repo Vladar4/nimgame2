@@ -57,6 +57,7 @@ proc renderScene*(scene: Scene, renderer: sdl.Renderer) =
   ##
   for entity in scene.list:
     entity.render(renderer)
+  # Should be in the scene level to be drawn on top of all entities
   if colliderOutline:
     for entity in scene.list:
       if entity.collider != nil:

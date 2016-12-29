@@ -39,22 +39,33 @@ let Eps = epsilon(float)
 ###########
 
 template position(a: Collider): Coord =
-  (a.parent.pos + a.pos)
+  if a.parent.rotation == 0:
+    (a.parent.position + a.pos)
+  else:
+    rotateEx(a.pos, (0, 0), a.parent.position, a.parent.rotation)
+
+
+template left(b: BoxCollider): float =
+  (b.position.x - b.dim.w / 2)
 
 
 template right(b: BoxCollider): float =
-  (b.position.x + b.dim.w.float)
+  (b.position.x + b.dim.w / 2)
+
+
+template top(b: BoxCollider): float =
+  (b.position.y - b.dim.h / 2)
 
 
 template bottom(b: BoxCollider): float =
-  (b.position.y + b.dim.h.float)
+  (b.position.y + b.dim.h / 2)
 
 
 template pointInBox(p: Coord, b: BoxCollider): bool =
   ##  ``Return`` `true` if ``p`` is contained in ``b``, or `false` otherwise.
   ##
-  ( ((p.x >= b.position.x) and (p.x <= b.right)) and
-    ((p.y >= b.position.y) and (p.y <= b.bottom)) )
+  ( ((p.x >= b.left) and (p.x <= b.right)) and
+    ((p.y >= b.top) and (p.y <= b.bottom)) )
 
 
 proc linesIntersect(p1, p2, p3, p4: Coord): bool =
@@ -118,9 +129,12 @@ method collide*(a: Collider, c: CircleCollider): bool {.inline.} =
 # Point - Line
 method collide*(a: Collider, d: LineCollider): bool =
   let
+    dpCenter = d.parent.center
+    dpPosition = d.parent.position
+    dpRotation = d.parent.rotation
     pos0 = a.position
-    pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
-    pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+    pos1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
+    pos2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
   if distanceToLine(pos0, pos1, pos2) >= 1.0:
     return false
   if distance(pos0, pos1) + distance(pos0, pos2) >= distance(pos1, pos2) + 1.0:
@@ -141,15 +155,18 @@ method collide*(a: Collider, p: PolyCollider): bool =
                                    pos: p.points[0],
                                    pos2: p.points[1]))
   let
-    p0 = rotateEx(a.pos, a.parent.center, a.parent.pos, a.parent.rot)
+    p0 = rotateEx(a.pos, a.parent.center, a.parent.position, a.parent.rotation)
   var
     i = 0
     j = p.points.high
     c = 0
   while i < p.points.len:
     let
-      pi = rotateEx(p.points[i], p.parent.center, p.parent.pos, p.parent.rot)
-      pj = rotateEx(p.points[j], p.parent.center, p.parent.pos, p.parent.rot)
+      ppCenter = p.parent.center
+      ppPosition = p.parent.position
+      ppRotation = p.parent.rotation
+      pi = rotateEx(p.points[i], ppCenter, ppPosition, ppRotation)
+      pj = rotateEx(p.points[j], ppCenter, ppPosition, ppRotation)
     if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
          ((pj.y <= p0.y) and (p0.y < pi.y)) ) and
        ( p0.x < (pj.x - pi.x) * (p0.y - pi.y) / (pj.y - pi.y) + pi.x ):
@@ -177,7 +194,7 @@ proc newBoxCollider*(parent: Entity, pos: Coord = (0, 0),
 
 
 method render*(b: BoxCollider, renderer: Renderer) =
-  discard renderer.rect(b.position, (b.right, b.bottom), colliderOutlineColor)
+  discard renderer.rect((b.left, b.top), (b.right, b.bottom), colliderOutlineColor)
   b.renderCollider(renderer)
 
 
@@ -188,38 +205,44 @@ method collide*(b: BoxCollider, a: Collider): bool {.inline.} =
 
 # Box - Box
 method collide*(b1, b2: BoxCollider): bool =
-  if b1.position.x > b2.right: return false
-  if b1.right < b2.position.x: return false
-  if b1.position.y > b2.bottom: return false
-  if b1.bottom < b2.position.y: return false
+  if b1.left > b2.right: return false
+  if b1.right < b2.left: return false
+  if b1.top > b2.bottom: return false
+  if b1.bottom < b2.top: return false
   return true
 
 
 # Box - Circle
 method collide*(b: BoxCollider, c: CircleCollider): bool =
   let
+    left = b.left
     right = b.right
+    top = b.top
     bottom = b.bottom
+    cpos = c.position
   var
     closest: Coord
-  closest.x = if b.position.x > c.position.x: b.position.x
-              elif right < c.position.x: right
-              else: c.position.x
-  closest.y = if b.position.y > c.position.y: b.position.y
-              elif bottom < c.position.y: bottom
-              else: c.position.y
-  return distance(c.position, closest) < c.radius
+  closest.x = if left > cpos.x: left
+              elif right < cpos.x: right
+              else: cpos.x
+  closest.y = if top > cpos.y: top
+              elif bottom < cpos.y: bottom
+              else: cpos.y
+  return distance(cpos, closest) < c.radius
 
 
 # Box - Line
 method collide*(b: BoxCollider, d: LineCollider): bool =
   let
-    b1 = b.position
+    b1 = (x: b.left, y: b.top)
     b2 = (b.right, b1.y)
     b3 = (b.right, b.bottom)
     b4 = (b1.x, b.bottom)
-    d1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
-    d2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+    dpCenter = d.parent.center
+    dpPosition = d.parent.position
+    dpRotation = d.parent.rotation
+    d1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
+    d2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
   if pointInBox(d1, b):
     return true
   elif pointInBox(d2, b):
@@ -299,8 +322,11 @@ method collide*(c1, c2: CircleCollider): bool {.inline.} =
 method collide*(c: CircleCollider, d: LineCollider): bool =
   let
     cc = c.position
-    d1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
-    d2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
+    dpCenter = d.parent.center
+    dpPosition = d.parent.position
+    dpRotation = d.parent.rotation
+    d1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
+    d2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
     dd = d2 - d1
     a = pow(dd.x, 2) + pow(dd.y, 2)
     b = 2 * (dd.x * (d1.x - cc.x) + dd.y * (d1.y - cc.y))
@@ -367,9 +393,11 @@ proc newLineCollider*(parent: Entity, pos: Coord = (0, 0),
 
 method render*(d: LineCollider, renderer: Renderer) =
   let
-    pos1 = rotateEx(d.pos, d.parent.center, d.parent.pos, d.parent.rot)
-    pos2 = rotateEx(d.pos2, d.parent.center, d.parent.pos, d.parent.rot)
-
+    dpCenter = d.parent.center
+    dpPosition = d.parent.position
+    dpRotation = d.parent.rotation
+    pos1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
+    pos2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
   discard renderer.line(pos1, pos2, colliderOutlineColor)
   d.renderCollider(renderer)
 
@@ -392,10 +420,16 @@ method collide*(d: LineCollider, c: CircleCollider): bool {.inline.} =
 # Line - Line
 method collide*(d1, d2: LineCollider): bool =
   let
-    p1 = rotateEx(d1.pos, d1.parent.center, d1.parent.pos, d1.parent.rot)
-    p2 = rotateEx(d1.pos2, d1.parent.center, d1.parent.pos, d1.parent.rot)
-    p3 = rotateEx(d2.pos, d2.parent.center, d2.parent.pos, d2.parent.rot)
-    p4 = rotateEx(d2.pos2, d2.parent.center, d2.parent.pos, d2.parent.rot)
+    d1pCenter = d1.parent.center
+    d1pPosition = d1.parent.position
+    d1pRotation = d1.parent.rotation
+    d2pCenter = d2.parent.center
+    d2pPosition = d2.parent.position
+    d2pRotation = d2.parent.rotation
+    p1 = rotateEx(d1.pos, d1pCenter, d1pPosition, d1pRotation)
+    p2 = rotateEx(d1.pos2, d1pCenter, d1pPosition, d1pRotation)
+    p3 = rotateEx(d2.pos, d2pCenter, d2pPosition, d2pRotation)
+    p4 = rotateEx(d2.pos2, d2pCenter, d2pPosition, d2pRotation)
   return linesIntersect(p1, p2, p3, p4)
 
 
@@ -459,8 +493,11 @@ method render*(p: PolyCollider, renderer: Renderer) =
     j = p.points.high
   while i < p.points.len:
     let
-      pi = rotateEx(p.points[i], p.parent.center, p.parent.pos, p.parent.rot)
-      pj = rotateEx(p.points[j], p.parent.center, p.parent.pos, p.parent.rot)
+      ppCenter = p.parent.center
+      ppPosition = p.parent.position
+      ppRotation = p.parent.rotation
+      pi = rotateEx(p.points[i], ppCenter, ppPosition, ppRotation)
+      pj = rotateEx(p.points[j], ppCenter, ppPosition, ppRotation)
     discard renderer.line(pi, pj, colliderOutlineColor)
     # increment
     j = i

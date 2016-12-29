@@ -24,7 +24,7 @@
 
 import
   sdl2/sdl,
-  graphic, types
+  graphic, types, utils
 
 type
   Animation = object
@@ -38,7 +38,7 @@ type
     animations*: seq[Animation] ##  list of animations
     currentAnimation*: int      ##  index of currently playing animation
     currentFrame*: int          ##  incex of current frame
-    cycles*: int                ##  animation cycles counter (-1 is looping)
+    cycles*: int                ##  animation cycles counter (`-1` for looping)
     time*: float                ##  animation timer
     playing*: bool              ##  animation playing flag
     frameSize*: Dim             ##  sprite frame dimensions
@@ -64,6 +64,7 @@ type
 
 
   Entity* = ref object of RootObj
+    parent*: Entity
     tags*: seq[string]            ##  list of entity tags
     graphic*: Graphic
     sprite*: Sprite
@@ -76,7 +77,7 @@ type
     # RenderEx Options
     renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle in degrees
-    rotVel*, rotAcc*, rotDrg*: float  ##  rotation velocity, acceleration, drag
+    rotVel*, rotAcc*, rotDrg*: Angle  ##  rotation velocity, acceleration, drag
     flip*: Flip                   ##  texture flip status
 
   Logic* = ref object of RootObj
@@ -313,6 +314,7 @@ proc initEntity*(entity: Entity) =
   ##
   ##  Call it after creating a new entity.
   ##
+  entity.parent = nil
   entity.tags = @[]
   entity.graphic = nil
   entity.sprite = nil
@@ -338,6 +340,26 @@ proc newEntity*(): Entity =
   result.initEntity()
 
 
+proc rotation*(entity: Entity): Angle {.inline.} =
+  if entity.parent == nil:
+    return entity.rot
+  else:
+    return entity.parent.rotation + entity.rot
+
+
+proc position*(entity: Entity): Coord {.inline.} =
+  if entity.parent == nil:
+    return entity.pos
+  else:
+    if entity.parent.rotation == 0:
+      return entity.parent.position + entity.pos
+    else:
+      return rotateEx(entity.pos,
+                      (0, 0),
+                      entity.parent.position,
+                      entity.rotation)
+
+
 proc centrify*(entity: Entity) =
   ##  Set ``center`` to the graphic's central point.
   ##
@@ -353,24 +375,25 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   if not (entity.graphic == nil):
     if not (entity.sprite == nil):
       if entity.sprite.currentAnimation < 0:
-        entity.graphic.drawEx(renderer, entity.pos - entity.center,
+        entity.graphic.drawEx(renderer, entity.position - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[0],
-                              entity.rot, entity.center,
+                              entity.rotation, entity.center,
                               entity.flip)
       else:
         let anim = entity.currentAnimation
-        entity.graphic.drawEx(renderer, entity.pos - entity.center,
+        entity.graphic.drawEx(renderer, entity.position - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[
                                 anim.frames[entity.sprite.currentFrame]],
-                              entity.rot, entity.center,
+                              entity.rotation, entity.center,
                               Flip(entity.flip.cint xor anim.flip.cint))
+    # entity.sprite == nil
     elif not entity.renderEx:
-      entity.graphic.draw(renderer, entity.pos - entity.center)
+      entity.graphic.draw(renderer, entity.position - entity.center)
     else:
-      entity.graphic.drawEx(renderer, entity.pos - entity.center,
-                            entity.rot, entity.center,
+      entity.graphic.drawEx(renderer, entity.position - entity.center,
+                            entity.rotation, entity.center,
                             entity.flip)
 
 

@@ -59,6 +59,7 @@ proc init*(scene: MainScene) =
   scene.spacemanG = newGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
+  scene.s.centrify()
   scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.s.graphic.dim)
   scene.s.renderEx = true
 
