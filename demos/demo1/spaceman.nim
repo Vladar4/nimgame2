@@ -20,7 +20,7 @@ proc init*(entity: Spaceman, s: Scene, g: Graphic, p: Physics) =
   entity.pos.y = random(game.size.h).float
   entity.vel.x = random(10.0..100.0) * random([-1, 1]).float
   entity.vel.y = random(10.0..100.0) * random([-1, 1]).float
-  entity.center = (g.w / 2, g.h / 2)
+  entity.centrify()
   entity.renderEx = true
   entity.rot = random(0.0..360.0)
   entity.rotVel = random(10.0..60.0) * random([-1, 1]).float
