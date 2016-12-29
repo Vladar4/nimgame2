@@ -27,13 +27,13 @@ import
   types
 
 
-template rad*(a: float): float =
+template rad*(a: Angle): Angle =
   ##  Convert degrees to radians.
   ##
   (a * Pi / 180)
 
 
-template deg*(a: float): float =
+template deg*(a: Angle): Angle =
   ##  Convert radians to degrees.
   ##
   (a * 180 / Pi)
@@ -53,7 +53,7 @@ proc distanceToLine*(a, d1, d2: Coord): float =
          sqrt( pow(d.y, 2) + pow(d.x, 2) )
 
 
-proc direction*(a, b: Coord): float =
+proc direction*(a, b: Coord): Angle =
   ##  ``Return`` angle direction from coordinate ``a`` to ``b``.
   ##
   let
@@ -62,7 +62,7 @@ proc direction*(a, b: Coord): float =
   return -(arctan2(dy, dx) / Pi) * 180 + 90
 
 
-proc rotate*(a: Coord, angle: float): Coord =
+proc rotate*(a: Coord, angle: Angle): Coord =
   ##  Rotate point ``a`` by the given ``angle`` (in degrees).
   ##
   let
@@ -73,7 +73,7 @@ proc rotate*(a: Coord, angle: float): Coord =
   result.y = a.x * s + a.y * c
 
 
-proc rotateEx*(point, center, offset: Coord, angle: float): Coord =
+proc rotateEx*(point, center, offset: Coord, angle: Angle): Coord =
   ##  Rotate ``point`` by the given ``angle`` around ``center``
   ##  and with given ``offset``.
   ##
