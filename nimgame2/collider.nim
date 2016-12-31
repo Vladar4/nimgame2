@@ -42,7 +42,7 @@ template position(a: Collider): Coord =
   if a.parent.rotation == 0:
     (a.parent.position + a.pos)
   else:
-    rotateEx(a.pos, (0, 0), a.parent.position, a.parent.rotation)
+    rotate(a.pos, (0, 0), a.parent.position, a.parent.rotation)
 
 
 template left(b: BoxCollider): float =
@@ -133,8 +133,8 @@ method collide*(a: Collider, d: LineCollider): bool =
     dpPosition = d.parent.position
     dpRotation = d.parent.rotation
     pos0 = a.position
-    pos1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
-    pos2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
+    pos1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
+    pos2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
   if distanceToLine(pos0, pos1, pos2) >= 1.0:
     return false
   if distance(pos0, pos1) + distance(pos0, pos2) >= distance(pos1, pos2) + 1.0:
@@ -155,7 +155,7 @@ method collide*(a: Collider, p: PolyCollider): bool =
                                    pos: p.points[0],
                                    pos2: p.points[1]))
   let
-    p0 = rotateEx(a.pos, a.parent.center, a.parent.position, a.parent.rotation)
+    p0 = rotate(a.pos, a.parent.center, a.parent.position, a.parent.rotation)
   var
     i = 0
     j = p.points.high
@@ -165,8 +165,8 @@ method collide*(a: Collider, p: PolyCollider): bool =
       ppCenter = p.parent.center
       ppPosition = p.parent.position
       ppRotation = p.parent.rotation
-      pi = rotateEx(p.points[i], ppCenter, ppPosition, ppRotation)
-      pj = rotateEx(p.points[j], ppCenter, ppPosition, ppRotation)
+      pi = rotate(p.points[i], ppCenter, ppPosition, ppRotation)
+      pj = rotate(p.points[j], ppCenter, ppPosition, ppRotation)
     if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
          ((pj.y <= p0.y) and (p0.y < pi.y)) ) and
        ( p0.x < (pj.x - pi.x) * (p0.y - pi.y) / (pj.y - pi.y) + pi.x ):
@@ -241,8 +241,8 @@ method collide*(b: BoxCollider, d: LineCollider): bool =
     dpCenter = d.parent.center
     dpPosition = d.parent.position
     dpRotation = d.parent.rotation
-    d1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
-    d2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
+    d1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
+    d2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
   if pointInBox(d1, b):
     return true
   elif pointInBox(d2, b):
@@ -325,8 +325,8 @@ method collide*(c: CircleCollider, d: LineCollider): bool =
     dpCenter = d.parent.center
     dpPosition = d.parent.position
     dpRotation = d.parent.rotation
-    d1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
-    d2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
+    d1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
+    d2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
     dd = d2 - d1
     a = pow(dd.x, 2) + pow(dd.y, 2)
     b = 2 * (dd.x * (d1.x - cc.x) + dd.y * (d1.y - cc.y))
@@ -396,8 +396,8 @@ method render*(d: LineCollider, renderer: Renderer) =
     dpCenter = d.parent.center
     dpPosition = d.parent.position
     dpRotation = d.parent.rotation
-    pos1 = rotateEx(d.pos, dpCenter, dpPosition, dpRotation)
-    pos2 = rotateEx(d.pos2, dpCenter, dpPosition, dpRotation)
+    pos1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
+    pos2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
   discard renderer.line(pos1, pos2, colliderOutlineColor)
   d.renderCollider(renderer)
 
@@ -426,10 +426,10 @@ method collide*(d1, d2: LineCollider): bool =
     d2pCenter = d2.parent.center
     d2pPosition = d2.parent.position
     d2pRotation = d2.parent.rotation
-    p1 = rotateEx(d1.pos, d1pCenter, d1pPosition, d1pRotation)
-    p2 = rotateEx(d1.pos2, d1pCenter, d1pPosition, d1pRotation)
-    p3 = rotateEx(d2.pos, d2pCenter, d2pPosition, d2pRotation)
-    p4 = rotateEx(d2.pos2, d2pCenter, d2pPosition, d2pRotation)
+    p1 = rotate(d1.pos, d1pCenter, d1pPosition, d1pRotation)
+    p2 = rotate(d1.pos2, d1pCenter, d1pPosition, d1pRotation)
+    p3 = rotate(d2.pos, d2pCenter, d2pPosition, d2pRotation)
+    p4 = rotate(d2.pos2, d2pCenter, d2pPosition, d2pRotation)
   return linesIntersect(p1, p2, p3, p4)
 
 
@@ -496,8 +496,8 @@ method render*(p: PolyCollider, renderer: Renderer) =
       ppCenter = p.parent.center
       ppPosition = p.parent.position
       ppRotation = p.parent.rotation
-      pi = rotateEx(p.points[i], ppCenter, ppPosition, ppRotation)
-      pj = rotateEx(p.points[j], ppCenter, ppPosition, ppRotation)
+      pi = rotate(p.points[i], ppCenter, ppPosition, ppRotation)
+      pj = rotate(p.points[j], ppCenter, ppPosition, ppRotation)
     discard renderer.line(pi, pj, colliderOutlineColor)
     # increment
     j = i

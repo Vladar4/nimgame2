@@ -354,10 +354,10 @@ proc position*(entity: Entity): Coord {.inline.} =
     if entity.parent.rotation == 0:
       return entity.parent.position + entity.pos
     else:
-      return rotateEx(entity.pos,
-                      (0, 0),
-                      entity.parent.position,
-                      entity.rotation)
+      return rotate(entity.pos,
+                    (0, 0),
+                    entity.parent.position,
+                    entity.rotation)
 
 
 proc centrify*(entity: Entity) =

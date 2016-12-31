@@ -73,7 +73,7 @@ proc rotate*(a: Coord, angle: Angle): Coord =
   result.y = a.x * s + a.y * c
 
 
-proc rotateEx*(point, center, offset: Coord, angle: Angle): Coord =
+proc rotate*(point, center, offset: Coord, angle: Angle): Coord =
   ##  Rotate ``point`` by the given ``angle`` around ``center``
   ##  and with given ``offset``.
   ##
