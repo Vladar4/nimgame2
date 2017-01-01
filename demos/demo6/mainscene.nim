@@ -39,7 +39,6 @@ proc init*(scene: MainScene) =
   scene.s.centrify()
   scene.s.renderEx = true
   scene.s.parent = scene.e
-  echo scene.s.center
   scene.s.collider = scene.s.newBoxCollider((0, 0), (100, 160))
 
   # add to scene

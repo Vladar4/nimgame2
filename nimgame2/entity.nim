@@ -340,24 +340,24 @@ proc newEntity*(): Entity =
   result.initEntity()
 
 
-proc rotation*(entity: Entity): Angle {.inline.} =
+proc absRot*(entity: Entity): Angle {.inline.} =
   if entity.parent == nil:
     return entity.rot
   else:
-    return entity.parent.rotation + entity.rot
+    return entity.parent.absRot + entity.rot
 
 
-proc position*(entity: Entity): Coord {.inline.} =
+proc absPos*(entity: Entity): Coord {.inline.} =
   if entity.parent == nil:
     return entity.pos
   else:
-    if entity.parent.rotation == 0:
-      return entity.parent.position + entity.pos
+    if entity.parent.absRot == 0:
+      return entity.parent.absPos + entity.pos
     else:
       return rotate(entity.pos,
                     (0, 0),
-                    entity.parent.position,
-                    entity.rotation)
+                    entity.parent.absPos,
+                    entity.absRot)
 
 
 proc centrify*(entity: Entity) =
@@ -375,25 +375,25 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   if not (entity.graphic == nil):
     if not (entity.sprite == nil):
       if entity.sprite.currentAnimation < 0:
-        entity.graphic.drawEx(renderer, entity.position - entity.center,
+        entity.graphic.drawEx(renderer, entity.absPos - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[0],
-                              entity.rotation, entity.center,
+                              entity.absRot, entity.center,
                               entity.flip)
       else:
         let anim = entity.currentAnimation
-        entity.graphic.drawEx(renderer, entity.position - entity.center,
+        entity.graphic.drawEx(renderer, entity.absPos - entity.center,
                               entity.sprite.frameSize,
                               entity.sprite.frames[
                                 anim.frames[entity.sprite.currentFrame]],
-                              entity.rotation, entity.center,
+                              entity.absRot, entity.center,
                               Flip(entity.flip.cint xor anim.flip.cint))
     # entity.sprite == nil
     elif not entity.renderEx:
-      entity.graphic.draw(renderer, entity.position - entity.center)
+      entity.graphic.draw(renderer, entity.absPos - entity.center)
     else:
-      entity.graphic.drawEx(renderer, entity.position - entity.center,
-                            entity.rotation, entity.center,
+      entity.graphic.drawEx(renderer, entity.absPos - entity.center,
+                            entity.absRot, entity.center,
                             entity.flip)
 
 

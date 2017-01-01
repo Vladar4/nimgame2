@@ -39,10 +39,10 @@ let Eps = epsilon(float)
 ###########
 
 template position(a: Collider): Coord =
-  if a.parent.rotation == 0:
-    (a.parent.position + a.pos)
+  if a.parent.absRot == 0:
+    (a.parent.absPos + a.pos)
   else:
-    rotate(a.pos, (0, 0), a.parent.position, a.parent.rotation)
+    rotate(a.pos, (0, 0), a.parent.absPos, a.parent.absRot)
 
 
 template left(b: BoxCollider): float =
@@ -130,8 +130,8 @@ method collide*(a: Collider, c: CircleCollider): bool {.inline.} =
 method collide*(a: Collider, d: LineCollider): bool =
   let
     dpCenter = d.parent.center
-    dpPosition = d.parent.position
-    dpRotation = d.parent.rotation
+    dpPosition = d.parent.absPos
+    dpRotation = d.parent.absRot
     pos0 = a.position
     pos1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
     pos2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
@@ -155,7 +155,7 @@ method collide*(a: Collider, p: PolyCollider): bool =
                                    pos: p.points[0],
                                    pos2: p.points[1]))
   let
-    p0 = rotate(a.pos, a.parent.center, a.parent.position, a.parent.rotation)
+    p0 = rotate(a.pos, a.parent.center, a.parent.absPos, a.parent.absRot)
   var
     i = 0
     j = p.points.high
@@ -163,8 +163,8 @@ method collide*(a: Collider, p: PolyCollider): bool =
   while i < p.points.len:
     let
       ppCenter = p.parent.center
-      ppPosition = p.parent.position
-      ppRotation = p.parent.rotation
+      ppPosition = p.parent.absPos
+      ppRotation = p.parent.absRot
       pi = rotate(p.points[i], ppCenter, ppPosition, ppRotation)
       pj = rotate(p.points[j], ppCenter, ppPosition, ppRotation)
     if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
@@ -239,8 +239,8 @@ method collide*(b: BoxCollider, d: LineCollider): bool =
     b3 = (b.right, b.bottom)
     b4 = (b1.x, b.bottom)
     dpCenter = d.parent.center
-    dpPosition = d.parent.position
-    dpRotation = d.parent.rotation
+    dpPosition = d.parent.absPos
+    dpRotation = d.parent.absRot
     d1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
     d2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
   if pointInBox(d1, b):
@@ -323,8 +323,8 @@ method collide*(c: CircleCollider, d: LineCollider): bool =
   let
     cc = c.position
     dpCenter = d.parent.center
-    dpPosition = d.parent.position
-    dpRotation = d.parent.rotation
+    dpPosition = d.parent.absPos
+    dpRotation = d.parent.absRot
     d1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
     d2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
     dd = d2 - d1
@@ -394,8 +394,8 @@ proc newLineCollider*(parent: Entity, pos: Coord = (0, 0),
 method render*(d: LineCollider, renderer: Renderer) =
   let
     dpCenter = d.parent.center
-    dpPosition = d.parent.position
-    dpRotation = d.parent.rotation
+    dpPosition = d.parent.absPos
+    dpRotation = d.parent.absRot
     pos1 = rotate(d.pos, dpCenter, dpPosition, dpRotation)
     pos2 = rotate(d.pos2, dpCenter, dpPosition, dpRotation)
   discard renderer.line(pos1, pos2, colliderOutlineColor)
@@ -421,11 +421,11 @@ method collide*(d: LineCollider, c: CircleCollider): bool {.inline.} =
 method collide*(d1, d2: LineCollider): bool =
   let
     d1pCenter = d1.parent.center
-    d1pPosition = d1.parent.position
-    d1pRotation = d1.parent.rotation
+    d1pPosition = d1.parent.absPos
+    d1pRotation = d1.parent.absRot
     d2pCenter = d2.parent.center
-    d2pPosition = d2.parent.position
-    d2pRotation = d2.parent.rotation
+    d2pPosition = d2.parent.absPos
+    d2pRotation = d2.parent.absRot
     p1 = rotate(d1.pos, d1pCenter, d1pPosition, d1pRotation)
     p2 = rotate(d1.pos2, d1pCenter, d1pPosition, d1pRotation)
     p3 = rotate(d2.pos, d2pCenter, d2pPosition, d2pRotation)
@@ -494,8 +494,8 @@ method render*(p: PolyCollider, renderer: Renderer) =
   while i < p.points.len:
     let
       ppCenter = p.parent.center
-      ppPosition = p.parent.position
-      ppRotation = p.parent.rotation
+      ppPosition = p.parent.absPos
+      ppRotation = p.parent.absRot
       pi = rotate(p.points[i], ppCenter, ppPosition, ppRotation)
       pj = rotate(p.points[j], ppCenter, ppPosition, ppRotation)
     discard renderer.line(pi, pj, colliderOutlineColor)
