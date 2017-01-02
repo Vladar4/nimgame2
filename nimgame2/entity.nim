@@ -346,23 +346,23 @@ proc absRot*(entity: Entity): Angle =
     return entity.parent.absRot + entity.rot
 
 
-proc absPos*(entity: Entity): Coord =
-  if entity.parent == nil:
-    return entity.pos
-  else:
-    if entity.parent.absRot == 0:
-      return entity.parent.absPos + entity.pos
-    else:
-      return rotate(entity.pos,
-                    entity.parent.absPos,
-                    entity.absRot)
-
-
 proc absScale*(entity: Entity): Scale =
   if entity.parent == nil:
     return entity.scale
   else:
     return entity.parent.absScale * entity.scale
+
+
+proc absPos*(entity: Entity): Coord =
+  if entity.parent == nil:
+    return entity.pos
+  else:
+    if entity.parent.absRot == 0:
+      return entity.parent.absPos + entity.pos * entity.absScale
+    else:
+      return rotate(entity.pos * entity.absScale,
+                    entity.parent.absPos,
+                    entity.absRot)
 
 
 proc centrify*(entity: Entity) =
