@@ -30,7 +30,7 @@ import
 
 type
   TextureGraphic* = ref object of Graphic
-    texture*: sdl.Texture
+    fTexture: sdl.Texture
     fSize: Dim
 
 
@@ -40,9 +40,9 @@ type
 
 
 proc free*(graphic: TextureGraphic) =
-  if not(graphic.texture == nil):
-    graphic.texture.destroyTexture()
-    graphic.texture = nil
+  if not(graphic.fTexture == nil):
+    graphic.fTexture.destroyTexture()
+    graphic.fTexture = nil
 
 
 proc newTextureGraphic*(): TextureGraphic =
@@ -69,19 +69,19 @@ proc load*(
   ##
   result = true
   # load texture
-  graphic.texture = renderer.loadTexture(file)
-  if graphic.texture == nil:
+  graphic.fTexture = renderer.loadTexture(file)
+  if graphic.fTexture == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load image %s: %s",
                     file, img.getError())
     return false
   # get dimensions
   var w, h: cint
-  if graphic.texture.queryTexture(nil, nil, addr(w), addr(h)) != 0:
+  if graphic.fTexture.queryTexture(nil, nil, addr(w), addr(h)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't get texture attributes: %s",
                     sdl.getError)
-    sdl.destroyTexture(graphic.texture)
+    sdl.destroyTexture(graphic.fTexture)
     return false
   graphic.fSize.w = w
   graphic.fSize.h = h
@@ -115,7 +115,7 @@ method draw*(graphic: TextureGraphic,
   ##
   ##  ``region`` Source texture region to draw.
   ##
-  if graphic.texture == nil:
+  if graphic.fTexture == nil:
     return
   if scale == 0.0:
     return
@@ -140,10 +140,10 @@ method draw*(graphic: TextureGraphic,
   if (angle == 0.0) and flip == Flip.none:
 
     if region == empty:
-      discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
+      discard renderer.renderCopy(graphic.fTexture, nil, addr(dstRect))
     else:
       var srcRect = region
-      discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
+      discard renderer.renderCopy(graphic.fTexture, addr(srcRect), addr(dstRect))
 
   else: # renderCopyEx procedure
 
@@ -153,7 +153,7 @@ method draw*(graphic: TextureGraphic,
     anchor.y = cntr.y.cint
 
     if region == empty:
-      discard renderer.renderCopyEx(graphic.texture,
+      discard renderer.renderCopyEx(graphic.fTexture,
                                     nil,
                                     addr(dstRect),
                                     angle,
@@ -161,7 +161,7 @@ method draw*(graphic: TextureGraphic,
                                     flip.RendererFlip)
     else:
       var srcRect = region
-      discard renderer.renderCopyEx(graphic.texture,
+      discard renderer.renderCopyEx(graphic.fTexture,
                                     addr(srcRect),
                                     addr(dstRect),
                                     angle,
@@ -179,7 +179,7 @@ proc colorMod*(graphic: TextureGraphic): Color =
   var r, g, b: uint8
   result = Color(r: 0, g: 0, b: 0, a: 0)
 
-  if graphic.texture.getTextureColorMod(addr(r), addr(g), addr(b)) != 0:
+  if graphic.fTexture.getTextureColorMod(addr(r), addr(g), addr(b)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't get texture color mod: %s",
                     sdl.getError())
@@ -191,7 +191,7 @@ proc colorMod*(graphic: TextureGraphic): Color =
 proc `colorMod=`*(graphic: TextureGraphic, color: Color) =
   ##  TODO
   ##
-  if graphic.texture.setTextureColorMod(color.r, color.g, color.b) != 0:
+  if graphic.fTexture.setTextureColorMod(color.r, color.g, color.b) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set texture color mod: %s",
                     sdl.getError())
@@ -201,7 +201,7 @@ proc alphaMod*(graphic: TextureGraphic): uint8 =
   ##  TODO
   ##
   var a: uint8
-  if graphic.texture.getTextureAlphaMod(addr(a)) != 0:
+  if graphic.fTexture.getTextureAlphaMod(addr(a)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't get texture alpha mod: %s",
                     sdl.getError())
@@ -212,7 +212,7 @@ proc alphaMod*(graphic: TextureGraphic): uint8 =
 proc `alphaMod=`*(graphic: TextureGraphic, alpha: uint8) =
   ##  TODO
   ##
-  if graphic.texture.setTextureAlphaMod(alpha) != 0:
+  if graphic.fTexture.setTextureAlphaMod(alpha) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set texture alpha mod: %s",
                     sdl.getError())
@@ -223,7 +223,7 @@ proc blendMod*(graphic: TextureGraphic): Blend =
   ##
   var blend: sdl.BlendMode
 
-  if graphic.texture.getTextureBlendMode(addr(blend)) != 0:
+  if graphic.fTexture.getTextureBlendMode(addr(blend)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't get texture blend mode: %s",
                     sdl.getError())
@@ -234,7 +234,7 @@ proc blendMod*(graphic: TextureGraphic): Blend =
 proc `blendMod=`*(graphic: TextureGraphic, blend: Blend) =
   ##  TODO
   ##
-  if graphic.texture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
+  if graphic.fTexture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set texture blend mode: %s",
                     sdl.getError())

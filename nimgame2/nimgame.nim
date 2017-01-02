@@ -108,13 +108,13 @@ proc init*(
   # Init SDL_image
   if img.init(imageFlags) == 0:
     sdl.logCritical(
-      sdl.LogCategoryError, "Can't initialize SDL_image: %s", sdl.getError())
+      sdl.LogCategoryError, "Can't initialize SDL_image: %s", img.getError())
     return false
 
   # Init SDL_ttf
   if ttf.init() != 0:
     sdl.logCritical(
-      sdl.LogCategoryError, "Can't initialize SDL_ttf: %s", sdl.getError())
+      sdl.LogCategoryError, "Can't initialize SDL_ttf: %s", ttf.getError())
     return false
 
   # Init SDL_mixer
