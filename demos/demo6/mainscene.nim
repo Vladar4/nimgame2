@@ -4,7 +4,7 @@ import
   nimgame2/collider,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -14,7 +14,7 @@ import
 
 type
   MainScene = ref object of Scene
-    cursorG, earthG, spacemanG: Graphic
+    cursorG, earthG, spacemanG: TextureGraphic
     e: Earth
     s: Spaceman
 
@@ -24,7 +24,7 @@ proc init*(scene: MainScene) =
 
   # Earth
   scene.e = newEarth()
-  scene.earthG = newGraphic()
+  scene.earthG = newTextureGraphic()
   discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   scene.e.centrify()
@@ -32,7 +32,7 @@ proc init*(scene: MainScene) =
 
   # Spaceman
   scene.s = newSpaceman()
-  scene.spacemanG = newGraphic()
+  scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.centrify()
@@ -66,11 +66,12 @@ method event*(scene: MainScene, event: Event) =
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
-  discard renderer.box((4, 60), (260, 92), 0x000000CC'u32)
+  discard renderer.box((4, 60), (260, 100), 0x000000CC'u32)
 
-  discard renderer.string((8, 64), "WASD move group", 0xFFFFFFFF'u32)
-  discard renderer.string((8, 72), "QE rotate group", 0xFFFFFFFF'u32)
-  discard renderer.string((8, 80), "RF scale group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 64), "WASD  - move group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 72), "QE    - rotate group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 80), "RF    - scale group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 88), "Space - toggle outlines", 0xFFFFFFFF'u32)
 
 
 method update*(scene: MainScene, elapsed: float) =

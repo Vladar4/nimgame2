@@ -3,7 +3,7 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -13,7 +13,7 @@ import
 
 type
   MainScene = ref object of Scene
-    earthG, spacemanG: Graphic
+    earthG, spacemanG: TextureGraphic
     e: Earth
     s: Spaceman
 
@@ -22,13 +22,13 @@ proc init*(scene: MainScene) =
   Scene(scene).init()
   # Earth
   scene.e = newEarth()
-  scene.earthG = newGraphic()
+  scene.earthG = newTextureGraphic()
   discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   scene.list.add(scene.e)
   # Spaceman
   scene.s = newSpaceman()
-  scene.spacemanG = newGraphic()
+  scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.list.add(scene.s)
@@ -46,7 +46,7 @@ proc newMainScene*(): MainScene =
 
 proc changeBlendMod(scene: MainScene, increase = true) =
   # get blend mod
-  var b = scene.s.graphic.blendMod
+  var b = TextureGraphic(scene.s.graphic).blendMod
   # change blend mod
   if increase:
     if b.int == 0:
@@ -57,7 +57,7 @@ proc changeBlendMod(scene: MainScene, increase = true) =
     if b.int > 0:
       b = Blend(b.int shr 1)
   # set blend mod
-  scene.s.graphic.blendMod = b
+  TextureGraphic(scene.s.graphic).blendMod = b
 
 
 const
@@ -99,7 +99,7 @@ method event*(scene: MainScene, event: Event) =
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
-  let c = scene.s.graphic.colorMod
+  let c = TextureGraphic(scene.s.graphic).colorMod
   let res = game.logicalSize
   let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
   discard renderer.box((4, 60), (220, 124), 0x000000CC'u32)
@@ -110,9 +110,11 @@ method render*(scene: MainScene, renderer: Renderer) =
   discard renderer.string(
     (8, 80), "E/D - blue mod: " & $c.b, 0xFF0000FF'u32)
   discard renderer.string(
-    (8, 88), "R/F - alpha mod: " & $scene.s.graphic.alphaMod, 0xFF0000FF'u32)
+    (8, 88), "R/F - alpha mod: " &
+      $TextureGraphic(scene.s.graphic).alphaMod, 0xFF0000FF'u32)
   discard renderer.string(
-    (8, 96), "T/G - blend mod: " & $scene.s.graphic.blendMod, 0xFF0000FF'u32)
+    (8, 96), "T/G - blend mod: " &
+      $TextureGraphic(scene.s.graphic).blendMod, 0xFF0000FF'u32)
   discard renderer.string(
     (8, 104), "Y/H - resolution: " & $res.w & "x" & $res.h, 0xFF0000FF'u32)
   discard renderer.string(
@@ -125,7 +127,7 @@ type
 
 
 proc changeColorMod(scene: MainScene, elem: ColorElement, val: int) =
-  var color = scene.s.graphic.colorMod
+  var color = TextureGraphic(scene.s.graphic).colorMod
   # Get color element
   var e = int(case elem:
               of ceR: color.r
@@ -141,19 +143,19 @@ proc changeColorMod(scene: MainScene, elem: ColorElement, val: int) =
   of ceR: color.r = e.uint8
   of ceG: color.g = e.uint8
   of ceB: color.b = e.uint8
-  scene.s.graphic.colorMod = color
+  TextureGraphic(scene.s.graphic).colorMod = color
 
 
 proc changeAlphaMod(scene: MainScene, val: int) =
   # Get alpha mod
-  var a = scene.s.graphic.alphaMod.int
+  var a = TextureGraphic(scene.s.graphic).alphaMod.int
   # Change alpha mod
   inc(a, val)
   # Correct value
   if a < 0x00: a = 0x00
   elif a > 0xFF: a = 0xFF
   # Set alpha mod
-  scene.s.graphic.alphaMod = a.uint8
+  TextureGraphic(scene.s.graphic).alphaMod = a.uint8
 
 
 method update*(scene: MainScene, elapsed: float) =

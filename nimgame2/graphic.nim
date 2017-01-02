@@ -24,217 +24,25 @@
 
 import
   sdl2/sdl,
-  sdl2/sdl_image as img,
   types
 
 
 type
   Graphic* = ref object of RootObj
-    texture*: sdl.Texture
-    fSize: Dim
 
 
-########
-# LOAD #
-########
+method w*(graphic: Graphic): int {.base.} = discard
 
+method h*(graphic: Graphic): int {.base.} = discard
 
-proc free*(graphic: Graphic) =
-  if not(graphic.texture == nil):
-    graphic.texture.destroyTexture()
-    graphic.texture = nil
+method dim*(graphic: Graphic): Dim {.base.} = discard
 
-
-proc newGraphic*(): Graphic =
-  new result, free
-
-
-proc load*(graphic: Graphic, renderer: sdl.Renderer, file: string): bool =
-  ##  Load texture from ``file``.
-  ##
-  ##  ``Return`` `true` on success, `false` otherwise.
-  ##
-  result = true
-  # load texture
-  graphic.texture = renderer.loadTexture(file)
-  if graphic.texture == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't load image %s: %s",
-                    file, img.getError())
-    return false
-  # get dimensions
-  var w, h: cint
-  if graphic.texture.queryTexture(nil, nil, addr(w), addr(h)) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't get texture attributes: %s",
-                    sdl.getError)
-    sdl.destroyTexture(graphic.texture)
-    return false
-  graphic.fSize.w = w
-  graphic.fSize.h = h
-
-
-proc w*(graphic: Graphic): int {.inline.} =
-  graphic.fSize.w
-
-
-proc h*(graphic: Graphic): int {.inline.} =
-  graphic.fSize.h
-
-
-proc dim*(graphic: Graphic): Dim {.inline.} =
-  graphic.fSize
-
-
-########
-# DRAW #
-########
-
-
-proc draw*(graphic: Graphic,
-           renderer: Renderer,
-           pos: Coord,
-           angle: Angle = 0.0,
-           scale: Scale = 1.0,
-           center: Coord = (0.0, 0.0),
-           flip: Flip = Flip.none,
-           region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  ##  Draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``angle`` Rotation angle in degrees.
-  ##
-  ##  ``scale`` Draw scale. `1.0` for original size.
-  ##
-  ##  ``center`` Center of rendering, rotation, and scaling.
-  ##
-  ##  ``flip`` ``RendererFlip`` value, could be set to:
-  ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
-  ##
-  ##  ``region`` Source texture region to draw.
-  ##
-  if graphic.texture == nil:
-    return
-  if scale == 0.0:
-    return
-
-  let
-    empty = Rect(x: 0, y: 0, w: 0, h: 0)
-  var
-    size: Dim = if region == empty: graphic.dim
-                else: (region.w.int, region.h.int)
-    cntr = center
-
-  if scale != 1.0:
-    size.w = int(size.w.float * scale)
-    size.h = int(size.h.float * scale)
-    cntr *= scale
-
-  var
-    position = pos - cntr
-    dstRect = sdl.Rect(
-      x: position.x.cint, y: position.y.cint, w: size.w.cint, h: size.h.cint)
-
-  if (angle == 0.0) and flip == Flip.none:
-
-    if region == empty:
-      discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
-    else:
-      var srcRect = region
-      discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
-
-  else: # renderCopyEx procedure
-
-    var
-      anchor: sdl.Point
-    anchor.x = cntr.x.cint
-    anchor.y = cntr.y.cint
-
-    if region == empty:
-      discard renderer.renderCopyEx(graphic.texture,
-                                    nil,
-                                    addr(dstRect),
-                                    angle,
-                                    addr(anchor),
-                                    flip.RendererFlip)
-    else:
-      var srcRect = region
-      discard renderer.renderCopyEx(graphic.texture,
-                                    addr(srcRect),
-                                    addr(dstRect),
-                                    angle,
-                                    addr(anchor),
-                                    flip.RendererFlip)
-
-
-########
-# MODS #
-########
-
-proc colorMod*(graphic: Graphic): Color =
-  ##  TODO
-  ##
-  var r, g, b: uint8
-  result = Color(r: 0, g: 0, b: 0, a: 0)
-
-  if graphic.texture.getTextureColorMod(addr(r), addr(g), addr(b)) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't get texture color mod: %s",
-                    sdl.getError())
-    return
-
-  return Color(r: r, g: g, b: b, a: 0xFF)
-
-
-proc `colorMod=`*(graphic: Graphic, color: Color) =
-  ##  TODO
-  ##
-  if graphic.texture.setTextureColorMod(color.r, color.g, color.b) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set texture color mod: %s",
-                    sdl.getError())
-
-
-proc alphaMod*(graphic: Graphic): uint8 =
-  ##  TODO
-  ##
-  var a: uint8
-  if graphic.texture.getTextureAlphaMod(addr(a)) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't get texture alpha mod: %s",
-                    sdl.getError())
-    return 0xFF
-  return a
-
-
-proc `alphaMod=`*(graphic: Graphic, alpha: uint8) =
-  ##  TODO
-  ##
-  if graphic.texture.setTextureAlphaMod(alpha) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set texture alpha mod: %s",
-                    sdl.getError())
-
-
-proc blendMod*(graphic: Graphic): Blend =
-  ##  TODO
-  ##
-  var blend: sdl.BlendMode
-
-  if graphic.texture.getTextureBlendMode(addr(blend)) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't get texture blend mode: %s",
-                    sdl.getError())
-    return Blend.none
-  return Blend(blend)
-
-
-proc `blendMod=`*(graphic: Graphic, blend: Blend) =
-  ##  TODO
-  ##
-  if graphic.texture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set texture blend mode: %s",
-                    sdl.getError())
+method draw*(graphic: Graphic,
+             renderer: Renderer,
+             pos: Coord = (0.0, 0.0),
+             angle: Angle = 0.0,
+             scale: Scale = 1.0,
+             center: Coord = (0.0, 0.0),
+             flip: Flip = Flip.none,
+             region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) {.base.} = discard
 

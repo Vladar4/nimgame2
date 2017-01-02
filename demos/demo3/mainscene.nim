@@ -2,7 +2,7 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -12,7 +12,7 @@ import
 
 type
   MainScene = ref object of Scene
-    spacemanG: Graphic
+    spacemanG: TextureGraphic
     s: Spaceman
 
 
@@ -36,11 +36,11 @@ proc init*(scene: MainScene) =
   Scene(scene).init()
   # Spaceman
   scene.s = newSpaceman()
-  scene.spacemanG = newGraphic()
+  scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.physics = new Physics
-  scene.s.center = scene.s.graphic.dim / 2
+  scene.s.centrify()
   scene.list.add(scene.s)
   # Mouse
   #discard mouseRelative(true)

@@ -4,7 +4,7 @@ import
   nimgame2/collider,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -14,7 +14,7 @@ import
 
 type
   MainScene = ref object of Scene
-    cursorG, earthG, spacemanG: Graphic
+    cursorG, earthG, spacemanG: TextureGraphic
     c: Cursor
     e: Earth
     d1, d2: Line
@@ -30,7 +30,7 @@ proc init*(scene: MainScene) =
 
   # Cursor
   scene.c = newCursor()
-  scene.cursorG = newGraphic()
+  scene.cursorG = newTextureGraphic()
   discard scene.cursorG.load(game.renderer, "../assets/gfx/cursor.png")
   scene.c.graphic = scene.cursorG
   scene.c.collider = newCollider(scene.c)
@@ -48,19 +48,19 @@ proc init*(scene: MainScene) =
 
   # Earth
   scene.e = newEarth()
-  scene.earthG = newGraphic()
+  scene.earthG = newTextureGraphic()
   discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
-  let radius = scene.e.graphic.dim.w.float / 2
+  let radius = scene.earthG.dim.w.float / 2
   scene.e.collider = newCircleCollider(scene.e, (radius, radius), radius)
 
   # Spaceman
   scene.s = newSpaceman()
-  scene.spacemanG = newGraphic()
+  scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.centrify()
-  scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.s.graphic.dim)
+  scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.spacemanG.dim)
 
   # Poly1
   scene.p1 = newPoly1()

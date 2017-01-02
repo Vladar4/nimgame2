@@ -3,7 +3,7 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -13,7 +13,7 @@ import
 
 type
   MainScene = ref object of Scene
-    dG: Graphic
+    dG: TextureGraphic
     d: Dwarf
 
 
@@ -23,7 +23,7 @@ const Framerate = 1/12
 proc init*(scene: MainScene) =
   Scene(scene).init()
   # Dwarf
-  scene.dG = newGraphic()
+  scene.dG = newTextureGraphic()
   discard scene.dG.load(game.renderer, "../assets/gfx/dwarf.png")
   scene.d = newDwarf()
   scene.d.pos = (200, 100)

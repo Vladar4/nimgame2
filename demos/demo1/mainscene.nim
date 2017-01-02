@@ -2,7 +2,7 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
+  nimgame2/texturegraphic,
   nimgame2/scene,
   nimgame2/settings,
   nimgame2/types,
@@ -18,7 +18,7 @@ const
 
 type
   MainScene = ref object of Scene
-    spacemanG: Graphic
+    spacemanG: TextureGraphic
     spacemanP: SpacemanPhysics
     count: int
 
@@ -41,7 +41,7 @@ method update*(physics: SpacemanPhysics, entity: Spaceman, elapsed: float) =
 
 proc init*(scene: MainScene) =
   Scene(scene).init()
-  scene.spacemanG = newGraphic()
+  scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.spacemanP = new SpacemanPhysics
   scene.count = CountStart
