@@ -92,185 +92,80 @@ proc dim*(graphic: Graphic): Dim {.inline.} =
 
 
 proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
-           pos: Coord) =
-  ##  Default draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  if graphic.texture == nil:
-    return
-
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: graphic.fSize.w,
-                         h: graphic.fSize.h)
-  discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
-
-
-proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
+           renderer: Renderer,
            pos: Coord,
-           size: Dim) =
-  ##  Default draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``size`` Output dimensions. Leave (0, 0) for default texture size.
-  ##
-  if graphic.texture == nil:
-    return
-
-  if size == (0, 0):
-    draw(graphic, renderer, pos)
-    return
-
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: size.w,
-                         h: size.h)
-  discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
-
-
-proc draw*(graphic: Graphic,
-           renderer: sdl.Renderer,
-           pos: Coord,
-           size: Dim,
-           region: sdl.Rect) =
-  ##  Default draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``size`` Output dimensions.
-  ##
-  ##  ``region``  Source texture region to draw.
-  ##
-  if graphic.texture == nil:
-    return
-
-  var srcRect = region
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: size.w,
-                         h: size.h)
-  discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
-
-
-proc drawEx*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             angle: Angle = 0.0,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
-  ##  Advanced draw procedure.
+           angle: Angle = 0.0,
+           scale: Scale = 1.0,
+           center: Coord = (0.0, 0.0),
+           flip: Flip = Flip.none,
+           region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  ##  Draw procedure.
   ##
   ##  ``pos`` Draw coordinates.
   ##
   ##  ``angle`` Rotation angle in degrees.
   ##
-  ##  ``anchor``  Rotation anchor position.
+  ##  ``scale`` Draw scale. `1.0` for original size.
   ##
-  ##  ``flip``  ``RendererFlip`` value, could be set to:
+  ##  ``center`` Center of rendering, rotation, and scaling.
+  ##
+  ##  ``flip`` ``RendererFlip`` value, could be set to:
   ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
-  ##
-  if graphic.texture == nil:
-    return
-
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: graphic.fSize.w,
-                         h: graphic.fSize.h)
-  var anchorPoint: sdl.Point
-  anchorPoint.x = anchor.x.cint
-  anchorPoint.y = anchor.y.cint
-  discard renderer.renderCopyEx(graphic.texture, nil, addr(dstRect),
-                                angle,
-                                addr(anchorPoint),
-                                sdl.RendererFlip(flip))
-
-
-proc drawEx*(graphic: Graphic,
-             renderer: sdl.Renderer,
-             pos: Coord,
-             size: Dim,
-             angle: Angle = 0.0,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
-  ##  Advanced draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``size`` Output dimensions. Leave (0, 0) for default texture size.
-  ##
-  ##  ``angle`` Rotation angle in degrees.
-  ##
-  ##  ``anchor``  Rotation anchor position.
-  ##
-  ##  ``flip``  ``RendererFlip`` value, could be set to:
-  ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
-  ##
-  if graphic.texture == nil:
-    return
-
-  if size == (0, 0):
-    drawEx(graphic, renderer, pos, angle, anchor, flip)
-    return
-
-  var dstRect = sdl.Rect(x: pos.x.int,
-                         y: pos.y.int,
-                         w: size.w,
-                         h: size.h)
-  var anchorPoint: sdl.Point
-  anchorPoint.x = anchor.x.cint
-  anchorPoint.y = anchor.y.cint
-  discard renderer.renderCopyEx(graphic.texture, nil, addr(dstRect),
-                                angle,
-                                addr(anchorPoint),
-                                sdl.RendererFlip(flip))
-
-
-proc drawEx*(graphic: Graphic,
-             renderer: Renderer,
-             pos: Coord,
-             size: Dim,
-             region: Rect,
-             angle: Angle = 0.0,
-             anchor: Coord = (0.0, 0.0),
-             flip: Flip = Flip.none) =
-  ##  Advanced draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``size`` Output dimensions. Leave (0, 0) for default texture size.
   ##
   ##  ``region`` Source texture region to draw.
   ##
-  ##  ``angle`` Rotation angle in degrees.
-  ##
-  ##  ``anchor``  Rotation anchor position.
-  ##
-  ##  ``flip``  ``RendererFlip`` value, could be set to:
-  ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
-  ##
   if graphic.texture == nil:
     return
-
-  if size == (0, 0):
-    drawEx(graphic, renderer, pos, angle, anchor, flip)
+  if scale == 0.0:
     return
 
-  var srcRect = region
-  var dstRect = Rect(x: pos.x.int,
-                     y: pos.y.int,
-                     w: size.w,
-                     h: size.h)
-  var anchorPoint: sdl.Point
-  anchorPoint.x = anchor.x.cint
-  anchorPoint.y = anchor.y.cint
-  discard renderer.renderCopyEx(graphic.texture, addr(srcRect), addr(dstRect),
-                                angle,
-                                addr(anchorPoint),
-                                sdl.RendererFlip(flip))
+  let
+    empty = Rect(x: 0, y: 0, w: 0, h: 0)
+  var
+    size: Dim = if region == empty: graphic.dim
+                else: (region.w.int, region.h.int)
+    cntr = center
+
+  if scale != 1.0:
+    size.w = int(size.w.float * scale)
+    size.h = int(size.h.float * scale)
+    cntr *= scale
+
+  var
+    position = pos - cntr
+    dstRect = sdl.Rect(
+      x: position.x.cint, y: position.y.cint, w: size.w.cint, h: size.h.cint)
+
+  if (angle == 0.0) and flip == Flip.none:
+
+    if region == empty:
+      discard renderer.renderCopy(graphic.texture, nil, addr(dstRect))
+    else:
+      var srcRect = region
+      discard renderer.renderCopy(graphic.texture, addr(srcRect), addr(dstRect))
+
+  else: # renderCopyEx procedure
+
+    var
+      anchor: sdl.Point
+    anchor.x = cntr.x.cint
+    anchor.y = cntr.y.cint
+
+    if region == empty:
+      discard renderer.renderCopyEx(graphic.texture,
+                                    nil,
+                                    addr(dstRect),
+                                    angle,
+                                    addr(anchor),
+                                    flip.RendererFlip)
+    else:
+      var srcRect = region
+      discard renderer.renderCopyEx(graphic.texture,
+                                    addr(srcRect),
+                                    addr(dstRect),
+                                    angle,
+                                    addr(anchor),
+                                    flip.RendererFlip)
 
 
 ########

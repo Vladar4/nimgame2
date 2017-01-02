@@ -11,17 +11,17 @@ type
 proc init*(entity: Poly9) =
   entity.initEntity()
   entity.tags.add("Poly9")
-  entity.center = (40.0, 50.0)
+  entity.centrify
   entity.collider = entity.newPolyCollider((0.0, 0.0),
-    [ (0.0,   0.0),
-      (20.0,  0.0),
-      (10.0,  70.0),
-      (70.0,  70.0),
-      (60.0,  0.0),
-      (80.0,  0.0),
-      (80.0,  80.0),
-      (40.0,  100.0),
-      (0.0,   80.0)])
+    [ (-40.0, -50.0),
+      (-20.0, -50.0),
+      (-30.0,  20.0),
+      ( 30.0,  20.0),
+      ( 20.0, -50.0),
+      ( 40.0, -50.0),
+      ( 40.0,  30.0),
+      (  0.0,  50.0),
+      (-40.0,  30.0)])
   entity.collidedWith = @[]
 
 

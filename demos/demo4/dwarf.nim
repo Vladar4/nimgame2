@@ -8,6 +8,7 @@ type
 
 proc init*(entity: Dwarf) =
   entity.initEntity()
+  entity.centrify()
 
 
 proc newDwarf*(): Dwarf =

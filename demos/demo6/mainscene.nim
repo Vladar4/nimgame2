@@ -28,7 +28,6 @@ proc init*(scene: MainScene) =
   discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   scene.e.centrify()
-  scene.e.renderEx = true
   scene.e.collider = scene.e.newCircleCollider((0, 0), 128)
 
   # Spaceman
@@ -37,7 +36,6 @@ proc init*(scene: MainScene) =
   discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.centrify()
-  scene.s.renderEx = true
   scene.s.parent = scene.e
   scene.s.collider = scene.s.newBoxCollider((0, 0), (100, 160))
 
@@ -62,17 +60,17 @@ method event*(scene: MainScene, event: Event) =
     of K_Escape:
       gameRunning = false
     of K_Space:
-      colliderOutline = true
+      colliderOutline = not colliderOutline
     else: discard
 
 
 method render*(scene: MainScene, renderer: Renderer) =
   scene.renderScene(renderer)
-  discard renderer.box((4, 60), (260, 76), 0x000000CC'u32)
+  discard renderer.box((4, 60), (260, 92), 0x000000CC'u32)
 
-  discard renderer.string(
-    (8, 64), "WASDQE control group",
-    0xFFFFFFFF'u32)
+  discard renderer.string((8, 64), "WASD move group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 72), "QE rotate group", 0xFFFFFFFF'u32)
+  discard renderer.string((8, 80), "RF scale group", 0xFFFFFFFF'u32)
 
 
 method update*(scene: MainScene, elapsed: float) =
@@ -83,4 +81,6 @@ method update*(scene: MainScene, elapsed: float) =
   if ScancodeW.pressed: scene.e.pos.y -= 1
   if ScancodeQ.pressed: scene.e.rot -= 1
   if ScancodeE.pressed: scene.e.rot += 1
+  if ScancodeR.pressed: scene.e.scale -= 0.01
+  if ScancodeF.pressed: scene.e.scale += 0.01
 

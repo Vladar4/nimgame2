@@ -73,11 +73,10 @@ type
     collider*: Collider
     colliding*: seq[Entity]       ##  list of Entities currently colliding with
     pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
-    center*: Coord                ##  center for drawing and rotating
-    # RenderEx Options
-    renderEx*: bool               ##  render with rotation and flip status
     rot*: Angle                   ##  rotation angle in degrees
     rotVel*, rotAcc*, rotDrg*: Angle  ##  rotation velocity, acceleration, drag
+    scale*: Scale                 ##  scale ratio
+    center*: Coord                ##  center for drawing and rotating
     flip*: Flip                   ##  texture flip status
 
   Logic* = ref object of RootObj
@@ -326,12 +325,12 @@ proc initEntity*(entity: Entity) =
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
   entity.drg = (0.0, 0.0)
-  entity.center = (0.0, 0.0)
-  entity.renderEx = false
   entity.rot = 0.0
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
   entity.rotDrg = 0.0
+  entity.scale = 1.0
+  entity.center = (0.0, 0.0)
   entity.flip = Flip.none
 
 
@@ -340,14 +339,14 @@ proc newEntity*(): Entity =
   result.initEntity()
 
 
-proc absRot*(entity: Entity): Angle {.inline.} =
+proc absRot*(entity: Entity): Angle =
   if entity.parent == nil:
     return entity.rot
   else:
     return entity.parent.absRot + entity.rot
 
 
-proc absPos*(entity: Entity): Coord {.inline.} =
+proc absPos*(entity: Entity): Coord =
   if entity.parent == nil:
     return entity.pos
   else:
@@ -355,9 +354,15 @@ proc absPos*(entity: Entity): Coord {.inline.} =
       return entity.parent.absPos + entity.pos
     else:
       return rotate(entity.pos,
-                    (0, 0),
                     entity.parent.absPos,
                     entity.absRot)
+
+
+proc absScale*(entity: Entity): Scale =
+  if entity.parent == nil:
+    return entity.scale
+  else:
+    return entity.parent.absScale * entity.scale
 
 
 proc centrify*(entity: Entity) =
@@ -373,28 +378,32 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
   ##  Call it from your entity render method.
   ##
   if not (entity.graphic == nil):
-    if not (entity.sprite == nil):
+    if entity.sprite == nil:
+      entity.graphic.draw(renderer,
+                          entity.absPos,
+                          entity.absRot,
+                          entity.absScale,
+                          entity.center,
+                          entity.flip)
+    else: # entity.sprite != nil
       if entity.sprite.currentAnimation < 0:
-        entity.graphic.drawEx(renderer, entity.absPos - entity.center,
-                              entity.sprite.frameSize,
-                              entity.sprite.frames[0],
-                              entity.absRot, entity.center,
-                              entity.flip)
+        entity.graphic.draw(renderer,
+                            entity.absPos,
+                            entity.absRot,
+                            entity.absScale,
+                            entity.center,
+                            entity.flip,
+                            entity.sprite.frames[entity.sprite.currentFrame])
       else:
         let anim = entity.currentAnimation
-        entity.graphic.drawEx(renderer, entity.absPos - entity.center,
-                              entity.sprite.frameSize,
-                              entity.sprite.frames[
-                                anim.frames[entity.sprite.currentFrame]],
-                              entity.absRot, entity.center,
-                              Flip(entity.flip.cint xor anim.flip.cint))
-    # entity.sprite == nil
-    elif not entity.renderEx:
-      entity.graphic.draw(renderer, entity.absPos - entity.center)
-    else:
-      entity.graphic.drawEx(renderer, entity.absPos - entity.center,
-                            entity.absRot, entity.center,
-                            entity.flip)
+        entity.graphic.draw(renderer,
+                            entity.absPos,
+                            entity.absRot,
+                            entity.absScale,
+                            entity.center,
+                            Flip(entity.flip.cint xor anim.flip.cint),
+                            entity.sprite.frames[
+                              anim.frames[entity.sprite.currentFrame]])
 
 
 method render*(entity: Entity, renderer: sdl.Renderer) {.base.} =

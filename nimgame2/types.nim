@@ -39,6 +39,7 @@ type
   Coord2* = tuple[abs, rel: Coord]    ##  Abs + Rel coordinates type
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
+  Scale* = float                      ##  Scale type
 
   Blend* {.size: sizeof(cint), pure.} = enum
     none  = sdl.BlendModeNone
