@@ -23,13 +23,13 @@ proc init*(scene: MainScene) =
   # Earth
   scene.e = newEarth()
   scene.earthG = newTextureGraphic()
-  discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
+  discard scene.earthG.load("../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   scene.list.add(scene.e)
   # Spaceman
   scene.s = newSpaceman()
   scene.spacemanG = newTextureGraphic()
-  discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.list.add(scene.s)
 
@@ -97,27 +97,27 @@ method event*(scene: MainScene, event: Event) =
     else: discard
 
 
-method render*(scene: MainScene, renderer: Renderer) =
-  scene.renderScene(renderer)
+method render*(scene: MainScene) =
+  scene.renderScene()
   let c = TextureGraphic(scene.s.graphic).colorMod
   let res = game.logicalSize
   let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
-  discard renderer.box((4, 60), (220, 124), 0x000000CC'u32)
-  discard renderer.string(
+  discard box((4, 60), (220, 124), 0x000000CC'u32)
+  discard string(
     (8, 64), "Q/A - red mod: " & $c.r, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 72), "W/S - green mod: " & $c.g, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 80), "E/D - blue mod: " & $c.b, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 88), "R/F - alpha mod: " &
       $TextureGraphic(scene.s.graphic).alphaMod, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 96), "T/G - blend mod: " &
       $TextureGraphic(scene.s.graphic).blendMod, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 104), "Y/H - resolution: " & $res.w & "x" & $res.h, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 112), "Scale: " & $scale.x & "x" & $scale.y, 0xFF0000FF'u32)
 
 

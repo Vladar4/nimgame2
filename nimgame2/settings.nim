@@ -25,6 +25,10 @@ import
   sdl2/sdl
 
 var
+  background*: sdl.Color  ##  Screen clearing color
+  renderer*: sdl.Renderer ##  Game renderer pointer
+  window*: sdl.Window     ##  Game window pointer
+
   gameRunning*: bool      ##  If `false` - break main loop
   showInfo*: bool         ##  Show info panel
   fpsLimit*: int          ##  Limit frames per second to ``fpsLimit``,\

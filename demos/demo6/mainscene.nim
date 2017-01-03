@@ -25,7 +25,7 @@ proc init*(scene: MainScene) =
   # Earth
   scene.e = newEarth()
   scene.earthG = newTextureGraphic()
-  discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
+  discard scene.earthG.load("../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   scene.e.centrify()
   scene.e.collider = scene.e.newCircleCollider((0, 0), 128)
@@ -33,7 +33,7 @@ proc init*(scene: MainScene) =
   # Spaceman
   scene.s = newSpaceman()
   scene.spacemanG = newTextureGraphic()
-  discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.centrify()
   scene.s.parent = scene.e
@@ -64,14 +64,14 @@ method event*(scene: MainScene, event: Event) =
     else: discard
 
 
-method render*(scene: MainScene, renderer: Renderer) =
-  scene.renderScene(renderer)
-  discard renderer.box((4, 60), (260, 100), 0x000000CC'u32)
+method render*(scene: MainScene) =
+  scene.renderScene()
+  discard box((4, 60), (260, 100), 0x000000CC'u32)
 
-  discard renderer.string((8, 64), "WASD  - move group", 0xFFFFFFFF'u32)
-  discard renderer.string((8, 72), "QE    - rotate group", 0xFFFFFFFF'u32)
-  discard renderer.string((8, 80), "RF    - scale group", 0xFFFFFFFF'u32)
-  discard renderer.string((8, 88), "Space - toggle outlines", 0xFFFFFFFF'u32)
+  discard string((8, 64), "WASD  - move group", 0xFFFFFFFF'u32)
+  discard string((8, 72), "QE    - rotate group", 0xFFFFFFFF'u32)
+  discard string((8, 80), "RF    - scale group", 0xFFFFFFFF'u32)
+  discard string((8, 88), "Space - toggle outlines", 0xFFFFFFFF'u32)
 
 
 method update*(scene: MainScene, elapsed: float) =

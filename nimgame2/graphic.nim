@@ -38,7 +38,6 @@ method h*(graphic: Graphic): int {.base.} = discard
 method dim*(graphic: Graphic): Dim {.base.} = discard
 
 method draw*(graphic: Graphic,
-             renderer: Renderer,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
              scale: Scale = 1.0,

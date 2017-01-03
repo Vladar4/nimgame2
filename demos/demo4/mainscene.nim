@@ -24,7 +24,7 @@ proc init*(scene: MainScene) =
   Scene(scene).init()
   # Dwarf
   scene.dG = newTextureGraphic()
-  discard scene.dG.load(game.renderer, "../assets/gfx/dwarf.png")
+  discard scene.dG.load("../assets/gfx/dwarf.png")
   scene.d = newDwarf()
   scene.d.pos = (200, 100)
   scene.d.graphic = scene.dG
@@ -58,8 +58,8 @@ method event*(scene: MainScene, event: Event) =
       else: discard
 
 
-method render*(scene: MainScene, renderer: Renderer) =
-  scene.renderScene(renderer)
+method render*(scene: MainScene) =
+  scene.renderScene()
 
 
 const Speed = 50
@@ -71,10 +71,10 @@ method update*(scene: MainScene, elapsed: float) =
   # Controls and speed
   type Direction = enum none, down, up, left, right
   var direction =
-    if ScancodeDown.pressed: down
-    elif ScancodeUp.pressed: up
-    elif ScancodeLeft.pressed: left
-    elif ScancodeRight.pressed: right
+    if ScancodeDown.pressed or ScancodeS.pressed: down
+    elif ScancodeUp.pressed or ScancodeW.pressed: up
+    elif ScancodeLeft.pressed or ScancodeA.pressed: left
+    elif ScancodeRight.pressed or ScancodeD.pressed: right
     else: none
 
   case direction:

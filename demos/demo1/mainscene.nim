@@ -42,7 +42,7 @@ method update*(physics: SpacemanPhysics, entity: Spaceman, elapsed: float) =
 proc init*(scene: MainScene) =
   Scene(scene).init()
   scene.spacemanG = newTextureGraphic()
-  discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.spacemanP = new SpacemanPhysics
   scene.count = CountStart
   for i in 1..scene.count:
@@ -76,12 +76,12 @@ method event*(scene: MainScene, event: Event) =
     else: discard
 
 
-method render*(scene: MainScene, renderer: Renderer) =
-  scene.renderScene(renderer)
-  discard renderer.box((4, 60), (260, 84), 0x000000CC'u32)
-  discard renderer.string(
+method render*(scene: MainScene) =
+  scene.renderScene()
+  discard box((4, 60), (260, 84), 0x000000CC'u32)
+  discard string(
     (8, 64), "Arrow Up - more entities", 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 72), "Arrow Down - less entities", 0xFF0000FF'u32)
 
 

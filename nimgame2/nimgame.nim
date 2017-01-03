@@ -37,11 +37,6 @@ type
     fSize, fLogicalSize: Dim
     fScale: Coord
     fTitle: string
-    # Public
-    # SDL2
-    bgColor*: sdl.Color     ##  Screen clearing color
-    renderer*: sdl.Renderer ##  Game renderer pointer
-    window*: sdl.Window     ##  Game window pointer
     # Scene
     scene*: Scene   ##  Current scene
 
@@ -51,8 +46,8 @@ var
 
 
 proc free(game: Game) =
-  game.renderer.destroyRenderer()
-  game.window.destroyWindow()
+  renderer.destroyRenderer()
+  window.destroyWindow()
   while mix.init(0) != 0: mix.quit()
   ttf.quit()
   img.quit()
@@ -89,7 +84,7 @@ proc init*(
   game.fLogicalSize.h = h
   game.fScale = (1.0, 1.0)
   game.fTitle = title
-  game.bgColor = bgColor
+  background = bgColor
 
   # Default options
   gameRunning = false
@@ -133,25 +128,25 @@ proc init*(
     return false
 
   # Create window
-  game.window = sdl.createWindow(
+  window = sdl.createWindow(
     game.fTitle,
     sdl.WindowPosUndefined, sdl.WindowPosUndefined,
     game.fSize.w, game.fSize.h,
     windowFlags)
-  if game.window == nil:
+  if window == nil:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't create window: %s", sdl.getError())
     return false
 
   # Create renderer
-  game.renderer = sdl.createRenderer(game.window, -1, rendererFlags)
-  if game.renderer == nil:
+  renderer = sdl.createRenderer(window, -1, rendererFlags)
+  if renderer == nil:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't create renderer: %s", sdl.getError())
     return false
 
   # Set renderer logical size
-  if game.renderer.renderSetLogicalSize(game.fSize.w, game.fSize.h) != 0:
+  if renderer.renderSetLogicalSize(game.fSize.w, game.fSize.h) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
         sdl.getError())
@@ -184,7 +179,7 @@ proc logicalSize*(game: Game): Dim {.inline.} =
 proc `logicalSize=`*(game: Game, size: Dim) =
   ##  Set logical size of the game renderer.
   ##
-  if game.renderer.renderSetLogicalSize(size.w, size.h) != 0:
+  if renderer.renderSetLogicalSize(size.w, size.h) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
         sdl.getError())
@@ -203,7 +198,7 @@ proc scale*(game: Game): Coord {.inline.} =
 proc `scale=`*(game: Game, scale: Coord) =
   ##  Set scale of the game renderer.
   ##
-  if game.renderer.renderSetScale(scale.x, scale.y) != 0:
+  if renderer.renderSetScale(scale.x, scale.y) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set renderer scale: %s",
       sdl.getError())
@@ -217,7 +212,7 @@ proc viewport*(game: Game): Rect =
   ##  Get current viewport.
   ##
   var rect: Rect
-  game.renderer.renderGetViewport(addr(rect))
+  renderer.renderGetViewport(addr(rect))
   return rect
 
 
@@ -225,14 +220,14 @@ proc `viewport=`*(game: Game, rect: Rect) =
   ##  Set current viewport.
   ##
   var r: sdl.Rect = rect
-  if game.renderer.renderSetViewport(addr(r)) != 0:
+  if renderer.renderSetViewport(addr(r)) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set viewport: %s",
         sdl.getError())
 
 
 proc resetViewport*(game: Game) =
-  if game.renderer.renderSetViewport(nil) != 0:
+  if renderer.renderSetViewport(nil) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't reset viewport: %s",
         sdl.getError())
@@ -296,38 +291,38 @@ proc run*(game: Game) =
         sdl.delay(uint32(msPerFrame - lag))
 
     # Clear screen
-    discard game.renderer.setRenderDrawColor(game.bgColor)
-    discard game.renderer.renderClear()
+    discard renderer.setRenderDrawColor(background)
+    discard renderer.renderClear()
 
     # Render scene
     if not (game.scene == nil):
-      game.scene.render(game.renderer)
+      game.scene.render()
 
     # Render info
     if showInfo:
       # Background
-      discard game.renderer.box((4, 4), (260, 52), 0x000000CC'u32)
+      discard box((4, 4), (260, 52), 0x000000CC'u32)
       # Show FPS
-      discard game.renderer.string(
+      discard string(
         (8, 8), $fpsMgr.current & " FPS", 0xFFFFFFFF'u32)
       # Show updates per second
-      discard game.renderer.string(
+      discard string(
         (8, 16), $upsMgr.current & " updates per second", 0xFFFFFFFF'u32)
       # Show updates per frame
-      discard game.renderer.string(
+      discard string(
         (8, 24), $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
       # Show entities count
-      discard game.renderer.string(
+      discard string(
         (8, 32), $game.scene.list.len & " entities", 0xFFFFFFFF'u32)
       # Show memory usage
-      discard game.renderer.string(
+      discard string(
         (8, 40),
         $(getOccupiedMem() shr 10) & " KB used of " &
         $(getTotalMem() shr 10) & " KB total",
         0xFFFFFFFF'u32)
 
     # Update renderer
-    game.renderer.renderPresent()
+    renderer.renderPresent()
 
     # Increase frame count
     fpsMgr.update()

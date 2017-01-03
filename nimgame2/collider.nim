@@ -107,17 +107,17 @@ proc newCollider*(parent: Entity, pos: Coord = (0, 0)): Collider =
   result.init(parent, pos)
 
 
-proc renderCollider*(a: Collider, renderer: Renderer) =
+proc renderCollider*(a: Collider) =
   let
     pos = a.position
     rad = 4.0
-  discard renderer.hline(pos - (rad, 0.0), 8, colliderOutlineColor)
-  discard renderer.vline(pos - (0.0, rad), 8, colliderOutlineColor)
-  discard renderer.circle(pos, rad, colliderOutlineColor)
+  discard hline(pos - (rad, 0.0), 8, colliderOutlineColor)
+  discard vline(pos - (0.0, rad), 8, colliderOutlineColor)
+  discard circle(pos, rad, colliderOutlineColor)
 
 
-method render*(a: Collider, renderer: Renderer) {.base.} =
-  a.renderCollider(renderer)
+method render*(a: Collider) {.base.} =
+  a.renderCollider()
 
 
 # Point - Point
@@ -200,9 +200,9 @@ proc newBoxCollider*(parent: Entity, pos: Coord = (0, 0),
   result.init(parent, pos, dim)
 
 
-method render*(b: BoxCollider, renderer: Renderer) =
-  discard renderer.rect((b.left, b.top), (b.right, b.bottom), colliderOutlineColor)
-  b.renderCollider(renderer)
+method render*(b: BoxCollider) =
+  discard rect((b.left, b.top), (b.right, b.bottom), colliderOutlineColor)
+  b.renderCollider()
 
 
 # Box - Point
@@ -304,9 +304,9 @@ proc newCircleCollider*(parent: Entity, pos: Coord = (0, 0),
   result.init(parent, pos, radius)
 
 
-method render*(c: CircleCollider, renderer: Renderer) =
-  discard renderer.circle(c.position, c.radius.scaled(c), colliderOutlineColor)
-  c.renderCollider(renderer)
+method render*(c: CircleCollider) =
+  discard circle(c.position, c.radius.scaled(c), colliderOutlineColor)
+  c.renderCollider()
 
 
 # Circle - Point
@@ -397,14 +397,14 @@ proc newLineCollider*(parent: Entity, pos: Coord = (0, 0),
   result.init(parent, pos, pos2)
 
 
-method render*(d: LineCollider, renderer: Renderer) =
+method render*(d: LineCollider) =
   let
     dpPosition = d.parent.absPos
     dpRotation = d.parent.absRot
     pos1 = rotate(d.pos.scaled(d), dpPosition, dpRotation)
     pos2 = rotate(d.pos2.scaled(d), dpPosition, dpRotation)
-  discard renderer.line(pos1, pos2, colliderOutlineColor)
-  d.renderCollider(renderer)
+  discard line(pos1, pos2, colliderOutlineColor)
+  d.renderCollider()
 
 
 # Line - Point
@@ -482,15 +482,13 @@ proc newPolyCollider*(parent: Entity, pos: Coord = (0, 0),
   result.init(parent, pos, points)
 
 
-method render*(p: PolyCollider, renderer: Renderer) =
+method render*(p: PolyCollider) =
   if p.points.len < 1:    # No points
     return
   elif p.points.len < 2:  # One point
-    render(Collider(parent: p.parent, pos: p.points[0]),
-           renderer)
+    render(Collider(parent: p.parent, pos: p.points[0]))
   elif p.points.len < 3:  # Two points
-    render(LineCollider(parent: p.parent, pos: p.points[0], pos2: p.points[1]),
-           renderer)
+    render(LineCollider(parent: p.parent, pos: p.points[0], pos2: p.points[1]))
   var
     i = 0
     j = p.points.high
@@ -500,11 +498,11 @@ method render*(p: PolyCollider, renderer: Renderer) =
       ppRotation = p.parent.absRot
       pi = rotate(p.points[i].scaled(p), ppPosition, ppRotation)
       pj = rotate(p.points[j].scaled(p), ppPosition, ppRotation)
-    discard renderer.line(pi, pj, colliderOutlineColor)
+    discard line(pi, pj, colliderOutlineColor)
     # increment
     j = i
     inc i
-  p.renderCollider(renderer)
+  p.renderCollider()
 
 
 # Poly - Point

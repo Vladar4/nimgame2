@@ -50,22 +50,22 @@ proc init*(scene: Scene) =
 method event*(scene: Scene, e: sdl.Event) {.base.} = discard
 
 
-proc renderScene*(scene: Scene, renderer: sdl.Renderer) =
+proc renderScene*(scene: Scene) =
   ##  Default scene render procedure.
   ##
   ##  Call it from your scene render method.
   ##
   for entity in scene.list:
-    entity.render(renderer)
+    entity.render()
   # Should be in the scene level to be drawn on top of all entities
   if colliderOutline:
     for entity in scene.list:
       if entity.collider != nil:
-        entity.collider.render(renderer)
+        entity.collider.render()
 
 
-method render*(scene: Scene, renderer: sdl.Renderer) {.base.} =
-  scene.renderScene(renderer)
+method render*(scene: Scene) {.base.} =
+  scene.renderScene()
 
 
 proc checkCollisions*(scene: Scene, entity: Entity) =

@@ -24,7 +24,7 @@
 
 import
   sdl2/sdl, sdl2/sdl_gfx_primitives, sdl2/sdl_gfx_primitives_font,
-  types
+  settings, types
 
 
 type
@@ -34,81 +34,70 @@ type
     filled
 
 
-proc pixel*(renderer: Renderer,
-            pos: Coord, color: Color): bool {.inline.} =
+proc pixel*(pos: Coord, color: Color): bool {.inline.} =
   pixelRGBA(renderer,
             pos.x.int16, pos.y.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
-proc hline*(renderer: Renderer,
-            pos: Coord, length: float, color: Color): bool {.inline.} =
+proc hline*(pos: Coord, length: float, color: Color): bool {.inline.} =
   hlineRGBA(renderer,
             pos.x.int16, pos.x.int16 + length.int16, pos.y.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
-proc vline*(renderer: Renderer,
-            pos: Coord, height: float, color: Color): bool {.inline.} =
+proc vline*(pos: Coord, height: float, color: Color): bool {.inline.} =
   vlineRGBA(renderer,
             pos.x.int16, pos.y.int16, pos.y.int16 + height.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
-proc rect*(renderer: Renderer,
-           pos1, pos2: Coord, color: Color): bool {.inline.} =
+proc rect*(pos1, pos2: Coord, color: Color): bool {.inline.} =
   rectangleRGBA(renderer,
                 pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                 color.r, color.g, color.b, color.a) == 0
 
 
-proc roundedRect*(renderer: Renderer,
-                  pos1, pos2: Coord, rad: float,
+proc roundedRect*(pos1, pos2: Coord, rad: float,
                   color: Color): bool {.inline.} =
   roundedRectangleRGBA(renderer,
                        pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                        rad.int16, color.r, color.g, color.b, color.a) == 0
 
 
-proc box*(renderer: Renderer,
-          pos1, pos2: Coord, color: Color): bool {.inline.} =
+proc box*(pos1, pos2: Coord, color: Color): bool {.inline.} =
     boxRGBA(renderer,
             pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
-proc roundedBox*(renderer: Renderer,
-                 pos1, pos2: Coord, rad: float,
+proc roundedBox*(pos1, pos2: Coord, rad: float,
                  color: Color): bool {.inline.} =
   roundedBoxRGBA(renderer,
                  pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                  rad.int16, color.r, color.g, color.b, color.a) == 0
 
 
-proc line*(renderer: Renderer,
-           pos1, pos2: Coord, color: Color): bool {.inline.} =
+proc line*(pos1, pos2: Coord, color: Color): bool {.inline.} =
   lineRGBA(renderer,
            pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
            color.r, color.g, color.b, color.a) == 0
 
 
-proc aaLine*(renderer: Renderer,
-             pos1, pos2: Coord, color: Color): bool {.inline.} =
+proc aaLine*(pos1, pos2: Coord, color: Color): bool {.inline.} =
   aalineRGBA(renderer,
              pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
              color.r, color.g, color.b, color.a) == 0
 
 
-proc thickLine*(renderer: Renderer,
-                pos1, pos2: Coord, width: float,
+proc thickLine*(pos1, pos2: Coord, width: float,
                 color: Color): bool {.inline.} =
   thickLineRGBA(renderer,
                 pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                 width.uint8, color.r, color.g, color.b, color.a) == 0
 
 
-proc circle*(renderer: Renderer,
-             pos: Coord, rad: float, color: Color,
+proc circle*(pos: Coord, rad: float, color: Color,
              mode: DrawMode = DrawMode.default): bool =
   case mode:
   of DrawMode.default:
@@ -125,16 +114,14 @@ proc circle*(renderer: Renderer,
                     color.r, color.g, color.b, color.a) == 0
 
 
-proc arc*(renderer: Renderer,
-          pos: Coord, rad, start, finish: float,
+proc arc*(pos: Coord, rad, start, finish: float,
           color: Color): bool {.inline.} =
   arcRGBA(renderer,
           pos.x.int16, pos.y.int16, rad.int16, start.int16, finish.int16,
           color.r, color.g, color.b, color.a) == 0
 
 
-proc ellipse*(renderer: Renderer,
-              pos, rad: Coord, color: Color,
+proc ellipse*(pos, rad: Coord, color: Color,
               mode: DrawMode = DrawMode.default): bool =
   case mode:
   of DrawMode.default:
@@ -151,8 +138,7 @@ proc ellipse*(renderer: Renderer,
                       color.r, color.g, color.b, color.a) == 0
 
 
-proc pie*(renderer: Renderer,
-          pos: Coord, rad, start, finish: float, color: Color,
+proc pie*(pos: Coord, rad, start, finish: float, color: Color,
           mode: DrawMode = DrawMode.default): bool =
   case mode:
   of DrawMode.default, DrawMode.aa:
@@ -167,8 +153,7 @@ proc pie*(renderer: Renderer,
                   color.r, color.g, color.b, color.a) == 0
 
 
-proc trigon*(renderer: Renderer,
-             pos1, pos2, pos3: Coord, color: Color,
+proc trigon*(pos1, pos2, pos3: Coord, color: Color,
              mode: DrawMode = DrawMode.default): bool =
   case mode:
   of DrawMode.default:
@@ -200,8 +185,7 @@ template `[]=`[T](p: ptr T, off: int, val: T) =
   (p + off)[] = val
 
 
-proc polygon*(renderer: Renderer,
-              pos: openarray[Coord], color: Color,
+proc polygon*(pos: openarray[Coord], color: Color,
               mode: DrawMode = DrawMode.default,
               texture: sdl.Surface = nil, textureD: Coord = (0, 0)): bool =
   var vx, vy: ptr int16
@@ -230,8 +214,7 @@ proc polygon*(renderer: Renderer,
                     texture, textureD.x.int, textureD.y.int) == 0
 
 
-proc bezier*(renderer: Renderer,
-             pos: openarray[Coord], s: float, color: Color): bool =
+proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
   var vx, vy: ptr int16
   vx = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
@@ -256,15 +239,13 @@ template setFontRotation*(rotation: uint32) =
   gfxPrimitivesSetFontRotation(rotation)
 
 
-proc character*(renderer: Renderer,
-                pos: Coord, c: char, color: Color): bool {.inline.} =
+proc character*(pos: Coord, c: char, color: Color): bool {.inline.} =
   characterRGBA(renderer,
                 pos.x.int16, pos.y.int16, c,
                 color.r, color.g, color.b, color.a) == 0
 
 
-proc string*(renderer: Renderer,
-             pos: Coord, s: string, color: Color): bool {.inline.} =
+proc string*(pos: Coord, s: string, color: Color): bool {.inline.} =
   stringRGBA(renderer,
              pos.x.int16, pos.y.int16, s,
              color.r, color.g, color.b, color.a) == 0

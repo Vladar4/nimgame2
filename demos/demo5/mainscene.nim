@@ -31,7 +31,7 @@ proc init*(scene: MainScene) =
   # Cursor
   scene.c = newCursor()
   scene.cursorG = newTextureGraphic()
-  discard scene.cursorG.load(game.renderer, "../assets/gfx/cursor.png")
+  discard scene.cursorG.load("../assets/gfx/cursor.png")
   scene.c.graphic = scene.cursorG
   scene.c.collider = newCollider(scene.c)
 
@@ -39,7 +39,7 @@ proc init*(scene: MainScene) =
   scene.d1 = newLine()
   scene.d1.pos = (50.0, 420.0)
   scene.d1.center = (25.0, 0.0)
-  scene.d1.collider = scene.d1.newLineCollider((0, 0), (50, 0))
+  scene.d1.collider = scene.d1.newLineCollider((-25, 0), (25, 0))
 
   # Line 2
   scene.d2 = newLine()
@@ -49,7 +49,7 @@ proc init*(scene: MainScene) =
   # Earth
   scene.e = newEarth()
   scene.earthG = newTextureGraphic()
-  discard scene.earthG.load(game.renderer, "../assets/gfx/earth.png")
+  discard scene.earthG.load("../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
   let radius = scene.earthG.dim.w.float / 2
   scene.e.collider = newCircleCollider(scene.e, (radius, radius), radius)
@@ -57,7 +57,7 @@ proc init*(scene: MainScene) =
   # Spaceman
   scene.s = newSpaceman()
   scene.spacemanG = newTextureGraphic()
-  discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.centrify()
   scene.s.collider = newBoxCollider(scene.s, (0, 0), scene.spacemanG.dim)
@@ -120,35 +120,35 @@ proc generateCollisionString(name: string, list: seq[string]): string =
     result = name & " isn't colliding with anything"
 
 
-method render*(scene: MainScene, renderer: Renderer) =
-  scene.renderScene(renderer)
-  discard renderer.box((4, 60), (380, 140), 0x000000CC'u32)
+method render*(scene: MainScene) =
+  scene.renderScene()
+  discard box((4, 60), (380, 140), 0x000000CC'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 64), generateCollisionString("Cursor", scene.c.collidedWith),
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 72), generateCollisionString("Line", scene.d1.collidedWith),
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 80), generateCollisionString("Earth", scene.e.collidedWith),
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 88), generateCollisionString("Spaceman", scene.s.collidedWith),
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 96), generateCollisionString("Poly9", scene.p9.collidedWith),
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 120), "Space toggles outlines, Arrows control spaceman",
     0xFFFFFFFF'u32)
 
-  discard renderer.string(
+  discard string(
     (8, 128), "WASDQE control line, IJKLUO control polygon",
     0xFFFFFFFF'u32)
 

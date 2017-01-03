@@ -37,7 +37,7 @@ proc init*(scene: MainScene) =
   # Spaceman
   scene.s = newSpaceman()
   scene.spacemanG = newTextureGraphic()
-  discard scene.spacemanG.load(game.renderer, "../assets/gfx/spaceman.png")
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
   scene.s.physics = new Physics
   scene.s.centrify()
@@ -62,12 +62,12 @@ method event*(scene: MainScene, event: Event) =
     else: discard
 
 
-method render*(scene: MainScene, renderer: Renderer) =
+method render*(scene: MainScene) =
   # Draw line between the spaceman and the mouse position if LMB is pressed
   if Button.left.pressed:
-    discard game.renderer.line(scene.s.pos, mouse.abs, 0xFF0000FF'u32)
+    discard line(scene.s.pos, mouse.abs, 0xFF0000FF'u32)
 
-  scene.renderScene(renderer)
+  scene.renderScene()
 
   var arrows: string = ""
   if ScancodeUp.pressed: arrows &= "Up "
@@ -92,14 +92,14 @@ method render*(scene: MainScene, renderer: Renderer) =
   if Button.x2.pressed: buttons &= "X2 "
 
 
-  discard renderer.box((4, 60), (260, 100), 0xCC000000'u32)
-  discard renderer.string(
+  discard box((4, 60), (260, 100), 0xCC000000'u32)
+  discard string(
     (8, 64), "Arrows: " & arrows, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 72), "WSAD: " & wsad, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 80), "Mouse: " & mouse, 0xFF0000FF'u32)
-  discard renderer.string(
+  discard string(
     (8, 88), "Mouse buttons: " & buttons, 0xFF0000FF'u32)
 
 const

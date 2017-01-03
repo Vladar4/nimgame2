@@ -109,10 +109,11 @@ proc initSprite*(entity: Entity,
   entity.sprite.offset = offset
   entity.sprite.frames = @[]
 
-  var cols = (entity.graphic.w - entity.sprite.offset.w) div
-              entity.sprite.frameSize.w
-  var rows = (entity.graphic.h - entity.sprite.offset.h) div
-              entity.sprite.frameSize.h
+  let
+    cols = (entity.graphic.w - entity.sprite.offset.w) div
+            entity.sprite.frameSize.w
+    rows = (entity.graphic.h - entity.sprite.offset.h) div
+            entity.sprite.frameSize.h
 
   for r in 0..(rows - 1):
     for c in 0..(cols - 1):
@@ -372,23 +373,21 @@ proc centrify*(entity: Entity) =
     entity.center = entity.graphic.dim / 2
 
 
-proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
+proc renderEntity*(entity: Entity) =
   ##  Default entity render procedure.
   ##
   ##  Call it from your entity render method.
   ##
   if not (entity.graphic == nil):
     if entity.sprite == nil:
-      entity.graphic.draw(renderer,
-                          entity.absPos,
+      entity.graphic.draw(entity.absPos,
                           entity.absRot,
                           entity.absScale,
                           entity.center,
                           entity.flip)
     else: # entity.sprite != nil
       if entity.sprite.currentAnimation < 0:
-        entity.graphic.draw(renderer,
-                            entity.absPos,
+        entity.graphic.draw(entity.absPos,
                             entity.absRot,
                             entity.absScale,
                             entity.center,
@@ -396,8 +395,7 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
                             entity.sprite.frames[entity.sprite.currentFrame])
       else:
         let anim = entity.currentAnimation
-        entity.graphic.draw(renderer,
-                            entity.absPos,
+        entity.graphic.draw(entity.absPos,
                             entity.absRot,
                             entity.absScale,
                             entity.center,
@@ -406,8 +404,8 @@ proc renderEntity*(entity: Entity, renderer: sdl.Renderer) =
                               anim.frames[entity.sprite.currentFrame]])
 
 
-method render*(entity: Entity, renderer: sdl.Renderer) {.base.} =
-  entity.renderEntity(renderer)
+method render*(entity: Entity) {.base.} =
+  entity.renderEntity()
 
 
 proc updateEntity*(entity: Entity, elapsed: float) =

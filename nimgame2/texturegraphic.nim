@@ -25,12 +25,13 @@
 import
   sdl2/sdl,
   sdl2/sdl_image as img,
-  graphic, types
+  graphic, settings, types
 
 
 type
   TextureGraphic* = ref object of Graphic
     fTexture: sdl.Texture
+    fFormat: uint32
     fSize: Dim
 
 
@@ -39,14 +40,27 @@ type
 ########
 
 
-proc free*(graphic: TextureGraphic) =
-  if not(graphic.fTexture == nil):
+proc freeTexture*(graphic: TextureGraphic) =
+  if not (graphic.fTexture == nil):
     graphic.fTexture.destroyTexture()
     graphic.fTexture = nil
 
 
+proc free*(graphic: TextureGraphic) =
+  graphic.freeTexture()
+  graphic.fFormat = 0
+  graphic.fSize = (0, 0)
+
+
+proc init*(graphic: TextureGraphic) =
+  graphic.fTexture = nil
+  graphic.fFormat = 0
+  graphic.fSize = (0, 0)
+
+
 proc newTextureGraphic*(): TextureGraphic =
   new result, free
+  result.init()
 
 
 method w*(graphic: TextureGraphic): int {.inline.} =
@@ -61,23 +75,11 @@ method dim*(graphic: TextureGraphic): Dim {.inline.} =
   graphic.fSize
 
 
-proc load*(
-    graphic: TextureGraphic, renderer: sdl.Renderer, file: string): bool =
-  ##  Load texture from ``file``.
-  ##
-  ##  ``Return`` `true` on success, `false` otherwise.
-  ##
+proc updateTexture*(graphic: TextureGraphic): bool =
   result = true
-  # load texture
-  graphic.fTexture = renderer.loadTexture(file)
-  if graphic.fTexture == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't load image %s: %s",
-                    file, img.getError())
-    return false
-  # get dimensions
   var w, h: cint
-  if graphic.fTexture.queryTexture(nil, nil, addr(w), addr(h)) != 0:
+  if graphic.fTexture.queryTexture(
+      addr(graphic.fFormat), nil, addr(w), addr(h)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't get texture attributes: %s",
                     sdl.getError)
@@ -87,13 +89,47 @@ proc load*(
   graphic.fSize.h = h
 
 
+proc format*(graphic: TextureGraphic): uint32 {.inline.} =
+  graphic.fFormat
+
+
+proc load*(
+    graphic: TextureGraphic, file: string): bool =
+  ##  Load texture from ``file``.
+  ##
+  ##  ``Return`` `true` on success, `false` otherwise.
+  ##
+  result = true
+  graphic.free()
+  # load texture
+  graphic.fTexture = renderer.loadTexture(file)
+  if graphic.fTexture == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load image %s: %s",
+                    file, img.getError())
+    return false
+  result = graphic.updateTexture()
+
+
+proc assignTexture*(
+    graphic: TextureGraphic, texture: Texture): bool =
+  ##  Assign already created texture.
+  ##
+  ##  ``ATTENTION!`` The texture will be destroyed on ``free()``.
+  ##
+  ##  ``Return`` `true` on success, `false` otherwise.
+  ##
+  graphic.freeTexture()
+  graphic.fTexture = texture
+  result = graphic.updateTexture()
+
+
 ########
 # DRAW #
 ########
 
 
 method draw*(graphic: TextureGraphic,
-             renderer: Renderer,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
              scale: Scale = 1.0,
