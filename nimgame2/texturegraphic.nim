@@ -76,6 +76,8 @@ method dim*(graphic: TextureGraphic): Dim {.inline.} =
 
 
 proc updateTexture*(graphic: TextureGraphic): bool =
+  if graphic.fTexture == nil:
+    return true
   result = true
   var w, h: cint
   if graphic.fTexture.queryTexture(
