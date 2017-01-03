@@ -4,6 +4,7 @@ import sdl2/sdl,
   nimgame2/collider,
   nimgame2/font,
   nimgame2/bitmapfont,
+  nimgame2/truetypefont,
   nimgame2/draw,
   nimgame2/entity,
   nimgame2/graphic,
@@ -23,6 +24,9 @@ type
     bmFont: BitmapFont
     bmText: TextGraphic
     bmEntity: Entity
+    ttFont: TrueTypeFont
+    ttText: TextGraphic
+    ttEntity: Entity
 
 
 proc init*(scene: MainScene) =
@@ -38,6 +42,10 @@ proc init*(scene: MainScene) =
   scene.bmFont = newBitmapFont()
   discard scene.bmFont.load("../assets/fnt/default8x16.png", (8, 16))
 
+  # TrueTypeFont
+  scene.ttFont = newTrueTypeFont()
+  discard scene.ttFont.load("../assets/fnt/FSEX300.ttf", 16)
+
   # Text
   scene.bmText = newTextGraphic()
   scene.bmText.font = scene.bmFont
@@ -45,13 +53,25 @@ proc init*(scene: MainScene) =
     [ "The quick brown fox",
       "jumps over the lazy dog"]
 
+  scene.ttText = newTextGraphic()
+  scene.ttText.font = scene.ttFont
+  scene.ttText.lines =
+    [ "В чащах юга жил бы цитрус?",
+      "Да, но фальшивый экземпляр!"]
+
+  # Entity
   scene.bmEntity = newEntity()
   scene.bmEntity.pos = (8, 128)
   scene.bmEntity.graphic = scene.bmText
 
+  scene.ttEntity = newEntity()
+  scene.ttEntity.pos = (8, 192)
+  scene.ttEntity.graphic = scene.ttText
+
   # add to scene
   scene.list.add(scene.e)
   scene.list.add(scene.bmEntity)
+  scene.list.add(scene.ttEntity)
 
 
 proc free*(scene: MainScene) =
@@ -63,7 +83,7 @@ proc newMainScene*(): MainScene =
   result.init()
 
 
-proc bmChangeAlign(scene: MainScene, increase = true) =
+proc changeAlign(scene: MainScene, increase = true) =
   # get
   var a = scene.bmText.align
   # change
@@ -77,25 +97,27 @@ proc bmChangeAlign(scene: MainScene, increase = true) =
       a = TextAlign(a.int shr 1)
   # set
   scene.bmText.align = a
+  scene.ttText.align = a
 
 let
   colors = [0xFFFFFFFF'u32, 0xFF0000FF'u32, 0x00FF00FF'u32, 0x0000FFFF'u32]
   colorNames = ["white", "red", "green", "blue"]
-var bmColor = 0
+var clr = 0
 
-proc bmChangeColor(scene: MainScene, increase = true) =
+proc changeColor(scene: MainScene, increase = true) =
   # change
   if increase:
-    if bmColor < colors.high:
-      inc bmColor
+    if clr < colors.high:
+      inc clr
   else: # decrease
-    if bmColor > 0:
-      dec bmColor
+    if clr > 0:
+      dec clr
   # set
-  scene.bmText.color = colors[bmColor]
+  scene.bmText.color = colors[clr]
+  scene.ttText.color = colors[clr]
 
 
-proc bmChangeAlpha(scene: MainScene, increase = true) =
+proc changeAlpha(scene: MainScene, increase = true) =
   # get
   var
     c = scene.bmText.color
@@ -113,6 +135,7 @@ proc bmChangeAlpha(scene: MainScene, increase = true) =
   # set
   c.a = a.uint8
   scene.bmText.color = c
+  scene.ttText.color = c
 
 
 method event*(scene: MainScene, event: Event) =
@@ -121,17 +144,17 @@ method event*(scene: MainScene, event: Event) =
     of K_Escape:
       gameRunning = false
     of K_Q:
-      scene.bmChangeAlign()
+      scene.changeAlign()
     of K_A:
-      scene.bmChangeAlign(false)
+      scene.changeAlign(false)
     of K_W:
-      scene.bmChangeColor()
+      scene.changeColor()
     of K_S:
-      scene.bmChangeColor(false)
+      scene.changeColor(false)
     of K_E:
-      scene.bmChangeAlpha()
+      scene.changeAlpha()
     of K_D:
-      scene.bmChangeAlpha(false)
+      scene.changeAlpha(false)
     else: discard
 
 
@@ -144,7 +167,7 @@ method render*(scene: MainScene) =
   discard string((8, 72),
     "QA - change alignment: " & $scene.bmText.align, 0xFFFFFFFF'u32)
   discard string((8, 80),
-    "WS - change color: " & colorNames[bmColor], 0xFFFFFFFF'u32)
+    "WS - change color: " & colorNames[clr], 0xFFFFFFFF'u32)
   discard string((8, 88),
     "ED - change alpha: " & $scene.bmText.color.a.int, 0xFFFFFFFF'u32)
 

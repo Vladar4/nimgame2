@@ -1,4 +1,4 @@
-# nimgame2/bitmapfont.nim
+# nimgame2/truetypefont.nim
 # Copyright (c) 2016-2017 Vladar
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,141 +23,102 @@
 
 import
   sdl2/sdl,
-  sdl2/sdl_image as img,
+  sdl2/sdl_ttf as ttf,
   font, settings, types
 
 
 type
-  BitmapFont* = ref object of Font
-    fSurface: Surface   # source font surface
-    fDim, fCharDim: Dim # dimensions of surface and single character
-    fChars: seq[tuple[x, y: int]] # coordinates of all characters
+  TrueTypeFont* = ref object of font.Font
+    fFont: ttf.Font
 
 
-proc free*(font: BitmapFont) =
-  if not (font.fSurface == nil):
-    font.fSurface.freeSurface()
-  font.fDim = (0, 0)
-  font.fCharDim = (0, 0)
-  font.fChars = @[]
+proc free*(font: TrueTypeFont) =
+  if not (font.fFont == nil):
+    font.fFont.closeFont()
+    font.fFont = nil
 
 
-proc init*(font: BitmapFont) =
-  font.fSurface = nil
-  font.fDim = (0, 0)
-  font.fCharDim = (0, 0)
-  font.fChars = @[]
+proc init*(font: TrueTypeFont) =
+  font.fFont = nil
 
 
-proc newBitmapFont*(): BitmapFont =
+proc newTrueTypeFont*(): TrueTypeFont =
   new result, free
   result.init()
 
 
-proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
+proc load*(font: TrueTypeFont, file: string, size: int): bool =
   result = true
   font.free()
-  font.fSurface = img.load(file)
-  if font.fSurface == nil:
+  font.fFont = ttf.openFont(file, size)
+  if font.fFont == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load font %s: %s",
-                    file, img.getError())
+                    file, ttf.getError())
     return false
 
-  font.fDim = (font.fSurface.w.int, font.fSurface.h.int)
-  font.fCharDim = charDim
-  let
-    cols = font.fDim.w div font.fCharDim.w
-    rows = font.fDim.h div font.fCharDim.h
-  for r in 0..(rows - 1):
-    for c in 0..(cols - 1):
-      font.fChars.add((font.fCharDim.w * c, font.fCharDim.h * r))
+
+method lineDim*(font: TrueTypeFont, line: string): Dim {.inline.} =
+  var w, h: cint
+  discard font.fFont.sizeUTF8(line, addr(w), addr(h))
+  return (w.int, h.int)
 
 
-method charDim*(font: BitmapFont): Dim {.inline.} =
-  font.fCharDim
-
-
-method lineDim*(font: BitmapFont, line: string): Dim {.inline.} =
-  (font.fCharDim.w * line.len, font.fCharDim.h)
-
-
-proc render(font: BitmapFont,
+proc render(font: TrueTypeFont,
             line: string,
             color: Color = DefaultFontColor): Surface =
-  if font.fSurface == nil:
+  if font.fFont == nil:
     sdl.logCritical(sdl.LogCategoryError,
-                    "Can't render nil font surface")
+                    "Can't render nil font")
     return nil
-  # create surface
-  let
-    dim = font.lineDim(line)
-    lineSurface = createRGBSurfaceWithFormat(
-      0, dim.w, dim.h,
-      font.fSurface.format.BitsPerPixel.cint,
-      font.fSurface.format.format)
-  if lineSurface == nil:
+  result = font.fFont.renderUTF8_Blended(line, color)
+  if result.setSurfaceAlphaMod(color.a) != 0:
     sdl.logCritical(sdl.LogCategoryError,
-                    "Can't create font line surface: %s",
-                    sdl.getError())
-    return nil
-
-  # color and alpha mod
-  if lineSurface.setSurfaceColorMod(color.r, color.g, color.b) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set surface color modifier: %s",
-                    sdl.getError())
-  if lineSurface.setSurfaceAlphaMod(color.a) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set surface alpha modifier: %s",
+                    "Can't set surface aplha modifier: %s",
                     sdl.getError())
 
-  # blit
-  var
-    srcRect = Rect(x: 0, y: 0, w: font.fCharDim.w, h: font.fCharDim.h)
-    dstRect = Rect(x: 0, y: 0, w: font.fCharDim.w, h: font.fCharDim.h)
-  for i in 0..line.high:
-    let ch = font.fChars[line[i].ord]
-    srcRect.x = ch.x
-    srcRect.y = ch.y
-    dstRect.x = i * font.fCharDim.w
-    discard font.fSurface.blitSurface(addr(srcRect), lineSurface, addr(dstRect))
-  return lineSurface
 
-
-method renderLine*(font: BitmapFont,
+method renderLine*(font: TrueTypeFont,
                    line: string,
                    color: Color = DefaultFontColor): Texture =
   let lineSurface = font.render(line, color)
   if lineSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render text line: %s",
-                    sdl.getError())
+                    ttf.getError())
     return nil
   result = renderer.createTextureFromSurface(lineSurface)
   lineSurface.freeSurface()
 
 
-method renderText*(font: BitmapFont,
+method renderText*(font: TrueTypeFont,
                    text: openarray[string],
                    align = TextAlign.left,
                    color: Color = DefaultFontColor): Texture =
   var text = @text
   if text.len < 1: text.add("")
   # find the longest line of text
-  var maxw = 0
+  var
+    sz: seq[tuple[w, h: int]] = @[]
+    maxw = 0
   for line in text:
-    let w = font.lineDim(line).w
-    if maxw < w:
-      maxw = w
+    sz.add(font.lineDim(line))
+    if maxw < sz[^1].w:
+      maxw = sz[^1].w
   let maxw2 = maxw div 2
   # create surface
+  let sampleSurface = font.render(" ")
+  if sampleSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't create font sample surface")
+    return nil
   let
-    dim: Dim = (maxw, font.fCharDim.h * text.len)
+    dim: Dim = (maxw, sz[0].h * text.len)
     textSurface = createRGBSurfaceWithFormat(
       0, dim.w, dim.h,
-      font.fSurface.format.BitsPerPixel.cint,
-      font.fSurface.format.format)
+      sampleSurface.format.BitsPerPixel.cint,
+      sampleSurface.format.format)
+  sampleSurface.freeSurface()
   if textSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't create font text surface: %s",
@@ -166,15 +127,16 @@ method renderText*(font: BitmapFont,
 
   # blit
   var
-    dstRect = Rect(x: 0, y: 0, w: 0, h: font.fCharDim.h)
+    dstRect = Rect(x: 0, y: 0, w: 0, h: 0)
   for i in 0..text.high:
     let ln = font.render(text[i], color)
-    dstRect.w = ln.w
+    dstRect.w = sz[i].w
+    dstRect.h = sz[i].h
     dstRect.x = case align:
                 of left:    0
                 of center:  maxw2 - dstRect.w div 2
                 of right:   maxw - dstRect.w
-    dstRect.y = i * font.fCharDim.h
+    dstRect.y = i * sz[i].h
     discard ln.blitSurface(nil, textSurface, addr(dstRect))
 
   result = renderer.createTextureFromSurface(textSurface)
@@ -184,4 +146,5 @@ method renderText*(font: BitmapFont,
                     "Can't render text: %s",
                     sdl.getError())
     return nil
+
 
