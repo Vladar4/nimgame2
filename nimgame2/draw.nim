@@ -193,7 +193,7 @@ proc polygon*(pos: openarray[Coord], color: Color,
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   for i in 0..pos.high:
     vx[i] = pos[i].x.int16
-    vx[i] = pos[i].y.int16
+    vy[i] = pos[i].y.int16
   if texture == nil:
     case mode:
     of DrawMode.default:
@@ -220,7 +220,7 @@ proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   for i in 0..pos.high:
     vx[i] = pos[i].x.int16
-    vx[i] = pos[i].y.int16
+    vy[i] = pos[i].y.int16
   bezierRGBA(renderer,
              vx, vy, pos.len, s.int,
              color.r, color.g, color.b, color.a) == 0
