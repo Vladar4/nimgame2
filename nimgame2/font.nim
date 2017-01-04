@@ -36,7 +36,7 @@ type
   Font* = ref object of RootObj
 
 
-method charDim*(font: Font): Dim {.base.} = discard
+method charH*(font: Font): int {.base.} = discard
 
 method lineDim*(font: Font, text: string): Dim {.base.} = discard
 

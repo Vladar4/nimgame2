@@ -58,7 +58,15 @@ proc load*(font: TrueTypeFont, file: string, size: int): bool =
     return false
 
 
-method lineDim*(font: TrueTypeFont, line: string): Dim {.inline.} =
+method charH*(font: TrueTypeFont): int =
+  if font.fFont == nil:
+    return 0
+  return font.fFont.fontHeight()
+
+
+method lineDim*(font: TrueTypeFont, line: string): Dim =
+  if font.fFont == nil:
+    return (0, 0)
   var w, h: cint
   discard font.fFont.sizeUTF8(line, addr(w), addr(h))
   return (w.int, h.int)
@@ -81,7 +89,9 @@ proc render(font: TrueTypeFont,
 method renderLine*(font: TrueTypeFont,
                    line: string,
                    color: Color = DefaultFontColor): Texture =
-  let lineSurface = font.render(line, color)
+  let
+    line = if line.len < 1: " " else: line
+    lineSurface = font.render(line, color)
   if lineSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render text line: %s",

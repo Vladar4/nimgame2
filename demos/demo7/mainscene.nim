@@ -105,6 +105,8 @@ let
 var clr = 0
 
 proc changeColor(scene: MainScene, increase = true) =
+  # get alpha
+  let a = scene.bmText.color.a
   # change
   if increase:
     if clr < colors.high:
@@ -113,8 +115,10 @@ proc changeColor(scene: MainScene, increase = true) =
     if clr > 0:
       dec clr
   # set
-  scene.bmText.color = colors[clr]
-  scene.ttText.color = colors[clr]
+  var color: Color = colors[clr]
+  color.a = a
+  scene.bmText.color = color
+  scene.ttText.color = color
 
 
 proc changeAlpha(scene: MainScene, increase = true) =

@@ -74,8 +74,8 @@ proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
       font.fChars.add((font.fCharDim.w * c, font.fCharDim.h * r))
 
 
-method charDim*(font: BitmapFont): Dim {.inline.} =
-  font.fCharDim
+method charH*(font: BitmapFont): int {.inline.} =
+  font.fCharDim.h
 
 
 method lineDim*(font: BitmapFont, line: string): Dim {.inline.} =
@@ -117,7 +117,10 @@ proc render(font: BitmapFont,
     srcRect = Rect(x: 0, y: 0, w: font.fCharDim.w, h: font.fCharDim.h)
     dstRect = Rect(x: 0, y: 0, w: font.fCharDim.w, h: font.fCharDim.h)
   for i in 0..line.high:
-    let ch = font.fChars[line[i].ord]
+    var idx = line[i].ord
+    if idx > font.fChars.high:
+      idx = 0
+    let ch = font.fChars[idx]
     srcRect.x = ch.x
     srcRect.y = ch.y
     dstRect.x = i * font.fCharDim.w
@@ -128,7 +131,9 @@ proc render(font: BitmapFont,
 method renderLine*(font: BitmapFont,
                    line: string,
                    color: Color = DefaultFontColor): Texture =
-  let lineSurface = font.render(line, color)
+  let
+    line = if line.len < 1: " " else: line
+    lineSurface = font.render(line, color)
   if lineSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render text line: %s",
@@ -143,7 +148,7 @@ method renderText*(font: BitmapFont,
                    align = TextAlign.left,
                    color: Color = DefaultFontColor): Texture =
   var text = @text
-  if text.len < 1: text.add("")
+  if text.len < 1: text.add(" ")
   # find the longest line of text
   var maxw = 0
   for line in text:
