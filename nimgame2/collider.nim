@@ -162,26 +162,27 @@ method collide*(a: Collider, p: PolyCollider): bool =
     return collide(a, LineCollider(parent: p.parent,
                                    pos: p.points[0],
                                    pos2: p.points[1]))
-  let
-    p0 = rotate(a.pos.scaled(a), a.parent.absPos, a.parent.absRot)
-  var
-    i = 0
-    j = p.points.high
-    c = 0
-  while i < p.points.len:
+  else:
     let
+      p0 = rotate(a.pos.scaled(a), a.parent.absPos, a.parent.absRot)
       ppPosition = p.parent.absPos
       ppRotation = p.parent.absRot
-      pi = rotate(p.points[i].scaled(p), ppPosition, ppRotation)
-      pj = rotate(p.points[j].scaled(p), ppPosition, ppRotation)
-    if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
-         ((pj.y <= p0.y) and (p0.y < pi.y)) ) and
-       ( p0.x < (pj.x - pi.x) * (p0.y - pi.y) / (pj.y - pi.y) + pi.x ):
-      c = if c == 0: 1 else: 0
-    # increment
-    j = i
-    inc i
-  return c > 0
+    var
+      i = 0
+      j = p.points.high
+      c = 0
+    while i < p.points.len:
+      let
+        pi = rotate(p.points[i].scaled(p), ppPosition, ppRotation)
+        pj = rotate(p.points[j].scaled(p), ppPosition, ppRotation)
+      if ( ((pi.y <= p0.y) and (p0.y < pj.y)) or
+          ((pj.y <= p0.y) and (p0.y < pi.y)) ) and
+        ( p0.x < (pj.x - pi.x) * (p0.y - pi.y) / (pj.y - pi.y) + pi.x ):
+        c = if c == 0: 1 else: 0
+      # increment
+      j = i
+      inc i
+    return c > 0
 
 
 ###############
@@ -274,18 +275,19 @@ method collide*(b: BoxCollider, p: PolyCollider): bool =
     return collide(b, LineCollider(parent: p.parent,
                                    pos: p.points[0],
                                    pos2: p.points[1]))
-  var
-    i = 0
-    j = p.points.high
-  while i < p.points.len:
-    if collide(b, LineCollider(parent: p.parent,
-                               pos: p.points[i],
-                               pos2: p.points[j])):
-      return true
-    # increment
-    j = i
-    inc i
-  return false
+  else:
+    var
+      i = 0
+      j = p.points.high
+    while i < p.points.len:
+      if collide(b, LineCollider(parent: p.parent,
+                                pos: p.points[i],
+                                pos2: p.points[j])):
+        return true
+      # increment
+      j = i
+      inc i
+    return false
 
 
 ##################
@@ -367,18 +369,19 @@ method collide*(c: CircleCollider, p: PolyCollider): bool =
     return collide(c, LineCollider(parent: p.parent,
                                    pos: p.points[0],
                                    pos2: p.points[1]))
-  var
-    i = 0
-    j = p.points.high
-  while i < p.points.len:
-    if collide(c, LineCollider(parent: p.parent,
-                               pos: p.points[i],
-                               pos2: p.points[j])):
-      return true
-    # increment
-    j = i
-    inc i
-  return false
+  else:
+    var
+      i = 0
+      j = p.points.high
+    while i < p.points.len:
+      if collide(c, LineCollider(parent: p.parent,
+                                pos: p.points[i],
+                                pos2: p.points[j])):
+        return true
+      # increment
+      j = i
+      inc i
+    return false
 
 
 #################
@@ -447,23 +450,23 @@ method collide*(d: LineCollider, p: PolyCollider): bool =
     return collide(d, LineCollider(parent: p.parent,
                                    pos: p.points[0],
                                    pos2: p.points[1]))
-
-  if collide(Collider(parent: d.parent, pos: d.pos), p):
-    return true
-  if collide(Collider(parent: d.parent, pos: d.pos2), p):
-    return true
-  var
-    i = 0
-    j = p.points.high
-  while i < p.points.len:
-    if collide(d, LineCollider(parent: p.parent,
-                               pos: p.points[i],
-                               pos2: p.points[j])):
+  else:
+    if collide(Collider(parent: d.parent, pos: d.pos), p):
       return true
-    # increment
-    j = i
-    inc i
-  return false
+    if collide(Collider(parent: d.parent, pos: d.pos2), p):
+      return true
+    var
+      i = 0
+      j = p.points.high
+    while i < p.points.len:
+      if collide(d, LineCollider(parent: p.parent,
+                                pos: p.points[i],
+                                pos2: p.points[j])):
+        return true
+      # increment
+      j = i
+      inc i
+    return false
 
 
 ################
@@ -489,20 +492,15 @@ method render*(p: PolyCollider) =
     render(Collider(parent: p.parent, pos: p.points[0]))
   elif p.points.len < 3:  # Two points
     render(LineCollider(parent: p.parent, pos: p.points[0], pos2: p.points[1]))
-  var
-    i = 0
-    j = p.points.high
-  while i < p.points.len:
+  else:
     let
       ppPosition = p.parent.absPos
       ppRotation = p.parent.absRot
-      pi = rotate(p.points[i].scaled(p), ppPosition, ppRotation)
-      pj = rotate(p.points[j].scaled(p), ppPosition, ppRotation)
-    discard line(pi, pj, colliderOutlineColor)
-    # increment
-    j = i
-    inc i
-  p.renderCollider()
+    var points: seq[Coord] = @[]
+    for point in p.points:
+      points.add(rotate(point.scaled(p), ppPosition, ppRotation))
+    discard polygon(points, colliderOutlineColor)
+    p.renderCollider()
 
 
 # Poly - Point
@@ -547,17 +545,18 @@ method collide*(p1, p2: PolyCollider): bool =
                                 pos: p2.points[0],
                                 pos2: p2.points[1]),
                    p1)
-  var
-    i = 0
-    j = p1.points.high
-  while i < p1.points.len:
-    if collide(LineCollider(parent: p1.parent,
-                            pos: p1.points[i],
-                            pos2: p1.points[j]),
-               p2):
-      return true
-    # increment
-    j = i
-    inc i
-  return false
+  else:
+    var
+      i = 0
+      j = p1.points.high
+    while i < p1.points.len:
+      if collide(LineCollider(parent: p1.parent,
+                              pos: p1.points[i],
+                              pos2: p1.points[j]),
+                p2):
+        return true
+      # increment
+      j = i
+      inc i
+    return false
 
