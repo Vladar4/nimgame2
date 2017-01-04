@@ -75,7 +75,10 @@ proc init*(scene: MainScene) =
 
 
 proc free*(scene: MainScene) =
-  scene.bmFont.free
+  scene.bmFont.free()
+  scene.ttFont.free()
+  scene.bmText.free()
+  scene.ttText.free()
 
 
 proc newMainScene*(): MainScene =
@@ -167,7 +170,7 @@ method render*(scene: MainScene) =
 
   discard box((4, 60), (260, 100), 0x000000CC'u32)
 
-  discard string((8, 64), "BitmapFont:", 0xFFFFFFFF'u32)
+  discard string((8, 64), "BitmapFont and TrueTypeFont:", 0xFFFFFFFF'u32)
   discard string((8, 72),
     "QA - change alignment: " & $scene.bmText.align, 0xFFFFFFFF'u32)
   discard string((8, 80),
