@@ -129,7 +129,7 @@ proc ellipse*(pos, rad: Coord, color: Color,
                 pos.x.int16, pos.y.int16, rad.x.int16, rad.y.int16,
                 color.r, color.g, color.b, color.a) == 0
   of DrawMode.aa:
-    aaellipseRGBA(renderer,
+    aaEllipseRGBA(renderer,
                   pos.x.int16, pos.y.int16, rad.x.int16, rad.y.int16,
                   color.r, color.g, color.b, color.a) == 0
   of DrawMode.filled:
@@ -163,7 +163,7 @@ proc trigon*(pos1, pos2, pos3: Coord, color: Color,
               pos3.x.int16, pos3.y.int16,
               color.r, color.g, color.b, color.a) == 0
   of DrawMode.aa:
-    aatrigonRGBA(renderer,
+    aaTrigonRGBA(renderer,
                 pos1.x.int16, pos1.y.int16,
                 pos2.x.int16, pos2.y.int16,
                 pos3.x.int16, pos3.y.int16,
@@ -201,7 +201,7 @@ proc polygon*(pos: openarray[Coord], color: Color,
                   vx, vy, pos.len,
                   color.r, color.g, color.b, color.a) == 0
     of DrawMode.aa:
-      aapolygonRGBA(renderer,
+      aaPolygonRGBA(renderer,
                     vx, vy, pos.len,
                     color.r, color.g, color.b, color.a) == 0
     of DrawMode.filled:

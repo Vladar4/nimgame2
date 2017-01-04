@@ -26,8 +26,7 @@ const polyLines0 = [
   ( 60.0,  30.0),
   (-60.0,  30.0),
   (-80.0, -50.0),
-  (-40.0, -30.0),
-  (  0.0, -70.0)]
+  (-40.0, -30.0)]
 
 const polyLines1 = [
   ((-30.0,  10.0), (-30.0, -10.0)),
@@ -48,19 +47,18 @@ proc polyProc(pos: Coord,
               region: Rect) =
   let
     color0: Color = 0xFFFF00FF'u32
-    color1: Color = 0xFFFFFFFF'u32
+    color1: Color = 0x000000FF'u32
 
-  for i in 1..(polyLines0.high):
-    let
-      p0 = rotate(polyLines0[i - 1], (0.0, 0.0), angle) * scale + pos
-      p1 = rotate(polyLines0[i], (0.0, 0.0), angle) * scale + pos
-    discard line(p0, p1, color0)
+  var poly: seq[Coord] = @[]
+  for p in polyLines0:
+    poly.add(rotate(p, (0.0, 0.0), angle) * scale + pos)
+  discard polygon(poly, color0, DrawMode.filled)
 
   for i in polyLines1:
     let
       p0 = rotate(i[0], (0.0, 0.0), angle) * scale + pos
       p1 = rotate(i[1], (0.0, 0.0), angle) * scale + pos
-    discard line(p0, p1, color1)
+    discard aaLine(p0, p1, color1)
 
 
 proc init*(scene: MainScene) =
