@@ -45,7 +45,7 @@ var
   game*: Game ##  global game variable
 
 
-proc free(game: Game) =
+proc free*(game: Game) =
   renderer.destroyRenderer()
   window.destroyWindow()
   while mix.init(0) != 0: mix.quit()
@@ -158,6 +158,10 @@ proc init*(
   randomize()
 
   return true
+
+
+proc newGame*(): Game =
+  new result, free
 
 
 proc size*(game: Game): Dim {.inline.} =

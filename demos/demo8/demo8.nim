@@ -4,7 +4,7 @@ import
   nimgame2/settings,
   mainscene
 
-game = new Game
+game = newGame()
 if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 7 (ProcGraphic)",
              scaleQuality = 0):
   showInfo = true
