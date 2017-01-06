@@ -42,6 +42,7 @@ type
 
 var
   kbd: ptr array[sdl.NumScancodes.int, uint8]
+  kbdPressed, kbdReleased: seq[Scancode]
   m: Coord2
   mBtn: int32
 
@@ -50,29 +51,51 @@ var
 # KEYBOARD #
 ############
 
-template updateKeyboard*() =
+proc initKeyboard*() =
+  kbdPressed = @[]
+  kbdReleased = @[]
+
+
+proc updateKeyboard*(event: Event) =
   ##  Called automatically from the main game cycle.
   ##
   kbd = sdl.getKeyboardState(nil)
+  if event.kind == KeyDown:
+    if event.key.repeat == 0:
+      kbdPressed.add(event.key.keysym.scancode)
+  elif event.kind == KeyUp:
+    kbdReleased.add(event.key.keysym.scancode)
 
 
-template pressed*(scancode: Scancode): bool =
-  ##  Check if ``scancode`` (keyboard key) is pressed.
+template down*(scancode: Scancode): bool =
+  ##  Check if ``scancode`` (keyboard key) is down.
   ##
   kbd[scancode.int] > 0'u8
 
 
-template pressed*(keymod: Keymod): bool =
-  ##  Check if ``keymod`` (keyboard mod key) is pressed.
+template down*(keymod: Keymod): bool =
+  ##  Check if ``keymod`` (keyboard mod key) is down.
   ##
   sdl.getModState() and keymod
+
+
+template pressed*(scancode: Scancode): bool =
+  (scancode in kbdPressed)
+
+
+template released*(scancode: Scancode): bool =
+  (scancode in kbdReleased)
+
+
+template name*(keycode: Keycode): string =
+  $getKeyName(keycode)
 
 
 #########
 # MOUSE #
 #########
 
-template updateMouse*() =
+template updateMouse*(event: Event) =
   ##  Called automatically from the main game cycle.
   ##
   var ax, ay, rx, ry: cint
@@ -108,4 +131,21 @@ template pressed*(button: int32): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
   (sdl.button(button) and mBtn) > 0
+
+
+template cursorIsVisible*(): bool =
+  ##  ``Return`` `true` if the system mouse cursor 
+  (sdl.showCursor(-1) == 1)
+
+
+template showCursor*() =
+  sdl.showCursor(1)
+
+
+template hideCursor*() =
+  sdl.showCursor(0)
+
+
+template toggleCursor*() =
+  sdl.showCursor(if cursorIsVisible: 0 else: 1)
 

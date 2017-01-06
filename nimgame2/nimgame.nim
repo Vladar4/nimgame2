@@ -269,15 +269,15 @@ proc run*(game: Game) =
     lag += elapsed
 
     # Events handling
-    updateKeyboard()
-    updateMouse()
-
+    initKeyboard()
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
         gameRunning = false
         break
       else:
+        updateKeyboard(event)
+        updateMouse(event)
         game.scene.event(event)
 
 

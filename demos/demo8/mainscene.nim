@@ -104,12 +104,12 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
-  if ScancodeA.pressed: scene.poly.pos.x -= 1
-  if ScancodeD.pressed: scene.poly.pos.x += 1
-  if ScancodeW.pressed: scene.poly.pos.y -= 1
-  if ScancodeS.pressed: scene.poly.pos.y += 1
-  if ScancodeQ.pressed: scene.poly.rot -= 1
-  if ScancodeE.pressed: scene.poly.rot += 1
-  if ScancodeR.pressed: scene.poly.scale -= 0.01
-  if ScancodeF.pressed: scene.poly.scale += 0.01
+  if ScancodeA.down: scene.poly.pos.x -= 1
+  if ScancodeD.down: scene.poly.pos.x += 1
+  if ScancodeW.down: scene.poly.pos.y -= 1
+  if ScancodeS.down: scene.poly.pos.y += 1
+  if ScancodeQ.down: scene.poly.rot -= 1
+  if ScancodeE.down: scene.poly.rot += 1
+  if ScancodeR.down: scene.poly.scale -= 0.01
+  if ScancodeF.down: scene.poly.scale += 0.01
 

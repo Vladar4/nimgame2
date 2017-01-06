@@ -70,16 +70,16 @@ method render*(scene: MainScene) =
   scene.renderScene()
 
   var arrows: string = ""
-  if ScancodeUp.pressed: arrows &= "Up "
-  if ScancodeDown.pressed: arrows &= "Down "
-  if ScancodeLeft.pressed: arrows &= "Left "
-  if ScancodeRight.pressed: arrows &= "Right"
+  if ScancodeUp.down: arrows &= "Up "
+  if ScancodeDown.down: arrows &= "Down "
+  if ScancodeLeft.down: arrows &= "Left "
+  if ScancodeRight.down: arrows &= "Right"
 
   var wsad: string = ""
-  if ScancodeW.pressed: wsad &= "W "
-  if ScancodeS.pressed: wsad &= "S "
-  if ScancodeA.pressed: wsad &= "A "
-  if ScancodeD.pressed: wsad &= "D "
+  if ScancodeW.down: wsad &= "W "
+  if ScancodeS.down: wsad &= "S "
+  if ScancodeA.down: wsad &= "A "
+  if ScancodeD.down: wsad &= "D "
 
   var mouse: string = "Abs(" & $mouse.abs.x.int & ":" & $mouse.abs.y.int &
                       ") Rel(" & $mouse.rel.x.int & ":" & $mouse.rel.y.int & ")"
@@ -109,10 +109,10 @@ const
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
   # Arrows and WSAD
-  if ScancodeUp.pressed or ScancodeW.pressed: scene.s.vel.y -= Acc * elapsed
-  if ScancodeDown.pressed or ScancodeS.pressed: scene.s.vel.y += Acc * elapsed
-  if ScancodeLeft.pressed or ScancodeA.pressed: scene.s.vel.x -= Acc * elapsed
-  if ScancodeRight.pressed or ScancodeD.pressed: scene.s.vel.x += Acc * elapsed
+  if ScancodeUp.down or ScancodeW.down: scene.s.vel.y -= Acc * elapsed
+  if ScancodeDown.down or ScancodeS.down: scene.s.vel.y += Acc * elapsed
+  if ScancodeLeft.down or ScancodeA.down: scene.s.vel.x -= Acc * elapsed
+  if ScancodeRight.down or ScancodeD.down: scene.s.vel.x += Acc * elapsed
   # Mouse
   if Button.left.pressed:
     var vector: Coord

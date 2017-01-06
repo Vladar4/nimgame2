@@ -156,22 +156,22 @@ method render*(scene: MainScene) =
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
   # Spaceman
-  if ScancodeRight.pressed: scene.s.pos.x += 1
-  if ScancodeLeft.pressed: scene.s.pos.x -= 1
-  if ScancodeDown.pressed: scene.s.pos.y += 1
-  if ScancodeUp.pressed: scene.s.pos.y -= 1
+  if ScancodeRight.down: scene.s.pos.x += 1
+  if ScancodeLeft.down: scene.s.pos.x -= 1
+  if ScancodeDown.down: scene.s.pos.y += 1
+  if ScancodeUp.down: scene.s.pos.y -= 1
   # Line
-  if ScancodeD.pressed: scene.d1.pos.x += 1
-  if ScancodeA.pressed: scene.d1.pos.x -= 1
-  if ScancodeS.pressed: scene.d1.pos.y += 1
-  if ScancodeW.pressed: scene.d1.pos.y -= 1
-  if ScancodeQ.pressed: scene.d1.rot -= 1
-  if ScancodeE.pressed: scene.d1.rot += 1
+  if ScancodeD.down: scene.d1.pos.x += 1
+  if ScancodeA.down: scene.d1.pos.x -= 1
+  if ScancodeS.down: scene.d1.pos.y += 1
+  if ScancodeW.down: scene.d1.pos.y -= 1
+  if ScancodeQ.down: scene.d1.rot -= 1
+  if ScancodeE.down: scene.d1.rot += 1
   # Poly9
-  if ScancodeL.pressed: scene.p9.pos.x += 1
-  if ScancodeJ.pressed: scene.p9.pos.x -= 1
-  if ScancodeK.pressed: scene.p9.pos.y += 1
-  if ScancodeI.pressed: scene.p9.pos.y -= 1
-  if ScancodeU.pressed: scene.p9.rot -= 1
-  if ScancodeO.pressed: scene.p9.rot += 1
+  if ScancodeL.down: scene.p9.pos.x += 1
+  if ScancodeJ.down: scene.p9.pos.x -= 1
+  if ScancodeK.down: scene.p9.pos.y += 1
+  if ScancodeI.down: scene.p9.pos.y -= 1
+  if ScancodeU.down: scene.p9.rot -= 1
+  if ScancodeO.down: scene.p9.rot += 1
 

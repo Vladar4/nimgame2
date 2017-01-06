@@ -71,10 +71,10 @@ method update*(scene: MainScene, elapsed: float) =
   # Controls and speed
   type Direction = enum none, down, up, left, right
   var direction =
-    if ScancodeDown.pressed or ScancodeS.pressed: down
-    elif ScancodeUp.pressed or ScancodeW.pressed: up
-    elif ScancodeLeft.pressed or ScancodeA.pressed: left
-    elif ScancodeRight.pressed or ScancodeD.pressed: right
+    if ScancodeDown.down or ScancodeS.down: down
+    elif ScancodeUp.down or ScancodeW.down: up
+    elif ScancodeLeft.down or ScancodeA.down: left
+    elif ScancodeRight.down or ScancodeD.down: right
     else: none
 
   case direction:

@@ -55,6 +55,6 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
-  if ScancodeUp.pressed: scene.tack.volumeInc(1)
-  if ScancodeDown.pressed: scene.tack.volumeDec(1)
+  if ScancodeUp.down: scene.tack.volumeInc(1)
+  if ScancodeDown.down: scene.tack.volumeDec(1)
 
