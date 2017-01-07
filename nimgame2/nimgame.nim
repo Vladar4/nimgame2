@@ -212,6 +212,13 @@ proc `scale=`*(game: Game, scale: Coord) =
   game.fLogicalSize.h = int(game.fSize.h.float / game.fScale.y)
 
 
+proc `scale=`*(game: Game, scale: float) =
+  ##  Set scale of the game renderer
+  ##  (both horizontal and vertical to same value)
+  ##
+  game.scale = (scale, scale)
+
+
 proc viewport*(game: Game): Rect =
   ##  Get current viewport.
   ##
