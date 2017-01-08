@@ -58,23 +58,6 @@ proc init*(graphic: TextureGraphic) =
   graphic.fSize = (0, 0)
 
 
-proc newTextureGraphic*(): TextureGraphic =
-  new result, free
-  result.init()
-
-
-method w*(graphic: TextureGraphic): int {.inline.} =
-  graphic.fSize.w
-
-
-method h*(graphic: TextureGraphic): int {.inline.} =
-  graphic.fSize.h
-
-
-method dim*(graphic: TextureGraphic): Dim {.inline.} =
-  graphic.fSize
-
-
 proc updateTexture*(graphic: TextureGraphic): bool =
   if graphic.fTexture == nil:
     return true
@@ -124,6 +107,33 @@ proc assignTexture*(
   graphic.freeTexture()
   graphic.fTexture = texture
   result = graphic.updateTexture()
+
+
+proc newTextureGraphic*(): TextureGraphic =
+  new result, free
+  result.init()
+
+
+proc newTextureGraphic*(file: string): TextureGraphic =
+  result = newTextureGraphic()
+  discard result.load(file)
+
+
+proc newTextureGraphic*(texture: Texture): TextureGraphic =
+  result = newTextureGraphic()
+  discard result.assignTexture(texture)
+
+
+method w*(graphic: TextureGraphic): int {.inline.} =
+  graphic.fSize.w
+
+
+method h*(graphic: TextureGraphic): int {.inline.} =
+  graphic.fSize.h
+
+
+method dim*(graphic: TextureGraphic): Dim {.inline.} =
+  graphic.fSize
 
 
 ########

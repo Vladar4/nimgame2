@@ -5,7 +5,7 @@ import
   mainscene
 
 game = newGame()
-if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 7 (ProcGraphic)",
+if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 8 (ProcGraphic)",
              scaleQuality = 0):
   showInfo = true
   game.scene = newMainScene()

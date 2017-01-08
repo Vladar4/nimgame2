@@ -49,11 +49,6 @@ proc init*(font: BitmapFont) =
   font.fChars = @[]
 
 
-proc newBitmapFont*(): BitmapFont =
-  new result, free
-  result.init()
-
-
 proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
   result = true
   font.free()
@@ -72,6 +67,16 @@ proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
   for r in 0..(rows - 1):
     for c in 0..(cols - 1):
       font.fChars.add((font.fCharDim.w * c, font.fCharDim.h * r))
+
+
+proc newBitmapFont*(): BitmapFont =
+  new result, free
+  result.init()
+
+
+proc newBitmapFont*(file: string, charDim: Dim): BitmapFont =
+  result = newBitmapFont()
+  discard result.load(file, charDim)
 
 
 method charH*(font: BitmapFont): int {.inline.} =

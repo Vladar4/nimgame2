@@ -56,6 +56,11 @@ proc newTextGraphic*(): TextGraphic =
   result.init()
 
 
+proc newTextGraphic*(font: Font): TextGraphic =
+  result = newTextGraphic()
+  result.fFont = font
+
+
 proc update*(text: TextGraphic) =
   if text.fFont == nil:
     return

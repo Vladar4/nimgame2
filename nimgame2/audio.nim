@@ -58,7 +58,7 @@ proc free*(sound: Sound) =
   sound.fChannel = -1
 
 
-proc init*(sound: Sound, file: string) =
+proc load*(sound: Sound, file: string) =
   sound.free()
   sound.fChunk = loadWAV(file)
   if sound.fChunk == nil:
@@ -70,7 +70,7 @@ proc init*(sound: Sound, file: string) =
 
 proc newSound*(file: string): Sound =
   new result, free
-  result.init(file)
+  result.load(file)
 
 
 proc available*(sound: Sound): bool =
