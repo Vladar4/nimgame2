@@ -65,6 +65,8 @@ proc direction*(a, b: Coord): Angle =
 proc rotate*(a: Coord, angle: Angle): Coord =
   ##  Rotate point ``a`` by the given ``angle`` (in degrees).
   ##
+  if angle == 0:
+    return a
   let
     rot = rad(angle)
     c = cos(rot)
