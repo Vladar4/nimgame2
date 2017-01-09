@@ -29,7 +29,8 @@ import
 
 type
   ProcGraphic* = ref object of Graphic
-    procedure*: proc(pos: Coord,
+    procedure*: proc(graphic: ProcGraphic,
+                     pos: Coord,
                      angle: Angle,
                      scale: Scale,
                      center: Coord,
@@ -73,5 +74,5 @@ method draw*(graphic: ProcGraphic,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
   if graphic.procedure == nil:
     return
-  graphic.procedure(pos, angle, scale, center, flip, region)
+  graphic.procedure(graphic, pos, angle, scale, center, flip, region)
 

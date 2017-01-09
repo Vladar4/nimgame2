@@ -39,7 +39,8 @@ const polyLines1 = [
   (( 30.0, -10.0), ( 30.0,  10.0))]
 
 
-proc polyProc(pos: Coord,
+proc polyProc(graphic: ProcGraphic,
+              pos: Coord,
               angle: Angle,
               scale: Scale,
               center: Coord,
