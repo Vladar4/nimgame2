@@ -38,7 +38,7 @@ type
     fScale: Coord
     fTitle: string
     # Scene
-    scene*: Scene   ##  Current scene
+    fScene: Scene   ##  Current scene
 
 
 var
@@ -219,6 +219,21 @@ proc `scale=`*(game: Game, scale: float) =
   game.scale = (scale, scale)
 
 
+proc scene*(game: Game): Scene {.inline.} =
+  ##  Get current scene.
+  ##
+  return game.fScene
+
+
+proc `scene=`*(game: Game, val: Scene) =
+  ##  Set new game scene.
+  ##
+  if not (game.fScene == nil):
+    game.fScene.hide()
+  game.fScene = val
+  game.fScene.show()
+
+
 proc viewport*(game: Game): Rect =
   ##  Get current viewport.
   ##
@@ -285,13 +300,13 @@ proc run*(game: Game) =
       else:
         updateKeyboard(event)
         updateMouse(event)
-        game.scene.event(event)
+        game.fScene.event(event)
 
 
     # Update
     var updateCounter = 0
     while lag >= updateInterval:
-      game.scene.update(updateIntervalSec)
+      game.fScene.update(updateIntervalSec)
       lag -= updateInterval
       inc(updateCounter)
 
@@ -306,8 +321,8 @@ proc run*(game: Game) =
     discard renderer.renderClear()
 
     # Render scene
-    if not (game.scene == nil):
-      game.scene.render()
+    if not (game.fScene == nil):
+      game.fScene.render()
 
     # Render info
     if showInfo:
@@ -324,7 +339,7 @@ proc run*(game: Game) =
         (8, 24), $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
       # Show entities count
       discard string(
-        (8, 32), $game.scene.list.len & " entities", 0xFFFFFFFF'u32)
+        (8, 32), $game.fScene.list.len & " entities", 0xFFFFFFFF'u32)
       # Show memory usage
       discard string(
         (8, 40),

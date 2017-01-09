@@ -50,6 +50,18 @@ proc init*(scene: Scene) =
 method event*(scene: Scene, e: sdl.Event) {.base.} = discard
 
 
+method show*(scene: Scene) {.base.} =
+  ##  Called when ``scene`` is set in ``Game``.
+  ##
+  discard
+
+
+method hide*(scene: Scene) {.base.} =
+  ##  Called when ``scene`` is replaced by other one in ``Game``.
+  ##
+  discard
+
+
 proc renderScene*(scene: Scene) =
   ##  Default scene render procedure.
   ##
