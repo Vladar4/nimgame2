@@ -54,10 +54,10 @@ proc distanceToLine*(a, d1, d2: Coord): float =
 
 
 proc direction*(a, b: Coord): Angle =
-  ##  ``Return`` angle direction from coordinate ``a`` to ``b``.
+  ##  ``Return`` angle direction from coordinate ``a`` to ``b`` (in degrees).
   ##
   let
-    dx = a.x - b.x
+    dx = b.x - a.x
     dy = a.y - b.y
   return -(arctan2(dy, dx) / Pi) * 180 + 90
 
