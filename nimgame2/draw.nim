@@ -102,16 +102,16 @@ proc circle*(pos: Coord, rad: float, color: Color,
   case mode:
   of DrawMode.default:
     circleRGBA(renderer,
-              pos.x.int16, pos.y.int16, rad.int16,
-              color.r, color.g, color.b, color.a) == 0
+               pos.x.int16, pos.y.int16, rad.int16,
+               color.r, color.g, color.b, color.a) == 0
   of DrawMode.aa:
     aacircleRGBA(renderer,
-                pos.x.int16, pos.y.int16, rad.int16,
-                color.r, color.g, color.b, color.a) == 0
+                 pos.x.int16, pos.y.int16, rad.int16,
+                 color.r, color.g, color.b, color.a) == 0
   of DrawMode.filled:
     filledCircleRGBA(renderer,
-                    pos.x.int16, pos.y.int16, rad.int16,
-                    color.r, color.g, color.b, color.a) == 0
+                     pos.x.int16, pos.y.int16, rad.int16,
+                     color.r, color.g, color.b, color.a) == 0
 
 
 proc arc*(pos: Coord, rad, start, finish: float,
@@ -158,23 +158,22 @@ proc trigon*(pos1, pos2, pos3: Coord, color: Color,
   case mode:
   of DrawMode.default:
     trigonRGBA(renderer,
-              pos1.x.int16, pos1.y.int16,
-              pos2.x.int16, pos2.y.int16,
-              pos3.x.int16, pos3.y.int16,
-              color.r, color.g, color.b, color.a) == 0
+               pos1.x.int16, pos1.y.int16,
+               pos2.x.int16, pos2.y.int16,
+               pos3.x.int16, pos3.y.int16,
+               color.r, color.g, color.b, color.a) == 0
   of DrawMode.aa:
     aaTrigonRGBA(renderer,
-                pos1.x.int16, pos1.y.int16,
-                pos2.x.int16, pos2.y.int16,
-                pos3.x.int16, pos3.y.int16,
-                color.r, color.g, color.b, color.a) == 0
+                 pos1.x.int16, pos1.y.int16,
+                 pos2.x.int16, pos2.y.int16,
+                 pos3.x.int16, pos3.y.int16,
+                 color.r, color.g, color.b, color.a) == 0
   of DrawMode.filled:
     filledTrigonRGBA(renderer,
-                    pos1.x.int16, pos1.y.int16,
-                    pos2.x.int16, pos2.y.int16,
-                    pos3.x.int16, pos3.y.int16,
-                    color.r, color.g, color.b, color.a) == 0
-
+                     pos1.x.int16, pos1.y.int16,
+                     pos2.x.int16, pos2.y.int16,
+                     pos3.x.int16, pos3.y.int16,
+                     color.r, color.g, color.b, color.a) == 0
 
 
 template `+`[T](p: ptr T, off: int): ptr T =
@@ -187,14 +186,14 @@ template `[]=`[T](p: ptr T, off: int, val: T) =
 
 proc polygon*(pos: openarray[Coord], color: Color,
               mode: DrawMode = DrawMode.default,
-              texture: sdl.Surface = nil, textureD: Coord = (0, 0)): bool =
+              surface: sdl.Surface = nil, surfaceD: Coord = (0, 0)): bool =
   var vx, vy: ptr int16
   vx = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   for i in 0..pos.high:
     vx[i] = pos[i].x.int16
     vy[i] = pos[i].y.int16
-  if texture == nil:
+  if surface == nil:
     result = case mode:
     of DrawMode.default:
       polygonRGBA(renderer,
@@ -211,7 +210,7 @@ proc polygon*(pos: openarray[Coord], color: Color,
   else: # textured
     result = texturedPolygon(renderer,
                              vx, vy, pos.len,
-                             texture, textureD.x.int, textureD.y.int) == 0
+                             surface, surfaceD.x.int, surfaceD.y.int) == 0
   # dealloc
   dealloc(vx)
   dealloc(vy)

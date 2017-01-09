@@ -24,8 +24,13 @@
 
 import
   math,
-  types
+  sdl2/sdl,
+  texturegraphic, types
 
+
+############
+# GEOMETRY #
+############
 
 template rad*(a: Angle): Angle =
   ##  Convert degrees to radians.
@@ -85,4 +90,24 @@ proc rotate*(point, offset: Coord, angle: Angle): Coord =
   result = offset + point
   if angle != 0:
     result = rotate(point, angle) + offset
+
+
+############
+# GRAPHICS #
+############
+
+import sdl2/sdl_image as img
+
+
+proc loadSurface*(file: string): Surface =
+  ##  Load an image ``file`` to the ``sdl.Surface``.
+  ##
+  ##  ``Return`` the surface on success, or `nil` otherwise.
+  ##
+  result = img.load(file)
+  if result == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load image %s: %s",
+                    file, img.getError())
+    return nil
 
