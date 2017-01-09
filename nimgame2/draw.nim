@@ -195,7 +195,7 @@ proc polygon*(pos: openarray[Coord], color: Color,
     vx[i] = pos[i].x.int16
     vy[i] = pos[i].y.int16
   if texture == nil:
-    case mode:
+    result = case mode:
     of DrawMode.default:
       polygonRGBA(renderer,
                   vx, vy, pos.len,
@@ -209,9 +209,12 @@ proc polygon*(pos: openarray[Coord], color: Color,
                         vx, vy, pos.len,
                         color.r, color.g, color.b, color.a) == 0
   else: # textured
-    texturedPolygon(renderer,
-                    vx, vy, pos.len,
-                    texture, textureD.x.int, textureD.y.int) == 0
+    result = texturedPolygon(renderer,
+                             vx, vy, pos.len,
+                             texture, textureD.x.int, textureD.y.int) == 0
+  # dealloc
+  dealloc(vx)
+  dealloc(vy)
 
 
 proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
@@ -221,10 +224,12 @@ proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
   for i in 0..pos.high:
     vx[i] = pos[i].x.int16
     vy[i] = pos[i].y.int16
-  bezierRGBA(renderer,
-             vx, vy, pos.len, s.int,
-             color.r, color.g, color.b, color.a) == 0
-
+  result = bezierRGBA(renderer,
+                      vx, vy, pos.len, s.int,
+                      color.r, color.g, color.b, color.a) == 0
+  # dealloc
+  dealloc(vx)
+  dealloc(vy)
 
 
 proc setFont*(fontdata: pointer, dim: Dim) =
