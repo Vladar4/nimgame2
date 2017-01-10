@@ -28,7 +28,7 @@ import
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  count, draw, input, scene, settings, types
+  count, draw, input, entity, scene, settings, types
 
 
 type

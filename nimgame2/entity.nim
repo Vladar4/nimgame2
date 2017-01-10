@@ -27,6 +27,13 @@ import
   graphic, types, utils
 
 type
+  Scene* = ref object of RootObj
+    when defined(faststack):
+      list*: FastStack[Entity]
+    else:
+      list*: seq[Entity]
+
+
   Animation = object
     frames*: seq[int] ##  list of animation's frame indexes
     frameRate*: float ##  frame rate in frames per second

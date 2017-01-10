@@ -27,12 +27,8 @@ import
   collider, entity, settings, types
 
 
-type
-  Scene* = ref object of RootObj
-    when defined(faststack):
-      list*: FastStack[Entity]
-    else:
-      list*: seq[Entity]
+##  Scene type is declared in `entity.nim`.
+##
 
 
 #########
