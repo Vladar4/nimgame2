@@ -91,15 +91,28 @@ proc checkCollisions*(scene: Scene, entity: Entity) =
       target.onCollide(entity)
 
 
+template deleteFromList(index: int) =
+  when defined(faststack):
+    discard scene.list.eject(index)
+  else:
+    scene.list.delete(index)
+
+
 proc updateScene*(scene: Scene, elapsed: float) =
   ##  Default scene update procedure.
   ##
   ##  Call it from your scene update method.
   ##
-  for entity in scene.list:
+  var i: int = 0
+  while i < scene.list.len:
+    let entity = scene.list[i]
+    if entity.dead:
+      deleteFromList(i)
+      continue
     entity.update(elapsed)
     if entity.collider != nil:
       entity.colliding = @[]
+    inc i
 
   for entity in scene.list:
     if entity.collider != nil:

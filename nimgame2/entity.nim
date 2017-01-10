@@ -66,6 +66,7 @@ type
   Entity* = ref object of RootObj
     parent*: Entity
     tags*: seq[string]            ##  list of entity tags
+    dead*: bool                   ##  `true` if marked for removal
     graphic*: Graphic
     sprite*: Sprite
     logic*: Logic
@@ -316,6 +317,7 @@ proc initEntity*(entity: Entity) =
   ##
   entity.parent = nil
   entity.tags = @[]
+  entity.dead = false
   entity.graphic = nil
   entity.sprite = nil
   entity.logic = nil
