@@ -10,17 +10,17 @@ import
 
 
 const
-  CountMin = 100
-  CountMax = 50_000
-  CountStep = 100
-  CountStart = 500
+  NumMin = 100
+  NumMax = 50_000
+  NumStep = 100
+  NumStart = 500
 
 
 type
   MainScene = ref object of Scene
     spacemanG: TextureGraphic
     spacemanP: SpacemanPhysics
-    count: int
+    num: int
 
   SpacemanPhysics = ref object of Physics
 
@@ -44,9 +44,9 @@ proc init*(scene: MainScene) =
   scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.spacemanP = new SpacemanPhysics
-  scene.count = CountStart
-  for i in 1..scene.count:
-    scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
+  scene.num = NumStart
+  for i in 1..scene.num:
+    scene.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
 
 
 proc free*(scene: MainScene) =
@@ -64,15 +64,15 @@ method event*(scene: MainScene, event: Event) =
     of K_Escape:
       gameRunning = false
     of K_Up:
-      if scene.count < CountMax:
-        scene.count += CountStep
-        for i in scene.list.len..scene.count-1:
-          scene.list.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
+      if scene.num < NumMax:
+        scene.num += NumStep
+        for i in scene.count..scene.num-1:
+          scene.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
     of K_Down:
-      if scene.count > CountMin:
-        scene.count -= CountStep
-        for i in scene.count..(scene.list.len - 1):
-          discard scene.list.pop()
+      if scene.num > NumMin:
+        scene.num -= NumStep
+        for i in scene.num..(scene.count - 1):
+          discard scene.pop()
     else: discard
 
 

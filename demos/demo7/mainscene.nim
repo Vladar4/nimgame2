@@ -69,9 +69,9 @@ proc init*(scene: MainScene) =
   scene.ttEntity.graphic = scene.ttText
 
   # add to scene
-  scene.list.add(scene.e)
-  scene.list.add(scene.bmEntity)
-  scene.list.add(scene.ttEntity)
+  scene.add(scene.bmEntity)
+  scene.add(scene.ttEntity)
+  scene.add(scene.e)
 
 
 proc free*(scene: MainScene) =

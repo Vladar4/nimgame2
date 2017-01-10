@@ -79,15 +79,15 @@ proc init*(scene: MainScene) =
   scene.p9.pos = (350, 360)
 
   # add to scene
-  scene.list.add(scene.d1)
-  scene.list.add(scene.d2)
-  scene.list.add(scene.e)
-  scene.list.add(scene.s)
-  scene.list.add(scene.c)
-  scene.list.add(scene.p1)
-  scene.list.add(scene.p2)
-  scene.list.add(scene.p3)
-  scene.list.add(scene.p9)
+  scene.add(scene.d1)
+  scene.add(scene.d2)
+  scene.add(scene.s)
+  scene.add(scene.e)
+  scene.add(scene.c)
+  scene.add(scene.p1)
+  scene.add(scene.p2)
+  scene.add(scene.p3)
+  scene.add(scene.p9)
 
 
 proc free*(scene: MainScene) =

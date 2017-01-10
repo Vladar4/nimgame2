@@ -113,6 +113,10 @@ proc add*(scene: Scene, entity: Entity) =
   scene.fAddList.add(entity)
 
 
+proc pop*(scene: Scene): Entity {.inline.} =
+  return scene.fList.pop()
+
+
 proc count*(scene: Scene): int {.inline.} =
   return scene.fList.len
 
@@ -131,19 +135,19 @@ proc updateScene*(scene: Scene, elapsed: float) =
   # delete
   var
     i = 0
-    l = scene.fList.len
-  while i < l:
+    len = scene.fList.len
+  while i < len:
     # marked as dead
     if scene.fList[i].dead:
       scene.delEntity(i)
-      dec l
+      dec len
       continue
     # marked as changed layer
     if scene.fList[i].updLayer:
       scene.fList[i].updLayer = false
       scene.fAddList.add(scene.fList[i])
       scene.delEntity(i)
-      dec l
+      dec len
       continue
     inc i
 

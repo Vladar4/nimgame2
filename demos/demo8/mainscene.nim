@@ -73,7 +73,7 @@ proc init*(scene: MainScene) =
   scene.poly.pos = (320, 240)
 
   # add to scene
-  scene.list.add(scene.poly)
+  scene.add(scene.poly)
 
 
 proc free*(scene: MainScene) =

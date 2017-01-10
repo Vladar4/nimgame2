@@ -25,13 +25,15 @@ proc init*(scene: MainScene) =
   scene.earthG = newTextureGraphic()
   discard scene.earthG.load("../assets/gfx/earth.png")
   scene.e.graphic = scene.earthG
-  scene.list.add(scene.e)
   # Spaceman
   scene.s = newSpaceman()
   scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
-  scene.list.add(scene.s)
+
+  # add to scene
+  scene.add(scene.s)
+  scene.add(scene.e)
 
 
 proc free*(scene: MainScene) =

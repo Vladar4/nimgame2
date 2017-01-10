@@ -40,8 +40,8 @@ proc init*(scene: MainScene) =
   scene.s.collider = scene.s.newBoxCollider((0, 0), (100, 160))
 
   # add to scene
-  scene.list.add(scene.e)
-  scene.list.add(scene.s)
+  scene.add(scene.s)
+  scene.add(scene.e)
 
 
 proc free*(scene: MainScene) =

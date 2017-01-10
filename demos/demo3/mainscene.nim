@@ -41,7 +41,7 @@ proc init*(scene: MainScene) =
   scene.s.graphic = scene.spacemanG
   scene.s.physics = new Physics
   scene.s.centrify()
-  scene.list.add(scene.s)
+  scene.add(scene.s)
   # Mouse
   #discard mouseRelative(true)
 

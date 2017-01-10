@@ -12,5 +12,4 @@ if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 9 (Audio)",
   showInfo = true
   game.scene = newMainScene()
   game.run()
-  let ass = newAssets[TextureGraphic]("../assets/gfx", proc(file: string): TextureGraphic = newTextureGraphic(file))
 

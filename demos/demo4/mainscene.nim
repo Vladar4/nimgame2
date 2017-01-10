@@ -38,7 +38,7 @@ proc init*(scene: MainScene) =
   discard scene.d.addAnimation(
     "right", [12, 13, 14, 15, 16, 17], Framerate, Flip.horizontal)
   scene.d.physics = new Physics
-  scene.list.add(scene.d)
+  scene.add(scene.d)
 
 
 proc free*(scene: MainScene) =
