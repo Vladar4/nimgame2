@@ -546,6 +546,22 @@ method collide*(p1, p2: PolyCollider): bool =
                                 pos2: p2.points[1]),
                    p1)
   else:
+    # check if polygons are close enough
+    var
+      max1 = 0.0
+      max2 = 0.0
+    for p in p1.points:
+      let dp = distance(p1.pos, p)
+      if dp > max1:
+        max1 = dp
+    for p in p2.points:
+      let dp = distance(p2.pos, p)
+      if dp > max2:
+        max2 = dp
+    if (max1 + max2) < distance(p1.pos, p2.pos):
+      return false # not close enough
+
+    # check for collision
     var
       i = 0
       j = p1.points.high

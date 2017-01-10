@@ -27,13 +27,6 @@ import
   graphic, types, utils
 
 type
-  Scene* = ref object of RootObj
-    when defined(faststack):
-      list*: FastStack[Entity]
-    else:
-      list*: seq[Entity]
-
-
   Animation = object
     frames*: seq[int] ##  list of animation's frame indexes
     frameRate*: float ##  frame rate in frames per second
@@ -74,6 +67,8 @@ type
     parent*: Entity
     tags*: seq[string]            ##  list of entity tags
     dead*: bool                   ##  `true` if marked for removal
+    fLayer: int
+    updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
     sprite*: Sprite
     logic*: Logic
@@ -325,6 +320,8 @@ proc initEntity*(entity: Entity) =
   entity.parent = nil
   entity.tags = @[]
   entity.dead = false
+  entity.fLayer = 0
+  entity.updLayer = false
   entity.graphic = nil
   entity.sprite = nil
   entity.logic = nil
@@ -347,6 +344,15 @@ proc initEntity*(entity: Entity) =
 proc newEntity*(): Entity =
   result = new Entity
   result.initEntity()
+
+
+proc layer*(entity: Entity): int {.inline.} =
+  return entity.fLayer
+
+
+proc `layer=`*(entity: Entity, val: int) =
+  entity.fLayer = val
+  entity.updLayer = true
 
 
 proc absRot*(entity: Entity): Angle =

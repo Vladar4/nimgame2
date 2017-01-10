@@ -339,7 +339,7 @@ proc run*(game: Game) =
         (8, 24), $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
       # Show entities count
       discard string(
-        (8, 32), $game.fScene.list.len & " entities", 0xFFFFFFFF'u32)
+        (8, 32), $game.fScene.count & " entities", 0xFFFFFFFF'u32)
       # Show memory usage
       discard string(
         (8, 40),

@@ -27,8 +27,9 @@ import
   collider, entity, settings, types
 
 
-##  Scene type is declared in `entity.nim`.
-##
+type
+  Scene* = ref object of RootObj
+    fList, fAddList: seq[Entity]
 
 
 #########
@@ -37,10 +38,8 @@ import
 
 
 proc init*(scene: Scene) =
-  when defined(faststack):
-    scene.list = newFastStack[Entity](1_000)
-  else:
-    scene.list = @[]
+  scene.fList = @[]
+  scene.fAddList = @[]
 
 
 method event*(scene: Scene, e: sdl.Event) {.base.} = discard
@@ -63,11 +62,11 @@ proc renderScene*(scene: Scene) =
   ##
   ##  Call it from your scene render method.
   ##
-  for entity in scene.list:
+  for entity in scene.fList:
     entity.render()
   # Should be in the scene level to be drawn on top of all entities
   if colliderOutline:
-    for entity in scene.list:
+    for entity in scene.fList:
       if entity.collider != nil:
         entity.collider.render()
 
@@ -77,7 +76,7 @@ method render*(scene: Scene) {.base.} =
 
 
 proc checkCollisions*(scene: Scene, entity: Entity) =
-  for target in scene.list:
+  for target in scene.fList:
     if target.collider == nil: continue # no collider on target
     if entity == target: continue # entity is target
     if target in entity.colliding: continue # already collided with target
@@ -87,11 +86,40 @@ proc checkCollisions*(scene: Scene, entity: Entity) =
       target.onCollide(entity)
 
 
-template deleteFromList(index: int) =
-  when defined(faststack):
-    discard scene.list.eject(index)
-  else:
-    scene.list.delete(index)
+proc addEntity(scene: Scene, entity: Entity) =
+  if scene.fList.len < 1:
+    scene.fList.add(entity)
+    return
+
+  if scene.fList[scene.fList.high].layer <= entity.layer:
+    scene.fList.add(entity)
+    return
+
+  var i = scene.fList.high-1
+  while i >= 0:
+    if scene.fList[i].layer <= entity.layer:
+      scene.fList.insert(entity, i+1)
+      return
+    dec i
+
+  scene.fList.insert(entity, 0)
+
+
+proc delEntity(scene: Scene, index: int) =
+  scene.fList.delete(index)
+
+
+proc add*(scene: Scene, entity: Entity) =
+  scene.fAddList.add(entity)
+
+
+proc count*(scene: Scene): int {.inline.} =
+  return scene.fList.len
+
+
+iterator entities*(scene: Scene): Entity {.inline.} =
+  for entity in scene.fList:
+    yield entity
 
 
 proc updateScene*(scene: Scene, elapsed: float) =
@@ -99,23 +127,44 @@ proc updateScene*(scene: Scene, elapsed: float) =
   ##
   ##  Call it from your scene update method.
   ##
-  var i: int = 0
-  while i < scene.list.len:
-    let entity = scene.list[i]
-    if entity.dead:
-      deleteFromList(i)
+
+  # delete
+  var
+    i = 0
+    l = scene.fList.len
+  while i < l:
+    # marked as dead
+    if scene.fList[i].dead:
+      scene.delEntity(i)
+      dec l
       continue
+    # marked as changed layer
+    if scene.fList[i].updLayer:
+      scene.fList[i].updLayer = false
+      scene.fAddList.add(scene.fList[i])
+      scene.delEntity(i)
+      dec l
+      continue
+    inc i
+
+  # add
+  while scene.fAddList.len > 0:
+    let entity = scene.fAddList.pop()
+    entity.updLayer = false
+    scene.addEntity(entity)
+
+  # update
+  for entity in scene.fList:
     entity.update(elapsed)
     if entity.collider != nil:
       entity.colliding = @[]
-    inc i
 
-  for entity in scene.list:
+  # collisions
+  for entity in scene.fList:
     if entity.collider != nil:
       scene.checkCollisions(entity)
 
 
 method update*(scene: Scene, elapsed: float) {.base.} =
   scene.updateScene(elapsed)
-
 

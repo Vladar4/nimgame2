@@ -30,10 +30,6 @@ export
   sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Rect, sdl.Renderer
 
 
-when defined(faststack):
-  include faststack
-
-
 type
   Coord* = tuple[x: float, y: float]  ##  Coordinates type
   Coord2* = tuple[abs, rel: Coord]    ##  Abs + Rel coordinates type
