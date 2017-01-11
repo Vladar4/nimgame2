@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   collider, entity, settings, types
@@ -32,10 +31,9 @@ type
     fList, fAddList: seq[Entity]
 
 
-#########
+#=======#
 # Scene #
-#########
-
+#=======#
 
 proc init*(scene: Scene) =
   scene.fList = @[]
@@ -110,18 +108,26 @@ proc delEntity(scene: Scene, index: int) =
 
 
 proc add*(scene: Scene, entity: Entity) =
+  ##  Add a new ``entity`` to the ``scene``.
+  ##
   scene.fAddList.add(entity)
 
 
 proc pop*(scene: Scene): Entity {.inline.} =
+  ##  ``Return`` the top entity and remove it from the ``scene``.
+  ##
   return scene.fList.pop()
 
 
 proc count*(scene: Scene): int {.inline.} =
+  ##  ``Return`` the number of entities in the ``scene``.
+  ##
   return scene.fList.len
 
 
 iterator entities*(scene: Scene): Entity {.inline.} =
+  ##  Iterate through all entities in the ``scene``.
+  ##
   for entity in scene.fList:
     yield entity
 

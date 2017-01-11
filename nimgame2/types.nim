@@ -52,17 +52,19 @@ type
 
 converter toUint32*(c: Color): uint32 =
   ##  Color(r, g, b, a) to 0xRRGGBBAA
+  ##
   uint32((c.r shl 24) or (c.g shl 16) or (c.b shl 8) or (c.a))
 
 
 converter toColor*(u: uint32): Color =
   ##  0xRRGGBBAA to Color(r, g, b, a)
+  ##
   Color(r: uint8(u shr 24), g: uint8(u shr 16), b: uint8(u shr 8), a: uint8(u))
 
 
-#########
-# COORD #
-#########
+#=======#
+# Coord #
+#=======#
 
 proc `==`*(c1, c2: Coord): bool {.inline.} =
   return (c1.x == c2.x) and (c1.y == c2.y)
@@ -153,9 +155,9 @@ converter toDim*(c: Coord): Dim =
   result.h = c.y.int
 
 
-#######
-# DIM #
-#######
+#=====#
+# Dim #
+#=====#
 
 proc `==`*(d1, d2: Dim): bool {.inline.} =
   return (d1.w == d2.w) and (d1.h == d2.h)

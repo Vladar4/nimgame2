@@ -41,9 +41,9 @@ type
     fMusic: mix.Music
 
 
-#########
-# SOUND #
-#########
+#=======#
+# Sound #
+#=======#
 
 proc free*(sound: Sound) =
   if not (sound.fChunk == nil):
@@ -74,13 +74,15 @@ proc newSound*(file: string): Sound =
 
 
 proc available*(sound: Sound): bool =
+  ##  ``Return`` `true` if the ``sound`` is ready to use, or `false` otherwise.
+  ##
   if sound.fChunk == nil:
     return false
   return not (sound.fChannel < 0)
 
 
 proc playing*(sound: Sound): bool =
-  ##  ``Return`` `true` if ``sound`` is playing, or `false` otherwise.
+  ##  ``Return`` `true` if the ``sound`` is playing, or `false` otherwise.
   ##
   if not sound.available:
     return false
@@ -88,14 +90,14 @@ proc playing*(sound: Sound): bool =
 
 
 proc stop*(sound: Sound) =
-  ##  Stop ``sound``.
+  ##  Stop the ``sound``.
   ##
   if sound.playing:
     discard sound.fChannel.haltChannel()
 
 
 proc play*(sound: Sound, loops: int = 0): Channel =
-  ##  Play ``sound`` ``loops`` + `1` times.
+  ##  Play the ``sound`` ``loops`` + `1` times.
   ##
   ##  ``Return`` the channel the ``sound`` is played on.
   ##
@@ -110,7 +112,7 @@ proc play*(sound: Sound, loops: int = 0): Channel =
 
 
 proc channel*(sound: Sound): Channel =
-  ##  ``Return`` the channel the ``sound`` is played on.
+  ##  ``Return`` the channel, the ``sound`` is played on.
   ##
   if sound.playing:
     return sound.fChannel
@@ -119,7 +121,7 @@ proc channel*(sound: Sound): Channel =
 
 
 proc paused*(sound: Sound): bool =
-  ##  ``Return`` `true` if ``sound`` is paused, or `false` otherwise.
+  ##  ``Return`` `true` if the ``sound`` is paused, or `false` otherwise.
   ##
   if not sound.available:
     return false
@@ -127,7 +129,7 @@ proc paused*(sound: Sound): bool =
 
 
 proc pause*(sound: Sound) =
-  ##  Pause ``sound``.
+  ##  Pause the ``sound``.
   ##
   if not sound.available:
     return
@@ -136,7 +138,7 @@ proc pause*(sound: Sound) =
 
 
 proc resume*(sound: Sound) =
-  ##  Resume ``sound`` if it is paused.
+  ##  Resume the ``sound`` if it is paused.
   ##
   if not sound.available:
     return
@@ -145,7 +147,7 @@ proc resume*(sound: Sound) =
 
 
 proc volume*(sound: Sound): Volume {.inline.} =
-  ##  ``Return`` the volume of ``sound``.
+  ##  ``Return`` the volume of the ``sound``.
   ##
   return sound.fChunk.volumeChunk(-1)
 
@@ -176,9 +178,9 @@ template volumeDec*(sound: Sound, val: int) =
   sound.volume = normalizeVolume(sound.volume - val)
 
 
-#################
-# SOUND CHANNEL #
-#################
+#===============#
+# Sound Channel #
+#===============#
 
 proc setDistance*(channel: Channel,
                   distance: Distance) {.inline.} =
@@ -227,9 +229,9 @@ proc setPosition*(channel: Channel,
                     channel, mix.getError())
 
 
-################
-# SOUND GLOBAL #
-################
+#==============#
+# Sound Global #
+#==============#
 
 proc soundStop*() {.inline.} =
   ##  Stop all sound channels.
@@ -285,9 +287,9 @@ template soundVolumeDec*(val: int) =
   soundVolume = normalizeVolume(soundVolume - val)
 
 
-#########
-# MUSIC #
-#########
+#=======#
+# Music #
+#=======#
 
 proc free*(music: Music) =
   if not (music.fMusic == nil):
@@ -310,19 +312,22 @@ proc newMusic*(file: string): Music =
 
 
 proc available*(music: Music): bool {.inline.} =
+  ##  ``Return`` `true` if the ``music`` is ready to use, or `false` otherwise.
+  ##
   return not (music.fMusic == nil)
 
 
 proc play*(music: Music, loops: int = 0) =
+  ##  Play the ``music`` ``loops`` + `1` times.
+  ##
   if music.fMusic.playMusic(loops) < 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't play music: %s",
                     mix.getError())
 
-################
-# MUSIC GLOBAL #
-################
-
+#==============#
+# Music Global #
+#==============#
 
 proc musicPaused*(): bool {.inline.} =
   ##  ``Return`` `true` if music is paused, or `false` otherwise.
@@ -361,7 +366,7 @@ proc musicStop*() {.inline.} =
 
 
 proc `musicPosition=`*(val: float) {.inline.} =
-  ##  Set the current position in the music stream.
+  ##  Set current position in the music stream.
   ##
   ##  Works only on MOD, OGG, and MP3 music:
   ##
@@ -375,13 +380,13 @@ proc `musicPosition=`*(val: float) {.inline.} =
 
 
 proc musicVolume*(): Volume {.inline.} =
-  ##  ``Return`` the current music volume.
+  ##  ``Return`` current music volume.
   ##
   return mix.volumeMusic(-1)
 
 
 proc `musicVolume=`*(val: Volume) =
-  ##  Set the music volume.
+  ##  Set music volume.
   ##
   discard mix.volumeMusic(val)
 

@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   graphic, types
@@ -35,9 +34,13 @@ type
                      scale: Scale,
                      center: Coord,
                      flip: Flip,
-                     region: Rect) {.locks:0.}
-    dimProcedure*: proc(): Dim {.locks:0.}
+                     region: Rect) {.locks:0.}  ##  Drawing procedure.
+    dimProcedure*: proc(): Dim {.locks:0.}  ##  Dimensions procedure.
 
+
+#=============#
+# ProcGraphic #
+#=============#
 
 proc newProcGraphic*(): ProcGraphic =
   new result
@@ -45,6 +48,8 @@ proc newProcGraphic*(): ProcGraphic =
 
 
 method w*(graphic: ProcGraphic): int =
+  ##  ``Return`` the width of the ``graphic`` if available, or `nil` otherwise.
+  ##
   if graphic.dimProcedure == nil:
     return 0
   else:
@@ -52,6 +57,8 @@ method w*(graphic: ProcGraphic): int =
 
 
 method h*(graphic: ProcGraphic): int =
+  ##  ``Return`` the height of the ``graphic`` if available, or `nil` otherwise.
+  ##
   if graphic.dimProcedure == nil:
     return 0
   else:
@@ -59,6 +66,8 @@ method h*(graphic: ProcGraphic): int =
 
 
 method dim*(graphic: ProcGraphic): Dim =
+  ##  ``Return`` the ``graphic``'s dimensions if available, or `nil` otherwise.
+  ##
   if graphic.dimProcedure == nil:
     return (0, 0)
   else:

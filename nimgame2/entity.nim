@@ -21,29 +21,29 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   graphic, types, utils
 
+
 type
   Animation = object
-    frames*: seq[int] ##  list of animation's frame indexes
-    frameRate*: float ##  frame rate in frames per second
-    flip*: Flip       ##  flip flag
+    frames*: seq[int] ##  List of animation's frame indexes
+    frameRate*: float ##  Frame rate (in frames per second)
+    flip*: Flip       ##  Flip flag
 
 
   Sprite = ref object
-    animationKeys*: seq[string] ##  list of animation names
-    animations*: seq[Animation] ##  list of animations
-    currentAnimation*: int      ##  index of currently playing animation
-    currentFrame*: int          ##  incex of current frame
-    cycles*: int                ##  animation cycles counter (`-1` for looping)
-    time*: float                ##  animation timer
-    playing*: bool              ##  animation playing flag
-    frameSize*: Dim             ##  sprite frame dimensions
-    offset*: Dim                ##  sprite graphic offset
-    frames*: seq[Rect]          ##  frames' coordinates
+    animationKeys*: seq[string] ##  List of animation names
+    animations*: seq[Animation] ##  List of animations
+    currentAnimation*: int      ##  Index of currently playing animation
+    currentFrame*: int          ##  Incex of current frame
+    cycles*: int                ##  Animation cycles counter (`-1` for looping)
+    time*: float                ##  Animation timer
+    playing*: bool              ##  Animation playing flag
+    frameSize*: Dim             ##  Sprite frame dimensions
+    offset*: Dim                ##  Sprite graphic offset
+    frames*: seq[Rect]          ##  Frames' coordinates
 
 
   Collider* = ref object of RootObj
@@ -64,41 +64,41 @@ type
 
 
   Entity* = ref object of RootObj
-    parent*: Entity
-    tags*: seq[string]            ##  list of entity tags
+    parent*: Entity               ##  Parent entity reference
+    tags*: seq[string]            ##  List of entity tags
     dead*: bool                   ##  `true` if marked for removal
-    fLayer: int
+    fLayer: int                   ##  Rendering layer
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
     sprite*: Sprite
     logic*: Logic
     physics*: Physics
     collider*: Collider
-    colliding*: seq[Entity]       ##  list of Entities currently colliding with
-    pos*, vel*, acc*, drg*: Coord ##  position, velocity, acceleration, drag
-    rot*: Angle                   ##  rotation angle in degrees
-    rotVel*, rotAcc*, rotDrg*: Angle  ##  rotation velocity, acceleration, drag
-    scale*: Scale                 ##  scale ratio
-    center*: Coord                ##  center for drawing and rotating
-    flip*: Flip                   ##  texture flip status
+    colliding*: seq[Entity]       ##  List of Entities currently colliding with
+    pos*, vel*, acc*, drg*: Coord ##  Position, velocity, acceleration, drag
+    rot*: Angle                   ##  Rotation angle in degrees
+    rotVel*, rotAcc*, rotDrg*: Angle  ##  Rotation velocity, acceleration, drag
+    scale*: Scale                 ##  Scale ratio
+    center*: Coord                ##  Center for drawing and rotating
+    flip*: Flip                   ##  Texture flip status
 
   Logic* = ref object of RootObj
 
   Physics* = ref object of RootObj
 
 
-##########
+#========#
 # Sprite #
-##########
+#========#
 
 proc initSprite*(entity: Entity,
                  frameSize: Dim,
                  offset: Dim = (0, 0)) =
-  ##  Creeate a sprite for a given ``entity`` with attached Graphic.
+  ##  Creeate a sprite for the given ``entity`` with the attached Graphic.
   ##
-  ##  ``frameSize`` Dimensions of one frame.
+  ##  ``frameSize`` dimensions of one frame.
   ##
-  ##  ``offset``  Offset from the edge of the texture.
+  ##  ``offset``  offset from the edge of the texture.
   ##
   entity.sprite = new Sprite
   entity.sprite.animationKeys = @[]
@@ -128,7 +128,7 @@ proc initSprite*(entity: Entity,
 
 
 proc animationIndex*(entity: Entity, name: string): int {.inline.} =
-  ##  ``Return`` index of the animation named ``name``.
+  ##  ``Return`` the index of the animation named ``name``.
   ##
   if entity.sprite == nil:
     return -1
@@ -136,7 +136,7 @@ proc animationIndex*(entity: Entity, name: string): int {.inline.} =
 
 
 proc animation*(entity: Entity, name: string): var Animation =
-  ##  ``Return`` animation named ``name``.
+  ##  ``Return`` the animation named ``name``.
   ##
   let index = entity.animationIndex(name)
   if index < 0:
@@ -145,7 +145,7 @@ proc animation*(entity: Entity, name: string): var Animation =
 
 
 proc animation*(entity: Entity, index: int): var Animation =
-  ##  ``Return`` animation under given ``index``.
+  ##  ``Return`` the animation under given ``index``.
   ##
   if index < 0 or index >= entity.sprite.animations.len:
     return
@@ -153,13 +153,13 @@ proc animation*(entity: Entity, index: int): var Animation =
 
 
 template currentAnimation*(entity: Entity): var Animation =
-  ##  ``Return`` current animation.
+  ##  ``Return`` the current animation.
   ##
   entity.animation(entity.sprite.currentAnimation)
 
 
 proc currentAnimationName*(entity: Entity): string =
-  ##  ``Return`` name of the current animation.
+  ##  ``Return`` the name of the current animation.
   ##
   if entity.sprite.currentAnimation < 0:
     return ""
@@ -173,13 +173,13 @@ proc addAnimation*(entity: Entity,
                    flip: Flip = Flip.none): bool =
   ##  Add animation to the ``entity``.
   ##
-  ##  ``name`` Name of the animation.
+  ##  ``name`` name of the animation.
   ##
-  ##  ``frames`` Array of animation frames' indexes.
+  ##  ``frames``  array of animation frames' indexes.
   ##
-  ##  ``frameRate`` Animation speed in frames per second.
+  ##  ``frameRate`` animation speed in frames per second.
   ##
-  ##  ``flip``  Animation flip flag.
+  ##  ``flip``  animation flip flag.
   ##
   result = true
 
@@ -205,10 +205,9 @@ proc addAnimation*(entity: Entity,
 proc play*(entity: Entity, anim: string, cycles = -1) =
   ##  Start playing the animation.
   ##
-  ##  ``anim`` Name of the animation.
+  ##  ``anim``  name of the animation.
   ##
-  ##  ``cycles`` Number of times to repeat the animation cycles.
-  ##  `-1` for looping.
+  ##  ``cycles``  number of times to repeat the animation, or `-1` for looping.
   ##
   if entity.sprite == nil:
     return
@@ -244,17 +243,17 @@ method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
       entity.sprite.currentFrame = 0
 
 
-#########
+#=======#
 # Logic #
-#########
+#=======#
 
 method update*(logic: Logic, entity: Entity, elapsed: float) {.base.} =
   discard
 
 
-###########
+#=========#
 # Physics #
-###########
+#=========#
 
 
 proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
@@ -307,9 +306,9 @@ method update*(physics: Physics, entity: Entity, elapsed: float) {.base.} =
   discard
 
 
-##########
+#========#
 # Entity #
-##########
+#========#
 
 
 proc initEntity*(entity: Entity) =
@@ -347,15 +346,22 @@ proc newEntity*(): Entity =
 
 
 proc layer*(entity: Entity): int {.inline.} =
+  ##  ``Return`` current rendering layer of the ``entity``.
+  ##
   return entity.fLayer
 
 
 proc `layer=`*(entity: Entity, val: int) =
+  ##  Change the rendering layer of the ``entity``.
+  ##
   entity.fLayer = val
   entity.updLayer = true
 
 
 proc absRot*(entity: Entity): Angle =
+  ##  ``Return`` the absolute (counting the parent's) rotation angle
+  ##  of the ``entity``.
+  ##
   if entity.parent == nil:
     return entity.rot
   else:
@@ -363,6 +369,9 @@ proc absRot*(entity: Entity): Angle =
 
 
 proc absScale*(entity: Entity): Scale =
+  ##  ``Return`` the absolute (counting the parent's) scale
+  ##  of the ``entity``.
+  ##
   if entity.parent == nil:
     return entity.scale
   else:
@@ -370,6 +379,9 @@ proc absScale*(entity: Entity): Scale =
 
 
 proc absPos*(entity: Entity): Coord =
+  ##  ``Return`` the absolute (counting the parent's) scale
+  ##  of the ``entity``.
+  ##
   if entity.parent == nil:
     return entity.pos
   else:
@@ -382,7 +394,7 @@ proc absPos*(entity: Entity): Coord =
 
 
 proc centrify*(entity: Entity) =
-  ##  Set ``center`` to the graphic's central point.
+  ##  Set ``entity``'s ``center`` to its graphic's central point.
   ##
   if entity.graphic != nil:
     entity.center = entity.graphic.dim / 2
@@ -444,3 +456,4 @@ method onCollide*(entity, target: Entity) {.base.} =
   ##  Called when ``entity`` collides with ``target``.
   ##
   discard
+

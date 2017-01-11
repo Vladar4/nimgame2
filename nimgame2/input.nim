@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   types
@@ -32,7 +31,9 @@ export
 
 
 type
-  Button* {.size: sizeof(int32), pure.} = enum
+  Button* {.size: sizeof(int32), pure.} = enum  ##  \
+    ##  Mouse buttons.
+    ##
     left = sdl.ButtonLeft,
     middle = sdl.ButtonMiddle,
     right = sdl.ButtonRight,
@@ -47,11 +48,15 @@ var
   mBtn: int32
 
 
-############
-# KEYBOARD #
-############
+#==========#
+# Keyboard #
+#==========#
 
 proc initKeyboard*() =
+  ##  Clear the buffers.
+  ##
+  ##  Called automatically from the main game cycle.
+  ##
   kbdPressed = @[]
   kbdReleased = @[]
 
@@ -80,20 +85,32 @@ template down*(keymod: Keymod): bool =
 
 
 template pressed*(scancode: Scancode): bool =
+  ##  Check if ``scancode`` (keyboard key) was just pressed.
+  ##
   (scancode in kbdPressed)
 
 
 template released*(scancode: Scancode): bool =
+  ##  Check if ``scancode`` (keyboard key) was just released.
+  ##
   (scancode in kbdReleased)
 
 
 template name*(keycode: Keycode): string =
+  ##  ``Return`` a human-readable name for the ``keycode``.
+  ##
   $getKeyName(keycode)
 
 
-#########
-# MOUSE #
-#########
+template name*(scancode: Scancode): string =
+  ##  ``Return`` a human-readable name for the ``scancode``.
+  ##
+  $getScancodeName(scancode)
+
+
+#=======#
+# Mouse #
+#=======#
 
 template updateMouse*(event: Event) =
   ##  Called automatically from the main game cycle.
@@ -117,7 +134,8 @@ template mouseRelative*(enabled: bool): bool =
 
 
 template mouseCapture*(enabled: bool): bool =
-  ##  Capture mouse
+  ##  Capture or release the mouse.
+  ##
   sdl.captureMouse(enabled) == 0
 
 
@@ -134,18 +152,26 @@ template pressed*(button: int32): bool =
 
 
 template cursorIsVisible*(): bool =
-  ##  ``Return`` `true` if the system mouse cursor 
+  ##  ``Return`` `true` if the system mouse cursor is visible,
+  ##  or `false` otherwise.
+  ##
   (sdl.showCursor(-1) == 1)
 
 
 template showCursor*() =
+  ##  Show the system mouse cursor.
+  ##
   sdl.showCursor(1)
 
 
 template hideCursor*() =
+  ##  Hide the system mouse cursor.
+  ##
   sdl.showCursor(0)
 
 
 template toggleCursor*() =
+  ##  Toggle the visibility of the system mouse cursor.
+  ##
   sdl.showCursor(if cursorIsVisible: 0 else: 1)
 

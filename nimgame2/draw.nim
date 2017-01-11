@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl, sdl2/sdl_gfx_primitives, sdl2/sdl_gfx_primitives_font,
   settings, types
@@ -35,24 +34,32 @@ type
 
 
 proc pixel*(pos: Coord, color: Color): bool {.inline.} =
+  ##  Draw a single pixel.
+  ##
   pixelRGBA(renderer,
             pos.x.int16, pos.y.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
 proc hline*(pos: Coord, length: float, color: Color): bool {.inline.} =
+  ##  Draw a horizontal line from ``pos`` to the right.
+  ##
   hlineRGBA(renderer,
             pos.x.int16, pos.x.int16 + length.int16, pos.y.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
 proc vline*(pos: Coord, height: float, color: Color): bool {.inline.} =
+  ##  Draw a vertical line from ``pos`` down.
+  ##
   vlineRGBA(renderer,
             pos.x.int16, pos.y.int16, pos.y.int16 + height.int16,
             color.r, color.g, color.b, color.a) == 0
 
 
 proc rect*(pos1, pos2: Coord, color: Color): bool {.inline.} =
+  ##  Draw a rectangle.
+  ##
   rectangleRGBA(renderer,
                 pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                 color.r, color.g, color.b, color.a) == 0
@@ -60,31 +67,41 @@ proc rect*(pos1, pos2: Coord, color: Color): bool {.inline.} =
 
 proc roundedRect*(pos1, pos2: Coord, rad: float,
                   color: Color): bool {.inline.} =
+  ##  Draw a rounded rectangle.
+  ##
   roundedRectangleRGBA(renderer,
                        pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                        rad.int16, color.r, color.g, color.b, color.a) == 0
 
 
 proc box*(pos1, pos2: Coord, color: Color): bool {.inline.} =
-    boxRGBA(renderer,
-            pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
-            color.r, color.g, color.b, color.a) == 0
+  ##  Draw a filled rectangle (box).
+  ##
+  boxRGBA(renderer,
+          pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
+          color.r, color.g, color.b, color.a) == 0
 
 
 proc roundedBox*(pos1, pos2: Coord, rad: float,
                  color: Color): bool {.inline.} =
+  ##  Draw a rounded filled rectangle (box).
+  ##
   roundedBoxRGBA(renderer,
                  pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                  rad.int16, color.r, color.g, color.b, color.a) == 0
 
 
 proc line*(pos1, pos2: Coord, color: Color): bool {.inline.} =
+  ##  Draw a line.
+  ##
   lineRGBA(renderer,
            pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
            color.r, color.g, color.b, color.a) == 0
 
 
 proc aaLine*(pos1, pos2: Coord, color: Color): bool {.inline.} =
+  ##  Draw an anti-aliased line.
+  ##
   aalineRGBA(renderer,
              pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
              color.r, color.g, color.b, color.a) == 0
@@ -92,6 +109,8 @@ proc aaLine*(pos1, pos2: Coord, color: Color): bool {.inline.} =
 
 proc thickLine*(pos1, pos2: Coord, width: float,
                 color: Color): bool {.inline.} =
+  ##  Draw a ``width`` pixels wide line.
+  ##
   thickLineRGBA(renderer,
                 pos1.x.int16, pos1.y.int16, pos2.x.int16, pos2.y.int16,
                 width.uint8, color.r, color.g, color.b, color.a) == 0
@@ -99,6 +118,8 @@ proc thickLine*(pos1, pos2: Coord, width: float,
 
 proc circle*(pos: Coord, rad: float, color: Color,
              mode: DrawMode = DrawMode.default): bool =
+  ## Draw a circle.
+  ##
   case mode:
   of DrawMode.default:
     circleRGBA(renderer,
@@ -114,8 +135,10 @@ proc circle*(pos: Coord, rad: float, color: Color,
                      color.r, color.g, color.b, color.a) == 0
 
 
-proc arc*(pos: Coord, rad, start, finish: float,
+proc arc*(pos: Coord, rad, start, finish: Angle,
           color: Color): bool {.inline.} =
+  ##  Draw an arc.
+  ##
   arcRGBA(renderer,
           pos.x.int16, pos.y.int16, rad.int16, start.int16, finish.int16,
           color.r, color.g, color.b, color.a) == 0
@@ -123,6 +146,8 @@ proc arc*(pos: Coord, rad, start, finish: float,
 
 proc ellipse*(pos, rad: Coord, color: Color,
               mode: DrawMode = DrawMode.default): bool =
+  ##  Draw an ellipse.
+  ##
   case mode:
   of DrawMode.default:
     ellipseRGBA(renderer,
@@ -138,8 +163,10 @@ proc ellipse*(pos, rad: Coord, color: Color,
                       color.r, color.g, color.b, color.a) == 0
 
 
-proc pie*(pos: Coord, rad, start, finish: float, color: Color,
+proc pie*(pos: Coord, rad, start, finish: Angle, color: Color,
           mode: DrawMode = DrawMode.default): bool =
+  ##  Draw a circular sector (pie).
+  ##
   case mode:
   of DrawMode.default, DrawMode.aa:
     pieRGBA(renderer,
@@ -155,6 +182,8 @@ proc pie*(pos: Coord, rad, start, finish: float, color: Color,
 
 proc trigon*(pos1, pos2, pos3: Coord, color: Color,
              mode: DrawMode = DrawMode.default): bool =
+  ##  Draw a trigon.
+  ##
   case mode:
   of DrawMode.default:
     trigonRGBA(renderer,
@@ -187,6 +216,8 @@ template `[]=`[T](p: ptr T, off: int, val: T) =
 proc polygon*(pos: openarray[Coord], color: Color,
               mode: DrawMode = DrawMode.default,
               surface: sdl.Surface = nil, surfaceD: Coord = (0, 0)): bool =
+  ##  Draw a polygon.
+  ##
   var vx, vy: ptr int16
   vx = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
@@ -217,6 +248,8 @@ proc polygon*(pos: openarray[Coord], color: Color,
 
 
 proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
+  ##  Draw a bezier curve.
+  ##
   var vx, vy: ptr int16
   vx = cast[ptr int16](alloc(pos.len * sizeof(int16)))
   vy = cast[ptr int16](alloc(pos.len * sizeof(int16)))
@@ -232,24 +265,34 @@ proc bezier*(pos: openarray[Coord], s: float, color: Color): bool =
 
 
 proc setFont*(fontdata: pointer, dim: Dim) =
+  ##  Set sdl_gfx_primitives font.
+  ##
   gfxPrimitivesSetFont(fontdata, dim.w.uint32, dim.h.uint32)
 
 
 template setFont*() =
+  ##  Set default sdl_gfx_primitives font.
+  ##
   gfxPrimitivesSetFont(addr(gfxPrimitivesFontData), 8, 8)
 
 
 template setFontRotation*(rotation: uint32) =
+  ##  Set sdl_gfx_primitives font rotation.
+  ##
   gfxPrimitivesSetFontRotation(rotation)
 
 
 proc character*(pos: Coord, c: char, color: Color): bool {.inline.} =
+  ##  Draw a single character.
+  ##
   characterRGBA(renderer,
                 pos.x.int16, pos.y.int16, c,
                 color.r, color.g, color.b, color.a) == 0
 
 
 proc string*(pos: Coord, s: string, color: Color): bool {.inline.} =
+  ##  Draw a string of text.
+  ##
   stringRGBA(renderer,
              pos.x.int16, pos.y.int16, s,
              color.r, color.g, color.b, color.a) == 0

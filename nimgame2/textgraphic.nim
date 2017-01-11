@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   font, texturegraphic, settings, types
@@ -34,6 +33,10 @@ type
     fColor: Color
     fFont: Font
 
+
+#=============#
+# TextGraphic #
+#=============#
 
 proc free*(text: TextGraphic) =
   TextureGraphic(text).free()

@@ -21,14 +21,13 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl
 
 
-############
+#==========#
 # CountMgr #
-############
+#==========#
 
 type
   CountMgr* = ref object
@@ -74,9 +73,9 @@ proc newCountMgr*(): CountMgr =
   new result, free
 
 
-########
-# MISC #
-########
+#======#
+# Misc #
+#======#
 
 proc timeDiff*(first, second: uint64): int {.inline.} =
   ##  ``first``, ``second`` two results of ``sdl.getPerformanceCounter()``.

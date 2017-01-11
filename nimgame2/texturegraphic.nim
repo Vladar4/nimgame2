@@ -21,7 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   sdl2/sdl,
   sdl2/sdl_image as img,
@@ -35,10 +34,9 @@ type
     fSize: Dim
 
 
-########
-# LOAD #
-########
-
+#================#
+# TextureGraphic #
+#================#
 
 proc freeTexture*(graphic: TextureGraphic) =
   if not (graphic.fTexture == nil):
@@ -136,11 +134,6 @@ method dim*(graphic: TextureGraphic): Dim {.inline.} =
   graphic.fSize
 
 
-########
-# DRAW #
-########
-
-
 method draw*(graphic: TextureGraphic,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
@@ -217,12 +210,8 @@ method draw*(graphic: TextureGraphic,
                                     flip.RendererFlip)
 
 
-########
-# MODS #
-########
-
 proc colorMod*(graphic: TextureGraphic): Color =
-  ##  TODO
+  ##  ``Return`` current color modifier.
   ##
   var r, g, b: uint8
   result = Color(r: 0, g: 0, b: 0, a: 0)
@@ -237,7 +226,7 @@ proc colorMod*(graphic: TextureGraphic): Color =
 
 
 proc `colorMod=`*(graphic: TextureGraphic, color: Color) =
-  ##  TODO
+  ##  Set a new color modifier.
   ##
   if graphic.fTexture.setTextureColorMod(color.r, color.g, color.b) != 0:
     sdl.logCritical(sdl.LogCategoryError,
@@ -246,7 +235,7 @@ proc `colorMod=`*(graphic: TextureGraphic, color: Color) =
 
 
 proc alphaMod*(graphic: TextureGraphic): uint8 =
-  ##  TODO
+  ##  ``Return`` current alpha (transparency) modifier.
   ##
   var a: uint8
   if graphic.fTexture.getTextureAlphaMod(addr(a)) != 0:
@@ -258,7 +247,7 @@ proc alphaMod*(graphic: TextureGraphic): uint8 =
 
 
 proc `alphaMod=`*(graphic: TextureGraphic, alpha: uint8) =
-  ##  TODO
+  ##  Set a new alpha (transparency) modifier.
   ##
   if graphic.fTexture.setTextureAlphaMod(alpha) != 0:
     sdl.logCritical(sdl.LogCategoryError,
@@ -267,7 +256,7 @@ proc `alphaMod=`*(graphic: TextureGraphic, alpha: uint8) =
 
 
 proc blendMod*(graphic: TextureGraphic): Blend =
-  ##  TODO
+  ##  ``Return`` current blending mode.
   ##
   var blend: sdl.BlendMode
 
@@ -280,7 +269,7 @@ proc blendMod*(graphic: TextureGraphic): Blend =
 
 
 proc `blendMod=`*(graphic: TextureGraphic, blend: Blend) =
-  ##  TODO
+  ##  Set a new blending mode.
   ##
   if graphic.fTexture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
     sdl.logCritical(sdl.LogCategoryError,

@@ -46,6 +46,12 @@ proc load[T](assets: Assets[T], dir: string, init: proc(file: string): T) =
 
 
 proc newAssets*[T](dir: string, init: proc(file: string): T): Assets[T] =
+  ##  Create a new assets collection.
+  ##
+  ##  ``dir`` target directory.
+  ##
+  ##  ``init`` ``T``'s init/load procedure.
+  ##
   new result
   result.load(dir, init)
 

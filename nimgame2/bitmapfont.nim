@@ -29,10 +29,14 @@ import
 
 type
   BitmapFont* = ref object of Font
-    fSurface: Surface   # source font surface
-    fDim, fCharDim: Dim # dimensions of surface and single character
-    fChars: seq[tuple[x, y: int]] # coordinates of all characters
+    fSurface: Surface   ##  Source font surface
+    fDim, fCharDim: Dim ##  Dimensions of the surface and a single character
+    fChars: seq[tuple[x, y: int]] ##  Coordinates of all characters
 
+
+#============#
+# BitmapFont #
+#============#
 
 proc free*(font: BitmapFont) =
   if not (font.fSurface == nil):
@@ -50,6 +54,12 @@ proc init*(font: BitmapFont) =
 
 
 proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
+  ##  Load ``font`` data from a ``file``.
+  ##
+  ##  ``charDim`` dimensions of a single font character.
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise.
+  ##
   result = true
   font.free()
   font.fSurface = img.load(file)
@@ -75,15 +85,23 @@ proc newBitmapFont*(): BitmapFont =
 
 
 proc newBitmapFont*(file: string, charDim: Dim): BitmapFont =
+  ##  Create and load a new bitmap font from a ``file``.
+  ##
+  ##  ``charDim`` dimensions of a single font character.
+  ##
   result = newBitmapFont()
   discard result.load(file, charDim)
 
 
 method charH*(font: BitmapFont): int {.inline.} =
+  ##  ``Return`` a font character's height.
+  ##
   font.fCharDim.h
 
 
 method lineDim*(font: BitmapFont, line: string): Dim {.inline.} =
+  ##  ``Return`` dimensions of a ``line`` of text, written in ``font``.
+  ##
   (font.fCharDim.w * line.len, font.fCharDim.h)
 
 
@@ -136,6 +154,8 @@ proc render(font: BitmapFont,
 method renderLine*(font: BitmapFont,
                    line: string,
                    color: Color = DefaultFontColor): Texture =
+  ##  Render a text ``line`` in ``font`` with given ``color``.
+  ##
   let
     line = if line.len < 1: " " else: line
     lineSurface = font.render(line, color)
@@ -152,6 +172,9 @@ method renderText*(font: BitmapFont,
                    text: openarray[string],
                    align = TextAlign.left,
                    color: Color = DefaultFontColor): Texture =
+  ##  Render a multi-line ``text`` in ``font``
+  ##  with given ``align`` and ``color``.
+  ##
   var text = @text
   if text.len < 1: text.add(" ")
   # find the longest line of text

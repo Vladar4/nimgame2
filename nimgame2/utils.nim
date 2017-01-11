@@ -28,9 +28,9 @@ import
   texturegraphic, types
 
 
-############
-# GEOMETRY #
-############
+#==========#
+# Geometry #
+#==========#
 
 template rad*(a: Angle): Angle =
   ##  Convert degrees to radians.
@@ -92,9 +92,9 @@ proc rotate*(point, offset: Coord, angle: Angle): Coord =
     result = rotate(point, angle) + offset
 
 
-############
-# GRAPHICS #
-############
+#==========#
+# Graphics #
+#==========#
 
 import sdl2/sdl_image as img
 

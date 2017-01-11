@@ -32,6 +32,10 @@ type
     fFont: ttf.Font
 
 
+#==============#
+# TrueTypeFont #
+#==============#
+
 proc free*(font: TrueTypeFont) =
   if not (font.fFont == nil):
     font.fFont.closeFont()
@@ -48,6 +52,10 @@ proc newTrueTypeFont*(): TrueTypeFont =
 
 
 proc load*(font: TrueTypeFont, file: string, size: int): bool =
+  ##  Load ``font`` data from a ``file``.
+  ##
+  ##  ``size`` required font size.
+  ##
   result = true
   font.free()
   font.fFont = ttf.openFont(file, size)
@@ -59,12 +67,16 @@ proc load*(font: TrueTypeFont, file: string, size: int): bool =
 
 
 method charH*(font: TrueTypeFont): int =
+  ##  ``Return`` a font character's height.
+  ##
   if font.fFont == nil:
     return 0
   return font.fFont.fontHeight()
 
 
 method lineDim*(font: TrueTypeFont, line: string): Dim =
+  ##  ``Return`` dimensions of a ``line`` of text, written in ``font``.
+  ##
   if font.fFont == nil:
     return (0, 0)
   var w, h: cint
@@ -89,6 +101,8 @@ proc render(font: TrueTypeFont,
 method renderLine*(font: TrueTypeFont,
                    line: string,
                    color: Color = DefaultFontColor): Texture =
+  ##  Render a text ``line`` in ``font`` with given ``color``.
+  ##
   let
     line = if line.len < 1: " " else: line
     lineSurface = font.render(line, color)
@@ -105,6 +119,9 @@ method renderText*(font: TrueTypeFont,
                    text: openarray[string],
                    align = TextAlign.left,
                    color: Color = DefaultFontColor): Texture =
+  ##  Render a multi-line ``text`` in ``font``
+  ##  with given ``align`` and ``color``.
+  ##
   var text = @text
   if text.len < 1: text.add("")
   # find the longest line of text
@@ -156,5 +173,4 @@ method renderText*(font: TrueTypeFont,
                     "Can't render text: %s",
                     sdl.getError())
     return nil
-
 

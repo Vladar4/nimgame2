@@ -42,8 +42,12 @@ type
 
 
 var
-  game*: Game ##  global game variable
+  game*: Game ##  Global game variable
 
+
+#======#
+# Game #
+#======#
 
 proc free*(game: Game) =
   renderer.destroyRenderer()
@@ -166,11 +170,13 @@ proc newGame*(): Game =
 
 proc size*(game: Game): Dim {.inline.} =
   ##  ``Return`` game window dimensions.
+  ##
   return game.fSize
 
 
 proc title*(game: Game): string {.inline.} =
   ##  ``Return`` game window title.
+  ##
   return game.fTitle
 
 
@@ -194,7 +200,7 @@ proc `logicalSize=`*(game: Game, size: Dim) =
 
 
 proc scale*(game: Game): Coord {.inline.} =
-  ##  Get scale of the game renderer.
+  ##  ``Return`` the scale of the game renderer.
   ##
   return game.fScale
 
@@ -220,13 +226,13 @@ proc `scale=`*(game: Game, scale: float) =
 
 
 proc scene*(game: Game): Scene {.inline.} =
-  ##  Get current scene.
+  ##  ``Return`` current game scene.
   ##
   return game.fScene
 
 
 proc `scene=`*(game: Game, val: Scene) =
-  ##  Set new game scene.
+  ##  Set a new game scene.
   ##
   if not (game.fScene == nil):
     game.fScene.hide()
@@ -253,6 +259,8 @@ proc `viewport=`*(game: Game, rect: Rect) =
 
 
 proc resetViewport*(game: Game) =
+  ##  Set default viewport.
+  ##
   if renderer.renderSetViewport(nil) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't reset viewport: %s",

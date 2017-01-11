@@ -21,10 +21,10 @@
 #
 # Vladar vladar4@gmail.com
 
-
 import
   math,
   nimgame, draw, entity, settings, types, utils
+
 
 from fenv import epsilon
 let Eps = epsilon(float)
@@ -34,9 +34,9 @@ let Eps = epsilon(float)
 ##
 
 
-###########
+#=========#
 # Private #
-###########
+#=========#
 
 template position(a: Collider): Coord =
   if a.parent.absRot == 0:
@@ -44,11 +44,14 @@ template position(a: Collider): Coord =
   else:
     rotate(a.pos * a.parent.absScale, a.parent.absPos, a.parent.absRot)
 
+
 template scaled(n: float, a: Collider): float =
   (n * a.parent.absScale)
 
+
 template scaled(n: int, a: Collider): int =
   int(n.float * a.parent.absScale)
+
 
 template scaled(n: Coord, a: Collider): Coord =
   (n.x * a.parent.absScale, n.y * a.parent.absScale)
@@ -93,9 +96,9 @@ proc linesIntersect(p1, p2, p3, p4: Coord): bool =
   return ( a >= 0 and a <= 1 ) and (b >= 0 and b <= 1)
 
 
-####################
+#==================#
 # Collider (Point) #
-####################
+#==================#
 
 proc init*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
   a.parent = parent
@@ -185,9 +188,9 @@ method collide*(a: Collider, p: PolyCollider): bool =
     return c > 0
 
 
-###############
+#=============#
 # BoxCollider #
-###############
+#=============#
 
 proc init*(b: BoxCollider, parent: Entity, pos: Coord = (0, 0),
            dim: Dim = (0, 0)) =
@@ -290,9 +293,9 @@ method collide*(b: BoxCollider, p: PolyCollider): bool =
     return false
 
 
-##################
+#================#
 # CircleCollider #
-##################
+#================#
 
 proc init*(c: CircleCollider, parent: Entity, pos: Coord = (0, 0),
            radius: float = 0) =
@@ -384,9 +387,9 @@ method collide*(c: CircleCollider, p: PolyCollider): bool =
     return false
 
 
-#################
+#===============#
 # Line Collider #
-#################
+#===============#
 
 proc init*(d: LineCollider, parent: Entity, pos: Coord = (0, 0),
            pos2: Coord = (0, 0)) =
@@ -469,9 +472,9 @@ method collide*(d: LineCollider, p: PolyCollider): bool =
     return false
 
 
-################
+#==============#
 # PolyCollider #
-################
+#==============#
 
 proc init*(p: PolyCollider, parent: Entity, pos: Coord = (0, 0),
            points: openarray[Coord]) =
