@@ -125,11 +125,45 @@ proc count*(scene: Scene): int {.inline.} =
   return scene.fList.len
 
 
+proc count*(scene: Scene, tag: string): int =
+  ##  ``Return`` the number of entities with ``tag`` in the ``scene``.
+  ##
+  result = 0
+  for entity in scene.fList:
+    if tag in entity.tags:
+      inc result
+
+
+proc contains*(scene: Scene, entity: Entity): bool {.inline.} =
+  ##  ``Return`` `true` if the ``scene`` has the ``entity``,
+  ##  or `false` otherwise.
+  ##
+  return entity in scene.fList
+
+
+proc contains*(scene: Scene, tag: string): bool =
+  ##  ``Return`` `true` if the ``scene`` has an entity with ``tag``,
+  ##  or `false` otherwise.
+  ##
+  for entity in scene.fList:
+    if tag in entity.tags:
+      return true
+  return false
+
+
 iterator entities*(scene: Scene): Entity {.inline.} =
   ##  Iterate through all entities in the ``scene``.
   ##
   for entity in scene.fList:
     yield entity
+
+
+iterator entities*(scene: Scene, tag: string): Entity {.inline.} =
+  ##  Iterate throught entities with ``tag`` in the ``scene``.
+  ##
+  for entity in scene.fList:
+    if tag in entity.tags:
+      yield entity
 
 
 proc updateScene*(scene: Scene, elapsed: float) =
