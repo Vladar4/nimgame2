@@ -113,10 +113,21 @@ proc add*(scene: Scene, entity: Entity) =
   scene.fAddList.add(entity)
 
 
-proc pop*(scene: Scene): Entity {.inline.} =
-  ##  ``Return`` the top entity and remove it from the ``scene``.
+proc contains*(scene: Scene, entity: Entity): bool {.inline.} =
+  ##  ``Return`` `true` if the ``scene`` has the ``entity``,
+  ##  or `false` otherwise.
   ##
-  return scene.fList.pop()
+  return entity in scene.fList
+
+
+proc contains*(scene: Scene, tag: string): bool =
+  ##  ``Return`` `true` if the ``scene`` has an entity with ``tag``,
+  ##  or `false` otherwise.
+  ##
+  for entity in scene.fList:
+    if tag in entity.tags:
+      return true
+  return false
 
 
 proc count*(scene: Scene): int {.inline.} =
@@ -134,21 +145,30 @@ proc count*(scene: Scene, tag: string): int =
       inc result
 
 
-proc contains*(scene: Scene, entity: Entity): bool {.inline.} =
-  ##  ``Return`` `true` if the ``scene`` has the ``entity``,
-  ##  or `false` otherwise.
-  ##
-  return entity in scene.fList
-
-
-proc contains*(scene: Scene, tag: string): bool =
-  ##  ``Return`` `true` if the ``scene`` has an entity with ``tag``,
-  ##  or `false` otherwise.
+proc find*(scene: Scene, tag: string): Entity =
+  ##  ``Return`` the first entity with ``tag`` in the ``scene``,
+  ##  or `nil` otherwise.
   ##
   for entity in scene.fList:
     if tag in entity.tags:
-      return true
-  return false
+      return entity
+  return nil
+
+
+proc findAll*(scene: Scene, tag: string): seq[Entity] =
+  ##  ``Return`` a sequence of all entities with ``tag`` in the ``scene``,
+  ##  or an empty sequence if no such entities are found.
+  ##
+  result = @[]
+  for entity in scene.fList:
+    if tag in entity.tags:
+      result.add(entity)
+
+
+proc pop*(scene: Scene): Entity {.inline.} =
+  ##  ``Return`` the top entity and remove it from the ``scene``.
+  ##
+  return scene.fList.pop()
 
 
 iterator entities*(scene: Scene): Entity {.inline.} =
