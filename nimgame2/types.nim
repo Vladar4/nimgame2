@@ -62,6 +62,12 @@ converter toColor*(u: uint32): Color =
   Color(r: uint8(u shr 24), g: uint8(u shr 16), b: uint8(u shr 8), a: uint8(u))
 
 
+converter toSeq*[T](s: Slice[T]): seq[T] =
+  result = @[]
+  for i in s:
+    result.add(i)
+
+
 #=======#
 # Coord #
 #=======#

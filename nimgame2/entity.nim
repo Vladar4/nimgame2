@@ -39,9 +39,10 @@ type
     currentAnimation*: int      ##  Index of currently playing animation
     currentFrame*: int          ##  Incex of current frame
     cycles*: int                ##  Animation cycles counter (`-1` for looping)
+    kill*: bool                 ##  Kill when animation is finished
     time*: float                ##  Animation timer
     playing*: bool              ##  Animation playing flag
-    frameSize*: Dim             ##  Sprite frame dimensions
+    dim*: Dim                   ##  Sprite frame dimensions
     offset*: Dim                ##  Sprite graphic offset
     frames*: seq[Rect]          ##  Frames' coordinates
 
@@ -81,6 +82,7 @@ type
     scale*: Scale                 ##  Scale ratio
     center*: Coord                ##  Center for drawing and rotating
     flip*: Flip                   ##  Texture flip status
+    visible*: bool                ##  Visibility status
 
   Logic* = ref object of RootObj
 
@@ -92,11 +94,11 @@ type
 #========#
 
 proc initSprite*(entity: Entity,
-                 frameSize: Dim,
+                 dim: Dim,
                  offset: Dim = (0, 0)) =
   ##  Creeate a sprite for the given ``entity`` with the attached Graphic.
   ##
-  ##  ``frameSize`` dimensions of one frame.
+  ##  ``dim`` dimensions of one frame.
   ##
   ##  ``offset``  offset from the edge of the texture.
   ##
@@ -106,25 +108,26 @@ proc initSprite*(entity: Entity,
   entity.sprite.currentAnimation = -1
   entity.sprite.currentFrame = 0
   entity.sprite.cycles = 0
+  entity.sprite.kill = false
   entity.sprite.time = 0
   entity.sprite.playing = false
-  entity.sprite.frameSize = frameSize
+  entity.sprite.dim = dim
   entity.sprite.offset = offset
   entity.sprite.frames = @[]
 
   let
     cols = (entity.graphic.w - entity.sprite.offset.w) div
-            entity.sprite.frameSize.w
+            entity.sprite.dim.w
     rows = (entity.graphic.h - entity.sprite.offset.h) div
-            entity.sprite.frameSize.h
+            entity.sprite.dim.h
 
   for r in 0..(rows - 1):
     for c in 0..(cols - 1):
       entity.sprite.frames.add(Rect(
-        x: entity.sprite.offset.w + entity.sprite.frameSize.w * c,
-        y: entity.sprite.offset.h + entity.sprite.frameSize.h * r,
-        w: entity.sprite.frameSize.w,
-        h: entity.sprite.frameSize.h))
+        x: entity.sprite.offset.w + entity.sprite.dim.w * c,
+        y: entity.sprite.offset.h + entity.sprite.dim.h * r,
+        w: entity.sprite.dim.w,
+        h: entity.sprite.dim.h))
 
 
 proc animationIndex*(entity: Entity, name: string): int {.inline.} =
@@ -177,7 +180,7 @@ proc addAnimation*(entity: Entity,
   ##
   ##  ``frames``  array of animation frames' indexes.
   ##
-  ##  ``frameRate`` animation speed in frames per second.
+  ##  ``frameRate`` animation speed in seconds per frame.
   ##
   ##  ``flip``  animation flip flag.
   ##
@@ -202,7 +205,7 @@ proc addAnimation*(entity: Entity,
 
 
 
-proc play*(entity: Entity, anim: string, cycles = -1) =
+proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
   ##  Start playing the animation.
   ##
   ##  ``anim``  name of the animation.
@@ -213,8 +216,10 @@ proc play*(entity: Entity, anim: string, cycles = -1) =
     return
   if entity.animationIndex(anim) < 0:
     return
+  entity.visible = true
   entity.sprite.currentAnimation = entity.animationIndex(anim)
   entity.sprite.cycles = cycles
+  entity.sprite.kill = kill
   entity.sprite.time = 0.0
   if cycles != 0:
     entity.sprite.playing = true
@@ -238,6 +243,10 @@ method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
         if entity.sprite.cycles == 0:
           # No more cycles left
           entity.sprite.playing = false
+          # Check if entity need to be killed
+          if entity.sprite.kill:
+            entity.dead = true
+            entity.visible = false
       # cycles <= 0 - animation either stopped or looped
       # Set current frame to first one of the current animation
       entity.sprite.currentFrame = 0
@@ -338,6 +347,7 @@ proc initEntity*(entity: Entity) =
   entity.scale = 1.0
   entity.center = (0.0, 0.0)
   entity.flip = Flip.none
+  entity.visible = true
 
 
 proc newEntity*(): Entity =
@@ -397,7 +407,10 @@ proc centrify*(entity: Entity) =
   ##  Set ``entity``'s ``center`` to its graphic's central point.
   ##
   if entity.graphic != nil:
-    entity.center = entity.graphic.dim / 2
+    if entity.sprite == nil:
+      entity.center = entity.graphic.dim / 2
+    else:
+      entity.center = entity.sprite.dim / 2
 
 
 proc renderEntity*(entity: Entity) =
@@ -405,7 +418,7 @@ proc renderEntity*(entity: Entity) =
   ##
   ##  Call it from your entity render method.
   ##
-  if not (entity.graphic == nil):
+  if not (entity.graphic == nil) and entity.visible:
     if entity.sprite == nil:
       entity.graphic.draw(entity.absPos,
                           entity.absRot,
