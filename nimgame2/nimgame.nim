@@ -67,7 +67,8 @@ proc init*(
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
     imageFlags: cint = img.InitPNG,
-    mixerFlags: cint = mix.InitOGG
+    mixerFlags: cint = mix.InitOGG,
+    mixerChannels: int = 32
     ): bool =
   ##  Init game.
   ##
@@ -79,6 +80,7 @@ proc init*(
   ##  ``scaleQuality``  scale quality (pixel sampling)
   ##  ``imageFlags``    sdl_image flags
   ##  ``mixerFlags``    sdl_mixer flags
+  ##  ``mixerChannels`` Number of channels to allocate for mixing.
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
@@ -130,6 +132,9 @@ proc init*(
     sdl.logCritical(
       sdl.LogCategoryError, "Can't open mixer: %s", mix.getError())
     return false
+
+  # Allocate mixing channels
+  discard allocateChannels(mixerChannels)
 
   # Create window
   window = sdl.createWindow(
