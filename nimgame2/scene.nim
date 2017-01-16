@@ -113,6 +113,13 @@ proc add*(scene: Scene, entity: Entity) =
   scene.fAddList.add(entity)
 
 
+proc clear*(scene: Scene) =
+  ##  Remove all entities from the scene.
+  ##
+  while scene.fList.len > 0:
+    discard scene.fList.pop()
+
+
 proc contains*(scene: Scene, entity: Entity): bool {.inline.} =
   ##  ``Return`` `true` if the ``scene`` has the ``entity``,
   ##  or `false` otherwise.
@@ -143,6 +150,30 @@ proc count*(scene: Scene, tag: string): int =
   for entity in scene.fList:
     if tag in entity.tags:
       inc result
+
+
+proc del*(scene: Scene, entity: Entity): bool =
+  ##  Delete ``entity`` from the ``scene``.
+  ##
+  ##  ``Return`` `true` if ``entity`` was deleted,
+  ##  or `false` if there is no such ``entity`` in the scene.
+  ##
+  let idx = scene.fList.find(entity)
+  if idx < 0:
+    return false
+  scene.delEntity(idx)
+  return true
+
+
+proc del*(scene: Scene, tag: string) =
+  ##  Delete all entities with ``tag`` from the ``scene``.
+  ##
+  var idx = 0
+  while idx < scene.fList.len:
+    if tag in scene.fList[idx].tags:
+      scene.delEntity(idx)
+      continue
+    inc idx
 
 
 proc find*(scene: Scene, tag: string): Entity =
