@@ -96,6 +96,24 @@ template released*(scancode: Scancode): bool =
   (scancode in kbdReleased)
 
 
+proc clearPressed*(scancode: Scancode) =
+  ##  Remove ``scancode`` from pressed keys list.
+  ##
+  let idx = kbdPressed.find(scancode)
+  if idx < 0:
+    return
+  kbdPressed.del(idx)
+
+
+proc clearReleased*(scancode: Scancode) =
+  ##  Remove ``scancode`` from released keys list.
+  ##
+  let idx = kbdReleased.find(scancode)
+  if idx < 0:
+    return
+  kbdReleased.del(idx)
+
+
 template name*(keycode: Keycode): string =
   ##  ``Return`` a human-readable name for the ``keycode``.
   ##
