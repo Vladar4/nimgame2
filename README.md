@@ -10,15 +10,15 @@ Requires:
 
 * Runtime libraries for:
 
-..* SDL 2.0.5
+  * SDL 2.0.5
 
-..* SDL_gfx 1.0.1
+  * SDL_gfx 1.0.1
 
-..* SDL_image 2.0.1
+  * SDL_image 2.0.1
 
-..* SDL_mixer 2.0.1
+  * SDL_mixer 2.0.1
 
-..* SDL_ttf 2.0.14
+  * SDL_ttf 2.0.14
 
 Recommended compilation flags:
 ------------------------------
