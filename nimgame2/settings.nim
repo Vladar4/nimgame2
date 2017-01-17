@@ -30,6 +30,7 @@ var
   window*: sdl.Window     ##  Game window pointer
 
   gameRunning*: bool      ##  If `false` - break main loop
+  gamePaused*: bool       ##  If `true` - do not update current scene
   showInfo*: bool         ##  Show info panel
   fpsLimit*: int          ##  Limit frames per second to ``fpsLimit``,\
                           ##  if `0` - no limit

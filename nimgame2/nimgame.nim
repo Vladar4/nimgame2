@@ -94,6 +94,7 @@ proc init*(
 
   # Default options
   gameRunning = false
+  gamePaused = false
   showInfo = false
   fpsLimit = 0
   updateInterval = 10
@@ -319,7 +320,8 @@ proc run*(game: Game) =
     # Update
     var updateCounter = 0
     while lag >= updateInterval:
-      game.fScene.update(updateIntervalSec)
+      if not gamePaused:
+        game.fScene.update(updateIntervalSec)
       lag -= updateInterval
       inc(updateCounter)
 
