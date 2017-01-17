@@ -8,4 +8,9 @@ license       = "MIT"
 # Dependencies
 
 requires "nim >= 0.16.0"
-requires "sdl2_nim"
+requires "sdl2_nim#head"
+
+# Options
+
+skipDirs = @["demos"]
+
