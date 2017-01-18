@@ -103,6 +103,7 @@ proc linesIntersect(p1, p2, p3, p4: Coord): bool =
 proc init*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
   a.parent = parent
   a.pos = pos
+  a.tags = @[]
 
 
 proc newCollider*(parent: Entity, pos: Coord = (0, 0)): Collider =

@@ -73,15 +73,24 @@ method render*(scene: Scene) {.base.} =
   scene.renderScene()
 
 
+proc intersect(a, b: seq[string]): bool =
+  for item in a:
+    if item in b:
+      return true
+  return false
+
+
 proc checkCollisions*(scene: Scene, entity: Entity) =
   for target in scene.fList:
     if target.collider == nil: continue # no collider on target
     if entity == target: continue # entity is target
     if target in entity.colliding: continue # already collided with target
-    if collide(entity.collider, target.collider):
-      target.colliding.add(entity) # mark target as already collided with entity
-      entity.onCollide(target)
-      target.onCollide(entity)
+    if entity.collider.tags.len == 0 or # no tags given
+       entity.collider.tags.intersect(target.tags): # check for needed tags
+      if collide(entity.collider, target.collider): # check for collision
+        target.colliding.add(entity) # mark target as already collided with entity
+        entity.onCollide(target)
+        target.onCollide(entity)
 
 
 proc addEntity(scene: Scene, entity: Entity) =

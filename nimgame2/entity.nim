@@ -49,6 +49,7 @@ type
 
   Collider* = ref object of RootObj
     parent*: Entity
+    tags*: seq[string]  ##  only check collisios with entities with given tags
     pos*: Coord
 
   BoxCollider* = ref object of Collider
