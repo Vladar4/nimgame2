@@ -22,9 +22,10 @@
 # Vladar vladar4@gmail.com
 
 import
+  random,
   sdl2/sdl,
   sdl2/sdl_mixer as mix,
-  types
+  types, settings
 
 
 type
@@ -365,7 +366,7 @@ proc musicStop*() {.inline.} =
   discard mix.haltMusic()
 
 
-proc `musicPosition=`*(val: float) {.inline.} =
+proc musicPosition*(val: float) {.inline.} =
   ##  Set current position in the music stream.
   ##
   ##  Works only on MOD, OGG, and MP3 music:
@@ -379,26 +380,94 @@ proc `musicPosition=`*(val: float) {.inline.} =
   discard mix.setMusicPosition(val)
 
 
-proc musicVolume*(): Volume {.inline.} =
-  ##  ``Return`` current music volume.
+template setMusicVolume*(val: Volume) =
+  ##  Set music volume, or return current setting, if ``val`` = `-1`.
   ##
-  return mix.volumeMusic(-1)
+  discard mix.volumeMusic(normalizeVolume(val))
 
 
-proc `musicVolume=`*(val: Volume) =
-  ##  Set music volume.
-  ##
-  discard mix.volumeMusic(val)
+template getMusicVolume*(): Volume =
+  mix.volumeMusic(-1)
 
 
 template musicVolumeInc*(val: int) =
   ##  Increase music volume by ``val``.
   ##
-  musicVolume = normalizeVolume(musicVolume + val)
+  setMusicVolume(normalizeVolume(getMusicVolume().int + val))
 
 
-template soundVolumeDec*(val: int) =
+template musicVolumeDec*(val: int) =
   ##  Decrease music volume by ``val``.
   ##
-  musicVolume = normalizeVolume(musicVolume - val)
+  setMusicVolume(normalizeVolume(getMusicVolume().int - val))
+
+
+#==========#
+# Playlist #
+#==========#
+
+type
+  Playlist* = ref object of RootObj
+    list*: seq[Music]
+    fIndex: int
+    fFinished: bool
+
+
+var
+  playlist*: Playlist = nil
+
+
+proc finished() {.cdecl.} =
+  ##  Playlist callback procedure.
+  ##
+  if playlist == nil:
+    return
+  playlist.fFinished = true
+
+
+proc init*(pl: Playlist) =
+  pl.list = @[]
+  pl.fIndex = -1
+  pl.fFinished = false
+
+
+proc newPlaylist*(): Playlist =
+  new result
+  result.init()
+
+
+proc index*(pl: Playlist): int {.inline.} =
+  ##  ``Return`` current track index.
+  ##
+  pl.fIndex
+
+
+proc play*(pl: Playlist, index: int = -1): int =
+  ##  Play a music track from the ``playlist``.
+  ##
+  ##  ``index`` track index, or `-1` for a random track.
+  ##
+  ##  ``Retrun`` current track index.
+  ##
+  var idx: int = if index < 0: random(pl.list.len)
+                 else: index
+  if index < 0:
+    if playlist.list.len > 1:
+      while idx == pl.fIndex:
+        idx = random(playlist.list.len)
+  pl.fIndex = idx
+  pl.list[idx].play()
+  mix.hookMusicFinished(finished)
+  return idx
+
+
+proc stop*(pl: Playlist) =
+  musicStop()
+  pl.fIndex = -1
+
+
+proc update*(pl: Playlist) =
+  if pl.fFinished: # Play next track
+    pl.fFinished = false
+    discard pl.play()
 

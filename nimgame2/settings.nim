@@ -38,5 +38,3 @@ var
   colliderOutline*: bool  ##  Show collider outlines
   colliderOutlineColor*: sdl.Color  ##  Color of collider outlines
 
-
-

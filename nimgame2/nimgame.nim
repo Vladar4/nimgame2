@@ -28,7 +28,7 @@ import
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  count, draw, input, entity, scene, settings, types
+  audio, count, draw, input, entity, scene, settings, types
 
 
 type
@@ -324,6 +324,10 @@ proc run*(game: Game) =
         game.fScene.update(updateIntervalSec)
       lag -= updateInterval
       inc(updateCounter)
+
+    # Update playlist
+    if not (playlist == nil):
+      playlist.update()
 
     # Limit FPS
     if fpsLimit > 0:
