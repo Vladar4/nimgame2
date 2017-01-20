@@ -23,7 +23,7 @@
 
 
 import
-  math,
+  math, random,
   sdl2/sdl,
   texturegraphic, types
 
@@ -110,4 +110,50 @@ proc loadSurface*(file: string): Surface =
                     "Can't load image %s: %s",
                     file, img.getError())
     return nil
+
+
+#========#
+# Random #
+#========#
+
+proc random*[T](x: Slice[T], exclude: openArray[T]): T =
+  ##  ``Return`` a random number in the range ``min``..<``max``,
+  ##  except values in the ``exclude``.
+  ##
+  result = random(x)
+  while exclude.contains(result):
+    result = random(x)
+
+
+proc randomBool*(chance: float = 0.5): bool =
+  ##  ``Return`` `true` or `false`,
+  ##  based on the ``chance`` value (from `0.0` to `1.0`).
+  ##
+  return random(1.0) < chance.clamp(0.0, 1.0)
+
+
+proc randomSign*(chance: float = 0.5): int =
+  ##  ``Return`` `1` or `-1`,
+  ##  based on the ``chance`` value (from `0.0` to `1.0`).
+  ##
+  return if randomBool(chance): 1 else: -1
+
+
+proc randomWeighted*[T](weights: openArray[T]): int =
+  ##  ``Return`` a random integer, based on the ``weights`` array.
+  ##
+  ##  E.g., call of randomWeighted([2, 3, 5])
+  ##  will have a 20% chance of returning `0`, 30% chance of returning `1`,
+  ##  and 50% chance of returning `2`.
+  ##
+  var total: T = 0
+  for i in weights:
+    total += i
+
+  total = random(T(0)..total)
+  for i in 0..weights.high:
+    if total < weights[i]:
+      result = i
+      break
+    total -= weights[i]
 
