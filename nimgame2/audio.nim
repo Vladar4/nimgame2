@@ -22,10 +22,9 @@
 # Vladar vladar4@gmail.com
 
 import
-  random,
   sdl2/sdl,
   sdl2/sdl_mixer as mix,
-  types, settings
+  types, settings, utils
 
 
 type
@@ -154,10 +153,8 @@ proc volume*(sound: Sound): Volume {.inline.} =
 
 
 proc normalizeVolume*(val: int): Volume =
-  if val > Volume.high:
-    return Volume.high
-  if val < 0:
-    return 0
+  if val < 0: return 0
+  if val > Volume.high: return Volume.high
   return val
 
 
@@ -449,16 +446,11 @@ proc play*(pl: Playlist, index: int = -1): int =
   ##
   ##  ``Retrun`` current track index.
   ##
-  var idx: int = if index < 0: random(pl.list.len)
-                 else: index
-  if index < 0:
-    if playlist.list.len > 1:
-      while idx == pl.fIndex:
-        idx = random(playlist.list.len)
-  pl.fIndex = idx
-  pl.list[idx].play()
+  pl.fIndex = if index < 0: random(pl.list.len, exclude = [pl.fIndex])
+              else: index
+  pl.list[pl.fIndex].play()
   mix.hookMusicFinished(finished)
-  return idx
+  return pl.fIndex
 
 
 proc stop*(pl: Playlist) =

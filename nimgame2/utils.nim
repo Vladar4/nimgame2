@@ -116,6 +116,15 @@ proc loadSurface*(file: string): Surface =
 # Random #
 #========#
 
+proc random*[T](max: T, exclude: openArray[T]): T =
+  ##  ``Return`` a random number in the range ``min``..<``max``,
+  ##  except values in the ``exclude``.
+  ##
+  result = random(max)
+  while exclude.contains(result):
+    result = random(max)
+
+
 proc random*[T](x: Slice[T], exclude: openArray[T]): T =
   ##  ``Return`` a random number in the range ``min``..<``max``,
   ##  except values in the ``exclude``.
