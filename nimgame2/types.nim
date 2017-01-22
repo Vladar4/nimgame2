@@ -76,6 +76,10 @@ proc `==`*(c1, c2: Coord): bool {.inline.} =
   return (c1.x == c2.x) and (c1.y == c2.y)
 
 
+proc `-`*(c: Coord): Coord {.inline.} =
+  return (-c.x, -c.y)
+
+
 proc `+`*(c1, c2: Coord): Coord {.inline.} =
   result.x = c1.x + c2.x
   result.y = c1.y + c2.y
