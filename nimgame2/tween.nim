@@ -21,17 +21,21 @@
 #
 # Vladar vladar4@gmail.com
 
+import
+  math
+
+
 type
   Tween*[T,V] = ref object of RootObj
     target: T                   ##  Target object
     get: proc(e: T): V          ##  A value getter procedure
     set: proc(e: T, v: V)       ##  A value setter procedure
-    fStart, fFinish, fSpeed: V  ##  Starting, finishing values, \
-                                ##  and speed of change (per second)
-    fDuration: float            ##  Duration (in seconds)
+    fStart, fFinish: V          ##  Starting and finishing values
+    fDistance: V                ##  Total distance (finish - start)
+    fElapsed, fDuration: float  ##  Elapsed and total duration (in seconds)
     loop*, loopLimit*: int      ##  Loop counter and loop limit
     running*: bool              ##  Running status flag
-    procedure*: proc(tween: Tween[T,V], elapsed: float) ##  \
+    procedure*: proc(tween: Tween[T,V]) ##  \
       ##  Value changing procedure, called from the ``update()``
     ender*: proc (tween: Tween[T,V]) ## \
       ##  Loop ending procedure, called from the ``update()``
@@ -40,13 +44,6 @@ type
 #=========#
 # Private #
 #=========#
-
-proc between[V](val, start, finish: V): bool =
-  let
-    lo = min(start, finish)
-    hi = max(start, finish)
-  return (val > lo) and (val < hi)
-
 
 proc nextLoop(tween: Tween): bool =
   inc tween.loop
@@ -87,22 +84,35 @@ proc finish*[T,V](tween: Tween[T,V]): V {.inline.} =
   return tween.fFinish
 
 
+proc distance*[T,V](tween: Tween[T,V]): V {.inline.} =
+  ##  ``Return`` the total distance.
+  ##
+  return tween.fDistance
+
+
 proc duration*(tween: Tween): float {.inline.} =
-  ##  ``Return`` ``tween``'s duration.
+  ##  ``Return`` ``tween``'s total duration.
   ##
   return tween.fDuration
 
 
-proc speed*[T,V](tween: Tween[T,V]): V {.inline.} =
-  ##  ``Return`` the speed of ``tween`` target variable change (per second).
+proc elapsed*(tween: Tween): float {.inline.} =
+  ##  ``Return`` ``tween``'s elapsed duration.
   ##
-  return tween.fSpeed
+  return tween.fElapsed
+
+
+proc progress*(tween: Tween): float =
+  ##  ``Return`` ``tween`` progress in `0.0`..`1.0` range.
+  ##
+  return tween.fElapsed / tween.fDuration
 
 
 proc play*(tween: Tween) =
   ##  Start playing ``tween`` with previously set params.
   ##
   tween.value = tween.fStart
+  tween.fElapsed = 0.0
   tween.running = true
   tween.loop = 0
 
@@ -120,7 +130,7 @@ proc setup*[T,V](tween: Tween[T,V],
   tween.fStart = start
   tween.fFinish = finish
   tween.fDuration = duration
-  tween.fSpeed = (finish - start) / duration
+  tween.fDistance = finish - start
   tween.loopLimit = loops
 
 
@@ -128,7 +138,8 @@ proc update*(tween: Tween, elapsed: float) =
   ##  Tween update procedure. Call it from the scene update method.
   ##
   if tween.running:
-    tween.procedure(tween, elapsed)
+    tween.fElapsed += elapsed
+    tween.procedure(tween)
     tween.ender(tween)
 
 
@@ -136,12 +147,23 @@ proc update*(tween: Tween, elapsed: float) =
 # Procedures #
 #============#
 
-proc linear*(tween: Tween, elapsed: float) {.procvar.} =
-  ##  Tween procedure.
+proc linear*(tween: Tween) {.procvar.} =
+  ##  Linear tween procedure.
   ##
-  ##  Changes ``tween`` value lineary from ``start`` to ``finish``.
+  tween.value = tween.fStart + tween.fDistance * tween.progress
+
+
+proc inQuad*(tween: Tween) {.procvar.} =
+  ##  Ease In Quadratic tween procedure.
   ##
-  tween.value = tween.value + tween.fSpeed * elapsed
+  tween.value = tween.fStart + tween.fDistance * pow(tween.progress, 2)
+
+
+proc outQuad*(tween: Tween) {.procvar.} =
+  ##  Ease Out Quadratic tween procedure.
+  ##
+  let progress = tween.progress
+  tween.value = tween.fStart - tween.fDistance * progress * (progress - 2.0)
 
 
 #========#
@@ -157,9 +179,11 @@ proc reversing*(tween: Tween) {.procvar.} =
   ##
   ##  ``Note:`` each reversal counts as one loop.
   ##
-  if not tween.value.between(tween.fStart, tween.fFinish):
+  if tween.progress >= 1.0:
     if tween.nextLoop():
-      tween.fSpeed = -tween.fSpeed
+      swap(tween.fStart, tween.fFinish)
+      tween.fDistance = -tween.fDistance
+      tween.fElapsed = 0.0
 
 
 proc repeating*(tween: Tween) {.procvar.} =
@@ -167,9 +191,10 @@ proc repeating*(tween: Tween) {.procvar.} =
   ##
   ##  Repeats from ``start`` to ``finish`` on each loop.
   ##
-  if not tween.value.between(tween.fStart, tween.fFinish):
+  if tween.progress >= 1.0:
     if tween.nextLoop():
       tween.value = tween.fStart
+      tween.fElapsed = 0.0
 
 
 #=======#
