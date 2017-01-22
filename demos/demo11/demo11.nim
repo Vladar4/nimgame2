@@ -4,8 +4,8 @@ import
   mainscene
 
 game = newGame()
-if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 3 (Input & Physics)"):
-  showInfo = true
+if game.init(w = 1280, h = 720, title = "Nimgame 2: Demo 11 (Tweens)"):
+  #showInfo = true
   game.scene = newMainScene()
   game.run()
 

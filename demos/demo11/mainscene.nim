@@ -64,24 +64,26 @@ proc init*(scene: MainScene) =
   discard scene.font.load("../assets/fnt/default8x16.png", (8, 16))
 
   # Column 1
-  scene.addEntity("linear", (100.0, 100.0), linear)
-  scene.addEntity("inQuad", (100.0, 150.0), inQuad)
-  scene.addEntity("outQuad", (100.0, 200.0), outQuad)
-  scene.addEntity("inOutQuad", (100.0, 250.0), inOutQuad)
-  scene.addEntity("inCubic", (100.0, 300.0), inCubic)
-  scene.addEntity("outCubic", (100.0, 350.0), outCubic)
-  scene.addEntity("inOutCubic", (100.0, 400.0), inOutCubic)
-  scene.addEntity("outInCubic", (100.0, 450.0), outInCubic)
+  scene.addEntity("linear", (100.0, 35.0), linear)
+  scene.addEntity("inQuad", (100.0, 85.0), inQuad)
+  scene.addEntity("outQuad", (100.0, 135.0), outQuad)
+  scene.addEntity("inOutQuad", (100.0, 185.0), inOutQuad)
+
+  scene.addEntity("inCubic", (100.0, 285.0), inCubic)
+  scene.addEntity("outCubic", (100.0, 335.0), outCubic)
+  scene.addEntity("inOutCubic", (100.0, 385.0), inOutCubic)
+  scene.addEntity("outInCubic", (100.0, 435.0), outInCubic)
+
+  scene.addEntity("inQuart", (100.0, 535.0), inQuart)
+  scene.addEntity("outQuart", (100.0, 585.0), outQuart)
+  scene.addEntity("inOutQuart", (100.0, 635.0), inOutQuart)
+  scene.addEntity("outInQuart", (100.0, 685.0), outInQuart)
 
   # Column 2
-  scene.addEntity("inQuart", (400.0, 100.0), inQuart)
-  scene.addEntity("outQuart", (400.0, 150.0), outQuart)
-  scene.addEntity("inOutQuart", (400.0, 200.0), inOutQuart)
-  scene.addEntity("outInQuart", (400.0, 250.0), outInQuart)
-  scene.addEntity("inQuint", (400.0, 300.0), inQuint)
-  scene.addEntity("outQuint", (400.0, 350.0), outQuint)
-  scene.addEntity("inOutQuint", (400.0, 400.0), inOutQuint)
-  scene.addEntity("outInQuint", (400.0, 450.0), outInQuint)
+  scene.addEntity("inQuint", (400.0, 35.0), inQuint)
+  scene.addEntity("outQuint", (400.0, 85.0), outQuint)
+  scene.addEntity("inOutQuint", (400.0, 135.0), inOutQuint)
+  scene.addEntity("outInQuint", (400.0, 185.0), outInQuint)
 
 
 

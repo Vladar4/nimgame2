@@ -1,7 +1,7 @@
 Nimgame 2: Demo 11
 ==================
 
-Tween demo. Demonstrates tweening usage.
+Tweens demo. Demonstrates tweening procedures.
 
 ![Screenshot](demo11.png)
 
