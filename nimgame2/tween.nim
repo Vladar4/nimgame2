@@ -21,10 +21,6 @@
 #
 # Vladar vladar4@gmail.com
 
-import
-  entity
-
-
 type
 
   Tween*[T,V] = ref object of RootObj
