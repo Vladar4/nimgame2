@@ -22,7 +22,6 @@
 # Vladar vladar4@gmail.com
 
 type
-
   Tween*[T,V] = ref object of RootObj
     target: T                   ##  Target object
     get: proc(e: T): V          ##  A value getter procedure
@@ -35,6 +34,7 @@ type
       ##  Value changing procedure, called from the ``update()``
     ender*: proc (tween: Tween[T,V]) ## \
       ##  Loop ending procedure, called from the ``update()``
+
 
 #=========#
 # Private #
@@ -55,16 +55,21 @@ proc nextLoop(tween: Tween): bool =
     result = true
   tween.running = result
 
+
 #========#
 # Public #
 #========#
 
 proc value*[T,V](tween: Tween[T,V]): V {.inline.} =
+  ##  ``Return`` the target value of ``tween``.
+  ##
   if not (tween.get == nil):
     return tween.get(tween.target)
 
 
 proc `value=`*[T,V](tween: Tween[T,V], val: V) {.inline.} =
+  ##  Set the target value of ``tween`` to ``val``.
+  ##
   if not (tween.set == nil):
     tween.set(tween.target, val)
 
@@ -89,6 +94,7 @@ proc play*[T,V](tween: Tween[T,V], start, finish, speed: V, loops = 0) =
 
 proc update*(tween: Tween, elapsed: float) =
   ##  Tween update procedure. Call it from the scene update method.
+  ##
   if tween.running:
     tween.procedure(tween, elapsed)
     tween.ender(tween)
