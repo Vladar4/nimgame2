@@ -85,6 +85,10 @@ proc init*(scene: MainScene) =
   scene.addEntity("inOutQuint", (400.0, 135.0), inOutQuint)
   scene.addEntity("outInQuint", (400.0, 185.0), outInQuint)
 
+  scene.addEntity("inSine", (400.0, 285.0), inSine)
+  scene.addEntity("outSine", (400.0, 335.0), outSine)
+  scene.addEntity("inOutSine", (400.0, 385.0), inOutSine)
+  scene.addEntity("outInSine", (400.0, 435.0), outInSine)
 
 
 proc free*(scene: MainScene) =
