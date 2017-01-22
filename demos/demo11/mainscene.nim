@@ -23,8 +23,7 @@ type
 proc addEntity*(scene: MainScene,
                 name: string,
                 pos: Coord,
-                procedure: proc(start, distance: Coord,
-                                elapsed, duration: float): Coord) =
+                procedure: TweenProcedure[Coord]) =
   # Name
   let n = newTextGraphic()
   n.font = scene.font
@@ -89,6 +88,33 @@ proc init*(scene: MainScene) =
   scene.addEntity("outSine", (400.0, 335.0), outSine)
   scene.addEntity("inOutSine", (400.0, 385.0), inOutSine)
   scene.addEntity("outInSine", (400.0, 435.0), outInSine)
+
+  # Column 3
+  scene.addEntity("inExpo", (700.0, 35.0), inExpo)
+  scene.addEntity("outExpo", (700.0, 85.0), outExpo)
+  scene.addEntity("inOutExpo", (700.0, 135.0), inOutExpo)
+  scene.addEntity("outInExpo", (700.0, 185.0), outInExpo)
+
+  scene.addEntity("inCirc", (700.0, 285.0), inCirc)
+  scene.addEntity("outCirc", (700.0, 335.0), outCirc)
+  scene.addEntity("inOutCirc", (700.0, 385.0), inOutCirc)
+  scene.addEntity("outInCirc", (700.0, 435.0), outInCirc)
+
+  # Column 4
+  scene.addEntity("inBounce", (1000.0, 35.0), inBounce)
+  scene.addEntity("outBounce", (1000.0, 85.0), outBounce)
+  scene.addEntity("inOutBounce", (1000.0, 135.0), inOutBounce)
+  scene.addEntity("outInBounce", (1000.0, 185.0), outInBounce)
+
+  #scene.addEntity("inElastic", (1000.0, 285.0), inElastic)
+  #scene.addEntity("outElastic", (1000.0, 335.0), outElastic)
+  #scene.addEntity("inOutElastic", (1000.0, 385.0), inOutElastic)
+  #scene.addEntity("outInElastic", (1000.0, 435.0), outInElastic)
+
+  #scene.addEntity("inBack", (1000.0, 535.0), inBack)
+  #scene.addEntity("outBack", (1000.0, 585.0), outBack)
+  #scene.addEntity("inOutBack", (1000.0, 635.0), inOutBack)
+  #scene.addEntity("outInBack", (1000.0, 685.0), outInBack)
 
 
 proc free*(scene: MainScene) =

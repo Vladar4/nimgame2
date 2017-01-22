@@ -27,9 +27,23 @@ import
 
 const
   Pi2 = Pi / 2
+  BounceTime = [1 / 2.75, 2 / 2.75,   2.5 / 2.75]
+  BounceSub =  [0.0,      1.5 / 2.75, 2.25 / 2.75,  2.625 / 2.75]
+  BounceAdd =  [0.0,      0.75,       0.9375,       0.984375]
+  BounceMul = 7.5625
+  DefaultAmplitude = 0.0
+  DefaultPeriodMul = 0.45
+  DefaultBack = 1.70158
 
 
 type
+  TweenProcedure*[V] = proc(
+    start, distance: V,
+    elapsed, duration: float,
+    amplitude, period, back: float): V
+
+  TweenEnder*[T,V] = proc(tween: Tween[T,V])
+
   Tween*[T,V] = ref object of RootObj
     target: T                   ##  Target object
     get: proc(e: T): V          ##  A value getter procedure
@@ -37,11 +51,13 @@ type
     fStart, fFinish: V          ##  Starting and finishing values
     fDistance: V                ##  Total distance (finish - start)
     fElapsed, fDuration: float  ##  Elapsed and total duration (in seconds)
+    amplitude*, period*: float  ##  Ease Bounce amplitude and period
+    back*: float                ##  Ease Back coefficient
     loop*, loopLimit*: int      ##  Loop counter and loop limit
     running*: bool              ##  Running status flag
-    procedure*: proc(start, distance: V, elapsed, duration: float): V ##  \
+    procedure*: TweenProcedure[V] ##  \
       ##  Value changing procedure, called from the ``update()``
-    ender*: proc (tween: Tween[T,V]) ## \
+    ender*: TweenEnder[T,V] ## \
       ##  Loop ending procedure, called from the ``update()``
 
 
@@ -139,6 +155,9 @@ proc setup*[T,V](tween: Tween[T,V],
   tween.fFinish = finish
   tween.fDuration = duration
   tween.fDistance = finish - start
+  tween.amplitude = DefaultAmplitude
+  tween.period = duration * DefaultPeriodMul
+  tween.back = DefaultBack
   tween.loopLimit = loops
 
 
@@ -148,7 +167,8 @@ proc update*(tween: Tween, elapsed: float) =
   if tween.running:
     tween.fElapsed += elapsed
     tween.value = tween.procedure(
-      tween.start, tween.distance, tween.elapsed, tween.duration)
+      tween.start, tween.distance, tween.elapsed, tween.duration,
+      tween.amplitude, tween.period, tween.back)
     tween.ender(tween)
 
 
@@ -158,7 +178,8 @@ proc update*(tween: Tween, elapsed: float) =
 
 # LINEAR #
 
-proc linear*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc linear*[V](start, distance: V, elapsed, duration: float,
+                amplitude, period, back: float): V {.procvar.} =
   ##  Linear tween procedure.
   ##
   return start + distance * progress(elapsed, duration)
@@ -166,20 +187,23 @@ proc linear*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
 
 # QUAD #
 
-proc inQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inQuad*[V](start, distance: V, elapsed, duration: float,
+                amplitude, period, back: float): V {.procvar.} =
   ##  Ease In Quadratic tween procedure.
   ##
   return start + distance * pow(progress(elapsed, duration), 2)
 
 
-proc outQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outQuad*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out Quadratic tween procedure.
   ##
   let progress = progress(elapsed, duration)
   return start - distance * progress * (progress - 2)
 
 
-proc inOutQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inOutQuad*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
   ##  Ease In/Out Quadratic tween procedure.
   ##
   let x2progress = progress(elapsed, duration) * 2
@@ -193,19 +217,22 @@ proc inOutQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} 
 
 # CUBIC #
 
-proc inCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inCubic*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
   ##  Ease In Cubic tween procedure.
   ##
   return start + distance * pow(progress(elapsed, duration), 3)
 
 
-proc outCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outCubic*[V](start, distance: V, elapsed, duration: float,
+                  amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out Cubic tween procedure.
   ##
   return start + distance * (pow(progress(elapsed, duration) - 1, 3) + 1)
 
 
-proc inOutCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inOutCubic*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##  Ease In/Out Cubic tween procedure.
   ##
   let x2progress = progress(elapsed, duration) * 2
@@ -216,32 +243,41 @@ proc inOutCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.}
       start + distance / 2.0 * (pow(x2progress - 2, 3) + 2)
 
 
-proc outInCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outInCubic*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out/In Cubic tween procedure.
   ##
-  let distance2 = distance / 2.0
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
   return
-    if elapsed < duration / 2:
-      outCubic(start, distance / 2.0, elapsed * 2, duration)
+    if x2elapsed < duration:
+      outCubic(start, distance2, x2elapsed, duration,
+               amplitude, period, back)
     else:
-      inCubic(start + distance2, distance2, elapsed * 2 - duration, duration)
+      inCubic(start + distance2, distance2, x2elapsed - duration, duration,
+               amplitude, period, back)
+
 
 
 # QUART #
 
-proc inQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inQuart*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
   ##  Ease In Quart tween procedure.
   ##
   return start + distance * pow(progress(elapsed, duration), 4)
 
 
-proc outQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outQuart*[V](start, distance: V, elapsed, duration: float,
+                  amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out Quart tween procedure.
   ##
   return start - distance * (pow(progress(elapsed, duration) - 1, 4) - 1)
 
 
-proc inOutQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inOutQuart*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##  Ease In/Out Quart tween procedure.
   ##
   let x2progress = progress(elapsed, duration) * 2
@@ -252,32 +288,40 @@ proc inOutQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.}
       start - distance / 2.0 * (pow(x2progress - 2, 4) - 2)
 
 
-proc outInQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outInQuart*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##   Ease Out/In Quart tween procedure
   ##
-  let distance2 = distance / 2.0
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
   return
-    if elapsed < duration / 2:
-      outQuart(start, distance2, elapsed * 2, duration)
+    if x2elapsed < duration:
+      outQuart(start, distance2, x2elapsed, duration,
+               amplitude, period, back)
     else:
-      inQuart(start + distance2, distance2, elapsed * 2 - duration, duration)
+      inQuart(start + distance2, distance2, x2elapsed - duration, duration,
+              amplitude, period, back)
 
 
 # QUINT #
 
-proc inQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inQuint*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
   ##  Ease In Quint tween procedure.
   ##
   return start + distance * pow(progress(elapsed, duration), 5)
 
 
-proc outQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outQuint*[V](start, distance: V, elapsed, duration: float,
+                  amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out Quint tween procedure.
   ##
   return start + distance * (pow(progress(elapsed, duration) - 1, 5) + 1)
 
 
-proc inOutQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inOutQuint*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##  Ease In/Out Quint tween procedure.
   ##
   let x2progress = progress(elapsed, duration) * 2
@@ -288,48 +332,230 @@ proc inOutQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.}
       start + distance / 2.0 * (pow(x2progress - 2, 5) + 2)
 
 
-proc outInQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outInQuint*[V](start, distance: V, elapsed, duration: float,
+                    amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out/In Quint tween procedure.
   ##
-  let distance2 = distance / 2.0
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
   return
-    if elapsed < duration / 2:
-      outQuint(start, distance2, elapsed * 2, duration)
+    if x2elapsed < duration:
+      outQuint(start, distance2, x2elapsed, duration,
+               amplitude, period, back)
     else:
-      inQuint(start + distance2, distance2, elapsed * 2 - duration, duration)
+      inQuint(start + distance2, distance2, x2elapsed - duration, duration,
+              amplitude, period, back)
 
 
 # SINE #
 
-proc inSine*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inSine*[V](start, distance: V, elapsed, duration: float,
+                amplitude, period, back: float): V {.procvar.} =
   ##  Ease In Sine tween procedure.
   ##
   return start + distance - distance * cos(progress(elapsed, duration) * Pi2)
 
 
-proc outSine*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outSine*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out Sine tween procedure.
   ##
   return start + distance * sin(progress(elapsed, duration) * Pi2)
 
 
-proc inOutSine*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc inOutSine*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
   ##  Ease In/Out Sine tween procedure.
   ##
   return start - distance / 2.0 * (cos(progress(elapsed, duration) * Pi) - 1)
 
 
-proc outInSine*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+proc outInSine*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
   ##  Ease Out/In Sine tween procedure.
   ##
   let
+    x2elapsed = elapsed * 2
     distance2 = distance / 2.0
   return
-    if elapsed < duration / 2:
-      outSine(start, distance2, elapsed * 2, duration)
+    if x2elapsed < duration:
+      outSine(start, distance2, x2elapsed, duration,
+              amplitude, period, back)
     else:
-      inSine(start + distance2, distance2, elapsed * 2 - duration, duration)
+      inSine(start + distance2, distance2, x2elapsed - duration, duration,
+             amplitude, period, back)
 
+
+# EXPO #
+
+proc inExpo*[V](start, distance: V, elapsed, duration: float,
+                amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In Expo tween procedure.
+  ##
+  return
+    if elapsed == 0.0:
+      start
+    else:
+      start - distance * 0.001 + distance *
+        pow(2, 10 * (progress(elapsed, duration) - 1))
+
+
+proc outExpo*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out Expo tween procedure.
+  ##
+  return
+    if elapsed == duration:
+      start + distance
+    else:
+      start +
+      distance * 1.001 * (-pow(2, -10 * progress(elapsed, duration)) + 1)
+
+
+proc inOutExpo*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In/Out Expo tween procedure.
+  ##
+  if elapsed == 0.0:
+    return start
+  elif elapsed == duration:
+    return start + distance
+  else:
+    let x2progress = progress(elapsed, duration) * 2
+    return
+      if x2progress < 1:
+        start - distance * 0.0005 + distance / 2.0 *
+          pow(2, 10 * (x2progress - 1))
+      else:
+        start + distance / 2.0 * 1.0005 *
+          (-pow(2, -10 * (x2progress - 1)) + 2)
+
+
+proc outInExpo*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out/In Expo tween procedure.
+  ##
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
+  return
+    if x2elapsed < duration:
+      outExpo(start, distance2, x2elapsed, duration,
+              amplitude, period, back)
+    else:
+      inExpo(start + distance2, distance2, x2elapsed - duration, duration,
+             amplitude, period, back)
+
+
+# CIRC #
+
+proc inCirc*[V](start, distance: V, elapsed, duration: float,
+                amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In Circ tween procedure.
+  ##
+  return start - distance *
+    (sqrt(1 - pow(progress(elapsed, duration), 2)) - 1)
+
+
+proc outCirc*[V](start, distance: V, elapsed, duration: float,
+                 amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out Circ tween procedure.
+  ##
+  return start + distance *
+    sqrt(1 - pow(progress(elapsed, duration) - 1, 2))
+
+
+proc inOutCirc*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In/Out Circ tween procedure.
+  ##
+  let x2progress = progress(elapsed, duration) * 2
+  return
+    if x2progress < 1:
+      start - distance / 2.0 * (sqrt(1 - pow(x2progress, 2)) - 1)
+    else:
+      start + distance / 2.0 * (sqrt(1 - pow(x2progress - 2, 2)) + 1)
+
+
+proc outInCirc*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out/In Circ tween procedure.
+  ##
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
+  return
+    if x2elapsed < duration:
+      outCirc(start, distance2, x2elapsed, duration,
+              amplitude, period, back)
+    else:
+      inCirc(start + distance2, distance2, x2elapsed - duration, duration,
+             amplitude, period, back)
+
+
+# Bounce #
+
+proc outBounce*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out Bounce tween procedure.
+  ##
+  let progress = progress(elapsed, duration)
+  return
+    if progress < BounceTime[0]:
+      start + distance *
+        (BounceMul * pow(progress - BounceSub[0], 2) + BounceAdd[0])
+    elif progress < BounceTime[1]:
+      start + distance *
+        (BounceMul * pow(progress - BounceSub[1], 2) + BounceAdd[1])
+    elif progress < BounceTime[2]:
+      start + distance *
+        (BounceMul * pow(progress - BounceSub[2], 2) + BounceAdd[2])
+    else:
+      start + distance *
+        (BounceMul * pow(progress - BounceSub[3], 2) + BounceAdd[3])
+
+
+proc inBounce*[V](start, distance: V, elapsed, duration: float,
+                  amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In Bounce tween procedure.
+  ##
+  return
+    start + distance -
+      outBounce(start - start, distance, duration - elapsed, duration,
+                amplitude, period, back)
+
+
+proc inOutBounce*[V](start, distance: V, elapsed, duration: float,
+                   amplitude, period, back: float): V {.procvar.} =
+  ##  Ease In/Out Bounce tween procedure.
+  ##
+  let x2elapsed = elapsed * 2
+  return
+    if x2elapsed < duration:
+      start +
+        inBounce(start - start, distance, x2elapsed, duration,
+                 amplitude, period, back) * 0.5
+    else:
+      start + distance / 2.0 +
+        outBounce(start - start, distance, x2elapsed - duration, duration,
+                  amplitude, period, back) * 0.5
+
+
+proc outInBounce*[V](start, distance: V, elapsed, duration: float,
+                     amplitude, period, back: float): V {.procvar.} =
+  ##  Ease Out/In Bounce tween procedure.
+  ##
+  let
+    x2elapsed = elapsed * 2
+    distance2 = distance / 2.0
+  return
+    if x2elapsed < duration:
+      outBounce(start, distance2, x2elapsed, duration,
+                amplitude, period, back)
+    else:
+      inBounce(start + distance2, distance2, x2elapsed - duration, duration,
+               amplitude, period, back)
 
 
 #========#
