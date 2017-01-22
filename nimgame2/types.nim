@@ -23,6 +23,7 @@
 
 
 import
+  math,
   sdl2/sdl
 
 
@@ -125,6 +126,10 @@ proc `+`*(c: Coord, v: float): Coord {.inline.} =
   result.y = c.y + v
 
 
+template `+`*(v: float, c: Coord): Coord =
+  (c + v)
+
+
 proc `+=`*(c: var Coord, v: float) {.inline.} =
   c.x += v
   c.y += v
@@ -135,6 +140,10 @@ proc `-`*(c: Coord, v: float): Coord {.inline.} =
   result.y = c.y - v
 
 
+template `-`*(v: float, c: Coord): Coord =
+  (-c + v)
+
+
 proc `-=`*(c: var Coord, v: float) {.inline.} =
   c.x -= v
   c.y -= v
@@ -143,6 +152,10 @@ proc `-=`*(c: var Coord, v: float) {.inline.} =
 proc `*`*(c: Coord, v: float): Coord {.inline.} =
   result.x = c.x * v
   result.y = c.y * v
+
+
+template `*`(v: float, c: Coord): Coord =
+  (c * v)
 
 
 proc `*=`*(c: var Coord, v: float) {.inline.} =
@@ -158,6 +171,21 @@ proc `/`*(c: Coord, v: float): Coord {.inline.} =
 proc `/=`*(c: var Coord, v: float) {.inline.} =
   c.x /= v
   c.y /= v
+
+
+proc abs*(c: Coord): Coord {.inline.} =
+  result.x = abs(c.x)
+  result.y = abs(c.y)
+
+
+proc sin*(c: Coord): Coord {.inline.} =
+  result.x = sin(c.x)
+  result.y = sin(c.y)
+
+
+proc arcsin*(c: Coord): Coord {.inline.} =
+  result.x = arcsin(c.x)
+  result.y = arcsin(c.y)
 
 
 converter toDim*(c: Coord): Dim =
