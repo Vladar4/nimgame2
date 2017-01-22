@@ -35,7 +35,7 @@ type
     fElapsed, fDuration: float  ##  Elapsed and total duration (in seconds)
     loop*, loopLimit*: int      ##  Loop counter and loop limit
     running*: bool              ##  Running status flag
-    procedure*: proc(tween: Tween[T,V]) ##  \
+    procedure*: proc(start, distance: V, elapsed, duration: float): V ##  \
       ##  Value changing procedure, called from the ``update()``
     ender*: proc (tween: Tween[T,V]) ## \
       ##  Loop ending procedure, called from the ``update()``
@@ -44,6 +44,10 @@ type
 #=========#
 # Private #
 #=========#
+
+template progress(elapsed, duration: float): float =
+  (elapsed / duration)
+
 
 proc nextLoop(tween: Tween): bool =
   inc tween.loop
@@ -139,7 +143,8 @@ proc update*(tween: Tween, elapsed: float) =
   ##
   if tween.running:
     tween.fElapsed += elapsed
-    tween.procedure(tween)
+    tween.value = tween.procedure(
+      tween.start, tween.distance, tween.elapsed, tween.duration)
     tween.ender(tween)
 
 
@@ -147,23 +152,69 @@ proc update*(tween: Tween, elapsed: float) =
 # Procedures #
 #============#
 
-proc linear*(tween: Tween) {.procvar.} =
+proc linear*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Linear tween procedure.
   ##
-  tween.value = tween.fStart + tween.fDistance * tween.progress
+  return start + distance * progress(elapsed, duration)
 
 
-proc inQuad*(tween: Tween) {.procvar.} =
+proc inQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Ease In Quadratic tween procedure.
   ##
-  tween.value = tween.fStart + tween.fDistance * pow(tween.progress, 2)
+  return start + distance * pow(progress(elapsed, duration), 2)
 
 
-proc outQuad*(tween: Tween) {.procvar.} =
+proc outQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Ease Out Quadratic tween procedure.
   ##
-  let progress = tween.progress
-  tween.value = tween.fStart - tween.fDistance * progress * (progress - 2.0)
+  let progress = progress(elapsed, duration)
+  return start - distance * progress * (progress - 2.0)
+
+
+proc inOutQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In/Out Quadratic tween procedure.
+  ##
+  let x2progress = progress(elapsed, duration) * 2.0
+  return
+    if x2progress < 1.0:
+      start + distance / 2.0 * pow(x2progress, 2)
+    else:
+      start - distance / 2.0 *
+        ((x2progress - 1.0) * (x2progress - 3.0) - 1.0)
+
+
+proc inCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In Cubic tween procedure.
+  ##
+  return start + distance * pow(progress(elapsed, duration), 3)
+
+
+proc outCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease Out Cubic tween procedure.
+  ##
+  return start + distance * (pow(progress(elapsed, duration) - 1.0, 3) + 1.0)
+
+
+proc inOutCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In/Out Cubic tween procedure.
+  ##
+  let x2progress = progress(elapsed, duration) * 2.0
+  return
+    if x2progress < 1.0:
+      start + distance / 2.0 * pow(x2progress, 3)
+    else:
+      start + distance / 2.0 * (pow(x2progress - 2.0, 3) + 2.0)
+
+
+proc outInCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease Out/In Cubic tween procedure.
+  ##
+  let distance2 = distance / 2.0
+  return
+    if elapsed < duration / 2.0:
+      outCubic(start, distance / 2.0, elapsed * 2, duration)
+    else:
+      inCubic(start + distance2, distance2, elapsed * 2 - duration, duration)
 
 
 #========#
