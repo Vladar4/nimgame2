@@ -152,11 +152,15 @@ proc update*(tween: Tween, elapsed: float) =
 # Procedures #
 #============#
 
+# LINEAR #
+
 proc linear*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Linear tween procedure.
   ##
   return start + distance * progress(elapsed, duration)
 
+
+# QUAD #
 
 proc inQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Ease In Quadratic tween procedure.
@@ -182,6 +186,8 @@ proc inOutQuad*[V](start, distance: V, elapsed, duration: float): V {.procvar.} 
       start - distance / 2.0 *
         ((x2progress - 1.0) * (x2progress - 3.0) - 1.0)
 
+
+# CUBIC #
 
 proc inCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
   ##  Ease In Cubic tween procedure.
@@ -215,6 +221,78 @@ proc outInCubic*[V](start, distance: V, elapsed, duration: float): V {.procvar.}
       outCubic(start, distance / 2.0, elapsed * 2, duration)
     else:
       inCubic(start + distance2, distance2, elapsed * 2 - duration, duration)
+
+
+# QUART #
+
+proc inQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In Quart tween procedure.
+  ##
+  return start + distance * pow(progress(elapsed, duration), 4)
+
+
+proc outQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease Out Quart tween procedure.
+  ##
+  return start - distance * (pow(progress(elapsed, duration) - 1.0, 4) - 1.0)
+
+
+proc inOutQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In/Out Quart tween procedure.
+  ##
+  let x2progress = progress(elapsed, duration) * 2
+  return
+    if x2progress < 1.0:
+      start + distance / 2.0 * pow(x2progress, 4)
+    else:
+      start - distance / 2.0 * (pow(x2progress - 2.0, 4) - 2.0)
+
+
+proc outInQuart*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##   Ease Out/In Quart tween procedure
+  ##
+  let distance2 = distance / 2.0
+  return
+    if elapsed < duration / 2.0:
+      outQuart(start, distance2, elapsed * 2, duration)
+    else:
+      inQuart(start + distance2, distance2, elapsed * 2 - duration, duration)
+
+
+# QUINT #
+
+proc inQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In Quint tween procedure.
+  ##
+  return start + distance * pow(progress(elapsed, duration), 5)
+
+
+proc outQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease Out Quint tween procedure.
+  ##
+  return start + distance * (pow(progress(elapsed, duration) - 1.0, 5) + 1.0)
+
+
+proc inOutQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease In/Out Quint tween procedure.
+  ##
+  let x2progress = progress(elapsed, duration) * 2
+  return
+    if x2progress < 1.0:
+      start + distance / 2.0 * pow(x2progress, 5)
+    else:
+      start + distance / 2.0 * (pow(x2progress - 2.0, 5) + 2.0)
+
+
+proc outInQuint*[V](start, distance: V, elapsed, duration: float): V {.procvar.} =
+  ##  Ease Out/In Quint tween procedure.
+  ##
+  let distance2 = distance / 2.0
+  return
+    if elapsed < duration / 2.0:
+      outQuint(start, distance2, elapsed * 2, duration)
+    else:
+      inQuint(start + distance2, distance2, elapsed * 2 - duration, duration)
 
 
 #========#

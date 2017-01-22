@@ -31,7 +31,7 @@ proc addEntity*(scene: MainScene,
   n.lines = [name]
   let ne = newEntity()
   ne.graphic = n
-  ne.pos = pos - (96.0, 8.0)
+  ne.pos = pos - (98.0, 8.0)
   scene.add(ne)
 
   # Entity
@@ -47,7 +47,7 @@ proc addEntity*(scene: MainScene,
     proc(t: Entity, val: Coord) = t.pos = val)
   t.procedure = procedure
   scene.tweens.add(t)
-  t.setup(e.pos, e.pos + (200.0, 0.0), 1.5, -1)
+  t.setup(e.pos, e.pos + (150.0, 0.0), 3.0, -1)
   t.play()
 
 
@@ -63,6 +63,7 @@ proc init*(scene: MainScene) =
   scene.font = newBitmapFont()
   discard scene.font.load("../assets/fnt/default8x16.png", (8, 16))
 
+  # Column 1
   scene.addEntity("linear", (100.0, 100.0), linear)
   scene.addEntity("inQuad", (100.0, 150.0), inQuad)
   scene.addEntity("outQuad", (100.0, 200.0), outQuad)
@@ -71,6 +72,16 @@ proc init*(scene: MainScene) =
   scene.addEntity("outCubic", (100.0, 350.0), outCubic)
   scene.addEntity("inOutCubic", (100.0, 400.0), inOutCubic)
   scene.addEntity("outInCubic", (100.0, 450.0), outInCubic)
+
+  # Column 2
+  scene.addEntity("inQuart", (400.0, 100.0), inQuart)
+  scene.addEntity("outQuart", (400.0, 150.0), outQuart)
+  scene.addEntity("inOutQuart", (400.0, 200.0), inOutQuart)
+  scene.addEntity("outInQuart", (400.0, 250.0), outInQuart)
+  scene.addEntity("inQuint", (400.0, 300.0), inQuint)
+  scene.addEntity("outQuint", (400.0, 350.0), outQuint)
+  scene.addEntity("inOutQuint", (400.0, 400.0), inOutQuint)
+  scene.addEntity("outInQuint", (400.0, 450.0), outInQuint)
 
 
 
