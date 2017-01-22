@@ -26,8 +26,9 @@ type
     target: T                   ##  Target object
     get: proc(e: T): V          ##  A value getter procedure
     set: proc(e: T, v: V)       ##  A value setter procedure
-    start*, finish*, speed*: V  ##  Starting, finishing values, \
-                                ##  and the speed of change (per second)
+    fStart, fFinish, fSpeed: V  ##  Starting, finishing values, \
+                                ##  and speed of change (per second)
+    fDuration: float            ##  Duration (in seconds)
     loop*, loopLimit*: int      ##  Loop counter and loop limit
     running*: bool              ##  Running status flag
     procedure*: proc(tween: Tween[T,V], elapsed: float) ##  \
@@ -74,21 +75,52 @@ proc `value=`*[T,V](tween: Tween[T,V], val: V) {.inline.} =
     tween.set(tween.target, val)
 
 
-proc play*[T,V](tween: Tween[T,V], start, finish, speed: V, loops = 0) =
-  ##  Start ``tween``.
+proc start*[T,V](tween: Tween[T,V]): V {.inline.} =
+  ##  ``Return`` starting value.
+  ##
+  return tween.fStart
+
+
+proc finish*[T,V](tween: Tween[T,V]): V {.inline.} =
+  ##  ``Return`` final value.
+  ##
+  return tween.fFinish
+
+
+proc duration*(tween: Tween): float {.inline.} =
+  ##  ``Return`` ``tween``'s duration.
+  ##
+  return tween.fDuration
+
+
+proc speed*[T,V](tween: Tween[T,V]): V {.inline.} =
+  ##  ``Return`` the speed of ``tween`` target variable change (per second).
+  ##
+  return tween.fSpeed
+
+
+proc play*(tween: Tween) =
+  ##  Start playing ``tween`` with previously set params.
+  ##
+  tween.value = tween.fStart
+  tween.running = true
+  tween.loop = 0
+
+
+proc setup*[T,V](tween: Tween[T,V],
+    start, finish: V, duration: float, loops = 0) =
+  ##  Set up ``tween`` params.
   ##
   ##  ``start``, ``finish`` Limiting values for the target variable.
   ##
-  ##  ``speed`` Speed of changing (per second).
+  ##  ``duration`` Duration (in seconds).
   ##
   ##  ``loops`` Loop limit. `0` for one loop, `-1` for looping forever.
   ##
-  tween.value = start
-  tween.start = start
-  tween.finish = finish
-  tween.speed = speed
-  tween.running = true
-  tween.loop = 0
+  tween.fStart = start
+  tween.fFinish = finish
+  tween.fDuration = duration
+  tween.fSpeed = (finish - start) / duration
   tween.loopLimit = loops
 
 
@@ -109,7 +141,7 @@ proc linear*(tween: Tween, elapsed: float) {.procvar.} =
   ##
   ##  Changes ``tween`` value lineary from ``start`` to ``finish``.
   ##
-  tween.value = tween.value + tween.speed * elapsed
+  tween.value = tween.value + tween.fSpeed * elapsed
 
 
 #========#
@@ -125,9 +157,9 @@ proc reversing*(tween: Tween) {.procvar.} =
   ##
   ##  ``Note:`` each reversal counts as one loop.
   ##
-  if not tween.value.between(tween.start, tween.finish):
+  if not tween.value.between(tween.fStart, tween.fFinish):
     if tween.nextLoop():
-      tween.speed = -tween.speed
+      tween.fSpeed = -tween.fSpeed
 
 
 proc repeating*(tween: Tween) {.procvar.} =
@@ -135,9 +167,9 @@ proc repeating*(tween: Tween) {.procvar.} =
   ##
   ##  Repeats from ``start`` to ``finish`` on each loop.
   ##
-  if not tween.value.between(tween.start, tween.finish):
+  if not tween.value.between(tween.fStart, tween.fFinish):
     if tween.nextLoop():
-      tween.value = tween.start
+      tween.value = tween.fStart
 
 
 #=======#
