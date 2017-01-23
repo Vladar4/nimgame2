@@ -3,6 +3,7 @@ Nimgame 2
 
 A simple 2D game engine for Nim language.
 
+
 Requires:
 ---------
 
@@ -20,12 +21,20 @@ Requires:
 
   * SDL_ttf 2.0.14
 
+
+Installation through [Nimble](https://github.com/nim-lang/nimble):
+------------------------------------------------------------------
+`nimble install nimgame2@#head`
+
+
 Recommended compilation flags:
 ------------------------------
--d:release --opt:speed
+`-d:release --opt:speed`
+
 
 Status: v0.1 alpha
 ------------------
+
 
 Links:
 ------
