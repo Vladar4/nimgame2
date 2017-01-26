@@ -31,8 +31,6 @@ const
 
 
 type
-  TextAlign* = enum left, center, right
-
   Font* = ref object of RootObj
 
 

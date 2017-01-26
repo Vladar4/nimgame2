@@ -404,14 +404,32 @@ proc absPos*(entity: Entity): Coord =
                     entity.absRot)
 
 
-proc centrify*(entity: Entity) =
-  ##  Set ``entity``'s ``center`` to its graphic's central point.
+proc centrify*(entity: Entity, hor = HorAlign.center, ver = VerAlign.center) =
+  ##  Set ``entity``'s ``center``, according to the given align.
   ##
-  if entity.graphic != nil:
-    if entity.sprite == nil:
-      entity.center = entity.graphic.dim / 2
-    else:
-      entity.center = entity.sprite.dim / 2
+  ##  ``hor`` Horisontal align: left, center, or right
+  ##
+  ##  ``ver`` Vertical align: top, center, or bottom
+  ##
+  if entity.graphic == nil:
+    return
+
+  var dim = if entity.sprite == nil:
+              entity.graphic.dim
+            else:
+              entity.sprite.dim
+
+  # horisontal align
+  entity.center.x = case hor:
+  of HorAlign.left:   0.0
+  of HorAlign.center: dim.w / 2
+  of HorAlign.right:  dim.w.float - 1
+
+  # vertical align
+  entity.center.y = case ver:
+  of VerAlign.top:    0.0
+  of VerAlign.center: dim.h / 2
+  of VerAlign.bottom: dim.h.float - 1
 
 
 proc renderEntity*(entity: Entity) =

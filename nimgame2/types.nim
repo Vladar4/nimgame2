@@ -50,6 +50,10 @@ type
     vertical    = sdl.FlipVertical,
     both        = sdl.FlipBoth
 
+  TextAlign* {.pure.} = enum left, center, right
+  HorAlign* {.pure.} = enum left, center, right
+  VerAlign* {.pure.} = enum top, center, bottom
+
 
 converter toUint32*(c: Color): uint32 =
   ##  Color(r, g, b, a) to 0xRRGGBBAA
@@ -154,7 +158,7 @@ proc `*`*(c: Coord, v: float): Coord {.inline.} =
   result.y = c.y * v
 
 
-template `*`(v: float, c: Coord): Coord =
+template `*`*(v: float, c: Coord): Coord =
   (c * v)
 
 

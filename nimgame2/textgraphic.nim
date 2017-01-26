@@ -41,7 +41,7 @@ type
 proc free*(text: TextGraphic) =
   TextureGraphic(text).free()
   text.fLines = @[]
-  text.fAlign = left
+  text.fAlign = TextAlign.left
   text.fColor = DefaultFontColor
   text.fFont = nil
 
@@ -49,7 +49,7 @@ proc free*(text: TextGraphic) =
 proc init*(text: TextGraphic) =
   TextureGraphic(text).init()
   text.fLines = @[]
-  text.fAlign = left
+  text.fAlign = TextAlign.left
   text.fColor = DefaultFontColor
   text.fFont = nil
 

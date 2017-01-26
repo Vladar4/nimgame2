@@ -160,9 +160,9 @@ method renderText*(font: TrueTypeFont,
     dstRect.w = sz[i].w
     dstRect.h = sz[i].h
     dstRect.x = case align:
-                of left:    0
-                of center:  maxw2 - dstRect.w div 2
-                of right:   maxw - dstRect.w
+                of TextAlign.left:    0
+                of TextAlign.center:  maxw2 - dstRect.w div 2
+                of TextAlign.right:   maxw - dstRect.w
     dstRect.y = i * sz[i].h
     discard ln.blitSurface(nil, textSurface, addr(dstRect))
 
