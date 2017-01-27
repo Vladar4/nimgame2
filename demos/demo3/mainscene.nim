@@ -46,7 +46,7 @@ proc init*(scene: MainScene) =
   #discard mouseRelative(true)
 
 proc free*(scene: MainScene) =
-  scene.spacemanG.free
+  scene.spacemanG.free()
 
 
 proc newMainScene*(): MainScene =

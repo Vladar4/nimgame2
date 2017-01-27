@@ -51,8 +51,8 @@ type
     both        = sdl.FlipBoth
 
   TextAlign* {.pure.} = enum left, center, right
-  HorAlign* {.pure.} = enum left, center, right
-  VerAlign* {.pure.} = enum top, center, bottom
+  HAlign* {.pure.} = enum left, center, right
+  VAlign* {.pure.} = enum top, center, bottom
 
 
 converter toUint32*(c: Color): uint32 =

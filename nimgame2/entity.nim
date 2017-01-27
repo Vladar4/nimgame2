@@ -131,6 +131,31 @@ proc initSprite*(entity: Entity,
         h: entity.sprite.dim.h))
 
 
+proc copy(target, source: Sprite) =
+  ##  Copy ``source``'s properties and animations to the other sprite.
+  ##
+  ##  No new objects will be allocated.
+  ##
+  target.animationKeys = @[]
+  for key in source.animationKeys:
+    target.animationKeys.add(key)
+  target.animations = @[]
+  for anim in source.animations:
+    target.animations.add(anim)
+  target.currentAnimation = source.currentAnimation
+  target.currentFrame     = source.currentFrame
+  target.cycles           = source.cycles
+  target.kill             = source.kill
+  target.time             = source.time
+  target.playing          = source.playing
+  target.dim              = source.dim
+  target.offset           = source.offset
+  target.frames = @[]
+  for frame in source.frames:
+    target.frames.add(frame)
+
+
+
 proc animationIndex*(entity: Entity, name: string): int {.inline.} =
   ##  ``Return`` the index of the animation named ``name``.
   ##
@@ -212,6 +237,8 @@ proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
   ##  ``anim``  name of the animation.
   ##
   ##  ``cycles``  number of times to repeat the animation, or `-1` for looping.
+  ##
+  ##  ``kill``  kill when finished.
   ##
   if entity.sprite == nil:
     return
@@ -369,6 +396,41 @@ proc `layer=`*(entity: Entity, val: int) =
   entity.updLayer = true
 
 
+proc copy*(target, source: Entity) =
+  ##  Copy ``source``'s properties to the other entity.
+  ##
+  ##  No new objects will be allocated.
+  ##
+  target.parent   = source.parent
+  target.tags     = @[]
+  for tag in source.tags:
+    target.tags.add(tag)
+  target.dead     = source.dead
+  target.fLayer   = source.layer
+  target.updLayer = source.updLayer
+  target.graphic  = source.graphic
+  target.sprite   = new Sprite
+  target.sprite.copy(source.sprite)
+  target.logic    = source.logic
+  target.physics  = source.physics
+  target.collider = source.collider
+  target.colliding = @[]
+  for e in source.colliding:
+    target.colliding.add(e)
+  target.pos      = source.pos
+  target.vel      = source.vel
+  target.acc      = source.acc
+  target.drg      = source.drg
+  target.rot      = source.rot
+  target.rotVel   = source.rotVel
+  target.rotAcc   = source.rotAcc
+  target.rotDrg   = source.rotDrg
+  target.scale    = source.scale
+  target.center   = source.center
+  target.flip     = source.flip
+  target.visible  = source.visible
+
+
 proc absRot*(entity: Entity): Angle =
   ##  ``Return`` the absolute (counting the parent's) rotation angle
   ##  of the ``entity``.
@@ -404,7 +466,7 @@ proc absPos*(entity: Entity): Coord =
                     entity.absRot)
 
 
-proc centrify*(entity: Entity, hor = HorAlign.center, ver = VerAlign.center) =
+proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   ##  Set ``entity``'s ``center``, according to the given align.
   ##
   ##  ``hor`` Horisontal align: left, center, or right
@@ -421,15 +483,15 @@ proc centrify*(entity: Entity, hor = HorAlign.center, ver = VerAlign.center) =
 
   # horisontal align
   entity.center.x = case hor:
-  of HorAlign.left:   0.0
-  of HorAlign.center: dim.w / 2
-  of HorAlign.right:  dim.w.float - 1
+  of HAlign.left:   0.0
+  of HAlign.center: dim.w / 2
+  of HAlign.right:  dim.w.float - 1
 
   # vertical align
   entity.center.y = case ver:
-  of VerAlign.top:    0.0
-  of VerAlign.center: dim.h / 2
-  of VerAlign.bottom: dim.h.float - 1
+  of VAlign.top:    0.0
+  of VAlign.center: dim.h / 2
+  of VAlign.bottom: dim.h.float - 1
 
 
 proc renderEntity*(entity: Entity) =
