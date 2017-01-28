@@ -51,7 +51,7 @@ proc initTileMap*(tilemap: TileMap) =
   tilemap.initEntity()
   tilemap.map = @[]
   tilemap.passable = @[]
-  tilemap.tileScale = 1 #DefaultTileScale
+  tilemap.tileScale = DefaultTileScale
 
 
 proc newTileMap*(): TileMap =
@@ -146,17 +146,18 @@ proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
 
   let
     scale = parent.tileScale
-    dim: Coord = parent.sprite.dim
-    offset: Coord = dim * scale - dim * scale / 2.0
+    spriteDim: Coord = parent.sprite.dim
+    dim: Coord = spriteDim * scale
+    offset: Coord = spriteDim / 2.0 - parent.center
 
   var position: Coord
 
   for y in 0..parent.map.high:
-    position.y = dim.y * y.float + offset.y
+    position.y = dim.y * y.float / scale + offset.y
 
     for x in 0..parent.map[y].high:
       if parent.map[y][x] notin parent.passable:
-        position.x = dim.x * x.float + offset.x
+        position.x = dim.x * x.float / scale + offset.x
         t.tiles.add(newBoxCollider(parent, position, dim))
 
 
