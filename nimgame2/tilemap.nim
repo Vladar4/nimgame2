@@ -110,20 +110,23 @@ proc renderTileMap*(tilemap: TileMap) =
     var pos: Coord
     let
       scale = tilemap.tileScale
-      absScale = tilemap.absScale * scale
+      absScale = tilemap.absScale
+      drawScale = scale * absScale
       dim: Coord = tilemap.sprite.dim * absScale
+      offset: Coord = - (scale - 1) * tilemap.sprite.dim * absScale / 2.0
+      drawCenter: Coord = tilemap.center / scale
 
     for y in 0..tilemap.map.high:
-      pos.y = y.float * dim.y
+      pos.y = y.float * dim.y + offset.y
 
       for x in 0..tilemap.map[y].high:
-        pos.x = x.float * dim.x
+        pos.x = x.float * dim.x + offset.x
 
         # Draw
         tilemap.graphic.draw(tilemap.absPos + pos.rotate(tilemap.absRot),
                              tilemap.absRot,
-                             absScale,
-                             tilemap.center,
+                             drawScale,
+                             drawCenter,
                              tilemap.flip,
                              tilemap.sprite.frames[tilemap.map[y][x]])
 
@@ -143,13 +146,14 @@ proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
 
   let
     scale = parent.tileScale
-    dim: Coord = parent.sprite.dim * scale
-    offset: Coord = dim / 2.0 - dim * (scale - 1) / 4.0 - parent.center
+    dim: Coord = parent.sprite.dim
+    offset: Coord = dim * scale - dim * scale / 2.0
 
   var position: Coord
 
   for y in 0..parent.map.high:
     position.y = dim.y * y.float + offset.y
+
     for x in 0..parent.map[y].high:
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float + offset.x
