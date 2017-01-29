@@ -35,7 +35,7 @@ proc init*(scene: MainScene) =
   scene.tilesG = newTextureGraphic()
   discard scene.tilesG.load("../assets/gfx/sprite0.png")
   # TileMap
-  scene.tm = newTileMap()
+  scene.tm = newTileMap(scaleFix = true)
   scene.tm.tags.add("map")
   scene.tm.graphic = scene.tilesG
   scene.tm.initSprite((64, 64), offset = (32, 32))

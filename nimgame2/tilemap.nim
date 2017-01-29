@@ -47,16 +47,16 @@ type
 # TileMap #
 #=========#
 
-proc initTileMap*(tilemap: TileMap) =
+proc initTileMap*(tilemap: TileMap, scaleFix = false) =
   tilemap.initEntity()
   tilemap.map = @[]
   tilemap.passable = @[]
-  tilemap.tileScale = DefaultTileScale
+  tilemap.tileScale = if scaleFix: DefaultTileScale else: 1.0
 
 
-proc newTileMap*(): TileMap =
+proc newTileMap*(scaleFix = false): TileMap =
   result = new TileMap
-  result.initTileMap()
+  result.initTileMap(scaleFix)
 
 
 
