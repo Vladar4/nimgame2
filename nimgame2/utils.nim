@@ -23,7 +23,7 @@
 
 
 import
-  math, random,
+  math, parsecsv, random,
   sdl2/sdl,
   texturegraphic, types
 
@@ -110,6 +110,31 @@ proc loadSurface*(file: string): Surface =
                     "Can't load image %s: %s",
                     file, img.getError())
     return nil
+
+
+#=========#
+# Parsing #
+#=========#
+
+proc loadCSV*[T](file: string,
+                 parse: proc(input: string): T,
+                 separator = ',',
+                 quote = '\"',
+                 escape = '\0',
+                 skipInitialSpace = false): seq[seq[T]] =
+  ##  Load data from a CSV file.
+  ##
+  ##  ``Return`` a two-dimensional sequence of values from the ``file``,
+  ##  or empty sequence (`@[]`) otherwise.
+  ##
+  result = @[]
+  var parser: CsvParser
+  parser.open(file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    result.add(@[])
+    for item in parser.row:
+      result[^1].add(parse(item))
+  parser.close()
 
 
 #========#
