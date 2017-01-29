@@ -26,7 +26,7 @@ import
 
 
 const
-  DefaultTileScale: Scale = 1.02
+  DefaultTileScale*: Scale = 1.02
 
 
 type

@@ -179,17 +179,17 @@ template cursorIsVisible*(): bool =
 template showCursor*() =
   ##  Show the system mouse cursor.
   ##
-  sdl.showCursor(1)
+  discard sdl.showCursor(1)
 
 
 template hideCursor*() =
   ##  Hide the system mouse cursor.
   ##
-  sdl.showCursor(0)
+  discard sdl.showCursor(0)
 
 
 template toggleCursor*() =
   ##  Toggle the visibility of the system mouse cursor.
   ##
-  sdl.showCursor(if cursorIsVisible: 0 else: 1)
+  discard sdl.showCursor(if cursorIsVisible: 0 else: 1)
 
