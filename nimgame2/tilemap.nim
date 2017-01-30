@@ -30,8 +30,11 @@ const
 
 
 type
+  TileShow* = tuple[x: Slice[int], y: Slice[int]]
+
   TileMap* = ref object of Entity
     map*: seq[seq[int]]
+    fShow: TileShow     ##  Slice of what part of map to show
     passable*: seq[int] ##  The list of tile indexes without collisions
     tileScale*: Scale   ##  \
       ##  The scaling of individual tiles, mostly used for gap removal. \
@@ -50,6 +53,7 @@ type
 proc initTileMap*(tilemap: TileMap, scaleFix = false) =
   tilemap.initEntity()
   tilemap.map = @[]
+  tilemap.fShow = (0..0, 0..0)
   tilemap.passable = @[]
   tilemap.tileScale = if scaleFix: DefaultTileScale else: 1.0
 
@@ -58,6 +62,18 @@ proc newTileMap*(scaleFix = false): TileMap =
   result = new TileMap
   result.initTileMap(scaleFix)
 
+
+proc show*(tilemap: TileMap): TileShow {.inline.} =
+  return tilemap.fShow
+
+
+proc `show=`*(tilemap: TileMap, val: TileShow) =
+  var show: TileShow
+  show.y.a = if val.y.a < 0: 0 else: val.y.a
+  show.y.b = if val.y.b > tilemap.map.high: tilemap.map.high else: val.y.b
+  show.x.a = if val.x.a < 0: 0 else: val.x.a
+  show.x.b = if val.x.b > tilemap.map[0].high: tilemap.map[0].high else: val.x.b
+  tilemap.fShow = show
 
 
 proc dimTiles*(tilemap: TileMap): Dim =
@@ -116,10 +132,14 @@ proc renderTileMap*(tilemap: TileMap) =
       offset: Coord = - (scale - 1) * tilemap.sprite.dim * absScale / 2.0
       drawCenter: Coord = tilemap.center / scale
 
-    for y in 0..tilemap.map.high:
+    var show = tilemap.show
+    if show == (0..0, 0..0):
+      show = (x: 0..tilemap.map[0].high, y: 0..tilemap.map.high)
+
+    for y in show.y:
       pos.y = y.float * dim.y + offset.y
 
-      for x in 0..tilemap.map[y].high:
+      for x in show.x:
         pos.x = x.float * dim.x + offset.x
 
         # Draw
