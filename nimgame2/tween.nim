@@ -54,7 +54,7 @@ type
     amplitude*, period*: V      ##  Ease elastic amplitude and period
     back*: float                ##  Ease Back coefficient
     loop*, loopLimit*: int      ##  Loop counter and loop limit
-    running*: bool              ##  Running status flag
+    playing*: bool              ##  Playing status flag
     procedure*: TweenProcedure[V] ##  \
       ##  Value changing procedure, called from the ``update()``
     ender*: TweenEnder[T,V] ## \
@@ -75,7 +75,7 @@ proc nextLoop(tween: Tween): bool =
     result = tween.loop < tween.loopLimit
   else:
     result = true
-  tween.running = result
+  tween.playing = result
 
 
 #========#
@@ -137,7 +137,7 @@ proc play*(tween: Tween) =
   ##
   tween.value = tween.fStart
   tween.fElapsed = 0.0
-  tween.running = true
+  tween.playing = true
   tween.loop = 0
 
 
@@ -164,7 +164,7 @@ proc setup*[T,V](tween: Tween[T,V],
 proc update*(tween: Tween, elapsed: float) =
   ##  Tween update procedure. Call it from the scene update method.
   ##
-  if tween.running:
+  if tween.playing:
     tween.fElapsed += elapsed
     tween.value = tween.procedure(
       tween.start, tween.distance, tween.elapsed, tween.duration,
@@ -765,7 +765,7 @@ proc init*[T,V](tween: Tween[T,V],
   tween.target = target
   tween.get = get
   tween.set = set
-  tween.running = false
+  tween.playing = false
   tween.procedure = linear
   tween.ender = reversing
 
