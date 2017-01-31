@@ -33,16 +33,16 @@ type
   TileShow* = tuple[x: Slice[int], y: Slice[int]]
 
   TileMap* = ref object of Entity
-    map*: seq[seq[int]]
+    map*: seq[seq[int]] ##  Two-dimensional sequence of tile indexes
     fShow: TileShow     ##  Slice of what part of map to show
-    passable*: seq[int] ##  The list of tile indexes without collisions
+    passable*: seq[int] ##  The list of tile indexes that do not collide
     tileScale*: Scale   ##  \
       ##  The scaling of individual tiles, mostly used for gap removal. \
       ##  Increase on scales vastly different from `1.0`. \
       ##  Set to `1.0` if your map isn't rotating or scaling.
 
-  TileCollider* = ref object of Collider
-    tiles*: seq[BoxCollider]
+  TileCollider* = ref object of Collider  ## Collider to use with TileMap
+    tiles*: seq[BoxCollider]  ##  Sequence of individual tile colliders
 
 
 
@@ -59,15 +59,24 @@ proc initTileMap*(tilemap: TileMap, scaleFix = false) =
 
 
 proc newTileMap*(scaleFix = false): TileMap =
+  ##  Create a new TileMap.
+  ##
+  ##  ``scaleFix``  set ``tileScale`` to ``DefaultTileScale`` if `true`,
+  ##  or to `1.0` otherwise.
+  ##
   result = new TileMap
   result.initTileMap(scaleFix)
 
 
 proc show*(tilemap: TileMap): TileShow {.inline.} =
+  ##  ``Return`` a currently shown slices of tiles.
+  ##
   return tilemap.fShow
 
 
 proc `show=`*(tilemap: TileMap, val: TileShow) =
+  ##  Set new values for the shown slices of tiles.
+  ##
   var show: TileShow
   show.y.a = if val.y.a < 0: 0 else: val.y.a
   show.y.b = if val.y.b > tilemap.map.high: tilemap.map.high else: val.y.b
@@ -183,6 +192,14 @@ proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
 
 proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0),
                       dim: Dim = (0, 0)): TileCollider =
+  ##  Create a ``TileCollider`` for the ``parent`` ``TileMap``.
+  ##
+  ##  Most of the times you should use ``initCollider()`` instead.
+  ##
+  ##  ``pos`` Collider's relative position. Usually `(0, 0)`.
+  ##
+  ##  ``dim`` Tile dimensions.
+  ##
   result = new TileCollider
   result.init(parent, pos, dim)
 
@@ -194,6 +211,8 @@ method render*(t: TileCollider) =
 
 
 proc initCollider*(tilemap: TileMap) =
+  ##  Initialize a collider for the ``tilemap``.
+  ##
   tilemap.collider = newTileCollider(tilemap, (0, 0), tilemap.sprite.dim)
 
 

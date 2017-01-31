@@ -35,7 +35,7 @@ type
     randomRot*, randomRotVel*: Angle  ##  Ranges of rot and rotVel deviation
     randomScale*: Scale               ##  Range of scale deviation
     randomTTL*: float                 ##  Range of TTL deviation
-    scene*: Scene
+    scene*: Scene                     ##  Target scene
     particle*: Particle  ##  A stencil particle, its properties will be \\
                          ##  assigned to any created particles.
 
@@ -76,6 +76,8 @@ method update*(particle: Particle, elapsed: float) =
 #=========#
 
 proc initEmitter*(emitter: Emitter, scene: Scene) =
+  ##  Create a new ``Emitter`` for the ``scene``.
+  ##
   emitter.initEntity()
   emitter.scene = scene
   emitter.particle = nil
@@ -87,6 +89,8 @@ proc newEmitter*(scene: Scene): Emitter =
 
 
 proc emit*(emitter: Emitter, amount: int = 1) =
+  ##  Emit an ``amount`` of particles.
+  ##
   if emitter.particle == nil:
     return
   for i in 1..amount:
