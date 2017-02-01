@@ -33,7 +33,7 @@ Recommended compilation flags:
 Links:
 ------
 
-* [demos](https://github.com/Vladar4/nimgame2/tree/master/demos)
+* [demos](demos)
 * [ng2planetoids](https://github.com/Vladar4/ng2planetoids) - first demo game.
 
 
