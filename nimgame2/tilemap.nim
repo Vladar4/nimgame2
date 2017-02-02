@@ -74,6 +74,7 @@ proc show*(tilemap: TileMap): TileShow {.inline.} =
   return tilemap.fShow
 
 
+proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0))
 proc `show=`*(tilemap: TileMap, val: TileShow) =
   ##  Set new values for the shown slices of tiles.
   ##
@@ -83,6 +84,18 @@ proc `show=`*(tilemap: TileMap, val: TileShow) =
   show.x.a = if val.x.a < 0: 0 else: val.x.a
   show.x.b = if val.x.b > tilemap.map[0].high: tilemap.map[0].high else: val.x.b
   tilemap.fShow = show
+
+  # Update collider
+  if tilemap.collider != nil:
+    TileCollider(tilemap.collider).init(tilemap, (0.0, 0.0), tilemap.sprite.dim)
+
+
+template updateShow(tilemap: Tilemap) =
+  ##  Updates ``TileMap.show`` property,
+  ##  according to ``TileMap.map`` dimensions.
+  ##
+  if tilemap.fShow == (0..0, 0..0):
+    tilemap.fShow = (x: 0..tilemap.map[0].high, y: 0..tilemap.map.high)
 
 
 proc dimTiles*(tilemap: TileMap): Dim =
@@ -141,14 +154,11 @@ proc renderTileMap*(tilemap: TileMap) =
       offset: Coord = - (scale - 1) * tilemap.sprite.dim * absScale / 2.0
       drawCenter: Coord = tilemap.center / scale
 
-    var show = tilemap.show
-    if show == (0..0, 0..0):
-      show = (x: 0..tilemap.map[0].high, y: 0..tilemap.map.high)
-
-    for y in show.y:
+    tilemap.updateShow()
+    for y in tilemap.fShow.y:
       pos.y = y.float * dim.y + offset.y
 
-      for x in show.x:
+      for x in tilemap.fShow.x:
         pos.x = x.float * dim.x + offset.x
 
         # Draw
@@ -181,10 +191,13 @@ proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
 
   var position: Coord
 
-  for y in 0..parent.map.high:
+  parent.updateShow()
+  #for y in 0..parent.map.high:
+  for y in parent.fShow.y:
     position.y = dim.y * y.float / scale + offset.y
 
-    for x in 0..parent.map[y].high:
+    #for x in 0..parent.map[y].high:
+    for x in parent.fShow.x:
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float / scale + offset.x
         t.tiles.add(newBoxCollider(parent, position, dim))
