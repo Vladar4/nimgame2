@@ -75,7 +75,7 @@ method render*(scene: MainScene) =
   scene.renderScene()
   discard box((4, 60), (300, 108), 0x000000CC'u32)
 
-  discard string((8, 64), "WSAD - move", 0xFFFFFFFF'u32)
+  discard string((8, 64), "WSAD or Arrows - move", 0xFFFFFFFF'u32)
 
   discard string((8, 72), "Q/E - change angle", 0xFFFFFFFF'u32)
 
@@ -93,12 +93,12 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
-  if ScancodeW.down: scene.tm.pos.y -= 1.0
-  if ScancodeS.down: scene.tm.pos.y += 1.0
-  if ScancodeA.down: scene.tm.pos.x -= 1.0
-  if ScancodeD.down: scene.tm.pos.x += 1.0
-  if ScancodeQ.down: scene.tm.rot -= 1.0
-  if ScancodeE.down: scene.tm.rot += 1.0
-  if ScancodeR.down: scene.tm.scale -= 0.005
-  if ScancodeF.down: scene.tm.scale += 0.005
+  if ScancodeW.down or ScancodeUp.down: scene.tm.pos.y -= 100 * elapsed
+  if ScancodeS.down or ScancodeDown.down: scene.tm.pos.y += 100 * elapsed
+  if ScancodeA.down or ScancodeLeft.down: scene.tm.pos.x -= 100 * elapsed
+  if ScancodeD.down or ScancodeRight.down: scene.tm.pos.x += 100 * elapsed
+  if ScancodeQ.down: scene.tm.rot -= 100 * elapsed
+  if ScancodeE.down: scene.tm.rot += 100 * elapsed
+  if ScancodeR.down: scene.tm.scale -= 0.5 * elapsed
+  if ScancodeF.down: scene.tm.scale += 0.5 * elapsed
 
