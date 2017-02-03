@@ -24,6 +24,7 @@
 import
   sdl2/sdl
 
+
 var
   background*: sdl.Color  ##  Screen clearing color
   renderer*: sdl.Renderer ##  Game renderer pointer
