@@ -29,3 +29,5 @@ Nimgame 2 Demos
 
 * [demo14](demo14) TileMaps, Tweens, Emitters
 
+* [demo15](demo15) Camera
+
