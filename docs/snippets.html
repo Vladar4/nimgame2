@@ -20,6 +20,92 @@
 
     <article>
         <h2>SNIPPETS</h2>
+
+        <div class="snippet" id="init_game">
+            <h3>Engine Initialization</h3>
+
+<pre class="prettyprint">
+  # mygame.nim
+
+  import
+      nimgame2 / [
+      nimgame,
+      settings,
+      ]
+      mainscene # your first scene
+
+
+  game = newGame()
+  if game.init(w = 640, h = 480, title = "My Awesome Game"):
+      game.scene = newMainScene() # your scene constructor
+      game.run()
+</pre>
+        </div>
+
+        <div class="snippet" id="init_scene">
+            <h3>Scene Initialization</h3>
+
+<pre class="prettyprint">
+  # mainscene.nim
+
+  import
+    nimgame2 / [
+      nimgame,
+      entity,
+      scene,
+      settings,
+      texturegraphic,
+      types
+    ]
+
+
+  type
+    MainScene = ref object of Scene
+      myGraphic: TextureGraphic
+      myEntity: Entity
+
+
+  proc init*(scene: MainScene) =
+    Scene(scene).init() # don't forget the parent initialization!
+
+    scene.myGraphic = newTextureGraphic() # create the graphic
+    scene.myGraphic.load("data/gfx/my_image.png") # load graphic file
+
+    scene.myEntity = newEntity() # create the entity
+    scene.myEntity.graphic = scene.myGraphic # assign the graphic to the entity
+
+    scene.add(scene.myEntity) # add your entity to the scene
+
+
+  proc free*(scene: MainScene) =
+    scene.myGraphic.free()  # free the texture
+
+
+  proc newMainScene*(): MainScene =
+    # scene constructor
+    new result, free
+    result.init()
+
+
+  method event*(scene: MainScene, event: Event) =
+    # if you want to handle some events manually, you do it here
+    if event.kind == KeyDown:
+      case event.key.keysym.sym:
+      of K_Escape:
+        gameRunning = false # stop the engine (see nimgame2/settings.nim)
+      else: discard
+
+
+  method render*(scene: MainScene) =
+    scene.renderScene() # don't forget to call the parent render!
+    # if you want to draw something on top of a rendered scene, you do it here
+
+
+  method update*(scene: MainScene, elapsed: float) =
+    scene.updateScene(elapsed) # don't forget to call the parent update!
+    # here goes the scene-level logic
+</pre>
+        </div>
     </article>
 
 </main>
@@ -28,6 +114,12 @@
 </footer>
 
 <script src="structure.js"></script>
+
+<script>
+    createSnippetsList();
+</script>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 </body>
 </html>

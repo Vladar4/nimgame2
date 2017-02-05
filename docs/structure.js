@@ -55,7 +55,7 @@ function createHeader(title, logo) {
     var headerLinks = [
         headerLink('index'),
         headerLink('tutorials', true),
-        headerLink('snippets', true),
+        headerLink('snippets'),
         headerLink('docs'),
         headerLink('links'),
     ];
@@ -85,6 +85,47 @@ function createFooter() {
     var footer = document.querySelector('footer');
     footer.appendChild(document.createElement('hr'));
     footer.appendChild(text);
+}
+
+/**
+ *  Fill <aside> with .snippet class links.
+ */
+function createSnippetsList() {
+    document.querySelector('body').id = 'top';
+    var list = document.querySelectorAll('.snippet');
+
+    for(var i = 0; i < list.length; i++) {
+        var title = list[i].childNodes[1];
+        title.style.display = 'inline';
+
+        var link = document.createElement('a');
+        link.href = '#' + list[i].id;
+        link.innerHTML = title.innerHTML;
+
+        var backLink = document.createElement('a');
+        backLink.href = '#top';
+        backLink.innerHTML = '&#8632;'; // back arrow
+
+        var spacing = document.createElement('span');
+        spacing.innerHTML = '&nbsp';
+
+        var titleLink = document.createElement('a');
+        titleLink.href = '#' + list[i].id;
+
+        var titleLine = document.createElement('div');
+        list[i].insertBefore(titleLine, title);
+        titleLine.appendChild(backLink);
+        titleLine.appendChild(spacing);
+        titleLine.appendChild(titleLink);
+        titleLink.appendChild(title);
+
+        // aside
+        var line = document.createElement('p');
+        line.appendChild(link);
+        var aside = document.querySelector('aside');
+        aside.style.display = 'block';
+        aside.appendChild(line);
+    }
 }
 
 

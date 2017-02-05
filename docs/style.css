@@ -83,7 +83,12 @@ article, footer p {
 }
 
 aside {
+    display: none;
     float: left;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    margin: 1rem;
+    min-width: 15rem;
     width: 15rem;
     height: 100%;
 }
@@ -104,6 +109,16 @@ footer {
     color: var(--text-light-color);
 }
 
+pre {
+    background-color: #e0e0e0;
+}
+
+.snippet {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
 .docs div:first-of-type {
     margin-left: 10%;
 }
@@ -111,6 +126,10 @@ footer {
 .links div:first-of-type{
     padding-left: 12.5%;
     padding-right: 12.5%;
+}
+
+.centered {
+    text-align: center;
 }
 
 .one-column {
@@ -139,6 +158,10 @@ footer {
 }
 
 /* TEXT */
+
+a {
+    text-decoration: none;
+}
 
 a[href*="http"] {
     background: url('images/icons/outlink.png') no-repeat 100% 0;
