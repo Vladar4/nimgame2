@@ -46,6 +46,7 @@ Changelog:
 * random procedures
 * tilemaps
 * tweens
+* emitters
 * various fixes
 * 4 new demos
 
