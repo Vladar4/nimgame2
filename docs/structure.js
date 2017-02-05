@@ -1,21 +1,35 @@
 // STRUCTURE
 
+
 /**
- *  Generate a html code for a header link.
+ *  Create favicon link tag.
+ */
+function createFavicon() {
+    var icon = document.createElement('link');
+    icon.rel = 'shortcut icon';
+    icon.href = 'favicon.ico';
+    icon.type = "image/x-icon";
+    document.querySelector('head').appendChild(icon);
+}
+
+
+/**
+ *  Create a header link object.
  *
- *  @param name     Link name.
- *
- *  @param link     Target html-file (without extension).
+ *  @param name     Link name (without extension).
  *
  *  @param disabled If true - the link is disabled.
  *
- *  @return a string of html, containing a link to the @param link.
+ *  @return an object with a link to the @param link.
  */
-function headerLink(name, link, disabled) {
-    var result = '<span><a '
-    if(disabled === true)
-        result += 'class="disabled" '
-    result += 'href="' + link + '.html">' + name + '</a>';
+function headerLink(name, disabled) {
+    var a = document.createElement('a');
+    if(disabled)
+        a.classList.add('disabled');
+    a.href = name + '.html';
+    a.innerHTML = name.toUpperCase();
+    var result = document.createElement('span');
+    result.appendChild(a);
     return result;
 }
 
@@ -24,16 +38,38 @@ function headerLink(name, link, disabled) {
  *  Fill the <header> of the current html-file.
  *
  *  @param title    Header title.
+ *
+ *  @param logo     Path to the logo image (without extension).
  */
-function createHeader(title) {
+function createHeader(title, logo) {
+    var img = document.createElement('img');
+    img.src = logo + '.png';
+
+    var logo = document.createElement('div');
+    logo.classList.add('logo');
+    logo.appendChild(img);
+
+    var headerTitle = document.createElement('h1');
+    headerTitle.innerHTML = title;
+
+    var headerLinks = [
+        headerLink('index'),
+        headerLink('tutorials', true),
+        headerLink('snippets', true),
+        headerLink('docs'),
+        headerLink('links'),
+    ];
+
+    var headerDiv = document.createElement('div');
+    headerDiv.appendChild(logo);
+    headerDiv.appendChild(headerTitle);
+    for(var i = 0; i < headerLinks.length; i++) {
+        headerDiv.appendChild(headerLinks[i]);
+    }
+
     var header = document.querySelector('header');
-    header.innerHTML = '<h1>' + title + '</h1>';
-    header.innerHTML += headerLink('INDEX', 'index');
-    header.innerHTML += headerLink('TUTORIALS', 'tutorials', true);
-    header.innerHTML += headerLink('SNIPPETS', 'snippets', true);
-    header.innerHTML += headerLink('DOCS', 'docs');
-    header.innerHTML += headerLink('LINKS', 'links');
-    header.innerHTML += '<hr/>'
+    header.appendChild(headerDiv);
+    header.appendChild(document.createElement('hr'));
 }
 
 
@@ -41,10 +77,14 @@ function createHeader(title) {
  *  Fill the <footer> of the current html-file.
  */
 function createFooter() {
-    var footer = document.querySelector('footer');
-    footer.innerHTML = '<hr/><p>\
+    var text = document.createElement('p');
+    text.innerHTML = '\
         Copyright &copy; 2016-2017 Vladar (Vladimir Arabadzhi)\
-        (<a href="mailto:vladar4@gmail.com">e-mail</a>)</p>';
+        (<a href="mailto:vladar4@gmail.com">e-mail</a>)';
+
+    var footer = document.querySelector('footer');
+    footer.appendChild(document.createElement('hr'));
+    footer.appendChild(text);
 }
 
 
@@ -75,17 +115,20 @@ var docsList = [
 
 
 /**
- *  Generate a html code for a <li> with a link inside.
+ *  Create a <li> element with a link inside.
  *
  *  @param dir  Path to the target html file.
  *
  *  @param link Target html-file (without extension).
  *
- *  @return a string of html, containing a link for the @param link file.
+ *  @return a <li> element, containing a link for the @param link file.
  */
 function listLink(dir, link) {
-    return '<li><a href="' + dir + '/' + link + '.html" target="_blank">' +
-        link + '</a></li>';
+    var result = document.createElement('li');
+    result.innerHTML = '\
+        <a href="' + dir + '/' + link + '.html" target="_blank">' +
+        link + '</a>';
+    return result;
 }
 
 
@@ -99,11 +142,11 @@ function listLink(dir, link) {
  *  @param to   Limiting index of the docList array.
  */
 function fillListColumn(obj, from, to) {
-    obj.innerHTML = '<ul>';
+    var list = document.createElement('ul');
     for(var i = from; i < to; i++) {
-        obj.innerHTML += listLink('docs', docsList[i]);
+        list.appendChild(listLink('docs', docsList[i]));
     }
-    obj.innerHTML += '</ul>';
+    obj.appendChild(list);
 }
 
 
@@ -131,6 +174,7 @@ function createDocsLinks() {
 
 // EXECUTE
 
-createHeader('Nimgame 2');
+createFavicon();
+createHeader('Nimgame 2', 'images/icons/logo');
 createFooter()
 

@@ -1,11 +1,25 @@
+:root {
+    --min-width: 20rem;
+    --max-width: 40rem;
+    --bg-base-color: #ddd;
+    --bg-grad-color: #ccc;
+    --border-color: #999;
+    --text-light-color: #444;
+}
+
 body {
     padding-left: 0;
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
-    background: #ddd;
-    background: linear-gradient(to right, #ccc, #ddd, #ccc);
+    background: var(--bg-base-color);
+    background: linear-gradient(
+        to right,
+        var(--bg-grad-color),
+        var(--bg-base-color),
+        var(--bg-grad-color));
     font-family: sans-serif;
+    overflow-y: scroll;
 }
 
 /* HEADER */
@@ -14,14 +28,30 @@ header {
     text-align: center;
 }
 
+header > div {
+    min-width: var(--min-width);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+header .logo {
+    float: left;
+    padding: 0.5rem;
+}
+
+header .logo img {
+    height: 4rem;
+    width: 4rem;
+}
+
 header h1 {
     text-shadow: 2px 2px 2px #444;
 }
 
 header a {
     padding: 0.5rem 1rem;
-    border: 1px solid #999;
-    color: #444;
+    border: 1px solid var(--border-color);
+    color: var(--text-light-color);
     background-color: #e0e0e0;
     text-align: center;
     text-decoration: unset;
@@ -47,9 +77,9 @@ header .disabled {
 /* MAIN */
 
 article, footer p {
-    min-width: 20rem;
-    max-width: 40rem;
-    margin: auto;
+    min-width: var(--min-width);
+    max-width: var(--max-width);
+    margin: 0 auto;
 }
 
 aside {
@@ -71,7 +101,7 @@ footer {
     padding-top: 1rem;
     text-align: right;
     font-size: small;
-    color: #444;
+    color: var(--text-light-color);
 }
 
 .docs div:first-of-type {
@@ -129,19 +159,19 @@ a[href*="mailto"] {
 .checklist li {
     list-style: none;
     list-style-position: outside;
-    background: url('images/icons/check.png') no-repeat 0 0;
+    background: url('images/icons/check.png') no-repeat 0 0.1rem;
     background-size: 1rem 1rem;
     padding-left: 1.5rem;
 }
 
 .checklist li.wip {
-    background: url('images/icons/checkn.png') no-repeat 0 0;
+    background: url('images/icons/checkn.png') no-repeat 0 0.1rem;
     background-size: 1rem 1rem;
     padding-left: 1.5rem;
 }
 
 hr {
-    border: 1px solid #999;
+    border: 1px solid var(--border-color);
 }
 
 h1, h2 {
