@@ -112,22 +112,32 @@ footer {
 
 a[href*="http"] {
     background: url('images/icons/outlink.png') no-repeat 100% 0;
-    background-size: 12px 12px;
-    padding-right: 16px;
+    background-size: 0.75rem;
+    padding-right: 0.85rem;
 }
 
 a[href*="mailto"] {
     background: url('images/icons/email.png') no-repeat 100% 0;
-    background-size: 17px 14px;
-    padding-right: 18px;
+    background-size: 1rem;
+    padding-right: 1.25rem;
 }
 
 .checklist {
-    list-style-image: url('images/icons/check.png');
+    padding-left: 0;
 }
 
-.checklist .wip {
-    list-style-image: url('images/icons/checkn.png');
+.checklist li {
+    list-style: none;
+    list-style-position: outside;
+    background: url('images/icons/check.png') no-repeat 0 0;
+    background-size: 1rem 1rem;
+    padding-left: 1.5rem;
+}
+
+.checklist li.wip {
+    background: url('images/icons/checkn.png') no-repeat 0 0;
+    background-size: 1rem 1rem;
+    padding-left: 1.5rem;
 }
 
 hr {
