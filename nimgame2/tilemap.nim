@@ -229,6 +229,15 @@ proc initCollider*(tilemap: TileMap) =
   tilemap.collider = newTileCollider(tilemap, (0, 0), tilemap.sprite.dim)
 
 
+# with Coord
+
+method collide*(t: TileCollider, pos: Coord): bool =
+  for tile in t.tiles:
+    if tile.collide(pos):
+      return true
+  return false
+
+
 # with Collider
 
 method collide*(t: TileCollider, a: Collider): bool =
