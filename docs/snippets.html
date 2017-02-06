@@ -65,19 +65,26 @@
 
 
   proc init*(scene: MainScene) =
-    Scene(scene).init() # don't forget the parent initialization!
+    # don't forget the parent initialization!
+    Scene(scene).init()
 
-    scene.myGraphic = newTextureGraphic() # create the graphic
-    scene.myGraphic.load("data/gfx/my_image.png") # load graphic file
+    # create the graphic
+    scene.myGraphic = newTextureGraphic()
+    # load graphic file
+    scene.myGraphic.load("data/gfx/my_image.png")
 
-    scene.myEntity = newEntity() # create the entity
-    scene.myEntity.graphic = scene.myGraphic # assign the graphic to the entity
+    # create the entity
+    scene.myEntity = newEntity()
+    # assign the graphic to the entity
+    scene.myEntity.graphic = scene.myGraphic
 
-    scene.add(scene.myEntity) # add your entity to the scene
+    # add your entity to the scene
+    scene.add(scene.myEntity)
 
 
   proc free*(scene: MainScene) =
-    scene.myGraphic.free()  # free the texture
+    # free the texture
+    scene.myGraphic.free()
 
 
   proc newMainScene*(): MainScene =
@@ -91,20 +98,140 @@
     if event.kind == KeyDown:
       case event.key.keysym.sym:
       of K_Escape:
-        gameRunning = false # stop the engine (see nimgame2/settings.nim)
+        # stop the engine (see nimgame2/settings.nim)
+        gameRunning = false
       else: discard
 
 
   method render*(scene: MainScene) =
-    scene.renderScene() # don't forget to call the parent render!
-    # if you want to draw something on top of a rendered scene, you do it here
+    # don't forget to call the parent render!
+    scene.renderScene()
+    # if you want to draw something on top of a rendered scene,
+    # you do it here
 
 
   method update*(scene: MainScene, elapsed: float) =
-    scene.updateScene(elapsed) # don't forget to call the parent update!
-    # here goes the scene-level logic
+    # don't forget to call the parent update!
+    scene.updateScene(elapsed)
+    # scene-level logic goes here
 </pre>
         </div>
+
+        <div class="snippet" id="init_entity">
+            <h3>Entity Initialization</h3>
+
+<pre class="prettyprint">
+  # myentity.nim
+
+  import
+    nimgame / [
+      nimgame,
+      entity,
+      texturegraphic,
+    ]
+
+
+  type
+    MyEntity* = ref object of Entity
+
+
+  proc init*(entity: MyEntity, graphic: TextureGraphic) =
+    # don't forget to call the parent initialization!
+    entity.initEntity()
+    # assign the graphic
+    entity.graphic = graphic
+    # set the center point
+    entity.centrify()
+    # init the physics only if you need it
+    entity.physics = new Physics
+
+
+  proc newMyEntity*(graphic: TextureGraphic): MyEntity =
+    # entity constructor
+    new result
+    result.init(graphic)
+
+
+  method update*(entity: MyEntity, elapsed: float) =
+    # don't forget to call the parent update!
+    entity.updateEntity(elapsed)
+    # entity-level logic goes here
+
+
+  method update*(physics: Physics, entity: MyEntity, elapsed: float) =
+    # call the default physics procedure, or write your own
+    physics.updatePhysics(entity, elapsed)
+</pre>
+        </div>
+
+        <div class="snippet" id="init_sprite">
+            <h3>Sprite Initialization</h3>
+
+<pre class="prettyprint">
+  # somewhere in the entity initialization routine
+
+    # assign the graphic
+    entity.graphic = graphic
+    # set the sprite dimensions and offset
+    # (if the graphic has a border)
+    entity.initSprite((24, 48), offset = (16, 16))
+
+    # add animations
+    discard scene.d.addAnimation(
+      "run_right", [0, 1, 2, 3])
+    discard scene.d.addAnimation(
+      "run_left", [0, 1, 2, 3], flip = Flip.horizontal)
+
+    # or, if your frames are in order,
+    # use toSeq() from types.nim
+    discard scene.d.addAnimation(
+      "jump_right", toSeq(4..7))
+    discard scene.d.addAnimation(
+      "jump_left", toSeq(4..7), flip = Flip.horizontal)
+</pre>
+        </div>
+
+        <div class="snippet" id="keyboard_input">
+            <h3>Keyboard Input</h3>
+
+<pre class="prettyprint">
+  # somewhere in the update method
+
+    let move = 100 * elapsed
+    if ScancodeLeft.down: scene.player.pos.x -= move
+    if ScancodeRight.down: scene.player.pos.x += move
+    # the key was pressed
+    if ScancodeSpace.pressed: scene.player.startCharging()
+    # the key was relased
+    if ScancodeSpace.released: scene.player.discharge()
+</pre>
+        </div>
+
+        <div class="snippet" id="mouse_input">
+            <h3>Mouse Input</h3>
+
+<pre class="prettyprint">
+  # somewhere in the update method
+
+    let mousePos = mouse.abs
+    if Button.left.pressed: scene.player.fireTo(mousePos)
+    # Mouse buttons (Button enum): left, middle, right, x1, x2
+</pre>
+        </div>
+
+
+        <!--
+
+        <div class="snippet" id="">
+            <h3></h3>
+
+<pre class="prettyprint">
+
+</pre>
+        </div>
+
+        -->
+
     </article>
 
 </main>
