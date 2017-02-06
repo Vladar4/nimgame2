@@ -1,23 +1,19 @@
-:root {
-    --min-width: 20rem;
-    --max-width: 40rem;
-    --bg-base-color: #ddd;
-    --bg-grad-color: #ccc;
-    --border-color: #999;
-    --text-light-color: #444;
-}
+/* REFERENCE
+--min-width: 20rem;
+--max-width: 40rem;
+--bg-base-color: #ddd;
+--bg-grad-color: #ccc;
+--border-color: #999;
+--text-light-color: #444;
+*/
 
 body {
     padding-left: 0;
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
-    background: var(--bg-base-color);
-    background: linear-gradient(
-        to right,
-        var(--bg-grad-color),
-        var(--bg-base-color),
-        var(--bg-grad-color));
+    background: #ddd;
+    background: linear-gradient(to right, #ccc, #ddd, #ccc);
     font-family: sans-serif;
     overflow-y: scroll;
 }
@@ -29,8 +25,8 @@ header {
 }
 
 header > div {
-    min-width: var(--min-width);
-    max-width: var(--max-width);
+    min-width: 20rem;
+    max-width: 40rem;
     margin: 0 auto;
 }
 
@@ -50,11 +46,11 @@ header h1 {
 
 header a {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    color: var(--text-light-color);
+    border: 1px solid #999;
+    color: #444;
     background-color: #e0e0e0;
     text-align: center;
-    text-decoration: unset;
+    text-decoration: none;
     vertical-align: middle;
     white-space: nowrap;
     cursor: pointer;
@@ -77,8 +73,8 @@ header .disabled {
 /* MAIN */
 
 article, footer p {
-    min-width: var(--min-width);
-    max-width: var(--max-width);
+    min-width: 20rem;
+    max-width: 40rem;
     margin: 0 auto;
 }
 
@@ -86,7 +82,7 @@ aside {
     display: none;
     float: left;
     padding: 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid #999;
     margin: 1rem;
     min-width: 15rem;
     width: 15rem;
@@ -106,7 +102,7 @@ footer {
     padding-top: 1rem;
     text-align: right;
     font-size: small;
-    color: var(--text-light-color);
+    color: #444;
 }
 
 pre {
@@ -114,8 +110,8 @@ pre {
 }
 
 .snippet {
-    padding: 1rem;
-    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border: 1px solid #999;
     margin-bottom: 1rem;
 }
 
@@ -194,7 +190,7 @@ a[href*="mailto"] {
 }
 
 hr {
-    border: 1px solid var(--border-color);
+    border: 1px solid #999;
 }
 
 h1, h2 {
