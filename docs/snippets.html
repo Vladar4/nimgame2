@@ -73,7 +73,7 @@
     # create the graphic
     scene.myGraphic = newTextureGraphic()
     # load graphic file
-    scene.myGraphic.load("data/gfx/my_image.png")
+    discard scene.myGraphic.load("data/gfx/my_image.png")
 
     # create the entity
     scene.myEntity = newEntity()
@@ -190,6 +190,16 @@
       "jump_right", toSeq(4..7))
     discard scene.d.addAnimation(
       "jump_left", toSeq(4..7), flip = Flip.horizontal)
+</pre>
+        </div>
+
+        <div class="snippet" id="init_collider">
+            <h3>Collider Initialization</h3>
+
+<pre class="prettyprint">
+  # somewhere in the entity initialization routine
+
+    entity.collider = newBoxCollider(entity, (0, 0), entity.graphic.dim)
 </pre>
         </div>
 
