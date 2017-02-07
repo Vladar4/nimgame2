@@ -166,6 +166,34 @@
 </pre>
         </div>
 
+        <div class="snippet" id="keyboard_input">
+            <h3>Keyboard Input</h3>
+
+<pre class="prettyprint">
+  # somewhere in the update method
+
+    let move = 100 * elapsed
+    if ScancodeLeft.down: scene.player.pos.x -= move
+    if ScancodeRight.down: scene.player.pos.x += move
+    # the key was pressed
+    if ScancodeSpace.pressed: scene.player.startCharging()
+    # the key was relased
+    if ScancodeSpace.released: scene.player.discharge()
+</pre>
+        </div>
+
+        <div class="snippet" id="mouse_input">
+            <h3>Mouse Input</h3>
+
+<pre class="prettyprint">
+  # somewhere in the update method
+
+    let mousePos = mouse.abs
+    if Button.left.pressed: scene.player.fireTo(mousePos)
+    # Mouse buttons (Button enum): left, middle, right, x1, x2
+</pre>
+        </div>
+
         <div class="snippet" id="init_sprite">
             <h3>Sprite Initialization</h3>
 
@@ -203,31 +231,82 @@
 </pre>
         </div>
 
-        <div class="snippet" id="keyboard_input">
-            <h3>Keyboard Input</h3>
+        <div class="snippet" id="textgraphic">
+            <h3>TextGraphic Usage</h3>
 
 <pre class="prettyprint">
-  # somewhere in the update method
+  # somewhere in the scene initialization routine
 
-    let move = 100 * elapsed
-    if ScancodeLeft.down: scene.player.pos.x -= move
-    if ScancodeRight.down: scene.player.pos.x += move
-    # the key was pressed
-    if ScancodeSpace.pressed: scene.player.startCharging()
-    # the key was relased
-    if ScancodeSpace.released: scene.player.discharge()
+    # BitmapFont
+
+    # create a bitmap font
+    scene.bitmapFont = newBitmapFont()
+    # load the font file, giving the dimensions of a single character
+    discard scene.bitmapFont.load("data/font/bitmap.png", (8, 16))
+    # create a text graphic
+    scene.bitmapText = newTextGraphic()
+    # assign the font
+    scene.bitmapText.font = scene.bitmapFont
+    # set the text
+    scene.bitmapText.lines =
+      [ "Text line 1",
+        "Text line 2"]
+    # create an entity
+    scene.bitmapEntity = newEntity()
+    # assign the graphic
+    scene.bitmapEntity.graphic = scene.bitmapText
+    # add to the scene
+    scene.add(scene.bitmapEntity)
+
+    # TrueTypeFont
+
+    # create a TrueType font
+    scene.trueTypeFont = newTrueTypeFont()
+    # load the font file, giving the font size
+    discard scene.trueTypeFont.load("data/font/truetype.ttf", 16)
+    # create a text graphic
+    scene.trueTypeText = newTextGraphic()
+    # assign the font
+    scene.trueTypeText.font = scene.trueTypeFont
+    # set the text
+    scene.trueTypeText.lines =
+      [ "Text line 1",
+        "Text line 2"]
+    # create an entity
+    scene.trueTypeEntity = newEntity()
+    # assign the graphic
+    scene.trueTypeEntity.graphic = scene.trueTypeText
+    # add to the scene
+    scene.add(scene.trueTypeEntity)
 </pre>
         </div>
 
-        <div class="snippet" id="mouse_input">
-            <h3>Mouse Input</h3>
+        <div class="snippet" id="procgraphic">
+            <h3>ProcGraphic Usage</h3>
 
 <pre class="prettyprint">
-  # somewhere in the update method
+  proc customProc(graphic: ProcGraphic,
+                  pos: Coord,
+                  angle: Angle,
+                  scale: Scale,
+                  center: Coord,
+                  flip: Flip,
+                  region: Rect) =
+    # your custom drawing routine goes here
 
-    let mousePos = mouse.abs
-    if Button.left.pressed: scene.player.fireTo(mousePos)
-    # Mouse buttons (Button enum): left, middle, right, x1, x2
+
+  proc init*(scene: MyScene) =
+    Scene(scene).init()
+    # create a ProcGraphic
+    scene.customGraphic = newProcGraphic()
+    # assign the procedure
+    scene.customGraphic.procedure = customProc
+    # create an entity
+    scene.myEntity = newEntity
+    # assign the graphic
+    scene.myEntity.graphic = scene.customGraphic
+    # add to the scene
+    scene.add(scene.myEntity)
 </pre>
         </div>
 
