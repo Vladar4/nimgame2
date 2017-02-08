@@ -106,22 +106,22 @@ template collide*(pos1, pos2: Coord): bool =
 
 
 # Coord - Point
-template collide*(pos: Coord, a: Collider): bool =
+method collide*(pos: Coord, a: Collider): bool {.base, inline.} =
   pos == a.position
 
 
 # Coord - Box
-template collide*(pos: Coord, b: BoxCollider): bool =
+method collide*(pos: Coord, b: BoxCollider): bool {.inline.} =
   pointInBox(pos, b)
 
 
 # Coord - Circle
-template collide*(pos: Coord, c: CircleCollider): bool =
+method collide*(pos: Coord, c: CircleCollider): bool {.inline.} =
   distance(pos, c.position) <= c.radius.scaled(c)
 
 
 # Coord - Line
-proc collide*(pos: Coord, d: LineCollider): bool =
+method collide*(pos: Coord, d: LineCollider): bool =
   let
     dpPosition = d.parent.absPos
     dpRotation = d.parent.absRot
@@ -136,7 +136,7 @@ proc collide*(pos: Coord, d: LineCollider): bool =
 
 
 # Coord - Poly
-proc collide*(pos: Coord, p: PolyCollider): bool =
+method collide*(pos: Coord, p: PolyCollider): bool =
   if p.points.len < 1:    # No points
     return false
   elif p.points.len < 2:  # One point
