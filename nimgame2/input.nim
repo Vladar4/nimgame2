@@ -31,14 +31,16 @@ export
 
 
 type
-  Button* {.size: sizeof(int32), pure.} = enum  ##  \
+  MouseButton* {.size: sizeof(int32), pure.} = enum  ##  \
     ##  Mouse buttons.
     ##
-    left = sdl.ButtonLeft,
-    middle = sdl.ButtonMiddle,
-    right = sdl.ButtonRight,
-    x1 = sdl.ButtonX1,
+    left = sdl.ButtonLeft
+    middle = sdl.ButtonMiddle
+    right = sdl.ButtonRight
+    x1 = sdl.ButtonX1
     x2 = sdl.ButtonX2
+
+  MouseButtonState* = array[MouseButton, bool]
 
 
 var
@@ -157,7 +159,7 @@ template mouseCapture*(enabled: bool): bool =
   sdl.captureMouse(enabled) == 0
 
 
-template pressed*(button: Button): bool =
+template pressed*(button: MouseButton): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
   (sdl.button(button.int32) and mBtn) > 0
@@ -167,6 +169,13 @@ template pressed*(button: int32): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
   (sdl.button(button) and mBtn) > 0
+
+
+proc mouseButtonState*(): MouseButtonState =
+  ##  ``Return`` an array of bool values of the current mouse buttons state.
+  ##
+  for i in MouseButton:
+    result[i] = pressed(i)
 
 
 template cursorIsVisible*(): bool =

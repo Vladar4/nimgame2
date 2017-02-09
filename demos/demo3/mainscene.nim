@@ -64,7 +64,7 @@ method event*(scene: MainScene, event: Event) =
 
 method render*(scene: MainScene) =
   # Draw line between the spaceman and the mouse position if LMB is pressed
-  if Button.left.pressed:
+  if MouseButton.left.pressed:
     discard line(scene.s.pos, mouse.abs, 0xFF0000FF'u32)
 
   scene.renderScene()
@@ -85,11 +85,11 @@ method render*(scene: MainScene) =
                       ") Rel(" & $mouse.rel.x.int & ":" & $mouse.rel.y.int & ")"
 
   var buttons: string = ""
-  if Button.left.pressed: buttons &= "L "
-  if Button.middle.pressed: buttons &= "M "
-  if Button.right.pressed: buttons &= "R "
-  if Button.x1.pressed: buttons &= "X1 "
-  if Button.x2.pressed: buttons &= "X2 "
+  if MouseButton.left.pressed: buttons &= "L "
+  if MouseButton.middle.pressed: buttons &= "M "
+  if MouseButton.right.pressed: buttons &= "R "
+  if MouseButton.x1.pressed: buttons &= "X1 "
+  if MouseButton.x2.pressed: buttons &= "X2 "
 
 
   discard box((4, 60), (260, 100), 0xCC000000'u32)
@@ -114,7 +114,7 @@ method update*(scene: MainScene, elapsed: float) =
   if ScancodeLeft.down or ScancodeA.down: scene.s.vel.x -= Acc * elapsed
   if ScancodeRight.down or ScancodeD.down: scene.s.vel.x += Acc * elapsed
   # Mouse
-  if Button.left.pressed:
+  if MouseButton.left.pressed:
     var vector: Coord
     vector = (mouse.abs - scene.s.pos) * elapsed
     scene.s.vel += vector

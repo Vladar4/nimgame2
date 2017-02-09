@@ -61,6 +61,6 @@ method render*(scene: MainScene) =
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
   scene.e.pos = mouse.abs
-  if Button.left.pressed:
+  if MouseButton.left.pressed:
     scene.e.emit(5)
 
