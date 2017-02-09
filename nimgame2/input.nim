@@ -40,8 +40,6 @@ type
     x1 = sdl.ButtonX1
     x2 = sdl.ButtonX2
 
-  MouseButtonState* = array[MouseButton, bool]
-
 
 var
   kbd: ptr array[sdl.NumScancodes.int, uint8]
@@ -159,23 +157,33 @@ template mouseCapture*(enabled: bool): bool =
   sdl.captureMouse(enabled) == 0
 
 
-template pressed*(button: MouseButton): bool =
+template pressed*(button: MouseButton, state: int32 = mBtn): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
-  (sdl.button(button.int32) and mBtn) > 0
+  (sdl.button(button.int32) and state) > 0
 
 
-template pressed*(button: int32): bool =
+template pressed*(button: int32, state: int32 = mBtn): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
-  (sdl.button(button) and mBtn) > 0
+  (sdl.button(button) and state) > 0
 
 
-proc mouseButtonState*(): MouseButtonState =
-  ##  ``Return`` an array of bool values of the current mouse buttons state.
+template mbState*(): int32 =
+  ##  ``Return`` current mouse buttons state value.
   ##
-  for i in MouseButton:
-    result[i] = pressed(i)
+  mBtn
+
+
+template set*(state: var int32,
+              button: MouseButton,
+              enable: bool = true) =
+  ##  Enable or disable specific mouse button's flag in the given ``state``.
+  ##
+  if enable:
+    state = state or sdl.button(button.int32).int32
+  else:
+    state = state and (not sdl.button(button.int32).int32)
 
 
 template cursorIsVisible*(): bool =

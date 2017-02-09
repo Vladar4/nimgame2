@@ -39,18 +39,18 @@ type
 
   GuiWidget* = ref object of Entity
     fState: GuiState
-    enabledMouseButtons*: MouseButtonState
-    fWasPressed: MouseButtonState
+    mbAllow*: int32
+    fWasPressed: int32
 
 
 proc init*(widget: GuiWidget) =
   widget.initEntity()
   widget.fState = GuiState.default
-  widget.enabledMouseButtons[MouseButton.left] = true
+  widget.mbAllow.set(MouseButton.left)
 
 
 proc newGuiWidget*(): GuiWidget =
-  result = new GuiWidget
+  new result
   result.init()
 
 
@@ -58,11 +58,11 @@ proc state*(widget: GuiWidget): GuiState {.inline.} =
   return widget.fState
 
 
-method onFocus*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
+method onFocus*(widget: GuiWidget) {.base.} =
   discard
 
 
-method onPress*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
+method onPress*(widget: GuiWidget) {.base.} =
   discard
 
 
@@ -87,11 +87,6 @@ method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
   widget.setState(val)
 
 
-proc clearPressed(widget: GuiWidget) =
-  for i in widget.fWasPressed.mitems:
-    i = false
-
-
 proc updateGuiWidget*(widget: GuiWidget, elapsed: float) =
   widget.updateEntity(elapsed)
 
@@ -104,21 +99,21 @@ proc updateGuiWidget*(widget: GuiWidget, elapsed: float) =
 
     if widget.state == GuiState.focused:
 
-      var mbState = mouseButtonState()
+      var mbState = mbState()
 
       # ignore non-enalbed buttons
       for i in MouseButton:
-        if not widget.enabledMouseButtons[i]:
-          mbState[i] = false
+        if not i.pressed(widget.mbAllow):
+          mbState.set(i, false)
 
-      if true in mbState:
+      if mbState != 0:
         widget.state = GuiState.pressed
 
-      elif true in widget.fWasPressed:
+      elif widget.fWasPressed != 0:
         for i in MouseButton:
-          if widget.fWasPressed[i]:
+          if i.pressed(widget.fWasPressed):
             widget.onClick(i)
-        widget.clearPressed
+        widget.fWasPressed = 0
 
       widget.fWasPressed = mbState
 
