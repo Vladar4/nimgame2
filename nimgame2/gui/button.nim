@@ -33,20 +33,39 @@ type
   GuiButton* =ref object of GuiWidget
 
 
-proc init*(button: GuiButton, graphic: Graphic) =
+proc init*(button: GuiButton, graphic: Graphic, circle: bool = false) =
+  ##  GuiButton initialization.
+  ##
+  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled
+  ##
+  ##  ``circle`` Set to `true` if you want a circle shape instead of square one
+  ##
   GuiWidget(button).init()
   button.graphic = graphic
   button.initSprite(graphic.dim / 2)
-  button.collider = button.newBoxCollider(
-    button.sprite.dim / 2, button.sprite.dim)
+  # Collider
+  button.collider = if circle:
+      button.newCircleCollider(
+        button.sprite.dim / 2,
+        max(button.sprite.dim.w, button.sprite.dim.h) / 2)
+    else:
+      button.newBoxCollider(
+        button.sprite.dim / 2,
+        button.sprite.dim)
+
+
+proc newGuiButton*(graphic: Graphic, circle: bool = false): GuiButton =
+  ##  Create a new GuiButton.
+  ##
+  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled
+  ##
+  ##  ``circle`` Set to `true` if you want a circle shape instead of square one
+  ##
+  result = new GuiButton
+  result.init(graphic, circle)
 
 
 method `state=`*(button: GuiButton, val: GuiState) =
   button.setState(val)
   button.sprite.currentFrame = val.int
-
-
-proc newGuiButton*(graphic: Graphic): GuiButton =
-  result = new GuiButton
-  result.init(graphic)
 
