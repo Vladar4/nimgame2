@@ -285,6 +285,8 @@
             <h3>ProcGraphic Usage</h3>
 
 <pre class="prettyprint">
+  # somewhere in the initialization routine
+
   proc customProc(graphic: ProcGraphic,
                   pos: Coord,
                   angle: Angle,
@@ -307,6 +309,47 @@
     scene.myEntity.graphic = scene.customGraphic
     # add to the scene
     scene.add(scene.myEntity)
+</pre>
+        </div>
+
+        <div class="snippet" id="sound">
+            <h3>Sound Usage</h3>
+
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+    # load a sound file
+    scene.soundEffect = newSound("data/sfx/effect.wav")
+    # set the volume
+    scene.soundEffect.volume = Volume.high div 2
+
+  # somewhere else
+
+    # the call
+    scene.soundEffect.play()
+</pre>
+        </div>
+
+        <div class="snippet" id="music_playlist">
+            <h3>Music Playlist Usage</h3>
+
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+    # load all music files
+    var musicData: Assets[Music]
+    musicData = newAssets[Music]("data/music",
+                                 proc(file: string): Music = newMusic(file))
+    # global playlist
+    playlist = newPlaylist()
+    # fill the playlist
+    for track in musicData.values:
+      playlist.list.add(track)
+
+  # somewhere else
+
+    # next random track
+    playlist.play()
 </pre>
         </div>
 
