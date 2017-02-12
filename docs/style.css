@@ -72,15 +72,28 @@ header .disabled {
 
 /* MAIN */
 
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+}
+
 article, footer p {
     min-width: 20rem;
     max-width: 40rem;
+    width: 100%;
     margin: 0 auto;
 }
 
 aside {
     display: none;
-    float: left;
+    flex-direction: column;
     padding: 1rem;
     border: 1px solid #999;
     margin: 1rem;
@@ -101,13 +114,17 @@ figcaption {
 footer {
     padding-top: 1rem;
     text-align: right;
-    font-size: small;
+    font-size: smaller;
     color: #444;
+}
+
+h3 {
+    font-size: 100%;
 }
 
 pre {
     background-color: #e0e0e0;
-    font-size: 12px;
+    white-space: pre-wrap;
 }
 
 noscript {
@@ -115,6 +132,8 @@ noscript {
 }
 
 .snippet {
+    display: flex;
+    flex-direction: column;
     padding: 0.5rem;
     border: 1px solid #999;
     margin-bottom: 1rem;
@@ -133,29 +152,13 @@ noscript {
     text-align: center;
 }
 
-.one-column {
-    clear: both;
+.columns {
+    display: flex;
+    flex-direction: row;
 }
 
-.two-columns {
-    width: 50%;
-}
-
-.three-columns {
-    min-width: 7.5rem;
-    width: 30%;
-}
-
-.left {
-    float: left;
-}
-
-.center {
-    float: left;
-}
-
-.right {
-    float: right;
+.columns > div {
+    width: 100%;
 }
 
 /* TEXT */

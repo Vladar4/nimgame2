@@ -54,6 +54,7 @@ function createHeader(title, logo) {
 
     var headerLinks = [
         headerLink('index'),
+        headerLink('demos', true),
         headerLink('tutorials', true),
         headerLink('snippets'),
         headerLink('docs'),
@@ -123,7 +124,7 @@ function createSnippetsList() {
         var line = document.createElement('p');
         line.appendChild(link);
         var aside = document.querySelector('aside');
-        aside.style.display = 'block';
+        aside.style.display = 'flex';
         aside.appendChild(line);
     }
 }
@@ -201,9 +202,9 @@ function fillListColumn(obj, from, to) {
  *      <div class="three-columns right"></div>
  */
 function createDocsLinks() {
-    var col1 = document.querySelector('.three-columns.left');
-    var col2 = document.querySelector('.three-columns.center');
-    var col3 = document.querySelector('.three-columns.right');
+    var col1 = document.querySelector('#col1');
+    var col2 = document.querySelector('#col2');
+    var col3 = document.querySelector('#col3');
     var oneThird = Math.round(docsList.length / 3);
     var twoThirds = 2 * oneThird;
 
