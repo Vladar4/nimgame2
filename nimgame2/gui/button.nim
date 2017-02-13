@@ -31,18 +31,33 @@ import
 
 type
   GuiButton* =ref object of GuiWidget
+    image*: Graphic ##  The graphic to render on top of a button
+    imageOffset*: Coord ## Image drawing offset from button's center. \
+      ## Calcuclated automatically if the image is passed in ``init()``
+    imageShift*: Coord  ## Image shift when button is pressed
 
 
-proc init*(button: GuiButton, graphic: Graphic, circle: bool = false) =
+proc init*(button: GuiButton,
+           graphic: Graphic,
+           image: Graphic = nil,
+           circle: bool = false) =
   ##  GuiButton initialization.
   ##
-  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled
+  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled.
   ##
-  ##  ``circle`` Set to `true` if you want a circle shape instead of square one
+  ##  ``image`` The graphic to render on top of a butotn.
+  ##
+  ##  ``circle`` Set to `true` if you want a circle shape instead of square one.
   ##
   GuiWidget(button).init()
   button.graphic = graphic
   button.initSprite(graphic.dim / 2)
+  button.image = image
+  button.imageOffset = if not (image == nil):
+                         (button.sprite.dim / 2 - image.dim / 2)
+                       else:
+                         (0, 0)
+  button.imageShift = (1, 1)
   # Collider
   button.collider = if circle:
       button.newCircleCollider(
@@ -54,18 +69,43 @@ proc init*(button: GuiButton, graphic: Graphic, circle: bool = false) =
         button.sprite.dim)
 
 
-proc newGuiButton*(graphic: Graphic, circle: bool = false): GuiButton =
+proc newGuiButton*(graphic: Graphic,
+                   image: Graphic = nil,
+                   circle: bool = false): GuiButton =
   ##  Create a new GuiButton.
   ##
-  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled
+  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled.
   ##
-  ##  ``circle`` Set to `true` if you want a circle shape instead of square one
+  ##  ``image`` The graphic to render on top of a butotn.
+  ##
+  ##  ``circle`` Set to `true` if you want a circle shape instead of square one.
   ##
   result = new GuiButton
-  result.init(graphic, circle)
+  result.init(graphic, image, circle)
 
 
 method `state=`*(button: GuiButton, val: GuiState) =
   button.setState(val)
   button.sprite.currentFrame = val.int
+
+
+proc renderGuiButton*(button: GuiButton) =
+  ##  Default button render procedure.
+  ##
+  ##  Call it from your button render method.
+  ##
+  button.renderEntity()
+  if not (button.image == nil):
+    var pos = button.absPos + button.imageOffset
+    if button.state == GuiState.pressed:
+      pos += button.imageShift
+    button.image.draw(pos,
+                      button.absRot,
+                      button.absScale,
+                      button.center,
+                      button.flip)
+
+
+method render*(button: GuiButton) =
+  button.renderGuiButton()
 
