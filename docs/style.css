@@ -21,18 +21,29 @@ body {
 /* HEADER */
 
 header {
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
-header > div {
-    min-width: 20rem;
-    max-width: 40rem;
-    margin: 0 auto;
+header > div, header > div > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+header > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+header hr {
+    width: 100%;
 }
 
 header .logo {
-    float: left;
     padding: 0.5rem;
+    min-width: 5rem;
 }
 
 header .logo img {

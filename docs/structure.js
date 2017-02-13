@@ -61,12 +61,22 @@ function createHeader(title, logo) {
         headerLink('links'),
     ];
 
+    var menu = document.createElement('div');
+    for(var i = 0; i < headerLinks.length; i++) {
+        menu.appendChild(headerLinks[i]);
+    }
+
+    var titleDiv = document.createElement('div');
+    titleDiv.appendChild(headerTitle);
+    titleDiv.appendChild(menu);
+
+    var logoR = document.createElement('div');
+    logoR.classList.add('logo');
+
     var headerDiv = document.createElement('div');
     headerDiv.appendChild(logo);
-    headerDiv.appendChild(headerTitle);
-    for(var i = 0; i < headerLinks.length; i++) {
-        headerDiv.appendChild(headerLinks[i]);
-    }
+    headerDiv.appendChild(titleDiv);
+    headerDiv.appendChild(logoR);
 
     var header = document.querySelector('header');
     header.appendChild(headerDiv);
