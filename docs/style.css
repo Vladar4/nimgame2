@@ -67,11 +67,11 @@ header .menu {
     cursor: pointer;
 }
 
-header a:hover {
+header .menu:hover {
     background-color: #f0f0f0;
 }
 
-header a:active {
+header .menu:active {
     background-color: #d0d0d0;
 }
 
