@@ -27,6 +27,7 @@ function headerLink(name, disabled) {
     if(disabled)
         a.classList.add('disabled');
     a.href = name + '.html';
+    a.classList.add('menu');
     a.innerHTML = name.toUpperCase();
     var result = document.createElement('span');
     result.appendChild(a);
@@ -45,9 +46,14 @@ function createHeader(title, logo) {
     var img = document.createElement('img');
     img.src = logo + '.png';
 
+    var logoLink = document.createElement('a');
+    logoLink.href = 'index.html';
+    logoLink.target = '_self';
+    logoLink.appendChild(img);
+
     var logo = document.createElement('div');
     logo.classList.add('logo');
-    logo.appendChild(img);
+    logo.appendChild(logoLink);
 
     var headerTitle = document.createElement('h1');
     headerTitle.innerHTML = title;

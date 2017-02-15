@@ -55,7 +55,7 @@ header h1 {
     text-shadow: 2px 2px 2px #444;
 }
 
-header a {
+header .menu {
     padding: 0.5rem 1rem;
     border: 1px solid #999;
     color: #444;
@@ -108,9 +108,10 @@ aside {
     padding: 1rem;
     border: 1px solid #999;
     margin: 1rem;
-    min-width: 15rem;
-    width: 15rem;
+    min-width: 20rem;
+    width: 20rem;
     height: 100%;
+    font-size: larger;
 }
 
 figure {
@@ -200,6 +201,7 @@ a[href*="mailto"] {
     background: url('images/icons/check.png') no-repeat 0 0.1rem;
     background-size: 1rem 1rem;
     padding-left: 1.5rem;
+    font-size: normal;
 }
 
 .checklist li.wip {
