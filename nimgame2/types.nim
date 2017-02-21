@@ -28,7 +28,8 @@ import
 
 
 export
-  sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Rect, sdl.Renderer
+  sdl.Color, sdl.Event, sdl.EventKind, sdl.Keycode, sdl.Rect, sdl.Renderer,
+  sdl.Surface, sdl.Texture
 
 
 type

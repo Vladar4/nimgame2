@@ -4,6 +4,7 @@ import
   nimgame2/entity,
   nimgame2/texturegraphic,
   nimgame2/input,
+  nimgame2/mosaic,
   nimgame2/scene,
   nimgame2/settings,
   nimgame2/types,
@@ -13,8 +14,8 @@ import
 
 type
   MainScene = ref object of Scene
-    btnSquareG, btnCircleG, iconX: TextureGraphic
-    btnSquare: SquareButton
+    btnSquareG, btnCircleG, iconX, btnMosaicG: TextureGraphic
+    btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
 
 
@@ -27,6 +28,20 @@ proc init*(scene: MainScene) =
   discard scene.btnCircleG.load("../assets/gfx/button_circle.png")
   scene.iconX = newTextureGraphic()
   discard scene.iconX.load("../assets/gfx/icon_x.png")
+  let mosaic = newMosaic("../assets/gfx/button_square.png", (8, 8))
+  scene.btnMosaicG = newTextureGraphic()
+  discard scene.btnMosaicG.assignTexture mosaic.render(
+    patternRepeat(@[
+      (1, 2, @[1,4,1]),
+      (4, 2, @[1,4,1]),
+      (1, 2, @[1,4,1]),
+      (1, 2, @[1,4,1]),
+      (4, 2, @[1,4,1]),
+      (1, 2, @[1,4,1]),
+    ])
+  )
+
+
   # Square Button
   scene.btnSquare = newSquareButton(scene.btnSquareG, scene.iconX)
   scene.btnSquare.mbAllow.set(MouseButton.right)
@@ -34,8 +49,12 @@ proc init*(scene: MainScene) =
   # Circle Button
   scene.btnCircle = newCircleButton(scene.btnCircleG)
   scene.btnCircle.pos = (150, 100)
+  # Mosaic Button
+  scene.btnMosaic = newSquareButton(scene.btnMosaicG)
+  scene.btnMosaic.pos = (200, 100)
 
   # add to scene
+  scene.add(scene.btnMosaic)
   scene.add(scene.btnSquare)
   scene.add(scene.btnCircle)
 
