@@ -220,3 +220,19 @@ proc patternRepeat*(repeat: RepeatPattern): MosaicPattern =
     for rowCount in 0..<line.rows:
       result.add rowData
 
+
+proc patternStretchBorder*(w, h: int, nx = 2, ny = 2): MosaicPattern =
+  ##  Generate a repeating pattern by repeating border items of 3x3 matrix
+  ##  (used for GUI buttons, etc.)
+  ##
+  ##  `w`, `h` strethed parts repeat count.
+  ##
+  ##  `nx`, `ny`  number of elements in the matrix.
+  ##
+  var pat: RepeatPattern = @[]
+  for i in 0..<ny:
+    pat.add((1, nx, @[1, w, 1]))
+    pat.add((h, nx, @[1, w, 1]))
+    pat.add((1, nx, @[1, w, 1]))
+  return patternRepeat(pat)
+

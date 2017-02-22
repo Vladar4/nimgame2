@@ -31,16 +31,7 @@ proc init*(scene: MainScene) =
   let mosaic = newMosaic("../assets/gfx/button_square.png", (8, 8))
   scene.btnMosaicG = newTextureGraphic()
   discard scene.btnMosaicG.assignTexture mosaic.render(
-    patternRepeat(@[
-      (1, 2, @[1,4,1]),
-      (4, 2, @[1,4,1]),
-      (1, 2, @[1,4,1]),
-      (1, 2, @[1,4,1]),
-      (4, 2, @[1,4,1]),
-      (1, 2, @[1,4,1]),
-    ])
-  )
-
+    patternStretchBorder(4, 2))
 
   # Square Button
   scene.btnSquare = newSquareButton(scene.btnSquareG, scene.iconX)
