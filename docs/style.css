@@ -37,10 +37,6 @@ header > div > div {
     flex-direction: column;
 }
 
-header hr {
-    width: 100%;
-}
-
 header .logo {
     padding: 0.5rem;
     min-width: 5rem;
@@ -108,8 +104,7 @@ aside {
     padding: 1rem;
     border: 1px solid #999;
     margin: 1rem;
-    min-width: 20rem;
-    width: 20rem;
+    min-width: 15rem;
     height: 100%;
     font-size: larger;
 }
@@ -133,6 +128,11 @@ footer {
 h3 {
     font-size: 100%;
 }
+
+hr {
+    width: 100%;
+}
+
 
 pre {
     background-color: #e0e0e0;
