@@ -39,14 +39,14 @@ type
 
   GuiWidget* = ref object of Entity
     fState: GuiState
-    mbAllow*: int32
-    fWasPressed: int32
+    mbAllow*, fWasPressed: MouseState
 
 
 proc init*(widget: GuiWidget) =
   widget.initEntity()
   widget.fState = GuiState.default
   widget.mbAllow.set(MouseButton.left)
+  widget.fWasPressed = 0
 
 
 proc newGuiWidget*(): GuiWidget =
@@ -56,10 +56,6 @@ proc newGuiWidget*(): GuiWidget =
 
 proc state*(widget: GuiWidget): GuiState {.inline.} =
   return widget.fState
-
-
-method onFocus*(widget: GuiWidget) {.base.} =
-  discard
 
 
 method onPress*(widget: GuiWidget) {.base.} =
@@ -76,7 +72,7 @@ proc setState*(widget: GuiWidget, val: GuiState) =
   of GuiState.default:
     discard
   of GuiState.focused:
-    widget.onFocus()
+    discard
   of GuiState.pressed:
     widget.onPress()
   of GuiState.disabled:
@@ -97,25 +93,28 @@ proc updateGuiWidget*(widget: GuiWidget, elapsed: float) =
     widget.state = if mouse.collide(widget.collider): GuiState.focused
                    else: GuiState.default
 
+    # check buttons only if the mouse is over the widget
     if widget.state == GuiState.focused:
 
-      var mbState = mbState()
-
-      # ignore non-enalbed buttons
       for i in MouseButton:
-        if not i.pressed(widget.mbAllow):
-          mbState.set(i, false)
+        # ignore non-enalbed buttons
+        if not i.down(widget.mbAllow):
+          continue
 
-      if mbState != 0:
-        widget.state = GuiState.pressed
+        if widget.fWasPressed == 0: # wasn't pressed
+          if i.pressed:
+            widget.state = GuiState.pressed
+            widget.fWasPressed.set(i)
+            widget.onPress
 
-      elif widget.fWasPressed != 0:
-        for i in MouseButton:
-          if i.pressed(widget.fWasPressed):
+        elif i.down(widget.fWasPressed): # i was pressed
+          if i.released:
+            widget.fWasPressed.set(i, false)
             widget.onClick(i)
-        widget.fWasPressed = 0
-
-      widget.fWasPressed = mbState
+          elif i.down(mbState):
+            widget.state = GuiState.pressed
+          else:
+            widget.fWasPressed.set(i, false)
 
 
 method update*(widget: GuiWidget, elapsed: float) =

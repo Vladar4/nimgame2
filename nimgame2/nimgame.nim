@@ -306,6 +306,7 @@ proc run*(game: Game) =
 
     # Events handling
     initKeyboard()
+    initMouse()
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:

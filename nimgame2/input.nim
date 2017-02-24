@@ -40,10 +40,17 @@ type
     x1 = sdl.ButtonX1
     x2 = sdl.ButtonX2
 
+  MouseState* = int32
+
+
+converter toInt*(button: MouseButton): int32 =
+  button.int32
+
 
 var
   kbd: ptr array[sdl.NumScancodes.int, uint8]
   kbdPressed, kbdReleased: seq[Scancode]
+  mPressed, mReleased: int32
   m: Coord2
   mBtn: int32
 
@@ -130,13 +137,38 @@ template name*(scancode: Scancode): string =
 # Mouse #
 #=======#
 
-template updateMouse*(event: Event) =
+template set*(state: var MouseState,
+              button: int32,
+              enable: bool = true) =
+  ##  Enable or disable specific mouse button's flag in the given ``state``.
+  ##
+  if enable:
+    state = state or sdl.button(button).int32
+  else:
+    state = state and (not sdl.button(button).int32)
+
+
+proc initMouse*() =
+  ##  Clear the buffers.
+  ##
+  ##  Called automatically from the main game cycle.
+  ##
+  mPressed = 0
+  mReleased = 0
+
+
+proc updateMouse*(event: Event) =
   ##  Called automatically from the main game cycle.
   ##
   var ax, ay, rx, ry: cint
   mBtn = sdl.getMouseState(addr(ax), addr(ay)).int
   discard sdl.getRelativeMouseState(addr(rx), addr(ry))
   m = ((ax.float, ay.float), (rx.float, ry.float))
+
+  if event.kind == MouseButtonDown:
+    mPressed.set(event.button.button.int32)
+  elif event.kind == MouseButtonUp:
+    mReleased.set(event.button.button.int32)
 
 
 template mouse*(): Coord2 =
@@ -157,33 +189,40 @@ template mouseCapture*(enabled: bool): bool =
   sdl.captureMouse(enabled) == 0
 
 
-template pressed*(button: MouseButton, state: int32 = mBtn): bool =
-  ##  Check if mouse ``button`` is pressed.
-  ##
-  (sdl.button(button.int32) and state) > 0
-
-
-template pressed*(button: int32, state: int32 = mBtn): bool =
+template down*(button: int32, state: MouseState = mBtn): bool =
   ##  Check if mouse ``button`` is pressed.
   ##
   (sdl.button(button) and state) > 0
 
 
-template mbState*(): int32 =
+template pressed*(button: int32): bool =
+  ##  Check if ``scancode`` (keyboard key) was just pressed.
+  ##
+  (sdl.button(button) and mPressed) > 0
+
+
+template released*(button: int32): bool =
+  ##  Check if ``scancode`` (keyboard key) was just released.
+  ##
+  (sdl.button(button) and mReleased) > 0
+
+
+template clearPressed*(button: int32) =
+  ##  Remove ``button`` from pressed buttons list.
+  ##
+  mPressed.set(button, false)
+
+
+template clearReleased*(button: int32) =
+  ##  Remove ``button`` from released buttons list.
+  ##
+  mReleased.set(button, false)
+
+
+template mbState*(): MouseState =
   ##  ``Return`` current mouse buttons state value.
   ##
   mBtn
-
-
-template set*(state: var int32,
-              button: MouseButton,
-              enable: bool = true) =
-  ##  Enable or disable specific mouse button's flag in the given ``state``.
-  ##
-  if enable:
-    state = state or sdl.button(button.int32).int32
-  else:
-    state = state and (not sdl.button(button.int32).int32)
 
 
 template cursorIsVisible*(): bool =
