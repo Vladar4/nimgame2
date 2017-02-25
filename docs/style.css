@@ -201,7 +201,7 @@ a[href*="mailto"] {
     background: url('images/icons/check.png') no-repeat 0 0.1rem;
     background-size: 1rem 1rem;
     padding-left: 1.5rem;
-    font-size: normal;
+    font-size: medium;
 }
 
 .checklist li.wip {

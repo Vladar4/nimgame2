@@ -22,9 +22,7 @@
     <article>
         <h2>SNIPPETS</h2>
 
-        <div class="snippet" id="init_game">
-            <h3>Engine Initialization</h3>
-
+<div class="snippet" id="init_game"><h3>Engine Initialization</h3>
 <pre class="prettyprint">
   # mygame.nim
 
@@ -40,12 +38,9 @@
   if game.init(w = 640, h = 480, title = "My Awesome Game"):
       game.scene = newMainScene() # your scene constructor
       game.run()
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="init_scene">
-            <h3>Scene Initialization</h3>
-
+<div class="snippet" id="init_scene"><h3>Scene Initialization</h3>
 <pre class="prettyprint">
   # mainscene.nim
 
@@ -116,12 +111,9 @@
     # don't forget to call the parent update!
     scene.updateScene(elapsed)
     # scene-level logic goes here
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="init_entity">
-            <h3>Entity Initialization</h3>
-
+<div class="snippet" id="init_entity"><h3>Entity Initialization</h3>
 <pre class="prettyprint">
   # myentity.nim
 
@@ -163,11 +155,9 @@
   method update*(physics: Physics, entity: MyEntity, elapsed: float) =
     # call the default physics procedure, or write your own
     physics.updatePhysics(entity, elapsed)
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="keyboard_input">
-            <h3>Keyboard Input</h3>
+<div class="snippet" id="keyboard_input"><h3>Keyboard Input</h3>
 
 <pre class="prettyprint">
   # somewhere in the update method
@@ -179,24 +169,18 @@
     if ScancodeSpace.pressed: scene.player.startCharging()
     # the key was relased
     if ScancodeSpace.released: scene.player.discharge()
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="mouse_input">
-            <h3>Mouse Input</h3>
-
+<div class="snippet" id="mouse_input"><h3>Mouse Input</h3>
 <pre class="prettyprint">
   # somewhere in the update method
 
     let mousePos = mouse.abs
-    if Button.left.pressed: scene.player.fireTo(mousePos)
+    if Button.left.down: scene.player.fireTo(mousePos)
     # Mouse buttons (Button enum): left, middle, right, x1, x2
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="init_sprite">
-            <h3>Sprite Initialization</h3>
-
+<div class="snippet" id="init_sprite"><h3>Sprite Initialization</h3>
 <pre class="prettyprint">
   # somewhere in the entity initialization routine
 
@@ -218,22 +202,16 @@
       "jump_right", toSeq(4..7))
     discard scene.d.addAnimation(
       "jump_left", toSeq(4..7), flip = Flip.horizontal)
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="init_collider">
-            <h3>Collider Initialization</h3>
-
+<div class="snippet" id="init_collider"><h3>Collider Initialization</h3>
 <pre class="prettyprint">
   # somewhere in the entity initialization routine
 
     entity.collider = newBoxCollider(entity, (0, 0), entity.graphic.dim)
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="textgraphic">
-            <h3>TextGraphic Usage</h3>
-
+<div class="snippet" id="textgraphic"><h3>TextGraphic Usage</h3>
 <pre class="prettyprint">
   # somewhere in the scene initialization routine
 
@@ -278,12 +256,9 @@
     scene.trueTypeEntity.graphic = scene.trueTypeText
     # add to the scene
     scene.add(scene.trueTypeEntity)
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="procgraphic">
-            <h3>ProcGraphic Usage</h3>
-
+<div class="snippet" id="procgraphic"><h3>ProcGraphic Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
 
@@ -309,12 +284,26 @@
     scene.myEntity.graphic = scene.customGraphic
     # add to the scene
     scene.add(scene.myEntity)
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="sound">
-            <h3>Sound Usage</h3>
+<div class="snippet" id="tweens"><h3>Tweens Usage</h3>
+<pre class="prettyprint">
+  let tween = newTween[Entity,Coord](
+    target = myEntity,
+    get = proc(t: Entity): Coord = t.pos,
+    set = proc(t: Entity, val: Coord) = t.pos = val
+  )
+  tween.procedure = inQuad
+  tween.setup(
+    start = myEnttiy.pos,
+    finish = myEntityPos + (100.0, 0.0),
+    duration = 3.0,
+    loops = -1
+  )
+  tween.play()
+</pre></div>
 
+<div class="snippet" id="sound"><h3>Sound Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
 
@@ -327,12 +316,9 @@
 
     # the call
     scene.soundEffect.play()
-</pre>
-        </div>
+</pre></div>
 
-        <div class="snippet" id="music_playlist">
-            <h3>Music Playlist Usage</h3>
-
+<div class="snippet" id="music_playlist"><h3>Music Playlist Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
 
@@ -350,21 +336,17 @@
 
     # next random track
     playlist.play()
-</pre>
-        </div>
+</pre></div>
 
 
-        <!--
+<!--
 
-        <div class="snippet" id="">
-            <h3></h3>
-
+<div class="snippet" id=""><h3></h3>
 <pre class="prettyprint">
 
-</pre>
-        </div>
+</pre></div>
 
-        -->
+-->
 
     </article>
 

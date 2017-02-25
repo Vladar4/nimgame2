@@ -112,7 +112,7 @@ function createSnippetsList() {
     var list = document.querySelectorAll('.snippet');
 
     for(var i = 0; i < list.length; i++) {
-        var title = list[i].childNodes[1];
+        var title = list[i].childNodes[0];
         title.style.display = 'inline';
 
         var link = document.createElement('a');
