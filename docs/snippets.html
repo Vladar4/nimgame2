@@ -286,7 +286,7 @@
     scene.add(scene.myEntity)
 </pre></div>
 
-<div class="snippet" id="tweens"><h3>Tweens Usage</h3>
+<div class="snippet" id="tweens"><h3>Tween Usage</h3>
 <pre class="prettyprint">
   let tween = newTween[Entity,Coord](
     target = myEntity,
@@ -302,6 +302,29 @@
   )
   tween.play()
 </pre></div>
+
+<div class="snippet" id="emitters"><h3>Emitter Usage</h3>
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+    # init emitter
+    myEmitter = newEmitter(myScene)
+    myEmitter.randomVel = (10.0, 10.0)
+    myEmitter.randomAcc = (5.0, 5.0)
+    myEmitter.randomTTL = 5.0
+    myScene.add(myEmitter)
+    # init emitter particle
+    myEmitter.particle = newParticle()
+    myEmitter.particle.graphic = myParticleGraphic
+    myEmitter.particle.initSprite((5, 5))
+    myEmitter.particle.centrify()
+    discard myEmitter.particle.addAnimation("play", toSeq(0..4), 1/5)
+    myEmitter.particle.play("play", 1, kill = true)
+
+  # somewhere in the update routine
+    if emitCondition:
+      myEmitter.emit(5) # emit 5 particles
+</pre></div>
+
 
 <div class="snippet" id="sound"><h3>Sound Usage</h3>
 <pre class="prettyprint">
