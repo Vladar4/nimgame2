@@ -30,11 +30,11 @@ import
 
 
 type
-  GuiButton* =ref object of GuiWidget
+  GuiButton* = ref object of GuiWidget
     image*: Graphic ##  The graphic to render on top of a button
-    imageOffset*: Coord ## Image drawing offset from button's center. \
-      ## Calcuclated automatically if the image is passed in ``init()``
-    imageShift*: Coord  ## Image shift when button is pressed
+    imageOffset*: Coord ##  Image drawing offset from button's center. \
+      ##  Calcuclated automatically if the image is passed in ``init()``
+    imageShift*: Coord  ##  Image shift when button is pressed
 
 
 proc init*(button: GuiButton,
