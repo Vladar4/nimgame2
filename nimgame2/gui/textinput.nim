@@ -35,6 +35,7 @@ type
   GuiTextInput* = ref object of GuiWidget
     font*: Font         ##  Font object for text rendering
     fText: TextGraphic
+    textPos*: Coord     ##  Relative text position
 
 
 proc init*(input: GuiTextInput,
@@ -55,6 +56,9 @@ proc init*(input: GuiTextInput,
   # Text
   input.fText = newTextGraphic()
   input.fText.font = font
+  input.textPos = (
+    (input.sprite.dim.h - font.charH) / 2,
+    (input.sprite.dim.h - font.charH) / 2)
   #TODO testing
   input.fText.lines = ["Test"]
 
@@ -82,7 +86,7 @@ proc renderGuiTextInput*(input: GuiTextInput) =
   ##  Call it from your text input render method.
   ##
   input.renderEntity()
-  input.fText.draw(input.pos)
+  input.fText.draw(input.pos + input.textPos)
 
 
 method render*(input: GuiTextInput) =

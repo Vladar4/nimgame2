@@ -51,10 +51,10 @@ proc init*(scene: MainScene) =
   # TextInput
   scene.font = newBitmapFont()
   discard scene.font.load("../assets/fnt/default8x16.png", (8, 16))
-  let inputmosaic = newMosaic("../assets/gfx/button_square.png", (8, 8))
+  let inputmosaic = newMosaic("../assets/gfx/text_input.png", (8, 8))
   scene.inputG = newTextureGraphic()
   discard scene.inputG.assignTexture inputmosaic.render(
-    patternStretchBorder(4, 1))
+    patternStretchBorder(16, 1))
   scene.textInput = newGuiTextInput(scene.inputG, scene.font)
   scene.textInput.pos = (100, 150)
 
