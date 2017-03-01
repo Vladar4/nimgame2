@@ -79,6 +79,7 @@ proc newMainScene*(): MainScene =
 
 
 method event*(scene: MainScene, event: Event) =
+  scene.eventScene(event)
   if event.kind == KeyDown:
     case event.key.keysym.sym:
     of K_Escape:

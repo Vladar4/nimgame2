@@ -494,6 +494,9 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   of VAlign.bottom: dim.h.float - 1
 
 
+method event*(entity: Entity, e: sdl.Event) {.base.} = discard
+
+
 proc renderEntity*(entity: Entity) =
   ##  Default entity render procedure.
   ##

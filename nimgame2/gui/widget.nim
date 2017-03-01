@@ -83,40 +83,55 @@ method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
   widget.setState(val)
 
 
-proc updateGuiWidget*(widget: GuiWidget, elapsed: float) =
-  widget.updateEntity(elapsed)
+template updateFocus(widget: GuiWidget, mouse: Coord): bool =
+  ##  Check if the ``mouse`` is over the ``widget``.
+  ##
+  if mouse.collide(widget.collider):
+    widget.state = GuiState.focused
+    true
+  else:
+    widget.state = GuiState.default
+    false
 
+
+proc eventGuiWidget*(widget: GuiWidget, e: Event) =
   if widget.state != GuiState.disabled:
+    case e.kind:
+    of MouseMotion:
+      let mouse: Coord = (e.motion.x.float, e.motion.y.float)
+      if widget.updateFocus(mouse):
+        for btn in MouseButton:
+          # check if button is allowed
+          if btn.down(widget.mbAllow):
+            # check if button was pressed over this widget
+            if btn.down(widget.fWasPressed):
+              widget.state = GuiState.pressed
 
-    let mouse = mouse.abs
+    of MouseButtonDown:
+      let mouse: Coord = (e.button.x.float, e.button.y.float)
+      if widget.updateFocus(mouse):
+        let btn = e.button.button.MouseButton
+        # check if button is allowed
+        if btn.down(widget.mbAllow):
+          widget.state = GuiState.pressed
+          widget.fWasPressed.set(btn)
+          widget.onPress()
 
-    widget.state = if mouse.collide(widget.collider): GuiState.focused
-                   else: GuiState.default
-
-    # check buttons only if the mouse is over the widget
-    if widget.state == GuiState.focused:
-
-      for i in MouseButton:
-        # ignore non-enalbed buttons
-        if not i.down(widget.mbAllow):
-          continue
-
-        if widget.fWasPressed == 0: # wasn't pressed
-          if i.pressed:
-            widget.state = GuiState.pressed
-            widget.fWasPressed.set(i)
-            widget.onPress
-
-        elif i.down(widget.fWasPressed): # i was pressed
-          if i.released:
-            widget.fWasPressed.set(i, false)
-            widget.onClick(i)
-          elif i.down(mbState):
-            widget.state = GuiState.pressed
-          else:
-            widget.fWasPressed.set(i, false)
+    of MouseButtonUp:
+      let mouse: Coord = (e.button.x.float, e.button.y.float)
+      let btn = e.button.button.MouseButton
+      if widget.updateFocus(mouse):
+        # check if button was pressed over this widget
+        if btn.down(widget.fWasPressed):
+          widget.fWasPressed.set(btn, false)
+          widget.onClick(btn)
+      else:
+        if btn.down(widget.fWasPressed):
+          widget.fWasPressed.set(btn, false)
+    else:
+      discard
 
 
-method update*(widget: GuiWidget, elapsed: float) =
-  widget.updateGuiWidget(elapsed)
+method event*(widget: GuiWidget, e: Event) =
+  widget.eventGuiWidget(e)
 

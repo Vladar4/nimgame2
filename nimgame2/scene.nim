@@ -40,7 +40,13 @@ proc init*(scene: Scene) =
   scene.fAddList = @[]
 
 
-method event*(scene: Scene, e: sdl.Event) {.base.} = discard
+proc eventScene*(scene: Scene, e: sdl.Event) =
+  for entity in scene.fList:
+    entity.event(e)
+
+
+method event*(scene: Scene, e: sdl.Event) {.base.} =
+  scene.eventScene(e)
 
 
 method show*(scene: Scene) {.base.} =
