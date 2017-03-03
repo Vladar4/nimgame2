@@ -28,6 +28,8 @@ import
 
 type
   Scene* = ref object of RootObj
+    camera*, cameraBond*: Entity
+    cameraBondOffset*: Coord
     fList, fAddList: seq[Entity]
 
 
@@ -36,6 +38,9 @@ type
 #=======#
 
 proc init*(scene: Scene) =
+  scene.camera = nil
+  scene.cameraBond = nil
+  scene.cameraBondOffset = (0.0, 0.0)
   scene.fList = @[]
   scene.fAddList = @[]
 
@@ -101,6 +106,11 @@ proc checkCollisions*(scene: Scene, entity: Entity) =
 
 proc addEntity(scene: Scene, entity: Entity) =
   if scene.fList.len < 1:
+    # assign camera as a parent
+    if scene.camera != nil:
+      if entity.parent == nil:
+        entity.parent = scene.camera
+    # add
     scene.fList.add(entity)
     return
 
@@ -126,6 +136,13 @@ proc add*(scene: Scene, entity: Entity) =
   ##  Add a new ``entity`` to the ``scene``.
   ##
   scene.fAddList.add(entity)
+
+
+proc bindCameraTo*(scene: Scene, bond: Entity, offset: Coord) =
+  ##  Bind the camera to the movement of the specific ``entity``.
+  ##
+  scene.cameraBond = bond
+  scene.cameraBondOffset = offset
 
 
 proc clear*(scene: Scene) =
@@ -262,6 +279,10 @@ proc updateScene*(scene: Scene, elapsed: float) =
     let entity = scene.fAddList.pop()
     entity.updLayer = false
     scene.addEntity(entity)
+
+  # camera
+  if scene.cameraBond != nil:
+    scene.camera.pos = -scene.cameraBond.pos + scene.cameraBondOffset
 
   # update
   for entity in scene.fList:

@@ -17,15 +17,15 @@ import
 type
   MainScene = ref object of Scene
     tilesG, spacemanG: TextureGraphic
-    camera, spaceman: Entity
+    spaceman: Entity
     map: TileMap
-    follow: bool
 
 
 proc init*(scene: MainScene) =
   Scene(scene).init()
 
   scene.camera = newEntity()
+  scene.cameraBondOffset = game.size / 2
 
   # Tiles Graphic
   scene.tilesG = newTextureGraphic()
@@ -41,7 +41,6 @@ proc init*(scene: MainScene) =
   scene.map.passable.add(0)
   scene.map.initCollider()
   scene.map.pos = (0.0, 0.0)
-  scene.map.parent = scene.camera
 
   # SpacemanG
   scene.spacemanG = newTextureGraphic()
@@ -57,7 +56,6 @@ proc init*(scene: MainScene) =
   # Add
   scene.add(scene.spaceman)
   scene.add(scene.map)
-  scene.add(scene.camera)
 
 
 
@@ -79,18 +77,19 @@ method event*(scene: MainScene, event: Event) =
     of K_Space:
       colliderOutline = not colliderOutline
     of K_Return:
-      scene.follow = not scene.follow
+      scene.cameraBond = if scene.cameraBond != nil: nil
+                         else: scene.spaceman
     else: discard
 
 
 method render*(scene: MainScene) =
   scene.renderScene()
-  discard box((4, 60), (300, 100), 0x000000CC'u32)
+  discard box((4, 60), (300, 108), 0x000000CC'u32)
 
   discard string((8, 64), "Arrows - move camera", 0xFFFFFFFF'u32)
   discard string((8, 72), "WSAD - move spaceman", 0xFFFFFFFF'u32)
   discard string((8, 80), "Enter - toggle following (" &
-    (if scene.follow: "on" else: "off")  & ")", 0xFFFFFFFF'u32)
+    (if scene.cameraBond != nil: "on" else: "off")  & ")", 0xFFFFFFFF'u32)
 
   discard string((8, 88), "camera.pos = " & $(-scene.camera.pos),
     0xFFFFFFFF'u32)
@@ -101,15 +100,13 @@ method render*(scene: MainScene) =
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
   let move = 100 * elapsed
-  if ScancodeUp.down: scene.camera.pos.y += move
-  if ScancodeDown.down: scene.camera.pos.y -= move
-  if ScancodeLeft.down: scene.camera.pos.x += move
-  if ScancodeRight.down: scene.camera.pos.x -= move
+  if scene.cameraBond == nil:
+    if ScancodeUp.down: scene.camera.pos.y += move
+    if ScancodeDown.down: scene.camera.pos.y -= move
+    if ScancodeLeft.down: scene.camera.pos.x += move
+    if ScancodeRight.down: scene.camera.pos.x -= move
   if ScancodeW.down: scene.spaceman.pos.y -= move
   if ScancodeS.down: scene.spaceman.pos.y += move
   if ScancodeA.down: scene.spaceman.pos.x -= move
   if ScancodeD.down: scene.spaceman.pos.x += move
-
-  if scene.follow:
-    scene.camera.pos = -scene.spaceman.pos + Coord(game.size / 2)
 
