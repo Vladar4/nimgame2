@@ -19,6 +19,7 @@ type
     tilesG, spacemanG: TextureGraphic
     camera, spaceman: Entity
     map: TileMap
+    follow: bool
 
 
 proc init*(scene: MainScene) =
@@ -77,6 +78,8 @@ method event*(scene: MainScene, event: Event) =
       gameRunning = false
     of K_Space:
       colliderOutline = not colliderOutline
+    of K_Return:
+      scene.follow = not scene.follow
     else: discard
 
 
@@ -86,10 +89,12 @@ method render*(scene: MainScene) =
 
   discard string((8, 64), "Arrows - move camera", 0xFFFFFFFF'u32)
   discard string((8, 72), "WSAD - move spaceman", 0xFFFFFFFF'u32)
+  discard string((8, 80), "Enter - toggle following (" &
+    (if scene.follow: "on" else: "off")  & ")", 0xFFFFFFFF'u32)
 
-  discard string((8, 80), "camera.pos = " & $(-scene.camera.pos),
+  discard string((8, 88), "camera.pos = " & $(-scene.camera.pos),
     0xFFFFFFFF'u32)
-  discard string((8, 88), "spaceman.pos = " & $(scene.spaceman.pos),
+  discard string((8, 96), "spaceman.pos = " & $(scene.spaceman.pos),
     0xFFFFFFFF'u32)
 
 
@@ -104,4 +109,7 @@ method update*(scene: MainScene, elapsed: float) =
   if ScancodeS.down: scene.spaceman.pos.y += move
   if ScancodeA.down: scene.spaceman.pos.x -= move
   if ScancodeD.down: scene.spaceman.pos.x += move
+
+  if scene.follow:
+    scene.camera.pos = -scene.spaceman.pos + Coord(game.size / 2)
 
