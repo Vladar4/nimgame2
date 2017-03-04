@@ -18,5 +18,5 @@ proc newCircleButton*(graphic: Graphic): CircleButton =
 
 
 method onClick*(btn: CircleButton, mb: MouseButton) =
-  echo "clicked circle button"
+  echo "clicked circle button, toggled " & (if btn.toggled: "on" else: "off")
 

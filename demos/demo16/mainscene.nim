@@ -44,6 +44,7 @@ proc init*(scene: MainScene) =
   # Circle Button
   scene.btnCircle = newCircleButton(scene.btnCircleG)
   scene.btnCircle.pos = (150, 100)
+  scene.btnCircle.toggle = true
   # Mosaic Button
   scene.btnMosaic = newSquareButton(scene.btnMosaicG)
   scene.btnMosaic.pos = (200, 100)

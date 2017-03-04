@@ -40,6 +40,7 @@ type
   GuiWidget* = ref object of Entity
     fState: GuiState
     mbAllow*, fWasPressed: MouseState
+    toggle*, toggled*: bool
 
 
 proc init*(widget: GuiWidget) =
@@ -47,6 +48,8 @@ proc init*(widget: GuiWidget) =
   widget.fState = GuiState.default
   widget.mbAllow.set(MouseButton.left)
   widget.fWasPressed = 0
+  widget.toggle = false
+  widget.toggled = false
 
 
 proc newGuiWidget*(): GuiWidget =
@@ -67,16 +70,8 @@ method onClick*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
 
 
 proc setState*(widget: GuiWidget, val: GuiState) =
-  widget.fState = val
-  case val:
-  of GuiState.default:
-    discard
-  of GuiState.focused:
-    discard
-  of GuiState.pressed:
-    widget.onPress()
-  of GuiState.disabled:
-    discard
+  widget.fState = if widget.toggle and widget.toggled: GuiState.pressed
+                  else: val
 
 
 method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
@@ -123,6 +118,12 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
       if widget.updateFocus(mouse):
         # check if button was pressed over this widget
         if btn.down(widget.fWasPressed):
+          # toggle
+          if widget.toggle:
+            widget.toggled = not widget.toggled
+            widget.state = if widget.toggled:GuiState.pressed
+                           else: GuiState.focused
+          #
           widget.fWasPressed.set(btn, false)
           widget.onClick(btn)
       else:
@@ -130,6 +131,7 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
           widget.fWasPressed.set(btn, false)
     else:
       discard
+    widget.state = widget.state
 
 
 method event*(widget: GuiWidget, e: Event) =
