@@ -221,7 +221,7 @@ proc patternRepeat*(repeat: RepeatPattern): MosaicPattern =
       result.add rowData
 
 
-proc patternStretchBorder*(w, h: int, nx = 2, ny = 2): MosaicPattern =
+proc patternStretchBorder*(w, h: int, nx = 2, ny = 3): MosaicPattern =
   ##  Generate a repeating pattern by repeating border items of 3x3 matrix
   ##  (used for GUI buttons, etc.)
   ##

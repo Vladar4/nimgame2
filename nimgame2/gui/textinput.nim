@@ -50,7 +50,7 @@ proc init*(input: GuiTextInput,
   ##
   GuiWidget(input).init()
   input.graphic = graphic
-  input.initSprite(graphic.dim / 2)
+  input.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   # Collider
   input.collider = input.newBoxCollider(input.sprite.dim / 2, input.sprite.dim)
   # Text

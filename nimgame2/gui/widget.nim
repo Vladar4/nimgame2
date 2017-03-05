@@ -31,10 +31,12 @@ import
 
 type
   GuiState* {.pure.} = enum
-    default
-    focused
-    pressed
-    disabled
+    defaultUp
+    defaultDown
+    focusedUp
+    focusedDown
+    disabledUp
+    disabledDown
 
 
   GuiWidget* = ref object of Entity
@@ -45,7 +47,7 @@ type
 
 proc init*(widget: GuiWidget) =
   widget.initEntity()
-  widget.fState = GuiState.default
+  widget.fState = GuiState.defaultUp
   widget.mbAllow.set(MouseButton.left)
   widget.fWasPressed = 0
   widget.toggle = false
@@ -69,28 +71,38 @@ method onClick*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
   discard
 
 
+template isUp*(state: GuiState): bool =
+  (state.int mod 2 == 0)
+
+
+template isDown*(state: GuiState): bool =
+  (not isUp(state))
+
+
 proc setState*(widget: GuiWidget, val: GuiState) =
-  widget.fState = if widget.toggle and widget.toggled: GuiState.pressed
-                  else: val
+  widget.fState = if widget.toggle and widget.toggled and val.isUp:
+                    GuiState(val.int + 1)
+                  else:
+                    val
 
 
 method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
   widget.setState(val)
 
 
-template updateFocus(widget: GuiWidget, mouse: Coord): bool =
+proc updateFocus(widget: GuiWidget, mouse: Coord): bool =
   ##  Check if the ``mouse`` is over the ``widget``.
   ##
   if mouse.collide(widget.collider):
-    widget.state = GuiState.focused
-    true
+    widget.state = GuiState.focusedUp
+    return true
   else:
-    widget.state = GuiState.default
-    false
+    widget.state = GuiState.defaultUp
+    return false
 
 
 proc eventGuiWidget*(widget: GuiWidget, e: Event) =
-  if widget.state != GuiState.disabled:
+  if widget.state != GuiState.disabledUp:
     case e.kind:
     of MouseMotion:
       let mouse: Coord = (e.motion.x.float, e.motion.y.float)
@@ -100,7 +112,7 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
           if btn.down(widget.mbAllow):
             # check if button was pressed over this widget
             if btn.down(widget.fWasPressed):
-              widget.state = GuiState.pressed
+              widget.state = GuiState.focusedDown
 
     of MouseButtonDown:
       let mouse: Coord = (e.button.x.float, e.button.y.float)
@@ -108,7 +120,7 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
         let btn = e.button.button.MouseButton
         # check if button is allowed
         if btn.down(widget.mbAllow):
-          widget.state = GuiState.pressed
+          widget.state = GuiState.focusedDown
           widget.fWasPressed.set(btn)
           widget.onPress()
 
@@ -121,8 +133,8 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
           # toggle
           if widget.toggle:
             widget.toggled = not widget.toggled
-            widget.state = if widget.toggled:GuiState.pressed
-                           else: GuiState.focused
+            widget.state = if widget.toggled:GuiState.focusedDown
+                           else: GuiState.focusedUp
           #
           widget.fWasPressed.set(btn, false)
           widget.onClick(btn)

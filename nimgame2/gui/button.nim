@@ -51,13 +51,14 @@ proc init*(button: GuiButton,
   ##
   GuiWidget(button).init()
   button.graphic = graphic
-  button.initSprite(graphic.dim / 2)
+  button.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   button.image = image
   button.imageOffset = if not (image == nil):
                          (button.sprite.dim / 2 - image.dim / 2)
                        else:
                          (0, 0)
   button.imageShift = (1, 1)
+  echo button.sprite.dim
   # Collider
   button.collider = if circle:
       button.newCircleCollider(
@@ -74,7 +75,8 @@ proc newGuiButton*(graphic: Graphic,
                    circle: bool = false): GuiButton =
   ##  Create a new GuiButton.
   ##
-  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled.
+  ##  ``graphic`` 2x3 button graphic:
+  ##  defaultUp, defaultDown, focusedUp, focusedDown, disabledUp, disabledDown.
   ##
   ##  ``image`` The graphic to render on top of a butotn.
   ##
@@ -97,7 +99,7 @@ proc renderGuiButton*(button: GuiButton) =
   button.renderEntity()
   if not (button.image == nil):
     var pos = button.absPos + button.imageOffset
-    if button.state == GuiState.pressed:
+    if button.state.isDown:
       pos += button.imageShift
     button.image.draw(pos,
                       button.absRot,
