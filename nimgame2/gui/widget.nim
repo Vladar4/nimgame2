@@ -42,7 +42,7 @@ type
   GuiWidget* = ref object of Entity
     fState: GuiState
     mbAllow*, fWasPressed: MouseState
-    toggle*, toggled*: bool
+    toggle*, fToggled: bool
 
 
 proc init*(widget: GuiWidget) =
@@ -51,7 +51,7 @@ proc init*(widget: GuiWidget) =
   widget.mbAllow.set(MouseButton.left)
   widget.fWasPressed = 0
   widget.toggle = false
-  widget.toggled = false
+  widget.fToggled = false
 
 
 proc newGuiWidget*(): GuiWidget =
@@ -79,6 +79,22 @@ template isDown*(state: GuiState): bool =
   (not isUp(state))
 
 
+template isFocused*(state: GuiState): bool =
+  (state in {GuiState.focusedUp, GuiState.focusedDown})
+
+
+template isDisabled*(state: GuiState): bool =
+  (state in {GuiState.disabledUp, GuiState.disabledDown})
+
+
+template isEnabled*(state: GuiState): bool =
+  (not isDisabled(state))
+
+
+template toggled*(widget: GuiWidget): bool =
+  widget.fToggled
+
+
 proc setState*(widget: GuiWidget, val: GuiState) =
   widget.fState = if widget.toggle and widget.toggled and val.isUp:
                     GuiState(val.int + 1)
@@ -88,6 +104,39 @@ proc setState*(widget: GuiWidget, val: GuiState) =
 
 method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
   widget.setState(val)
+
+
+proc `toggled=`*(widget: GuiWidget, val: bool) =
+  widget.fToggled = val
+  if val:
+    if widget.state.isUp:
+      inc widget.fState
+  else:
+    if widget.state.isDown:
+      dec widget.fState
+  widget.state = widget.state
+
+
+template press*(widget: GuiWidget) =
+  widget.toggled = true
+
+
+template release*(widget: GuiWidget) =
+  widget.toggled = false
+
+
+proc disable*(widget: GuiWidget) =
+  if widget.state.isUp:
+    widget.state = GuiState.disabledUp
+  else:
+    widget.state = GuiState.disabledDown
+
+
+proc enable*(widget: GuiWidget) =
+  if widget.state == GuiState.disabledUp:
+    widget.state = GuiState.defaultUp
+  elif widget.state == GuiState.disabledDown:
+    widget.state = GuiState.defaultDown
 
 
 proc updateFocus(widget: GuiWidget, mouse: Coord): bool =
@@ -102,7 +151,7 @@ proc updateFocus(widget: GuiWidget, mouse: Coord): bool =
 
 
 proc eventGuiWidget*(widget: GuiWidget, e: Event) =
-  if widget.state != GuiState.disabledUp:
+  if widget.state.isEnabled:
     case e.kind:
     of MouseMotion:
       let mouse: Coord = (e.motion.x.float, e.motion.y.float)

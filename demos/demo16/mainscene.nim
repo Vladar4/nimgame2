@@ -48,6 +48,7 @@ proc init*(scene: MainScene) =
   # Mosaic Button
   scene.btnMosaic = newSquareButton(scene.btnMosaicG)
   scene.btnMosaic.pos = (200, 100)
+  scene.btnMosaic.toggle = true
 
   # TextInput
   scene.font = newBitmapFont()

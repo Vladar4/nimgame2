@@ -58,7 +58,6 @@ proc init*(button: GuiButton,
                        else:
                          (0, 0)
   button.imageShift = (1, 1)
-  echo button.sprite.dim
   # Collider
   button.collider = if circle:
       button.newCircleCollider(
