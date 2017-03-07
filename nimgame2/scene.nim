@@ -105,11 +105,12 @@ proc checkCollisions*(scene: Scene, entity: Entity) =
 
 
 proc addEntity(scene: Scene, entity: Entity) =
+  # assign camera as a parent
+  if scene.camera != nil:
+    if entity.parent == nil:
+      entity.parent = scene.camera
+
   if scene.fList.len < 1:
-    # assign camera as a parent
-    if scene.camera != nil:
-      if entity.parent == nil:
-        entity.parent = scene.camera
     # add
     scene.fList.add(entity)
     return
