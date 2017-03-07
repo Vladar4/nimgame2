@@ -80,7 +80,7 @@ type
     pos*, vel*, acc*, drg*: Coord ##  Position, velocity, acceleration, drag
     rot*: Angle                   ##  Rotation angle in degrees
     rotVel*, rotAcc*, rotDrg*: Angle  ##  Rotation velocity, acceleration, drag
-    scale*: Scale                 ##  Scale ratio
+    parallax*, scale*: Scale      ##  Parallax and scale ratio
     center*: Coord                ##  Center for drawing and rotating
     flip*: Flip                   ##  Texture flip status
     visible*: bool                ##  Visibility status
@@ -372,6 +372,7 @@ proc initEntity*(entity: Entity) =
   entity.rotVel = 0.0
   entity.rotAcc = 0.0
   entity.rotDrg = 0.0
+  entity.parallax = 1.0
   entity.scale = 1.0
   entity.center = (0.0, 0.0)
   entity.flip = Flip.none
@@ -459,11 +460,13 @@ proc absPos*(entity: Entity): Coord =
     return entity.pos
   else:
     if entity.parent.absRot == 0:
-      return entity.parent.absPos + entity.pos * entity.absScale
+      return
+        entity.parent.absPos * entity.parallax + entity.pos * entity.absScale
     else:
-      return rotate(entity.pos * entity.absScale,
-                    entity.parent.absPos,
-                    entity.absRot)
+      return
+        rotate(entity.pos * entity.absScale,
+               entity.parent.absPos * entity.parallax,
+               entity.absRot)
 
 
 proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =

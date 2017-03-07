@@ -1,7 +1,7 @@
 Nimgame 2: Demo 16
 ==================
 
-GUI/Button demo. Demonstrates buttons usage.
+Parallax demo. Demonstrates parallax effect.
 
 ![Screenshot](demo16.png)
 

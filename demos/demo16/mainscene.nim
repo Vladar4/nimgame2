@@ -1,78 +1,67 @@
 import
   nimgame2/nimgame,
-  nimgame2/draw,
   nimgame2/entity,
-  nimgame2/bitmapfont,
   nimgame2/texturegraphic,
   nimgame2/input,
-  nimgame2/mosaic,
   nimgame2/scene,
   nimgame2/settings,
-  nimgame2/types,
-  nimgame2/gui/widget,
-  nimgame2/gui/textinput,
-  btnSquare, btnCircle
+  nimgame2/types
 
 
 type
   MainScene = ref object of Scene
-    btnSquareG, btnCircleG, iconX, btnMosaicG, inputG: TextureGraphic
-    btnSquare, btnMosaic: SquareButton
-    btnCircle: CircleButton
-    textInput: GuiTextInput
-    font: BitmapFont
+    spacemanG: TextureGraphic
+    p0125, p025, p05, p1: Entity
 
 
 proc init*(scene: MainScene) =
   Scene(scene).init()
+
   # Graphics
-  scene.btnSquareG = newTextureGraphic()
-  discard scene.btnSquareG.load("../assets/gfx/button_square.png")
-  scene.btnCircleG = newTextureGraphic()
-  discard scene.btnCircleG.load("../assets/gfx/button_circle.png")
-  scene.iconX = newTextureGraphic()
-  discard scene.iconX.load("../assets/gfx/icon_x.png")
-  let mosaic = newMosaic("../assets/gfx/button_square.png", (8, 8))
-  scene.btnMosaicG = newTextureGraphic()
-  discard scene.btnMosaicG.assignTexture mosaic.render(
-    patternStretchBorder(4, 2))
+  scene.spacemanG = newTextureGraphic()
+  discard scene.spacemanG.load("../assets/gfx/spaceman.png")
 
-  # Square Button
-  scene.btnSquare = newSquareButton(scene.btnSquareG, scene.iconX)
-  scene.btnSquare.mbAllow.set(MouseButton.right)
-  scene.btnSquare.pos = (100, 100)
-  # Circle Button
-  scene.btnCircle = newCircleButton(scene.btnCircleG)
-  scene.btnCircle.pos = (150, 100)
-  scene.btnCircle.toggle = true
-  # Mosaic Button
-  scene.btnMosaic = newSquareButton(scene.btnMosaicG)
-  scene.btnMosaic.pos = (200, 100)
-  scene.btnMosaic.toggle = true
+  # Entities
+  scene.camera = newEntity()
+  scene.camera.pos = game.size / 2
 
-  # TextInput
-  scene.font = newBitmapFont()
-  discard scene.font.load("../assets/fnt/default8x16.png", (8, 16))
-  let inputmosaic = newMosaic("../assets/gfx/text_input.png", (8, 8))
-  scene.inputG = newTextureGraphic()
-  discard scene.inputG.assignTexture inputmosaic.render(
-    patternStretchBorder(16, 1))
-  scene.textInput = newGuiTextInput(scene.inputG, scene.font)
-  scene.textInput.pos = (100, 150)
+  scene.p0125 = newEntity()
+  scene.p0125.graphic = scene.spacemanG
+  scene.p0125.centrify()
+  scene.p0125.pos = game.size / 2
+  scene.p0125.pos.y -= 150
+  scene.p0125.parallax = 0.125
+
+  scene.p025 = newEntity()
+  scene.p025.graphic = scene.spacemanG
+  scene.p025.centrify()
+  scene.p025.pos = game.size / 2
+  scene.p025.pos.y -= 100
+  scene.p025.parallax = 0.25
+
+  scene.p05 = newEntity()
+  scene.p05.graphic = scene.spacemanG
+  scene.p05.centrify()
+  scene.p05.pos = game.size / 2
+  scene.p05.pos.y -= 50
+  scene.p05.parallax = 0.5
+
+  scene.p1 = newEntity()
+  scene.p1.graphic = scene.spacemanG
+  scene.p1.centrify()
+  scene.p1.pos = game.size / 2
+
+  scene.cameraBond = scene.p1
 
   # add to scene
-  scene.add(scene.textInput)
-  scene.add(scene.btnMosaic)
-  scene.add(scene.btnSquare)
-  scene.add(scene.btnCircle)
+  scene.add(scene.p1)
+  scene.add(scene.p05)
+  scene.add(scene.p025)
+  scene.add(scene.p0125)
 
 
 proc free*(scene: MainScene) =
-  scene.inputG.free()
-  scene.btnMosaicG.free()
-  scene.btnSquareG.free()
-  scene.btnCircleG.free()
-  scene.iconX.free()
+  scene.spacemanG.free()
 
 
 proc newMainScene*(): MainScene =
@@ -93,11 +82,9 @@ method event*(scene: MainScene, event: Event) =
 
 method render*(scene: MainScene) =
   scene.renderScene()
-  discard box((4, 60), (220, 76), 0x000000CC'u32)
-  discard string(
-    (8, 64), "Space - toggle collider outlines", 0xFFFFFFFF'u32)
 
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
+  scene.camera.pos = mouse.abs - Coord(game.size / 2)
 

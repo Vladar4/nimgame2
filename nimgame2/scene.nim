@@ -111,7 +111,6 @@ proc addEntity(scene: Scene, entity: Entity) =
       entity.parent = scene.camera
 
   if scene.fList.len < 1:
-    # add
     scene.fList.add(entity)
     return
 

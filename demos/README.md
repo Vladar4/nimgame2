@@ -31,3 +31,5 @@ Nimgame 2 Demos
 
 * [demo15](demo15) Camera
 
+* [demo16](demo16) Parallax
+
