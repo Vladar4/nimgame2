@@ -2,12 +2,12 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/bitmapfont,
   nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/mosaic,
   nimgame2/scene,
   nimgame2/settings,
+  nimgame2/truetypefont,
   nimgame2/types,
   nimgame2/gui/widget,
   nimgame2/gui/textinput,
@@ -20,11 +20,12 @@ type
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
-    font: BitmapFont
+    font: TrueTypeFont
 
 
 proc init*(scene: MainScene) =
   Scene(scene).init()
+
   # Graphics
   scene.btnSquareG = newTextureGraphic()
   discard scene.btnSquareG.load("../assets/gfx/button_square.png")
@@ -48,11 +49,10 @@ proc init*(scene: MainScene) =
   # Mosaic Button
   scene.btnMosaic = newSquareButton(scene.btnMosaicG)
   scene.btnMosaic.pos = (200, 100)
-  scene.btnMosaic.toggle = true
 
   # TextInput
-  scene.font = newBitmapFont()
-  discard scene.font.load("../assets/fnt/default8x16.png", (8, 16))
+  scene.font = newTrueTypeFont()
+  discard scene.font.load("../assets/fnt/FSEX300.ttf", 16)
   let inputmosaic = newMosaic("../assets/gfx/text_input.png", (8, 8))
   scene.inputG = newTextureGraphic()
   discard scene.inputG.assignTexture inputmosaic.render(

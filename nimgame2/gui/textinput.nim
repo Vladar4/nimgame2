@@ -22,10 +22,13 @@
 # Vladar vladar4@gmail.com
 
 import
+  unicode,
+  sdl2/sdl,
   ../collider,
   ../entity,
   ../font,
   ../graphic,
+  ../input,
   ../textgraphic,
   ../types,
   widget
@@ -36,6 +39,9 @@ type
     font*: Font         ##  Font object for text rendering
     fText: TextGraphic
     textPos*: Coord     ##  Relative text position
+    keysBackspace*, keysDone*: seq[Keycode]
+    cursor*: string
+    limit*: int
 
 
 proc init*(input: GuiTextInput,
@@ -49,6 +55,11 @@ proc init*(input: GuiTextInput,
   ##  ``font`` Font object for text rendering.
   ##
   GuiWidget(input).init()
+  input.toggle = true
+  input.keysBackspace = @[K_Backspace]
+  input.keysDone = @[K_Return, K_Escape]
+  input.cursor = "_"
+  input.limit = 8
   input.graphic = graphic
   input.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   # Collider
@@ -59,8 +70,7 @@ proc init*(input: GuiTextInput,
   input.textPos = (
     (input.sprite.dim.h - font.charH) / 2,
     (input.sprite.dim.h - font.charH) / 2)
-  #TODO testing
-  input.fText.lines = ["Test"]
+  input.fText.lines = [""]
 
 
 proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
@@ -75,9 +85,81 @@ proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
   result.init(graphic, font)
 
 
+template text(input: GuiTextInput): string =
+  input.fText.lines[0]
+
+
+template textLen(input: GuiTextInput): int =
+  input.text.runeLen
+
+
+template cursorLen(input: GuiTextInput): int =
+  input.cursor.runeLen
+
+
+proc textPop(input: GuiTextInput) =
+  if input.textLen > input.cursorLen:
+    let runes = input.text.toRunes
+    input.fText.lines = [$runes[0..^3] & input.cursor]
+
+
+proc textAdd(input: GuiTextInput, t: string) =
+  if (input.textLen - input.cursorLen + t.runeLen) <= input.limit:
+    let runes = input.text.toRunes
+    input.fText.lines = [$runes[0..^2] & t & input.cursor]
+
+
+template textAddCursor(input: GuiTextInput) =
+  input.fText.lines = [input.fText.lines[0] & input.cursor]
+
+
+template textDelCursor(input: GuiTextInput) =
+  input.fText.lines = [
+    input.fText.lines[0][0..(input.text.len-input.cursorLen-1)]]
+
+
+proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
+  if input.state.isEnabled:
+    case e.kind:
+    of KeyDown:
+      if input.toggled:
+        let key = e.key.keysym.sym
+        if key in input.keysBackspace:
+            input.textPop()
+        elif key in input.keysDone:
+          input.textDelCursor()
+          stopTextInput()
+          input.release()
+
+    of TextInput:
+      if input.toggled:
+        input.textAdd($e.text.text)
+
+    of TextEditing:
+      if input.toggled:
+        discard
+
+    else:
+      discard
+
+
+method event*(input: GuiTextInput, e: Event) =
+  input.eventGuiWidget(e)
+  input.eventGuiTextInput(e)
+
+
 method `state=`*(input: GuiTextInput, val: GuiState) =
   input.setState(val)
   input.sprite.currentFrame = val.int
+
+
+proc enter*(input: GuiTextInput) =
+  input.textAddCursor()
+  startTextInput()
+
+
+method onClick*(input: GuiTextInput, mb: MouseButton) =
+  input.enter()
 
 
 proc renderGuiTextInput*(input: GuiTextInput) =
