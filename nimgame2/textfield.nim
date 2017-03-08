@@ -79,17 +79,29 @@ template len*(tf: TextField): int =
 
 
 proc bs*(tf: TextField, index = -1) =
-  if index >= tf.len:
+  if not tf.fActive:
     return
   let
     runes = tf.text.toRunes
     idx = if index >= 0: index else: (tf.fCursorIndex - 1)
-  if idx >= 0:
+  if idx >= 0 and idx < tf.len:
     tf.text = $runes[0..(idx-1)] & $runes[(idx+1)..^1]
     dec tf.fCursorIndex
 
 
+proc del*(tf: TextField, index = -1) =
+  if not tf.fActive:
+    return
+  let
+    runes = tf.text.toRunes
+    idx = if index >= 0: index else: (tf.fCursorIndex + 1)
+  if (idx >= 0) and (idx < tf.len):
+    tf.text = $runes[0..(idx-1)] & $runes[(idx+1)..^1]
+
+
 proc add*(tf: TextField, str: string, index = -1) =
+  if not tf.fActive:
+    return
   if (index >= tf.len) or (tf.len - tf.cursorLen + str.runeLen > tf.limit):
     return
   let
@@ -97,6 +109,30 @@ proc add*(tf: TextField, str: string, index = -1) =
     idx = if index >= 0: index else: tf.fCursorIndex
   tf.text = $runes[0..(idx-1)] & str & $runes[idx..^1]
   inc tf.fCursorIndex
+
+
+proc left*(tf: TextField) =
+  if tf.fActive and tf.fCursorIndex > 0:
+    let
+      runes = tf.text.toRunes
+      idx = tf.fCursorIndex
+    tf.text = $runes[0..(idx-2)] &
+              tf.cursor &
+              $runes[idx-1] &
+              $runes[(idx+1)..^1]
+    dec tf.fCursorIndex
+
+
+proc right*(tf: TextField) =
+  if tf.fActive and tf.fCursorIndex < (tf.len - 1):
+    let
+      runes = tf.text.toRunes
+      idx = tf.fCursorIndex
+    tf.text = $runes[0..(idx-1)] &
+              $runes[idx+1] &
+              tf.cursor &
+              $runes[(idx+2)..^1]
+    inc tf.fCursorIndex
 
 
 proc activate*(tf: TextField) =
@@ -108,8 +144,11 @@ proc activate*(tf: TextField) =
 
 proc deactivate*(tf: TextField) =
   if tf.fActive:
+    let
+      runes = tf.text.toRunes
+      idx = tf.fCursorIndex
+    tf.text = $runes[0..(idx-1)] & $runes[(idx+1)..^1]
     tf.fCursorIndex = tf.len - 1
-    tf.text = tf.text[0..<(tf.len - tf.cursorLen)]
     tf.fActive = false
 
 
