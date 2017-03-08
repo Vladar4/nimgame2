@@ -1,0 +1,118 @@
+# nimgame2/gui/textfield.nim
+# Copyright (c) 2016-2017 Vladar
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+# Vladar vladar4@gmail.com
+
+import
+  unicode,
+  font,
+  graphic,
+  textgraphic,
+  types
+
+
+const
+  DefaultTextFieldCursor = "|"
+  DefaultTextFieldLimit = 8
+
+
+type
+  TextField* = ref object
+    fActive: bool
+    fText: TextGraphic
+    fCursorIndex: int
+    cursor*: string
+    limit*: int
+
+
+# PRIVATE #
+
+template cursorLen(tf: TextField): int =
+  tf.cursor.runeLen
+
+
+# PUBLIC #
+
+proc init*(tf: TextField, font: Font) =
+  tf.fActive = false
+  tf.fText = newTextGraphic()
+  tf.fText.font = font
+  tf.fCursorIndex = 0
+  tf.cursor = DefaultTextFieldCursor
+  tf.limit = DefaultTextFieldLimit
+  tf.fText.lines = [""]
+
+
+proc newTextField*(font: Font): TextField =
+  result = new TextField
+  result.init(font)
+
+
+proc text*(tf: TextField): string =
+  tf.fText.lines[0]
+
+
+proc `text=`*(tf: TextField, val: string) =
+  tf.fText.lines = [val]
+
+
+template len*(tf: TextField): int =
+  tf.text.runeLen
+
+
+proc bs*(tf: TextField, index = -1) =
+  if index >= tf.len:
+    return
+  let
+    runes = tf.text.toRunes
+    idx = if index >= 0: index else: (tf.fCursorIndex - 1)
+  if idx >= 0:
+    tf.text = $runes[0..(idx-1)] & $runes[(idx+1)..^1]
+    dec tf.fCursorIndex
+
+
+proc add*(tf: TextField, str: string, index = -1) =
+  if (index >= tf.len) or (tf.len - tf.cursorLen + str.runeLen > tf.limit):
+    return
+  let
+    runes = tf.text.toRunes
+    idx = if index >= 0: index else: tf.fCursorIndex
+  tf.text = $runes[0..(idx-1)] & str & $runes[idx..^1]
+  inc tf.fCursorIndex
+
+
+proc activate*(tf: TextField) =
+  if not tf.fActive:
+    tf.fCursorIndex = tf.len
+    tf.text = tf.text & tf.cursor
+    tf.fActive = true
+
+
+proc deactivate*(tf: TextField) =
+  if tf.fActive:
+    tf.fCursorIndex = tf.len - 1
+    tf.text = tf.text[0..<(tf.len - tf.cursorLen)]
+    tf.fActive = false
+
+
+proc draw*(tf: TextField, pos: Coord) =
+  tf.fText.draw(pos)
+
