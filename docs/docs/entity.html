@@ -1250,7 +1250,7 @@ function main() {
   pos*, vel*, acc*, drg*: Coord   ## Position, velocity, acceleration, drag
   rot*: Angle                  ## Rotation angle in degrees
   rotVel*, rotAcc*, rotDrg*: Angle ## Rotation velocity, acceleration, drag
-  scale*: Scale                ## Scale ratio
+  parallax*, scale*: Scale      ## Parallax and scale ratio
   center*: Coord               ## Center for drawing and rotating
   flip*: Flip                  ## Texture flip status
   visible*: bool               ## Visibility status"><wbr />Entity<span class="attachedType" style="visibility:hidden"></span></a></li>
@@ -1315,6 +1315,8 @@ function main() {
     title="update*(logic: Logic; entity: Entity; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#update.e,Physics,Entity,float"
     title="update*(physics: Physics; entity: Entity; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#event.e,Entity,"
+    title="event*(entity: Entity; e: sdl.Event)"><wbr />event<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#render.e,Entity"
     title="render*(entity: Entity)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#update.e,Entity,float"
@@ -1419,7 +1421,7 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">pos</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">vel</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">acc</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">drg</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Coord</span>   <span class="Comment">## Position, velocity, acceleration, drag</span>
   <span class="Identifier">rot</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Angle</span>                  <span class="Comment">## Rotation angle in degrees</span>
   <span class="Identifier">rotVel</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">rotAcc</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">rotDrg</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Angle</span> <span class="Comment">## Rotation velocity, acceleration, drag</span>
-  <span class="Identifier">scale</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scale</span>                <span class="Comment">## Scale ratio</span>
+  <span class="Identifier">parallax</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">scale</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scale</span>      <span class="Comment">## Parallax and scale ratio</span>
   <span class="Identifier">center</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Coord</span>               <span class="Comment">## Center for drawing and rotating</span>
   <span class="Identifier">flip</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Flip</span>                  <span class="Comment">## Texture flip status</span>
   <span class="Identifier">visible</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>               <span class="Comment">## Visibility status</span>
@@ -1557,27 +1559,27 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L381"
+href="/tree/master/entity.nim#L382"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L381" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L382" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="layer"><a name="layer,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">layer</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current rendering layer of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L386"
+href="/tree/master/entity.nim#L387"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L386" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L387" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,Entity,int"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">layer</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Change the rendering layer of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L392"
+href="/tree/master/entity.nim#L393"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L392" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L393" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,Entity,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">,</span> <span class="Identifier">source</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
@@ -1586,36 +1588,36 @@ class="link-seesrc" target="_blank">Source</a>
 <p>No new objects will be allocated. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L399"
+href="/tree/master/entity.nim#L400"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L399" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L400" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absRot"><a name="absRot,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absRot</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) rotation angle of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L434"
+href="/tree/master/entity.nim#L435"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L434" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L435" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absScale"><a name="absScale,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absScale</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Scale</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) scale of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L444"
+href="/tree/master/entity.nim#L445"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L444" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L445" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absPos"><a name="absPos,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absPos</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) scale of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L454"
+href="/tree/master/entity.nim#L455"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L454" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L455" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="centrify"><a name="centrify,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">hor</span> <span class="Other">=</span> <span class="Identifier">HAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">;</span> <span class="Identifier">ver</span> <span class="Other">=</span> <span class="Identifier">VAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">)</span></pre></dt>
@@ -1625,9 +1627,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">ver</span></tt> Vertical align: top, center, or bottom </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L469"
+href="/tree/master/entity.nim#L472"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L469" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L472" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderEntity"><a name="renderEntity,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
@@ -1636,9 +1638,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p>Call it from your entity render method. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L497"
+href="/tree/master/entity.nim#L503"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L497" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L503" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="updateEntity"><a name="updateEntity,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
@@ -1647,9 +1649,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p>Call it from your entity update method. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L532"
+href="/tree/master/entity.nim#L538"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L532" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L538" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1684,31 +1686,40 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/entity.nim#L342" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<dt id="event"><a name="event.e,Entity,"></a><pre><span class="Keyword">method</span> <span class="Identifier">event</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Event</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L500"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L500" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <dt id="render"><a name="render.e,Entity"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L528"
+href="/tree/master/entity.nim#L534"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L528" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L534" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="update"><a name="update.e,Entity,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L545"
+href="/tree/master/entity.nim#L551"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L545" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L551" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="onCollide"><a name="onCollide.e,Entity,Entity"></a><pre><span class="Keyword">method</span> <span class="Identifier">onCollide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">,</span> <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Called when <tt class="docutils literal"><span class="pre">entity</span></tt> collides with <tt class="docutils literal"><span class="pre">target</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/entity.nim#L549"
+href="/tree/master/entity.nim#L555"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/entity.nim#L549" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/entity.nim#L555" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1735,7 +1746,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-02-04 23:50:49 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
       </div>
     </div>
   </div>

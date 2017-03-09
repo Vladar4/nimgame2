@@ -1279,6 +1279,8 @@ function main() {
     title="render*(tilemap: TileMap)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#render.e,TileCollider"
     title="render*(t: TileCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileCollider,Coord"
+    title="collide*(t: TileCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#collide.e,TileCollider,Collider"
     title="collide*(t: TileCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#collide.e,Collider,TileCollider"
@@ -1515,7 +1517,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/tilemap.nim#L220" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1524,94 +1526,103 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/tilemap.nim#L234" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<dt id="collide"><a name="collide.e,TileCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L243"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <dt id="collide"><a name="collide.e,Collider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L241"
+href="/tree/master/tilemap.nim#L250"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L241" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L247"
+href="/tree/master/tilemap.nim#L256"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L247" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L256" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,BoxCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L254"
+href="/tree/master/tilemap.nim#L263"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L254" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L263" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L260"
+href="/tree/master/tilemap.nim#L269"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L260" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L269" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,CircleCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L267"
+href="/tree/master/tilemap.nim#L276"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L267" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L276" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L273"
+href="/tree/master/tilemap.nim#L282"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L273" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L282" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,LineCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L280"
+href="/tree/master/tilemap.nim#L289"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L280" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L289" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L286"
+href="/tree/master/tilemap.nim#L295"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L286" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L295" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,PolyCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L293"
+href="/tree/master/tilemap.nim#L302"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L293" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L302" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L299"
+href="/tree/master/tilemap.nim#L308"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L299" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/tilemap.nim#L308" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1624,7 +1635,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-02-04 23:50:49 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
       </div>
     </div>
   </div>
