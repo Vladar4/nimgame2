@@ -79,6 +79,8 @@ template len*(tf: TextField): int =
 
 
 proc bs*(tf: TextField, index = -1) =
+  ##  Backspace text action.
+  ##
   if not tf.fActive:
     return
   let
@@ -90,6 +92,8 @@ proc bs*(tf: TextField, index = -1) =
 
 
 proc del*(tf: TextField, index = -1) =
+  ##  Delete text action.
+  ##
   if not tf.fActive:
     return
   let
@@ -100,6 +104,8 @@ proc del*(tf: TextField, index = -1) =
 
 
 proc add*(tf: TextField, str: string, index = -1) =
+  ##  Add text action.
+  ##
   if not tf.fActive:
     return
   if (index >= tf.len) or (tf.len - tf.cursorLen + str.runeLen > tf.limit):
@@ -112,6 +118,8 @@ proc add*(tf: TextField, str: string, index = -1) =
 
 
 proc left*(tf: TextField) =
+  ##  Move cursor to the left.
+  ##
   if tf.fActive and tf.fCursorIndex > 0:
     let
       runes = tf.text.toRunes
@@ -124,6 +132,8 @@ proc left*(tf: TextField) =
 
 
 proc right*(tf: TextField) =
+  ##  Move cursor to the right.
+  ##
   if tf.fActive and tf.fCursorIndex < (tf.len - 1):
     let
       runes = tf.text.toRunes
@@ -136,6 +146,8 @@ proc right*(tf: TextField) =
 
 
 proc activate*(tf: TextField) =
+  ##  Activate text field.
+  ##
   if not tf.fActive:
     tf.fCursorIndex = tf.len
     tf.text = tf.text & tf.cursor
@@ -143,6 +155,8 @@ proc activate*(tf: TextField) =
 
 
 proc deactivate*(tf: TextField) =
+  ##  Deactivate text field.
+  ##
   if tf.fActive:
     let
       runes = tf.text.toRunes

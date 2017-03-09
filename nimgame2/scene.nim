@@ -28,7 +28,7 @@ import
 
 type
   Scene* = ref object of RootObj
-    camera*, cameraBond*: Entity
+    camera*, cameraBond*: Entity  ##  Camera and its bond Entity
     cameraBondOffset*: Coord
     fList, fAddList: seq[Entity]
 

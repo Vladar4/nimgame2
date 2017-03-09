@@ -56,6 +56,8 @@ proc newParticle*(): Particle =
 
 
 proc copy*(target, source: Particle) =
+  ##  Copy ``source`` properties to the ``target``.
+  ##
   Entity(target).copy(Entity(source))
   target.ttl = source.ttl
 
@@ -84,6 +86,8 @@ proc initEmitter*(emitter: Emitter, scene: Scene) =
 
 
 proc newEmitter*(scene: Scene): Emitter =
+  ##  Create a new Emitter in the ``scene``.
+  ##
   result = new Emitter
   result.initEmitter(scene)
 

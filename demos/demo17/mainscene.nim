@@ -59,6 +59,7 @@ proc init*(scene: MainScene) =
     patternStretchBorder(16, 1))
   scene.textInput = newGuiTextInput(scene.inputG, scene.font)
   scene.textInput.pos = (100, 150)
+  scene.textInput.text.limit = 16
 
   # add to scene
   scene.add(scene.textInput)

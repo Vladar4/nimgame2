@@ -86,6 +86,12 @@ proc newMosaic*(): Mosaic =
 
 
 proc newMosaic*(file: string, tileDim: Dim, offset: Dim = (0, 0)): Mosaic =
+  ##  Create a new Mosaic and load tileset from a ``file``.
+  ##
+  ##  ``tileDim`` the size of a single tile.
+  ##
+  ##  ``offset``  offset from the edge of the tileset.
+  ##
   result = newMosaic()
   discard result.load(file, tileDim, offset)
 

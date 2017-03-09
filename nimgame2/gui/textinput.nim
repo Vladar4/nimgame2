@@ -132,8 +132,12 @@ proc enter*(input: GuiTextInput) =
   startTextInput()
 
 
-method onClick*(input: GuiTextInput, mb: MouseButton) =
+proc click*(input: GuiTextInput, mb: MouseButton) {.inline.} =
   input.enter()
+
+
+method onClick*(input: GuiTextInput, mb: MouseButton) =
+  input.click(mb)
 
 
 proc renderGuiTextInput*(input: GuiTextInput) =
