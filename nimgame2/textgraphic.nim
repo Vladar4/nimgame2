@@ -46,22 +46,17 @@ proc free*(text: TextGraphic) =
   text.fFont = nil
 
 
-proc init*(text: TextGraphic) =
+proc init*(text: TextGraphic, font: Font) =
   TextureGraphic(text).init()
   text.fLines = @[]
   text.fAlign = TextAlign.left
   text.fColor = DefaultFontColor
-  text.fFont = nil
+  text.fFont = font
 
 
-proc newTextGraphic*(): TextGraphic =
+proc newTextGraphic*(font: Font = nil): TextGraphic =
   new result, free
-  result.init()
-
-
-proc newTextGraphic*(font: Font): TextGraphic =
-  result = newTextGraphic()
-  result.fFont = font
+  result.init(font)
 
 
 proc update*(text: TextGraphic) =

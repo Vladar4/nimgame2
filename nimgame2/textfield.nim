@@ -35,9 +35,8 @@ const
 
 
 type
-  TextField* = ref object
+  TextField* = ref object of TextGraphic
     fActive: bool
-    fText: TextGraphic
     fCursorIndex: int
     cursor*: string
     limit*: int
@@ -52,13 +51,12 @@ template cursorLen(tf: TextField): int =
 # PUBLIC #
 
 proc init*(tf: TextField, font: Font) =
+  TextGraphic(tf).init(font)
   tf.fActive = false
-  tf.fText = newTextGraphic()
-  tf.fText.font = font
   tf.fCursorIndex = 0
   tf.cursor = DefaultTextFieldCursor
   tf.limit = DefaultTextFieldLimit
-  tf.fText.lines = [""]
+  tf.lines = [""]
 
 
 proc newTextField*(font: Font): TextField =
@@ -67,11 +65,15 @@ proc newTextField*(font: Font): TextField =
 
 
 proc text*(tf: TextField): string =
-  tf.fText.lines[0]
+  tf.lines[0]
 
 
 proc `text=`*(tf: TextField, val: string) =
-  tf.fText.lines = [val]
+  tf.lines = [val]
+
+
+template isActive*(tf: TextField): bool =
+  tf.fActive
 
 
 template len*(tf: TextField): int =
@@ -145,6 +147,22 @@ proc right*(tf: TextField) =
     inc tf.fCursorIndex
 
 
+proc toFirst*(tf: TextField) =
+  ##  Move cursor to the beginning.
+  ##
+  if tf.fActive:
+    while tf.fCursorIndex > 0:
+      tf.left()
+
+
+proc toLast*(tf: TextField) =
+  ##  Move cursor to the end.
+  ##
+  if tf.fActive:
+    while tf.fCursorIndex < (tf.len - 1):
+      tf.right()
+
+
 proc activate*(tf: TextField) =
   ##  Activate text field.
   ##
@@ -167,5 +185,5 @@ proc deactivate*(tf: TextField) =
 
 
 proc draw*(tf: TextField, pos: Coord) =
-  tf.fText.draw(pos)
+  Graphic(tf).draw(pos)
 

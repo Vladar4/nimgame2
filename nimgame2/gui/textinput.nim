@@ -39,7 +39,8 @@ type
   GuiTextInput* = ref object of GuiWidget
     text*: TextField
     textPos*: Coord     ##  Relative text position
-    keysBackspace*, keysDelete*, keysLeft*, keysRight*, keysDone*: seq[Keycode]
+    keysBackspace*, keysDelete*, keysLeft*, keysRight*,
+      keysToFirst*, keysToLast*, keysDone*: seq[Keycode]
 
 
 proc init*(input: GuiTextInput,
@@ -58,6 +59,8 @@ proc init*(input: GuiTextInput,
   input.keysDelete = @[K_Delete]
   input.keysLeft = @[K_Left]
   input.keysRight = @[K_Right]
+  input.keysToFirst = @[K_Home]
+  input.keysToLast = @[K_End]
   input.keysDone = @[K_Return, K_Escape]
   input.graphic = graphic
   input.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
@@ -99,6 +102,12 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
 
         elif key in input.keysRight:
           input.text.right()
+
+        elif key in input.keysToFirst:
+          input.text.toFirst()
+
+        elif key in input.keysToLast:
+          input.text.toLast()
 
         elif key in input.keysDone:
           input.text.deactivate()
