@@ -60,7 +60,7 @@ function createHeader(title, logo) {
 
     var headerLinks = [
         headerLink('index'),
-        headerLink('demos', true),
+        headerLink('demos'),
         headerLink('tutorials', true),
         headerLink('snippets'),
         headerLink('docs'),

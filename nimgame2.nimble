@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.3.0"
 author        = "Vladar"
 description   = "A simple 2D game engine for Nim language."
 license       = "MIT"

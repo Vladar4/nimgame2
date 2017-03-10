@@ -4,7 +4,7 @@ Nimgame 2
 A simple 2D game engine for Nim language.
 
 
-Status: v0.2 alpha
+Status: v0.3 alpha
 ------------------
 
 
@@ -33,12 +33,27 @@ Recommended compilation flags:
 Links:
 ------
 
+* [home page](https://vladar4.github.io/nimgame2/)
 * [demos](demos)
 * [ng2planetoids](https://github.com/Vladar4/ng2planetoids) - first demo game.
 
 
 Changelog:
 ----------
+
+### v0.3 alpha
+* camera property (Scene)
+* new collision procedures
+* reworked input
+* Mosaic
+* parallax property (Entity)
+* TextField
+* GUI:
+  * Widget
+  * Button
+  * TextInput
+* 3 new demos
+* home page, snippets, and documentation
 
 ### v0.2 alpha
 * collider optimizations
