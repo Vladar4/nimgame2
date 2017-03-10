@@ -1231,12 +1231,10 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#free,TextGraphic"
     title="free*(text: TextGraphic)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,TextGraphic"
-    title="init*(text: TextGraphic)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTextGraphic,"
-    title="newTextGraphic*(): TextGraphic"><wbr />new<wbr />Text<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#init,TextGraphic,Font"
+    title="init*(text: TextGraphic; font: Font)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newTextGraphic,Font"
-    title="newTextGraphic*(font: Font): TextGraphic"><wbr />new<wbr />Text<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="newTextGraphic*(font: Font = nil): TextGraphic"><wbr />new<wbr />Text<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#update,TextGraphic"
     title="update*(text: TextGraphic)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#align,TextGraphic"
@@ -1301,7 +1299,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span></pre></dt>
+<dt id="init"><a name="init,TextGraphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1310,7 +1308,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextGraphic"><a name="newTextGraphic,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span></pre></dt>
+<dt id="newTextGraphic"><a name="newTextGraphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1319,7 +1317,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextGraphic"><a name="newTextGraphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span></pre></dt>
+<dt id="update"><a name="update,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1328,25 +1326,25 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="update"><a name="update,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L67"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <dt id="align"><a name="align,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">align</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextAlign</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L80"
+href="/tree/master/textgraphic.nim#L75"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textgraphic.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TextGraphic,TextAlign"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">align</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">TextAlign</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/textgraphic.nim#L79"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/textgraphic.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="color"><a name="color,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">color</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1355,16 +1353,16 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="color"><a name="color,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">color</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="="><a name="=,TextGraphic,Color"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">color</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L89"
+href="/tree/master/textgraphic.nim#L88"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textgraphic.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,TextGraphic,Color"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">color</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="font"><a name="font,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">font</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Font</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1373,16 +1371,16 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="font"><a name="font,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">font</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Font</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="="><a name="=,TextGraphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">font</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L98"
+href="/tree/master/textgraphic.nim#L97"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textgraphic.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,TextGraphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">font</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="lines"><a name="lines,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">lines</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
@@ -1391,22 +1389,13 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/textgraphic.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="lines"><a name="lines,TextGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">lines</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L107"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L107" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <dt id="="><a name="=,TextGraphic,openarray[string]"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">lines</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">TextGraphic</span><span class="Other">;</span> <span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textgraphic.nim#L111"
+href="/tree/master/textgraphic.nim#L106"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textgraphic.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textgraphic.nim#L106" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1419,7 +1408,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-10 12:25:50 UTC</small>
       </div>
     </div>
   </div>

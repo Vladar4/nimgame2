@@ -1221,7 +1221,8 @@ function main() {
     title="GuiTextInput* = ref object of GuiWidget
   text*: TextField
   textPos*: Coord
-  keysBackspace*, keysDelete*, keysLeft*, keysRight*, keysDone*: seq[Keycode]"><wbr />Gui<wbr />Text<wbr />Input<span class="attachedType" style="visibility:hidden"></span></a></li>
+  keysBackspace*, keysDelete*, keysLeft*, keysRight*, keysToFirst*, keysToLast*,
+  keysDone*: seq[Keycode]"><wbr />Gui<wbr />Text<wbr />Input<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1275,7 +1276,8 @@ function main() {
 <dt id="GuiTextInput"><a name="GuiTextInput"></a><pre><span class="Identifier">GuiTextInput</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">GuiWidget</span>
   <span class="Identifier">text</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TextField</span>
   <span class="Identifier">textPos</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Coord</span>
-  <span class="Identifier">keysBackspace</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysDelete</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysLeft</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysRight</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysDone</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Keycode</span><span class="Other">]</span>
+  <span class="Identifier">keysBackspace</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysDelete</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysLeft</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysRight</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysToFirst</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">keysToLast</span><span class="Operator">*</span><span class="Other">,</span>
+  <span class="Identifier">keysDone</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Keycode</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 Relative text position
@@ -1297,9 +1299,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">font</span></tt> Font object for text rendering. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L45"
+href="/tree/master/textinput.nim#L46"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L46" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newGuiTextInput"><a name="newGuiTextInput,Graphic,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newGuiTextInput</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">Graphic</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span></pre></dt>
@@ -1309,36 +1311,36 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">font</span></tt> Font object for text rendering. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L73"
+href="/tree/master/textinput.nim#L76"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="eventGuiTextInput"><a name="eventGuiTextInput,GuiTextInput,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">eventGuiTextInput</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">;</span> <span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L85"
+href="/tree/master/textinput.nim#L88"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="enter"><a name="enter,GuiTextInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">enter</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L130"
+href="/tree/master/textinput.nim#L139"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L139" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="click"><a name="click,GuiTextInput,MouseButton"></a><pre><span class="Keyword">proc</span> <span class="Identifier">click</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">;</span> <span class="Identifier">mb</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L135"
+href="/tree/master/textinput.nim#L144"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderGuiTextInput"><a name="renderGuiTextInput,GuiTextInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderGuiTextInput</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">)</span></pre></dt>
@@ -1347,9 +1349,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p>Call it from your text input render method. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L143"
+href="/tree/master/textinput.nim#L152"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L143" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1361,36 +1363,36 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L120"
+href="/tree/master/textinput.nim#L129"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L120" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=.e,GuiTextInput,GuiState"></a><pre><span class="Keyword">method</span> <span class="Other">`</span><span class="Identifier">state</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L125"
+href="/tree/master/textinput.nim#L134"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L125" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L134" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="onClick"><a name="onClick.e,GuiTextInput,MouseButton"></a><pre><span class="Keyword">method</span> <span class="Identifier">onClick</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">;</span> <span class="Identifier">mb</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L139"
+href="/tree/master/textinput.nim#L148"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L139" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L148" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="render"><a name="render.e,GuiTextInput"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">GuiTextInput</span><span class="Other">)</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/textinput.nim#L152"
+href="/tree/master/textinput.nim#L161"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textinput.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/textinput.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1403,7 +1405,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:18 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-10 12:25:21 UTC</small>
       </div>
     </div>
   </div>
