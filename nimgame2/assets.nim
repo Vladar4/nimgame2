@@ -33,16 +33,36 @@ type
   Assets*[T] = OrderedTableRef[string, T]
 
 
-proc load[T](assets: Assets[T], dir: string, init: proc(file: string): T) =
+proc load[T](assets: Assets[T],
+             files: openarray[string],
+             init: proc(file: string):T) =
+  assets[] = initOrderedTable[string, T](nextPowerOfTwo(files.len))
+  for i in files:
+    let
+      name = i.splitFile.name
+      data = init(i)
+    assets.add(name, data)
+
+
+proc load[T](assets: Assets[T],
+             dir: string,
+             init: proc(file: string): T) =
   var files: seq[string] = @[]
   for i in walkDir(dir):
     if i.kind == pcFile:
       files.add(i.path)
-  assets[] = initOrderedTable[string, T](nextPowerOfTwo(files.len))
-  for i in files:
-    let name = i.splitFile.name
-    let data = init(i)
-    assets.add(name, data)
+  assets.load(files, init)
+
+
+proc newAssets*[T](files: openarray[string], init: proc(file: string): T): Assets[T] =
+  ##  Create a new assets collection.
+  ##
+  ##  ``files`` an array of target files.
+  ##
+  ##  ``init`` ``T``'s init/load procedure.
+  ##
+  new result
+  result.load(files, init)
 
 
 proc newAssets*[T](dir: string, init: proc(file: string): T): Assets[T] =
@@ -54,5 +74,4 @@ proc newAssets*[T](dir: string, init: proc(file: string): T): Assets[T] =
   ##
   new result
   result.load(dir, init)
-
 
