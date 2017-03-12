@@ -326,6 +326,27 @@
 </pre></div>
 
 
+<div class="snippet" id="tilemaps"><h3>TileMap Usage</h3>
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+    # tiles
+    scene.tilesGraphic = newTextureGraphic()
+    discard scene.tilesGraphic.load("/data/gfx/tile.png")
+
+    # map
+    scene.map = newTileMap(scaleFix = true)
+    scene.map.graphic = scene.tilesGraphic
+    scene.map.initSprite((64, 64), offset = (0, 0))
+    scene.map.map = loadCSV[int](
+        "data/csv/map.csv",
+        proc(input: string): int = discard parseInt(input, result)
+    )
+    scene.map.passable.add(0)
+    scene.add(scene.map)
+</pre></div>
+
+
 <div class="snippet" id="sound"><h3>Sound Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
