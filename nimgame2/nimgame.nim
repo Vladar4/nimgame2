@@ -28,7 +28,7 @@ import
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  audio, count, draw, input, entity, scene, settings, types
+  audio, count, draw, input, entity, scene, settings, types, utils
 
 
 type
@@ -37,6 +37,7 @@ type
     fWindow: sdl.Window
     fLogicalSize: Dim
     fScale: Coord
+    fIcon: sdl.Surface
     # Scene
     fScene: Scene   ##  Current scene
 
@@ -52,6 +53,7 @@ var
 proc free*(game: Game) =
   renderer.destroyRenderer()
   game.fWindow.destroyWindow()
+  game.fIcon.freeSurface()
   while mix.init(0) != 0: mix.quit()
   ttf.quit()
   img.quit()
@@ -66,6 +68,7 @@ proc init*(
     windowFlags: uint32 = 0,
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
+    icon: string,
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitOGG,
     mixerChannels: int = 32
@@ -144,6 +147,10 @@ proc init*(
     sdl.logCritical(
       sdl.LogCategoryError, "Can't create window: %s", sdl.getError())
     return false
+
+  if icon.len > 0:
+    game.fIcon = loadSurface(icon)
+    game.fWindow.setWindowIcon(game.fIcon)
 
   # Create renderer
   renderer = sdl.createRenderer(game.fWindow, -1, rendererFlags)
