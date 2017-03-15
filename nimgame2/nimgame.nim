@@ -68,7 +68,7 @@ proc init*(
     windowFlags: uint32 = 0,
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
-    icon: string,
+    icon: string = "",
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitOGG,
     mixerChannels: int = 32
