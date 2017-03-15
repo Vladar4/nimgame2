@@ -35,8 +35,7 @@ type
   Game* = ref object
     # Private
     fWindow: sdl.Window
-    fLogicalSize: Dim
-    fScale: Coord
+    fSize: Dim
     fIcon: sdl.Surface
     # Scene
     fScene: Scene   ##  Current scene
@@ -87,9 +86,8 @@ proc init*(
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
-  game.fLogicalSize.w = w
-  game.fLogicalSize.h = h
-  game.fScale = (1.0, 1.0)
+  game.fSize.w = w
+  game.fSize.h = h
   background = bgColor
 
   # Default options
@@ -178,15 +176,15 @@ proc newGame*(): Game =
   new result, free
 
 
-template title*(game: Game): string =
+proc title*(game: Game): string {.inline.} =
   $game.fWindow.getWindowTitle()
 
 
-template `title=`*(game: Game, title: string) =
+proc `title=`*(game: Game, title: string) {.inline.} =
   game.fWindow.setWindowTitle(title)
 
 
-proc pos*(game: Game): Coord {.inline.} =
+proc pos*(game: Game): Coord =
   var x, y: cint
   game.fWindow.getWindowPosition(addr(x), addr(y))
   return (x.float, y.float)
@@ -201,7 +199,7 @@ proc `pos=`*(game: Game, pos: Coord,
     game.fWindow.setWindowPosition(x, y)
 
 
-proc size*(game: Game): Dim =
+proc windowSize*(game: Game): Dim =
   ##  ``Return`` game window dimensions.
   ##
   var w, h: cint
@@ -209,8 +207,8 @@ proc size*(game: Game): Dim =
   return (w.int, h.int)
 
 
-proc `size=`*(game: Game, dim: Dim) {.inline.} =
-  if dim != game.size:
+proc `windowSize=`*(game: Game, dim: Dim) {.inline.} =
+  if dim != game.windowSize:
     game.fWindow.setWindowSize(dim.w.cint, dim.h.cint)
 
 
@@ -242,83 +240,50 @@ proc `maxSize=`*(game: Game, dim: Dim) =
     game.fWindow.setWindowMaximumSize(w, h)
 
 
-template setBordered*(game: Game, enabled: bool) =
+proc setBordered*(game: Game, enabled: bool) {.inline.} =
   game.fWindow.setWindowBordered(enabled)
 
 
-template setResizable*(game: Game, enabled: bool) =
+proc setResizable*(game: Game, enabled: bool) {.inline.} =
   game.fWindow.setWindowResizable(enabled)
 
 
-template show*(game: Game) =
+proc show*(game: Game) {.inline.} =
   game.fWindow.showWindow()
 
 
-template hide*(game: Game) =
+proc hide*(game: Game) {.inline.} =
   game.fWindow.hideWindow()
 
 
-template focus*(game: Game) =
+proc focus*(game: Game) {.inline.} =
   game.fWindow.raiseWindow()
 
 
-template maximize*(game: Game) =
+proc maximize*(game: Game) {.inline.} =
   game.fWindow.maximizeWindow()
 
 
-template minimize*(game: Game) =
+proc minimize*(game: Game) {.inline.} =
   game.fWindow.minimizeWindow()
 
 
-template restore*(game: Game) =
+proc restore*(game: Game) {.inline.} =
   game.fWindow.restoreWindow()
 
 
-proc logicalSize*(game: Game): Dim {.inline.} =
+proc size*(game: Game): Dim {.inline.} =
   ##  Get logical size of the game renderer.
   ##
-  return game.fLogicalSize
-
-
-proc `logicalSize=`*(game: Game, size: Dim) =
-  ##  Set logical size of the game renderer.
-  ##
-  if renderer.renderSetLogicalSize(size.w, size.h) != 0:
-    sdl.logCritical(
-      sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
-        sdl.getError())
-    return
-  game.fLogicalSize = size
-  let size = game.size
-  game.fScale.x = size.w / game.fLogicalSize.w
-  game.fScale.y = size.h / game.fLogicalSize.h
+  return game.fSize
 
 
 proc scale*(game: Game): Coord {.inline.} =
   ##  ``Return`` the scale of the game renderer.
   ##
-  return game.fScale
-
-
-proc `scale=`*(game: Game, scale: Coord) =
-  ##  Set scale of the game renderer.
-  ##
-  if renderer.renderSetScale(scale.x, scale.y) != 0:
-    sdl.logCritical(
-      sdl.LogCategoryError, "Can't set renderer scale: %s",
-      sdl.getError())
-    return
-  game.fScale = scale
-  let size = game.size
-  game.fLogicalSize.w = int(size.w.float / game.fScale.x)
-  game.fLogicalSize.h = int(size.h.float / game.fScale.y)
-
-
-proc `scale=`*(game: Game, scale: float) =
-  ##  Set scale of the game renderer
-  ##  (both horizontal and vertical to same value)
-  ##
-  game.scale = (scale, scale)
+  var w, h: cfloat
+  renderer.renderGetScale(addr(w), addr(h))
+  return (w.float, h.float)
 
 
 proc scene*(game: Game): Scene {.inline.} =
