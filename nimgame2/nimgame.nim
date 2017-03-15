@@ -34,9 +34,9 @@ import
 type
   Game* = ref object
     # Private
-    fSize, fLogicalSize: Dim
+    fWindow: sdl.Window
+    fLogicalSize: Dim
     fScale: Coord
-    fTitle: string
     # Scene
     fScene: Scene   ##  Current scene
 
@@ -51,7 +51,7 @@ var
 
 proc free*(game: Game) =
   renderer.destroyRenderer()
-  window.destroyWindow()
+  game.fWindow.destroyWindow()
   while mix.init(0) != 0: mix.quit()
   ttf.quit()
   img.quit()
@@ -84,12 +84,9 @@ proc init*(
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
-  game.fSize.w = w
-  game.fSize.h = h
   game.fLogicalSize.w = w
   game.fLogicalSize.h = h
   game.fScale = (1.0, 1.0)
-  game.fTitle = title
   background = bgColor
 
   # Default options
@@ -138,25 +135,25 @@ proc init*(
   discard allocateChannels(mixerChannels)
 
   # Create window
-  window = sdl.createWindow(
-    game.fTitle,
+  game.fWindow = sdl.createWindow(
+    title,
     sdl.WindowPosUndefined, sdl.WindowPosUndefined,
-    game.fSize.w, game.fSize.h,
+    w, h,
     windowFlags)
-  if window == nil:
+  if game.fWindow == nil:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't create window: %s", sdl.getError())
     return false
 
   # Create renderer
-  renderer = sdl.createRenderer(window, -1, rendererFlags)
+  renderer = sdl.createRenderer(game.fWindow, -1, rendererFlags)
   if renderer == nil:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't create renderer: %s", sdl.getError())
     return false
 
   # Set renderer logical size
-  if renderer.renderSetLogicalSize(game.fSize.w, game.fSize.h) != 0:
+  if renderer.renderSetLogicalSize(w, h) != 0:
     sdl.logCritical(
       sdl.LogCategoryError, "Can't set logical size of the game renderer: %s",
         sdl.getError())
@@ -174,16 +171,100 @@ proc newGame*(): Game =
   new result, free
 
 
-proc size*(game: Game): Dim {.inline.} =
+template title*(game: Game): string =
+  $game.fWindow.getWindowTitle()
+
+
+template `title=`*(game: Game, title: string) =
+  game.fWindow.setWindowTitle(title)
+
+
+proc pos*(game: Game): Coord {.inline.} =
+  var x, y: cint
+  game.fWindow.getWindowPosition(addr(x), addr(y))
+  return (x.float, y.float)
+
+
+proc `pos=`*(game: Game, pos: Coord,
+             centerX = false, centerY = false) =
+  if (pos != game.pos) or centerX or centerY:
+    let
+      x = if centerX: sdl.WindowPosCentered else: pos.x.cint
+      y = if centerY: sdl.WindowPosCentered else: pos.y.cint
+    game.fWindow.setWindowPosition(x, y)
+
+
+proc size*(game: Game): Dim =
   ##  ``Return`` game window dimensions.
   ##
-  return game.fSize
+  var w, h: cint
+  game.fWindow.getWindowSize(addr(w), addr(h))
+  return (w.int, h.int)
 
 
-proc title*(game: Game): string {.inline.} =
-  ##  ``Return`` game window title.
-  ##
-  return game.fTitle
+proc `size=`*(game: Game, dim: Dim) {.inline.} =
+  if dim != game.size:
+    game.fWindow.setWindowSize(dim.w.cint, dim.h.cint)
+
+
+proc minSize*(game: Game): Dim =
+  var w, h: cint
+  game.fWindow.getWindowMinimumSize(addr(w), addr(h))
+  return (w.int, h.int)
+
+
+proc `minSize=`*(game: Game, dim: Dim) =
+  if dim != game.minSize:
+    let
+      w: cint = if dim.w > 0: dim.w else: 1
+      h: cint = if dim.h > 0: dim.h else: 1
+    game.fWindow.setWindowMinimumSize(w, h)
+
+
+proc maxSize*(game: Game): Dim =
+  var w, h: cint
+  game.fWindow.getWindowMaximumSize(addr(w), addr(h))
+  return (w.int, h.int)
+
+
+proc `maxSize=`*(game: Game, dim: Dim) =
+  if dim != game.maxSize:
+    let
+      w: cint = if dim.w > 0: dim.w else: 1
+      h: cint = if dim.h > 0: dim.h else: 1
+    game.fWindow.setWindowMaximumSize(w, h)
+
+
+template setBordered*(game: Game, enabled: bool) =
+  game.fWindow.setWindowBordered(enabled)
+
+
+template setResizable*(game: Game, enabled: bool) =
+  game.fWindow.setWindowResizable(enabled)
+
+
+template show*(game: Game) =
+  game.fWindow.showWindow()
+
+
+template hide*(game: Game) =
+  game.fWindow.hideWindow()
+
+
+template focus*(game: Game) =
+  game.fWindow.raiseWindow()
+
+
+template maximize*(game: Game) =
+  game.fWindow.maximizeWindow()
+
+
+template minimize*(game: Game) =
+  game.fWindow.minimizeWindow()
+
+
+template restore*(game: Game) =
+  game.fWindow.restoreWindow()
 
 
 proc logicalSize*(game: Game): Dim {.inline.} =
@@ -201,8 +282,9 @@ proc `logicalSize=`*(game: Game, size: Dim) =
         sdl.getError())
     return
   game.fLogicalSize = size
-  game.fScale.x = game.fSize.w / game.fLogicalSize.w
-  game.fScale.y = game.fSize.h / game.fLogicalSize.h
+  let size = game.size
+  game.fScale.x = size.w / game.fLogicalSize.w
+  game.fScale.y = size.h / game.fLogicalSize.h
 
 
 proc scale*(game: Game): Coord {.inline.} =
@@ -220,8 +302,9 @@ proc `scale=`*(game: Game, scale: Coord) =
       sdl.getError())
     return
   game.fScale = scale
-  game.fLogicalSize.w = int(game.fSize.w.float / game.fScale.x)
-  game.fLogicalSize.h = int(game.fSize.h.float / game.fScale.y)
+  let size = game.size
+  game.fLogicalSize.w = int(size.w.float / game.fScale.x)
+  game.fLogicalSize.h = int(size.h.float / game.fScale.y)
 
 
 proc `scale=`*(game: Game, scale: float) =

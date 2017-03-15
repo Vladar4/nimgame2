@@ -28,7 +28,6 @@ import
 var
   background*: sdl.Color  ##  Screen clearing color
   renderer*: sdl.Renderer ##  Game renderer pointer
-  window*: sdl.Window     ##  Game window pointer
 
   gameRunning*: bool      ##  If `false` - break main loop
   gamePaused*: bool       ##  If `true` - do not update current scene
