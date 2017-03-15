@@ -190,13 +190,16 @@ proc pos*(game: Game): Coord =
   return (x.float, y.float)
 
 
-proc `pos=`*(game: Game, pos: Coord,
-             centerX = false, centerY = false) =
-  if (pos != game.pos) or centerX or centerY:
-    let
-      x = if centerX: sdl.WindowPosCentered else: pos.x.cint
-      y = if centerY: sdl.WindowPosCentered else: pos.y.cint
-    game.fWindow.setWindowPosition(x, y)
+proc `pos=`*(game: Game, pos: Coord) =
+  if pos != game.pos:
+    game.fWindow.setWindowPosition(pos.x.cint, pos.y.cint)
+
+
+proc centrify*(game: Game, centerX = true, centerY = true) =
+  let
+    x: cint = if centerX: sdl.WindowPosCentered else: game.pos.x.cint
+    y: cint = if centerY: sdl.WindowPosCentered else: game.pos.y.cint
+  game.fWindow.setWindowPosition(x, y)
 
 
 proc windowSize*(game: Game): Dim =
