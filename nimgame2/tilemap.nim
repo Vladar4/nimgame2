@@ -50,7 +50,7 @@ type
 # TileMap #
 #=========#
 
-proc initTileMap*(tilemap: TileMap, scaleFix = false) =
+proc init*(tilemap: TileMap, scaleFix = false) =
   tilemap.initEntity()
   tilemap.map = @[]
   tilemap.fShow = (0..0, 0..0)
@@ -65,7 +65,7 @@ proc newTileMap*(scaleFix = false): TileMap =
   ##  or to `1.0` otherwise.
   ##
   result = new TileMap
-  result.initTileMap(scaleFix)
+  result.init(scaleFix)
 
 
 proc show*(tilemap: TileMap): TileShow {.inline.} =

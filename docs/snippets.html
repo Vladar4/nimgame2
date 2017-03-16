@@ -91,6 +91,8 @@
 
 
   method event*(scene: MainScene, event: Event) =
+    # call it if your entities have their own event handlers
+    scene.eventScene(event)
     # if you want to handle some events manually, you do it here
     if event.kind == KeyDown:
       case event.key.keysym.sym:

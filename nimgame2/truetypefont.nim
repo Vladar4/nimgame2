@@ -91,10 +91,12 @@ proc render(font: TrueTypeFont,
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render nil font")
     return nil
+  if line.len < 1:
+    return nil
   result = font.fFont.renderUTF8_Blended(line, color)
   if result.setSurfaceAlphaMod(color.a) != 0:
     sdl.logCritical(sdl.LogCategoryError,
-                    "Can't set surface aplha modifier: %s",
+                    "Can't set surface alpha modifier: %s",
                     sdl.getError())
 
 

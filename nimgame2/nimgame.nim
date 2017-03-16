@@ -200,6 +200,11 @@ proc centrify*(game: Game, centerX = true, centerY = true) =
     x: cint = if centerX: sdl.WindowPosCentered else: game.pos.x.cint
     y: cint = if centerY: sdl.WindowPosCentered else: game.pos.y.cint
   game.fWindow.setWindowPosition(x, y)
+  # check if the screen is smaller than a window
+  var pos = game.pos
+  if pos.x < 0: pos.x = 0
+  if pos.y < 0: pos.y = 0
+  game.pos = pos
 
 
 proc windowSize*(game: Game): Dim =
