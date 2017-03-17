@@ -159,6 +159,15 @@ proc random*[T](x: Slice[T], exclude: openArray[T]): T =
     result = random(x)
 
 
+proc random*[T](x: set[T]): T =
+  ##  ``Return`` a random member of set ``x``.
+  ##
+  var r: seq[T] = @[]
+  for i in x:
+    r.add(i)
+  return random(r)
+
+
 proc randomBool*(chance: float = 0.5): bool =
   ##  ``Return`` `true` or `false`,
   ##  based on the ``chance`` value (from `0.0` to `1.0`).

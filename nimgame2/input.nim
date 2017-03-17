@@ -91,16 +91,52 @@ template down*(keymod: Keymod): bool =
   sdl.getModState() and keymod
 
 
+proc down*(scancodes: openarray[Scancode]): bool =
+  ##  Check if any scancode in the ``scancodes`` array is down.
+  ##
+  for i in scancodes:
+    if i.down:
+      return true
+  return false
+
+
+proc down*(keymods: openarray[Keymod]): bool =
+  ##  Check if any keymod in the ``keymodes`` array is down.
+  ##
+  for i in keymods:
+    if i.down:
+      return true
+  return false
+
+
 template pressed*(scancode: Scancode): bool =
   ##  Check if ``scancode`` (keyboard key) was just pressed.
   ##
   (scancode in kbdPressed)
 
 
+proc pressed*(scancodes: openarray[Scancode]): bool =
+  ##  Check if any scancode in the ``scancodes`` array was just pressed.
+  ##
+  for i in scancodes:
+    if i.pressed:
+      return true
+  return false
+
+
 template released*(scancode: Scancode): bool =
   ##  Check if ``scancode`` (keyboard key) was just released.
   ##
   (scancode in kbdReleased)
+
+
+proc released*(scancodes: openarray[Scancode]): bool =
+  ##  Check if any scancode in the ``scancodes`` array was just released.
+  ##
+  for i in scancodes:
+    if i.released:
+      return true
+  return false
 
 
 proc clearPressed*(scancode: Scancode) =
@@ -196,13 +232,13 @@ template down*(button: int32, state: MouseState = mBtn): bool =
 
 
 template pressed*(button: int32): bool =
-  ##  Check if ``scancode`` (keyboard key) was just pressed.
+  ##  Check if mouse ``button`` was just pressed.
   ##
   (sdl.button(button) and mPressed) > 0
 
 
 template released*(button: int32): bool =
-  ##  Check if ``scancode`` (keyboard key) was just released.
+  ##  Check if mouse ``button`` was just released.
   ##
   (sdl.button(button) and mReleased) > 0
 
