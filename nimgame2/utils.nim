@@ -141,7 +141,7 @@ proc loadCSV*[T](file: string,
 # Random #
 #========#
 
-proc random*[T](max: T, exclude: openArray[T]): T =
+proc random*[T](max: T, exclude: seq[T]): T =
   ##  ``Return`` a random number in the range ``min``..<``max``,
   ##  except values in the ``exclude``.
   ##
@@ -150,13 +150,33 @@ proc random*[T](max: T, exclude: openArray[T]): T =
     result = random(max)
 
 
-proc random*[T](x: Slice[T], exclude: openArray[T]): T =
+template random*[T](max: T, exclude: openArray[T]): T =
+  random(max, @exclude)
+
+
+proc random*[T](x, exclude: seq[T]): T =
+  ##  ``Return`` a random number in the sequence ``x``,
+  ##  except values in the ``exclude``.
+  result = random(x)
+  while exclude.contains(result):
+    result = random(x)
+
+
+template random*[T](x, exclude: openArray[T]): T =
+  random(@x, @exclude)
+
+
+proc random*[T](x: Slice[T], exclude: seq[T]): T =
   ##  ``Return`` a random number in the range ``min``..<``max``,
   ##  except values in the ``exclude``.
   ##
   result = random(x)
   while exclude.contains(result):
     result = random(x)
+
+
+template random*[T](x: Slice[T], exclude: openArray[T]): T =
+  random(x, @exclude)
 
 
 proc random*[T](x: set[T]): T =
