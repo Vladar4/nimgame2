@@ -141,6 +141,15 @@ proc play*(tween: Tween) =
   tween.loop = 0
 
 
+proc stop*(tween: Tween) =
+  ##  Stop playing ``tween`` immediately.
+  ##
+  tween.value = tween.fFinish
+  tween.fElapsed = 0.0
+  tween.playing = false
+  tween.loop = 0
+
+
 proc setup*[T,V](tween: Tween[T,V],
     start, finish: V, duration: float, loops = 0) =
   ##  Set up ``tween`` params.

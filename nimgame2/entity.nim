@@ -29,7 +29,7 @@ import
 type
   Animation = object
     frames*: seq[int] ##  List of animation's frame indexes
-    frameRate*: float ##  Frame rate (in frames per second)
+    frameRate*: float ##  Frame rate (in seconds per frame)
     flip*: Flip       ##  Flip flag
 
 
@@ -193,6 +193,13 @@ proc currentAnimationName*(entity: Entity): string =
   if entity.sprite.currentAnimation < 0:
     return ""
   return entity.sprite.animationKeys[entity.sprite.currentAnimation]
+
+
+proc changeFramerate*(entity: Entity, frameRate: float = 0.1) =
+  ##  Change framerate for all created animations.
+  ##
+  for i in 0..entity.sprite.animations.high:
+    entity.sprite.animations[i].frameRate = frameRate
 
 
 proc addAnimation*(entity: Entity,
