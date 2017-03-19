@@ -66,7 +66,8 @@ proc update*(text: TextGraphic) =
   if num < 1:
     discard text.assignTexture(text.fFont.renderLine(""))
   elif num < 2:
-    discard text.assignTexture(text.fFont.renderLine(text.fLines[0]))
+    discard text.assignTexture(
+      text.fFont.renderLine(text.fLines[0], text.fColor))
   else:
     discard text.assignTexture(
       text.fFont.renderText(text.fLines, text.fAlign, text.fColor))
