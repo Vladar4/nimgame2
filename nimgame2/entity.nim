@@ -27,7 +27,7 @@ import
 
 
 type
-  Animation = object
+  Animation* = object
     frames*: seq[int] ##  List of animation's frame indexes
     frameRate*: float ##  Frame rate (in seconds per frame)
     flip*: Flip       ##  Flip flag
@@ -72,7 +72,7 @@ type
     fLayer: int                   ##  Rendering layer
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
-    sprite*: Sprite
+    sprite: Sprite
     logic*: Logic
     physics*: Physics
     collider*: Collider
@@ -256,11 +256,12 @@ proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
   entity.sprite.cycles = cycles
   entity.sprite.kill = kill
   entity.sprite.time = 0.0
+  entity.sprite.currentFrame = 0
   if cycles != 0:
     entity.sprite.playing = true
 
 
-method update*(sprite: Sprite, entity: Entity, elapsed: float) {.base.} =
+proc update(sprite: Sprite, entity: Entity, elapsed: float) =
   if entity.sprite == nil:
     return
   if (entity.sprite.currentAnimation < 0) or (not entity.sprite.playing):
