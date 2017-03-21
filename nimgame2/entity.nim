@@ -33,7 +33,7 @@ type
     flip*: Flip       ##  Flip flag
 
 
-  Sprite = ref object
+  Sprite* = ref object
     animationKeys*: seq[string] ##  List of animation names
     animations*: seq[Animation] ##  List of animations
     currentAnimation*: int      ##  Index of currently playing animation
@@ -72,7 +72,7 @@ type
     fLayer: int                   ##  Rendering layer
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
-    sprite: Sprite
+    sprite*: Sprite
     logic*: Logic
     physics*: Physics
     collider*: Collider
