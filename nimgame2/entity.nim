@@ -487,10 +487,12 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   if entity.graphic == nil:
     return
 
-  var dim = if entity.sprite == nil:
+  let
+    dim = if entity.sprite == nil:
               entity.graphic.dim
             else:
               entity.sprite.dim
+    oldCenter = entity.center
 
   # horisontal align
   entity.center.x = case hor:
@@ -503,6 +505,11 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   of VAlign.top:    0.0
   of VAlign.center: dim.h / 2
   of VAlign.bottom: dim.h.float - 1
+
+  # collider adjustment
+  if entity.collider != nil:
+    entity.collider.pos += oldCenter - entity.center
+
 
 
 method event*(entity: Entity, e: sdl.Event) {.base.} = discard
