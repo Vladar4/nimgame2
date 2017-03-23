@@ -349,6 +349,38 @@
 </pre></div>
 
 
+<div class="snippet" id="camera"><h3>Camera Usage</h3>
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+    scene.camera = newEntity()
+
+    # this entity is bound to the camera
+    scene.map = newMyMap()
+    scene.add(scene.map)
+
+    # this entitys isn't bound to the camera,
+    # as we set its parent manually
+    scene.player = newMyPlayer()
+    scene.plater.parent = scene.map
+    scene.add(scene.player)
+
+    # boud camera to this entity
+    scene.cameraBond = scene.player
+    # place camera bond entity at the center
+    scene.cameraBondOffset = game.size / 2
+
+  # somewhere in the update routine
+
+    if scene.cameraBond == nil:
+        if ScancodeRight.down: scene.camera.pos.x += step
+        # ...
+    else:
+        if ScancodeRight.down: scene.player.pos.x += step
+        # ...
+</pre></div>
+
+
 <div class="snippet" id="sound"><h3>Sound Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
