@@ -261,13 +261,13 @@ proc soundResume*() {.inline.} =
   mix.resume(-1)
 
 
-proc soundVolume*(): Volume {.inline.} =
+proc getSoundVolume*(): Volume {.inline.} =
   ##  ``Return`` average sound volume.
   ##
   return mix.volume(-1, -1)
 
 
-proc `soundVolume=`*(val: Volume) {.inline.} =
+proc setSoundVolume*(val: Volume) {.inline.} =
   ##  Set new volume for all sound channels.
   ##
   discard mix.volume(-1, val)
