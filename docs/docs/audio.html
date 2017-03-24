@@ -1296,10 +1296,10 @@ function main() {
     title="soundPause*()"><wbr />sound<wbr />Pause<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#soundResume,"
     title="soundResume*()"><wbr />sound<wbr />Resume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundVolume,"
-    title="soundVolume*(): Volume"><wbr />sound<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Volume"
-    title="`soundVolume =`*(val: Volume)">`<wbr />sound<wbr />Volume<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#getSoundVolume,"
+    title="getSoundVolume*(): Volume"><wbr />get<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#setSoundVolume,Volume"
+    title="setSoundVolume*(val: Volume)"><wbr />set<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#free,Music"
     title="free*(music: Music)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#init,Music,string"
@@ -1678,7 +1678,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/audio.nim#L258" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundVolume"><a name="soundVolume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="getSoundVolume"><a name="getSoundVolume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> average sound volume. 
 &nbsp;&nbsp;<a
@@ -1687,7 +1687,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/audio.nim#L264" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Volume"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">soundVolume</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="setSoundVolume"><a name="setSoundVolume,Volume"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new volume for all sound channels. 
 &nbsp;&nbsp;<a
@@ -1953,7 +1953,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-24 15:15:01 UTC</small>
       </div>
     </div>
   </div>
