@@ -67,6 +67,7 @@ proc init*(
     windowFlags: uint32 = 0,
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
+    integerScale: bool = false,
     icon: string = "",
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitOGG,
@@ -75,13 +76,23 @@ proc init*(
   ##  Init game.
   ##
   ##  ``w``, ``h``      window dimensions
+  ##
   ##  ``title``         window title
+  ##
   ##  ``bgColor``       window background color
+  ##
   ##  ``windowFlags``   sdl window flags
+  ##
   ##  ``rendererFlags`` sdl renderer flags
+  ##
   ##  ``scaleQuality``  scale quality (pixel sampling)
+  ##
+  ##  ``integerScale``  force integer scale only
+  ##
   ##  ``imageFlags``    sdl_image flags
+  ##
   ##  ``mixerFlags``    sdl_mixer flags
+  ##
   ##  ``mixerChannels`` Number of channels to allocate for mixing.
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
@@ -165,6 +176,7 @@ proc init*(
 
   # Set renderer scale quality
   discard sdl.setHint(sdl.HintRenderScaleQuality, $scaleQuality)
+  discard renderer.renderSetIntegerScale(integerScale)
 
   # Initialize the random number generator
   randomize()
