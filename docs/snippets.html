@@ -95,8 +95,8 @@
     scene.eventScene(event)
     # if you want to handle some events manually, you do it here
     if event.kind == KeyDown:
-      case event.key.keysym.sym:
-      of K_Escape:
+      case event.key.keysym.scancode:
+      of ScancodeEscape:
         # stop the engine (see nimgame2/settings.nim)
         gameRunning = false
       else: discard
