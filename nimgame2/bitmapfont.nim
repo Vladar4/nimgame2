@@ -53,10 +53,15 @@ proc init*(font: BitmapFont) =
   font.fChars = @[]
 
 
-proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
+proc load*(font: BitmapFont, file: string, charDim: Dim,
+           offset: Dim = (0, 0), border: Dim = (0, 0)): bool =
   ##  Load ``font`` data from a ``file``.
   ##
   ##  ``charDim`` dimensions of a single font character.
+  ##
+  ##  ``offset``  offset from the edge of the texture.
+  ##
+  ##  ``border``  border around individual characters.
   ##
   ##  ``Return`` `true` on success, or `false` otherwise.
   ##
@@ -72,11 +77,15 @@ proc load*(font: BitmapFont, file: string, charDim: Dim): bool =
   font.fDim = (font.fSurface.w.int, font.fSurface.h.int)
   font.fCharDim = charDim
   let
-    cols = font.fDim.w div font.fCharDim.w
-    rows = font.fDim.h div font.fCharDim.h
+    cols = (font.fDim.w - offset.w) div
+           (font.fCharDim.w + 2 * border.w)
+    rows = (font.fDim.h - offset.h) div
+           (font.fCharDim.h + 2 * border.h)
   for r in 0..(rows - 1):
     for c in 0..(cols - 1):
-      font.fChars.add((font.fCharDim.w * c, font.fCharDim.h * r))
+      font.fChars.add((
+        offset.w + font.fCharDim.w * c + border.w * (1 + c * 2),
+        offset.h + font.fCharDim.h * r + border.h * (1 + r * 2)))
 
 
 proc newBitmapFont*(): BitmapFont =

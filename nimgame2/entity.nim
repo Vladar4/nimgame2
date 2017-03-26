@@ -43,7 +43,6 @@ type
     time*: float                ##  Animation timer
     playing*: bool              ##  Animation playing flag
     dim*: Dim                   ##  Sprite frame dimensions
-    offset*: Dim                ##  Sprite graphic offset
     frames*: seq[Rect]          ##  Frames' coordinates
 
 
@@ -96,12 +95,15 @@ type
 
 proc initSprite*(entity: Entity,
                  dim: Dim,
-                 offset: Dim = (0, 0)) =
+                 offset: Dim = (0, 0),
+                 border: Dim = (0, 0)) =
   ##  Creeate a sprite for the given ``entity`` with the attached Graphic.
   ##
   ##  ``dim`` dimensions of one frame.
   ##
   ##  ``offset``  offset from the edge of the texture.
+  ##
+  ##  ``border``  border around individual frames.
   ##
   entity.sprite = new Sprite
   entity.sprite.animationKeys = @[]
@@ -113,20 +115,19 @@ proc initSprite*(entity: Entity,
   entity.sprite.time = 0
   entity.sprite.playing = false
   entity.sprite.dim = dim
-  entity.sprite.offset = offset
   entity.sprite.frames = @[]
 
   let
-    cols = (entity.graphic.w - entity.sprite.offset.w) div
-            entity.sprite.dim.w
-    rows = (entity.graphic.h - entity.sprite.offset.h) div
-            entity.sprite.dim.h
+    cols = (entity.graphic.w - offset.w) div
+            (entity.sprite.dim.w + 2 * border.w)
+    rows = (entity.graphic.h - offset.h) div
+            (entity.sprite.dim.h + 2 * border.h)
 
   for r in 0..(rows - 1):
     for c in 0..(cols - 1):
       entity.sprite.frames.add(Rect(
-        x: entity.sprite.offset.w + entity.sprite.dim.w * c,
-        y: entity.sprite.offset.h + entity.sprite.dim.h * r,
+        x: offset.w + entity.sprite.dim.w * c + border.w * (1 + c * 2),
+        y: offset.h + entity.sprite.dim.h * r + border.h * (1 + r * 2),
         w: entity.sprite.dim.w,
         h: entity.sprite.dim.h))
 
@@ -149,7 +150,6 @@ proc copy(target, source: Sprite) =
   target.time             = source.time
   target.playing          = source.playing
   target.dim              = source.dim
-  target.offset           = source.offset
   target.frames = @[]
   for frame in source.frames:
     target.frames.add(frame)
