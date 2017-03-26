@@ -1232,8 +1232,9 @@ function main() {
     title="free*(font: BitmapFont)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#init,BitmapFont"
     title="init*(font: BitmapFont)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#load,BitmapFont,string,Dim"
-    title="load*(font: BitmapFont; file: string; charDim: Dim): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#load,BitmapFont,string,Dim,Dim,Dim"
+    title="load*(font: BitmapFont; file: string; charDim: Dim; offset: Dim = (0, 0);
+      border: Dim = (0, 0)): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newBitmapFont,"
     title="newBitmapFont*(): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newBitmapFont,string,Dim"
@@ -1307,10 +1308,13 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/bitmapfont.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="load"><a name="load,BitmapFont,string,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="load"><a name="load,BitmapFont,string,Dim,Dim,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
+          <span class="Identifier">border</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">charDim</span></tt> dimensions of a single font character.</p>
+<p><tt class="docutils literal"><span class="pre">offset</span></tt>  offset from the edge of the texture.</p>
+<p><tt class="docutils literal"><span class="pre">border</span></tt>  border around individual characters.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, or <cite>false</cite> otherwise. </p>
 
 &nbsp;&nbsp;<a
@@ -1323,9 +1327,9 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L82"
+href="/tree/master/bitmapfont.nim#L91"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newBitmapFont"><a name="newBitmapFont,string,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span></pre></dt>
@@ -1334,9 +1338,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">charDim</span></tt> dimensions of a single font character. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L87"
+href="/tree/master/bitmapfont.nim#L96"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L87" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L96" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1348,27 +1352,27 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a font character's height. 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L96"
+href="/tree/master/bitmapfont.nim#L105"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L96" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="lineDim"><a name="lineDim.e,BitmapFont,string"></a><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of a <tt class="docutils literal"><span class="pre">line</span></tt> of text, written in <tt class="docutils literal"><span class="pre">font</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L102"
+href="/tree/master/bitmapfont.nim#L111"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderLine"><a name="renderLine.e,BitmapFont,string,Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Texture</span></pre></dt>
 <dd>
 Render a text <tt class="docutils literal"><span class="pre">line</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">color</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L154"
+href="/tree/master/bitmapfont.nim#L163"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L154" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderText"><a name="renderText.e,BitmapFont,openarray[string],Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderText</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">align</span> <span class="Other">=</span> <span class="Identifier">TextAlign</span><span class="Other">.</span><span class="Identifier">left</span><span class="Other">;</span>
@@ -1376,9 +1380,9 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 Render a multi-line <tt class="docutils literal"><span class="pre">text</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">align</span></tt> and <tt class="docutils literal"><span class="pre">color</span></tt>. 
 &nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L171"
+href="/tree/master/bitmapfont.nim#L180"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/bitmapfont.nim#L180" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1391,7 +1395,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-26 16:18:31 UTC</small>
       </div>
     </div>
   </div>
