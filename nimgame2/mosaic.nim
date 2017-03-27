@@ -50,6 +50,7 @@ proc free*(mosaic: Mosaic) =
 
 
 proc init*(mosaic: Mosaic) =
+  mosaic.free()
   mosaic.fSurface = nil
   mosaic.fDim = (0, 0)
   mosaic.tileDim = (0, 0)
