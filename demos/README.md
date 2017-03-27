@@ -35,3 +35,5 @@ Nimgame 2 Demos
 
 * [demo17](demo17) GUI (Button, TextField)
 
+* [demo18](demo18) IndexedImage
+
