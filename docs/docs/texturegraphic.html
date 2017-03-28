@@ -1240,8 +1240,8 @@ function main() {
     title="format*(graphic: TextureGraphic): uint32"><wbr />format<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#load,TextureGraphic,string"
     title="load*(graphic: TextureGraphic; file: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#assignTexture,TextureGraphic,Texture"
-    title="assignTexture*(graphic: TextureGraphic; texture: Texture): bool"><wbr />assign<wbr />Texture<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#assignTexture,TextureGraphic,Texture,bool"
+    title="assignTexture*(graphic: TextureGraphic; texture: Texture; freeCurrent: bool = true): bool"><wbr />assign<wbr />Texture<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newTextureGraphic,"
     title="newTextureGraphic*(): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newTextureGraphic,string"
@@ -1368,10 +1368,12 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="/edit/devel/texturegraphic.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="assignTexture"><a name="assignTexture,TextureGraphic,Texture"></a><pre><span class="Keyword">proc</span> <span class="Identifier">assignTexture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="assignTexture"><a name="assignTexture,TextureGraphic,Texture,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">assignTexture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">;</span>
+                   <span class="Identifier">freeCurrent</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
-<p>Assign already created texture.</p>
-<p><tt class="docutils literal"><span class="pre">ATTENTION!</span></tt> The texture will be destroyed on <tt class="docutils literal"><span class="pre">free()</span></tt>.</p>
+<p>Assign already created <tt class="docutils literal"><span class="pre">texture</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">freeCurrent</span></tt> Free the currently assigned texture. Set to <cite>false</cite> if it used by other objects.</p>
+<p><tt class="docutils literal"><span class="pre">ATTENTION!</span></tt> The <tt class="docutils literal"><span class="pre">texture</span></tt> will be destroyed on <tt class="docutils literal"><span class="pre">free()</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, <cite>false</cite> otherwise. </p>
 
 &nbsp;&nbsp;<a
@@ -1384,81 +1386,81 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L110"
+href="/tree/master/texturegraphic.nim#L114"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L110" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTextureGraphic"><a name="newTextureGraphic,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L115"
+href="/tree/master/texturegraphic.nim#L119"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L115" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTextureGraphic"><a name="newTextureGraphic,Texture"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L120"
+href="/tree/master/texturegraphic.nim#L124"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L120" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="colorMod"><a name="colorMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">colorMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current color modifier. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L213"
+href="/tree/master/texturegraphic.nim#L217"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L213" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L217" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TextureGraphic,Color"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">colorMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span></pre></dt>
 <dd>
 Set a new color modifier. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L228"
+href="/tree/master/texturegraphic.nim#L232"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L228" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L232" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="alphaMod"><a name="alphaMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">alphaMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current alpha (transparency) modifier. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L237"
+href="/tree/master/texturegraphic.nim#L241"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L237" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L241" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TextureGraphic,uint8"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">alphaMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span></pre></dt>
 <dd>
 Set a new alpha (transparency) modifier. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L249"
+href="/tree/master/texturegraphic.nim#L253"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L253" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="blendMod"><a name="blendMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">blendMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Blend</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current blending mode. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L258"
+href="/tree/master/texturegraphic.nim#L262"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L258" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L262" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TextureGraphic,Blend"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">blendMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">blend</span><span class="Other">:</span> <span class="Identifier">Blend</span><span class="Other">)</span></pre></dt>
 <dd>
 Set a new blending mode. 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L271"
+href="/tree/master/texturegraphic.nim#L275"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L271" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L275" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1470,27 +1472,27 @@ class="link-seesrc" target="_blank">Source</a>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L125"
+href="/tree/master/texturegraphic.nim#L129"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L125" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="h"><a name="h.e,TextureGraphic"></a><pre><span class="Keyword">method</span> <span class="Identifier">h</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L129"
+href="/tree/master/texturegraphic.nim#L133"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="dim"><a name="dim.e,TextureGraphic"></a><pre><span class="Keyword">method</span> <span class="Identifier">dim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L133"
+href="/tree/master/texturegraphic.nim#L137"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="draw"><a name="draw.e,TextureGraphic,Coord,Angle,Scale,Coord,Flip,Rect"></a><pre><span class="Keyword">method</span> <span class="Identifier">draw</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0'f64</span><span class="Other">,</span> <span class="FloatNumber">0.0'f64</span><span class="Other">)</span><span class="Other">;</span>
@@ -1507,9 +1509,9 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">region</span></tt> Source texture region to draw. </p>
 
 &nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L137"
+href="/tree/master/texturegraphic.nim#L141"
 class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
+<a href="/edit/devel/texturegraphic.nim#L141" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1522,7 +1524,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-03-28 10:33:18 UTC</small>
       </div>
     </div>
   </div>
