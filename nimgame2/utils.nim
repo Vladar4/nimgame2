@@ -122,7 +122,7 @@ proc loadCSV*[T](file: string,
                  quote = '\"',
                  escape = '\0',
                  skipInitialSpace = false): seq[seq[T]] =
-  ##  Load data from a CSV file.
+  ##  Load data from a CSV ``file``.
   ##
   ##  ``Return`` a two-dimensional sequence of values from the ``file``,
   ##  or empty sequence (`@[]`) otherwise.
@@ -135,6 +135,59 @@ proc loadCSV*[T](file: string,
     for item in parser.row:
       result[^1].add(parse(item))
   parser.close()
+
+
+import
+  strutils, indexedimage
+
+proc loadPalette*(palette: var indexedimage.Palette,
+                  file: string,
+                  separator = ' ',
+                  quote = '\"',
+                  escape = '\0',
+                  skipInitialSpace = false) =
+  ##  Load palette color data from a ``file``.
+  ##
+  ##  ``palette`` Target palette. If ``palette`` is `nil`,
+  ##  allocates a new palette, otherwise the ``palette`` will be freed.
+  ##
+  ##  Data file should be in a format of:
+  ##
+  ##  .. code-block
+  ##    rrr ggg bbb aaa
+  ##    ...
+  ##
+  ##  or
+  ##
+  ##  .. code-block
+  ##    rrr ggg bbb
+  ##
+  ##  where `rrr`, `ggg`, `bbb`, and `aaa` is in `0`..`255` range.
+  ##
+  ##  Other types of lines are ignored.
+  ##
+  var
+    ncolors = 0
+    colors: seq[Color] = @[]
+    parser: CsvParser
+    r, g, b, a: int
+  parser.open(file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    let cols = parser.row.len
+    if cols in {3, 4}:
+      r = parser.row[0].parseInt
+      g = parser.row[1].parseInt
+      b = parser.row[2].parseInt
+      a = if cols == 4: parser.row[3].parseInt
+          else: 255
+      inc ncolors
+    else:
+      continue
+  if ncolors > 0:
+    if not (palette == nil):
+      palette.free()
+    palette.init(ncolors)
+    palette[0] = colors
 
 
 #========#
