@@ -95,14 +95,18 @@ proc load*(
 
 
 proc assignTexture*(
-    graphic: TextureGraphic, texture: Texture): bool =
-  ##  Assign already created texture.
+  graphic: TextureGraphic, texture: Texture, freeCurrent: bool = true): bool =
+  ##  Assign already created ``texture``.
   ##
-  ##  ``ATTENTION!`` The texture will be destroyed on ``free()``.
+  ##  ``freeCurrent`` Free the currently assigned texture.
+  ##  Set to `false` if it used by other objects.
+  ##
+  ##  ``ATTENTION!`` The ``texture`` will be destroyed on ``free()``.
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
-  graphic.freeTexture()
+  if freeCurrent:
+    graphic.freeTexture()
   graphic.fTexture = texture
   result = graphic.updateTexture()
 
