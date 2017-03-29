@@ -106,7 +106,7 @@ method `state=`*(widget: GuiWidget, val: GuiState) {.base.} =
   widget.setState(val)
 
 
-proc `toggled=`*(widget: GuiWidget, val: bool) =
+proc setToggled*(widget: GuiWidget, val: bool) =
   widget.fToggled = val
   if val:
     if widget.state.isUp:
@@ -117,12 +117,24 @@ proc `toggled=`*(widget: GuiWidget, val: bool) =
   widget.state = widget.state
 
 
-template press*(widget: GuiWidget) =
+method `toggled=`*(widget: GuiWidget, val: bool) =
+  widget.setToggled(val)
+
+
+template pressWidget*(widget: GuiWidget) =
   widget.toggled = true
 
 
-template release*(widget: GuiWidget) =
+method press*(widget: GuiWidget) =
+  widget.pressWidget()
+
+
+template releaseWidget*(widget: GuiWidget) =
   widget.toggled = false
+
+
+method release*(widget: GuiWidget) =
+  widget.releaseWidget()
 
 
 proc disable*(widget: GuiWidget) =
