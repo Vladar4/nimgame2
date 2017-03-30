@@ -10,6 +10,7 @@ import
   nimgame2/truetypefont,
   nimgame2/types,
   nimgame2/gui/widget,
+  nimgame2/gui/radio,
   nimgame2/gui/textinput,
   btnSquare, btnCircle
 
@@ -17,6 +18,8 @@ import
 type
   MainScene = ref object of Scene
     btnSquareG, btnCircleG, iconX, btnMosaicG, inputG: TextureGraphic
+    btnsRadio: array[3, GuiRadioButton]
+    radioGroup: GuiRadioGroup
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
@@ -61,7 +64,19 @@ proc init*(scene: MainScene) =
   scene.textInput.pos = (100, 150)
   scene.textInput.text.limit = 16
 
+  # Radio Button
+  scene.radioGroup = newGuiRadioGroup()
+  scene.radioGroup.pos = (100, 200)
+  for i in 0..scene.btnsRadio.high:
+    scene.btnsRadio[i] = newGuiRadioButton(
+      scene.radioGroup, scene.btnCircleG, circle = true)
+    scene.btnsRadio[i].pos = (i.float * 50.0, 0.0)
+  scene.btnsRadio[0].toggled = true
+
   # add to scene
+  scene.add(scene.radioGroup)
+  for b in scene.btnsRadio:
+    scene.add(b)
   scene.add(scene.textInput)
   scene.add(scene.btnMosaic)
   scene.add(scene.btnSquare)
