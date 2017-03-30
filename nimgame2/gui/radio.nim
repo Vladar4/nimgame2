@@ -42,6 +42,7 @@ type
 #===============#
 
 proc init*(radiogroup: GuiRadioGroup) =
+  radiogroup.initEntity()
   radiogroup.list = @[]
 
 
@@ -69,7 +70,7 @@ proc init*(radiobutton: GuiRadioButton,
            circle: bool = false) =
   GuiButton(radiobutton).init(graphic, image, circle)
   radiobutton.toggle = true
-  #TODO radiobutton.parent = group
+  radiobutton.parent = group
   radiobutton.group = group
   group.list.add(radiobutton)
 
