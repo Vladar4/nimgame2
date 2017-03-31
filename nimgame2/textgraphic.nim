@@ -22,6 +22,7 @@
 # Vladar vladar4@gmail.com
 
 import
+  strutils, unicode,
   sdl2/sdl,
   font, texturegraphic, settings, types
 
@@ -110,4 +111,44 @@ proc `lines=`*(text: TextGraphic, lines: openarray[string]) =
   text.fLines = @lines
   text.freeTexture()
   text.update()
+
+
+proc text*(text: TextGraphic): string {.inline.} =
+  ##  ``Return`` ``lines``, joined in one string.
+  ##
+  text.fLines.join("\n")
+
+
+proc wordWrap(s: string, maxLineWidth: int): seq[string] =
+  result = @[]
+  let runes = s.toRunes
+  var
+    i = 0
+    start = 0
+    lastSep = -1
+  while i < runes.len:
+    if runes[i].isWhiteSpace:
+      lastSep = i
+    if runeLen($runes[start..i]) > maxLineWidth:
+      if lastSep < 0:
+        result.add($runes[start..<i])
+        start = i
+      else:
+        result.add($runes[start..<lastSep])
+        start = lastSep + 1
+        lastSep = -1
+    inc i
+  result.add($runes[start..^1])
+
+
+proc setText*(text: TextGraphic,
+              val: string,
+              width: int = 0,
+              seps: set[char] = Whitespace) =
+  ##  Set the text ``lines``, wrapping each ``width`` characters.
+  ##
+  if width < 1:
+    text.lines = [val]
+  else:
+    text.lines = val.wordWrap(width)
 
