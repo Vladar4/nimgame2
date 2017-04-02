@@ -1,4 +1,4 @@
-# nimgame2/perspective.nim
+# nimgame2/perspectiveimage.nim
 # Copyright (c) 2016-2017 Vladar
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,7 +20,6 @@
 # THE SOFTWARE.
 #
 # Vladar vladar4@gmail.com
-
 
 import
   math,
@@ -85,7 +84,14 @@ proc dim*(image: PerspectiveImage): Dim {.inline.} =
 proc render*(image: PerspectiveImage,
              direction: PerspectiveDirection,
              sizeFrom, sizeTo, sizeNormal: int): Texture =
-  ##  TODO
+  ##  ``direction`` (`pdHor` or `pdVer`) direction of perspective axis.
+  ##
+  ##  ``sizeFrom``, ``sizeTo`` target scaled size
+  ##  (left and right for the `pdHor`, or top and bottom for the `pdVer`).
+  ##
+  ##  ``sizeNormal`` scaled size of the normal axis.
+  ##
+  ##  ``Return`` a new ``Texture`` created from the ``image``.
   ##
   let
     sizeFrom = if sizeFrom > 0: sizeFrom
@@ -103,13 +109,9 @@ proc render*(image: PerspectiveImage,
         of pdHor: image.fDim.w
         of pdVer: image.fDim.h
 
-    sw = case direction:
-      of pdHor: sizeNormal
-      of pdVer: max(sizeFrom, sizeTo)
-
-    sh = case direction:
-      of pdHor: max(sizeFrom, sizeTo)
-      of pdVer: sizeNormal
+    (sw, sh) = case direction:
+      of pdHor: (sizeNormal, max(sizeFrom, sizeTo))
+      of pdVer: (max(sizeFrom, sizeTo), sizeNormal)
 
     sizeStep = (sizeFrom - sizeTo) / sizeNormal
 
@@ -123,16 +125,21 @@ proc render*(image: PerspectiveImage,
     image.fSurface.format.BitsPerPixel.cint,
     image.fSurface.format.format)
 
-  # blit
+  # rect
   var
-    srcRect = case direction:
-      of pdHor: Rect(x: 0, y: 0, w: cint(round(normalStep)), h: image.fDim.h)
-      of pdVer: Rect(x: 0, y: 0, w: image.fDim.w, h: cint(round(normalStep)))
+    (srcRect, dstRect) = case direction:
+      of pdHor:
+        (
+          Rect(x: 0, y: 0, w: cint(round(normalStep)), h: image.fDim.h),
+          Rect(x: 0, y: 0, w: 1, h: sizeFrom)
+        )
+      of pdVer:
+        (
+          Rect(x: 0, y: 0, w: image.fDim.w, h: cint(round(normalStep))),
+          Rect(x: 0, y: 0, w: sizeFrom, h: 1)
+        )
 
-    dstRect = case direction:
-      of pdHor: Rect(x: 0, y: 0, w: 1, h: sizeFrom)
-      of pdVer: Rect(x: 0, y: 0, w: sizeFrom, h: 1)
-
+  # blit loop
   for i in 0..<sizeNormal:
     case direction:
     of pdHor:
@@ -145,8 +152,10 @@ proc render*(image: PerspectiveImage,
       dstRect.y = i
       dstRect.w = sizeFrom - cint(round(sizeStep * i.float))
       dstRect.x = cint(round(sizeStep * i.float / 2))
+    # blit
     discard image.fSurface.blitScaled(addr(srcRect), surface, addr(dstRect))
 
+  # return and free
   result = renderer.createTextureFromSurface(surface)
   surface.freeSurface()
 
