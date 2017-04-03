@@ -83,13 +83,17 @@ proc dim*(image: PerspectiveImage): Dim {.inline.} =
 
 proc render*(image: PerspectiveImage,
              direction: PerspectiveDirection,
-             sizeFrom, sizeTo, sizeNormal: int): Texture =
+             sizeFrom, sizeTo: int,
+             sizeNormal: int = 0,
+             shift: float = 0.5): Texture =
   ##  ``direction`` (`pdHor` or `pdVer`) direction of perspective axis.
   ##
   ##  ``sizeFrom``, ``sizeTo`` target scaled size
   ##  (left and right for the `pdHor`, or top and bottom for the `pdVer`).
   ##
   ##  ``sizeNormal`` scaled size of the normal axis.
+  ##
+  ##  ``shift`` perspective shift (0.5 is center symmetry).
   ##
   ##  ``Return`` a new ``Texture`` created from the ``image``.
   ##
@@ -109,15 +113,20 @@ proc render*(image: PerspectiveImage,
         of pdHor: image.fDim.w
         of pdVer: image.fDim.h
 
+    maxSize = max(sizeFrom, sizeTo)
+
     (sw, sh) = case direction:
-      of pdHor: (sizeNormal, max(sizeFrom, sizeTo))
-      of pdVer: (max(sizeFrom, sizeTo), sizeNormal)
+      of pdHor: (sizeNormal, maxSize)
+      of pdVer: (maxSize, sizeNormal)
 
     sizeStep = (sizeFrom - sizeTo) / sizeNormal
 
     normalStep = case direction:
       of pdHor: image.fDim.w / sizeNormal
       of pdVer: image.fDim.h / sizeNormal
+
+    startShift = if sizeFrom > sizeTo: 0
+                 else: cint(float(sizeTo - sizeFrom) * shift)
 
   # create a temporary surface
   var surface: Surface = createRGBSUrfaceWithFormat(
@@ -146,12 +155,12 @@ proc render*(image: PerspectiveImage,
       srcRect.x = cint(round(i.float * normalStep))
       dstRect.x = i
       dstRect.h = sizeFrom - cint(round(sizeStep * i.float))
-      dstRect.y = cint(round(sizeStep * i.float / 2))
+      dstRect.y = startShift + cint(round(sizeStep * i.float * shift))
     of pdVer:
       srcRect.y = cint(round(i.float * normalStep))
       dstRect.y = i
       dstRect.w = sizeFrom - cint(round(sizeStep * i.float))
-      dstRect.x = cint(round(sizeStep * i.float / 2))
+      dstRect.x = startShift + cint(round(sizeStep * i.float * shift))
     # blit
     discard image.fSurface.blitScaled(addr(srcRect), surface, addr(dstRect))
 
