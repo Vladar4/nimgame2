@@ -129,10 +129,16 @@ proc render*(image: PerspectiveImage,
                  else: cint(float(sizeTo - sizeFrom) * shift)
 
   # create a temporary surface
-  var surface: Surface = createRGBSUrfaceWithFormat(
+  var surface: Surface = createRGBSurfaceWithFormat(
     0, sw, sh,
     image.fSurface.format.BitsPerPixel.cint,
     image.fSurface.format.format)
+
+  if surface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't create a surface: %s",
+                    sdl.getError())
+    return nil
 
   # rect
   var

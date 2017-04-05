@@ -121,7 +121,7 @@ proc loadCSV*[T](file: string,
                  separator = ',',
                  quote = '\"',
                  escape = '\0',
-                 skipInitialSpace = false): seq[seq[T]] =
+                 skipInitialSpace = true): seq[seq[T]] =
   ##  Load data from a CSV ``file``.
   ##
   ##  ``Return`` a two-dimensional sequence of values from the ``file``,
@@ -140,12 +140,13 @@ proc loadCSV*[T](file: string,
 import
   strutils, indexedimage
 
+
 proc loadPalette*(palette: var indexedimage.Palette,
                   file: string,
                   separator = ' ',
                   quote = '\"',
                   escape = '\0',
-                  skipInitialSpace = false) =
+                  skipInitialSpace = true) =
   ##  Load palette color data from a ``file``.
   ##
   ##  ``palette`` Target palette. If ``palette`` is `nil`,
@@ -188,6 +189,35 @@ proc loadPalette*(palette: var indexedimage.Palette,
       palette.free()
     palette.init(ncolors)
     palette[0] = colors
+
+
+iterator atlasValues*(file: string,
+                      separator = ',',
+                      quote = '\"',
+                      escape = '\0',
+                      skipInitialSpace = true):
+    tuple[name: string, rect: Rect] =
+  ##  Load and iterate over atlas mapping file.
+  ##
+  ##  Mapping should be in a format of:
+  ##
+  ##  ..code-block
+  ##    name, x, y, w, h
+  ##    ...
+  ##
+  var
+    parser: CsvParser
+    val: tuple[name: string, rect: Rect]
+  parser.open(file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    if not(parser.row.len == 5):
+      continue
+    val.name = parser.row[0]
+    val.rect.x = parser.row[1].parseInt
+    val.rect.y = parser.row[2].parseInt
+    val.rect.w = parser.row[3].parseInt
+    val.rect.h = parser.row[4].parseInt
+    yield val
 
 
 #========#
