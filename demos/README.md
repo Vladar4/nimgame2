@@ -39,3 +39,5 @@ Nimgame 2 Demos
 
 * [demo19](demo19) PerspectiveImage
 
+* [demo20](demo20) TextureAtlas
+
