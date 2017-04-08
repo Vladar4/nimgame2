@@ -285,3 +285,251 @@ template toggleCursor*() =
   ##
   discard sdl.showCursor(if cursorIsVisible: 0 else: 1)
 
+
+#==========#
+# Joystick #
+#==========#
+
+export
+  sdl.numJoysticks, sdl.HatPosition
+
+
+type
+  JoyAxis* = range[low(int16)..high(int16)]
+  JoyBall* = tuple[dx, dy: int]
+  JoyHat*  = sdl.HatPosition
+
+  Joystick = ref object
+    joy: sdl.Joystick
+    numButtons, numAxes, numBalls, numHats: int
+    pressed, released: array[uint8.high, int]
+
+var
+  joysticks: seq[Joystick]
+
+
+proc joyIsOpened(id: int): bool =
+  if id >= 0:
+    if joysticks.high < id:
+      return false
+    if joysticks[id] == nil:
+      return false
+    return true
+  else:
+    return joysticks.len > 0
+
+
+iterator opened(joys: seq[Joystick]): Joystick =
+  for i in 0..joys.high:
+    if joys[i] == nil:
+      continue
+    yield joys[i]
+
+
+proc openJoystick*(id: int): bool =
+  let joy = joystickOpen(id)
+  if joy == nil:
+    return false
+  # init a new joystick
+  let newJoystick = new Joystick
+  newJoystick.joy = joy
+  newJoystick.numButtons = joystickNumButtons(joy)
+  newJoystick.numAxes = joystickNumAxes(joy)
+  newJoystick.numBalls = joystickNumBalls(joy)
+  newJoystick.numHats = joystickNumHats(joy)
+  # add to the ``joysticks`` sequence
+  if joysticks == nil:
+    joysticks = @[]
+  if joysticks.high >= id:
+    if not (joysticks[id] == nil):
+      joystickClose(joysticks[id].joy)
+    joysticks[id] = newJoystick
+  else:
+    while joysticks.high < id:
+      joysticks.add(nil)
+    joysticks[id] = newJoystick
+  return true
+
+
+proc closeJoystick*(id: int): bool =
+  if joysticks.high < id:
+    return false
+  if joysticks[id] == nil:
+    return false
+  joystickClose(joysticks[id].joy)
+  joysticks[id] = nil
+  return true
+
+
+proc initJoysticks*() =
+  ##  Init the ``joysticks`` sequence.
+  ##
+  ##  Called automatically from the main game cycle.
+  ##
+  if joysticks == nil:
+    joysticks = @[]
+  else:
+    for j in joysticks.opened:
+      for i in 0..<j.numButtons:
+        j.pressed[i] = 0
+        j.released[i] = 0
+
+
+proc updateJoysticks*(event: Event) =
+  ##  Called automatically from the main game cycle.
+  ##
+  if event.kind == JoyButtonDown:
+    let id = event.jbutton.which
+    if joysticks.high >= id:
+      let btn = event.jbutton.button
+      inc joysticks[id].pressed[btn]
+
+  elif event.kind == JoyButtonUp:
+    let id = event.jbutton.which
+    if joysticks.high >= id:
+      let btn = event.jbutton.button
+      inc joysticks[id].released[btn]
+
+
+proc joyName*(joystick: int): string =
+  ##  ``Return`` the name of the ``joystick``, or an empty string otherwise.
+  ##
+  if not joyIsOpened(joystick):
+    return ""
+  let name = joysticks[joystick].joy.joystickName()
+  return if name == nil: "Unknown Joystick"
+         else: $name
+
+
+proc joyNumButtons*(joystick: int): int {.inline.} =
+  if not joyIsOpened(joystick):
+    return 0
+  joysticks[joystick].numButtons
+
+
+proc joyNumAxes*(joystick: int): int {.inline.} =
+  if not joyIsOpened(joystick):
+    return 0
+  joysticks[joystick].numAxes
+
+
+proc joyNumBalls*(joystick: int): int {.inline.} =
+  if not joyIsOpened(joystick):
+    return 0
+  joysticks[joystick].numBalls
+
+
+proc joyNumHats*(joystick: int): int {.inline.} =
+  if not joyIsOpened(joystick):
+    return 0
+  joysticks[joystick].numHats
+
+
+proc joyDown*(joystick: int, button: uint8): bool =
+  ##  Check if ``joystick`` ``button`` is down.
+  ##
+  ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
+  ##
+  ##  ``button``  Button ID.
+  ##
+  if not joyIsOpened(joystick):
+    return false
+  if joystick >= 0:
+    return joysticks[joystick].joy.joystickGetButton(button.cint) > 0
+  else:
+    for j in joysticks.opened:
+      if j.joy.joystickGetButton(button.cint) > 0:
+        return true
+    return false
+
+
+proc joyPressed*(joystick: int, button: uint8): bool =
+  ##  Check if ``joystick`` ``button`` was just pressed.
+  ##
+  ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
+  ##
+  ##  ``button``  Joystick button ID.
+  ##
+  if not joyIsOpened(joystick):
+    return false
+  if joystick >= 0:
+    return button in joysticks[joystick].pressed
+  else:
+    for j in joysticks.opened:
+      if j.pressed[button] > 0:
+        return true
+    return false
+
+
+proc joyReleased*(joystick: int, button: uint8): bool =
+  ##  Check if ``joystick`` ``button`` was just released.
+  ##
+  ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
+  ##
+  ##  ``button``  Joystick button ID.
+  ##
+  if not joyIsOpened(joystick):
+    return false
+  if joystick >= 0:
+    return button in joysticks[joystick].released
+  else:
+    for j in joysticks.opened:
+      if j.released[button] > 0:
+        return true
+    return false
+
+
+proc joyAxis*(joystick: int, axis: int): JoyAxis =
+  ##  Get ``joystick`` ``axis`` current position.
+  ##
+  ##  ``joystick``  Joystick ID.
+  ##
+  ##  ``axis``  Joystick axis ID.
+  ##
+  if joystick < 0:
+    return 0
+  if not joyIsOpened(joystick):
+    return 0
+  let j = joysticks[joystick]
+  if axis >= j.numAxes:
+    return 0
+  return joystickGetAxis(j.joy, axis)
+
+
+proc joyBall*(joystick: int, ball: int): JoyBall =
+  ##  Get ``joystick`` ``ball`` axis change since the last poll.
+  ##
+  ##  ``joystick``  Joystick ID.
+  ##
+  ##  ``ball``  Joystick ball ID.
+  ##
+  if joystick < 0:
+    return (0, 0)
+  if not joyIsOpened(joystick):
+    return (0, 0)
+  let j = joysticks[joystick]
+  if ball >= j.numBalls:
+    return (0, 0)
+  var dx, dy: cint
+  if joystickGetBall(j.joy, ball, addr(dx), addr(dy)) != 0:
+    return (0, 0)
+  return (dx.int, dy.int)
+
+
+proc joyHat*(joystick: int, hat: int): JoyHat =
+  ##  Get ``joystick`` ``hat`` current position.
+  ##
+  ##  ``joystick``  Joystick ID.
+  ##
+  ##  ``hat`` Joystick hat ID.
+  ##
+  if joystick < 0:
+    return HatCentered
+  if not joyIsOpened(joystick):
+    return HatCentered
+  let j = joysticks[joystick]
+  if hat >= j.numHats:
+    return HatCentered
+  return joystickGetHat(j.joy, hat)
+
+

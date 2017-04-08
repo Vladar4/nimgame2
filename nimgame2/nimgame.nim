@@ -390,6 +390,7 @@ proc run*(game: Game) =
     # Events handling
     initKeyboard()
     initMouse()
+    initJoysticks()
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
@@ -398,14 +399,16 @@ proc run*(game: Game) =
       else:
         updateKeyboard(event)
         updateMouse(event)
+        updateJoysticks(event)
         game.fScene.event(event)
-
 
     # Update
     var updateCounter = 0
     while lag >= updateInterval:
       if not gamePaused:
         game.fScene.update(updateIntervalSec)
+        # joysticks
+        initJoysticks()
       lag -= updateInterval
       inc(updateCounter)
 
