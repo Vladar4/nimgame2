@@ -387,10 +387,23 @@ proc run*(game: Game) =
     timePrev = timeCurr
     lag += elapsed
 
+    # Update
+    var updateCounter = 0
+    while lag >= updateInterval:
+      if not gamePaused:
+        game.fScene.update(updateIntervalSec)
+        # clear inputs after the first loop
+        initKeyboard()
+        initMouse()
+        initJoysticks()
+      lag -= updateInterval
+      inc(updateCounter)
+
+    # Update playlist
+    if not (playlist == nil):
+      playlist.update()
+
     # Events handling
-    initKeyboard()
-    initMouse()
-    initJoysticks()
     var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
@@ -401,20 +414,6 @@ proc run*(game: Game) =
         updateMouse(event)
         updateJoysticks(event)
         game.fScene.event(event)
-
-    # Update
-    var updateCounter = 0
-    while lag >= updateInterval:
-      if not gamePaused:
-        game.fScene.update(updateIntervalSec)
-        # joysticks
-        initJoysticks()
-      lag -= updateInterval
-      inc(updateCounter)
-
-    # Update playlist
-    if not (playlist == nil):
-      playlist.update()
 
     # Limit FPS
     if fpsLimit > 0:
