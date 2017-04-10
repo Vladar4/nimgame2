@@ -291,7 +291,7 @@ template toggleCursor*() =
 #==========#
 
 export
-  sdl.numJoysticks, sdl.HatPosition
+  sdl.numJoysticks, sdl.HatPosition, sdl.JoystickGUID
 
 
 type
@@ -301,6 +301,7 @@ type
 
   Joystick = ref object
     joy: sdl.Joystick
+    guid: sdl.JoystickGUID
     numButtons, numAxes, numBalls, numHats: int
     pressed, released: array[uint8.high, int]
 
@@ -308,7 +309,7 @@ var
   joysticks: seq[Joystick]
 
 
-proc joyIsOpened(id: int): bool =
+proc joyIsOpened*(id: int): bool =
   if id >= 0:
     if joysticks.high < id:
       return false
@@ -326,6 +327,22 @@ iterator opened(joys: seq[Joystick]): Joystick =
     yield joys[i]
 
 
+proc getId*(guid: JoystickGUID): int =
+  ##  ``Return`` the index of a joystick with a corresponding ``guid``,
+  ##  or `-1` otherwise.
+  ##
+  for i in 0..joysticks.high:
+    if not (joysticks[i] == nil):
+      if joysticks[i].guid == guid:
+        return i
+  return -1
+
+
+proc joyGuid*(id: int): JoystickGUID {.inline.} =
+  if joyIsOpened(id):
+    return joysticks[id].guid
+
+
 proc openJoystick*(id: int): bool =
   let joy = joystickOpen(id)
   if joy == nil:
@@ -333,6 +350,7 @@ proc openJoystick*(id: int): bool =
   # init a new joystick
   let newJoystick = new Joystick
   newJoystick.joy = joy
+  newJoystick.guid = joystickGetGUID(joy)
   newJoystick.numButtons = joystickNumButtons(joy)
   newJoystick.numAxes = joystickNumAxes(joy)
   newJoystick.numBalls = joystickNumBalls(joy)
@@ -425,7 +443,7 @@ proc joyNumHats*(joystick: int): int {.inline.} =
   joysticks[joystick].numHats
 
 
-proc joyDown*(joystick: int, button: uint8): bool =
+proc joyDown*(joystick: int, button: int): bool =
   ##  Check if ``joystick`` ``button`` is down.
   ##
   ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
@@ -435,15 +453,19 @@ proc joyDown*(joystick: int, button: uint8): bool =
   if not joyIsOpened(joystick):
     return false
   if joystick >= 0:
-    return joysticks[joystick].joy.joystickGetButton(button.cint) > 0
+    if button < joysticks[joystick].numButtons:
+      return joysticks[joystick].joy.joystickGetButton(button) > 0
+    else:
+      return false
   else:
     for j in joysticks.opened:
-      if j.joy.joystickGetButton(button.cint) > 0:
-        return true
+      if button < j.numButtons:
+        if j.joy.joystickGetButton(button) > 0:
+          return true
     return false
 
 
-proc joyPressed*(joystick: int, button: uint8): bool =
+proc joyPressed*(joystick: int, button: int): bool =
   ##  Check if ``joystick`` ``button`` was just pressed.
   ##
   ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
@@ -453,15 +475,19 @@ proc joyPressed*(joystick: int, button: uint8): bool =
   if not joyIsOpened(joystick):
     return false
   if joystick >= 0:
-    return button in joysticks[joystick].pressed
+    if button < joysticks[joystick].numButtons:
+      return button in joysticks[joystick].pressed
+    else:
+      return false
   else:
     for j in joysticks.opened:
-      if j.pressed[button] > 0:
-        return true
+      if button < j.numButtons:
+        if j.pressed[button] > 0:
+          return true
     return false
 
 
-proc joyReleased*(joystick: int, button: uint8): bool =
+proc joyReleased*(joystick: int, button: int): bool =
   ##  Check if ``joystick`` ``button`` was just released.
   ##
   ##  ``joystick``  Joystick ID, or `-1` to check every opened joystick.
@@ -471,11 +497,15 @@ proc joyReleased*(joystick: int, button: uint8): bool =
   if not joyIsOpened(joystick):
     return false
   if joystick >= 0:
-    return button in joysticks[joystick].released
+    if button < joysticks[joystick].numButtons:
+      return button in joysticks[joystick].released
+    else:
+      return false
   else:
     for j in joysticks.opened:
-      if j.released[button] > 0:
-        return true
+      if button < j.numButtons:
+        if j.released[button] > 0:
+          return true
     return false
 
 
@@ -531,5 +561,4 @@ proc joyHat*(joystick: int, hat: int): JoyHat =
   if hat >= j.numHats:
     return HatCentered
   return joystickGetHat(j.joy, hat)
-
 
