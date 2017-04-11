@@ -182,6 +182,29 @@
     # Mouse buttons (Button enum): left, middle, right, x1, x2
 </pre></div>
 
+
+<div class="snippet" id="joystick_input"><h3>Joystick Input</h3>
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+    for i in 0..&lt;numJoysticks():
+      discard openJoystick(i)
+
+    scene.joy = 0
+
+  # somewhere in the update method
+
+    let move = 100 * elapsed / JoyAxis.high.float
+    scene.player.pos.x += scene.joy.joyAxis(0).float * move
+    scene.player.pos.y += scene.joy.joyAxis(1).float * move
+
+    # the button was pressed
+    if scene.joy.joyPressed(0): scene.player.startCharging()
+    # the button was released
+    if scene.joy.joyReleased(0): scene.player.discharge()
+</pre></div>
+
+
 <div class="snippet" id="init_sprite"><h3>Sprite Initialization</h3>
 <pre class="prettyprint">
   # somewhere in the entity initialization routine

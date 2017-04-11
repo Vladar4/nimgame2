@@ -43,12 +43,13 @@ method render*(jp: JoyPoint) =
     jp.flip)
 
 
-const move = 10.0
+const Speed = 100
 
 method update*(jp: JoyPoint, elapsed: float) =
+  let move = Speed * elapsed / JoyAxis.high.float
   jp.updateEntity(elapsed)
-  jp.pos.x += jp.joy.joyAxis(0) / JoyAxis.high * move
+  jp.pos.x += jp.joy.joyAxis(0).float * move
   jp.pos.x = clamp(jp.pos.x, 0.0, game.size.w.float)
-  jp.pos.y += jp.joy.joyAxis(1) / JoyAxis.high * move
+  jp.pos.y += jp.joy.joyAxis(1).float * move
   jp.pos.y = clamp(jp.pos.y, 0.0, game.size.h.float)
 
