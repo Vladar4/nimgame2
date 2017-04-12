@@ -143,12 +143,15 @@ noscript {
     color: maroon;
 }
 
-.snippet {
+.snippet, .section {
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
-    border: 1px solid #999;
     margin-bottom: 1rem;
+}
+
+.snippet {
+    border: 1px solid #999;
 }
 
 .docs div:first-of-type {
@@ -208,6 +211,10 @@ a[href*="mailto"] {
     background: url('images/icons/checkn.png') no-repeat 0 0.1rem;
     background-size: 1rem 1rem;
     padding-left: 1.5rem;
+}
+
+.star {
+    width: 1rem;
 }
 
 hr {

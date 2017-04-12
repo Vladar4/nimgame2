@@ -105,11 +105,11 @@ function createFooter() {
 }
 
 /**
- *  Fill <aside> with .snippet class links.
+ *  Fill <aside> with @param cname snippet class links.
  */
-function createSnippetsList() {
+function createClassList(cname) {
     document.querySelector('body').id = 'top';
-    var list = document.querySelectorAll('.snippet');
+    var list = document.querySelectorAll(cname);
 
     for(var i = 0; i < list.length; i++) {
         var title = list[i].childNodes[0];
@@ -143,6 +143,15 @@ function createSnippetsList() {
         aside.style.display = 'flex';
         aside.appendChild(line);
     }
+}
+
+
+function createSnippetsList() {
+    createClassList('.snippet')
+}
+
+function createSectionsList() {
+    createClassList('.section')
 }
 
 
@@ -232,6 +241,27 @@ function createDocsLinks() {
     fillListColumn(col1, 0, oneThird);
     fillListColumn(col2, oneThird, twoThirds);
     fillListColumn(col3, twoThirds, docsList.length);
+}
+
+
+function createRanks() {
+    var list = document.querySelectorAll('.rank');
+    for(i = 0; i < list.length; i++) {
+        var attr_is = list[i].getAttribute('is');
+        var attr_of = list[i].getAttribute('of');
+        for(n = 0; n < attr_is; n++) {
+            var starf = document.createElement('img');
+            starf.classList.add('star');
+            starf.src = 'images/icons/starf.png';
+            list[i].appendChild(starf);
+        }
+        for(m = 0; m < (attr_of - attr_is); m++) {
+            var stare = document.createElement('img');
+            stare.classList.add('star');
+            stare.src = 'images/icons/stare.png';
+            list[i].appendChild(stare);
+        }
+    }
 }
 
 
