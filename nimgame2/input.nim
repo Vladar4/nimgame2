@@ -22,6 +22,7 @@
 # Vladar vladar4@gmail.com
 
 import
+  strutils,
   sdl2/sdl,
   types
 
@@ -231,10 +232,18 @@ template down*(button: int32, state: MouseState = mBtn): bool =
   (sdl.button(button) and state) > 0
 
 
+template down*(button: MouseButton, state: MouseState = mBtn): bool =
+  down(int32(button), state)
+
+
 template pressed*(button: int32): bool =
   ##  Check if mouse ``button`` was just pressed.
   ##
   (sdl.button(button) and mPressed) > 0
+
+
+template pressed*(button: MouseButton): bool =
+  pressed(int32(button))
 
 
 template released*(button: int32): bool =
@@ -243,16 +252,28 @@ template released*(button: int32): bool =
   (sdl.button(button) and mReleased) > 0
 
 
+template released*(button: MouseButton): bool =
+  released(int32(button))
+
+
 template clearPressed*(button: int32) =
   ##  Remove ``button`` from pressed buttons list.
   ##
   mPressed.set(button, false)
 
 
+template clearPressed*(button: MouseButton) =
+  clearPressed(int32(button))
+
+
 template clearReleased*(button: int32) =
   ##  Remove ``button`` from released buttons list.
   ##
   mReleased.set(button, false)
+
+
+template clearReleased*(button: MouseButton) =
+  clearReleased(int32(button))
 
 
 template mbState*(): MouseState =
@@ -561,4 +582,218 @@ proc joyHat*(joystick: int, hat: int): JoyHat =
   if hat >= j.numHats:
     return HatCentered
   return joystickGetHat(j.joy, hat)
+
+
+#===============#
+# General Input #
+#===============#
+
+import
+  tables
+
+
+export
+  tables
+
+
+type
+  GeneralInputKeyboard* = object
+    key*: Scancode
+
+  GeneralInputDirection* = enum dirX, dirY
+
+  GeneralInputMouseKind* = enum mButton, mMove
+  GeneralInputMouse* = object
+    case kind*: GeneralInputMouseKind
+    of mButton: button*: MouseButton
+    of mMove: direction*: GeneralInputDirection
+
+  GeneralInputJoystickKind* = enum jButton, jAxis, jBall, jHat
+  GeneralInputJoystick* = object
+    guid*: JoystickGUID
+    case kind*: GeneralInputJoystickKind
+    of jButton: button*: int
+    of jAxis: axis*: int
+    of jBall:
+      ball*: int
+      ballDirection*: GeneralInputDirection
+    of jHat:
+      hat*: int
+      hatPosition*: HatPosition
+
+  GeneralInputKind* = enum giKeyboard, giMouse, giJoystick
+  GeneralInput* = object
+    case kind*: GeneralInputKind
+    of giKeyboard:
+      keyboard: GeneralInputKeyboard
+    of giMouse:
+      mouse: GeneralInputMouse
+    of giJoystick:
+      joystick: GeneralInputJoystick
+
+  InputMap* = OrderedTableRef[string, GeneralInput]
+
+
+proc newInputMap*(): InputMap =
+  new result
+  result[] = initOrderedTable[string, GeneralInput]()
+
+
+proc addKey*(map: InputMap, name: string,
+             key: Scancode) {.inline.} =
+  map[name] = GeneralInput(kind: giKeyboard,
+    keyboard: GeneralInputKeyboard(
+      key: key))
+
+
+proc addMouseButton*(map: InputMap, name: string,
+                     button: MouseButton) {.inline.} =
+  map[name] = GeneralInput(kind: giMouse,
+    mouse: GeneralInputMouse(
+      kind: mButton, button: button))
+
+
+proc addMouseMove*(map: InputMap, name: string,
+                   direction: GeneralInputDirection) {.inline.} =
+  map[name] = GeneralInput(kind: giMouse,
+    mouse: GeneralInputMouse(
+      kind: mMove, direction: direction))
+
+
+proc addJoyButton*(map: InputMap, name: string, guid: JoystickGUID,
+                   button: int) {.inline.} =
+  map[name] = GeneralInput(kind: giJoystick,
+    joystick: GeneralInputJoystick(
+      guid: guid, kind: jButton, button: button))
+
+
+proc addJoyAxis*(map: InputMap, name: string, guid: JoystickGUID,
+                 axis: int) {.inline.} =
+  map[name] = GeneralInput(kind: giJoystick,
+    joystick: GeneralInputJoystick(
+      guid: guid, kind: jAxis, axis: axis))
+
+
+proc addJoyBall*(map: InputMap, name: string, guid: JoystickGUID,
+                 ball: int, ballDirection: GeneralInputDirection) {.inline.} =
+  map[name] = GeneralInput(kind: giJoystick,
+    joystick: GeneralInputJoystick(
+      guid: guid, kind: jBall, ball: ball, ballDirection: ballDirection))
+
+
+proc addJoyHat*(map: InputMap, name: string, guid: JoystickGUID,
+                hat: int, hatPosition: HatPosition) {.inline.} =
+  map[name] = GeneralInput(kind: giJoystick,
+    joystick: GeneralInputJoystick(
+      guid: guid, kind: jHat, hat: hat, hatPosition: hatPosition))
+
+
+proc `$`*(gi: GeneralInput): string =
+  return case gi.kind:
+    of giKeyboard: "KEY_" & toUpper($getScancodeName(gi.keyboard.key))
+    of giMouse:
+      case gi.mouse.kind:
+      of mButton: "MB_" & toUpper($gi.mouse.button)
+      of mMove: "MMOVE_" & (
+        case gi.mouse.direction:
+        of dirX: "X"
+        of dirY: "Y")
+    of giJoystick:
+      let id = gi.joystick.guid.getId()
+      "JOY" & $id & "_" & (case gi.joystick.kind:
+        of jButton: $gi.joystick.button
+        of jAxis: "AXIS" & $gi.joystick.axis
+        of jBall: "BALL" & $gi.joystick.ball & "_" & (
+          case gi.joystick.ballDirection:
+          of dirX: "X"
+          of dirY: "Y")
+        of jHat: "HAT" & $gi.joystick.hat & "_" & (
+          case gi.joystick.hatPosition:
+          of HatCentered: "C"
+          of HatUp: "U"
+          of HatRight: "R"
+          of HatRightUp: "RU"
+          of HatDown: "D"
+          of HatRightDown: "RD"
+          of HatLeft: "L"
+          of HatLeftUp: "LU"
+          of HatLeftDown: "LD"))
+
+
+proc down*(gi: GeneralInput): bool =
+  return case gi.kind:
+    of giKeyboard: gi.keyboard.key.down()
+    of giMouse:
+      case gi.mouse.kind:
+      of mButton: gi.mouse.button.down()
+      else: false
+    of giJoystick:
+      let id = gi.joystick.guid.getId()
+      if id < 0: false  # no such joystick opened
+      else:
+        case gi.joystick.kind:
+        of jButton:
+          joyDown(id, gi.joystick.button)
+        of jHat:
+          gi.joystick.hatPosition == joyHat(id, gi.joystick.hat)
+        else: false
+
+
+proc pressed*(gi: GeneralInput): bool =
+  return case gi.kind:
+    of giKeyboard: gi.keyboard.key.pressed()
+    of giMouse:
+      case gi.mouse.kind:
+      of mButton: gi.mouse.button.pressed()
+      else: false
+    of giJoystick:
+      let id = gi.joystick.guid.getId()
+      if id < 0: false  # no such joystick opened
+      else:
+        case gi.joystick.kind:
+        of jButton:
+          joyPressed(id, gi.joystick.button)
+        of jHat:
+          gi.joystick.hatPosition == joyHat(id, gi.joystick.hat)
+        else: false
+
+
+proc released*(gi: GeneralInput): bool =
+  return case gi.kind:
+    of giKeyboard: gi.keyboard.key.released()
+    of giMouse:
+      case gi.mouse.kind:
+      of mButton: gi.mouse.button.released()
+      else: false
+    of giJoystick:
+      let id = gi.joystick.guid.getId()
+      if id < 0: false  # no such joystick opened
+      else:
+        case gi.joystick.kind:
+        of jButton:
+          joyReleased(id, gi.joystick.button)
+        else: false
+
+
+proc movement*(gi: GeneralInput): int =
+  return case gi.kind:
+    of giMouse:
+      case gi.mouse.kind:
+      of mMove:
+        case gi.mouse.direction:
+        of dirX: mouse.rel.x.int
+        of dirY: mouse.rel.y.int
+      else: 0
+    of giJoystick:
+      let id = gi.joystick.guid.getId()
+      if id < 0: 0  # no such joystick opened
+      else:
+        case gi.joystick.kind:
+        of jAxis: joyAxis(id, gi.joystick.axis)
+        of jBall:
+          case gi.joystick.ballDirection:
+          of dirX: joyBall(id, gi.joystick.ball).dx
+          of dirY: joyBall(id, gi.joystick.ball).dy
+        else: 0
+    else: 0
 
