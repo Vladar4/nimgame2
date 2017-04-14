@@ -24,7 +24,7 @@
 import
   strutils,
   sdl2/sdl,
-  types
+  types, utils
 
 
 export
@@ -688,26 +688,29 @@ proc addJoyHat*(map: InputMap, name: string, guid: JoystickGUID,
       guid: guid, kind: jHat, hat: hat, hatPosition: hatPosition))
 
 
+const GISep = ' '
+template quoted(s: string): string = "\"" & s & "\""
 proc `$`*(gi: GeneralInput): string =
   return case gi.kind:
-    of giKeyboard: "KEY_" & toUpper($getScancodeName(gi.keyboard.key))
+    of giKeyboard:
+      "KEY" & GISep & toUpper($getScancodeName(gi.keyboard.key)).quoted
     of giMouse:
       case gi.mouse.kind:
-      of mButton: "MB_" & toUpper($gi.mouse.button)
-      of mMove: "MMOVE_" & (
+      of mButton: "MBTN" & GISep & toUpper($gi.mouse.button)
+      of mMove: "MMOVE" & GISep & (
         case gi.mouse.direction:
         of dirX: "X"
         of dirY: "Y")
     of giJoystick:
       let id = gi.joystick.guid.getId()
-      "JOY" & $id & "_" & (case gi.joystick.kind:
-        of jButton: $gi.joystick.button
-        of jAxis: "AXIS" & $gi.joystick.axis
-        of jBall: "BALL" & $gi.joystick.ball & "_" & (
+      "JOY" & GISep & $id & GISep & (case gi.joystick.kind:
+        of jButton: "BTN" & GISep & $gi.joystick.button
+        of jAxis: "AXIS" & GISep & $gi.joystick.axis
+        of jBall: "BALL" & GISep & $gi.joystick.ball & GISep & (
           case gi.joystick.ballDirection:
           of dirX: "X"
           of dirY: "Y")
-        of jHat: "HAT" & $gi.joystick.hat & "_" & (
+        of jHat: "HAT" & GISep & $gi.joystick.hat & GISep & (
           case gi.joystick.hatPosition:
           of HatCentered: "C"
           of HatUp: "U"
@@ -718,6 +721,117 @@ proc `$`*(gi: GeneralInput): string =
           of HatLeft: "L"
           of HatLeftUp: "LU"
           of HatLeftDown: "LD"))
+
+
+proc load*(map: InputMap, filename: string): bool =
+  result = true
+  let csv = loadCSV[string](filename,
+                            proc(input: string): string = input,
+                            GISep)
+  if csv.len < 1:
+    return false
+
+  var
+    count = 0
+    ids: seq[int] = @[]
+    guids: seq[JoystickGUID] = @[]
+
+  for line in csv:
+    if line.len < 3:
+      continue
+    if line[0] == "JOY": # joystick GUID definition
+      if line.len < 4: continue
+      if line[2] != "GUID": continue
+      let id = (try: line[1].parseInt except: -1)
+      if id < 0: continue
+      let guid = joystickGetGUIDFromString(line[3])
+      ids.add(id)
+      guids.add(guid)
+      continue
+
+    let name = line[0]
+    case line[1]:
+    of "KEY":
+      let code = getScancodeFromName(line[2])
+      if code == ScancodeUnknown: continue
+      map.addKey(name, code)
+
+    of "MBTN":
+      case line[2]:
+      of "LEFT": map.addMouseButton(name, MouseButton.left)
+      of "MIDDLE": map.addMouseButton(name, MouseButton.middle)
+      of "RIGHT": map.addMouseButton(name, MouseButton.right)
+      of "X1": map.addMouseButton(name, MouseButton.x1)
+      of "X2": map.addMouseButton(name, MouseButton.x2)
+      else: continue
+
+    of "MMOVE":
+      case line[2]:
+      of "X": map.addMouseMove(name, dirX)
+      of "Y": map.addMouseMove(name, dirY)
+      else: continue
+
+    of "JOY":
+      if line.len < 5: continue
+      let id = (try: line[2].parseInt except: -1)
+      if id < 0: continue
+      let i = ids.find(id)
+      if i < 0: continue
+      let guid = guids[i]
+      let value = (try: line[4].parseInt except: -1)
+      if value < 0: continue
+      case line[3]:
+      of "BTN": map.addJoyButton(name, guid, value)
+      of "AXIS": map.addJoyAxis(name, guid, value)
+      of "BALL":
+        if line.len < 6: continue
+        case line[5]:
+        of "X": map.addJoyBall(name, guid, value, dirX)
+        of "Y": map.addJoyBall(name, guid, value, dirY)
+        else: continue
+      of "HAT":
+        if line.len < 6: continue
+        case line[5]:
+        of "C":   map.addJoyHat(name, guid, value, HatCentered)
+        of "U":   map.addJoyHat(name, guid, value, HatUp)
+        of "R":   map.addJoyHat(name, guid, value, HatRight)
+        of "RU":  map.addJoyHat(name, guid, value, HatRightUp)
+        of "D":   map.addJoyHat(name, guid, value, HatDown)
+        of "RD":  map.addJoyHat(name, guid, value, HatRightDown)
+        of "L":   map.addJoyHat(name, guid, value, HatLeft)
+        of "LU":  map.addJoyHat(name, guid, value, HatLeftUp)
+        of "LD":  map.addJoyHat(name, guid, value, HatLeftDown)
+        else: continue
+      else: continue
+    else:
+      continue
+
+    inc count
+
+  if count < 1:
+    return false
+
+
+proc save*(map: InputMap, filename: string): bool =
+  result = true
+  var f: File
+  if not f.open(filename, fmWrite):
+    return false
+  var guids: seq[JoystickGUID] = @[]
+  for pair in map.pairs:
+    if pair[1].kind == giJoystick:
+      if pair[1].joystick.guid notin guids:
+        f.write("JOY" & GISep)
+        f.write($pair[1].joystick.guid.getId() & GISep)
+        f.write("GUID" & GISep)
+        var s = alloc0(33 * sizeof(cchar))
+        pair[1].joystick.guid.joystickGetGUIDString(cast[cstring](s), 33)
+        f.write($cast[cstring](s) & "\n")
+        s.dealloc()
+        guids.add(pair[1].joystick.guid)
+    f.write(pair[0].quoted & GISep)
+    f.write($pair[1] & "\n")
+  f.close()
 
 
 proc down*(gi: GeneralInput): bool =
