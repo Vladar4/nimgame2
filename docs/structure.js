@@ -244,21 +244,33 @@ function createDocsLinks() {
 }
 
 
+function rankName(level) {
+    switch(level) {
+        case '1': return 'simple';
+        case '2': return 'advanced';
+        case '3': return 'difficult';
+        default: return '';
+    }
+}
+
 function createRanks() {
+    const max = 3;
     var list = document.querySelectorAll('.rank');
     for(i = 0; i < list.length; i++) {
-        var attr_is = list[i].getAttribute('is');
-        var attr_of = list[i].getAttribute('of');
-        for(n = 0; n < attr_is; n++) {
+        var level = list[i].getAttribute('level');
+        var name = rankName(level);
+        for(n = 0; n < level; n++) {
             var starf = document.createElement('img');
             starf.classList.add('star');
             starf.src = 'images/icons/starf.png';
+            starf.title = name;
             list[i].appendChild(starf);
         }
-        for(m = 0; m < (attr_of - attr_is); m++) {
+        for(m = 0; m < (max - level); m++) {
             var stare = document.createElement('img');
             stare.classList.add('star');
             stare.src = 'images/icons/stare.png';
+            stare.title = name;
             list[i].appendChild(stare);
         }
     }

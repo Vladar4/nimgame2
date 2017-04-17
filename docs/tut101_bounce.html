@@ -24,17 +24,267 @@
 
 <div class="section" id="introduction"><h3>Introduction</h3>
 
-<pre class="prettyprint">
+</div>
 
-</pre></div>
+<div class="section" id="assets"><h3>Assets</h3>
+    <p>
+        For any basic game you'll need three basic kinds of assets:
+    </p>
+    <ul>
+        <li>fonts</li>
+        <li>graphics</li>
+        <li>sounds</li>
+    </ul>
+    <p>
+        So, the assets directory of the game will be structured as showed here:
+    </p>
+<pre>
+    ./data/
+      |
+      |-- fnt/
+      |-- gfx/
+      |-- sfx/
+</pre>
+    <p>
+        For rendering all text in the game we will use good old <a href="http://fixedsysexcelsior.com/" target="_blank">Fixedsys Excelsior</a> (at "data/fnt").
+    </p>
+    <p>
+        We will need just two graphic assets here: the ball and the paddle (at "data/gfx").
+    </p>
+    <p class="centered">
+        <span><img src="images/tut101_bounce/ball.png"
+             alt="Ball graphic asset"
+             title="Ball"
+        /></span><span>
+        <img src="images/tut101_bounce/paddle.png"
+             alt="Paddle graphic asset"
+             title="Paddle"
+        /></span>
+    </p>
+    <p>
+        As for the sounds, we will not worry about it for now.
+    </p>
+</div>
+
+
+<div class="section" id="starting"><h3>Starting to Code</h3>
+
+    <p>
+        All source code will be placed into the "src" directory. Let's start with a file for storing constants and variables that might be accessed from different points of the game.
+    </p>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    scene,
+    types,
+  ]
+
+
+const
+  GameWidth* = 640
+  GameHeight* = 360
+  GameTitle* = "Nimgame 2 Bounce"
+
+
+var
+  titleScene*, mainScene*: Scene
+
+</pre>
+
+    <p>
+        As you can see, we will have two game scenes: title and main one. We will create a souce file for each of them.
+    </p>
+
+<h4>title.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    nimgame,
+    scene,
+    types,
+  ],
+  data
+
+
+type
+  TitleScene = ref object of Scene
+
+
+proc init*(scene: TitleScene) =
+  init Scene(scene)
+
+
+proc free*(scene: TitleScene) =
+  discard
+
+
+proc newTitleScene*(): TitleScene =
+  new result, free
+  init result
+
+
+method event*(scene: TitleScene, event: Event) =
+  if event.kind == KeyDown:
+    game.scene = mainScene
+
+</pre>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    scene,
+  ],
+  data
+
+
+type
+  MainScene = ref object of Scene
+
+
+proc init*(scene: MainScene) =
+  init Scene(scene)
+
+
+proc free*(scene: MainScene) =
+  discard
+
+
+proc newMainScene*(): MainScene =
+  new result, free
+  init result
+
+
+method show*(scene: MainScene) =
+  echo "Switched to MainScene"
+
+</pre>
+
+    <p>
+        And, finally, we'll create a main source file:
+    </p>
+
+<h4>bounce.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    nimgame,
+    settings,
+    types,
+  ],
+  data,
+  title,
+  main
+
+
+game = newGame()
+if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
+
+  # Init
+  game.setResizable(true) # Window could be resized
+  game.minSize = (GameWidth, GameHeight) # Minimal window size
+  game.windowSize = (GameWidth * 2, GameHeight * 2) # Double scaling (1280x720)
+  game.centrify() # Place window at the center of the screen
+
+  # Create scenes
+  titleScene = newTitleScene()
+  mainScene = newMainScene()
+
+  # Run
+  game.scene = titleScene # Initial scene
+  run game  # Let's go!
+
+</pre>
+
+    <p>
+        During the process of development we will rebuild the game constantly, so let's create some basic scripts for that:
+    </p>
+
+<h4>build.debug.sh</h4>
+<pre class="prettyprint">
+    #!/bin/sh
+    cd src
+    nim c --out:../ng2bounce bounce.nim
+    cd ..
+</pre>
+
+<h4>build.release.sh</h4>
+<pre class="prettyprint">
+    #!/bin/sh
+    cd src
+    nim c --out:../ng2bounce -d:release --opt:speed bounce.nim
+    rm -rf nimcache
+    cd ..
+</pre>
+
+    <p>
+        Or, if you are working on Windows:
+    </p>
+
+<h4>build.debug.bat</h4>
+<pre class="prettyprint">
+    cd src
+    nim c --out:..\ng2bounce.exe bounce.nim
+    cd ..
+</pre>
+
+<h4>build.release.bat</h4>
+<pre class="prettyprint">
+    cd src
+    nim c --out:..\ng2bounce -d:release --opt:speed --app:gui bounce.nim
+    rmdir /s /q nimcache
+    cd ..
+</pre>
+
+    <p>
+        So, at this moment, our directory structure will look like this:
+    </p>
+
+<pre>
+    ./ng2bounce/
+      |
+      |-- build.debug.sh
+      |-- build.release.sh
+      |
+      |-- data/
+      |     |
+      |     |-- fnt/
+      |     |     |
+      |     |     |-- FSEX300.ttf
+      |     |
+      |     |-- gfx/
+      |     |     |
+      |     |     |-- ball.png
+      |     |     |-- paddle.png
+      |     |
+      |     |-- sfx/
+      |
+      |-- src/
+            |
+            |-- bounce.nim
+            |-- data.nim
+            |-- main.nim
+            |-- title.nim
+</pre>
+
+    <p>
+        When we run our "build.debug.sh" script, we should get an executalbe "ng2bounce" that just shows a black screen and, when any keyboard key is pressed, outputs a "Switched to MainScene" message to the console.
+    </p>
+
+</div>
 
 <!--
 
 <div class="section" id=""><h3></h3>
 
+<h4></h4>
 <pre class="prettyprint">
 
-</pre></div>
+</pre>
+</div>
 
 -->
 

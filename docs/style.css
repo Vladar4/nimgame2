@@ -129,6 +129,12 @@ h3 {
     font-size: 100%;
 }
 
+h4 {
+    font-size: 80%;
+    font-style: italic;
+    margin-bottom: 0rem;
+}
+
 hr {
     width: 100%;
 }
@@ -192,6 +198,11 @@ a[href*="mailto"] {
     background: url('images/icons/email.png') no-repeat 100% 0;
     background-size: 1rem;
     padding-right: 1.25rem;
+}
+
+p {
+    margin-top: 1rem;
+    margin-bottom: 0rem;
 }
 
 .checklist {
