@@ -26,6 +26,7 @@
 
 </div>
 
+
 <div class="section" id="assets"><h3>Assets</h3>
     <p>
         For any basic game you'll need three basic kinds of assets:
@@ -276,6 +277,119 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 
 </div>
 
+
+<div class="section" id="titlescreen"><h3>Title Screen</h3>
+
+    <p>
+        We'll start with populating the title screen. There will be two text graphics: the title of the game and a subtitle hint under it.
+    </p>
+
+    <p>
+        To render any text we need to load our font first.
+    </p>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    font,
+    ...
+    truetypefont,
+    ...
+  ]
+
+...
+
+var
+  defaultFont*, bigFont*: TrueTypeFont
+
+
+proc loadData*() =
+  defaultFont = newTrueTypeFont()
+  if not defaultFont.load("data/fnt/FSEX300.ttf", 16):
+    echo "ERROR: Can't load font"
+  bigFont = newTrueTypeFont()
+  if not bigFont.load("data/fnt/FSEX300.ttf", 32):
+    echo "ERROR: Can't load font"
+
+
+proc freeData*() =
+  defaultFont.free()
+  bigFont.free()
+
+</pre>
+
+    <p>
+        We will call the loading procedure from our main file.
+    </p>
+
+<h4>bounce.nim</h4>
+<pre class="prettyprint">
+...
+
+loadData() # Call it before any scene initialization
+
+# Create scenes
+...
+
+</pre>
+
+    <p>
+        And finally, we will create our entities in TitleScene's <b>init()</b> procedure.
+    </p>
+
+<h4>title.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    entity,
+    font,
+    ...
+    textgraphic,
+    ...
+  ],
+  ...
+
+proc init*(scene: TitleScene) =
+  ...
+
+  # Create a title text graphic with a big font
+  let titleText = newTextGraphic(bigFont)
+  titleText.setText GameTitle # Set the text to render
+
+  let title = newEntity() # Create a title entity
+  title.graphic = titleText # Assign the title text graphic
+  title.centrify() # Set the origin point to the graphic's center
+  title.pos = (GameWidth / 2, GameHeight / 3) # Set title position on screen
+  scene.add title # Add title entity to the scene
+
+  # Create a subtitle text graphic with a default font
+  let subtitleText = newTextGraphic(defaultFont)
+  subtitleText.setText "Press any key to start" # Set the text
+
+  let subtitle = newEntity() # Create a subtitle entity
+  subtitle.graphic = subtitleText # Assign the subtitle text graphic
+  subtitle.centrify() # Set the origin point to the graphic's center
+  subtitle.pos = game.size / 2 # Place to the center of the screen
+  scene.add subtitle # Add subtitle entity to the scene
+
+  ...
+
+</pre>
+
+    <p>
+        After running the game we should see this screen:
+    </p>
+
+    <p>
+        <img src="images/tut101_bounce/titlescene.png"
+             alt="TitleScene screenshot"
+             title="TitleScene screenshot"
+        />
+    </p>
+
+</div>
 <!--
 
 <div class="section" id=""><h3></h3>
