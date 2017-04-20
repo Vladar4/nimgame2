@@ -302,6 +302,7 @@ import
 ...
 
 var
+  ...
   defaultFont*, bigFont*: TrueTypeFont
 
 
@@ -390,6 +391,51 @@ proc init*(scene: TitleScene) =
     </p>
 
 </div>
+
+
+<div class="section" id="loadingassets"><h3>Loading Assets</h3>
+
+    <p>
+        Though we only have two graphic assets now it is surelly an overkill to use an asset manager, but it is a good opportunity to gave an example of its usage.
+    </p>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    texturegraphic,
+    ...
+  ]
+
+...
+
+var
+  ...
+  gfxData*:Assets[TextureGraphic]
+
+
+proc loadData*() =
+  ...
+
+  gfxData = newAssets[TextureGraphic](
+    "data/gfx",
+    proc(file: string): TextureGraphic = newTextureGraphic(file))
+
+
+proc freeData*() =
+  ...
+  for graphic in gfxData.values:
+    graphic.free()
+
+</pre>
+
+    <p>
+        As you can see, we pass two arguments to the asset manager constructor: a path to the assets, and a procedure to load them. The procedure recieves a file name and should return an object to be loaded in our collection.
+    </p>
+
+</div>
+
 <!--
 
 <div class="section" id=""><h3></h3>
