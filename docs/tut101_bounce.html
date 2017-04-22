@@ -434,6 +434,154 @@ proc freeData*() =
         As you can see, we pass two arguments to the asset manager constructor: a path to the assets, and a procedure to load them. The procedure recieves a file name and should return an object to be loaded in our collection.
     </p>
 
+    <p>
+        <b>Note:</b>Would you try to load any directory containing other types of files, the loading procedure will throw an error.
+    </p>
+
+</div>
+
+
+<div class="section" id="paddles"><h3>Paddles</h3>
+
+    <p>
+        Let's start with creating paddle entity. This object will represent players in this game.
+    </p>
+
+<h4>paddle.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    graphic,
+    input,
+    nimgame,
+    entity,
+  ],
+  data
+
+
+const
+  speed = 250.0 # Speed (in pixels per second)
+
+
+type
+  PaddlePlacement* = enum
+    ppLeft, ppRight
+
+  PaddleControl* = enum
+    pcPlayer1, pcPlayer2
+
+  Paddle* = ref object of Entity
+    control*: PaddleControl
+
+</pre>
+
+    <p>
+        As you can see, two enums represent paddle position and how it will be controlled.
+    </p>
+
+<h4>paddle.nim</h4>
+<pre class="prettyprint">
+...
+
+proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
+  paddle.initEntity()
+  paddle.graphic = gfxData["paddle"]
+  paddle.centrify() # Set the center point offset
+
+  # Set position
+  paddle.pos = case placement:
+    of ppLeft: (paddle.graphic.w.float, game.size.h / 2)
+    of ppRight: (float(game.size.w - paddle.graphic.w), game.size.h / 2)
+
+  paddle.control = control # Set control mode
+
+
+proc newPaddle*(placement: PaddlePlacement, control: PaddleControl): Paddle =
+  new result
+  result.init(placement, control)
+
+</pre>
+
+    <p>
+    As you see, for now we need to have only one param in our <b>Paddle</b> object&nbsp;— a control state, that we'll need in the <b>update()</b> method.
+    </p>
+
+<h4>paddle.nim</h4>
+<pre class="prettyprint">
+...
+
+method update*(paddle: Paddle, elapsed: float) =
+  var movement = speed * elapsed
+
+  # Read input
+  case paddle.control:
+  # First player
+  of pcPlayer1:
+    if ScancodeQ.down: paddle.pos.y -= movement # Move up
+    if ScancodeA.down: paddle.pos.y += movement # Move down
+  # Second player
+  of pcPlayer2:
+    if ScancodeUp.down: paddle.pos.y -= movement    # Move up
+    if ScancodeDown.down: paddle.pos.y += movement  # Move down
+
+  # Check for the screen borders
+  paddle.pos.y = clamp(
+    paddle.pos.y,
+    paddle.center.y,
+    game.size.h.float - paddle.center.y)
+
+</pre>
+
+    <p>
+        We calculate movement distance by multiplying the speed and time elapsed since previous update. Finally, don't forget to check for the screen borders.
+    </p>
+
+    <p>
+        Now we just need to add two <b>Paddle</b> entities into the main scene.
+    </p>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    scene,
+  ],
+  data,
+  paddle
+
+
+type
+  MainScene = ref object of Scene
+    leftPaddle, rightPaddle: Paddle
+
+
+proc init*(scene: MainScene) =
+  init Scene(scene)
+
+  # left paddle
+  scene.leftPaddle = newPaddle(ppLeft, pcPlayer1)
+  scene.add scene.leftPaddle
+
+  # right paddle
+  scene.rightPaddle = newPaddle(ppRight, pcPlayer2)
+  scene.add scene.rightPaddle
+
+...
+
+</pre>
+
+    <p>
+        Now the main scene should look like this:
+    </p>
+
+    <p>
+        <img src="images/tut101_bounce/paddles.png"
+             alt="Paddles screenshot"
+             title="Paddles screenshot"
+        />
+    </p>
+
 </div>
 
 <!--
