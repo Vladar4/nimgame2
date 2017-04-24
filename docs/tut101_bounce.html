@@ -50,7 +50,7 @@
         For rendering all text in the game we will use good old <a href="http://fixedsysexcelsior.com/" target="_blank">Fixedsys Excelsior</a> (at "data/fnt").
     </p>
     <p>
-        We will need just two graphic assets here: the ball and the paddle (at "data/gfx").
+        We will need just two graphic assets here: the ball and the paddle (at &quot;data/gfx&quot;).
     </p>
     <p class="centered">
         <span><img src="images/tut101_bounce/ball.png"
@@ -71,7 +71,7 @@
 <div class="section" id="starting"><h3>Starting to Code</h3>
 
     <p>
-        All source code will be placed into the "src" directory. Let's start with a file for storing constants and variables that might be accessed from different points of the game.
+        All source code will be placed into the &quot;src&quot; directory. Let's start with a file for storing constants and variables that might be accessed from different points of the game.
     </p>
 
 <h4>data.nim</h4>
@@ -272,7 +272,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 </pre>
 
     <p>
-        When we run our "build.debug.sh" script, we should get an executalbe "ng2bounce" that just shows a black screen and, when any keyboard key is pressed, outputs a "Switched to MainScene" message to the console.
+        When we run our &quot;build.debug.sh&quot; script, we should get an executalbe &quot;ng2bounce&quot; that just shows a black screen and, when any keyboard key is pressed, outputs a &quot;Switched to MainScene&quot; message to the console.
     </p>
 
 </div>
@@ -396,7 +396,7 @@ proc init*(scene: TitleScene) =
 <div class="section" id="loadingassets"><h3>Loading Assets</h3>
 
     <p>
-        Though we only have two graphic assets now it is surelly an overkill to use an asset manager, but it is a good opportunity to gave an example of its usage.
+        Though we only have two graphic assets now it is surelly an overkill to use an asset manager, but it is a good opportunity to give an example of its usage.
     </p>
 
 <h4>data.nim</h4>
@@ -582,6 +582,142 @@ proc init*(scene: MainScene) =
         />
     </p>
 
+</div>
+
+
+<div class="section" id="colliders"><h3>Colliders</h3>
+
+    <p>
+        To detect collisions between the ball and paddles we need to init colliders for these entities. All collider counstructor accept a parent entity reference, center point offset, and collider dimensions that depend on a particular collider type. We will use a simple box collider for our paddles.
+    </p>
+
+<h4>paddle.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    collider,
+    ...
+  ],
+  ...
+
+
+proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
+  ...
+
+  # Collisions
+  paddle.tags.add "paddle"
+  paddle.collider = paddle.newBoxCollider((0.0, 0.0), paddle.graphic.dim)
+  paddle.collider.tags.add "ball"
+
+...
+
+</pre>
+
+    <p>
+        The &quot;paddle&quot; and &quot;ball&quot; tags will be used to filter out the collisions.
+    </p>
+
+    <p>
+        Now we define a <b>Ball</b> entity the same way, but using the circle collider instead of a box one, passing the circle radius to its constructor.
+    </p>
+
+<h4>ball.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    collider,
+    entity,
+    graphic,
+    nimgame,
+    types,
+  ],
+  data
+
+
+type
+  Ball* = ref object of Entity
+
+
+proc reset*(ball: Ball) =
+  ball.pos = game.size / 2  # place to the center of the screen
+
+
+proc init*(ball: Ball) =
+  ball.initEntity()
+  ball.graphic = gfxData["ball"]
+  ball.centrify() # Set the center point offset
+  ball.reset()
+
+  # Collisions
+  ball.tags.add "ball"
+  ball.collider = ball.newCircleCollider((0.0, 0.0), ball.graphic.dim.w / 2)
+  ball.collider.tags.add "paddle"
+
+
+proc newBall*(): Ball =
+  new result
+  result.init()
+
+</pre>
+
+    <p>
+        To be sure that we initialized colliders correctly we could use a <b>colliderOutline</b> boolean variable from the &quot;nimgame2/settings&quot; module.
+    </p>
+
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    input,
+    scene,
+    settings,
+  ],
+  ball,
+  ...
+
+
+type
+  MainScene = ref object of Scene
+    ...
+    ball: Ball
+
+
+proc init*(scene: MainScene) =
+  ...
+
+  # ball
+  scene.ball = newBall()
+  scene.add scene.ball
+
+...
+
+method show*(scene: MainScene) =
+  ...
+  scene.ball.reset()
+
+...
+
+method update*(scene: MainScene, elapsed: float) =
+  scene.updateScene(elapsed)
+
+  if ScancodeF10.pressed: colliderOutline = not colliderOutline
+  if ScancodeF11.pressed: showInfo = not showInfo
+
+</pre>
+
+    <p>
+        Now we could press <kbd>F10</kbd> to toggle collider outlines. We also assigned the info panel toggle to a <kbd>F11</kbd> for good measure.
+    </p>
+
+    <p>
+        <img src="images/tut101_bounce/colliders.png"
+             alt="Collider outlines screenshot"
+             title="Collider outlines screenshot"
+        />
+    </p>
 </div>
 
 <!--

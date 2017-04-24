@@ -140,6 +140,14 @@ hr {
 }
 
 
+kbd {
+    background-color: #e0e0e0;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+
 pre {
     background-color: #e0e0e0;
     white-space: pre-wrap;
