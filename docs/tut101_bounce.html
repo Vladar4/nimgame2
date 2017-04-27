@@ -632,6 +632,7 @@ import
     graphic,
     nimgame,
     types,
+    utils,
   ],
   data
 
@@ -663,7 +664,7 @@ proc newBall*(): Ball =
 </pre>
 
     <p>
-        To be sure that we initialized colliders correctly we could use a <b>colliderOutline</b> boolean variable from the &quot;nimgame2/settings&quot; module.
+        To be sure that we have initialized colliders correctly we could use a <b>colliderOutline</b> boolean variable from the &quot;nimgame2/settings&quot; module.
     </p>
 
 
@@ -719,6 +720,65 @@ method update*(scene: MainScene, elapsed: float) =
         />
     </p>
 </div>
+
+
+<div class="section" id="bounce"><h3>Bounce</h3>
+
+    <p>
+        Now, as we have a ball entity, bounce logic could be implemented. The ball should bounce from top and bottom walls, and also from both paddles. Paddle bounces will increase ball's speed each time.
+    </p>
+
+<h4>ball.nim</h4>
+<pre class="prettyprint">
+...
+
+const
+  speed = 100.0 # Speed (in pixels per second)
+  speedInc = 25.0 # Speed increase after each bounce
+
+type
+  Ball* = ref object of Entity
+    radius: float
+
+
+proc reset*(ball: Ball) =
+  ball.pos = game.size / 2  # place to the center of the screen
+  ball.vel.x = speed * randomSign().float
+  ball.vel.y = speed * randomSign().float
+
+...
+
+method update*(ball: Ball, elapsed: float) =
+  var movement = ball.vel * elapsed
+
+  ball.pos += movement
+
+  # Top and bottom walls collisions
+  if ball.pos.y &lt; ball.radius or
+     ball.pos.y &gt;= (game.size.h.float - ball.radius):
+    ball.vel.y = -ball.vel.y
+
+
+method onCollide*(ball: Ball, target: Entity) =
+  if "paddle" in target.tags:
+    # Check if the ball is in the front of a paddle
+    if (ball.pos.y &gt;= target.pos.y - target.center.y) and
+       (ball.pos.y &lt;= target.pos.y + target.center.y):
+
+      ball.vel.x = -ball.vel.x  # change horizontal direction
+
+      # Move the ball out of the collision zone
+      if ball.pos.x &lt; game.size.w / 2:
+        ball.pos.x = target.pos.x + target.center.x + ball.radius + 1
+      else:
+        ball.pos.x = target.pos.x - target.center.x - ball.radius - 1
+
+      # increase speed
+      ball.vel += (speedInc, speedInc) * ball.vel / abs(ball.vel)
+
+</pre>
+</div>
+
 
 <!--
 
