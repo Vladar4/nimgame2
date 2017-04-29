@@ -461,7 +461,7 @@ import
 
 
 const
-  speed = 250.0 # Speed (in pixels per second)
+  Speed = 250.0 # Speed (in pixels per second)
 
 
 type
@@ -512,7 +512,7 @@ proc newPaddle*(placement: PaddlePlacement, control: PaddleControl): Paddle =
 ...
 
 method update*(paddle: Paddle, elapsed: float) =
-  var movement = speed * elapsed
+  var movement = Speed * elapsed
 
   # Read input
   case paddle.control:
@@ -733,8 +733,8 @@ method update*(scene: MainScene, elapsed: float) =
 ...
 
 const
-  speed = 100.0 # Speed (in pixels per second)
-  speedInc = 25.0 # Speed increase after each bounce
+  Speed = 100.0 # Speed (in pixels per second)
+  SpeedInc = 25.0 # Speed increase after each bounce
 
 type
   Ball* = ref object of Entity
@@ -743,8 +743,8 @@ type
 
 proc reset*(ball: Ball) =
   ball.pos = game.size / 2  # place to the center of the screen
-  ball.vel.x = speed * randomSign().float
-  ball.vel.y = speed * randomSign().float
+  ball.vel.x = Speed * randomSign().float
+  ball.vel.y = Speed * randomSign().float
 
 ...
 
@@ -774,11 +774,90 @@ method onCollide*(ball: Ball, target: Entity) =
         ball.pos.x = target.pos.x - target.center.x - ball.radius - 1
 
       # increase speed
-      ball.vel += (speedInc, speedInc) * ball.vel / abs(ball.vel)
+      ball.vel += (SpeedInc, SpeedInc) * ball.vel / abs(ball.vel)
 
 </pre>
 </div>
 
+
+<div class="section" id="reset"><h3>Reset</h3>
+
+    <p>
+        Each time the ball leaves the screen it should be returned to the center and relaunched. It is good to add a small pause before the launch too. This pause will be indicated by a white circle, shrinking as the pause runs out.
+    </p>
+
+
+<h4>ball.nim</h4>
+<pre class="prettyprint">
+nimgame2 / [
+  ...
+  draw,
+  ...
+],
+...
+
+const
+  ...
+  Pause = 1.0 # Pause value before launch (in seconds)
+
+
+type
+  Ball* = ref object of Entity
+    ...
+    pause: float
+
+
+proc reset*(ball: Ball) =
+  ...
+  ball.pause = Pause
+
+
+method render*(ball: Ball) =
+  ball.renderEntity()
+  if ball.pause &gt; 0.0: # pre-launch pause
+    discard circle(ball.pos, ball.pause * 100, 0xFFFFFFFFF<span class="nocode">&#39;</span>u32, DrawMode.aa)
+
+
+method update*(ball: Ball, elapsed: float) =
+  if ball.pause &lt;= 0.0:
+
+    var movement = ball.vel * elapsed
+
+    ball.pos += movement
+
+    # Top and bottom walls collisions
+    if ball.pos.y &lt; ball.radius or
+      ball.pos.y &gt;= (game.size.h.float - ball.radius):
+      ball.vel.y = -ball.vel.y
+
+  else: # pre-launch pause
+
+    ball.pause -= elapsed
+
+...
+</pre>
+
+
+    <p>
+        The actual checking of ball position will be performed in the main scene file.
+    </p>
+
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+
+method update*(scene: MainScene, elapsed: float) =
+  ...
+
+  # check if the ball is out of the screen borders
+  if (scene.ball.pos.x &lt; 0) or (scene.ball.pos.x &gt;= game.size.w.float) or
+     (scene.ball.pos.y &lt; 0) or (scene.ball.pos.y &gt;= game.size.h.float):
+    scene.ball.reset()
+
+</pre>
+
+</div>
 
 <!--
 
