@@ -859,6 +859,92 @@ method update*(scene: MainScene, elapsed: float) =
 
 </div>
 
+
+<div class="section" id="score"><h3>Score</h3>
+
+    <p>
+        At this moment we are ready to add a simple score counting into the game.
+    </p>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+...
+
+var
+  ...
+  score1*, score2*: int
+
+...
+</pre>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    entity,
+    graphic,
+    ...
+    textgraphic,
+    ...
+  ],
+  ...
+
+MainScene = ref object of Scene
+  ...
+  scoreText: TextGraphic
+
+
+proc init*(scene: MainScene) =
+  ...
+
+  # score
+  scene.scoreText = newTextGraphic(bigFont)
+  scene.scoreText.setText "0:0"
+  let score = newEntity()
+  score.graphic = scene.scoreText
+  score.centrify()
+  score.pos = (game.size.w / 2, score.graphic.dim.h.float)
+  score.layer = 10 # text should be over other entities
+  scene.add score
+
+...
+
+method show*(scene: MainScene) =
+  ...
+  score1 = 0
+  score2 = 0
+  scene.scoreText.setText "0:0"
+
+method update*(scene: MainScene, elapsed: float) =
+  ...
+  # check if the ball is out of the screen borders
+  if (scene.ball.pos.x &lt; 0) or (scene.ball.pos.x &gt;= game.size.w.float) or
+     (scene.ball.pos.y &lt; 0) or (scene.ball.pos.y &gt;= game.size.h.float):
+    # increase score
+    if scene.ball.pos.x &lt; 0:
+      inc score2
+    else:
+      inc score1
+    # update score graphic
+    scene.scoreText.setText $score1 &amp; ":" &amp; $score2
+    # reset
+    scene.ball.reset()
+
+</pre>
+
+    <p>
+        Now your game screen should look like this:
+    </p>
+
+    <p>
+        <img src="images/tut101_bounce/score.png"
+             alt="Score counting screenshot"
+             title="Score counting screenshot"
+        />
+    </p>
+
+</div>
+
 <!--
 
 <div class="section" id=""><h3></h3>
