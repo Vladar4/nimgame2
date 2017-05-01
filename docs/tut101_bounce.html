@@ -907,6 +907,10 @@ proc init*(scene: MainScene) =
   score.layer = 10 # text should be over other entities
   scene.add score
 
+
+proc free*(scene: MainScene) =
+  scene.scoreText.free()
+
 ...
 
 method show*(scene: MainScene) =
@@ -945,6 +949,60 @@ method update*(scene: MainScene, elapsed: float) =
 
 </div>
 
+
+<div class="section" id="pause"><h3>Pause</h3>
+
+    <p>
+        Adding the option to pause the game is actually pretty easy.
+    </p>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+  import
+    nimgame2 / [
+      ...,
+      types,
+    ],
+    ...
+
+
+type
+  MainScene = ref object of Scene
+    ...
+    pause: Entity
+
+
+proc init*(scene: MainScene) =
+  ...
+
+  # pause
+  let pauseText = newTextGraphic(bigFont)
+  pauseText.setText "PAUSE"
+  scene.pause = newEntity()
+  scene.pause.graphic = pauseText
+  scene.pause.centrify()
+  scene.pause.pos = game.size / 2
+  scene.pause.visible = false
+  scene.add scene.pause
+
+...
+
+method event*(scene: MainScene, event: Event) =
+  scene.eventScene(event)
+  if event.kind == KeyDown:
+    # Pause/Unpause
+    if event.key.keysym.scancode == ScancodeP:
+      gamePaused = not gamePaused
+      scene.pause.visible = gamePaused
+
+...
+</pre>
+
+    <p>
+        Now pressing the <kbd>P</kbd> will toggle pause mode.
+    </p>
+
+</div>
 <!--
 
 <div class="section" id=""><h3></h3>
