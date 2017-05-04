@@ -24,6 +24,22 @@
 
 <div class="section" id="introduction"><h3>Introduction</h3>
 
+    <p>
+        This tutorial is designed to give an example of the basic structure of Nimgame2 applications. The following concepts will be explained here:
+    </p>
+    <ul>
+        <li>engine initialization</li>
+        <li>assets loading</li>
+        <li>scenes</li>
+        <li>texture graphics</li>
+        <li>text graphics</li>
+        <li>entity objects</li>
+        <li>colliders and collisions</li>
+        <li>keyboard input</li>
+        <li>pausing</li>
+        <li>sound</li>
+    </ul>
+
 </div>
 
 
@@ -37,7 +53,7 @@
         <li>sounds</li>
     </ul>
     <p>
-        So, the assets directory of the game will be structured as showed here:
+        So, the assets directory of the game will be structured as shown here:
     </p>
 <pre>
     ./data/
@@ -96,7 +112,7 @@ var
 </pre>
 
     <p>
-        As you can see, we will have two game scenes: title and main one. We will create a souce file for each of them.
+        As you can see, we will have two game scenes: title and main. We will create a souce file for each of them.
     </p>
 
 <h4>title.nim</h4>
@@ -165,7 +181,7 @@ method show*(scene: MainScene) =
 </pre>
 
     <p>
-        And, finally, we'll create a main source file:
+        And, finally, we will create a main source file:
     </p>
 
 <h4>bounce.nim</h4>
@@ -241,7 +257,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 </pre>
 
     <p>
-        So, at this moment, our directory structure will look like this:
+        So, at this moment, our directory structure looks like this:
     </p>
 
 <pre>
@@ -272,7 +288,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 </pre>
 
     <p>
-        When we run our &quot;build.debug.sh&quot; script, we should get an executalbe &quot;ng2bounce&quot; that just shows a black screen and, when any keyboard key is pressed, outputs a &quot;Switched to MainScene&quot; message to the console.
+        When we run our &quot;build.debug.sh&quot; script, we should get an executalbe &quot;ng2bounce&quot; that just shows a black screen and outputs a &quot;Switched to MainScene&quot; message to the console when any keyboard key is pressed.
     </p>
 
 </div>
@@ -281,7 +297,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 <div class="section" id="titlescreen"><h3>Title Screen</h3>
 
     <p>
-        We'll start with populating the title screen. There will be two text graphics: the title of the game and a subtitle hint under it.
+        We will start with populating the title screen. There will be two text graphics: the title of the game and a subtitle hint under it.
     </p>
 
     <p>
@@ -362,7 +378,7 @@ proc init*(scene: TitleScene) =
   let title = newEntity() # Create a title entity
   title.graphic = titleText # Assign the title text graphic
   title.centrify() # Set the origin point to the graphic's center
-  title.pos = (GameWidth / 2, GameHeight / 3) # Set title position on screen
+  title.pos = (GameWidth / 2, GameHeight / 3) # Set the title position on the screen
   scene.add title # Add title entity to the scene
 
   # Create a subtitle text graphic with a default font
@@ -431,11 +447,11 @@ proc freeData*() =
 </pre>
 
     <p>
-        As you can see, we pass two arguments to the asset manager constructor: a path to the assets, and a procedure to load them. The procedure recieves a file name and should return an object to be loaded in our collection.
+        As you can see, we pass two arguments to the asset manager constructor: a path to the assets and a procedure to load them. The procedure recieves a file name and should return an object to be loaded in our collection.
     </p>
 
     <p>
-        <b>Note:</b>Would you try to load any directory containing other types of files, the loading procedure will throw an error.
+        <b>Note:</b> If you try to load any directory containing other types of files, the loading procedure will throw an error.
     </p>
 
 </div>
@@ -477,7 +493,7 @@ type
 </pre>
 
     <p>
-        As you can see, two enums represent paddle position and how it will be controlled.
+        As you can see, two enums represent the paddle position and how it will be controlled.
     </p>
 
 <h4>paddle.nim</h4>
@@ -504,7 +520,7 @@ proc newPaddle*(placement: PaddlePlacement, control: PaddleControl): Paddle =
 </pre>
 
     <p>
-    As you see, for now we need to have only one param in our <b>Paddle</b> object&nbsp;— a control state, that we'll need in the <b>update()</b> method.
+    As you see, for now we need to have only one param in our <b>Paddle</b> object&nbsp;— a control state, that we will need in the <b>update()</b> method.
     </p>
 
 <h4>paddle.nim</h4>
@@ -588,7 +604,7 @@ proc init*(scene: MainScene) =
 <div class="section" id="colliders"><h3>Colliders</h3>
 
     <p>
-        To detect collisions between the ball and paddles we need to init colliders for these entities. All collider counstructor accept a parent entity reference, center point offset, and collider dimensions that depend on a particular collider type. We will use a simple box collider for our paddles.
+        To detect collisions between the ball and paddles we need to init colliders for these entities. All collider counstructors accept a parent entity reference, center point offset, and collider dimensions that depend on a particular collider type. We will use a simple box collider for our paddles.
     </p>
 
 <h4>paddle.nim</h4>
@@ -710,7 +726,7 @@ method update*(scene: MainScene, elapsed: float) =
 </pre>
 
     <p>
-        Now we could press <kbd>F10</kbd> to toggle collider outlines. We also assigned the info panel toggle to a <kbd>F11</kbd> for good measure.
+        Now we could press <kbd>F10</kbd> to toggle collider outlines. We also assigned the info panel toggle to <kbd>F11</kbd> for good measure.
     </p>
 
     <p>
@@ -761,7 +777,7 @@ method update*(ball: Ball, elapsed: float) =
 
 method onCollide*(ball: Ball, target: Entity) =
   if "paddle" in target.tags:
-    # Check if the ball is in the front of a paddle
+    # Check if the ball is in front of a paddle
     if (ball.pos.y &gt;= target.pos.y - target.center.y) and
        (ball.pos.y &lt;= target.pos.y + target.center.y):
 
@@ -783,7 +799,7 @@ method onCollide*(ball: Ball, target: Entity) =
 <div class="section" id="reset"><h3>Reset</h3>
 
     <p>
-        Each time the ball leaves the screen it should be returned to the center and relaunched. It is good to add a small pause before the launch too. This pause will be indicated by a white circle, shrinking as the pause runs out.
+        Each time the ball leaves the screen it should be returned to the center and relaunched. It would be good to add a small pause before the launch too. This pause will be indicated by a white circle, shrinking as the pause runs out.
     </p>
 
 
@@ -839,7 +855,7 @@ method update*(ball: Ball, elapsed: float) =
 
 
     <p>
-        The actual checking of ball position will be performed in the main scene file.
+        The actual checking of the ball position will be performed in the main scene file.
     </p>
 
 
@@ -999,10 +1015,120 @@ method event*(scene: MainScene, event: Event) =
 </pre>
 
     <p>
-        Now pressing the <kbd>P</kbd> will toggle pause mode.
+        Now pressing <kbd>P</kbd> will toggle pause mode.
     </p>
 
 </div>
+
+
+<div class="section" id="sound"><h3>Sound</h3>
+
+    <p>
+        Finally, we will add sound effects. WAV files will be placed into "data/sfx" directory:
+    </p>
+    <ul>
+        <li>bell.wav</li>
+        <li>hit1.wav</li>
+        <li>hit2.wav</li>
+        <li>hit3.wav</li>
+    </ul>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    audio,
+    ...
+  ]
+
+...
+
+var
+  ...
+  sfxData*: Assets[Sound]
+
+
+proc loadData*() =
+  ...
+
+  sfxData = newAssets[Sound](
+    "data/sfx",
+    proc(file: string): Sound = newSound(file))
+
+...
+</pre>
+
+<h4>ball.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    audio,
+    ...
+  ],
+  ...
+
+...
+
+method update*(ball: Ball, elapsed: float) =
+    ...
+    if ball.pos.y &lt; ball.radius or
+      ball.pos.y &gt;= (game.size.h.float - ball.radius):
+      ...
+      discard sfxData["hit3"].play()
+
+...
+
+method onCollide*(ball: Ball, target: Entity) =
+  ...
+      if ball.pos.x &lt; game.size.w / 2:
+        ...
+        discard sfxData["hit1"].play()
+      else:
+        ...
+        discard sfxData["hit2"].play()
+  ...
+</pre>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    ...
+    audio,
+    ...
+    ],
+    ...
+
+...
+
+method show*(scene: MainScene) =
+  ...
+  discard sfxData["bell"].play()
+
+...
+
+method update*(scene: MainScene, elapsed: float) =
+  ...
+    # reset
+    scene.ball.reset()
+    discard sfxData["bell"].play()
+
+</pre>
+
+</div>
+
+
+<div class="section" id="whatsnext"><h3>What's Next?</h3>
+
+    <p>
+        Though the game is ready, there's a multitude of ways to improve it (like changing the angle of the ball's trajectory, for example). As this isn't directly related to the engine functionality, it is left for you to explore on your own.
+    </p>
+
+</pre>
+</div>
+
 <!--
 
 <div class="section" id=""><h3></h3>
