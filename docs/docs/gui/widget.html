@@ -1239,8 +1239,8 @@ function main() {
     title="state*(widget: GuiWidget): GuiState"><wbr />state<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#setState,GuiWidget,GuiState"
     title="setState*(widget: GuiWidget; val: GuiState)"><wbr />set<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,GuiWidget,bool"
-    title="`toggled =`*(widget: GuiWidget; val: bool)">`<wbr />toggled<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#setToggled,GuiWidget,bool"
+    title="setToggled*(widget: GuiWidget; val: bool)"><wbr />set<wbr />Toggled<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#disable,GuiWidget"
     title="disable*(widget: GuiWidget)"><wbr />disable<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#enable,GuiWidget"
@@ -1259,6 +1259,12 @@ function main() {
     title="onClick*(widget: GuiWidget; mb = MouseButton.left)"><wbr />on<wbr />Click<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#=.e,GuiWidget,GuiState"
     title="`state =`*(widget: GuiWidget; val: GuiState)">`<wbr />state<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#=.e,GuiWidget,bool"
+    title="`toggled =`*(widget: GuiWidget; val: bool)">`<wbr />toggled<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#press.e,GuiWidget"
+    title="press*(widget: GuiWidget)"><wbr />press<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#release.e,GuiWidget"
+    title="release*(widget: GuiWidget)"><wbr />release<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#event.e,GuiWidget,Event"
     title="event*(widget: GuiWidget; e: Event)"><wbr />event<span class="attachedType" style="visibility:hidden"></span></a></li>
 
@@ -1279,10 +1285,10 @@ function main() {
     title="isEnabled*(state: GuiState): bool"><wbr />is<wbr />Enabled<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#toggled.t,GuiWidget"
     title="toggled*(widget: GuiWidget): bool"><wbr />toggled<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#press.t,GuiWidget"
-    title="press*(widget: GuiWidget)"><wbr />press<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#release.t,GuiWidget"
-    title="release*(widget: GuiWidget)"><wbr />release<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#pressWidget.t,GuiWidget"
+    title="pressWidget*(widget: GuiWidget)"><wbr />press<wbr />Widget<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#releaseWidget.t,GuiWidget"
+    title="releaseWidget*(widget: GuiWidget)"><wbr />release<wbr />Widget<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1305,10 +1311,6 @@ function main() {
   <span class="Identifier">defaultUp</span><span class="Other">,</span> <span class="Identifier">defaultDown</span><span class="Other">,</span> <span class="Identifier">focusedUp</span><span class="Other">,</span> <span class="Identifier">focusedDown</span><span class="Other">,</span> <span class="Identifier">disabledUp</span><span class="Other">,</span> <span class="Identifier">disabledDown</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="GuiWidget"><a name="GuiWidget"></a><pre><span class="Identifier">GuiWidget</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Entity</span>
@@ -1318,10 +1320,6 @@ class="link-seesrc" target="_blank">Source</a>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L42"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L42" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1332,73 +1330,41 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="init"><a name="init,GuiWidget"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L48"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newGuiWidget"><a name="newGuiWidget,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newGuiWidget</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L57"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="state"><a name="state,GuiWidget"></a><pre><span class="Keyword">proc</span> <span class="Identifier">state</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GuiState</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L62"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setState"><a name="setState,GuiWidget,GuiState"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setState</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L98"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,GuiWidget,bool"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">toggled</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span></pre></dt>
+<dt id="setToggled"><a name="setToggled,GuiWidget,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setToggled</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L109"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L109" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="disable"><a name="disable,GuiWidget"></a><pre><span class="Keyword">proc</span> <span class="Identifier">disable</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L128"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L128" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="enable"><a name="enable,GuiWidget"></a><pre><span class="Keyword">proc</span> <span class="Identifier">enable</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L135"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="eventGuiWidget"><a name="eventGuiWidget,GuiWidget,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">eventGuiWidget</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L153"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1409,37 +1375,36 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="onPress"><a name="onPress.e,GuiWidget"></a><pre><span class="Keyword">method</span> <span class="Identifier">onPress</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L66"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L66" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="onClick"><a name="onClick.e,GuiWidget"></a><pre><span class="Keyword">method</span> <span class="Identifier">onClick</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">mb</span> <span class="Other">=</span> <span class="Identifier">MouseButton</span><span class="Other">.</span><span class="Identifier">left</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L70"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=.e,GuiWidget,GuiState"></a><pre><span class="Keyword">method</span> <span class="Other">`</span><span class="Identifier">state</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L105"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="="><a name="=.e,GuiWidget,bool"></a><pre><span class="Keyword">method</span> <span class="Other">`</span><span class="Identifier">toggled</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="press"><a name="press.e,GuiWidget"></a><pre><span class="Keyword">method</span> <span class="Identifier">press</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="release"><a name="release.e,GuiWidget"></a><pre><span class="Keyword">method</span> <span class="Identifier">release</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
+<dd>
+
 
 </dd>
 <dt id="event"><a name="event.e,GuiWidget,Event"></a><pre><span class="Keyword">method</span> <span class="Identifier">event</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">;</span> <span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L198"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L198" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1450,73 +1415,41 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="isUp"><a name="isUp.t,GuiState"></a><pre><span class="Keyword">template</span> <span class="Identifier">isUp</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L74"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L74" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="isDown"><a name="isDown.t,GuiState"></a><pre><span class="Keyword">template</span> <span class="Identifier">isDown</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L78"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="isFocused"><a name="isFocused.t,GuiState"></a><pre><span class="Keyword">template</span> <span class="Identifier">isFocused</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L82"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="isDisabled"><a name="isDisabled.t,GuiState"></a><pre><span class="Keyword">template</span> <span class="Identifier">isDisabled</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L86"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L86" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="isEnabled"><a name="isEnabled.t,GuiState"></a><pre><span class="Keyword">template</span> <span class="Identifier">isEnabled</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">GuiState</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L90"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toggled"><a name="toggled.t,GuiWidget"></a><pre><span class="Keyword">template</span> <span class="Identifier">toggled</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L94"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="press"><a name="press.t,GuiWidget"></a><pre><span class="Keyword">template</span> <span class="Identifier">press</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
+<dt id="pressWidget"><a name="pressWidget.t,GuiWidget"></a><pre><span class="Keyword">template</span> <span class="Identifier">pressWidget</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L120"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L120" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="release"><a name="release.t,GuiWidget"></a><pre><span class="Keyword">template</span> <span class="Identifier">release</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
+<dt id="releaseWidget"><a name="releaseWidget.t,GuiWidget"></a><pre><span class="Keyword">template</span> <span class="Identifier">releaseWidget</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">widget</span><span class="Other">:</span> <span class="Identifier">GuiWidget</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/widget.nim#L124"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/widget.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1529,7 +1462,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:18 UTC</small>
+        <small>Made with Nim. Generated: 2017-05-04 08:32:22 UTC</small>
       </div>
     </div>
   </div>

@@ -1272,10 +1272,6 @@ function main() {
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1286,28 +1282,16 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="free"><a name="free,TrueTypeFont"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L39"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L39" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="init"><a name="init,TrueTypeFont"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L45"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTrueTypeFont"><a name="newTrueTypeFont,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTrueTypeFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L49"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="load"><a name="load,TrueTypeFont,string,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
@@ -1315,10 +1299,6 @@ class="link-seesrc" target="_blank">Source</a>
 <p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">size</span></tt> required font size. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L54"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1329,38 +1309,22 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="charH"><a name="charH.e,TrueTypeFont"></a><pre><span class="Keyword">method</span> <span class="Identifier">charH</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a font character's height. 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L69"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="lineDim"><a name="lineDim.e,TrueTypeFont,string"></a><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of a <tt class="docutils literal"><span class="pre">line</span></tt> of text, written in <tt class="docutils literal"><span class="pre">font</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L77"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderLine"><a name="renderLine.e,TrueTypeFont,string,Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Texture</span></pre></dt>
 <dd>
 Render a text <tt class="docutils literal"><span class="pre">line</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">color</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L101"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderText"><a name="renderText.e,TrueTypeFont,openarray[string],Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderText</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">TrueTypeFont</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span>
                   <span class="Identifier">align</span> <span class="Other">=</span> <span class="Identifier">TextAlign</span><span class="Other">.</span><span class="Identifier">left</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Texture</span></pre></dt>
 <dd>
 Render a multi-line <tt class="docutils literal"><span class="pre">text</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">align</span></tt> and <tt class="docutils literal"><span class="pre">color</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/truetypefont.nim#L118"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/truetypefont.nim#L118" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1373,7 +1337,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
       </div>
     </div>
   </div>

@@ -1280,10 +1280,6 @@ function main() {
 </pre></dt>
 <dd>
 Time to live (in seconds)
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L29"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Emitter"><a name="Emitter"></a><pre><span class="Identifier">Emitter</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Entity</span>
@@ -1297,10 +1293,6 @@ class="link-seesrc" target="_blank">Source</a>
   </pre></dt>
 <dd>
 Ranges of vel and acc deviation
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1311,55 +1303,31 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="initParticle"><a name="initParticle,Particle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initParticle</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L47"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newParticle"><a name="newParticle,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newParticle</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Particle</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L53"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,Particle,Particle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">,</span> <span class="Identifier">source</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">)</span></pre></dt>
 <dd>
 Copy <tt class="docutils literal"><span class="pre">source</span></tt> properties to the <tt class="docutils literal"><span class="pre">target</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L58"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="initEmitter"><a name="initEmitter,Emitter,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initEmitter</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">emitter</span><span class="Other">:</span> <span class="Identifier">Emitter</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span></pre></dt>
 <dd>
 Create a new <tt class="docutils literal"><span class="pre">Emitter</span></tt> for the <tt class="docutils literal"><span class="pre">scene</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L80"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newEmitter"><a name="newEmitter,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newEmitter</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Emitter</span></pre></dt>
 <dd>
 Create a new Emitter in the <tt class="docutils literal"><span class="pre">scene</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L88"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="emit"><a name="emit,Emitter,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">emit</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">emitter</span><span class="Other">:</span> <span class="Identifier">Emitter</span><span class="Other">;</span> <span class="Identifier">amount</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">1</span><span class="Other">)</span></pre></dt>
 <dd>
 Emit an <tt class="docutils literal"><span class="pre">amount</span></tt> of particles. 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L95"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1370,19 +1338,11 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="update"><a name="update.e,Physics,Particle,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">physics</span><span class="Other">:</span> <span class="Identifier">Physics</span><span class="Other">;</span> <span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L65"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="update"><a name="update.e,Particle,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/emitter.nim#L69"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/emitter.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1395,7 +1355,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
       </div>
     </div>
   </div>

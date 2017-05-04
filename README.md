@@ -4,7 +4,7 @@ Nimgame 2
 A simple 2D game engine for Nim language.
 
 
-Status: v0.3 alpha
+Status: v0.4 alpha
 ------------------
 
 
@@ -35,11 +35,27 @@ Links:
 
 * [home page](https://vladar4.github.io/nimgame2/)
 * [demos](demos)
+* [tutorials](https://vladar4.github.io/nimgame2/tutorials)
+* [documentation](https://vladar4.github.io/nimgame2/docs.html)
 * [ng2planetoids](https://github.com/Vladar4/ng2planetoids) - first demo game.
+* [ng2gggrotto](https://github.com/Vladar4/ng2gggrotto) - Linux Game Jam 2017 entry.
 
 
 Changelog:
 ----------
+
+### v0.4 alpha
+* GUI:
+  * RadioGroup
+  * RadioButton
+* IndexedImage
+* PerspectiveImage
+* TextureAtlas
+* joysticks support
+* window management procedures
+* 4 new demos
+* [first tutorial](https://vladar4.github.io/nimgame2/tut101_bounce.html)
+
 
 ### v0.3 alpha
 * camera property (Scene)

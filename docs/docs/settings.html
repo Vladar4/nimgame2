@@ -1221,8 +1221,6 @@ function main() {
     title="background*: sdl.Color"><wbr />background<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#renderer"
     title="renderer*: sdl.Renderer"><wbr />renderer<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#window"
-    title="window*: sdl.Window"><wbr />window<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#gameRunning"
     title="gameRunning*: bool"><wbr />game<wbr />Running<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#gamePaused"
@@ -1258,92 +1256,47 @@ function main() {
 <dt id="background"><a name="background"></a><pre><span class="Identifier">background</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Color</span></pre></dt>
 <dd>
 Screen clearing color
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L29"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderer"><a name="renderer"></a><pre><span class="Identifier">renderer</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Renderer</span></pre></dt>
 <dd>
 Game renderer pointer
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L30"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L30" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="window"><a name="window"></a><pre><span class="Identifier">window</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Window</span></pre></dt>
-<dd>
-Game window pointer
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="gameRunning"><a name="gameRunning"></a><pre><span class="Identifier">gameRunning</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 If <cite>false</cite> - break main loop
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="gamePaused"><a name="gamePaused"></a><pre><span class="Identifier">gamePaused</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 If <cite>true</cite> - do not update current scene
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L34"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="showInfo"><a name="showInfo"></a><pre><span class="Identifier">showInfo</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Show info panel
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="fpsLimit"><a name="fpsLimit"></a><pre><span class="Identifier">fpsLimit</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 Limit frames per second to <tt class="docutils literal"><span class="pre">fpsLimit</span></tt>,
 if <cite>0</cite> - no limit
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L36"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="updateInterval"><a name="updateInterval"></a><pre><span class="Identifier">updateInterval</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 Call update() each <tt class="docutils literal"><span class="pre">updateInterval</span></tt> ms
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L38"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L38" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="colliderOutline"><a name="colliderOutline"></a><pre><span class="Identifier">colliderOutline</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Show collider outlines
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L39"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L39" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="colliderOutlineColor"><a name="colliderOutlineColor"></a><pre><span class="Identifier">colliderOutlineColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Color</span></pre></dt>
 <dd>
 Color of collider outlines
-&nbsp;&nbsp;<a
-href="/tree/master/settings.nim#L40"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/settings.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1356,7 +1309,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
       </div>
     </div>
   </div>

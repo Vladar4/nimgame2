@@ -1245,8 +1245,8 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#initTileMap,TileMap"
-    title="initTileMap*(tilemap: TileMap; scaleFix = false)"><wbr />init<wbr />Tile<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#init,TileMap"
+    title="init*(tilemap: TileMap; scaleFix = false)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newTileMap,"
     title="newTileMap*(scaleFix = false): TileMap"><wbr />new<wbr />Tile<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#show,TileMap"
@@ -1324,10 +1324,6 @@ function main() {
 <dt id="TileShow"><a name="TileShow"></a><pre><span class="Identifier">TileShow</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="TileMap"><a name="TileMap"></a><pre><span class="Identifier">TileMap</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Entity</span>
@@ -1341,10 +1337,6 @@ class="link-seesrc" target="_blank">Source</a>
   </pre></dt>
 <dd>
 Two-dimensional sequence of tile indexes
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="TileCollider"><a name="TileCollider"></a><pre><span class="Identifier">TileCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
@@ -1352,10 +1344,6 @@ class="link-seesrc" target="_blank">Source</a>
   </pre></dt>
 <dd>
 Collider to use with TileMap
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L44"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1366,10 +1354,6 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="DefaultTileScale"><a name="DefaultTileScale"></a><pre><span class="Identifier">DefaultTileScale</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scale</span> <span class="Other">=</span> <span class="FloatNumber">1.02'f64</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L29"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1377,13 +1361,9 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="initTileMap"><a name="initTileMap,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initTileMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">scaleFix</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
+<dt id="init"><a name="init,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">scaleFix</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L53"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTileMap"><a name="newTileMap,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scaleFix</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileMap</span></pre></dt>
@@ -1391,55 +1371,31 @@ class="link-seesrc" target="_blank">Source</a>
 <p>Create a new TileMap.</p>
 <p><tt class="docutils literal"><span class="pre">scaleFix</span></tt>  set <tt class="docutils literal"><span class="pre">tileScale</span></tt> to <tt class="docutils literal"><span class="pre">DefaultTileScale</span></tt> if <cite>true</cite>, or to <cite>1.0</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L61"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="show"><a name="show,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">show</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileShow</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a currently shown slices of tiles. 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L71"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="init"><a name="init,TileCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L77"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TileMap,TileShow"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">show</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">TileShow</span><span class="Other">)</span></pre></dt>
 <dd>
 Set new values for the shown slices of tiles. 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L78"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="dimTiles"><a name="dimTiles,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dimTiles</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of the <tt class="docutils literal"><span class="pre">tilemap</span></tt>, calculated from its <tt class="docutils literal"><span class="pre">map</span></tt> (in tiles). 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L101"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="dim"><a name="dim,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of the <tt class="docutils literal"><span class="pre">tilemap</span></tt>, calculated from its <tt class="docutils literal"><span class="pre">map</span></tt> (in pixels). 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L112"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="centrify"><a name="centrify,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">hor</span> <span class="Other">=</span> <span class="Identifier">HAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">;</span> <span class="Identifier">ver</span> <span class="Other">=</span> <span class="Identifier">VAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">)</span></pre></dt>
@@ -1448,28 +1404,16 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">hor</span></tt> Horisontal align: left, center, or right</p>
 <p><tt class="docutils literal"><span class="pre">ver</span></tt> Vertical align: top, center, or bottom </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderTileMap"><a name="renderTileMap,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderTileMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L144"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="init"><a name="init,TileCollider,TileMap,Coord,Dim_2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L181"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L181" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTileCollider"><a name="newTileCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileCollider</span></pre></dt>
@@ -1479,19 +1423,11 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">pos</span></tt> Collider's relative position. Usually <cite>(0, 0)</cite>.</p>
 <p><tt class="docutils literal"><span class="pre">dim</span></tt> Tile dimensions. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L206"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L206" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="initCollider"><a name="initCollider,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 Initialize a collider for the <tt class="docutils literal"><span class="pre">tilemap</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L226"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L226" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1502,127 +1438,71 @@ class="link-seesrc" target="_blank">Source</a>
 <dt id="render"><a name="render.e,TileMap"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L173"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L173" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="render"><a name="render.e,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L220"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L220" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L234"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L234" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L243"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,Collider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L250"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L256"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L256" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,BoxCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L263"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L263" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L269"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L269" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,CircleCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L276"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L276" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L282"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L282" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,LineCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L289"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L289" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L295"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L295" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,PolyCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L302"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L302" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="collide"><a name="collide.e,TileCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tilemap.nim#L308"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tilemap.nim#L308" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1635,7 +1515,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-03-09 16:18:02 UTC</small>
+        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
       </div>
     </div>
   </div>
