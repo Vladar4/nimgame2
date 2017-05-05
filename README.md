@@ -44,7 +44,7 @@ Links:
 Changelog:
 ----------
 
-### v0.4 alpha
+### v0.4 alpha (2017-05-04)
 * GUI:
   * RadioGroup
   * RadioButton
@@ -57,7 +57,7 @@ Changelog:
 * [first tutorial](https://vladar4.github.io/nimgame2/tut101_bounce.html)
 
 
-### v0.3 alpha
+### v0.3 alpha (2017-03-10)
 * camera property (Scene)
 * new collision procedures
 * reworked input
@@ -71,7 +71,7 @@ Changelog:
 * 3 new demos
 * home page, snippets, and documentation
 
-### v0.2 alpha
+### v0.2 alpha (2017-01-31)
 * collider optimizations
 * music playlists
 * random procedures
@@ -81,7 +81,7 @@ Changelog:
 * various fixes
 * 4 new demos
 
-### v0.1 alpha
+### v0.1 alpha (2017-01-16)
 * base scene/entity system
 * assets manager
 * basic sound and music
