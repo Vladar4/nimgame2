@@ -357,7 +357,7 @@
 
     # tiles
     scene.tilesGraphic = newTextureGraphic()
-    discard scene.tilesGraphic.load("/data/gfx/tile.png")
+    discard scene.tilesGraphic.load("data/gfx/tile.png")
 
     # map
     scene.map = newTileMap(scaleFix = true)
@@ -443,6 +443,41 @@
     playlist.update()
 </pre></div>
 
+<div class="snippet" id="gui_buttons"><h3>GUI: Buttons (and Mosaic)</h3>
+<pre class="prettyprint">
+# mybutton.nim
+
+import
+  nimgame2 / [
+    graphic,
+    input,
+    gui/button,
+  ]
+
+type
+  MyButton* = ref object of GuiButton
+
+proc init*(btn: MyButton, graphic: Graphic, image: Graphic = nil) =
+  GuiButton(btn).init(graphic, image)
+
+proc newMyButton*(graphic: Graphic, image: Graphic = nil): MyButton =
+  new result
+  result.init(graphic, image)
+
+method onClick*(btn: MyButton, mb: MouseButton) =
+  echo "clicked my button"
+
+
+# somewhere in the initialization routine
+  # mosaic creation
+  let myMosaic = newMosaic("data/gfx/button_skin.png")
+  let mySkin = newTextureGraphic()
+  discard mySkin.assignTexture myMosaic.render(patternStretchBorder(4, 2))
+
+  # button initialization
+  myBtn = newMyButton(mySkin)
+  scene.add(myBtn)
+</pre></div>
 
 <!--
 
