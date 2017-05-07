@@ -443,7 +443,7 @@
     playlist.update()
 </pre></div>
 
-<div class="snippet" id="gui_buttons"><h3>GUI: Buttons (and Mosaic)</h3>
+<div class="snippet" id="gui_buttons"><h3>GUI: Buttons</h3>
 <pre class="prettyprint">
 # mybutton.nim
 
@@ -469,14 +469,39 @@ method onClick*(btn: MyButton, mb: MouseButton) =
 
 
 # somewhere in the initialization routine
-  # mosaic creation
-  let myMosaic = newMosaic("data/gfx/button_skin.png")
+  # skin loading
   let mySkin = newTextureGraphic()
-  discard mySkin.assignTexture myMosaic.render(patternStretchBorder(4, 2))
+  discard mySkin.load("data/gfx/button_skin.png")
 
   # button initialization
   myBtn = newMyButton(mySkin)
   scene.add(myBtn)
+</pre></div>
+
+<div class="snippet" id="gui_text_input"><h3>GUI: Text Input (+ Mosaic)</h3>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    texturegraphic,
+    mosaic,
+    scene,
+    truetypefont,
+    gui/widget,
+    gui/textinput,
+  ]
+
+# somewhere in the initialization routine
+
+  # mosaic creation
+  let myMosaic = newMosaic("data/gfx/textinput_skin.png")
+  let mySkin = newTextureGraphic()
+  discard mySkin.assignTexture myMosaic.render(patternStretchBorder(16, 1))
+
+  # text input initialization
+  myTextInput = newGuiTextInput(mySkin, myFont)
+  myTextInput.text.limit = 16 # set text length limit
+  scene.add(myTextInput)
+
 </pre></div>
 
 <!--
