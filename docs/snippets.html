@@ -482,9 +482,9 @@ method onClick*(btn: MyButton, mb: MouseButton) =
 <pre class="prettyprint">
 import
   nimgame2 / [
-    texturegraphic,
-    mosaic,
     scene,
+    mosaic,
+    texturegraphic,
     truetypefont,
     gui/widget,
     gui/textinput,
@@ -504,6 +504,37 @@ import
 
 </pre></div>
 
+<div class="snippet" id="gui_radio_groups"><h3>GUI: Radio Groups</h3>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    scene,
+    texturegraphic,
+    truetypefont,
+    gui/widget,
+    gui/radio,
+  ]
+
+type
+  MyScene = ref object of Scene
+    radioButtons: array[3, GuiRadioButton]
+    radioGroup: GuiRadioGroup
+
+# somewhere in the initialization routine
+
+  scene.radioGroup = newGuiRadioGroup() # create group
+
+  # init each button
+  for i in 0..scene.radioButtons.high:
+    scene.radioButtons[i] = newGuiRadioButton(scene.radioGroup, scene.mySkin)
+
+  scene.radioButtons[0].toggled = true # toggle the first button
+
+  # add to the scene
+  scene.add(scene.radioGroup)
+  for btn in scene.radioButtons:
+    scene.add(btn)
+</pre></div>
 <!--
 
 <div class="snippet" id=""><h3></h3>
