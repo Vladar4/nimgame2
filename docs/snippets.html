@@ -311,6 +311,23 @@
     scene.add(scene.myEntity)
 </pre></div>
 
+<div class="snippet" id="indexed_image"><h3>IndexedImage Usage</h3>
+<pre class="prettyprint">
+# somewhere in the initialization routine
+
+  let myImage = newIndexedImage("data/gfx/unit.gif")
+  var color = myImage.palette[8] # get palette color
+  color.r = 255
+  color.g = 0
+  color.b = 0
+  myImage.palette[8] = color # set palette color
+
+  # generate graphic
+  let myGraphic = newTextureGraphic()
+  discard myGraphic.assignTexture myImage.render()
+</pre></div>
+
+
 <div class="snippet" id="tweens"><h3>Tween Usage</h3>
 <pre class="prettyprint">
   let tween = newTween[Entity,Coord](
@@ -535,6 +552,7 @@ type
   for btn in scene.radioButtons:
     scene.add(btn)
 </pre></div>
+
 <!--
 
 <div class="snippet" id=""><h3></h3>
