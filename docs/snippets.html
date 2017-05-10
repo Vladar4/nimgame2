@@ -327,6 +327,18 @@
   discard myGraphic.assignTexture myImage.render()
 </pre></div>
 
+<div class="snippet" id="perspective_image"><h3>PerspectiveImage Usage</h3>
+<pre class="prettyprint">
+  # somewhere in the initialization routine
+
+  let myImage = newPerspectiveImage("data/gfx/pimage.png")
+  let myGraphic = newTextureGraphic()
+  # render with distortion
+  myGraphic.assignTexture myImage.render(pdHor, 64, 32)
+  let myEntity = newEntity()
+  myEntith.graphic = myGrapghic
+  scene.add(myEntity)
+</pre></div>
 
 <div class="snippet" id="tweens"><h3>Tween Usage</h3>
 <pre class="prettyprint">
