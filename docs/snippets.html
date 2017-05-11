@@ -329,7 +329,7 @@
 
 <div class="snippet" id="perspective_image"><h3>PerspectiveImage Usage</h3>
 <pre class="prettyprint">
-  # somewhere in the initialization routine
+# somewhere in the initialization routine
 
   let myImage = newPerspectiveImage("data/gfx/pimage.png")
   let myGraphic = newTextureGraphic()
@@ -338,6 +338,15 @@
   let myEntity = newEntity()
   myEntith.graphic = myGrapghic
   scene.add(myEntity)
+</pre></div>
+
+<div class="snippet" id="texture_atlas"><h3>TextureAtlas Usage</h3>
+<pre class="prettyprint">
+# somewhere in the initialization routine
+
+  let myAtlas = newTextureAtlas("data/gfx/atlas.png", "data/csv/atlas.csv")
+  entity1.graphic = myAtlas["image1"]
+  entity2.graphic = myAtlas["image2"]
 </pre></div>
 
 <div class="snippet" id="tweens"><h3>Tween Usage</h3>
