@@ -1,10 +1,7 @@
 /* REFERENCE
 --min-width: 20rem;
 --max-width: 40rem;
---bg-base-color: #ddd;
---bg-grad-color: #ccc;
 --border-color: #999;
---text-light-color: #444;
 */
 
 body {
@@ -12,8 +9,8 @@ body {
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
-    background: #ddd;
-    background: linear-gradient(to right, #ccc, #ddd, #ccc);
+    color: #333;
+    background-color: #fcf8f4;
     font-family: sans-serif;
     overflow-y: scroll;
 }
@@ -48,14 +45,14 @@ header .logo img {
 }
 
 header h1 {
-    text-shadow: 2px 2px 2px #444;
+    color: #000;
+    text-shadow: 2px 2px 2px #333;
 }
 
 header .menu {
     padding: 0.5rem 1rem;
     border: 1px solid #999;
-    color: #444;
-    background-color: #e0e0e0;
+    color: #333;
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
@@ -64,11 +61,11 @@ header .menu {
 }
 
 header .menu:hover {
-    background-color: #f0f0f0;
+    background-color: #fff;
 }
 
 header .menu:active {
-    background-color: #d0d0d0;
+    background-color: #fee;
 }
 
 header .disabled {
@@ -122,7 +119,11 @@ footer {
     padding-top: 1rem;
     text-align: right;
     font-size: smaller;
-    color: #444;
+    color: #333;
+}
+
+h1, h2, h3, h4 {
+    color: #333;
 }
 
 h3 {
@@ -149,10 +150,14 @@ kbd {
 
 
 pre {
-    background-color: #e0e0e0;
+    background-color: #f2edeb;
     white-space: pre-wrap;
     padding: 2px;
     border: 1px solid #888;
+}
+
+.prettyprint {
+    background-color: #f2edeb;
 }
 
 noscript {
