@@ -22,25 +22,51 @@
 # Vladar vladar4@gmail.com
 
 import
+  ../font,
+  ../graphic,
+  ../textgraphic,
+  ../types,
   widget
 
 type
   GuiProgressBar* = ref object of GuiWidget
     min*, max*, value*: int
+    dim: Dim
+    text: TextGraphic
+    bgColor, fgColor: Color
+    bgGraphic, fgGraphic: Graphic
 
 
-proc init*(bar: GuiProgressBar) =
+proc init*(bar: GuiProgressBar,
+           dim: Dim,
+           bgColor, fgColor: Color,
+           font: Font,
+           bgGraphic, fgGraphic: Graphic) =
   ##  TODO
   GuiWidget(bar).init()
   bar.min = 0
   bar.max = 100
   bar.value = 0
+  bar.dim = dim
+  bar.bgColor = bgColor
+  bar.fgColor = fgColor
+  if font == nil:
+    bar.text = nil
+  else:
+    bar.text = newTextGraphic(font)
+    bar.text.setText("0%")
+  bar.bgGraphic = bgGraphic
+  bar.fgGraphic = fgGraphic
 
 
-proc newProgressBar*(): GuiProgressBar =
+proc newProgressBar*(dim: Dim,
+                     bgColor: Color, fgColor: Color,
+                     font: Font = nil,
+                     bgGraphic: Graphic = nil,
+                     fgGraphic: Graphic = nil): GuiProgressBar =
   ##  TODO
   result = new GuiProgressBar
-  result.init()
+  result.init(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
 
 
 proc renderGuiProgressBar*(bar: GuiProgressBar) =
@@ -48,8 +74,17 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
   ##
   ##  Call it from your progress bar render method.
   ##
-  # TODO
-  discard
+  if bar.bgGraphic == nil:
+    discard #TODO draw bgColor
+  else:
+    discard #TODO draw bgGraphic
+  if bar.fgGraphic == nil:
+    discard #TODO draw fgColor
+  else:
+    discard #TODO draw fgGraphic
+  # text
+  if not(bar.text == nil):
+    discard #TODO draw text
 
 
 method render*(bar: GuiProgressBar) =
