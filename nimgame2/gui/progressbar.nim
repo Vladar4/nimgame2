@@ -22,6 +22,8 @@
 # Vladar vladar4@gmail.com
 
 import
+  strutils,
+  ../draw,
   ../font,
   ../graphic,
   ../textgraphic,
@@ -30,7 +32,10 @@ import
 
 type
   GuiProgressBar* = ref object of GuiWidget
-    min*, max*, value*: int
+    min*, max*, value*: float
+    precision*: range[0..32] # value format precision (defaults to 0)
+    unit*: string # value format unit (defaults to '%')
+    decimalSep*: char # value format decimal separator (defaults to '.')
     dim: Dim
     text: TextGraphic
     bgColor, fgColor: Color
@@ -47,6 +52,9 @@ proc init*(bar: GuiProgressBar,
   bar.min = 0
   bar.max = 100
   bar.value = 0
+  bar.precision = 0
+  bar.unit = "%"
+  bar.decimalSep = '.'
   bar.dim = dim
   bar.bgColor = bgColor
   bar.fgColor = fgColor
@@ -75,16 +83,29 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
   ##  Call it from your progress bar render method.
   ##
   if bar.bgGraphic == nil:
-    discard #TODO draw bgColor
+    discard box(
+      bar.pos,
+      bar.pos + Coord(bar.dim),
+      bar.bgColor)
   else:
     discard #TODO draw bgGraphic
-  if bar.fgGraphic == nil:
-    discard #TODO draw fgColor
-  else:
-    discard #TODO draw fgGraphic
+  if bar.value > 0:
+    if bar.fgGraphic == nil:
+      discard box(
+        bar.pos,
+        ( bar.pos.x + (bar.dim.w.float * (bar.value / (bar.max - bar.min))),
+          bar.pos.y + bar.dim.h.float),
+        bar.fgColor)
+    else:
+      discard #TODO draw fgGraphic
   # text
   if not(bar.text == nil):
-    discard #TODO draw text
+    bar.text.setText(formatEng(
+      100 * bar.value / (bar.max - bar.min),
+      precision = bar.precision,
+      decimalSep = bar.decimalSep) & bar.unit)
+    let offset = bar.dim / 2.0 - Coord(bar.text.dim) / 2.0
+    bar.text.draw(bar.pos + offset)
 
 
 method render*(bar: GuiProgressBar) =

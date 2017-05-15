@@ -56,7 +56,7 @@ proc toggle*(radiogroup: GuiRadioGroup, target: GuiWidget) =
   if idx >= 0:
     for i in 0..radiogroup.list.high:
       if i != idx:
-        GuiWidget(radiogroup.list[i]).setToggled(false)
+        radiogroup.list[i].setToggled(false)
 
 
 #================#
