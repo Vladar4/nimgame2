@@ -93,15 +93,17 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
     if bar.fgGraphic == nil:
       discard box(
         bar.pos,
-        ( bar.pos.x + (bar.dim.w.float * (bar.value / (bar.max - bar.min))),
+        ( bar.pos.x +
+            (bar.dim.w.float * ((bar.value - bar.min) / (bar.max - bar.min))),
           bar.pos.y + bar.dim.h.float),
         bar.fgColor)
     else:
       discard #TODO draw fgGraphic
+
   # text
   if not(bar.text == nil):
     bar.text.setText(formatEng(
-      100 * bar.value / (bar.max - bar.min),
+      bar.value,
       precision = bar.precision,
       decimalSep = bar.decimalSep) & bar.unit)
     let offset = bar.dim / 2.0 - Coord(bar.text.dim) / 2.0
