@@ -214,6 +214,49 @@ method draw*(graphic: TextureGraphic,
                                     flip.RendererFlip)
 
 
+proc drawTiled*(graphic: TextureGraphic,
+                rect: Rect,
+                region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  ##  Repeatedly draw the ``graphic`` to fill the ``rect``.
+  ##
+  ##  ``region`` Source texture region to draw.
+  ##
+
+  proc drawTile(graphic: TextureGraphic, src, dst: var Rect) =
+    discard renderer.renderCopy(graphic.fTexture, addr(src), addr(dst))
+
+  proc drawLine(graphic: TextureGraphic, src, dst: var Rect, lastX, endX: int) =
+    while dst.x < lastX:
+      graphic.drawTile(src, dst)
+      dst.x += dst.w
+    var
+      srcEnd = src
+      dstEnd = dst
+    srcEnd.w = endX - dst.x
+    dstEnd.w = srcEnd.w
+    graphic.drawTile(srcEnd, dstEnd)
+
+  var
+    srcRect = if region == Rect(x: 0, y: 0, w: 0, h: 0):
+                Rect(x: 0, y: 0, w: graphic.dim.w, h: graphic.dim.h)
+              else:
+                region
+    dstRect = Rect(x: rect.x, y: rect.y, w: graphic.w, h: graphic.h)
+  let
+    endX = rect.x + rect.w
+    endY = rect.y + rect.h
+    lastX = endX - dstRect.w
+    lastY = endY - dstRect.h
+
+  while dstRect.y < lastY:
+    graphic.drawLine(srcRect, dstRect, lastX, endX)
+    dstRect.x = rect.x
+    dstRect.y += dstRect.h
+  srcRect.h = endY - dstRect.y
+  dstRect.h = srcRect.h
+  graphic.drawLine(srcRect, dstRect, lastX, endX)
+
+
 proc colorMod*(graphic: TextureGraphic): Color =
   ##  ``Return`` current color modifier.
   ##
