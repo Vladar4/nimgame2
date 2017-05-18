@@ -25,8 +25,8 @@ import
   strutils,
   ../draw,
   ../font,
-  ../graphic,
   ../textgraphic,
+  ../texturegraphic,
   ../types,
   widget
 
@@ -39,14 +39,14 @@ type
     dim: Dim
     text: TextGraphic
     bgColor, fgColor: Color
-    bgGraphic, fgGraphic: Graphic
+    bgGraphic, fgGraphic: TextureGraphic
 
 
 proc init*(bar: GuiProgressBar,
            dim: Dim,
            bgColor, fgColor: Color,
            font: Font,
-           bgGraphic, fgGraphic: Graphic) =
+           bgGraphic, fgGraphic: TextureGraphic) =
   ##  TODO
   GuiWidget(bar).init()
   bar.min = 0
@@ -70,8 +70,8 @@ proc init*(bar: GuiProgressBar,
 proc newProgressBar*(dim: Dim,
                      bgColor: Color, fgColor: Color,
                      font: Font = nil,
-                     bgGraphic: Graphic = nil,
-                     fgGraphic: Graphic = nil): GuiProgressBar =
+                     bgGraphic: TextureGraphic = nil,
+                     fgGraphic: TextureGraphic = nil): GuiProgressBar =
   ##  TODO
   result = new GuiProgressBar
   result.init(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
@@ -82,23 +82,32 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
   ##
   ##  Call it from your progress bar render method.
   ##
+  # background
   if bar.bgGraphic == nil:
     discard box(
       bar.pos,
-      bar.pos + Coord(bar.dim),
+      bar.pos + Coord(bar.dim - (1, 1)),
       bar.bgColor)
   else:
-    discard #TODO draw bgGraphic
+    bar.bgGraphic.drawTiled(Rect(
+      x: bar.pos.x.cint,
+      y: bar.pos.y.cint,
+      w: bar.dim.w.cint,
+      h: bar.dim.h.cint))
+
+  # foreground
   if bar.value > 0:
+    var part: Coord = (
+      int(bar.dim.w.float * ((bar.value - bar.min) / (bar.max - bar.min))),
+      bar.dim.h)
     if bar.fgGraphic == nil:
-      discard box(
-        bar.pos,
-        ( bar.pos.x +
-            (bar.dim.w.float * ((bar.value - bar.min) / (bar.max - bar.min))),
-          bar.pos.y + bar.dim.h.float),
-        bar.fgColor)
+      discard box(bar.pos, bar.pos + part - (1.0, 1.0), bar.fgColor)
     else:
-      discard #TODO draw fgGraphic
+      bar.fgGraphic.drawTiled(Rect(
+        x: bar.pos.x.cint,
+        y: bar.pos.y.cint,
+        w: part.x.cint,
+        h: part.y.cint))
 
   # text
   if not(bar.text == nil):
