@@ -693,10 +693,10 @@ template quoted(s: string): string = "\"" & s & "\""
 proc `$`*(gi: GeneralInput): string =
   return case gi.kind:
     of giKeyboard:
-      "KEY" & GISep & toUpper($getScancodeName(gi.keyboard.key)).quoted
+      "KEY" & GISep & toUpperAscii($getScancodeName(gi.keyboard.key)).quoted
     of giMouse:
       case gi.mouse.kind:
-      of mButton: "MBTN" & GISep & toUpper($gi.mouse.button)
+      of mButton: "MBTN" & GISep & toUpperAscii($gi.mouse.button)
       of mMove: "MMOVE" & GISep & (
         case gi.mouse.direction:
         of dirX: "X"
