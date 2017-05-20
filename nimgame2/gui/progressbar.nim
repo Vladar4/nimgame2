@@ -36,10 +36,11 @@ type
     precision*: range[0..32] # value format precision (defaults to 0)
     unit*: string # value format unit (defaults to '%')
     decimalSep*: char # value format decimal separator (defaults to '.')
-    dim: Dim
+    direction*: Direction
+    dim*: Dim
     text: TextGraphic
-    bgColor, fgColor: Color
-    bgGraphic, fgGraphic: TextureGraphic
+    bgColor*, fgColor*: Color
+    bgGraphic*, fgGraphic*: TextureGraphic
 
 
 proc init*(bar: GuiProgressBar,
@@ -55,6 +56,7 @@ proc init*(bar: GuiProgressBar,
   bar.precision = 0
   bar.unit = "%"
   bar.decimalSep = '.'
+  bar.direction = Direction.leftRight
   bar.dim = dim
   bar.bgColor = bgColor
   bar.fgColor = fgColor
@@ -97,17 +99,54 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
 
   # foreground
   if bar.value > 0:
-    var part: Coord = (
-      int(bar.dim.w.float * ((bar.value - bar.min) / (bar.max - bar.min))),
-      bar.dim.h)
+
+    let value = (bar.value - bar.min) / (bar.max - bar.min)
+    var part: Coord = case bar.direction:
+      of Direction.leftRight, Direction.rightLeft:
+        (int(bar.dim.w.float * value), bar.dim.h)
+      of Direction.bottomTop, Direction.topBottom:
+        (bar.dim.w, int(bar.dim.h.float * value))
+
     if bar.fgGraphic == nil:
-      discard box(bar.pos, bar.pos + part - (1.0, 1.0), bar.fgColor)
+      case bar.direction:
+      of Direction.leftRight, Direction.topBottom:
+        discard box(
+          bar.pos,
+          bar.pos + part - (1.0, 1.0),
+          bar.fgColor)
+      of Direction.rightLeft:
+        discard box(
+          (bar.pos.x + bar.dim.w.float - part.x, bar.pos.y),
+          bar.pos + Coord(bar.dim) - (1.0, 1.0),
+          bar.fgColor)
+      of Direction.bottomTop:
+        discard box(
+          (bar.pos.x, bar.pos.y + bar.dim.h.float - part.y),
+          bar.pos + Coord(bar.dim) - (1.0, 1.0),
+          bar.fgColor)
+      else:
+        discard
+
     else:
-      bar.fgGraphic.drawTiled(Rect(
-        x: bar.pos.x.cint,
-        y: bar.pos.y.cint,
-        w: part.x.cint,
-        h: part.y.cint))
+      case bar.direction:
+      of Direction.leftRight, Direction.topBottom:
+        bar.fgGraphic.drawTiled(Rect(
+          x: bar.pos.x.cint,
+          y: bar.pos.y.cint,
+          w: part.x.cint,
+          h: part.y.cint))
+      of Direction.rightLeft:
+        bar.fgGraphic.drawTiled(Rect(
+          x: cint(bar.pos.x + bar.dim.w.float - part.x),
+          y: bar.pos.y.cint,
+          w: part.x.cint,
+          h: part.y.cint))
+      of Direction.bottomTop:
+        bar.fgGraphic.drawTiled(Rect(
+          x: bar.pos.x.cint,
+          y: cint(bar.pos.y + bar.dim.h.float - part.y),
+          w: part.x.cint,
+          h: part.y.cint))
 
   # text
   if not(bar.text == nil):

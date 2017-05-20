@@ -52,6 +52,7 @@ type
     both        = sdl.FlipBoth
 
   TextAlign* {.pure.} = enum left, center, right
+  Direction* {.pure.} = enum leftRight, rightLeft, topBottom, bottomTop
   HAlign* {.pure.} = enum left, center, right
   VAlign* {.pure.} = enum top, center, bottom
 
