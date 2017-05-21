@@ -140,13 +140,15 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
           x: cint(bar.pos.x + bar.dim.w.float - part.x),
           y: bar.pos.y.cint,
           w: part.x.cint,
-          h: part.y.cint))
+          h: part.y.cint),
+          reverseX = true, reverseY = true)
       of Direction.bottomTop:
         bar.fgGraphic.drawTiled(Rect(
           x: bar.pos.x.cint,
           y: cint(bar.pos.y + bar.dim.h.float - part.y),
           w: part.x.cint,
-          h: part.y.cint))
+          h: part.y.cint),
+          reverseX = true, reverseY = true)
 
   # text
   if not(bar.text == nil):
