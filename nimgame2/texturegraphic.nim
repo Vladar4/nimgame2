@@ -241,7 +241,7 @@ proc drawTiled*(graphic: TextureGraphic,
 
     if deltaX > 0:
       var
-        partSrc = Rect(x: 0, y: 0, w: deltaX, h: src.h)
+        partSrc = Rect(x: src.x, y: src.y, w: deltaX, h: src.h)
         partDst = dst
       if reverseX:
         partSrc.x = src.w - deltaX
