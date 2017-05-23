@@ -380,6 +380,10 @@ proc run*(game: Game) =
   timePrev = sdl.getPerformanceCounter()
   draw.setFont()
 
+  initKeyboard()
+  initMouse()
+  initJoysticks()
+
   # Main loop
   while gameRunning:
     timeCurr = sdl.getPerformanceCounter()

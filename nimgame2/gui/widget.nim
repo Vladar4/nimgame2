@@ -154,12 +154,13 @@ proc enable*(widget: GuiWidget) =
 proc updateFocus(widget: GuiWidget, mouse: Coord): bool =
   ##  Check if the ``mouse`` is over the ``widget``.
   ##
-  if mouse.collide(widget.collider):
-    widget.state = GuiState.focusedUp
-    return true
-  else:
-    widget.state = GuiState.defaultUp
-    return false
+  if widget.collider != nil:
+    if mouse.collide(widget.collider):
+      widget.state = GuiState.focusedUp
+      return true
+    else:
+      widget.state = GuiState.defaultUp
+      return false
 
 
 proc eventGuiWidget*(widget: GuiWidget, e: Event) =
