@@ -33,14 +33,16 @@ import
 type
   GuiProgressBar* = ref object of GuiWidget
     min*, max*, value*: float
-    precision*: range[0..32] # value format precision (defaults to 0)
-    unit*: string # value format unit (defaults to '%')
-    decimalSep*: char # value format decimal separator (defaults to '.')
+    precision*: range[0..32]  ## value format precision (defaults to 0)
+    unit*: string             ## value format unit (defaults to '%')
+    decimalSep*: char       ## value format decimal separator (defaults to '.')
     direction*: Direction
     dim*: Dim
     text: TextGraphic
+    outline*: Dim            ## outline border size
     bgColor*, fgColor*: Color
     bgGraphic*, fgGraphic*: TextureGraphic
+    reverseX*, reverseY*: bool
 
 
 proc init*(bar: GuiProgressBar,
@@ -67,6 +69,8 @@ proc init*(bar: GuiProgressBar,
     bar.text.setText("0%")
   bar.bgGraphic = bgGraphic
   bar.fgGraphic = fgGraphic
+  bar.reverseX = false
+  bar.reverseY = false
 
 
 proc newProgressBar*(dim: Dim,
@@ -87,15 +91,17 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
   # background
   if bar.bgGraphic == nil:
     discard box(
-      bar.pos,
-      bar.pos + Coord(bar.dim - (1, 1)),
+      bar.pos - Coord(bar.outline),
+      bar.pos + Coord(bar.dim - (1, 1) + bar.outline),
       bar.bgColor)
   else:
     bar.bgGraphic.drawTiled(Rect(
-      x: bar.pos.x.cint,
-      y: bar.pos.y.cint,
-      w: bar.dim.w.cint,
-      h: bar.dim.h.cint))
+      x: bar.pos.x.cint - bar.outline.w.cint,
+      y: bar.pos.y.cint - bar.outline.h.cint,
+      w: bar.dim.w.cint + bar.outline.w.cint * 2,
+      h: bar.dim.h.cint + bar.outline.h.cint * 2),
+      reverseX = bar.reverseX,
+      reverseY = bar.reverseY)
 
   # foreground
   if bar.value > 0:
@@ -134,21 +140,25 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
           x: bar.pos.x.cint,
           y: bar.pos.y.cint,
           w: part.x.cint,
-          h: part.y.cint))
+          h: part.y.cint),
+          reverseX = bar.reverseX,
+          reverseY = bar.reverseY)
       of Direction.rightLeft:
         bar.fgGraphic.drawTiled(Rect(
           x: cint(bar.pos.x + bar.dim.w.float - part.x),
           y: bar.pos.y.cint,
           w: part.x.cint,
           h: part.y.cint),
-          reverseX = true, reverseY = true)
+          reverseX = bar.reverseX,
+          reverseY = bar.reverseY)
       of Direction.bottomTop:
         bar.fgGraphic.drawTiled(Rect(
           x: bar.pos.x.cint,
           y: cint(bar.pos.y + bar.dim.h.float - part.y),
           w: part.x.cint,
           h: part.y.cint),
-          reverseX = true, reverseY = true)
+          reverseX = bar.reverseX,
+          reverseY = bar.reverseY)
 
   # text
   if not(bar.text == nil):
