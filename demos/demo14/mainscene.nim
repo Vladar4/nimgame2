@@ -82,7 +82,7 @@ method update*(scene: MainScene, elapsed: float) =
     scene.d.tween.update(elapsed)
 
   # Controls and speed
-  var direction: Direction =
+  var direction: dwarf.Direction =
     if ScancodeDown.down or ScancodeS.down: dDown
     elif ScancodeUp.down or ScancodeW.down: dUp
     elif ScancodeLeft.down or ScancodeA.down: dLeft

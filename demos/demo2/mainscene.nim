@@ -80,7 +80,7 @@ proc changeResolution(scene: MainScene, increase = true) =
       scale.x -= ScaleMod
       scale.y -= ScaleMod
   # set resolution
-  game.scale = scale
+  game.windowSize = Dim(Coord(game.size) * scale)
 
 
 method event*(scene: MainScene, event: Event) =
@@ -102,7 +102,7 @@ method event*(scene: MainScene, event: Event) =
 method render*(scene: MainScene) =
   scene.renderScene()
   let c = TextureGraphic(scene.s.graphic).colorMod
-  let res = game.logicalSize
+  let res = game.windowSize
   let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
   discard box((4, 60), (220, 124), 0x000000CC'u32)
   discard string(
