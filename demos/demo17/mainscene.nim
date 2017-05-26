@@ -12,6 +12,7 @@ import
   nimgame2/gui/widget,
   nimgame2/gui/radio,
   nimgame2/gui/textinput,
+  nimgame2/gui/progressbar,
   btnSquare, btnCircle
 
 
@@ -23,6 +24,7 @@ type
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
+    progressBar: GuiProgressBar
     font: TrueTypeFont
 
 
@@ -53,7 +55,7 @@ proc init*(scene: MainScene) =
   scene.btnMosaic = newSquareButton(scene.btnMosaicG)
   scene.btnMosaic.pos = (200, 100)
 
-  # TextInput
+  # Text Input
   scene.font = newTrueTypeFont()
   discard scene.font.load("../assets/fnt/FSEX300.ttf", 16)
   let inputmosaic = newMosaic("../assets/gfx/text_input.png", (8, 8))
@@ -73,7 +75,18 @@ proc init*(scene: MainScene) =
     scene.btnsRadio[i].pos = (i.float * 50.0, 0.0)
   scene.btnsRadio[0].toggled = true
 
+  # Progress Bar
+  scene.progressBar = newProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
+    scene.font)
+  scene.progressBar.min = 0
+  scene.progressBar.max = 100
+  scene.progressBar.value = 0
+  scene.progressBar.direction = Direction.leftRight
+  scene.progressBar.outline = (1, 1)
+  scene.progressBar.pos = (100, 250)
+
   # add to scene
+  scene.add(scene.progressBar)
   scene.add(scene.radioGroup)
   for b in scene.btnsRadio:
     scene.add(b)
@@ -116,4 +129,11 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
+
+  # progressBar
+  if scene.progressBar.value < scene.progressBar.max:
+    scene.progressBar.value += 10 * elapsed
+    if scene.progressBar.value > scene.progressBar.max:
+      scene.progressBar.value = scene.progressBar.max
+
 
