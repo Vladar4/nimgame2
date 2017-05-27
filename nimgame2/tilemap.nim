@@ -41,8 +41,12 @@ type
       ##  Increase on scales vastly different from `1.0`. \
       ##  Set to `1.0` if your map isn't rotating or scaling.
 
-  TileCollider* = ref object of Collider  ## Collider to use with TileMap
-    tiles*: seq[BoxCollider]  ##  Sequence of individual tile colliders
+  TileCollider* = ref object of BoxCollider
+    value*: int       ##  Tile kind value
+    mapx*, mapy*: int ##  Map coordinates
+
+  TileMapCollider* = ref object of Collider  ## Collider to use with TileMap
+    tiles*: seq[TileCollider]  ##  Sequence of individual tile colliders
 
 
 
@@ -74,7 +78,7 @@ proc show*(tilemap: TileMap): TileShow {.inline.} =
   return tilemap.fShow
 
 
-proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0))
+proc init*(t: TilemapCollider, parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0))
 proc `show=`*(tilemap: TileMap, val: TileShow) =
   ##  Set new values for the shown slices of tiles.
   ##
@@ -87,7 +91,8 @@ proc `show=`*(tilemap: TileMap, val: TileShow) =
 
   # Update collider
   if tilemap.collider != nil:
-    TileCollider(tilemap.collider).init(tilemap, (0.0, 0.0), tilemap.sprite.dim)
+    TilemapCollider(tilemap.collider).init(
+      tilemap, (0.0, 0.0), tilemap.sprite.dim)
 
 
 template updateShow(tilemap: Tilemap) =
@@ -178,7 +183,26 @@ method render*(tilemap: TileMap) =
 # TileCollider #
 #==============#
 
-proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
+proc init*(t: TileCollider,
+           parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
+           value, mapx, mapy: int) =
+  BoxCollider(t).init(parent, pos, dim)
+  t.value = value
+  t.mapx = mapx
+  t.mapy = mapy
+
+
+proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
+                      value, mapx, mapy: int): TileCollider =
+  new result
+  result.init(parent, pos, dim, value, mapx, mapy)
+
+
+#=================#
+# TilemapCollider #
+#=================#
+
+proc init*(t: TilemapCollider, parent: TileMap, pos: Coord = (0, 0),
            dim: Dim = (0, 0)) =
   Collider(t).init(parent, pos)
   t.tiles = @[]
@@ -200,12 +224,13 @@ proc init*(t: TileCollider, parent: TileMap, pos: Coord = (0, 0),
     for x in parent.fShow.x:
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float / scale + offset.x
-        t.tiles.add(newBoxCollider(parent, position, dim))
+        t.tiles.add(newTileCollider(parent, position, dim,
+          parent.map[y][x], x, y))
 
 
-proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0),
-                      dim: Dim = (0, 0)): TileCollider =
-  ##  Create a ``TileCollider`` for the ``parent`` ``TileMap``.
+proc newTilemapCollider*(parent: TileMap, pos: Coord = (0, 0),
+                         dim: Dim = (0, 0)): TilemapCollider =
+  ##  Create a ``TilemapCollider`` for the ``parent`` ``TileMap``.
   ##
   ##  Most of the times you should use ``initCollider()`` instead.
   ##
@@ -213,11 +238,11 @@ proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0),
   ##
   ##  ``dim`` Tile dimensions.
   ##
-  result = new TileCollider
+  result = new TilemapCollider
   result.init(parent, pos, dim)
 
 
-method render*(t: TileCollider) =
+method render*(t: TilemapCollider) =
   for tile in t.tiles:
     tile.render()
   t.renderCollider()
@@ -226,12 +251,29 @@ method render*(t: TileCollider) =
 proc initCollider*(tilemap: TileMap) =
   ##  Initialize a collider for the ``tilemap``.
   ##
-  tilemap.collider = newTileCollider(tilemap, (0, 0), tilemap.sprite.dim)
+  tilemap.collider = newTilemapCollider(tilemap, (0, 0), tilemap.sprite.dim)
+
+
+template collisionList*(t: TilemapCollider,
+                        a: typed,
+                        first: bool = false): seq[TileCollider] =
+  ##  Get a list of collided ``TileColliders``.
+  ##
+  ##  ``a`` collision target (``Coord``, any ``Collider``, etc.)
+  ##
+  ##  ``first`` If true, return after the first detected collision.
+  ##
+  var result: seq[TileCollider] = @[]
+  for tile in t.tiles:
+    if tile.collide(a):
+      result.add(tile)
+      if first: break
+  result
 
 
 # with Coord
 
-method collide*(t: TileCollider, pos: Coord): bool =
+method collide*(t: TilemapCollider, pos: Coord): bool =
   for tile in t.tiles:
     if tile.collide(pos):
       return true
@@ -240,72 +282,72 @@ method collide*(t: TileCollider, pos: Coord): bool =
 
 # with Collider
 
-method collide*(t: TileCollider, a: Collider): bool =
+method collide*(t: TilemapCollider, a: Collider): bool =
   for tile in t.tiles:
     if tile.collide(a):
       return true
   return false
 
 
-method collide*(a: Collider, t: TileCollider): bool {.inline.} =
+method collide*(a: Collider, t: TilemapCollider): bool {.inline.} =
   collide(t, a)
 
 
 # with BoxCollider
 
-method collide*(t: TileCollider, b: BoxCollider): bool =
+method collide*(t: TilemapCollider, b: BoxCollider): bool =
   for tile in t.tiles:
     if tile.collide(b):
       return true
   return false
 
 
-method collide*(b: BoxCollider, t: TileCollider): bool {.inline.} =
+method collide*(b: BoxCollider, t: TilemapCollider): bool {.inline.} =
   collide(t, b)
 
 
 # with CircleCollider
 
-method collide*(t: TileCollider, c: CircleCollider): bool =
+method collide*(t: TilemapCollider, c: CircleCollider): bool =
   for tile in t.tiles:
     if tile.collide(c):
       return true
   return false
 
 
-method collide*(c: CircleCollider, t: TileCollider): bool {.inline.} =
+method collide*(c: CircleCollider, t: TilemapCollider): bool {.inline.} =
   collide(t, c)
 
 
 # with LineCollider
 
-method collide*(t: TileCollider, d: LineCollider): bool =
+method collide*(t: TilemapCollider, d: LineCollider): bool =
   for tile in t.tiles:
     if tile.collide(d):
       return true
   return false
 
 
-method collide*(d: LineCollider, t: TileCollider): bool {.inline.} =
+method collide*(d: LineCollider, t: TilemapCollider): bool {.inline.} =
   collide(t, d)
 
 
 # with PolyCollider
 
-method collide*(t: TileCollider, p: PolyCollider): bool =
+method collide*(t: TilemapCollider, p: PolyCollider): bool =
   for tile in t.tiles:
     if tile.collide(p):
       return true
   return false
 
 
-method collide*(p: PolyCollider, t: TileCollider): bool {.inline.} =
+method collide*(p: PolyCollider, t: TilemapCollider): bool {.inline.} =
   collide(t, p)
 
 
-# with TileCollider
+# with TilemapCollider
 
-method collide*(t1, t2: TileCollider): bool =
+method collide*(t1, t2: TilemapCollider): bool =
   for tile in t1.tiles:
     if t2.collide(tile):
       return true
