@@ -1,7 +1,8 @@
 import
   nimgame2/nimgame,
   nimgame2/entity,
-  nimgame2/input
+  nimgame2/input,
+  nimgame2/tilemap
 
 type
   Cursor* = ref object of Entity
@@ -28,5 +29,10 @@ method update*(entity: Cursor, elapsed: float) =
 
 method onCollide*(entity: Cursor, target: Entity) =
   if target.tags.len > 0:
-    entity.collidedWith.add(target.tags[0])
+    if "map" in target.tags:
+      let collider = TilemapCollider(target.collider)
+      let clist = collider.collisionList(entity.pos)
+      for tile in clist:
+        entity.collidedWith.add(
+          "[" & $tile.mapx & ":" & $tile.mapy & "] -> " & $tile.value)
 

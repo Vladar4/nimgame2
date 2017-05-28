@@ -83,9 +83,13 @@ method render*(scene: MainScene) =
 
   discard string((8, 88), "Space - toggle collider outlines", 0xFFFFFFFF'u32)
 
+  var collides: string = ""
+  for collision in scene.cursor.collidedWith:
+    collides &= collision & " "
+
   discard string((8, 96),
     if scene.cursor.collidedWith.len > 0:
-      "Cursor is over a collidable tile"
+      "Cursor collides with: " & collides
     else:
       "Cursor isn't over a collidable tile",
     0xFFFFFFFF'u32)
