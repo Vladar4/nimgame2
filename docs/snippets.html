@@ -410,6 +410,18 @@
 </pre></div>
 
 
+<div class="snippet" id="tilemap_collisionlist"><h3>TileMap Collision List</h3>
+<pre class="prettyprint">
+  # checking specific tile collisions
+  let
+    collider = TilemapCollider(map.collider)
+    collisions = collider.collisionList(myEntity.collider)
+    for tile in collisions:
+      echo
+        "Collided with " &amp; $tile.value &amp; " at " &amp; $tile.mapx &amp; ":" & $tile.mapy
+</pre></div>
+
+
 <div class="snippet" id="camera"><h3>Camera Usage</h3>
 <pre class="prettyprint">
   # somewhere in the initialization routine
