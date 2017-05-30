@@ -586,6 +586,22 @@ type
     scene.add(btn)
 </pre></div>
 
+
+<div class="snippet" id="gui_progressbar"><h3>GUI: ProgressBar</h3>
+<pre class="prettyprint">
+# somewhere in the initialization routine
+  scene.bar = newProgressBar((200, 50), 0xFF0000FF<span class="nocode">&#39;</span>u32, 0xFF0000FF<span class="nocode">&#39;</span>u32, myFont)
+  scene.bar.min = 0
+  scene.bar.max = 100
+  scene.bar.direction = Direction.leftRight
+  scene.bar.outline = (1, 1) # one pixel outline
+  scene.add(scene.bar)
+
+# on update
+  scene.bar.value = newValue
+</pre></div>
+
+
 <!--
 
 <div class="snippet" id=""><h3></h3>
