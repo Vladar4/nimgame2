@@ -1057,6 +1057,12 @@ proc loadData*() =
     proc(file: string): Sound = newSound(file))
 
 ...
+
+proc freeData*() =
+  ...
+
+  for sound in sfxData.values:
+    sound.free()
 </pre>
 
 <h4>ball.nim</h4>
