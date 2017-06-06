@@ -30,6 +30,8 @@ import
 
 
 type
+  GuiAction* = proc(widget: GuiWidget)
+
   GuiState* {.pure.} = enum
     defaultUp
     defaultDown
@@ -38,8 +40,8 @@ type
     disabledUp
     disabledDown
 
-
   GuiWidget* = ref object of Entity
+    action*: GuiAction
     fState: GuiState
     mbAllow*, fWasPressed: MouseState
     toggle*, fToggled: bool
@@ -67,8 +69,13 @@ method onPress*(widget: GuiWidget) {.base.} =
   discard
 
 
+proc clickAction*(widget: GuiWidget) =
+  if not(widget.action == nil):
+    widget.action(widget)
+
+
 method onClick*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
-  discard
+  widget.clickAction()
 
 
 template isUp*(state: GuiState): bool =
