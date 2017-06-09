@@ -26,9 +26,205 @@
 
 </div>
 
+
 <div class="section" id="assets"><h3>Assets</h3>
 
 </div>
+
+
+<div class="section" id="assets"><h3>Starting to Code</h3>
+
+    <p>
+        First lines of code are actually pretty similar to the <a href="tut101_bounce.html"></a> so we won't dive too deep here this time.
+    </p>
+
+<h4>data.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    audio,
+    font,
+    mosaic,
+    scene,
+    texturegraphic,
+    truetypefont,
+    types,
+  ]
+
+
+const
+  GameWidth* = 640
+  GameHeight* = 360
+  GameTitle* = "Nimgame 2 Platformer"
+
+
+var
+  titleScene*, mainScene*: Scene
+  defaultFont*, bigFont*: TrueTypeFont
+  gfxData*: Assets[TextureGraphic]
+  sfxData*: Assets[Sound]
+  buttonMosaic*: Mosaic
+  buttonSkin*: TextureGraphic
+  score*: int
+
+
+proc loadData*() =
+  defaultFont = newTrueTypeFont()
+  if not defaultFont.load("data/fnt/FSEX300.ttf", 16):
+    echo "ERROR: Can't load font"
+  bigFont = newTrueTypeFont()
+  if not bigFont.load("data/fnt/FSEX300.ttf", 32):
+    echo "ERROR: Can't load font"
+
+  gfxData = newAssets[TextureGraphic](
+    "data/gfx",
+    proc(file: string): TextureGraphic = newTextureGraphic(file))
+
+  sfxData = newAssets[Sound](
+    "data/sfx",
+    proc(file: string): Sound = newSound(file))
+
+  buttonMosaic = newMosaic("data/gui/button.png", (8, 8))
+  buttonSkin = newTextureGraphic()
+  discard buttonSkin.assignTexture buttonMosaic.render(
+    patternStretchBorder(8, 2))
+
+
+proc freeData*() =
+  defaultFont.free()
+  bigFont.free()
+  for graphic in gfxData.values:
+    graphic.free()
+  for sound in sfxData.values:
+    sound.free()
+  buttonSkin.free()
+  buttonMosaic.free()
+
+</pre></div>
+
+
+<h4>title.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    entity,
+    font,
+    gui/button,
+    gui/widget,
+    mosaic,
+    nimgame,
+    scene,
+    settings,
+    textgraphic,
+    texturegraphic,
+    types,
+  ],
+  data
+
+
+type
+  TitleScene = ref object of Scene
+
+
+proc init*(scene: TitleScene) =
+  init Scene(scene)
+
+
+proc free*(scene: TitleScene) =
+  discard
+
+
+proc newTitleScene*(): TitleScene =
+  new result, free
+  init result
+</pre>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    entity,
+    font,
+    gui/button,
+    gui/widget,
+    nimgame,
+    scene,
+    textgraphic,
+    types,
+  ],
+  data,
+  level,
+  player
+
+
+type
+  MainScene = ref object of Scene
+
+
+proc init*(scene: MainScene) =
+  init Scene scene
+
+
+proc free*(scene: MainScene) =
+  discard
+
+
+proc newMainScene*(): MainScene =
+  new result, free
+  init result
+
+</pre>
+
+
+
+<h4>platformer.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    nimgame,
+    settings,
+    types,
+  ],
+  data,
+  title,
+  main
+
+
+game = newGame()
+if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
+
+  # Init
+  game.setResizable(true) # Window could be resized
+  game.minSize = (GameWidth, GameHeight) # Minimal window size
+  game.windowSize = (GameWidth * 2, GameHeight * 2) # Doulbe scaling (1280x720)
+  game.centrify() # Place window at the center of the screen
+
+  loadData() # Call it before any scene initialization
+
+  # Create scenes
+  titleScene = newTitleScene()
+  mainScene = newMainScene()
+
+  # Run
+  game.scene = titleScene # Initial scene
+  run game # Let's go!
+</pre>
+
+</div>
+
+
+<h4></h4>
+<div class="section" id=""><h3></h3>
+
+<pre class="prettyprint">
+
+</pre>
+
+</div>
+
 
 <div class="section" id="links"><h3>Links</h3>
     <ul>
@@ -40,6 +236,7 @@
 
 <!--
 
+<h4></h4>
 <div class="section" id=""><h3></h3>
 
 <pre class="prettyprint">
