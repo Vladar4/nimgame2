@@ -131,6 +131,15 @@ type
 proc init*(scene: TitleScene) =
   init Scene(scene)
 
+  # Title text
+  let titleText = newTextGraphic bigFont
+  titleText.setText GameTitle
+  let title = newEntity()
+  title.graphic = titleText
+  title.centrify()
+  title.pos = (GameWidth / 2, GameHeight / 3)
+  scene.add title
+
 
 proc free*(scene: TitleScene) =
   discard
@@ -216,11 +225,67 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 </div>
 
 
-<h4></h4>
-<div class="section" id=""><h3></h3>
+<div class="section" id="menu"><h3>Menu</h3>
 
+    <p>
+        Let's add "Play" and "Exit" buttons to our title screen. This buttons will work through the action procedures feature of <b>GuiWidget</b> type.
+    </p>
+
+<h4>title.nim</h4>
 <pre class="prettyprint">
+...
 
+type
+  TitleScene = ref object of Scene
+
+
+# Play action procedure
+proc play(widget: GuiWidget) =
+  game.scene = mainScene
+
+
+# Exit action procedure
+proc exit(widget: GuiWidget) =
+  gameRunning = false
+
+...
+</pre>
+
+    <p>
+        Now, we just need to initialize both buttons in the <b>init</b> procedure, binding the actions.
+    </p>
+
+<h4>title.nim</h4>
+<pre class="prettyprint">
+...
+
+proc init*(scene: TitleScene) =
+  init Scene(scene)
+
+  # Create menu buttons
+  var
+    btnPlay, btnExit: GuiButton
+    btnPlayLabel, btnExitLabel: TextGraphic
+
+  # Play button
+  btnPlayLabel = newTextGraphic defaultFont
+  btnPlayLabel.setText "PLAY"
+  btnPlay = newGuiButton(buttonSkin, btnPlayLabel)
+  btnPlay.centrify()
+  btnPlay.pos = (GameWidth / 2, GameHeight / 2)
+  btnPlay.action = play # assign the action procedure
+  scene.add btnPlay
+
+  # Exit button
+  btnExitLabel = newTextGraphic defaultFont
+  btnExitLabel.setText "EXIT"
+  btnExit = newGuiButton(buttonSkin, btnExitLabel)
+  btnExit.centrify()
+  btnExit.pos = (GameWidth / 2, GameHeight / 2 + 64)
+  btnExit.action = exit # assign the action procedure
+  scene.add btnExit
+
+  ...
 </pre>
 
 </div>
