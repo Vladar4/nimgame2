@@ -528,6 +528,25 @@ method onClick*(btn: MyButton, mb: MouseButton) =
   scene.add(myBtn)
 </pre></div>
 
+
+<div class="snippet" id="gui_actions"><h3>GUI: Actions</h3>
+<pre class="prettyprint">
+# action procedure
+proc myBtnAction(widget: GuiWidget) =
+  echo "clicked my button"
+
+# somewhere in the initialization routine
+  # skin loading
+  let mySkin = newTextureGraphic()
+  discard mySkin.load("data/gfx/button_skin.png")
+
+  # button initialization
+  myBtn = newGuiButton(mySkin)
+  myBtn.action = myBtnAction
+  scene.add(myBtn)
+</pre></div>
+
+
 <div class="snippet" id="gui_text_input"><h3>GUI: Text Input (+ Mosaic)</h3>
 <pre class="prettyprint">
 import
