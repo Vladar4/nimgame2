@@ -164,9 +164,7 @@ import
     textgraphic,
     types,
   ],
-  data,
-  level,
-  player
+  data
 
 
 type
@@ -291,6 +289,81 @@ proc init*(scene: TitleScene) =
 </div>
 
 
+<div class="section" id="level"><h3>Level</h3>
+
+    <p>
+        Now we'll create a wireframe for our level module.
+    </p>
+
+<h4>level.nim</h4>
+<pre class="prettyprint">
+import
+  parseutils,
+  nimgame2 / [
+    assets,
+    entity,
+    texturegraphic,
+    tilemap,
+    utils,
+  ],
+  data
+
+type
+  Level* = ref object of TileMap
+
+
+proc init*(level: Level, tiles: TextureGraphic) =
+  init Tilemap level
+  level.tags.add("level")
+  level.graphic = tiles
+  level.initSprite((32, 32))
+
+
+proc newLevel*(tiles: TextureGraphic): Level =
+  new result
+  result.init(tiles)
+
+
+proc load*(level: Level, csv: string) =
+  level.map = loadCSV[int](
+    csv,
+    proc(input: string): int = discard parseInt(input, result))
+</pre>
+
+    <p>
+        Now we could add the level into the main scene.
+    </p>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  ...
+  data,
+  level
+
+...
+
+type
+  MainScene = ref object of Scene
+    level: Level
+
+proc init*(scene: MainScene) =
+  ...
+
+  scene.level = newLevel gfxData["tiles"]
+  scene.level.load "data/csv/map1.csv"
+  scene.level.layer = LevelLayer
+  scene.add scene.level
+
+</pre>
+
+    <p>
+        You should see top-left corner of the map on the main screen at the moment.
+    </p>
+
+</div>
+
+
 <div class="section" id="links"><h3>Links</h3>
     <ul>
         <li>
@@ -301,12 +374,14 @@ proc init*(scene: TitleScene) =
 
 <!--
 
-<h4></h4>
 <div class="section" id=""><h3></h3>
 
+<h4></h4>
 <pre class="prettyprint">
 
-</pre></div>
+</pre>
+
+</div>
 
 -->
 
