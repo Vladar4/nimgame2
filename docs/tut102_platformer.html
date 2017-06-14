@@ -364,6 +364,81 @@ proc init*(scene: MainScene) =
 </div>
 
 
+<div class="section" id="player"><h3>Player</h3>
+
+    <p>
+        The next step is to create a player entity.
+    </p>
+
+<h4>player.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    collider,
+    entity,
+    texturegraphic,
+    tilemap,
+    types,
+  ],
+  level
+
+
+const
+  Framerate = 1/12
+
+
+type
+  Player* = ref object of Entity
+    level*: Level
+
+
+proc init*(player: Player, graphic: TextureGraphic, level: Level) =
+  player.initEntity()
+  player.level = level
+  player.graphic = graphic
+  player.initSprite((32, 32))
+  discard player.addAnimation("right", [0, 1, 2, 3], Framerate)
+  discard player.addAnimation("left", [0, 1, 2, 3], Framerate, Flip.horizontal)
+  discard player.addAnimation("death", [4, 5, 6, 7], Framerate)
+
+
+proc newPlayer*(graphic: TextureGraphic, level: Level): Player =
+  new result
+  result.init(graphic, level)
+
+</pre>
+
+    <p>
+        Adding it to the scene is trivial.
+    </p>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+import
+  ...
+  level,
+  player
+
+...
+
+type
+  MainScene = ref object of Scene
+    level: Level
+    player: Player
+
+
+proc init*(scene: MainScene) =
+  ...
+
+  scene.player = newPlayer(gfxData["player"], scene.level)
+  scene.player.layer = PlayerLayer
+  scene.add scene.player
+
+</pre>
+
+</div>
+
+
 <div class="section" id="links"><h3>Links</h3>
     <ul>
         <li>
