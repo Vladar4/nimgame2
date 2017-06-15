@@ -41,7 +41,7 @@ type
     disabledDown
 
   GuiWidget* = ref object of Entity
-    action*: GuiAction
+    actions*: seq[GuiAction]
     fState: GuiState
     mbAllow*, fWasPressed: MouseState
     toggle*, fToggled: bool
@@ -49,6 +49,7 @@ type
 
 proc init*(widget: GuiWidget) =
   widget.initEntity()
+  widget.actions = @[]
   widget.fState = GuiState.defaultUp
   widget.mbAllow.set(MouseButton.left)
   widget.fWasPressed = 0
@@ -70,8 +71,9 @@ method onPress*(widget: GuiWidget) {.base.} =
 
 
 proc clickAction*(widget: GuiWidget) =
-  if not(widget.action == nil):
-    widget.action(widget)
+  if not(widget.actions == nil):
+    for action in widget.actions:
+      action(widget)
 
 
 method onClick*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
