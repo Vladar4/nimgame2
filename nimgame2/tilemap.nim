@@ -35,6 +35,7 @@ type
   TileMap* = ref object of Entity
     map*: seq[seq[int]] ##  Two-dimensional sequence of tile indexes
     fShow: TileShow     ##  Slice of what part of map to show
+    hidden*: seq[int]   ##  The list of tile indexes to not render
     passable*: seq[int] ##  The list of tile indexes that do not collide
     tileScale*: Scale   ##  \
       ##  The scaling of individual tiles, mostly used for gap removal. \
@@ -58,6 +59,7 @@ proc init*(tilemap: TileMap, scaleFix = false) =
   tilemap.initEntity()
   tilemap.map = @[]
   tilemap.fShow = (0..0, 0..0)
+  tilemap.hidden = @[]
   tilemap.passable = @[]
   tilemap.tileScale = if scaleFix: DefaultTileScale else: 1.0
 
@@ -166,13 +168,18 @@ proc renderTileMap*(tilemap: TileMap) =
       for x in tilemap.fShow.x:
         pos.x = x.float * dim.x + offset.x
 
+        let val = tilemap.map[y][x]
+
+        if val in tilemap.hidden: # Do not render hidden tiles
+          continue
+
         # Draw
         tilemap.graphic.draw(tilemap.absPos + pos.rotate(tilemap.absRot),
                              tilemap.absRot,
                              drawScale,
                              drawCenter,
                              tilemap.flip,
-                             tilemap.sprite.frames[tilemap.map[y][x]])
+                             tilemap.sprite.frames[val])
 
 
 method render*(tilemap: TileMap) =
