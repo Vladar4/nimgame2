@@ -148,6 +148,28 @@ proc centrify*(tilemap: TileMap, hor = HAlign.center, ver = VAlign.center) =
   of VAlign.bottom: dim.h.float - 1
 
 
+iterator tileIndex*(tilemap: TileMap, value: int): tuple[x, y: int] =
+  for y in 0..tilemap.map.high:
+    for x in 0..tilemap.map[y].high:
+      if tilemap.map[y][x] == value:
+        yield (x, y)
+
+
+proc firstTileIndex*(tilemap: TileMap, value: int): tuple[x, y: int] =
+  for i in tilemap.tileIndex(value):
+    return i
+
+
+proc tilePos*(tilemap: TileMap, index: tuple[x, y: int]): Coord =
+  let
+    dim: Coord = tilemap.sprite.dim * tilemap.absScale
+    offset: Coord =
+      - (tilemap.tileScale - 1) * tilemap.sprite.dim * tilemap.absScale / 2.0
+  result = (
+    index.x.float * dim.x + offset.x,
+    index.y.float * dim.y + offset.y)
+
+
 proc renderTileMap*(tilemap: TileMap) =
   if not (tilemap.graphic == nil) and
      not (tilemap.sprite == nil) and
