@@ -328,6 +328,8 @@ proc load*(level: Level, csv: string) =
   level.map = loadCSV[int](
     csv,
     proc(input: string): int = discard parseInt(input, result))
+
+  level.hidden.add @[8, 9, 10, 11]  # tiles on a third row are invisible markers
 </pre>
 
     <p>
@@ -419,7 +421,12 @@ import
   level,
   player
 
-...
+const
+  LevelLayer = 0
+  PlayerLayer = 10
+
+  MapPlayerSpawn = 8  # player spawn selector tile index
+
 
 type
   MainScene = ref object of Scene
@@ -428,12 +435,22 @@ type
 
 
 proc init*(scene: MainScene) =
+  init Scene scene
+
+  scene.camera = newEntity()
+  scene.cameraBondOffset = game.size / 2  # set camera to the center
+
   ...
 
   scene.player = newPlayer(gfxData["player"], scene.level)
   scene.player.layer = PlayerLayer
+  scene.player.pos =
+    scene.level.tilePos scene.level.firstTileIndex(MapPlayerSpawn) # positioning
   scene.add scene.player
 
+  scene.cameraBond = scene.player # bind camera to the player entity
+
+...
 </pre>
 
 </div>
