@@ -35,6 +35,7 @@ export
 type
   Coord* = tuple[x: float, y: float]  ##  Coordinates type
   Coord2* = tuple[abs, rel: Coord]    ##  Abs + Rel coordinates type
+  CoordInt* = tuple[x: int, y: int]   ##  Integer coordinates
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
   Scale* = float                      ##  Scale type

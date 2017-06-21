@@ -29,9 +29,9 @@ import
 
 type
   BitmapFont* = ref object of Font
-    fSurface: Surface   ##  Source font surface
-    fDim, fCharDim: Dim ##  Dimensions of the surface and a single character
-    fChars: seq[tuple[x, y: int]] ##  Coordinates of all characters
+    fSurface: Surface     ##  Source font surface
+    fDim, fCharDim: Dim   ##  Dimensions of the surface and a single character
+    fChars: seq[CoordInt] ##  Coordinates of all characters
 
 
 #============#

@@ -317,7 +317,7 @@ export
 
 type
   JoyAxis* = range[low(int16)..high(int16)]
-  JoyBall* = tuple[dx, dy: int]
+  JoyBall* = CoordInt
   JoyHat*  = sdl.HatPosition
 
   Joystick = ref object
@@ -906,8 +906,8 @@ proc movement*(gi: GeneralInput): int =
         of jAxis: joyAxis(id, gi.joystick.axis)
         of jBall:
           case gi.joystick.ballDirection:
-          of dirX: joyBall(id, gi.joystick.ball).dx
-          of dirY: joyBall(id, gi.joystick.ball).dy
+          of dirX: joyBall(id, gi.joystick.ball).x
+          of dirY: joyBall(id, gi.joystick.ball).y
         else: 0
     else: 0
 
