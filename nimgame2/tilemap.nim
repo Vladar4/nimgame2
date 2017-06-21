@@ -160,6 +160,15 @@ proc firstTileIndex*(tilemap: TileMap, value: int): CoordInt =
     return i
 
 
+proc tileIndex*(tilemap: TileMap, pos: Coord): CoordInt =
+  let
+    dim: Coord = tilemap.sprite.dim * tilemap.absScale
+    offset: Coord = pos - tilemap.pos
+  result = (
+    int(offset.x / dim.x),
+    int(offset.y / dim.y))
+
+
 proc tilePos*(tilemap: TileMap, index: CoordInt): Coord =
   let
     dim: Coord = tilemap.sprite.dim * tilemap.absScale
