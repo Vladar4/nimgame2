@@ -387,11 +387,20 @@ import
 
 const
   Framerate = 1/12
+  VisibilityDim: Dim = (w: 9, h: 6)
 
 
 type
   Player* = ref object of Entity
     level*: Level
+
+
+proc updateVisibility*(player: Player) =
+  let
+    center = player.level.tileIndex(player.pos)
+  player.level.show = (
+    x: (center.x - VisibilityDim.w)..(center.x + VisibilityDim.w),
+    y: (center.y - VisibilityDim.h)..(center.y + VisibilityDim.h))
 
 
 proc init*(player: Player, graphic: TextureGraphic, level: Level) =
@@ -449,6 +458,7 @@ proc init*(scene: MainScene) =
   scene.add scene.player
 
   scene.cameraBond = scene.player # bind camera to the player entity
+  scene.player.updateVisibility()
 
 ...
 </pre>
