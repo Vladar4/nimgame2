@@ -16,8 +16,8 @@ type
     s: Spaceman
 
 
-method update*(physics: Physics, entity: Spaceman, elapsed: float) =
-  physics.updatePhysics(entity, elapsed)
+proc spacemanPhysics(entity: Entity, elapsed: float) =
+  defaultPhysics(entity, elapsed)
   if entity.pos.x.int < 0:
     entity.pos.x = 0
     entity.vel.x = 0
@@ -39,7 +39,7 @@ proc init*(scene: MainScene) =
   scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load("../assets/gfx/spaceman.png")
   scene.s.graphic = scene.spacemanG
-  scene.s.physics = new Physics
+  scene.s.physics = spacemanPhysics
   scene.s.centrify()
   scene.add(scene.s)
   # Mouse

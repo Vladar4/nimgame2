@@ -9,13 +9,10 @@ type
 proc init*(entity: Dwarf) =
   entity.initEntity()
   entity.centrify()
+  entity.physics = defaultPhysics
 
 
 proc newDwarf*(): Dwarf =
   result = new Dwarf
   result.init()
-
-
-method update*(physics: Physics, entity: Dwarf, elapsed: float) =
-  physics.updatePhysics(entity, elapsed)
 

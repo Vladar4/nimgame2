@@ -19,14 +19,11 @@ const
 type
   MainScene = ref object of Scene
     spacemanG: TextureGraphic
-    spacemanP: SpacemanPhysics
     num: int
 
-  SpacemanPhysics = ref object of Physics
 
-
-method update*(physics: SpacemanPhysics, entity: Spaceman, elapsed: float) =
-  physics.updatePhysics(entity, elapsed)
+proc spacemanPhysics*(entity: Entity, elapsed: float) =
+  defaultPhysics(entity, elapsed)
 
   # Screen collision
   if entity.pos.x < 0:
@@ -43,10 +40,9 @@ proc init*(scene: MainScene) =
   Scene(scene).init()
   scene.spacemanG = newTextureGraphic()
   discard scene.spacemanG.load("../assets/gfx/spaceman.png")
-  scene.spacemanP = new SpacemanPhysics
   scene.num = NumStart
   for i in 1..scene.num:
-    scene.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
+    scene.add(newSpaceman(scene, scene.spacemanG, spacemanPhysics))
 
 
 proc free*(scene: MainScene) =
@@ -67,7 +63,7 @@ method event*(scene: MainScene, event: Event) =
       if scene.num < NumMax:
         scene.num += NumStep
         for i in scene.count..scene.num-1:
-          scene.add(newSpaceman(scene, scene.spacemanG, scene.spacemanP))
+          scene.add(newSpaceman(scene, scene.spacemanG, spacemanPhysics))
     of K_Down:
       if scene.num > NumMin:
         scene.num -= NumStep

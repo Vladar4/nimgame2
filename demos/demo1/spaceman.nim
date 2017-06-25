@@ -12,7 +12,7 @@ type
     scene*: Scene
 
 
-proc init*(entity: Spaceman, s: Scene, g: Graphic, p: Physics) =
+proc init*(entity: Spaceman, s: Scene, g: Graphic, p: PhysicsProc) =
   entity.initEntity()
   entity.scene = s
   entity.graphic = g
@@ -26,7 +26,7 @@ proc init*(entity: Spaceman, s: Scene, g: Graphic, p: Physics) =
   entity.rotVel = random(10.0..60.0) * randomSign().float
 
 
-proc newSpaceman*(s: Scene, g: Graphic, p: Physics): Spaceman =
+proc newSpaceman*(s: Scene, g: Graphic, p: PhysicsProc): Spaceman =
   result = new Spaceman
   result.init(s, g, p)
 

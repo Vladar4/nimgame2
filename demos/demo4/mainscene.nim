@@ -37,7 +37,6 @@ proc init*(scene: MainScene) =
     "left", [12, 13, 14, 15, 16, 17], Framerate)
   discard scene.d.addAnimation(
     "right", [12, 13, 14, 15, 16, 17], Framerate, Flip.horizontal)
-  scene.d.physics = new Physics
   scene.add(scene.d)
 
 
