@@ -138,8 +138,8 @@
     entity.graphic = graphic
     # set the center point
     entity.centrify()
-    # init the physics only if you need it
-    entity.physics = new Physics
+    # assign the physics only if you need it
+    entity.physics = defaultPhysics
 
 
   proc newMyEntity*(graphic: TextureGraphic): MyEntity =
@@ -153,10 +153,6 @@
     entity.updateEntity(elapsed)
     # entity-level logic goes here
 
-
-  method update*(physics: Physics, entity: MyEntity, elapsed: float) =
-    # call the default physics procedure, or write your own
-    physics.updatePhysics(entity, elapsed)
 </pre></div>
 
 <div class="snippet" id="keyboard_input"><h3>Keyboard Input</h3>
