@@ -72,8 +72,8 @@ type
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
     sprite*: Sprite
-    logic*: Logic
-    physics*: Physics
+    logic*: LogicProc
+    physics*: PhysicsProc
     collider*: Collider
     colliding*: seq[Entity]       ##  List of Entities currently colliding with
     pos*, vel*, acc*, drg*: Coord ##  Position, velocity, acceleration, drag
@@ -84,9 +84,9 @@ type
     flip*: Flip                   ##  Texture flip status
     visible*: bool                ##  Visibility status
 
-  Logic* = ref object of RootObj
+  LogicProc* = proc(entity: Entity, elapsed: float)
 
-  Physics* = ref object of RootObj
+  PhysicsProc* = proc(entity: Entity, elapsed: float)
 
 
 #========#
@@ -288,23 +288,14 @@ proc update(sprite: Sprite, entity: Entity, elapsed: float) =
       entity.sprite.currentFrame = 0
 
 
-#=======#
-# Logic #
-#=======#
-
-method update*(logic: Logic, entity: Entity, elapsed: float) {.base.} =
-  discard
-
-
 #=========#
 # Physics #
 #=========#
 
-
-proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
+proc defaultPhysics*(entity: Entity, elapsed: float) =
   ##  Default physics procedure. Disabled by default.
   ##
-  ##  Call it from your entity physics update method.
+  ##  Assign it it as your entity's physics.
   ##
 
   # acceleration -> velocity
@@ -345,10 +336,6 @@ proc updatePhysics*(physics: Physics, entity: Entity, elapsed: float) =
 
   # rotatiton velocity -> rotation
   entity.rot += entity.rotVel * elapsed
-
-
-method update*(physics: Physics, entity: Entity, elapsed: float) {.base.} =
-  discard
 
 
 #========#
@@ -558,9 +545,9 @@ proc updateEntity*(entity: Entity, elapsed: float) =
   if not(entity.sprite == nil):
     entity.sprite.update(entity, elapsed)
   if not(entity.logic == nil):
-    entity.logic.update(entity, elapsed)
+    entity.logic(entity, elapsed)
   if not(entity.physics == nil):
-    entity.physics.update(entity, elapsed)
+    entity.physics(entity, elapsed)
 
 
 method update*(entity: Entity, elapsed: float) {.base.} =
