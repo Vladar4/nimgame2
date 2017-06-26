@@ -63,7 +63,7 @@ type
   PolyCollider* = ref object of Collider
     points*: seq[Coord]
 
-
+  Scene = ref object of RootObj
   Entity* = ref object of RootObj
     parent*: Entity               ##  Parent entity reference
     tags*: seq[string]            ##  List of entity tags
@@ -74,6 +74,8 @@ type
     sprite*: Sprite
     logic*: LogicProc
     physics*: PhysicsProc
+    collisionEnvironment*: seq[Entity]  ## List of collidable entites
+                                        ## used in some physics procedures
     collider*: Collider
     colliding*: seq[Entity]       ##  List of Entities currently colliding with
     pos*, vel*, acc*, drg*: Coord ##  Position, velocity, acceleration, drag
@@ -295,7 +297,7 @@ proc update(sprite: Sprite, entity: Entity, elapsed: float) =
 proc defaultPhysics*(entity: Entity, elapsed: float) =
   ##  Default physics procedure. Disabled by default.
   ##
-  ##  Assign it it as your entity's physics.
+  ##  Assign it as your entity's physics.
   ##
 
   # acceleration -> velocity
@@ -336,6 +338,41 @@ proc defaultPhysics*(entity: Entity, elapsed: float) =
 
   # rotatiton velocity -> rotation
   entity.rot += entity.rotVel * elapsed
+
+
+proc platformerPhysics*(entity: Entity, elapsed: float) =
+  ##  Platformer physics procedure.
+  ##
+  ##  Assign it as your entity's physics.
+  ##
+
+  # acceleration -> velocity
+  entity.vel.x += entity.acc.x * elapsed
+  entity.vel.y += entity.acc.y * elapsed
+
+  # drag -> velocity
+  let absx = entity.vel.x.abs
+  if absx > 0.0:
+    var dx = entity.drg.x * elapsed
+    if dx > absx:
+      entity.vel.x = 0.0
+    else:
+      entity.vel.x += (if entity.vel.x > 0.0: -dx else: dx)
+
+  let absy = entity.vel.y.abs
+  if absy > 0.0:
+    var dy = entity.drg.y * elapsed
+    if dy > absy:
+      entity.vel.y = 0.0
+    else:
+      entity.vel.y += (if entity.vel.y > 0.0: -dy else: dy)
+
+  # velocity -> position
+  # entity.pos = entity.pos + entity.vel * elapsed
+  # x
+  # TODO
+  # y
+  # TODO
 
 
 #========#

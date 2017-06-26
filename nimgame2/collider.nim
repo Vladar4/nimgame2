@@ -637,3 +637,56 @@ method collide*(p1, p2: PolyCollider): bool =
       inc i
     return false
 
+
+#=======#
+# Utils #
+#=======#
+
+proc intersect(a, b: seq[string]): bool =
+  for item in a:
+    if item in b:
+      return true
+  return false
+
+
+iterator collisions(entity: Entity, list: seq[Entity]): Entity =
+  for target in list:
+    if target.collider == nil: continue # no collider on target
+    if entity == target: continue # entity is target
+    if target in entity.colliding: continue # already collided with target
+    if entity.collider.tags.len == 0 or # no tags given
+       entity.collider.tags.intersect(target.tags): # check for needed tags
+      if collide(entity.collider, target.collider): # check for collision
+        yield target
+
+
+proc checkCollisions*(entity: Entity, list: seq[Entity]) =
+  for target in entity.collisions(list):
+    target.colliding.add(entity) # mark target as already collided with entity
+    entity.onCollide(target)
+    target.onCollide(entity)
+
+
+proc isColliding*(entity: Entity, list: seq[Entity]): bool =
+  for target in entity.collisions(list):
+    return true
+  return false
+
+
+proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale): bool =
+  let
+    originalPos = entity.pos
+    originalRot = entity.rot
+    originalScale = entity.scale
+
+  entity.pos = pos
+  entity.rot = rot
+  entity.scale = scale
+
+  defer:
+    entity.pos = originalPos
+    entity.rot = originalRot
+    entity.scale = scale
+
+  result = isColliding(entity, entity.collisionEnvironment)
+
