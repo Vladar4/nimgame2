@@ -91,8 +91,8 @@ proc intersect(a, b: seq[string]): bool =
   return false
 
 
-proc checkCollisions*(scene: Scene, entity: Entity) =
-  for target in scene.fList:
+proc checkCollisions*(entity: Entity, list: seq[Entity]) =
+  for target in list:
     if target.collider == nil: continue # no collider on target
     if entity == target: continue # entity is target
     if target in entity.colliding: continue # already collided with target
@@ -293,7 +293,7 @@ proc updateScene*(scene: Scene, elapsed: float) =
   # collisions
   for entity in scene.fList:
     if entity.collider != nil:
-      scene.checkCollisions(entity)
+      entity.checkCollisions(scene.fList)
 
 
 method update*(scene: Scene, elapsed: float) {.base.} =
