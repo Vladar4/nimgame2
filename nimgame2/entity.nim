@@ -64,6 +64,10 @@ type
   PolyCollider* = ref object of Collider
     points*: seq[Coord]
 
+  GroupCollider* = ref object of Collider
+    list*: seq[Collider]
+
+
   Scene = ref object of RootObj
   Entity* = ref object of RootObj
     parent*: Entity               ##  Parent entity reference
@@ -671,6 +675,15 @@ proc linesIntersect(p1, p2, p3, p4: Coord): bool =
   return ( a >= 0 and a <= 1 ) and (b >= 0 and b <= 1)
 
 
+template groupCollide(g: GroupCollider, x: untyped): bool =
+  var result = false
+  for c in g.list:
+    if collide(x, c):
+      result = true
+      break
+  result
+
+
 #==================#
 # Coord collisions #
 #==================#
@@ -743,6 +756,11 @@ method collide*(pos: Coord, p: PolyCollider): bool =
     return c > 0
 
 
+# Coord - Group
+method collide(pos: Coord, g: GroupCollider): bool =
+  groupCollide(g, pos)
+
+
 #==================#
 # Collider (Point) #
 #==================#
@@ -773,32 +791,37 @@ method render*(a: Collider) {.base.} =
 
 # Point - Coord
 method collide*(a: Collider, pos: Coord): bool {.base, inline.} =
-  return collide(pos, a)
+  collide(pos, a)
 
 
 # Point - Point
 method collide*(a1, a2: Collider): bool {.base, inline.} =
-  return collide(a1.position, a2.position)
+  collide(a1.position, a2.position)
 
 
 # Point - Box
 method collide*(a: Collider, b: BoxCollider): bool {.inline.} =
-  return collide(a.position, b)
+  collide(a.position, b)
 
 
 # Point - Circle
 method collide*(a: Collider, c: CircleCollider): bool {.inline.} =
-  return collide(a.position, c)
+  collide(a.position, c)
 
 
 # Point - Line
 method collide*(a: Collider, d: LineCollider): bool =
-  return collide(a.position, d)
+  collide(a.position, d)
 
 
 # Point - Poly
 method collide*(a: Collider, p: PolyCollider): bool =
-  return collide(a.position, p)
+  collide(a.position, p)
+
+
+# Point - Group
+method collide*(a: Collider, g: GroupCollider): bool =
+  groupCollide(g, a)
 
 
 #=============#
@@ -824,12 +847,12 @@ method render*(b: BoxCollider) =
 
 # Box - Coord
 method collide*(b: BoxCollider, pos: Coord): bool {.inline.} =
-  return collide(pos, b)
+  collide(pos, b)
 
 
 # Box - Point
 method collide*(b: BoxCollider, a: Collider): bool {.inline.} =
-  return collide(a, b)
+  collide(a, b)
 
 
 # Box - Box
@@ -911,6 +934,11 @@ method collide*(b: BoxCollider, p: PolyCollider): bool =
     return false
 
 
+# Box - Group
+method collide*(b: BoxCollider, g: GroupCollider): bool =
+  groupCollide(g, b)
+
+
 #================#
 # CircleCollider #
 #================#
@@ -934,23 +962,23 @@ method render*(c: CircleCollider) =
 
 # Circle - Coord
 method collide*(c: CircleCollider, pos: Coord): bool {.inline.} =
-  return collide(pos, c)
+  collide(pos, c)
 
 
 # Circle - Point
 method collide*(c: CircleCollider, a: Collider): bool {.inline.} =
-  return collide(a, c)
+  collide(a, c)
 
 
 # Circle - Box
 method collide*(c: CircleCollider, b: BoxCollider): bool {.inline.} =
-  return collide(b, c)
+  collide(b, c)
 
 
 # Circle - Circle
 method collide*(c1, c2: CircleCollider): bool {.inline.} =
-  return distance(c1.position, c2.position) <
-         (c1.radius.scaled(c1) + c2.radius.scaled(c2))
+  distance(c1.position, c2.position) <
+    (c1.radius.scaled(c1) + c2.radius.scaled(c2))
 
 
 # Circle - Line
@@ -1008,6 +1036,11 @@ method collide*(c: CircleCollider, p: PolyCollider): bool =
       j = i
       inc i
     return false
+
+
+# Circle - Group
+method collide*(c: CircleCollider, g: GroupCollider): bool =
+  groupCollide(g, c)
 
 
 #===============#
@@ -1098,6 +1131,11 @@ method collide*(d: LineCollider, p: PolyCollider): bool =
       j = i
       inc i
     return false
+
+
+# Line - Group
+method collide*(d: LineCollider, g: GroupCollider): bool =
+  groupCollide(g, d)
 
 
 #==============#
@@ -1211,6 +1249,62 @@ method collide*(p1, p2: PolyCollider): bool =
       j = i
       inc i
     return false
+
+
+# Poly - Group
+method collide*(p: LineCollider, g: GroupCollider): bool =
+  groupCollide(g, p)
+
+
+#===============#
+# GroupCollider #
+#===============#
+
+proc init*(g: GroupCollider, parent: Entity) =
+  Collider(g).init(parent, (0, 0))
+  g.list = @[]
+
+
+proc newGroupCollider*(parent: Entity): GroupCollider =
+  result = new GroupCollider
+  result.init(parent)
+
+
+method render*(g: GroupCollider) =
+  if g.list.len < 1:
+    return
+  for c in g.list:
+    c.render()
+
+
+# Group - Coord
+method collide*(g: GroupCollider, pos: Coord): bool =
+  groupCollide(g, pos)
+
+
+# Group - Point
+method collide*(g: GroupCollider, a: Collider): bool =
+  groupCollide(g, a)
+
+
+# Group - Box
+method collide*(g: GroupCollider, b: BoxCollider): bool =
+  groupCollide(g, b)
+
+
+# Group - Circle
+method collide*(g: GroupCollider, c: CircleCollider): bool =
+  groupCollide(g, c)
+
+
+# Group - Line
+method collide*(g: GroupCollider, d: LineCollider): bool =
+  groupCollide(g, d)
+
+
+# Group - Poly
+method collide*(g: GroupCollider, p: PolyCollider): bool =
+  groupCollide(g, p)
 
 
 #================#
