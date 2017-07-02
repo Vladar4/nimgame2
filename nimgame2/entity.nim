@@ -609,8 +609,6 @@ method onCollide*(entity, target: Entity) {.base.} =
   ##  Called when ``entity`` collides with ``target``.
   ##
   discard
-from fenv import epsilon
-let Eps = epsilon(float)
 
 
 include private/collider

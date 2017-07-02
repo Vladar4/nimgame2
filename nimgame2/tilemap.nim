@@ -50,7 +50,6 @@ type
     tiles*: seq[TileCollider]  ##  Sequence of individual tile colliders
 
 
-
 #=========#
 # TileMap #
 #=========#
@@ -262,8 +261,8 @@ proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
     for x in parent.fShow.x:
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float / scale + offset.x
-        t.tiles.add(newTileCollider(parent, position, dim,
-          parent.map[y][x], x, y))
+        t.tiles.add(
+          newTileCollider(parent, position, dim, parent.map[y][x], x, y))
 
 
 proc newTileMapCollider*(parent: TileMap, pos: Coord = (0, 0),

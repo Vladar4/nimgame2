@@ -29,6 +29,10 @@
 # Collider Private #
 #==================#
 
+from fenv import epsilon
+let Eps = epsilon(float)
+
+
 template position(a: Collider): Coord =
   if a.parent.absRot == 0:
     (a.parent.absPos + a.pos * a.parent.absScale)
