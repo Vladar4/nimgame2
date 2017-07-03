@@ -330,6 +330,11 @@ import
   ],
   data
 
+
+const
+  TileDim* = (32, 32)
+
+
 type
   Level* = ref object of TileMap
 
@@ -338,7 +343,7 @@ proc init*(level: Level, tiles: TextureGraphic) =
   init Tilemap level
   level.tags.add("level")
   level.graphic = tiles
-  level.initSprite((32, 32))
+  level.initSprite(TileDim)
 
 
 proc newLevel*(tiles: TextureGraphic): Level =
@@ -352,6 +357,9 @@ proc load*(level: Level, csv: string) =
     proc(input: string): int = discard parseInt(input, result))
 
   level.hidden.add @[8, 9, 10, 11]  # tiles on a third row are invisible markers
+  level.passable.add @[0, 2, 3, 4, 6, 7, 8, 9, 10, 11] # tiles without colliders
+  level.initCollider()
+
 </pre>
 
     <p>
@@ -374,6 +382,7 @@ type
 proc init*(scene: MainScene) =
   ...
 
+  # Level
   scene.level = newLevel gfxData["tiles"]
   scene.level.load "data/csv/map1.csv"
   scene.level.layer = LevelLayer
@@ -410,6 +419,7 @@ import
 const
   Framerate = 1/12
   VisibilityDim: Dim = (w: 10, h: 6)
+  Spawn = 8 # player spawn selector tile index
   PlayerRadius = 16
   PlayerSize = PlayerRadius * 2
 
@@ -428,8 +438,14 @@ proc updateVisibility*(player: Player) =
     y: (center.y - VisibilityDim.h)..(center.y + VisibilityDim.h))
 
 
+proc resetPosition*(player: Player) =
+  # reset player position to a given tile
+  player.pos = player.level.tilePos player.level.firstTileIndex(Spawn)
+
+
 proc init*(player: Player, graphic: TextureGraphic, level: Level) =
   player.initEntity()
+  player.tags.add "player"
   player.level = level
   player.graphic = graphic
   player.initSprite((PlayerSize, PlayerSize))
@@ -464,8 +480,6 @@ const
   LevelLayer = 0
   PlayerLayer = 10
 
-  MapPlayerSpawn = 8  # player spawn selector tile index
-
 
 type
   MainScene = ref object of Scene
@@ -476,15 +490,17 @@ type
 proc init*(scene: MainScene) =
   init Scene scene
 
+  # Camera
   scene.camera = newEntity()
   scene.cameraBondOffset = game.size / 2  # set camera to the center
 
   ...
 
+  # Player
   scene.player = newPlayer(gfxData["player"], scene.level)
+  scene.player.collisionEnvironment = @[Entity(scene.level)]
   scene.player.layer = PlayerLayer
-  scene.player.pos =
-    scene.level.tilePos scene.level.firstTileIndex(MapPlayerSpawn) # positioning
+  scene.player.resetPosition()
   scene.add scene.player
 
   scene.cameraBond = scene.player # bind camera to the player entity
@@ -539,18 +555,18 @@ proc init*(player: Player, graphic: TextureGraphic, level: Level) =
 
 ...
 
-proc jump*(player: Player, elapsed: float) =
+proc jump*(player: Player) =
   if player.vel.y == 0.0:
     player.vel.y -= JumpVel
 
 
-proc right*(player: Player, elapsed: float) =
+proc right*(player: Player) =
   player.vel.x += WalkVel
   if not player.sprite.playing and player.vel.y == 0.0:
     player.play("right", 1)
 
 
-proc left*(player: Player, elapsed: float) =
+proc left*(player: Player) =
   player.vel.x -= WalkVel
   if not player.sprite.playing and player.vel.y == 0.0:
     player.play("left", 1)
@@ -569,11 +585,11 @@ proc left*(player: Player, elapsed: float) =
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene elapsed
   if ScancodeSpace.pressed:
-    scene.player.jump(elapsed)
+    scene.player.jump()
   if ScancodeRight.down:
-    scene.player.right(elapsed)
+    scene.player.right()
   if ScancodeLeft.down:
-    scene.player.left(elapsed)
+    scene.player.left()
 
 </pre>
 
