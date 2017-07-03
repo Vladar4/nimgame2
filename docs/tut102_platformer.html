@@ -596,6 +596,86 @@ method update*(scene: MainScene, elapsed: float) =
 </div>
 
 
+<div class="section" id="dying_and_spikes"><h3>Dying and Spikes</h3>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+
+const
+  ...
+  Spikes = 4 # Spikes tile index
+
+
+type
+  MainScene = ref object of Scene
+    ...
+    spikes: seq[Entity]
+    ...
+
+
+proc init*(scene: MainScene) =
+  ...
+
+  # Spikes
+  scene.spikes = @[]
+  const
+    SpikesOrigin = TileDim / 2 + (0, TileDim[1] div 4)
+    SpikesDim = TileDim / (1, 2)
+  for tileCoord in scene.level.tileIndex(Spikes):
+    let e = newEntity()
+    e.tags.add "spikes"
+    e.pos = scene.level.tilePos(tileCoord)
+    e.collider = newBoxCollider(e, SpikesOrigin, SpikesDim)
+    e.collider.tags.add "player" # collide only with player entity
+    scene.spikes.add e
+    scene.add e
+
+  ...
+</pre>
+
+
+<h4>player.nim</h4>
+<pre class="prettyprint">
+...
+
+type
+  Player* = ref object of Entity
+    ...
+    dying: bool
+
+...
+
+proc die*(player: Player) =
+  if not player.dying:
+    player.dying = true
+    player.play("death", 3)
+    player.vel.y = -JumpVel
+
+
+method update*(player: Player, elapsed: float) =
+  ...
+
+  if player.dying:
+    if not player.sprite.playing:
+      # reset
+      player.play("right", 0)
+      player.resetPosition()
+      player.updateVisibility()
+      player.dying = false
+    else:
+      return
+
+
+method onCollide*(player: Player, target: Entity) =
+  if "spikes" in target.tags:
+    player.die()
+
+</pre>
+
+</div>
+
+
 <div class="section" id="links"><h3>Links</h3>
     <ul>
         <li>
