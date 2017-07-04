@@ -374,19 +374,43 @@ proc platformerPhysics*(entity: Entity, elapsed: float) =
       entity.vel.y += (if entity.vel.y > 0.0: -dy else: dy)
 
   # velocity -> position
-  let
+  var
     diffX = entity.vel.x * elapsed
     diffY = entity.vel.y * elapsed
+
+  let
+    stepX = diffX / abs(diffX)
+    stepY = diffY / abs(diffY)
+
   # x
-  if entity.willCollide(entity.pos + (diffX, 0.0), entity.rot, entity.scale):
-    entity.vel.x = 0.0
-  else:
-    entity.pos.x = entity.pos.x + diffX
+  while abs(diffX) >= 1.0:
+    if entity.willCollide(entity.pos + (stepX, 0.0), entity.rot, entity.scale):
+      entity.vel.x = 0.0
+      break
+    diffX -= stepX
+    entity.pos.x += stepX
+
+  # x remainder
+  if entity.vel.x != 0.0:
+    if entity.willCollide(entity.pos + (diffX, 0.0), entity.rot, entity.scale):
+      entity.vel.x = 0.0
+    else:
+      entity.pos.x += diffX
+
   # y
-  if entity.willCollide(entity.pos + (0.0, diffY), entity.rot, entity.scale):
-    entity.vel.y = 0.0
-  else:
-    entity.pos.y = entity.pos.y + diffY
+  while abs(diffY) >= 1.0:
+    if entity.willCollide(entity.pos + (0.0, stepY), entity.rot, entity.scale):
+      entity.vel.y = 0.0
+      break
+    diffY -= stepY
+    entity.pos.y += stepY
+
+  # y remainder
+  if entity.vel.y != 0.0:
+    if entity.willCollide(entity.pos + (0.0, diffY), entity.rot, entity.scale):
+      entity.vel.y = 0.0
+    else:
+      entity.pos.y += diffY
 
 
 #========#
