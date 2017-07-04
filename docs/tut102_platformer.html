@@ -357,7 +357,7 @@ proc load*(level: Level, csv: string) =
     proc(input: string): int = discard parseInt(input, result))
 
   level.hidden.add @[8, 9, 10, 11]  # tiles on a third row are invisible markers
-  level.passable.add @[0, 2, 3, 4, 6, 7, 8, 9, 10, 11] # tiles without colliders
+  level.passable.add @[0, 2, 3, 4, 8, 9, 10, 11] # tiles without colliders
   level.initCollider()
 
 </pre>
@@ -413,6 +413,7 @@ import
     tilemap,
     types,
   ],
+  data,
   level
 
 
@@ -606,19 +607,12 @@ const
   ...
   Spikes = 4 # Spikes tile index
 
-
-type
-  MainScene = ref object of Scene
-    ...
-    spikes: seq[Entity]
-    ...
-
+...
 
 proc init*(scene: MainScene) =
   ...
 
   # Spikes
-  scene.spikes = @[]
   const
     SpikesOrigin = TileDim / 2 + (0, TileDim[1] div 4)
     SpikesDim = TileDim / (1, 2)
@@ -628,7 +622,6 @@ proc init*(scene: MainScene) =
     e.pos = scene.level.tilePos(tileCoord)
     e.collider = newBoxCollider(e, SpikesOrigin, SpikesDim)
     e.collider.tags.add "player" # collide only with player entity
-    scene.spikes.add e
     scene.add e
 
   ...
@@ -675,6 +668,86 @@ method onCollide*(player: Player, target: Entity) =
 
 </div>
 
+
+<div class="section" id="boxes_and_coins"><h3>Boxes and Coins</h3>
+
+<h4>player.nim</h4>
+<pre class="prettyprint">
+...
+
+type
+  Player* = ref object of Entity
+    ...
+    requestCoins*: seq[CoordInt]
+
+...
+
+proc init*(player: Player, graphic, TextureGraphic, level: Level) =
+  ...
+
+  player.requestCoins = @[]
+
+
+...
+
+method onCollide*(player: Player, target: Entity) =
+  ...
+
+  if "box" in target.tags:
+    let index = player.level.tileIndex(target.pos)
+    player.level.tile(index) += 1 # red box -&gt; grey box
+    player.requestCoins.add index + (0, -1) # request coin spawn on tile higher
+    target.dead = true
+
+  if "coin" in target.tags:
+    inc score
+    target.dead = true
+
+</pre>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+
+proc init*(scene: MainScene) =
+  ...
+
+  # Boxes
+  const
+    BoxPos1 = (2, TileDim[1] + 2)
+    BoxPos2 = (TileDim[0] - 2, TileDim[1] + 2)
+  for tileCoord in scene.level.tileIndex(Box):
+    let e = newEntity()
+    e.tags.add "box"
+    e.pos = scene.level.tilePos(tileCoord)
+    e.collider = newLineCollider(e, BoxPos1, BoxPos2)
+    e.collider.tags.add "player" # collide only with player entity
+    scene.add e
+
+  ...
+
+...
+
+method update*(scene: MainScene, elapsed: float) =
+  ...
+
+  # Spawn coins
+  while scene.player.requestCoins.len &gt; 0:
+    let e = newEntity()
+    e.tags.add "coin"
+    e.graphic = gfxData["tiles"]
+    e.initSprite(TileDim)
+    discard e.addAnimation("rotate", [2, 3], 1/8)
+    e.play("rotate", -1)
+    e.pos = scene.level.tilePos scene.player.requestCoins.pop()
+    e.collider = newCircleCollider(e, TileDim / 2 - 1, TileDim[0] / 2 - 1)
+    e.collider.tags.add "player"
+    scene.add e
+
+</pre>
+
+
+</div>
 
 <div class="section" id="links"><h3>Links</h3>
     <ul>
