@@ -33,7 +33,7 @@ type
   TileShow* = tuple[x: Slice[int], y: Slice[int]]
 
   TileMap* = ref object of Entity
-    map*: seq[seq[int]] ##  Two-dimensional sequence of tile indexes
+    map*: seq[seq[int]] ##  Two-dimensional sequence of tile indexes (y, x)
     fShow: TileShow     ##  Slice of what part of map to show
     hidden*: seq[int]   ##  The list of tile indexes to not render
     passable*: seq[int] ##  The list of tile indexes without colliders
@@ -176,6 +176,12 @@ proc tilePos*(tilemap: TileMap, index: CoordInt): Coord =
   result = (
     index.x.float * dim.x + offset.x,
     index.y.float * dim.y + offset.y)
+
+
+template tile*(tilemap: TileMap, index: CoordInt): var int =
+  ##  Direct access to a single tile value.
+  ##
+  tilemap.map[index.y][index.x]
 
 
 proc renderTileMap*(tilemap: TileMap) =
