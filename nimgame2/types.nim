@@ -200,6 +200,119 @@ converter toDim*(c: Coord): Dim =
   result.h = c.y.int
 
 
+#==========#
+# CoordInt #
+#==========#
+
+proc `==`*(c1, c2: CoordInt): bool {.inline.} =
+  return (c1.x == c2.x) and (c1.y == c2.y)
+
+
+proc `-`*(c: CoordInt): CoordInt {.inline.} =
+  return (-c.x, -c.y)
+
+
+proc `+`*(c1, c2: CoordInt): CoordInt {.inline.} =
+  result.x = c1.x + c2.x
+  result.y = c1.y + c2.y
+
+
+proc `+=`*(c1: var CoordInt, c2: CoordInt) {.inline.} =
+  c1.x += c2.x
+  c1.y += c2.y
+
+
+proc `-`*(c1, c2: CoordInt): CoordInt {.inline.} =
+  result.x = c1.x - c2.x
+  result.y = c1.y - c2.y
+
+
+proc `-=`*(c1: var CoordInt, c2: CoordInt) {.inline.} =
+  c1.x -= c2.x
+  c1.x -= c2.y
+
+
+proc `*`*(c1, c2: CoordInt): CoordInt {.inline.} =
+  result.x = c1.x * c2.x
+  result.y = c1.y * c2.y
+
+
+proc `*=`*(c1: var CoordInt, c2: CoordInt) {.inline.} =
+  c1.x *= c2.x
+  c1.y *= c2.y
+
+
+proc `div`*(c1, c2: CoordInt): CoordInt {.inline.} =
+  result.x = c1.x div c2.x
+  result.y = c1.y div c2.y
+
+
+proc `div=`*(c1: var CoordInt, c2: CoordInt) {.inline.} =
+  c1.x = c1.x div c2.x
+  c1.y = c1.y div c2.y
+
+
+proc `+`*(c: CoordInt, v: int): CoordInt {.inline.} =
+  result.x = c.x + v
+  result.y = c.y + v
+
+
+template `+`*(v: int, c: CoordInt): CoordInt =
+  (c + v)
+
+
+proc `+=`*(c: var CoordInt, v: int) {.inline.} =
+  c.x += v
+  c.y += v
+
+
+proc `-`*(c: CoordInt, v: int): CoordInt {.inline.} =
+  result.x = c.x - v
+  result.y = c.y - v
+
+
+template `-`*(v: int, c: CoordInt): CoordInt =
+  (-c + v)
+
+
+proc `-=`*(c: var CoordInt, v: int) {.inline.} =
+  c.x -= v
+  c.y -= v
+
+
+proc `*`*(c: CoordInt, v: int): CoordInt {.inline.} =
+  result.x = c.x * v
+  result.y = c.y * v
+
+
+template `*`*(v: int, c: CoordInt): CoordInt =
+  (c * v)
+
+
+proc `*=`*(c: var CoordInt, v: int) {.inline.} =
+  c.x *= v
+  c.y *= v
+
+
+proc `div`*(c: CoordInt, v: int): CoordInt {.inline.} =
+  result.x = c.x div v
+  result.y = c.y div v
+
+
+proc `div=`*(c: var CoordInt, v: int) {.inline.} =
+  c.x = c.x div v
+  c.y = c.y div v
+
+
+proc abs*(c: CoordInt): CoordInt {.inline.} =
+  result.x = abs(c.x)
+  result.y = abs(c.y)
+
+
+converter toDim*(c: CoordInt): Dim =
+  result.w = c.x
+  result.h = c.y
+
 #=====#
 # Dim #
 #=====#
