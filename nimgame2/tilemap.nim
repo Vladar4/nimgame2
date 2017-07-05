@@ -44,7 +44,7 @@ type
 
   TileCollider* = ref object of BoxCollider
     value*: int       ##  Tile kind value
-    mapx*, mapy*: int ##  Map coordinates
+    index*: CoordInt  ##  Map coordinates
 
   TileMapCollider* = ref object of Collider  ## Collider to use with TileMap
     tiles*: seq[TileCollider]  ##  Sequence of individual tile colliders
@@ -228,17 +228,16 @@ method render*(tilemap: TileMap) =
 
 proc init*(t: TileCollider,
            parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
-           value, mapx, mapy: int) =
+           value: int, index: CoordInt) =
   BoxCollider(t).init(parent, pos, dim)
   t.value = value
-  t.mapx = mapx
-  t.mapy = mapy
+  t.index = index
 
 
 proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
-                      value, mapx, mapy: int): TileCollider =
+                      value: int, index: CoordInt): TileCollider =
   new result
-  result.init(parent, pos, dim, value, mapx, mapy)
+  result.init(parent, pos, dim, value, index)
 
 
 #=================#
@@ -268,7 +267,7 @@ proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float / scale + offset.x
         t.tiles.add(
-          newTileCollider(parent, position, dim, parent.map[y][x], x, y))
+          newTileCollider(parent, position, dim, parent.map[y][x], (x, y)))
 
 
 proc newTileMapCollider*(parent: TileMap, pos: Coord = (0, 0),
@@ -286,8 +285,10 @@ proc newTileMapCollider*(parent: TileMap, pos: Coord = (0, 0),
 
 
 method render*(t: TileMapCollider) =
+  let show = TileMap(t.parent).show
   for tile in t.tiles:
-    tile.render()
+    if (tile.index.x in show.x) and (tile.index.y in show.y):
+      tile.render()
   t.renderCollider()
 
 
