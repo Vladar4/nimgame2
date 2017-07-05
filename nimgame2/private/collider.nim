@@ -758,7 +758,8 @@ proc isColliding*(entity: Entity, list: seq[Entity]): bool =
   return false
 
 
-proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale): bool =
+proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale,
+                  list: seq[Entity]): bool =
   let
     originalPos = entity.pos
     originalRot = entity.rot
@@ -773,5 +774,5 @@ proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale): bool =
     entity.rot = originalRot
     entity.scale = scale
 
-  result = isColliding(entity, entity.collisionEnvironment)
+  result = isColliding(entity, list)
 

@@ -79,6 +79,7 @@ type
     sprite*: Sprite
     logic*: LogicProc
     physics*: PhysicsProc
+    fastPhysics*: bool            ##  rough and fast physics flag
     collisionEnvironment*: seq[Entity]  ## List of collidable entites
                                         ## used in some physics procedures
     collider*: Collider
@@ -345,7 +346,8 @@ proc defaultPhysics*(entity: Entity, elapsed: float) =
   entity.rot += entity.rotVel * elapsed
 
 
-proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale): bool
+proc willCollide*(
+  entity: Entity, pos: Coord, rot: Angle, scale: Scale, list: seq[Entity]): bool
 proc platformerPhysics*(entity: Entity, elapsed: float) =
   ##  Platformer physics procedure.
   ##
@@ -378,39 +380,60 @@ proc platformerPhysics*(entity: Entity, elapsed: float) =
     diffX = entity.vel.x * elapsed
     diffY = entity.vel.y * elapsed
 
-  let
-    stepX = diffX / abs(diffX)
-    stepY = diffY / abs(diffY)
+  if entity.fastPhysics:
 
-  # x
-  while abs(diffX) >= 1.0:
-    if entity.willCollide(entity.pos + (stepX, 0.0), entity.rot, entity.scale):
-      entity.vel.x = 0.0
-      break
-    diffX -= stepX
-    entity.pos.x += stepX
-
-  # x remainder
-  if entity.vel.x != 0.0:
-    if entity.willCollide(entity.pos + (diffX, 0.0), entity.rot, entity.scale):
+    # x
+    if entity.willCollide(entity.pos + (diffX, 0.0), entity.rot, entity.scale,
+        entity.collisionEnvironment):
       entity.vel.x = 0.0
     else:
       entity.pos.x += diffX
 
-  # y
-  while abs(diffY) >= 1.0:
-    if entity.willCollide(entity.pos + (0.0, stepY), entity.rot, entity.scale):
-      entity.vel.y = 0.0
-      break
-    diffY -= stepY
-    entity.pos.y += stepY
-
-  # y remainder
-  if entity.vel.y != 0.0:
-    if entity.willCollide(entity.pos + (0.0, diffY), entity.rot, entity.scale):
+    # y
+    if entity.willCollide(entity.pos + (0.0, diffY), entity.rot, entity.scale,
+        entity.collisionEnvironment):
       entity.vel.y = 0.0
     else:
       entity.pos.y += diffY
+
+  else:
+    let
+      stepX = diffX / abs(diffX)
+      stepY = diffY / abs(diffY)
+
+    # x
+    while abs(diffX) >= 1.0:
+      if entity.willCollide(entity.pos + (stepX, 0.0), entity.rot, entity.scale,
+          entity.collisionEnvironment):
+        entity.vel.x = 0.0
+        break
+      diffX -= stepX
+      entity.pos.x += stepX
+
+    # x remainder
+    if entity.vel.x != 0.0:
+      if entity.willCollide(entity.pos + (diffX, 0.0), entity.rot, entity.scale,
+          entity.collisionEnvironment):
+        entity.vel.x = 0.0
+      else:
+        entity.pos.x += diffX
+
+    # y
+    while abs(diffY) >= 1.0:
+      if entity.willCollide(entity.pos + (0.0, stepY), entity.rot, entity.scale,
+          entity.collisionEnvironment):
+        entity.vel.y = 0.0
+        break
+      diffY -= stepY
+      entity.pos.y += stepY
+
+    # y remainder
+    if entity.vel.y != 0.0:
+      if entity.willCollide(entity.pos + (0.0, diffY), entity.rot, entity.scale,
+          entity.collisionEnvironment):
+        entity.vel.y = 0.0
+      else:
+        entity.pos.y += diffY
 
 
 #========#
@@ -434,6 +457,8 @@ proc initEntity*(entity: Entity) =
   entity.physics = nil
   entity.collider = nil
   entity.colliding = @[]
+  entity.fastPhysics = false
+  entity.collisionEnvironment = @[]
   entity.pos = (0.0, 0.0)
   entity.vel = (0.0, 0.0)
   entity.acc = (0.0, 0.0)
@@ -488,6 +513,8 @@ proc copy*(target, source: Entity) =
   target.colliding = @[]
   for e in source.colliding:
     target.colliding.add(e)
+  target.fastPhysics = source.fastPhysics
+  target.collisionEnvironment = source.collisionEnvironment
   target.pos      = source.pos
   target.vel      = source.vel
   target.acc      = source.acc
