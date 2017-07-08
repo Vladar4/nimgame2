@@ -91,6 +91,15 @@ proc linesIntersect(p1, p2, p3, p4: Coord): bool =
   return ( a >= 0 and a <= 1 ) and (b >= 0 and b <= 1)
 
 
+template farthestRadius(p: PolyCollider): float =
+  var result = 0.0
+  for point in p.points:
+    let d = distance(p.pos, point)
+    if d > result:
+      result = d
+  result
+
+
 template groupCollide(g: GroupCollider, x: untyped): bool =
   var result = false
   for c in g.list:
@@ -151,6 +160,8 @@ method collide*(pos: Coord, p: PolyCollider): bool =
                                      pos: p.points[0],
                                      pos2: p.points[1]))
   else:
+    if distance(pos, p.position) > p.farthest:
+      return false
     let
       ppPosition = p.parent.absPos
       ppRotation = p.parent.absRot
@@ -336,6 +347,9 @@ method collide*(b: BoxCollider, p: PolyCollider): bool =
                                    pos: p.points[0],
                                    pos2: p.points[1]))
   else:
+    if  distance(b.position, p.position) >
+        (max(b.dim.w / 2, b.dim.h / 2) + p.farthest):
+      return false
     var
       i = 0
       j = p.points.high
@@ -440,6 +454,8 @@ method collide*(c: CircleCollider, p: PolyCollider): bool =
                                    pos: p.points[0],
                                    pos2: p.points[1]))
   else:
+    if distance(c.position, p.position) > (c.radius + p.farthest):
+      return false
     var
       i = 0
       j = p.points.high
@@ -562,6 +578,13 @@ proc init*(p: PolyCollider, parent: Entity, pos: Coord = (0, 0),
            points: openarray[Coord]) =
   Collider(p).init(parent, pos)
   p.points = @points
+  p.farthest = farthestRadius(p)
+
+
+proc updateFarthest*(p: PolyCollider) {.inline.} =
+  ##  Call this procedure any time you changed points' coordinates.
+  ##
+  p.farthest = farthestRadius(p)
 
 
 proc newPolyCollider*(parent: Entity, pos: Coord = (0, 0),
@@ -636,21 +659,8 @@ method collide*(p1, p2: PolyCollider): bool =
                                 pos2: p2.points[1]),
                    p1)
   else:
-    # check if polygons are close enough
-    var
-      max1 = 0.0
-      max2 = 0.0
-    for p in p1.points:
-      let dp = distance(p1.pos, p)
-      if dp > max1:
-        max1 = dp
-    for p in p2.points:
-      let dp = distance(p2.pos, p)
-      if dp > max2:
-        max2 = dp
-    if (max1 + max2) < distance(p1.pos, p2.pos):
-      return false # not close enough
-
+    if distance(p1.position, p2.position) > (p1.farthest + p2.farthest):
+      return false
     # check for collision
     var
       i = 0

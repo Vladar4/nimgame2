@@ -63,6 +63,7 @@ type
 
   PolyCollider* = ref object of Collider
     points*: seq[Coord]
+    farthest: float
 
   GroupCollider* = ref object of Collider
     list*: seq[Collider]
