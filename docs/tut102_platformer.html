@@ -419,6 +419,7 @@ import
 
 const
   Framerate = 1/12
+  VisibilityDim: Dim = (w: 10, h: 6)
   Spawn = 8 # player spawn selector tile index
   PlayerRadius = 16
   PlayerSize = PlayerRadius * 2
@@ -427,6 +428,14 @@ const
 type
   Player* = ref object of Entity
     level*: Level
+
+
+proc updateVisibility*(player: Player) =
+  # update the visible portion of the map
+  let center = player.level.tileIndex(player.pos)
+  player.level.show = (
+    x: (center.x - VisibilityDim.w)..(center.x + VisibilityDim.x),
+    y: (center.y - VisibilityDim.h)..(center.y + VisibilityDim.h))
 
 
 proc resetPosition*(player: Player) =
@@ -452,6 +461,7 @@ proc newPlayer*(graphic: TextureGraphic, level: Level): Player =
 
 method update*(player: Player, elapsed: float) =
   player.updateEntity elapsed
+  player.updateVisibility()
 
 </pre>
 
@@ -494,6 +504,7 @@ proc init*(scene: MainScene) =
   scene.add scene.player
 
   scene.cameraBond = scene.player # bind camera to the player entity
+  scene.player.updateVisibility()
 
 ...
 </pre>
@@ -642,6 +653,7 @@ method update*(player: Player, elapsed: float) =
       # reset
       player.play("right", 0)
       player.resetPosition()
+      player.updateVisibility()
       player.dying = false
     else:
       return
