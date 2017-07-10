@@ -37,6 +37,8 @@ type
     fShow: TileShow     ##  Slice of what part of map to show
     hidden*: seq[int]   ##  The list of tile indexes to not render
     passable*: seq[int] ##  The list of tile indexes without colliders
+    onlyReachableColliders*: bool ##  Do not create colliders \
+                                  ##  for unreachable tiles
     tileScale*: Scale   ##  \
       ##  The scaling of individual tiles, mostly used for gap removal. \
       ##  Increase on scales vastly different from `1.0`. \
@@ -79,7 +81,8 @@ proc show*(tilemap: TileMap): TileShow {.inline.} =
   return tilemap.fShow
 
 
-proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0))
+proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
+  dim: Dim = (0, 0))
 proc `show=`*(tilemap: TileMap, val: TileShow) =
   ##  Set new values for the shown slices of tiles.
   ##
@@ -249,28 +252,58 @@ proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
   Collider(t).init(parent, pos)
   t.tiles = @[]
 
+  parent.updateShow()
+
   let
     scale = parent.tileScale
     spriteDim: Coord = parent.sprite.dim
     dim: Coord = spriteDim * scale
     offset: Coord = spriteDim / 2.0 - parent.center
+    offsetY = parent.fshow.y.a
+    offsetX = parent.fshow.x.a
 
-  var position: Coord
+  var
+    position: Coord
+    unreachable: seq[CoordInt] = @[]
+    neighbors: seq[seq[int]]
 
-  parent.updateShow()
+  if parent.onlyReachableColliders:
+    let
+      lenY = parent.fShow.y.b - parent.fShow.y.a + 1
+      lenX = parent.fShow.x.b - parent.fShow.x.a + 1
+    # count neighbors
+    newSeq(neighbors, lenY)
+    for y in (parent.fShow.y.a + 1)..(parent.fShow.y.b - 1):
+      newSeq(neighbors[y-offsetY], lenX)
+      for x in (parent.fShow.x.a + 1)..(parent.fShow.x.b - 1):
+        if parent.map[y-1][x] notin parent.passable:
+          inc neighbors[y-offsetY][x-offsetX]
+        if parent.map[y+1][x] notin parent.passable:
+          inc neighbors[y-offsetY][x-offsetX]
+        if parent.map[y][x-1] notin parent.passable:
+          inc neighbors[y-offsetY][x-offsetX]
+        if parent.map[y][x+1] notin parent.passable:
+          inc neighbors[y-offsetY][x-offsetX]
+    newSeq(neighbors[0], lenX)
+    newSeq(neighbors[^1], lenX)
+
   #for y in 0..parent.map.high:
   for y in parent.fShow.y:
     position.y = dim.y * y.float / scale + offset.y
 
     #for x in 0..parent.map[y].high:
     for x in parent.fShow.x:
+      if parent.onlyReachableColliders:
+        if neighbors[y-offsetY][x-offsetX] > 3:
+          continue
       if parent.map[y][x] notin parent.passable:
         position.x = dim.x * x.float / scale + offset.x
         t.tiles.add(
           newTileCollider(parent, position, dim, parent.map[y][x], (x, y)))
 
 
-proc newTileMapCollider*(parent: TileMap, pos: Coord = (0, 0),
+proc newTileMapCollider*(parent: TileMap,
+                         pos: Coord = (0, 0),
                          dim: Dim = (0, 0)): TileMapCollider =
   ##  Create a ``TileMapCollider`` for the ``parent`` ``TileMap``.
   ##
