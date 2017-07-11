@@ -358,6 +358,7 @@ proc load*(level: Level, csv: string) =
 
   level.hidden.add @[8, 9, 10, 11]  # tiles on a third row are invisible markers
   level.passable.add @[0, 2, 3, 4, 8, 9, 10, 11] # tiles without colliders
+  level.onlyReachableColliders = true # do not init unreachable colliders
   level.initCollider()
 
 </pre>
@@ -419,7 +420,7 @@ import
 
 const
   Framerate = 1/12
-  VisibilityDim: Dim = (w: 10, h: 6)
+  VisibilityDim: Dim = (w: 12, h: 10)
   Spawn = 8 # player spawn selector tile index
   PlayerRadius = 16
   PlayerSize = PlayerRadius * 2
