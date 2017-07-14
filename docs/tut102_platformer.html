@@ -314,7 +314,7 @@ proc init*(scene: TitleScene) =
 <div class="section" id="level"><h3>Level</h3>
 
     <p>
-        Now we'll create a wireframe for our level module.
+        Here we'll create a wireframe for our level module.
     </p>
 
 <h4>level.nim</h4>
@@ -364,6 +364,9 @@ proc load*(level: Level, csv: string) =
 </pre>
 
     <p>
+        As you see, we are passing CSV data into the two-dimensional map sequence.Third row of tiles should not be visible as it is used for spawn selectors and such. All tiles that player should not be able to walk on are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
+    </p>
+    <p>
         Now we could add the level into the main scene.
     </p>
 
@@ -401,7 +404,7 @@ proc init*(scene: MainScene) =
 <div class="section" id="player"><h3>Player</h3>
 
     <p>
-        The next step is to create a player entity.
+        The next step is to create a player entity with a couple of animations and the ability to spawn itself at player spawn selector (tile index 8).
     </p>
 
 <h4>player.nim</h4>
@@ -516,7 +519,7 @@ proc init*(scene: MainScene) =
 <div class="section" id="player_movement"><h3>Player Movement</h3>
 
     <p>
-        To make the player entity move, we will use the platformerPhysics procedure from the engine's entity module.
+        To make the player entity move, we will use the <b>platformerPhysics</b> procedure from the engine's entity module. As you could see from the previous section, we added level as the only item in the player's <b>collisionEnvironment</b> sequence. This sequence is used by <b>platformerPhysics</b> procedure to check if the player entity could move in any given direction.
     </p>
 
 <h4>player.nim</h4>
@@ -599,6 +602,10 @@ method update*(scene: MainScene, elapsed: float) =
 
 <div class="section" id="dying_and_spikes"><h3>Dying and Spikes</h3>
 
+    <p>
+        You might noticed that spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with tile map before the standard collision callback could happen. That's why we should init any tiles, that you want player to interact with, as separate entities with their own colliders.
+    </p>
+
 <h4>main.nim</h4>
 <pre class="prettyprint">
 ...
@@ -626,6 +633,11 @@ proc init*(scene: MainScene) =
 
   ...
 </pre>
+
+
+    <p>
+        Now we could use the standard collision callbacks in the player entity.
+    </p>
 
 
 <h4>player.nim</h4>
@@ -671,6 +683,12 @@ method onCollide*(player: Player, target: Entity) =
 
 <div class="section" id="boxes_and_coins"><h3>Boxes and Coins</h3>
 
+
+    <p>
+        As you could imagine, any other interactive tiles are created similarly.
+    </p>
+
+
 <h4>player.nim</h4>
 <pre class="prettyprint">
 ...
@@ -696,7 +714,7 @@ method onCollide*(player: Player, target: Entity) =
   if "box" in target.tags:
     let index = player.level.tileIndex(target.pos)
     player.level.tile(index) += 1 # red box -&gt; grey box
-    player.requestCoins.add index + (0, -1) # request coin spawn on tile higher
+    player.requestCoins.add index + (0, -1) # request coin spawn one tile higher
     target.dead = true
 
   if "coin" in target.tags:
@@ -768,6 +786,14 @@ method update*(scene: MainScene, elapsed: float) =
 
 
 <div class="section" id="enemy"><h3>Enemy</h3>
+
+    <p>
+        Our enemies should be able to move left and right (though not falling off the ledges) and kill the player entity on collision. Walking logic is implemented in the custom <b>enemyLogic</b> procedure.
+    </p>
+
+    <p>
+    We don't want physics and logic to update while the enemy is off the screen, so we don't call <b>updateEntity</b> procedure this time, checking enemy's position and calling procedures manually instead.
+    </p>
 
 <h4>enemy.nim</h4>
 <pre class="prettyprint">
