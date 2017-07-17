@@ -85,11 +85,6 @@ method render*(scene: Scene) {.base.} =
 
 
 proc addEntity(scene: Scene, entity: Entity) =
-  # assign camera as a parent
-  if scene.camera != nil:
-    if entity.parent == nil:
-      entity.parent = scene.camera
-
   if scene.fList.len < 1:
     scene.fList.add(entity)
     return
@@ -118,7 +113,7 @@ proc add*(scene: Scene, entity: Entity) =
   scene.fAddList.add(entity)
 
 
-proc bindCameraTo*(scene: Scene, bond: Entity, offset: Coord) =
+template bindCameraTo*(scene: Scene, bond: Entity, offset: Coord) =
   ##  Bind the camera to the movement of the specific ``entity``.
   ##
   scene.cameraBond = bond
@@ -261,7 +256,7 @@ proc updateScene*(scene: Scene, elapsed: float) =
     scene.addEntity(entity)
 
   # camera
-  if scene.cameraBond != nil:
+  if not (scene.cameraBond == nil):
     scene.camera.pos = -scene.cameraBond.pos + scene.cameraBondOffset
 
   # update
