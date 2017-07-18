@@ -33,6 +33,7 @@ proc init*(scene: MainScene) =
 
   # TileMap
   scene.map = newTileMap(scaleFix = true)
+  scene.map.parent = scene.camera
   scene.map.tags.add("map")
   scene.map.graphic = scene.tilesG
   scene.map.initSprite((24, 24))

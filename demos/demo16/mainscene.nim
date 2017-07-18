@@ -26,6 +26,7 @@ proc init*(scene: MainScene) =
   scene.camera.pos = game.size / 2
 
   scene.p0125 = newEntity()
+  scene.p0125.parent = scene.camera
   scene.p0125.graphic = scene.spacemanG
   scene.p0125.centrify()
   scene.p0125.pos = game.size / 2
@@ -33,6 +34,7 @@ proc init*(scene: MainScene) =
   scene.p0125.parallax = 0.125
 
   scene.p025 = newEntity()
+  scene.p025.parent = scene.camera
   scene.p025.graphic = scene.spacemanG
   scene.p025.centrify()
   scene.p025.pos = game.size / 2
@@ -40,6 +42,7 @@ proc init*(scene: MainScene) =
   scene.p025.parallax = 0.25
 
   scene.p05 = newEntity()
+  scene.p05.parent = scene.camera
   scene.p05.graphic = scene.spacemanG
   scene.p05.centrify()
   scene.p05.pos = game.size / 2
@@ -47,6 +50,7 @@ proc init*(scene: MainScene) =
   scene.p05.parallax = 0.5
 
   scene.p1 = newEntity()
+  scene.p1.parent = scene.camera
   scene.p1.graphic = scene.spacemanG
   scene.p1.centrify()
   scene.p1.pos = game.size / 2

@@ -424,15 +424,17 @@
 
     scene.camera = newEntity()
 
-    # this entity is bound to the camera
     scene.map = newMyMap()
+    scene.map.parent = scene.camera # this entity is bound to the camera
     scene.add(scene.map)
 
-    # this entitys isn't bound to the camera,
-    # as we set its parent manually
     scene.player = newMyPlayer()
-    scene.plater.parent = scene.map
+    scene.player.parent = scene.map # this entity is bound to the map
     scene.add(scene.player)
+
+    # this entity isn't bound to the camera
+    scene.ui = newUI()
+    scene.add(scene.ui)
 
     # boud camera to this entity
     scene.cameraBond = scene.player
