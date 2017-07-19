@@ -168,6 +168,7 @@ import
     assets,
     entity,
     font,
+    graphic,
     gui/button,
     gui/widget,
     nimgame,
@@ -498,6 +499,7 @@ proc init*(scene: MainScene) =
 
   # Camera
   scene.camera = newEntity()
+  scene.camera.tags.add "camera"
   scene.cameraBondOffset = game.size / 2  # set camera to the center
 
   ...
@@ -638,6 +640,7 @@ proc init*(scene: MainScene) =
     e.pos = scene.level.tilePos(tileCoord)
     e.collider = newBoxCollider(e, SpikesOrigin, SpikesDim)
     e.collider.tags.add "player" # collide only with player entity
+    e.parent = scene.camera
     scene.add e
 
   ...
@@ -747,6 +750,7 @@ proc spawnCoin*(scene: MainScene, index: CoordInt) =
   e.pos = scene.level.tilePos index
   e.collider = newCircleCollider(e, TileDim / 2 - 1, TileDim[0] / 2 - 1)
   e.collider.tags.add "player"
+  e.parent = scene.camera
   scene.add e
 
 
@@ -763,6 +767,7 @@ proc init*(scene: MainScene) =
     e.pos = scene.level.tilePos(tileCoord)
     e.collider = newLineCollider(e, BoxPos1, BoxPos2)
     e.collider.tags.add "player" # collide only with player entity
+    e.parent = scene.camera
     scene.add e
 
   # Coins
@@ -907,6 +912,7 @@ proc init*(scene: MainScene) =
     let e = newEnemy(gfxData["enemy"], scene.level)
     e.collisionEnvironment = @[Entity(scene.level)]
     e.pos = scene.level.tilePos(tileCoord) + TileDim[1] / 2
+    e.parent = scene.camera
     scene.add e
 
   ...
@@ -922,6 +928,85 @@ method onCollide*(player: Player, target: Entity) =
     player.die()
 
   ...
+</pre>
+
+</div>
+
+
+<div class="section" id="victory"><h3>Victory</h3>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+
+const
+  ...
+  UILayer = 20
+  ...
+  Finish = 11
+
+type
+  MainScene = ref object of Scene
+    ...
+    victory: Entity
+
+...
+
+proc init*(scene: MainScene) =
+  ...
+
+  # Finish
+  let
+    finishIdx = scene.level.firstTileIndex(Finish)
+    f = newEntity()
+  f.tags.add "finish"
+  f.collider = newCircleCollider(f, TileDim / 2, TileDim[0] / 2 - 1)
+  f.pos = scene.level.tilePos(finishIdx)
+  f.parent = scene.camera
+  scene.add f
+
+  # Victory
+  let victoryText = newTextGraphic bigFont
+  victoryText.setText "VICTORY!"
+  scene.victory = newEntity()
+  scene.victory.graphic = victoryText
+  scene.victory.centrify(ver = VAlign.top)
+  scene.victory.visible = false
+  scene.victory.layer = UILayer
+  scene.victory.pos = (GameWidth / 2, 0.0)
+  scene.add scene.victory
+
+  ...
+
+...
+
+method update*(scene: MainScene, elapsed: float) =
+ ...
+
+ # Check for victory
+ if scene.player.won:
+   scene.victory.visible = true
+
+</pre>
+
+<h4>player.nim</h4>
+<pre class="prettyprint">
+...
+
+type
+  Player* = ref object of Entity
+    ...
+    won*: bool
+    ...
+
+...
+
+method onCollide*(player: Player, target: Entity) =
+  ...
+
+  if "finish" in target.tags:
+    player.won = true
+
 </pre>
 
 </div>
