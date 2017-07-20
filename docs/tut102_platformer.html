@@ -1012,6 +1012,47 @@ method onCollide*(player: Player, target: Entity) =
 </div>
 
 
+<div class="section" id="score"><h3>Score</h3>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+  type
+    MainScene = ref object of Scene
+      ...
+      score: TextGraphic
+      ...
+
+...
+
+proc init*(scene: MainScene) =
+  ...
+
+  # Score
+  let score = newEntity()
+  scene.score = newTextGraphic defaultFont
+  scene.score.setText "SCORE: 0"
+  score.graphic = scene.score
+  score.layer = UILayer
+  score.pos = (12, 8)
+  scene.add score
+
+  ...
+
+...
+
+method update*(scene: MainScene, elapsed: float) =
+  ...
+
+  # Update score
+  scene.score.setText "SCORE: " &amp; $score
+
+  ...
+</pre>
+
+</div>
+
+
 <div class="section" id="links"><h3>Links</h3>
     <ul>
         <li>
