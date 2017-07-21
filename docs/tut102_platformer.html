@@ -614,7 +614,7 @@ method update*(scene: MainScene, elapsed: float) =
 <div class="section" id="dying_and_spikes"><h3>Dying and Spikes</h3>
 
     <p>
-        You might have noticed that spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with tile map before the standard collision callback could happen. That's why we should init any tiles, that you want player to interact with, as separate entities with their own colliders.
+        You might have noticed that spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with tile map before the standard collision callback could happen. That's why we should init any tiles, that you want player to interact with, as separate entities with their own colliders. So, for each "spikes" tile index in the map data we create a collidable entity (without any graphics)in its place.
     </p>
 
 <h4>main.nim</h4>
@@ -646,11 +646,9 @@ proc init*(scene: MainScene) =
   ...
 </pre>
 
-
     <p>
         Now we could use the standard collision callbacks in the player entity.
     </p>
-
 
 <h4>player.nim</h4>
 <pre class="prettyprint">
@@ -690,7 +688,7 @@ method onCollide*(player: Player, target: Entity) =
 
 
     <p>
-        As you could imagine, any other interactive tiles are created similarly.
+        As you could imagine, any other interactive tiles are created similarly. Compare following code to the previous section.
     </p>
 
 
@@ -892,6 +890,10 @@ method update*(enemy: Enemy, elapsed: float) =
 
 </pre>
 
+    <p>
+        Enemy spawning is pretty similar to spikes and coins creation.
+    </p>
+
 <h4>main.nim</h4>
 <pre class="prettyprint">
 import
@@ -934,6 +936,14 @@ method onCollide*(player: Player, target: Entity) =
 
 
 <div class="section" id="victory"><h3>Victory</h3>
+
+    <p>
+        The victory is achieved when the player entity has collided with "finish" tile, or, more specifically, with an invisible collidable entity that was spawned in this tile.
+    </p>
+
+    <p>
+        Note, that we are fetching the index with <b>firstTileIndex</b> procedure. It means, that if there's more than one appearance of this tile index on a map, only one will be processed. If you want to have multiple finish points, change it to the <b>tileIndex</b> iterator.
+    </p>
 
 <h4>main.nim</h4>
 <pre class="prettyprint">
@@ -989,6 +999,10 @@ method update*(scene: MainScene, elapsed: float) =
 
 </pre>
 
+    <p>
+        For simplicity, the victory is represented with a simple text entity. You could try to implement a separate victory scene on your own for practice.
+    </p>
+
 <h4>player.nim</h4>
 <pre class="prettyprint">
 ...
@@ -1013,6 +1027,11 @@ method onCollide*(player: Player, target: Entity) =
 
 
 <div class="section" id="score"><h3>Score</h3>
+
+    <p>
+        Finally, we add the score indicator, which is a simple text graphic updated with the data from the <b>score</b> variable. Note that we don't select <b>scene.camera</b> as its parens, so this entity is constantly positioned at the same position on the game screen.
+    </p>
+
 
 <h4>main.nim</h4>
 <pre class="prettyprint">
