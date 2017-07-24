@@ -1122,6 +1122,71 @@ method update*(scene: MainScene, elapsed: float) =
 </div>
 
 
+<div class="section" id="sounds"><h3>Sounds</h3>
+
+<h4>platformer.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    audio,
+    ...
+
+...
+
+if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
+
+  # Init
+  ...
+  setSoundVolume Volume.high div 2 # set sound volume to a 50%
+
+  ...
+</pre>
+
+
+<h4>player.nim</h4>
+<pre class="prettyprint">
+import
+  nimgame2 / [
+    assets,
+    audio,
+    ...
+
+...
+
+proc jump*(player: Player) =
+  ...
+  if player.vel.y == 0.0:
+    ...
+    discard sfxData["jump"].play()
+
+...
+
+proc die*(player: Player) =
+  ...
+  discard sfxData["death"].play()
+
+...
+
+method onCollide*(player: Player, target: Entity) =
+  ...
+  if "box" in target.tags:
+    ...
+    discard sfxData["box"].play()
+
+  if "coin" in target.tags:
+    ...
+    discard sfxData["pickup"].play()
+
+  if "finish" in target.tags:
+    if not player.won:
+      discard sfxData["victory"].play()
+    player.won = true
+
+</pre>
+
+</div>
+
+
 <div class="section" id="links"><h3>Links</h3>
     <ul>
         <li>
