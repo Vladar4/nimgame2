@@ -422,7 +422,7 @@ proc load*(level: Level, csv: string) =
     csv,
     proc(input: string): int = discard parseInt(input, result))
 
-  level.hidden.add @[8, 9, 10, 11]  # tiles on a third row are invisible markers
+  level.hidden.add @[8, 9, 10, 11]  # tiles on the third row are invisible markers
   level.passable.add @[0, 2, 3, 4, 8, 9, 10, 11] # tiles without colliders
   level.onlyReachableColliders = true # do not init unreachable colliders
   level.initCollider()
@@ -430,7 +430,7 @@ proc load*(level: Level, csv: string) =
 </pre>
 
     <p>
-        As you see, we are passing CSV data into the two-dimensional map sequence.Third row of tiles should not be visible as it is used for spawn selectors and such. All tiles that player should not be able to walk on are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
+        As you see, we are passing CSV data into the two-dimensional map sequence.The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles that player should not be able to walk on are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
     </p>
     <p>
         Now we could add the level into the main scene.
@@ -1093,7 +1093,7 @@ method onCollide*(player: Player, target: Entity) =
 <div class="section" id="score"><h3>Score</h3>
 
     <p>
-        Finally, we add the score indicator, which is a simple text graphic updated with the data from the <b>score</b> variable. Note that we don't select <b>scene.camera</b> as its parens, so this entity is constantly positioned at the same position on the game screen.
+        Finally, we add the score indicator, which is a simple text graphic updated with the data from the <b>score</b> variable. Note that we don't select <b>scene.camera</b> as its parent, so this entity is located constantly at the same position on the game screen.
     </p>
 
 
