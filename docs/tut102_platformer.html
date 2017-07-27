@@ -44,7 +44,7 @@
 <div class="section" id="assets"><h3>Assets</h3>
 
     <p>
-        Apart from our usual need of fonts, graphic, and sounds, we'll need map data (in CSV) and GUI graphics. So here is our data directory structure:
+        Apart from our usual need of fonts, graphic and sounds, we will need map data (in CSV) and GUI graphics. So here is our data directory structure:
     </p>
 
 <pre>
@@ -62,7 +62,7 @@
     </p>
 
     <p>
-        Game graphics consist of tile sheet, and player and enemy sprites.
+        Game graphics consist of the tile sheet, player and enemy sprites.
     </p>
     <p class="centered">
         <span><img src="images/tut102_platformer/tiles.png"
@@ -90,7 +90,7 @@
     </p>
 
     <p>
-        Sounds located in the sfx directory and was created with a help of <a href="http://www.bfxr.net/" target="_blank">bfxr.net</a> online tool.
+        Sounds are located in the sfx directory and were created with the help of <a href="http://www.bfxr.net/" target="_blank">bfxr.net</a> online tool.
     </p>
 
 </div>
@@ -99,7 +99,7 @@
 <div class="section" id="assets"><h3>Starting to Code</h3>
 
     <p>
-        First lines of code are actually pretty similar to the <a href="tut101_bounce.html">Tutorial 101</a> so we won't dive too deep here this time.
+        The first lines of code are actually pretty similar to the <a href="tut101_bounce.html">Tutorial 101</a> so we will not dive too deep here this time.
     </p>
 
 <h4>data.nim</h4>
@@ -380,7 +380,7 @@ proc init*(scene: TitleScene) =
 <div class="section" id="level"><h3>Level</h3>
 
     <p>
-        Here we'll create a wireframe for our level module.
+        Here we will create a wireframe for our level module.
     </p>
 
 <h4>level.nim</h4>
@@ -430,7 +430,7 @@ proc load*(level: Level, csv: string) =
 </pre>
 
     <p>
-        As you see, we are passing CSV data into the two-dimensional map sequence.The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles that player should not be able to walk on are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
+        As you see, we are passing CSV data into the two-dimensional map sequence. The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles, that the player should not be able to walk on, are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
     </p>
     <p>
         Now we could add the level into the main scene.
@@ -461,7 +461,7 @@ proc init*(scene: MainScene) =
 </pre>
 
     <p>
-        You should see top-left corner of the map on the main screen at the moment.
+        You should see the top-left corner of the map on the main screen at the moment.
     </p>
 
 </div>
@@ -587,7 +587,7 @@ proc init*(scene: MainScene) =
 <div class="section" id="player_movement"><h3>Player Movement</h3>
 
     <p>
-        To make the player entity move, we will use the <b>platformerPhysics</b> procedure from the engine's entity module. As you could see from the previous section, we added level as the only item in the player's <b>collisionEnvironment</b> sequence. This sequence is used by <b>platformerPhysics</b> procedure to check if the player entity could move in any given direction.
+        To make the player entity move, we will use the <b>platformerPhysics</b> procedure from the engine's entity module. As you could see from the previous section, we added the level as the only item in the player's <b>collisionEnvironment</b> sequence. This sequence is used by <b>platformerPhysics</b> procedure to check if the player entity could move in any given direction.
     </p>
 
 <h4>player.nim</h4>
@@ -678,7 +678,7 @@ method update*(scene: MainScene, elapsed: float) =
 <div class="section" id="dying_and_spikes"><h3>Dying and Spikes</h3>
 
     <p>
-        You might have noticed that spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with tile map before the standard collision callback could happen. That's why we should init any tiles, that you want player to interact with, as separate entities with their own colliders. So, for each "spikes" tile index in the map data we create a collidable entity (without any graphics)in its place.
+        You might have noticed that the spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with the tile map before the standard collision callback could happen. That is why we should initialize any tiles, that you want player to interact with, as separate entities with their own colliders. So, for each "spikes" tile index in the map data we create a collidable entity (without any graphics) in its place.
     </p>
 
 <h4>main.nim</h4>
@@ -752,7 +752,7 @@ method onCollide*(player: Player, target: Entity) =
 
 
     <p>
-        As you could imagine, any other interactive tiles are created similarly. Compare following code to the previous section.
+        As you could imagine, any other interactive tiles are created similarly. Compare the following code to the previous section.
     </p>
 
 
@@ -857,11 +857,11 @@ method update*(scene: MainScene, elapsed: float) =
 <div class="section" id="enemy"><h3>Enemy</h3>
 
     <p>
-        Our enemies should be able to move left and right (though not falling off the ledges) and kill the player entity on collision. Walking logic is implemented in the custom <b>enemyLogic</b> procedure.
+        Our enemies should be able to move left and right (though not falling off the ledges) and kill the player entity on collision. The walking logic is implemented in the custom <b>enemyLogic</b> procedure.
     </p>
 
     <p>
-    We don't want physics and logic to update while the enemy is off the screen, so we don't call <b>updateEntity</b> procedure this time, checking enemy's position and calling procedures manually instead.
+    We do not want physics and logic to be updated while the enemy is off the screen, so we do not call <b>updateEntity</b> procedure this time, checking the enemy's position and calling procedures manually instead.
     </p>
 
 <h4>enemy.nim</h4>
@@ -1006,7 +1006,7 @@ method onCollide*(player: Player, target: Entity) =
     </p>
 
     <p>
-        Note, that we are fetching the index with <b>firstTileIndex</b> procedure. It means, that if there's more than one appearance of this tile index on a map, only one will be processed. If you want to have multiple finish points, change it to the <b>tileIndex</b> iterator.
+        Note, that we are fetching the index with <b>firstTileIndex</b> procedure. It means that if there is more than one appearance of this tile index on a map, only one will be processed. If you want to have multiple finish points, change it to the <b>tileIndex</b> iterator.
     </p>
 
 <h4>main.nim</h4>
@@ -1093,7 +1093,7 @@ method onCollide*(player: Player, target: Entity) =
 <div class="section" id="score"><h3>Score</h3>
 
     <p>
-        Finally, we add the score indicator, which is a simple text graphic updated with the data from the <b>score</b> variable. Note that we don't select <b>scene.camera</b> as its parent, so this entity is located constantly at the same position on the game screen.
+        Finally, we add the score indicator, which is a simple text graphic updated with the data from the <b>score</b> variable. Note that we do not select <b>scene.camera</b> as its parent, so this entity is located constantly at the same position on the game screen.
     </p>
 
 
@@ -1213,7 +1213,7 @@ method onCollide*(player: Player, target: Entity) =
 <div class="section" id="whatsnext"><h3>What's Next?</h3>
 
     <p>
-        To practice your skills and improve the game you could try adding game settings screen, victory animation, leaderboard, different types of hazards and enemies, multiple levels, etc.
+        To practice your skills and improve the game, you could try adding the game settings screen, victory animation, leaderboard, different types of hazards and enemies, multiple levels, etc.
     </p>
 
 </div>
