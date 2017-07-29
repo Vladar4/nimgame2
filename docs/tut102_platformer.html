@@ -1210,6 +1210,40 @@ method onCollide*(player: Player, target: Entity) =
 </div>
 
 
+<div class="section" id="reset"><h3>Reset</h3>
+
+    <p>
+        Finally, we will add the option to return to the title screen, resetting the level.
+    </p>
+
+<h4>main.nim</h4>
+<pre class="prettyprint">
+...
+
+proc init*(scene: MainScene) =
+  ...
+  if scene.level.map.len == 0: scene.level.load "data/csv/map1.csv"
+  # changed from: scene.level.load "data/csv/map1.csv"
+  ...
+
+proc newMainScene*(): MainScene =
+  new result, free
+  # removed: init result
+
+method show*(scene: MainScene) =
+  hideCursor()
+  init scene
+
+...
+</pre>
+
+    <p>
+        As you can see, we moved <b>init</b> call from the constructor to the <b>show</b> method, so the scene will be rebuilt each time it is switched to. Nim's GC will take care of previously allocated resources.
+    </p>
+
+</div>
+
+
 <div class="section" id="whatsnext"><h3>What's Next?</h3>
 
     <p>
