@@ -609,14 +609,7 @@ proc init*(scene: MainScene) =
 
 <h4>paddle.nim</h4>
 <pre class="prettyprint">
-import
-  nimgame2 / [
-    ...
-    collider,
-    ...
-  ],
-  ...
-
+...
 
 proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
   ...
@@ -643,7 +636,6 @@ proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
 import
   nimgame2 / [
     assets,
-    collider,
     entity,
     graphic,
     nimgame,
