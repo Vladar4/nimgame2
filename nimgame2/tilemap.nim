@@ -22,7 +22,7 @@
 # Vladar vladar4@gmail.com
 
 import
-  collider, entity, graphic, types, utils
+  entity, graphic, types, utils
 
 
 const
@@ -259,7 +259,6 @@ proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
 
   var
     position: Coord
-    unreachable: seq[CoordInt] = @[]
     neighbors: seq[seq[int]]
 
   if parent.onlyReachableColliders and parent.map.len > 0:
@@ -315,7 +314,7 @@ proc newTileMapCollider*(parent: TileMap,
   result.init(parent, pos, dim)
 
 
-iterator tileColliders(t: TilemapCollider): TileCollider =
+iterator tileColliders*(t: TilemapCollider): TileCollider =
   for y in t.map.show.y:
     for x in t.map.show.x:
       let tile = t.tiles[y][x]
@@ -347,7 +346,7 @@ template collisionList*(t: TileMapCollider,
   ##  ``first`` If true, return after the first detected collision.
   ##
   var result: seq[TileCollider] = @[]
-  for tile in t.tiles:
+  for tile in t.tileColliders:
     if tile.collide(a):
       result.add(tile)
       if first: break

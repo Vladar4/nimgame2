@@ -23,10 +23,7 @@
 
 import
   unicode,
-  font,
-  graphic,
-  textgraphic,
-  types
+  font, graphic, textgraphic, types
 
 
 const

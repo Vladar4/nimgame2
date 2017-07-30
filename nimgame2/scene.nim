@@ -23,7 +23,7 @@
 
 import
   sdl2/sdl,
-  collider, entity, settings, types
+  entity, settings, types
 
 
 type

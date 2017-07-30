@@ -782,7 +782,7 @@ proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale,
   defer:
     entity.pos = originalPos
     entity.rot = originalRot
-    entity.scale = scale
+    entity.scale = originalScale
 
   result = isColliding(entity, list)
 

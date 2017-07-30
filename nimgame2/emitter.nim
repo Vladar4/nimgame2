@@ -46,7 +46,7 @@ type
 
 proc initParticle*(particle: Particle) =
   particle.initEntity()
-  particle.physics = new Physics
+  particle.physics = defaultPhysics
   particle.ttl = 1.0
 
 
@@ -60,10 +60,6 @@ proc copy*(target, source: Particle) =
   ##
   Entity(target).copy(Entity(source))
   target.ttl = source.ttl
-
-
-method update*(physics: Physics, particle: Particle, elapsed: float) =
-  physics.updatePhysics(particle, elapsed)
 
 
 method update*(particle: Particle, elapsed: float) =

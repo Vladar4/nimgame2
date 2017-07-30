@@ -22,7 +22,6 @@
 # Vladar vladar4@gmail.com
 
 import
-  ../collider,
   ../entity,
   ../graphic,
   ../types,

@@ -24,7 +24,6 @@
 import
   unicode,
   sdl2/sdl,
-  ../collider,
   ../entity,
   ../font,
   ../graphic,

@@ -69,7 +69,6 @@ type
     list*: seq[Collider]
 
 
-  Scene = ref object of RootObj
   Entity* = ref object of RootObj
     parent*: Entity               ##  Parent entity reference
     tags*: seq[string]            ##  List of entity tags
