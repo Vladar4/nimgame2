@@ -1,6 +1,5 @@
 import
   nimgame2/nimgame,
-  nimgame2/collider,
   nimgame2/entity,
   nimgame2/texturegraphic,
   nimgame2/tilemap,

@@ -1,7 +1,6 @@
 import sdl2/sdl,
   math,
   nimgame2/nimgame,
-  nimgame2/collider,
   nimgame2/font,
   nimgame2/bitmapfont,
   nimgame2/truetypefont,

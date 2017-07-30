@@ -1,7 +1,6 @@
 import
   parseutils,
   nimgame2/nimgame,
-  nimgame2/collider,
   nimgame2/draw,
   nimgame2/emitter,
   nimgame2/entity,

@@ -2,7 +2,6 @@ import
   parseutils,
   sdl2/sdl,
   nimgame2/nimgame,
-  nimgame2/collider,
   nimgame2/draw,
   nimgame2/entity,
   nimgame2/texturegraphic,

@@ -34,5 +34,5 @@ method onCollide*(entity: Cursor, target: Entity) =
       let clist = collider.collisionList(entity.pos)
       for tile in clist:
         entity.collidedWith.add(
-          "[" & $tile.mapx & ":" & $tile.mapy & "] -> " & $tile.value)
+          "[" & $tile.index.x & ":" & $tile.index.y & "] -> " & $tile.value)
 
