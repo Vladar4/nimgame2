@@ -738,6 +738,9 @@ method collide*(g: GroupCollider, p: PolyCollider): bool =
 #================#
 
 proc intersect(a, b: seq[string]): bool =
+  ##  ``Return`` `true` if sequences have at least one identical element,
+  ##  or `false` otherwise.
+  ##
   for item in a:
     if item in b:
       return true
@@ -756,6 +759,9 @@ iterator collisions(entity: Entity, list: seq[Entity]): Entity =
 
 
 proc checkCollisions*(entity: Entity, list: seq[Entity]) =
+  ##  Trigger ``onCollide`` method of ``entity``
+  ##  with a given ``list`` of targets.
+  ##
   for target in entity.collisions(list):
     target.colliding.add(entity) # mark target as already collided with entity
     entity.onCollide(target)
@@ -763,6 +769,9 @@ proc checkCollisions*(entity: Entity, list: seq[Entity]) =
 
 
 proc isColliding*(entity: Entity, list: seq[Entity]): bool =
+  ##  ``Return`` `true` if ``entity`` collides with one of the elements
+  ##  in the given ``list``, or `false` if no collisions occurs.
+  ##
   for target in entity.collisions(list):
     return true
   return false
@@ -770,6 +779,9 @@ proc isColliding*(entity: Entity, list: seq[Entity]): bool =
 
 proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale,
                   list: seq[Entity]): bool =
+  ##  ``Return`` `true` if ``entity`` will collide with one of the elements
+  ##  in the given list, if ``entity``'s coordinates or dimentsions will change.
+  ##
   let
     originalPos = entity.pos
     originalRot = entity.rot
