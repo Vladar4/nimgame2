@@ -52,6 +52,8 @@ proc newGuiRadioGroup*(): GuiRadioGroup =
 
 
 proc toggle*(radiogroup: GuiRadioGroup, target: GuiWidget) =
+  ##  Toggle a ``target`` element of the ``radiogroup``.
+  ##
   let idx = radiogroup.list.find(target)
   if idx >= 0:
     for i in 0..radiogroup.list.high:
@@ -68,6 +70,13 @@ proc init*(radiobutton: GuiRadioButton,
            graphic: Graphic,
            image: Graphic = nil,
            circle: bool = false) =
+  ##  GuiRadioButton initialization.
+  ##
+  ##  ``group`` GuiRadioGroup the ``radiobutton`` belongs to.
+  ##
+  ##  ``graphic``, ``image``, ``circle``
+  ##  See "gui/button.nim" initialization docs.
+  ##
   GuiButton(radiobutton).init(graphic, image, circle)
   radiobutton.toggle = true
   radiobutton.parent = group
@@ -79,11 +88,21 @@ proc newGuiRadioButton*(group: GuiRadioGroup,
                         graphic: Graphic,
                         image: Graphic = nil,
                         circle: bool = false): GuiRadioButton =
+  ##  Create a new GuiRadioButton.
+  ##
+  ##  ``group`` GuiRadioGroup the ``radiobutton`` belongs to.
+  ##
+  ##  ``graphic``, ``image``, ``circle``
+  ##  See "gui/button.nim" initialization docs.
+  ##
+  ##
   result = new GuiRadioButton
   result.init(group, graphic, image, circle)
 
 
 proc setToggled*(radiobutton: GuiRadioButton, val: bool) =
+  ##  Toggle ``radiobutton`` to a given state.
+  ##
   if val:
     GuiWidget(radiobutton).setToggled(val)
     radiobutton.group.toggle(radiobutton)

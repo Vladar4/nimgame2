@@ -50,7 +50,17 @@ proc init*(bar: GuiProgressBar,
            bgColor, fgColor: Color,
            font: Font,
            bgGraphic, fgGraphic: TextureGraphic) =
-  ##  TODO
+  ##  GuiProgressBar initialization.
+  ##
+  ##  ``dim`` bar's dimensions.
+  ##
+  ##  ``bgColor``, ``fgColor`` background (empty) and foreground (full) colors.
+  ##
+  ##  ``font``  info text font. Might be `nil`.
+  ##
+  ##  ``bgGraphic``, ``fgGraphic`` background (empty) and foreground (full)
+  ##  textures that replace ``bgColor`` and ``fgColor`` if specified.
+  ##
   GuiWidget(bar).init()
   bar.min = 0
   bar.max = 100
@@ -78,7 +88,17 @@ proc newProgressBar*(dim: Dim,
                      font: Font = nil,
                      bgGraphic: TextureGraphic = nil,
                      fgGraphic: TextureGraphic = nil): GuiProgressBar =
-  ##  TODO
+  ##  Create a new GuiProgressBar.
+  ##
+  ##  ``dim`` bar's dimensions.
+  ##
+  ##  ``bgColor``, ``fgColor`` background (empty) and foreground (full) colors.
+  ##
+  ##  ``font``  info text font. Might be `nil`.
+  ##
+  ##  ``bgGraphic``, ``fgGraphic`` background (empty) and foreground (full)
+  ##  textures that replace ``bgColor`` and ``fgColor`` if specified.
+  ##
   result = new GuiProgressBar
   result.init(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
 

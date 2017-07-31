@@ -40,10 +40,10 @@ type
     disabledDown
 
   GuiWidget* = ref object of Entity
-    actions*: seq[GuiAction]
+    actions*: seq[GuiAction]  ##  A list of action to perform on click.
     fState: GuiState
-    mbAllow*, fWasPressed: MouseState
-    toggle*, fToggled: bool
+    mbAllow*, fWasPressed: MouseState ##  Mouse buttons allowed for interaction.
+    toggle*, fToggled: bool ##  If `true`, the widget is in toggle on/off mode.
 
 
 proc init*(widget: GuiWidget) =

@@ -136,6 +136,8 @@ method `state=`*(input: GuiTextInput, val: GuiState) =
 
 
 proc enter*(input: GuiTextInput) =
+  ##  Start text entry mode.
+  ##
   input.text.activate()
   startTextInput()
 

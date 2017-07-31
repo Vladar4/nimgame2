@@ -42,7 +42,8 @@ proc init*(button: GuiButton,
            circle: bool = false) =
   ##  GuiButton initialization.
   ##
-  ##  ``graphic`` 2x2 button graphic: default, focused, pressed, disabled.
+  ##  ``graphic`` 2x3 button graphic:
+  ##  defaultUp, defaultDown, focusedUp, focusedDown, disabledUp, disabledDown.
   ##
   ##  ``image`` The graphic to render on top of a butotn.
   ##
@@ -85,6 +86,8 @@ proc newGuiButton*(graphic: Graphic,
 
 
 method `state=`*(button: GuiButton, val: GuiState) =
+  ##  ``Return`` ``button``'s ``state``.
+  ##
   button.setState(val)
   button.sprite.currentFrame = val.int
 
