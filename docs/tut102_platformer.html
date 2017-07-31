@@ -314,7 +314,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 <div class="section" id="menu"><h3>Menu</h3>
 
     <p>
-        Let's add "Play" and "Exit" buttons to our title screen. These buttons will work through the action procedures feature of <b>GuiWidget</b> type.
+        Let's add "Play" and "Exit" buttons to our title screen. These buttons will work through the action procedures feature of the <b>GuiWidget</b> type.
     </p>
 
 <h4>title.nim</h4>
@@ -430,7 +430,7 @@ proc load*(level: Level, csv: string) =
 </pre>
 
     <p>
-        As you see, we are passing CSV data into the two-dimensional map sequence. The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles, that the player should not be able to walk on, are added to the <b>passable</b> sequence. To speed up phyiscs we enabled <b>onlyReachableColliders</b> option prior to calling <b>initCollider</b> procedure.
+        As you see, we are passing CSV data into the two-dimensional map sequence. The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles, that the player should not be able to walk on, are added to the <b>passable</b> sequence. To speed up phyiscs we enabled the <b>onlyReachableColliders</b> option prior to calling the <b>initCollider</b> procedure.
     </p>
     <p>
         Now we could add the level into the main scene.
@@ -586,7 +586,7 @@ proc init*(scene: MainScene) =
 <div class="section" id="player_movement"><h3>Player Movement</h3>
 
     <p>
-        To make the player entity move, we will use the <b>platformerPhysics</b> procedure from the engine's entity module. As you could see from the previous section, we added the level as the only item in the player's <b>collisionEnvironment</b> sequence. This sequence is used by <b>platformerPhysics</b> procedure to check if the player entity could move in any given direction.
+        To make the player entity move, we will use the <b>platformerPhysics</b> procedure from the engine's entity module. As you could see from the previous section, we added the level as the only item in the player's <b>collisionEnvironment</b> sequence. This sequence is used by the <b>platformerPhysics</b> procedure to check if the player entity could move in any given direction.
     </p>
 
 <h4>player.nim</h4>
@@ -677,7 +677,7 @@ method update*(scene: MainScene, elapsed: float) =
 <div class="section" id="dying_and_spikes"><h3>Dying and Spikes</h3>
 
     <p>
-        You might have noticed that the spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that <b>platformerPhysics</b> procedure prevents any collisions with the tile map before the standard collision callback could happen. That is why we should initialize any tiles, that you want player to interact with, as separate entities with their own colliders. So, for each "spikes" tile index in the map data we create a collidable entity (without any graphics) in its place.
+        You might have noticed that the spikes tile in our tile sheet is added to the <b>passable</b> sequence. The reason for this is that the <b>platformerPhysics</b> procedure prevents any collisions with the tile map before the standard collision callback could happen. That is why we should initialize any tiles, that you want player to interact with, as separate entities with their own colliders. So, for each "spikes" tile index in the map data we create a collidable entity (without any graphics) in its place.
     </p>
 
 <h4>main.nim</h4>
@@ -860,7 +860,7 @@ method update*(scene: MainScene, elapsed: float) =
     </p>
 
     <p>
-    We do not want physics and logic to be updated while the enemy is off the screen, so we do not call <b>updateEntity</b> procedure this time, checking the enemy's position and calling procedures manually instead.
+    We do not want physics and logic to be updated while the enemy is off the screen, so we do not call the <b>updateEntity</b> procedure this time, checking the enemy's position and calling procedures manually instead.
     </p>
 
 <h4>enemy.nim</h4>
@@ -1004,7 +1004,7 @@ method onCollide*(player: Player, target: Entity) =
     </p>
 
     <p>
-        Note, that we are fetching the index with <b>firstTileIndex</b> procedure. It means that if there is more than one appearance of this tile index on a map, only one will be processed. If you want to have multiple finish points, change it to the <b>tileIndex</b> iterator.
+        Note, that we are fetching the index with the <b>firstTileIndex</b> procedure. It means that if there is more than one appearance of this tile index on a map, only one will be processed. If you want to have multiple finish points, change it to the <b>tileIndex</b> iterator.
     </p>
 
 <h4>main.nim</h4>
@@ -1160,7 +1160,7 @@ if game.init(GameWidth, GameHeight, title = GameTitle, integerScale = true):
 
 
     <p>
-        As we loaded our sounds into <b>sfxData</b> assets collection, playing them at the right moment is trivial.
+        As we loaded our sounds into the <b>sfxData</b> assets collection, playing them at the right moment is trivial.
     </p>
 
 
@@ -1236,7 +1236,7 @@ method show*(scene: MainScene) =
 </pre>
 
     <p>
-        As you can see, we moved <b>init</b> call from the constructor to the <b>show</b> method, so the scene will be rebuilt each time it is switched to. Nim's GC will take care of previously allocated resources.
+        As you can see, we moved the <b>init</b> call from the constructor to the <b>show</b> method, so the scene will be rebuilt each time it is switched to. Nim's GC will take care of previously allocated resources.
     </p>
 
 </div>

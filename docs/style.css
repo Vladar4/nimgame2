@@ -239,6 +239,10 @@ p {
     padding-left: 1.5rem;
 }
 
+.tutlist li {
+    padding-bottom: 1em;
+}
+
 .star {
     width: 1rem;
 }
