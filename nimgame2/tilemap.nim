@@ -59,6 +59,11 @@ type
 #=========#
 
 proc init*(tilemap: TileMap, scaleFix = false) =
+  ##  TileMap initialization.
+  ##
+  ##  ``scaleFix``  set ``tileScale`` to ``DefaultTileScale`` if `true`,
+  ##  or to `1.0` otherwise.
+  ##
   tilemap.initEntity()
   tilemap.map = @[]
   tilemap.fShow = (0..0, 0..0)
@@ -148,6 +153,8 @@ proc centrify*(tilemap: TileMap, hor = HAlign.center, ver = VAlign.center) =
 
 
 iterator tileIndex*(tilemap: TileMap, value: int): CoordInt =
+  ##  Iterate through tiles with a specific ``value``.
+  ##
   for y in 0..tilemap.map.high:
     for x in 0..tilemap.map[y].high:
       if tilemap.map[y][x] == value:
@@ -155,11 +162,16 @@ iterator tileIndex*(tilemap: TileMap, value: int): CoordInt =
 
 
 proc firstTileIndex*(tilemap: TileMap, value: int): CoordInt =
+  ##  ``Return`` the first tile index with a specific ``value``.
+  ##
   for i in tilemap.tileIndex(value):
     return i
 
 
 proc tileIndex*(tilemap: TileMap, pos: Coord): CoordInt =
+  ##  ``Return`` the tile map index of a tile
+  ##  that is located at the given screen position.
+  ##
   let
     dim: Coord = tilemap.sprite.dim * tilemap.absScale
     offset: Coord = pos - tilemap.pos
@@ -169,6 +181,8 @@ proc tileIndex*(tilemap: TileMap, pos: Coord): CoordInt =
 
 
 proc tilePos*(tilemap: TileMap, index: CoordInt): Coord =
+  ##  ``Return`` screen position of a tile with the given tile map index.
+  ##
   let
     dim: Coord = tilemap.sprite.dim * tilemap.absScale
     offset: Coord =
@@ -315,6 +329,8 @@ proc newTileMapCollider*(parent: TileMap,
 
 
 iterator tileColliders*(t: TilemapCollider): TileCollider =
+  ##  Iterate through all tile colliders of ``t`` TilemapCollider.
+  ##
   for y in t.map.show.y:
     for x in t.map.show.x:
       let tile = t.tiles[y][x]
