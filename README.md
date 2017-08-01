@@ -4,7 +4,7 @@ Nimgame 2
 A simple 2D game engine for Nim language.
 
 
-Status: v0.4 alpha
+Status: v0.5 alpha
 ------------------
 
 
@@ -43,6 +43,23 @@ Links:
 
 Changelog:
 ----------
+
+### v0.5 alpha (2017-08-01)
+* changed physics and logic systems
+* platformer physics
+* CoordInt type
+* now collider module is autmatically included into the entity module
+* group collider
+* huge Tilemap optimizations
+* various utility Tilemap procedures
+* TextureGraphic.drawTiled
+* GUI:
+  * GUIProgressBar
+  * widget actions
+* various minor changes and upgrades
+* Nim v0.17.0 transition
+* documentation, snippets, and demos update
+* [second tutorial](https://vladar4.github.io/nimgame2/tut102_platformer.html)
 
 ### v0.4 alpha (2017-05-04)
 * GUI:
