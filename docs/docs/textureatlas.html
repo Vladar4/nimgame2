@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module textureatlas</title>
@@ -1250,6 +1252,10 @@ function main() {
 <dt id="TextureAtlas"><a name="TextureAtlas"></a><pre><span class="Identifier">TextureAtlas</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">OrderedTableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">TextureGraphic</span><span class="Other">]</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/textureatlas.nim#L36"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/textureatlas.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1260,6 +1266,10 @@ function main() {
 <dt id="free"><a name="free,TextureAtlas"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">atlas</span><span class="Other">:</span> <span class="Identifier">TextureAtlas</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/textureatlas.nim#L39"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/textureatlas.nim#L39" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTextureAtlas"><a name="newTextureAtlas,string,string,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureAtlas</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">imagefile</span><span class="Other">,</span> <span class="Identifier">mapfile</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">count</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureAtlas</span></pre></dt>
@@ -1270,6 +1280,10 @@ function main() {
 <blockquote><p>name, x, y, w, h ...</p></blockquote>
 <p><tt class="docutils literal"><span class="pre">count</span></tt> expected mappings count. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/textureatlas.nim#L79"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/textureatlas.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1282,7 +1296,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>

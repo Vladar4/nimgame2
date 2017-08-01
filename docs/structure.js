@@ -159,7 +159,6 @@ var docsList = [
     'assets',
     'audio',
     'bitmapfont',
-    'collider',
     'count',
     'draw',
     'emitter',
@@ -167,6 +166,7 @@ var docsList = [
     'font',
     'graphic',
     'gui/button',
+    'gui/progressbar',
     'gui/radio',
     'gui/textinput',
     'gui/widget',
@@ -187,6 +187,7 @@ var docsList = [
     'tween',
     'types',
     'utils',
+    'private/collider',
 ];
 
 

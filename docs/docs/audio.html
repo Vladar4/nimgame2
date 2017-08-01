@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module audio</title>
@@ -1379,21 +1381,37 @@ function main() {
 <dt id="Channel"><a name="Channel"></a><pre><span class="Identifier">Channel</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L31"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Distance"><a name="Distance"></a><pre><span class="Identifier">Distance</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L32"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Panning"><a name="Panning"></a><pre><span class="Identifier">Panning</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L33"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Volume"><a name="Volume"></a><pre><span class="Identifier">Volume</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">MaxVolume</span><span class="Other">]</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L34"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Sound"><a name="Sound"></a><pre><span class="Identifier">Sound</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
@@ -1402,6 +1420,10 @@ function main() {
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L36"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Music"><a name="Music"></a><pre><span class="Identifier">Music</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
@@ -1409,6 +1431,10 @@ function main() {
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L40"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Playlist"><a name="Playlist"></a><pre><span class="Identifier">Playlist</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
@@ -1418,6 +1444,10 @@ function main() {
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L407"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L407" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1428,6 +1458,10 @@ function main() {
 <dt id="playlist"><a name="playlist_2"></a><pre><span class="Identifier">playlist</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Playlist</span> <span class="Other">=</span> <span class="Keyword">nil</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L414"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L414" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1438,31 +1472,55 @@ function main() {
 <dt id="free"><a name="free,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L48"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="load"><a name="load,Sound,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L61"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newSound"><a name="newSound,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newSound</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Sound</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L71"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="available"><a name="available,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is ready to use, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L76"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="playing"><a name="playing,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playing</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is playing, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L84"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="stop"><a name="stop,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
 <dd>
 Stop the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L92"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L92" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="play"><a name="play,Sound,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Channel</span></pre></dt>
@@ -1470,41 +1528,73 @@ Stop the <tt class="docutils literal"><span class="pre">sound</span></tt>.
 <p>Play the <tt class="docutils literal"><span class="pre">sound</span></tt> <tt class="docutils literal"><span class="pre">loops</span></tt> + <cite>1</cite> times.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> the channel the <tt class="docutils literal"><span class="pre">sound</span></tt> is played on. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L99"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L99" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="channel"><a name="channel,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">channel</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Channel</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the channel, the <tt class="docutils literal"><span class="pre">sound</span></tt> is played on. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L114"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="paused"><a name="paused,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">paused</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is paused, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L123"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="pause"><a name="pause,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
 <dd>
 Pause the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L131"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L131" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="resume"><a name="resume,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">resume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
 <dd>
 Resume the <tt class="docutils literal"><span class="pre">sound</span></tt> if it is paused. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L140"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L140" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="volume"><a name="volume,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">volume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the volume of the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L149"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L149" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="normalizeVolume"><a name="normalizeVolume,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">normalizeVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L155"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,Sound,Volume"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">volume</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set <tt class="docutils literal"><span class="pre">sound</span></tt> volume. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L161"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setDistance"><a name="setDistance,Channel,Distance"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setDistance</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">Distance</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1513,6 +1603,10 @@ Set the distance on a <tt class="docutils literal"><span class="pre">channel</sp
 <dd><cite>0</cite> - near (loud) <cite>255</cite> - far (quiet)</dd>
 </dl>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L183"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setPanning"><a name="setPanning,Channel,Panning,Panning"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setPanning</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">:</span> <span class="Identifier">Panning</span> <span class="Other">=</span> <span class="Identifier">Panning</span><span class="Other">.</span><span class="Identifier">high</span><span class="Other">;</span>
@@ -1521,6 +1615,10 @@ Set the distance on a <tt class="docutils literal"><span class="pre">channel</sp
 <p>Set the panning on a <tt class="docutils literal"><span class="pre">channel</span></tt>.</p>
 <p>Setting both <tt class="docutils literal"><span class="pre">left</span></tt> and <tt class="docutils literal"><span class="pre">right</span></tt> to <cite>255</cite> (<tt class="docutils literal"><span class="pre">Panning.high</span></tt>) will unregister the effect from <tt class="docutils literal"><span class="pre">channel</span></tt>. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L197"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L197" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setPosition"><a name="setPosition,Channel,Angle,Distance"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setPosition</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">Distance</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1531,96 +1629,172 @@ Set the position on a <tt class="docutils literal"><span class="pre">channel</sp
 <dd><cite>0</cite> - near (loud) <cite>255</cite> - far (quiet)</dd>
 </dl>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L210"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L210" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundStop"><a name="soundStop,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundStop</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Stop all sound channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L234"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L234" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundPlayingNum"><a name="soundPlayingNum,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPlayingNum</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the number of currently playing channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L240"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundPausedNum"><a name="soundPausedNum,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPausedNum</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the number of currently paused channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L246"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L246" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundPause"><a name="soundPause,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPause</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Pause all sound channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L252"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L252" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundResume"><a name="soundResume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundResume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Resume all sound channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L258"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L258" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="getSoundVolume"><a name="getSoundVolume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> average sound volume. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L264"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L264" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setSoundVolume"><a name="setSoundVolume,Volume"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new volume for all sound channels. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L270"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L270" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="free"><a name="free,Music"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L292"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L292" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="init"><a name="init,Music,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L298"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L298" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newMusic"><a name="newMusic,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newMusic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Music</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L307"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L307" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="available"><a name="available,Music"></a><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">music</span></tt> is ready to use, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L312"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L312" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="play"><a name="play,Music,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
 <dd>
 Play the <tt class="docutils literal"><span class="pre">music</span></tt> <tt class="docutils literal"><span class="pre">loops</span></tt> + <cite>1</cite> times. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L318"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L318" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicPaused"><a name="musicPaused,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPaused</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if music is paused, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L330"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L330" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicPause"><a name="musicPause,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPause</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Pause music. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L336"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L336" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicResume"><a name="musicResume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicResume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Resume music. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L342"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L342" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicRewind"><a name="musicRewind,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicRewind</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Rewind music. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L348"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L348" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicPlaying"><a name="musicPlaying,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPlaying</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if music is playing, or <cite>false</cite> otherwise. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L354"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L354" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicStop"><a name="musicStop,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicStop</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Stop music. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L360"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L360" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicPosition"><a name="musicPosition,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPosition</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1631,21 +1805,37 @@ Stop music.
 <p>OGG <tt class="docutils literal"><span class="pre">val</span></tt> is seconds from from the beginning.</p>
 <p>MP3 <tt class="docutils literal"><span class="pre">val</span></tt> is seconds from the current position. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L366"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L366" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="init"><a name="init,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L425"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L425" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newPlaylist"><a name="newPlaylist,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newPlaylist</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Playlist</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L431"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L431" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="index"><a name="index,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">index</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current track index. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L436"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L436" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="play"><a name="play,Playlist,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
@@ -1654,16 +1844,28 @@ Stop music.
 <p><tt class="docutils literal"><span class="pre">index</span></tt> track index, or <cite>-1</cite> for a random track.</p>
 <p><tt class="docutils literal"><span class="pre">Retrun</span></tt> current track index. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L442"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L442" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="stop"><a name="stop,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L456"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L456" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="update"><a name="update,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L461"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L461" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1674,41 +1876,73 @@ Stop music.
 <dt id="volumeInc"><a name="volumeInc.t,Sound,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">volumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase <tt class="docutils literal"><span class="pre">sound</span></tt> volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L167"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="volumeDec"><a name="volumeDec.t,Sound,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">volumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease <tt class="docutils literal"><span class="pre">sound</span></tt> volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L173"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L173" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundVolumeInc"><a name="soundVolumeInc.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase global sound volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L276"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L276" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="soundVolumeDec"><a name="soundVolumeDec.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease global sound volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L282"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L282" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setMusicVolume"><a name="setMusicVolume.t,Volume"></a><pre><span class="Keyword">template</span> <span class="Identifier">setMusicVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span></pre></dt>
 <dd>
 Set music volume, or return current setting, if <tt class="docutils literal"><span class="pre">val</span></tt> = <cite>-1</cite>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L380"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L380" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="getMusicVolume"><a name="getMusicVolume.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">getMusicVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L386"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L386" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicVolumeInc"><a name="musicVolumeInc.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase music volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L390"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L390" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="musicVolumeDec"><a name="musicVolumeDec.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease music volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/audio.nim#L396"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/audio.nim#L396" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1721,7 +1955,7 @@ Decrease music volume by <tt class="docutils literal"><span class="pre">val</spa
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>

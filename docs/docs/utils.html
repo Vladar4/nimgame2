@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module utils</title>
@@ -1295,21 +1297,37 @@ function main() {
 <dt id="distance"><a name="distance,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">distance</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> distance between two coordinates. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L47"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="distanceToLine"><a name="distanceToLine,Coord,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">distanceToLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">d1</span><span class="Other">,</span> <span class="Identifier">d2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> distance between point <tt class="docutils literal"><span class="pre">a</span></tt> and line <tt class="docutils literal"><span class="pre">d1</span></tt>-<tt class="docutils literal"><span class="pre">d2</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L53"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="direction"><a name="direction,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">direction</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> angle direction from coordinate <tt class="docutils literal"><span class="pre">a</span></tt> to <tt class="docutils literal"><span class="pre">b</span></tt> (in degrees). 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L61"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="rotate"><a name="rotate,Coord,Angle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
 <dd>
 Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the given <tt class="docutils literal"><span class="pre">angle</span></tt> (in degrees). 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L70"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="rotate"><a name="rotate,Coord,Coord,Angle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">point</span><span class="Other">,</span> <span class="Identifier">offset</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
@@ -1317,6 +1335,10 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p>Rotate <tt class="docutils literal"><span class="pre">point</span></tt> by the given <tt class="docutils literal"><span class="pre">angle</span></tt> and with given <tt class="docutils literal"><span class="pre">offset</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">offset</span></tt>  Offset coordinate (parent position) <tt class="docutils literal"><span class="pre">point</span></tt>   Point to rotate <tt class="docutils literal"><span class="pre">angle</span></tt>   Angle of rotation (in degrees) </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L83"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="loadSurface"><a name="loadSurface,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadSurface</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span></pre></dt>
@@ -1324,6 +1346,10 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p>Load an image <tt class="docutils literal"><span class="pre">file</span></tt> to the <tt class="docutils literal"><span class="pre">sdl.Surface</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> the surface on success, or <cite>nil</cite> otherwise. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L102"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="loadCSV"><a name="loadCSV,string,proc(string)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadCSV</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">parse</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span>
@@ -1332,6 +1358,10 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p>Load data from a CSV <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> a two-dimensional sequence of values from the <tt class="docutils literal"><span class="pre">file</span></tt>, or empty sequence (<cite>@[]</cite>) otherwise. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L119"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="loadPalette"><a name="loadPalette,,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadPalette</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">palette</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">indexedimage</span><span class="Other">.</span><span class="Identifier">Palette</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">' '</span><span class="Other">;</span>
@@ -1346,36 +1376,64 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p>where <cite>rrr</cite>, <cite>ggg</cite>, <cite>bbb</cite>, and <cite>aaa</cite> is in <cite>0</cite>..`255` range.</p>
 <p>Other types of lines are ignored. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L144"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random,T,seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L227"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L227" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random,seq[T],seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the sequence <tt class="docutils literal"><span class="pre">x</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>.
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L240"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random,Slice[T],seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L252"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L252" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random,set[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a random member of set <tt class="docutils literal"><span class="pre">x</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L265"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L265" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="randomBool"><a name="randomBool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomBool</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5'f64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> or <cite>false</cite>, based on the <tt class="docutils literal"><span class="pre">chance</span></tt> value (from <cite>0.0</cite> to <cite>1.0</cite>). 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L274"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L274" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="randomSign"><a name="randomSign,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomSign</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5'f64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>1</cite> or <cite>-1</cite>, based on the <tt class="docutils literal"><span class="pre">chance</span></tt> value (from <cite>0.0</cite> to <cite>1.0</cite>). 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L281"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L281" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="randomWeighted"><a name="randomWeighted,openArray[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomWeighted</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">weights</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
@@ -1383,6 +1441,10 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> a random integer, based on the <tt class="docutils literal"><span class="pre">weights</span></tt> array.</p>
 <p>E.g., call of randomWeighted([2, 3, 5]) will have a 20% chance of returning <cite>0</cite>, 30% chance of returning <cite>1</cite>, and 50% chance of returning <cite>2</cite>. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L288"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L288" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1397,6 +1459,10 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <p>Mapping should be in a format of:</p>
 <blockquote><p>name, x, y, w, h ...</p></blockquote>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L194"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L194" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1407,26 +1473,46 @@ Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the
 <dt id="rad"><a name="rad.t,Angle"></a><pre><span class="Keyword">template</span> <span class="Identifier">rad</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
 <dd>
 Convert degrees to radians. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L35"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="deg"><a name="deg.t,Angle"></a><pre><span class="Keyword">template</span> <span class="Identifier">deg</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
 <dd>
 Convert radians to degrees. 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L41"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random.t,T,openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L236"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L236" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random.t,openArray[T],openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L248"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L248" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="random"><a name="random.t,Slice[T],openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/utils.nim#L261"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/utils.nim#L261" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1439,7 +1525,7 @@ Convert radians to degrees.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>

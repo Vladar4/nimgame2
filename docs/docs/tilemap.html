@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module tilemap</title>
@@ -1223,14 +1225,23 @@ function main() {
     title="TileMap* = ref object of Entity
   map*: seq[seq[int]]
   fShow: TileShow              ## Slice of what part of map to show
-  passable*: seq[int]          ## The list of tile indexes that do not collide
+  hidden*: seq[int]            ## The list of tile indexes to not render
+  passable*: seq[int]          ## The list of tile indexes without colliders
+  onlyReachableColliders*: bool ## Do not create colliders \
+                              ## for unreachable tiles
   tileScale*: Scale ## \
                   ## The scaling of individual tiles, mostly used for gap removal. \
                   ## Increase on scales vastly different from `1.0`. \
                   ## Set to `1.0` if your map isn&#x27;t rotating or scaling."><wbr />Tile<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#TileCollider"
-    title="TileCollider* = ref object of Collider
-  tiles*: seq[BoxCollider]     ## Sequence of individual tile colliders"><wbr />Tile<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="TileCollider* = ref object of BoxCollider
+  value*: int
+  index*: CoordInt             ## Map coordinates"><wbr />Tile<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#TileMapCollider"
+    title="TileMapCollider* = ref object of Collider
+  map: TileMap
+  tiles: seq[seq[TileCollider]] ## Two-dimensional sequence of colliders \
+                              ## (y, x)"><wbr />Tile<wbr />Map<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1251,8 +1262,6 @@ function main() {
     title="newTileMap*(scaleFix = false): TileMap"><wbr />new<wbr />Tile<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#show,TileMap"
     title="show*(tilemap: TileMap): TileShow"><wbr />show<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,TileCollider,TileMap,Coord,Dim"
-    title="init*(t: TileCollider; parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#=,TileMap,TileShow"
     title="`show =`*(tilemap: TileMap; val: TileShow)">`<wbr />show<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#dimTiles,TileMap"
@@ -1261,12 +1270,24 @@ function main() {
     title="dim*(tilemap: TileMap): Dim"><wbr />dim<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#centrify,TileMap"
     title="centrify*(tilemap: TileMap; hor = HAlign.center; ver = VAlign.center)"><wbr />centrify<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#firstTileIndex,TileMap,int"
+    title="firstTileIndex*(tilemap: TileMap; value: int): CoordInt"><wbr />first<wbr />Tile<wbr />Index<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#tileIndex,TileMap,Coord"
+    title="tileIndex*(tilemap: TileMap; pos: Coord): CoordInt"><wbr />tile<wbr />Index<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#tilePos,TileMap,CoordInt"
+    title="tilePos*(tilemap: TileMap; index: CoordInt): Coord"><wbr />tile<wbr />Pos<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#renderTileMap,TileMap"
     title="renderTileMap*(tilemap: TileMap)"><wbr />render<wbr />Tile<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,TileCollider,TileMap,Coord,Dim_2"
-    title="init*(t: TileCollider; parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTileCollider,TileMap,Coord,Dim"
-    title="newTileCollider*(parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0)): TileCollider"><wbr />new<wbr />Tile<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#init,TileCollider,TileMap,Coord,Dim,int,CoordInt"
+    title="init*(t: TileCollider; parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0); value: int;
+      index: CoordInt)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#newTileCollider,TileMap,Coord,Dim,int,CoordInt"
+    title="newTileCollider*(parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0); value: int;
+                 index: CoordInt): TileCollider"><wbr />new<wbr />Tile<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#init,TileMapCollider,TileMap,Coord,Dim"
+    title="init*(t: TileMapCollider; parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#newTileMapCollider,TileMap,Coord,Dim"
+    title="newTileMapCollider*(parent: TileMap; pos: Coord = (0, 0); dim: Dim = (0, 0)): TileMapCollider"><wbr />new<wbr />Tile<wbr />Map<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#initCollider,TileMap"
     title="initCollider*(tilemap: TileMap)"><wbr />init<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
 
@@ -1277,32 +1298,56 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#render.e,TileMap"
     title="render*(tilemap: TileMap)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,TileCollider"
-    title="render*(t: TileCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,Coord"
-    title="collide*(t: TileCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,Collider"
-    title="collide*(t: TileCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,TileCollider"
-    title="collide*(a: Collider; t: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,BoxCollider"
-    title="collide*(t: TileCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,TileCollider"
-    title="collide*(b: BoxCollider; t: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,CircleCollider"
-    title="collide*(t: TileCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,TileCollider"
-    title="collide*(c: CircleCollider; t: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,LineCollider"
-    title="collide*(t: TileCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,TileCollider"
-    title="collide*(d: LineCollider; t: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,PolyCollider"
-    title="collide*(t: TileCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,TileCollider"
-    title="collide*(p: PolyCollider; t: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,TileCollider,TileCollider"
-    title="collide*(t1, t2: TileCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#render.e,TileMapCollider"
+    title="render*(t: TileMapCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,Coord"
+    title="collide*(t: TileMapCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,Collider"
+    title="collide*(t: TileMapCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,Collider,TileMapCollider"
+    title="collide*(a: Collider; t: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,BoxCollider"
+    title="collide*(t: TileMapCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,BoxCollider,TileMapCollider"
+    title="collide*(b: BoxCollider; t: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,CircleCollider"
+    title="collide*(t: TileMapCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,CircleCollider,TileMapCollider"
+    title="collide*(c: CircleCollider; t: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,LineCollider"
+    title="collide*(t: TileMapCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,LineCollider,TileMapCollider"
+    title="collide*(d: LineCollider; t: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,PolyCollider"
+    title="collide*(t: TileMapCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,PolyCollider,TileMapCollider"
+    title="collide*(p: PolyCollider; t: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,GroupCollider"
+    title="collide*(t: TileMapCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,GroupCollider,TilemapCollider"
+    title="collide*(g: GroupCollider; t: TilemapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e,TileMapCollider,TileMapCollider"
+    title="collide*(t1, t2: TileMapCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#14" id="64">Iterators</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#tileIndex.i,TileMap,int"
+    title="tileIndex*(tilemap: TileMap; value: int): CoordInt"><wbr />tile<wbr />Index<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#tileColliders.i,TilemapCollider"
+    title="tileColliders*(t: TilemapCollider): TileCollider"><wbr />tile<wbr />Colliders<span class="attachedType" style="visibility:hidden"></span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#tile.t,TileMap,CoordInt"
+    title="tile*(tilemap: TileMap; index: CoordInt): var int"><wbr />tile<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collisionList.t,TileMapCollider,typed,bool"
+    title="collisionList*(t: TileMapCollider; a: typed; first: bool = false): seq[TileCollider]"><wbr />collision<wbr />List<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1316,7 +1361,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="collider.html">collider</a>, <a class="reference external" href="entity.html">entity</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
+<a class="reference external" href="entity.html">entity</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -1324,26 +1369,55 @@ function main() {
 <dt id="TileShow"><a name="TileShow"></a><pre><span class="Identifier">TileShow</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L33"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="TileMap"><a name="TileMap"></a><pre><span class="Identifier">TileMap</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Entity</span>
   <span class="Identifier">map</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span>
   <span class="Identifier">fShow</span><span class="Other">:</span> <span class="Identifier">TileShow</span>              <span class="Comment">## Slice of what part of map to show</span>
-  <span class="Identifier">passable</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span>          <span class="Comment">## The list of tile indexes that do not collide</span>
+  <span class="Identifier">hidden</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span>            <span class="Comment">## The list of tile indexes to not render</span>
+  <span class="Identifier">passable</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span>          <span class="Comment">## The list of tile indexes without colliders</span>
+  <span class="Identifier">onlyReachableColliders</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Comment">## Do not create colliders \</span>
+                              <span class="Comment">## for unreachable tiles</span>
   <span class="Identifier">tileScale</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scale</span> <span class="Comment">## \</span>
                   <span class="Comment">## The scaling of individual tiles, mostly used for gap removal. \</span>
                   <span class="Comment">## Increase on scales vastly different from `1.0`. \</span>
                   <span class="Comment">## Set to `1.0` if your map isn't rotating or scaling.</span>
   </pre></dt>
 <dd>
-Two-dimensional sequence of tile indexes
+Two-dimensional sequence of tile indexes (y, x)
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L35"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="TileCollider"><a name="TileCollider"></a><pre><span class="Identifier">TileCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
-  <span class="Identifier">tiles</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">BoxCollider</span><span class="Other">]</span>     <span class="Comment">## Sequence of individual tile colliders</span>
+<dt id="TileCollider"><a name="TileCollider"></a><pre><span class="Identifier">TileCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">BoxCollider</span>
+  <span class="Identifier">value</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
+  <span class="Identifier">index</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">CoordInt</span>             <span class="Comment">## Map coordinates</span>
+  </pre></dt>
+<dd>
+Tile kind value
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L47"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="TileMapCollider"><a name="TileMapCollider"></a><pre><span class="Identifier">TileMapCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
+  <span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">TileMap</span>
+  <span class="Identifier">tiles</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">TileCollider</span><span class="Other">]</span><span class="Other">]</span> <span class="Comment">## Two-dimensional sequence of colliders \</span>
+                              <span class="Comment">## (y, x)</span>
   </pre></dt>
 <dd>
 Collider to use with TileMap
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L51"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L51" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1354,6 +1428,10 @@ Collider to use with TileMap
 <dt id="DefaultTileScale"><a name="DefaultTileScale"></a><pre><span class="Identifier">DefaultTileScale</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scale</span> <span class="Other">=</span> <span class="FloatNumber">1.02'f64</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L29"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1363,7 +1441,13 @@ Collider to use with TileMap
 <dl class="item">
 <dt id="init"><a name="init,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">scaleFix</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
 <dd>
+<p>TileMap initialization.</p>
+<p><tt class="docutils literal"><span class="pre">scaleFix</span></tt>  set <tt class="docutils literal"><span class="pre">tileScale</span></tt> to <tt class="docutils literal"><span class="pre">DefaultTileScale</span></tt> if <cite>true</cite>, or to <cite>1.0</cite> otherwise. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L61"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newTileMap"><a name="newTileMap,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scaleFix</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileMap</span></pre></dt>
@@ -1371,31 +1455,46 @@ Collider to use with TileMap
 <p>Create a new TileMap.</p>
 <p><tt class="docutils literal"><span class="pre">scaleFix</span></tt>  set <tt class="docutils literal"><span class="pre">tileScale</span></tt> to <tt class="docutils literal"><span class="pre">DefaultTileScale</span></tt> if <cite>true</cite>, or to <cite>1.0</cite> otherwise. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L75"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="show"><a name="show,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">show</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileShow</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a currently shown slices of tiles. 
-
-</dd>
-<dt id="init"><a name="init,TileCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
-<dd>
-
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L85"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,TileMap,TileShow"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">show</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">TileShow</span><span class="Other">)</span></pre></dt>
 <dd>
 Set new values for the shown slices of tiles. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L91"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="dimTiles"><a name="dimTiles,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dimTiles</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of the <tt class="docutils literal"><span class="pre">tilemap</span></tt>, calculated from its <tt class="docutils literal"><span class="pre">map</span></tt> (in tiles). 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L112"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="dim"><a name="dim,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of the <tt class="docutils literal"><span class="pre">tilemap</span></tt>, calculated from its <tt class="docutils literal"><span class="pre">map</span></tt> (in pixels). 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L123"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="centrify"><a name="centrify,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">hor</span> <span class="Other">=</span> <span class="Identifier">HAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">;</span> <span class="Identifier">ver</span> <span class="Other">=</span> <span class="Identifier">VAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">)</span></pre></dt>
@@ -1404,30 +1503,97 @@ Set new values for the shown slices of tiles.
 <p><tt class="docutils literal"><span class="pre">hor</span></tt> Horisontal align: left, center, or right</p>
 <p><tt class="docutils literal"><span class="pre">ver</span></tt> Vertical align: top, center, or bottom </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L130"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="firstTileIndex"><a name="firstTileIndex,TileMap,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">firstTileIndex</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoordInt</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> the first tile index with a specific <tt class="docutils literal"><span class="pre">value</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L164"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L164" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="tileIndex"><a name="tileIndex,TileMap,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tileIndex</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoordInt</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> the tile map index of a tile that is located at the given screen position. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L171"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="tilePos"><a name="tilePos,TileMap,CoordInt"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tilePos</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">CoordInt</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> screen position of a tile with the given tile map index. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L183"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderTileMap"><a name="renderTileMap,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderTileMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L201"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L201" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,TileCollider,TileMap,Coord,Dim_2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+<dt id="init"><a name="init,TileCollider,TileMap,Coord,Dim,int,CoordInt"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
+          <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">CoordInt</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L243"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTileCollider"><a name="newTileCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileCollider</span></pre></dt>
+<dt id="newTileCollider"><a name="newTileCollider,TileMap,Coord,Dim,int,CoordInt"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span>
+                     <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">CoordInt</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileCollider</span></pre></dt>
 <dd>
-<p>Create a <tt class="docutils literal"><span class="pre">TileCollider</span></tt> for the <tt class="docutils literal"><span class="pre">parent</span></tt> <tt class="docutils literal"><span class="pre">TileMap</span></tt>.</p>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L251"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L251" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="init"><a name="init,TileMapCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L261"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L261" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="newTileMapCollider"><a name="newTileMapCollider,TileMap,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTileMapCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span></pre></dt>
+<dd>
+<p>Create a <tt class="docutils literal"><span class="pre">TileMapCollider</span></tt> for the <tt class="docutils literal"><span class="pre">parent</span></tt> <tt class="docutils literal"><span class="pre">TileMap</span></tt>.</p>
 <p>Most of the times you should use <tt class="docutils literal"><span class="pre">initCollider()</span></tt> instead.</p>
 <p><tt class="docutils literal"><span class="pre">pos</span></tt> Collider's relative position. Usually <cite>(0, 0)</cite>.</p>
 <p><tt class="docutils literal"><span class="pre">dim</span></tt> Tile dimensions. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L316"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L316" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="initCollider"><a name="initCollider,TileMap"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 Initialize a collider for the <tt class="docutils literal"><span class="pre">tilemap</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L347"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L347" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1438,71 +1604,195 @@ Initialize a collider for the <tt class="docutils literal"><span class="pre">til
 <dt id="render"><a name="render.e,TileMap"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L235"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L235" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span></pre></dt>
+<dt id="render"><a name="render.e,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L341"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L341" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L374"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L374" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L383"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L383" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="collide"><a name="collide.e,Collider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L390"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L390" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L396"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L396" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="collide"><a name="collide.e,BoxCollider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L403"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L403" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L409"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L409" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="collide"><a name="collide.e,CircleCollider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L416"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L416" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L422"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L422" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="collide"><a name="collide.e,LineCollider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L429"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L429" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L435"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L435" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,PolyCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="collide"><a name="collide.e,PolyCollider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L442"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L442" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,TileCollider,TileCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <span class="Identifier">TileCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dt id="collide"><a name="collide.e,TileMapCollider,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L449"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L449" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="collide"><a name="collide.e,GroupCollider,TilemapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TilemapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L456"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L456" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="collide"><a name="collide.e,TileMapCollider,TileMapCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L462"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L462" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="14">
+<h1><a class="toc-backref" href="#14">Iterators</a></h1>
+<dl class="item">
+<dt id="tileIndex"><a name="tileIndex.i,TileMap,int"></a><pre><span class="Keyword">iterator</span> <span class="Identifier">tileIndex</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoordInt</span></pre></dt>
+<dd>
+Iterate through tiles with a specific <tt class="docutils literal"><span class="pre">value</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L155"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="tileColliders"><a name="tileColliders.i,TilemapCollider"></a><pre><span class="Keyword">iterator</span> <span class="Identifier">tileColliders</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TilemapCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TileCollider</span></pre></dt>
+<dd>
+Iterate through all tile colliders of <tt class="docutils literal"><span class="pre">t</span></tt> TilemapCollider. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L331"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L331" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="17">
+<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<dl class="item">
+<dt id="tile"><a name="tile.t,TileMap,CoordInt"></a><pre><span class="Keyword">template</span> <span class="Identifier">tile</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tilemap</span><span class="Other">:</span> <span class="Identifier">TileMap</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">CoordInt</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">int</span></pre></dt>
+<dd>
+Direct access to a single tile value. 
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L195"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="collisionList"><a name="collisionList.t,TileMapCollider,typed,bool"></a><pre><span class="Keyword">template</span> <span class="Identifier">collisionList</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <span class="Identifier">TileMapCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">typed</span><span class="Other">;</span> <span class="Identifier">first</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">TileCollider</span><span class="Other">]</span></pre></dt>
+<dd>
+<p>Get a list of collided <tt class="docutils literal"><span class="pre">TileColliders</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">a</span></tt> collision target (<tt class="docutils literal"><span class="pre">Coord</span></tt>, any <tt class="docutils literal"><span class="pre">Collider</span></tt>, etc.)</p>
+<p><tt class="docutils literal"><span class="pre">first</span></tt> If true, return after the first detected collision. </p>
+
+&nbsp;&nbsp;<a
+href="/tree/master/tilemap.nim#L355"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/tilemap.nim#L355" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1515,7 +1805,7 @@ Initialize a collider for the <tt class="docutils literal"><span class="pre">til
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>

@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module entity</title>
@@ -1250,7 +1252,11 @@ function main() {
   pos2*: Coord"><wbr />Line<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#PolyCollider"
     title="PolyCollider* = ref object of Collider
-  points*: seq[Coord]"><wbr />Poly<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  points*: seq[Coord]
+  farthest: float"><wbr />Poly<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#GroupCollider"
+    title="GroupCollider* = ref object of Collider
+  list*: seq[Collider]"><wbr />Group<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Entity"
     title="Entity* = ref object of RootObj
   parent*: Entity
@@ -1260,8 +1266,11 @@ function main() {
   updLayer*: bool              ## `true` if entity&#x27;s layer was changed
   graphic*: Graphic
   sprite*: Sprite
-  logic*: Logic
-  physics*: Physics
+  logic*: LogicProc
+  physics*: PhysicsProc
+  fastPhysics*: bool           ## rough and fast physics flag
+  collisionEnvironment*: seq[Entity] ## List of collidable entites
+                                   ## used in some physics procedures
   collider*: Collider
   colliding*: seq[Entity]      ## List of Entities currently colliding with
   pos*, vel*, acc*, drg*: Coord   ## Position, velocity, acceleration, drag
@@ -1271,10 +1280,10 @@ function main() {
   center*: Coord               ## Center for drawing and rotating
   flip*: Flip                  ## Texture flip status
   visible*: bool               ## Visibility status"><wbr />Entity<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#Logic"
-    title="Logic* = ref object of RootObj"><wbr />Logic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#Physics"
-    title="Physics* = ref object of RootObj"><wbr />Physics<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#LogicProc"
+    title="LogicProc* = proc (entity: Entity; elapsed: float)"><wbr />Logic<wbr />Proc<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#PhysicsProc"
+    title="PhysicsProc* = proc (entity: Entity; elapsed: float)"><wbr />Physics<wbr />Proc<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1298,8 +1307,12 @@ function main() {
               frameRate: float = 0.1&#x27;f64; flip: Flip = Flip.none): bool"><wbr />add<wbr />Animation<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#play,Entity,string,bool"
     title="play*(entity: Entity; anim: string; cycles = - 1; kill: bool = false)"><wbr />play<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updatePhysics,Physics,Entity,float"
-    title="updatePhysics*(physics: Physics; entity: Entity; elapsed: float)"><wbr />update<wbr />Physics<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#defaultPhysics,Entity,float"
+    title="defaultPhysics*(entity: Entity; elapsed: float)"><wbr />default<wbr />Physics<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#willCollide,Entity,Coord,Angle,Scale,seq[Entity]"
+    title="willCollide*(entity: Entity; pos: Coord; rot: Angle; scale: Scale; list: seq[Entity]): bool"><wbr />will<wbr />Collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#platformerPhysics,Entity,float"
+    title="platformerPhysics*(entity: Entity; elapsed: float)"><wbr />platformer<wbr />Physics<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#initEntity,Entity"
     title="initEntity*(entity: Entity)"><wbr />init<wbr />Entity<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newEntity,"
@@ -1328,11 +1341,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#update.e,Logic,Entity,float"
-    title="update*(logic: Logic; entity: Entity; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#update.e,Physics,Entity,float"
-    title="update*(physics: Physics; entity: Entity; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#event.e,Entity,"
+      <li><a class="reference" href="#event.e,Entity,"
     title="event*(entity: Entity; e: sdl.Event)"><wbr />event<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#render.e,Entity"
     title="render*(entity: Entity)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
@@ -1361,7 +1370,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
+<a class="reference external" href="math.html">math</a>, <a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="draw.html">draw</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -1373,6 +1382,10 @@ function main() {
   </pre></dt>
 <dd>
 List of animation's frame indexes
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L31"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Sprite"><a name="Sprite"></a><pre><span class="Identifier">Sprite</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
@@ -1389,6 +1402,10 @@ List of animation's frame indexes
   </pre></dt>
 <dd>
 List of animation names
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L37"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Collider"><a name="Collider"></a><pre><span class="Identifier">Collider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
@@ -1398,6 +1415,10 @@ List of animation names
 </pre></dt>
 <dd>
 only check collisios with entities with given tags
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L50"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L50" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="BoxCollider"><a name="BoxCollider"></a><pre><span class="Identifier">BoxCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
@@ -1405,6 +1426,10 @@ only check collisios with entities with given tags
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L55"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L55" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="CircleCollider"><a name="CircleCollider"></a><pre><span class="Identifier">CircleCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
@@ -1412,6 +1437,10 @@ only check collisios with entities with given tags
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L58"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="LineCollider"><a name="LineCollider"></a><pre><span class="Identifier">LineCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
@@ -1419,13 +1448,33 @@ only check collisios with entities with given tags
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L61"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="PolyCollider"><a name="PolyCollider"></a><pre><span class="Identifier">PolyCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
   <span class="Identifier">points</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Coord</span><span class="Other">]</span>
+  <span class="Identifier">farthest</span><span class="Other">:</span> <span class="Identifier">float</span>
 </pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L64"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L64" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="GroupCollider"><a name="GroupCollider"></a><pre><span class="Identifier">GroupCollider</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Collider</span>
+  <span class="Identifier">list</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Collider</span><span class="Other">]</span>
+</pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L68"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Entity"><a name="Entity"></a><pre><span class="Identifier">Entity</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
@@ -1436,8 +1485,11 @@ only check collisios with entities with given tags
   <span class="Identifier">updLayer</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>              <span class="Comment">## `true` if entity's layer was changed</span>
   <span class="Identifier">graphic</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Graphic</span>
   <span class="Identifier">sprite</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Sprite</span>
-  <span class="Identifier">logic</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Logic</span>
-  <span class="Identifier">physics</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Physics</span>
+  <span class="Identifier">logic</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">LogicProc</span>
+  <span class="Identifier">physics</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">PhysicsProc</span>
+  <span class="Identifier">fastPhysics</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>           <span class="Comment">## rough and fast physics flag</span>
+  <span class="Identifier">collisionEnvironment</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span> <span class="Comment">## List of collidable entites</span>
+                                   <span class="Comment">## used in some physics procedures</span>
   <span class="Identifier">collider</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Collider</span>
   <span class="Identifier">colliding</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span>      <span class="Comment">## List of Entities currently colliding with</span>
   <span class="Identifier">pos</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">vel</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">acc</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">drg</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Coord</span>   <span class="Comment">## Position, velocity, acceleration, drag</span>
@@ -1450,16 +1502,28 @@ only check collisios with entities with given tags
   </pre></dt>
 <dd>
 Parent entity reference
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L72"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Logic"><a name="Logic"></a><pre><span class="Identifier">Logic</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span></pre></dt>
+<dt id="LogicProc"><a name="LogicProc"></a><pre><span class="Identifier">LogicProc</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L95"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Physics"><a name="Physics"></a><pre><span class="Identifier">Physics</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span></pre></dt>
+<dt id="PhysicsProc"><a name="PhysicsProc"></a><pre><span class="Identifier">PhysicsProc</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L97"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1474,31 +1538,55 @@ Parent entity reference
 <p><tt class="docutils literal"><span class="pre">offset</span></tt>  offset from the edge of the texture.</p>
 <p><tt class="docutils literal"><span class="pre">border</span></tt>  border around individual frames. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L104"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="animationIndex"><a name="animationIndex,Entity,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">animationIndex</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the index of the animation named <tt class="docutils literal"><span class="pre">name</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L167"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="animation"><a name="animation,Entity,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">animation</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Animation</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the animation named <tt class="docutils literal"><span class="pre">name</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L175"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L175" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="animation"><a name="animation,Entity,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">animation</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Animation</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the animation under given <tt class="docutils literal"><span class="pre">index</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L184"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L184" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="currentAnimationName"><a name="currentAnimationName,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">currentAnimationName</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the name of the current animation. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L198"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L198" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="changeFramerate"><a name="changeFramerate,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">changeFramerate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">frameRate</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.1'f64</span><span class="Other">)</span></pre></dt>
 <dd>
 Change framerate for all created animations. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L206"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L206" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="addAnimation"><a name="addAnimation,Entity,string,openarray[int],float,Flip"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addAnimation</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">frames</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">;</span>
@@ -1510,6 +1598,10 @@ Change framerate for all created animations.
 <p><tt class="docutils literal"><span class="pre">frameRate</span></tt> animation speed in seconds per frame.</p>
 <p><tt class="docutils literal"><span class="pre">flip</span></tt>  animation flip flag. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L213"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L213" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="play"><a name="play,Entity,string,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">anim</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">cycles</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">;</span> <span class="Identifier">kill</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
@@ -1519,13 +1611,41 @@ Change framerate for all created animations.
 <p><tt class="docutils literal"><span class="pre">cycles</span></tt>  number of times to repeat the animation, or <cite>-1</cite> for looping.</p>
 <p><tt class="docutils literal"><span class="pre">kill</span></tt>  kill when finished. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L249"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="updatePhysics"><a name="updatePhysics,Physics,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updatePhysics</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">physics</span><span class="Other">:</span> <span class="Identifier">Physics</span><span class="Other">;</span> <span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
+<dt id="defaultPhysics"><a name="defaultPhysics,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">defaultPhysics</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 <p>Default physics procedure. Disabled by default.</p>
-<p>Call it from your entity physics update method. </p>
+<p>Assign it as your entity's physics. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L303"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L303" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="willCollide"><a name="willCollide,Entity,Coord,Angle,Scale,seq[Entity]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">willCollide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rot</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">scale</span><span class="Other">:</span> <span class="Identifier">Scale</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L349"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L349" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<dt id="platformerPhysics"><a name="platformerPhysics,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">platformerPhysics</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
+<dd>
+<p>Platformer physics procedure.</p>
+<p>Assign it as your entity's physics. </p>
+
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L351"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L351" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="initEntity"><a name="initEntity,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
@@ -1533,21 +1653,37 @@ Change framerate for all created animations.
 <p>Default entity initialization procedure.</p>
 <p>Call it after creating a new entity. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L444"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L444" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newEntity"><a name="newEntity,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Entity</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L477"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L477" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="layer"><a name="layer,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">layer</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current rendering layer of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L482"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L482" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="="><a name="=,Entity,int"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">layer</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Change the rendering layer of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L488"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L488" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,Entity,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">,</span> <span class="Identifier">source</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
@@ -1555,21 +1691,37 @@ Change the rendering layer of the <tt class="docutils literal"><span class="pre"
 <p>Copy <tt class="docutils literal"><span class="pre">source</span></tt>'s properties to the other entity.</p>
 <p>No new objects will be allocated. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L495"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L495" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absRot"><a name="absRot,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absRot</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) rotation angle of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L532"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L532" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absScale"><a name="absScale,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absScale</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Scale</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) scale of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L542"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L542" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="absPos"><a name="absPos,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">absPos</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the absolute (counting the parent's) scale of the <tt class="docutils literal"><span class="pre">entity</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L552"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L552" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="centrify"><a name="centrify,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">hor</span> <span class="Other">=</span> <span class="Identifier">HAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">;</span> <span class="Identifier">ver</span> <span class="Other">=</span> <span class="Identifier">VAlign</span><span class="Other">.</span><span class="Identifier">center</span><span class="Other">)</span></pre></dt>
@@ -1578,6 +1730,10 @@ Change the rendering layer of the <tt class="docutils literal"><span class="pre"
 <p><tt class="docutils literal"><span class="pre">hor</span></tt> Horisontal align: left, center, or right</p>
 <p><tt class="docutils literal"><span class="pre">ver</span></tt> Vertical align: top, center, or bottom </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L569"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L569" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="renderEntity"><a name="renderEntity,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
@@ -1585,6 +1741,10 @@ Change the rendering layer of the <tt class="docutils literal"><span class="pre"
 <p>Default entity render procedure.</p>
 <p>Call it from your entity render method. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L607"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L607" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="updateEntity"><a name="updateEntity,Entity,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateEntity</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
@@ -1592,6 +1752,10 @@ Change the rendering layer of the <tt class="docutils literal"><span class="pre"
 <p>Default entity update procedure.</p>
 <p>Call it from your entity update method. </p>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L642"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L642" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1599,34 +1763,40 @@ Change the rendering layer of the <tt class="docutils literal"><span class="pre"
 <div class="section" id="13">
 <h1><a class="toc-backref" href="#13">Methods</a></h1>
 <dl class="item">
-<dt id="update"><a name="update.e,Logic,Entity,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">logic</span><span class="Other">:</span> <span class="Identifier">Logic</span><span class="Other">;</span> <span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="update"><a name="update.e,Physics,Entity,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">physics</span><span class="Other">:</span> <span class="Identifier">Physics</span><span class="Other">;</span> <span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
 <dt id="event"><a name="event.e,Entity,"></a><pre><span class="Keyword">method</span> <span class="Identifier">event</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Event</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L604"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L604" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="render"><a name="render.e,Entity"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L638"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L638" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="update"><a name="update.e,Entity,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L655"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L655" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="onCollide"><a name="onCollide.e,Entity,Entity"></a><pre><span class="Keyword">method</span> <span class="Identifier">onCollide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">,</span> <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Called when <tt class="docutils literal"><span class="pre">entity</span></tt> collides with <tt class="docutils literal"><span class="pre">target</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L659"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L659" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1637,6 +1807,10 @@ Called when <tt class="docutils literal"><span class="pre">entity</span></tt> co
 <dt id="currentAnimation"><a name="currentAnimation.t,Entity"></a><pre><span class="Keyword">template</span> <span class="Identifier">currentAnimation</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Animation</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the current animation. 
+&nbsp;&nbsp;<a
+href="/tree/master/entity.nim#L192"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/entity.nim#L192" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1649,7 +1823,7 @@ Called when <tt class="docutils literal"><span class="pre">entity</span></tt> co
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>

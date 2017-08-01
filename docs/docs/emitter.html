@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module emitter</title>
@@ -1253,9 +1255,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#update.e,Physics,Particle,float"
-    title="update*(physics: Physics; particle: Particle; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#update.e,Particle,float"
+      <li><a class="reference" href="#update.e,Particle,float"
     title="update*(particle: Particle; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
@@ -1280,6 +1280,10 @@ function main() {
 </pre></dt>
 <dd>
 Time to live (in seconds)
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L29"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="Emitter"><a name="Emitter"></a><pre><span class="Identifier">Emitter</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Entity</span>
@@ -1293,6 +1297,10 @@ Time to live (in seconds)
   </pre></dt>
 <dd>
 Ranges of vel and acc deviation
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L33"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1303,31 +1311,55 @@ Ranges of vel and acc deviation
 <dt id="initParticle"><a name="initParticle,Particle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initParticle</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L47"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newParticle"><a name="newParticle,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newParticle</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Particle</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L53"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,Particle,Particle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">,</span> <span class="Identifier">source</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">)</span></pre></dt>
 <dd>
 Copy <tt class="docutils literal"><span class="pre">source</span></tt> properties to the <tt class="docutils literal"><span class="pre">target</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L58"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="initEmitter"><a name="initEmitter,Emitter,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initEmitter</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">emitter</span><span class="Other">:</span> <span class="Identifier">Emitter</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span></pre></dt>
 <dd>
 Create a new <tt class="docutils literal"><span class="pre">Emitter</span></tt> for the <tt class="docutils literal"><span class="pre">scene</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L76"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newEmitter"><a name="newEmitter,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newEmitter</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Emitter</span></pre></dt>
 <dd>
 Create a new Emitter in the <tt class="docutils literal"><span class="pre">scene</span></tt>. 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L84"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="emit"><a name="emit,Emitter,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">emit</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">emitter</span><span class="Other">:</span> <span class="Identifier">Emitter</span><span class="Other">;</span> <span class="Identifier">amount</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">1</span><span class="Other">)</span></pre></dt>
 <dd>
 Emit an <tt class="docutils literal"><span class="pre">amount</span></tt> of particles. 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L91"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1335,14 +1367,13 @@ Emit an <tt class="docutils literal"><span class="pre">amount</span></tt> of par
 <div class="section" id="13">
 <h1><a class="toc-backref" href="#13">Methods</a></h1>
 <dl class="item">
-<dt id="update"><a name="update.e,Physics,Particle,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">physics</span><span class="Other">:</span> <span class="Identifier">Physics</span><span class="Other">;</span> <span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-</dd>
 <dt id="update"><a name="update.e,Particle,float"></a><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">particle</span><span class="Other">:</span> <span class="Identifier">Particle</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 
+&nbsp;&nbsp;<a
+href="/tree/master/emitter.nim#L65"
+class="link-seesrc" target="_blank">Source</a>
+<a href="/edit/devel/emitter.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1355,7 +1386,7 @@ Emit an <tt class="docutils literal"><span class="pre">amount</span></tt> of par
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-05-04 08:32:17 UTC</small>
+        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
       </div>
     </div>
   </div>
