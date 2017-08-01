@@ -3,6 +3,8 @@ Nimgame 2
 
 A simple 2D game engine for Nim language.
 
+For more information check [home page](https://vladar4.github.io/nimgame2/).
+
 
 Status: v0.5 alpha
 ------------------
@@ -11,7 +13,7 @@ Status: v0.5 alpha
 Requires:
 ---------
 
-* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package.
+* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.5.0 or newer).
 * Runtime libraries for:
   * SDL 2.0.5
   * SDL_gfx 1.0.1
