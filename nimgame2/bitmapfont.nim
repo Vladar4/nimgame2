@@ -114,9 +114,9 @@ method lineDim*(font: BitmapFont, line: string): Dim {.inline.} =
   (font.fCharDim.w * line.len, font.fCharDim.h)
 
 
-proc render(font: BitmapFont,
-            line: string,
-            color: Color = DefaultFontColor): Surface =
+method render(font: BitmapFont,
+              line: string,
+              color: Color = DefaultFontColor): Surface =
   if font.fSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render nil font surface")
@@ -158,72 +158,4 @@ proc render(font: BitmapFont,
     dstRect.x = i * font.fCharDim.w
     discard font.fSurface.blitSurface(addr(srcRect), lineSurface, addr(dstRect))
   return lineSurface
-
-
-method renderLine*(font: BitmapFont,
-                   line: string,
-                   color: Color = DefaultFontColor): Texture =
-  ##  Render a text ``line`` in ``font`` with given ``color``.
-  ##
-  let
-    line = if line.len < 1: " " else: line
-    lineSurface = font.render(line, color)
-  if lineSurface == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't render text line: %s",
-                    sdl.getError())
-    return nil
-  result = renderer.createTextureFromSurface(lineSurface)
-  lineSurface.freeSurface()
-
-
-method renderText*(font: BitmapFont,
-                   text: openarray[string],
-                   align = TextAlign.left,
-                   color: Color = DefaultFontColor): Texture =
-  ##  Render a multi-line ``text`` in ``font``
-  ##  with given ``align`` and ``color``.
-  ##
-  var text = @text
-  if text.len < 1: text.add(" ")
-  # find the longest line of text
-  var maxw = 0
-  for line in text:
-    let w = font.lineDim(line).w
-    if maxw < w:
-      maxw = w
-  let maxw2 = maxw div 2
-  # create surface
-  let
-    dim: Dim = (maxw, font.fCharDim.h * text.len)
-    textSurface = createRGBSurfaceWithFormat(
-      0, dim.w, dim.h,
-      font.fSurface.format.BitsPerPixel.cint,
-      font.fSurface.format.format)
-  if textSurface == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't create font text surface: %s",
-                    sdl.getError())
-    return nil
-
-  # blit
-  var
-    dstRect = Rect(x: 0, y: 0, w: 0, h: font.fCharDim.h)
-  for i in 0..text.high:
-    let ln = font.render(text[i], color)
-    dstRect.w = ln.w
-    dstRect.x = case align:
-                of TextAlign.left:    0
-                of TextAlign.center:  maxw2 - dstRect.w div 2
-                of TextAlign.right:   maxw - dstRect.w
-    dstRect.y = i * font.fCharDim.h
-    discard ln.blitSurface(nil, textSurface, addr(dstRect))
-
-  result = renderer.createTextureFromSurface(textSurface)
-  textSurface.freeSurface()
-  if result == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't render text: %s",
-                    sdl.getError())
-    return nil
 
