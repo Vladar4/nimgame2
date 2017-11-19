@@ -112,6 +112,33 @@ proc loadSurface*(file: string): Surface =
     return nil
 
 
+proc textureFormats*(renderer: Renderer):
+    tuple[num: uint32, formats: array[16, uint32]] =
+  ##  ``Return`` number and array of available texture formats
+  ##  from the ``renderer``.
+  ##
+  var info: RendererInfo
+  if renderer.getRendererInfo(addr(info)) == 0:
+    return (info.num_texture_formats, info.textureFormats)
+  else:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't get renderer texture format: %s",
+                    sdl.getError())
+    return
+
+
+proc textureFormat*(renderer: Renderer, n: uint32 = 0): uint32 =
+  ##  ``Return`` ``n``'th texture format from the ``renderer``.
+  ##
+  let (num, formats) = renderer.textureFormats()
+  if n < num:
+    return formats[n]
+  else:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "No such texture format (%d) in current renderer.", n)
+    return
+
+
 #=========#
 # Parsing #
 #=========#

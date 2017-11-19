@@ -23,7 +23,7 @@
 
 import
   sdl2/sdl,
-  settings, types
+  settings, types, utils
 
 
 const
@@ -83,22 +83,8 @@ method renderText*(font: Font,
     height = font.charH
 
   # create surface
-  var
-    rendererInfo: RendererInfo
-    format: uint32
-
-  if renderer.getRendererInfo(addr(rendererInfo)) == 0:
-    if rendererInfo.num_texture_formats > 0'u32:
-      format = rendererInfo.textureFormats[0]
-    else:
-      sdl.logCritical(sdl.LogCategoryError,
-                      "No available texture formats in current renderer.")
-  else:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't get renderer texture format: %s",
-                    sdl.getError())
-
   let
+    format = renderer.textureFormat(0)
     dim: Dim = (maxw, height * text.len)
     textSurface = createRGBSurfaceWithFormat(
       0, dim.w, dim.h, format.bitsPerPixel, format)
