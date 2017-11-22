@@ -1,4 +1,4 @@
-# nimgame2/textgraphic.nim
+# nimgame2/shadowtextgraphic.nim
 # Copyright (c) 2016-2017 Vladar
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
