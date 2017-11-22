@@ -1,4 +1,4 @@
-import sdl2/sdl,
+import sdl2/sdl as sdl,
   math,
   nimgame2/nimgame,
   nimgame2/font,
@@ -8,6 +8,7 @@ import sdl2/sdl,
   nimgame2/entity,
   nimgame2/graphic,
   nimgame2/textgraphic,
+  nimgame2/shadowtextgraphic,
   nimgame2/texturegraphic,
   nimgame2/input,
   nimgame2/scene,
@@ -26,6 +27,9 @@ type
     ttFont: TrueTypeFont
     ttText: TextGraphic
     ttEntity: Entity
+    swFont: TrueTypeFont
+    swText: ShadowTextGraphic
+    swEntity: Entity
 
 
 proc init*(scene: MainScene) =
@@ -45,6 +49,10 @@ proc init*(scene: MainScene) =
   scene.ttFont = newTrueTypeFont()
   discard scene.ttFont.load("../assets/fnt/FSEX300.ttf", 16)
 
+  # shadow font 
+  scene.swFont = newTrueTypeFont()
+  discard scene.swFont.load("../assets/fnt/FSEX300.ttf", 18)
+
   # Text
   scene.bmText = newTextGraphic()
   scene.bmText.font = scene.bmFont
@@ -58,6 +66,9 @@ proc init*(scene: MainScene) =
     [ "В чащах юга жил бы цитрус?",
       "Да, но фальшивый экземпляр!"]
 
+  scene.swText = newShadowTextGraphic(scene.swFont, @["Texto �������", "�������"], 
+    0xffffffff'u32, 0x1d1dffff'u32, 2, 1)
+
   # Entity
   scene.bmEntity = newEntity()
   scene.bmEntity.pos = (8, 128)
@@ -67,15 +78,21 @@ proc init*(scene: MainScene) =
   scene.ttEntity.pos = (8, 192)
   scene.ttEntity.graphic = scene.ttText
 
+  scene.swEntity = newEntity()
+  scene.swEntity.pos = (8, 256)
+  scene.swEntity.graphic = scene.swText
+
   # add to scene
   scene.add(scene.bmEntity)
   scene.add(scene.ttEntity)
+  scene.add(scene.swEntity)
   scene.add(scene.e)
 
 
 proc free*(scene: MainScene) =
   scene.bmFont.free()
   scene.ttFont.free()
+  scene.swFont.free()
   scene.bmText.free()
   scene.ttText.free()
 
@@ -100,6 +117,7 @@ proc changeAlign(scene: MainScene, increase = true) =
   # set
   scene.bmText.align = a
   scene.ttText.align = a
+  scene.swText.align = a
 
 let
   colors = [0xFFFFFFFF'u32, 0xFF0000FF'u32, 0x00FF00FF'u32, 0x0000FFFF'u32]
@@ -121,6 +139,7 @@ proc changeColor(scene: MainScene, increase = true) =
   color.a = a
   scene.bmText.color = color
   scene.ttText.color = color
+  scene.swText.color = color
 
 
 proc changeAlpha(scene: MainScene, increase = true) =
@@ -142,6 +161,7 @@ proc changeAlpha(scene: MainScene, increase = true) =
   c.a = a.uint8
   scene.bmText.color = c
   scene.ttText.color = c
+  scene.swText.color = c
 
 
 method event*(scene: MainScene, event: Event) =

@@ -24,12 +24,12 @@
 import
   sdl2/sdl,
   sdl2/sdl_ttf as ttf,
-  font, settings, types
+  font, settings, types, utils
 
 
 type
   TrueTypeFont* = ref object of font.Font
-    fFont: ttf.Font
+    fFont*: ttf.Font
 
 
 #==============#
@@ -102,4 +102,57 @@ method render(font: TrueTypeFont,
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set surface alpha modifier: %s",
                     sdl.getError())
+
+
+
+method renderTextSurface*(font: TrueTypeFont,
+                   text: seq[string],
+                   align = TextAlign.left,
+                   color: Color = DefaultfontColor): Surface  =
+  ##  Render a multi-line ``text`` in ``font``
+  ##  with given ``align`` and ``color``.
+  var text = @text
+  if text.len < 1: text.add(" ")
+
+  # find the longest line of text
+  var maxw = 0
+
+  for line in text:
+    let w = font.lineDim(line).w
+    if maxw < w:
+      maxw = w
+  let
+    maxw2 = maxw div 2
+    height = font.charH
+
+  # create surface
+  let
+    format = renderer.textureFormat(0)
+    dim: Dim = (maxw, height * text.len)
+    textSurface = sdl.createRGBSurfaceWithFormat(
+      0, dim.w, dim.h, format.bitsPerPixel, format)
+
+  if textSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't create font text surface: %s",
+                    sdl.getError())
+    return nil
+
+  # blit
+  var
+    dstRect = Rect(x: 0, y: 0, w: 0, h: height)
+
+  for i in 0..text.high:
+    let ln = font.fFont.renderText_Blended(text[i], color)
+    dstRect.w = ln.w
+    dstRect.x = case align:
+                of TextAlign.left:    0
+                of TextAlign.center:  maxw2 - dstRect.w div 2
+                of TextAlign.right:   maxw - dstRect.w
+    dstRect.y = i * height
+    discard ln.blitSurface(nil, textSurface, addr(dstRect))
+
+  return textSurface
+
+
 
