@@ -54,13 +54,19 @@ proc init*(text: TextGraphic, font: Font) =
   text.fColor = DefaultFontColor
   text.fFont = font
 
+proc init*(text: TextGraphic, font: Font, lines: seq[string], align: TextAlign, color: Color) =
+  TextureGraphic(text).init()
+  text.fLines = lines
+  text.fAlign = align
+  text.fColor = color
+  text.fFont = font
 
 proc newTextGraphic*(font: Font = nil): TextGraphic =
   new result, free
   result.init(font)
 
 
-proc update*(text: TextGraphic) =
+method update*(text: TextGraphic) =
   if text.fFont == nil:
     return
   let num = text.fLines.len
