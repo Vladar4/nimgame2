@@ -128,19 +128,21 @@ proc init*(
       sdl.LogCategoryError, "Can't initialize SDL_ttf: %s", ttf.getError())
     return false
 
-  # Init SDL_mixer
-  if mix.init(mixerFlags) == 0:
-    sdl.logCritical(
-      sdl.LogCategoryError, "Can't initialize SDL_mixer: %s", mix.getError())
-    return false
-
   # Open mixer
   if mix.openAudio(mix.DefaultFrequency,
                    mix.DefaultFormat,
                    mix.DefaultChannels,
                    2048) != 0:
     sdl.logCritical(
-      sdl.LogCategoryError, "Can't open mixer: %s", mix.getError())
+      sdl.LogCategoryError, "Can't initialize SDL_mixer: %s",
+      mix.getError())
+    return false
+
+  # Init SDL_mixer
+  if mix.init(mixerFlags) == 0:
+    sdl.logCritical(
+      sdl.LogCategoryError, "Can't initialize SDL_mixer flags: %s",
+      mix.getError())
     return false
 
   # Allocate mixing channels
