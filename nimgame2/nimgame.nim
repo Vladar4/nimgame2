@@ -54,6 +54,8 @@ proc free*(game: Game) =
   game.fWindow.destroyWindow()
   game.fIcon.freeSurface()
   while mix.init(0) != 0: mix.quit()
+  let mixNumOpened = mix.querySpec(nil, nil, nil)
+  for i in 0..<mixNumOpened: mix.closeAudio()
   ttf.quit()
   img.quit()
   sdl.quit()
