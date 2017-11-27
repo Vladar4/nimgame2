@@ -324,7 +324,7 @@ type
     joy: sdl.Joystick
     guid: sdl.JoystickGUID
     numButtons, numAxes, numBalls, numHats: int
-    pressed, released: array[uint8.high, int]
+    pressed, released: array[uint8.high.int, int]
 
 var
   joysticks: seq[Joystick]

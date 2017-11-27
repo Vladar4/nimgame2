@@ -87,7 +87,7 @@ method renderText*(font: Font,
     format = renderer.textureFormat(0)
     dim: Dim = (maxw, height * text.len)
     textSurface = createRGBSurfaceWithFormat(
-      0, dim.w, dim.h, format.bitsPerPixel, format)
+      0, dim.w, dim.h, format.bitsPerPixel.cint, format)
 
   if textSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,

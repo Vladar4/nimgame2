@@ -418,8 +418,7 @@ proc outExpo*[V](start, distance: V, elapsed, duration: float,
     if elapsed == duration:
       start + distance
     else:
-      start +
-      distance * 1.001 * (-pow(2, -10 * progress(elapsed, duration)) + 1)
+      start + distance * 1.001 * (-pow(2, -10 * progress(elapsed, duration)) + 1)
 
 
 proc inOutExpo*[V](start, distance: V, elapsed, duration: float,
