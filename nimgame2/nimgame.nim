@@ -369,21 +369,20 @@ proc run*(game: Game) =
 
   gameRunning = true
 
-  # Init FPS and UPS managers
+  # Init FPS and UPS managers, declare all needed variables
   var
     fpsMgr = newCountMgr()
     upsMgr = newCountMgr()
     timePrev, timeCurr: uint64
-    elapsed, lag, msPerFrame: int
-
-  let
-    updateIntervalSec = updateInterval / 1000
+    elapsed, lag, msPerFrame, updateCounter: int
+    event: sdl.Event
 
   fpsMgr.start()
   upsMgr.start()
   timePrev = sdl.getPerformanceCounter()
   draw.setFont()
 
+  # Init input devices
   initKeyboard()
   initMouse()
   initJoysticks()
@@ -396,7 +395,7 @@ proc run*(game: Game) =
     lag += elapsed
 
     # Update
-    var updateCounter = 0
+    updateCounter = 0
     while lag >= updateInterval:
       if not gamePaused:
         game.fScene.update(updateIntervalSec)
@@ -412,7 +411,6 @@ proc run*(game: Game) =
       playlist.update()
 
     # Events handling
-    var event: sdl.Event
     while sdl.pollEvent(addr(event)) != 0:
       if event.kind == sdl.Quit:
         gameRunning = false

@@ -57,6 +57,7 @@ proc start*(mgr: CountMgr, interval: uint32 = 1000) =
   ##
   mgr.timerId = sdl.addTimer(interval, countTimer, cast[pointer](mgr))
 
+
 proc stop*(mgr: CountMgr) =
   ##  Stop the timer.
   ##
@@ -77,11 +78,10 @@ proc newCountMgr*(): CountMgr =
 # Misc #
 #======#
 
-proc timeDiff*(first, second: uint64): int {.inline.} =
+template timeDiff*(first, second: untyped): untyped = ##  \
   ##  ``first``, ``second`` two results of ``sdl.getPerformanceCounter()``.
   ##
   ##  ``Return`` time difference between two time stamps (in ms).
   ##
   int(((second - first) * 1000) div sdl.getPerformanceFrequency())
-
 
