@@ -330,3 +330,46 @@ proc randomWeighted*[T](weights: openArray[T]): int =
       break
     total -= weights[i]
 
+
+#======#
+# Time #
+#======#
+
+template timeDiff*(first, second: untyped): untyped = ##  \
+  ##  ``first``, ``second`` two results of ``sdl.getPerformanceCounter()``.
+  ##
+  ##  ``Return`` time difference between two time stamps (in ms).
+  ##
+  int(((second - first) * 1000) div sdl.getPerformanceFrequency())
+
+template msToSec*(ms: int): float = (ms / 1000)
+
+template secToMs*(sec: float): int = int(sec * 1000)
+
+type
+  Counter* = ref object
+    counter, current, interval: int
+    time: uint64
+
+
+proc newCounter*(interval: int = 1000): Counter =
+  new result
+  result.counter = 0
+  result.current = 0
+  result.interval = interval
+  result.time = sdl.getPerformanceCounter()
+
+
+proc update*(counter: Counter) =
+  inc(counter.counter)
+  let time = sdl.getPerformanceCounter()
+  if timeDiff(counter.time, time) > counter.interval:
+    counter.current = counter.counter
+    counter.counter = 0
+    counter.time = time
+
+
+proc value*(counter: Counter): int {.inline.} =
+  counter.current
+
+

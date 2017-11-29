@@ -28,7 +28,7 @@ import
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  audio, count, draw, input, entity, scene, settings, types, utils
+  audio, draw, input, entity, scene, settings, types, utils
 
 
 type
@@ -371,14 +371,13 @@ proc run*(game: Game) =
 
   # Init FPS and UPS managers, declare all needed variables
   var
-    fpsMgr = newCountMgr()
-    upsMgr = newCountMgr()
+    fps = newCounter()
+    ups = newCounter()
     timePrev, timeCurr: uint64
     elapsed, lag, msPerFrame, updateCounter: int
+    updateIntervalSec: float
     event: sdl.Event
 
-  fpsMgr.start()
-  upsMgr.start()
   timePrev = sdl.getPerformanceCounter()
   draw.setFont()
 
@@ -393,6 +392,7 @@ proc run*(game: Game) =
     elapsed = timeDiff(timePrev, timeCurr)
     timePrev = timeCurr
     lag += elapsed
+    updateIntervalSec = msToSec(updateInterval)
 
     # Update
     updateCounter = 0
@@ -441,10 +441,10 @@ proc run*(game: Game) =
       discard box((4, 4), (260, 52), 0x000000CC'u32)
       # Show FPS
       discard string(
-        (8, 8), $fpsMgr.current & " FPS", 0xFFFFFFFF'u32)
+        (8, 8), $fps.value & " FPS", 0xFFFFFFFF'u32)
       # Show updates per second
       discard string(
-        (8, 16), $upsMgr.current & " updates per second", 0xFFFFFFFF'u32)
+        (8, 16), $ups.value & " updates per second", 0xFFFFFFFF'u32)
       # Show updates per frame
       discard string(
         (8, 24), $updateCounter & " updates per frame", 0xFFFFFFFF'u32)
@@ -462,12 +462,10 @@ proc run*(game: Game) =
     renderer.renderPresent()
 
     # Increase frame count
-    fpsMgr.update()
-    upsMgr.update()
+    fps.update()
+    ups.update()
   # while game.running
 
   # Free
-  free(fpsMgr)
-  free(upsMgr)
   free(game)
 

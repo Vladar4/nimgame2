@@ -36,50 +36,5 @@ var
                           ##  if `0` - no limit
   colliderOutline*: bool  ##  Show collider outlines
   colliderOutlineColor*: sdl.Color  ##  Color of collider outlines
-
-
-#=================#
-# Update Interval #
-#=================#
-
-var
-  fUpdateInterval: int
-  fUpdateIntervalSec: float
-
-
-template updateInterval*(): int =  ##  \
-  ##  Get updateInterval value in ms.
-  ##
-  ##  ``update()`` is called each ``updateInteval`` ms.
-  ##
-  fUpdateInterval
-
-
-template `updateInteval=`*(val: int) = ##  \
-  ##  Set new updateInteval value in ms.
-  ##
-  ##  ``update()`` is called each ``updateInteval`` ms.
-  ##
-  assert(val > 0, "updateInterval can't be <= 0")
-  fUpdateInterval = val
-  fUpdateIntervalSec = val / 1000
-
-
-template updateIntervalSec*(): float = ##  \
-  ##  Get updateInterval value in seconds.
-  ##
-  ##  ``update()`` is called each ``updateInteval`` ms.
-  ##
-  fUpdateIntervalSec
-
-
-template `updateIntervalSec=`*(val: float) = ## \
-  ##  Set new updateInteval value in ms.
-  ##
-  ##  ``update()`` is called each ``updateInteval`` ms.
-  ##
-  assert(val > 0, "updateIntervalSec can't be <= 0")
-  fUpdateIntervalSec = val
-  fUpdateInterval = int(val * 1000)
-
+  updateInterval*: int    ## ``update()`` is called each ``updateInterval`` ms.
 
