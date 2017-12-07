@@ -28,6 +28,7 @@ import
 
 type
   ProcGraphic* = ref object of Graphic
+    # Public
     procedure*: proc(graphic: ProcGraphic,
                      pos: Coord,
                      angle: Angle,
@@ -74,6 +75,18 @@ method dim*(graphic: ProcGraphic): Dim =
     return graphic.dimProcedure()
 
 
+proc drawProcGraphic*(graphic: ProcGraphic,
+                      pos: Coord = (0.0, 0.0),
+                      angle: Angle = 0.0,
+                      scale: Scale = 1.0,
+                      center: Coord = (0.0, 0.0),
+                      flip: Flip = Flip.none,
+                      region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  if graphic.procedure == nil:
+    return
+  graphic.procedure(graphic, pos, angle, scale, center, flip, region)
+
+
 method draw*(graphic: ProcGraphic,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
@@ -81,7 +94,5 @@ method draw*(graphic: ProcGraphic,
              center: Coord = (0.0, 0.0),
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  if graphic.procedure == nil:
-    return
-  graphic.procedure(graphic, pos, angle, scale, center, flip, region)
+  drawProcGraphic(graphic, pos, angle, scale, center, flip, region)
 

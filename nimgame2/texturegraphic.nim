@@ -29,6 +29,7 @@ import
 
 type
   TextureGraphic* = ref object of Graphic
+    # Private
     fTexture: sdl.Texture
     fFormat: uint32
     fSize: Dim
@@ -144,15 +145,29 @@ method dim*(graphic: TextureGraphic): Dim {.inline.} =
   graphic.fSize
 
 
-proc drawTexture*(texture: sdl.Texture,
-                  textureDim: Dim,
-                  pos: Coord = (0.0, 0.0),
-                  angle: Angle = 0.0,
-                  scale: Scale = 1.0,
-                  center: Coord = (0.0, 0.0),
-                  flip: Flip = Flip.none,
-                  region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  if texture == nil:
+proc drawTextureGraphic*(graphic: TextureGraphic,
+                         pos: Coord = (0.0, 0.0),
+                         angle: Angle = 0.0,
+                         scale: Scale = 1.0,
+                         center: Coord = (0.0, 0.0),
+                         flip: Flip = Flip.none,
+                         region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  ##  Draw procedure.
+  ##
+  ##  ``pos`` Draw coordinates.
+  ##
+  ##  ``angle`` Rotation angle in degrees.
+  ##
+  ##  ``scale`` Draw scale. `1.0` for original size.
+  ##
+  ##  ``center`` Center of rendering, rotation, and scaling.
+  ##
+  ##  ``flip`` ``RendererFlip`` value, could be set to:
+  ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
+  ##
+  ##  ``region`` Source texture region to draw.
+  ##
+  if graphic.fTexture == nil:
     return
   if scale == 0.0:
     return
@@ -160,7 +175,7 @@ proc drawTexture*(texture: sdl.Texture,
   let
     empty = Rect(x: 0, y: 0, w: 0, h: 0)
   var
-    size: Dim = if region == empty: textureDim
+    size: Dim = if region == empty: graphic.dim
                 else: (region.w.int, region.h.int)
     cntr = center
 
@@ -177,10 +192,14 @@ proc drawTexture*(texture: sdl.Texture,
   if (angle == 0.0) and flip == Flip.none:
 
     if region == empty:
-      discard renderer.renderCopy(texture, nil, addr(dstRect))
+      discard renderer.renderCopy(graphic.fTexture,
+                                  nil,
+                                  addr(dstRect))
     else:
       var srcRect = region
-      discard renderer.renderCopy(texture, addr(srcRect), addr(dstRect))
+      discard renderer.renderCopy(graphic.fTexture,
+                                  addr(srcRect),
+                                  addr(dstRect))
 
   else: # renderCopyEx procedure
 
@@ -190,7 +209,7 @@ proc drawTexture*(texture: sdl.Texture,
     anchor.y = cntr.y.cint
 
     if region == empty:
-      discard renderer.renderCopyEx(texture,
+      discard renderer.renderCopyEx(graphic.fTexture,
                                     nil,
                                     addr(dstRect),
                                     angle,
@@ -198,7 +217,7 @@ proc drawTexture*(texture: sdl.Texture,
                                     flip.RendererFlip)
     else:
       var srcRect = region
-      discard renderer.renderCopyEx(texture,
+      discard renderer.renderCopyEx(graphic.fTexture,
                                     addr(srcRect),
                                     addr(dstRect),
                                     angle,
@@ -213,23 +232,7 @@ method draw*(graphic: TextureGraphic,
              center: Coord = (0.0, 0.0),
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  ##  Draw procedure.
-  ##
-  ##  ``pos`` Draw coordinates.
-  ##
-  ##  ``angle`` Rotation angle in degrees.
-  ##
-  ##  ``scale`` Draw scale. `1.0` for original size.
-  ##
-  ##  ``center`` Center of rendering, rotation, and scaling.
-  ##
-  ##  ``flip`` ``RendererFlip`` value, could be set to:
-  ##  ``FlipNone``, ``FlipHorizontal``, ``FlipVertical``.
-  ##
-  ##  ``region`` Source texture region to draw.
-  ##
-  graphic.fTexture.drawTexture(
-    graphic.dim, pos, angle, scale, center, flip, region)
+  drawTextureGraphic(graphic, pos, angle, scale, center, flip, region)
 
 
 proc drawTiled*(graphic: TextureGraphic,

@@ -26,10 +26,12 @@ import
   sdl2/smpeg,
   graphic, texturegraphic, settings, types
 
+
 type
   MpegVolume* = range[0..100]
   MpegGraphic* = ref object of TextureGraphic ##  \
     ##  See sdl2/mpeg documentation for the details of implementation.
+    # Private
     fInfo: smpeg.Info
     fSmpeg: smpeg.Smpeg
     fFrame: smpeg.Frame
@@ -72,7 +74,7 @@ proc update(data: pointer, frame: Frame) {.cdecl.} =
   graphic.fUpdated = true
 
 
-proc loadMpeg*(graphic: MpegGraphic, filename: string): bool =
+proc load*(graphic: MpegGraphic, filename: string): bool =
   ##  Load MPEG movie file.
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
@@ -103,9 +105,26 @@ proc loadMpeg*(graphic: MpegGraphic, filename: string): bool =
 
 proc newMpegGraphic*(filename: string): MpegGraphic =
   new result, free
-  if not result.loadMpeg(filename):
+  if not result.load(filename):
     result.free()
     return nil
+
+
+proc drawMpegGraphic*(graphic: MpegGraphic,
+                      pos: Coord = (0.0, 0.0),
+                      angle: Angle = 0.0,
+                      scale: Scale = 1.0,
+                      center: Coord = (0.0, 0.0),
+                      flip: Flip = Flip.none,
+                      region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  if graphic.fUpdated:
+    discard graphic.fMutex.mutexP() # lock
+    discard sdl.updateTexture(graphic.texture, nil, graphic.fFrame.image,
+                              graphic.fFrame.imageWidth.cint)
+    graphic.fSmpeg.getInfo(addr(graphic.fInfo))
+    graphic.fUpdated = false
+    discard graphic.fMutex.mutexV() # unlock
+  drawTextureGraphic(graphic, pos, angle, scale, center, flip, region)
 
 
 method draw*(graphic: MpegGraphic,
@@ -115,17 +134,7 @@ method draw*(graphic: MpegGraphic,
              center: Coord = (0.0, 0.0),
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  ##  Draw procedure; identical to ``TextureGraphic``'s one.
-  ##
-  if graphic.fUpdated:
-    discard graphic.fMutex.mutexP() # lock
-    discard sdl.updateTexture(graphic.texture, nil, graphic.fFrame.image,
-                              graphic.fFrame.imageWidth.cint)
-    graphic.fSmpeg.getInfo(addr(graphic.fInfo))
-    graphic.fUpdated = false
-    discard graphic.fMutex.mutexV() # unlock
-  graphic.texture.drawTexture(
-    graphic.dim, pos, angle, scale, center, flip, region)
+  drawMpegGraphic(graphic, pos, angle, scale, center, flip, region)
 
 
 proc video*(graphic: MpegGraphic): bool {.inline.} =

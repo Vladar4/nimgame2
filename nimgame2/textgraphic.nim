@@ -29,6 +29,7 @@ import
 
 type
   TextGraphic* = ref object of TextureGraphic
+    # Private
     fLines: seq[string]
     fAlign: TextAlign
     fColor: Color
