@@ -87,9 +87,11 @@ proc rotate*(point, offset: Coord, angle: Angle): Coord =
   ##  ``point``   Point to rotate
   ##  ``angle``   Angle of rotation (in degrees)
   ##
-  result = offset + point
-  if angle != 0:
-    result = rotate(point, angle) + offset
+  return
+    if angle != 0:
+      (rotate(point, angle) + offset)
+    else:
+      (offset + point)
 
 
 #==========#
@@ -342,9 +344,12 @@ template timeDiff*(first, second: untyped): untyped = ##  \
   ##
   int(((second - first) * 1000) div sdl.getPerformanceFrequency())
 
+
 template msToSec*(ms: int): float = (ms / 1000)
 
+
 template secToMs*(sec: float): int = int(sec * 1000)
+
 
 type
   Counter* = ref object
@@ -371,5 +376,4 @@ proc update*(counter: Counter) =
 
 proc value*(counter: Counter): int {.inline.} =
   counter.current
-
 
