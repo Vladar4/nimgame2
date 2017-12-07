@@ -43,3 +43,5 @@ Nimgame 2 Demos
 
 * [demo21](demo21) Joysticks
 
+* [demo22](demo22) MpegGraphic
+
