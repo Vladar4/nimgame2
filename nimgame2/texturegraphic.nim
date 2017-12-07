@@ -111,6 +111,12 @@ proc assignTexture*(
   result = graphic.updateTexture()
 
 
+proc texture*(graphic: TextureGraphic): sdl.Texture {.inline.} =
+  ##  Direct access to the ``graphic``'s texture. Be careful.
+  ##
+  graphic.fTexture
+
+
 proc newTextureGraphic*(): TextureGraphic =
   new result, free
   result.init()
@@ -138,6 +144,68 @@ method dim*(graphic: TextureGraphic): Dim {.inline.} =
   graphic.fSize
 
 
+proc drawTexture*(texture: sdl.Texture,
+                  textureDim: Dim,
+                  pos: Coord = (0.0, 0.0),
+                  angle: Angle = 0.0,
+                  scale: Scale = 1.0,
+                  center: Coord = (0.0, 0.0),
+                  flip: Flip = Flip.none,
+                  region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
+  if texture == nil:
+    return
+  if scale == 0.0:
+    return
+
+  let
+    empty = Rect(x: 0, y: 0, w: 0, h: 0)
+  var
+    size: Dim = if region == empty: textureDim
+                else: (region.w.int, region.h.int)
+    cntr = center
+
+  if scale != 1.0:
+    size.w = int(size.w.float * scale)
+    size.h = int(size.h.float * scale)
+    cntr *= scale
+
+  var
+    position = pos - cntr
+    dstRect = sdl.Rect(
+      x: position.x.cint, y: position.y.cint, w: size.w.cint, h: size.h.cint)
+
+  if (angle == 0.0) and flip == Flip.none:
+
+    if region == empty:
+      discard renderer.renderCopy(texture, nil, addr(dstRect))
+    else:
+      var srcRect = region
+      discard renderer.renderCopy(texture, addr(srcRect), addr(dstRect))
+
+  else: # renderCopyEx procedure
+
+    var
+      anchor: sdl.Point
+    anchor.x = cntr.x.cint
+    anchor.y = cntr.y.cint
+
+    if region == empty:
+      discard renderer.renderCopyEx(texture,
+                                    nil,
+                                    addr(dstRect),
+                                    angle,
+                                    addr(anchor),
+                                    flip.RendererFlip)
+    else:
+      var srcRect = region
+      discard renderer.renderCopyEx(texture,
+                                    addr(srcRect),
+                                    addr(dstRect),
+                                    angle,
+                                    addr(anchor),
+                                    flip.RendererFlip)
+
+
 method draw*(graphic: TextureGraphic,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
@@ -160,58 +228,8 @@ method draw*(graphic: TextureGraphic,
   ##
   ##  ``region`` Source texture region to draw.
   ##
-  if graphic.fTexture == nil:
-    return
-  if scale == 0.0:
-    return
-
-  let
-    empty = Rect(x: 0, y: 0, w: 0, h: 0)
-  var
-    size: Dim = if region == empty: graphic.dim
-                else: (region.w.int, region.h.int)
-    cntr = center
-
-  if scale != 1.0:
-    size.w = int(size.w.float * scale)
-    size.h = int(size.h.float * scale)
-    cntr *= scale
-
-  var
-    position = pos - cntr
-    dstRect = sdl.Rect(
-      x: position.x.cint, y: position.y.cint, w: size.w.cint, h: size.h.cint)
-
-  if (angle == 0.0) and flip == Flip.none:
-
-    if region == empty:
-      discard renderer.renderCopy(graphic.fTexture, nil, addr(dstRect))
-    else:
-      var srcRect = region
-      discard renderer.renderCopy(graphic.fTexture, addr(srcRect), addr(dstRect))
-
-  else: # renderCopyEx procedure
-
-    var
-      anchor: sdl.Point
-    anchor.x = cntr.x.cint
-    anchor.y = cntr.y.cint
-
-    if region == empty:
-      discard renderer.renderCopyEx(graphic.fTexture,
-                                    nil,
-                                    addr(dstRect),
-                                    angle,
-                                    addr(anchor),
-                                    flip.RendererFlip)
-    else:
-      var srcRect = region
-      discard renderer.renderCopyEx(graphic.fTexture,
-                                    addr(srcRect),
-                                    addr(dstRect),
-                                    angle,
-                                    addr(anchor),
-                                    flip.RendererFlip)
+  graphic.fTexture.drawTexture(
+    graphic.dim, pos, angle, scale, center, flip, region)
 
 
 proc drawTiled*(graphic: TextureGraphic,
