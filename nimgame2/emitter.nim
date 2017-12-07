@@ -31,6 +31,7 @@ type
 
 
   Emitter* = ref object of Entity
+    # Public
     randomVel*, randomAcc*: Coord     ##  Ranges of vel and acc deviation
     randomRot*, randomRotVel*: Angle  ##  Ranges of rot and rotVel deviation
     randomScale*: Scale               ##  Range of scale deviation
@@ -62,11 +63,15 @@ proc copy*(target, source: Particle) =
   target.ttl = source.ttl
 
 
-method update*(particle: Particle, elapsed: float) =
+proc updateParticle*(particle: Particle, elapsed: float) =
   particle.updateEntity(elapsed)
   particle.ttl -= elapsed
   if particle.ttl < 0:
     particle.dead = true
+
+
+method update*(particle: Particle, elapsed: float) =
+  updateParticle(particle, elapsed)
 
 
 #=========#
