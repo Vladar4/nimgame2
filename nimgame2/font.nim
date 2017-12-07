@@ -33,20 +33,25 @@ const
 type
   Font* = ref object of RootObj
 
+
 method getError(font: Font): string {.base.} =
   $sdl.getError()
 
+
 method charH*(font: Font): int {.base.} = discard
 
+
 method lineDim*(font: Font, text: string): Dim {.base.} = discard
+
 
 method render*(font: Font,
                line: string,
                color: Color = DefaultFontColor): Surface {.base.} = discard
 
-method renderLine*(font: Font,
-                   line: string,
-                   color: Color = DefaultFontColor): Texture {.base.} =
+
+proc renderLineFont*(font: Font,
+                     line: string,
+                     color: Color = DefaultFontColor): Texture =
   ##  Render a text ``line`` in ``font`` with given ``color``.
   ##
   let
@@ -61,10 +66,18 @@ method renderLine*(font: Font,
   lineSurface.freeSurface()
 
 
-method renderText*(font: Font,
-                   text: openarray[string],
-                   align = TextAlign.left,
-                   color: Color = DefaultfontColor): Texture {.base.} =
+method renderLine*(font: Font,
+                   line: string,
+                   color: Color = DefaultFontColor): Texture {.base.} =
+  ##  Base ``renderLine()`` font method.
+  ##
+  renderLineFont(font, line, color)
+
+
+proc renderTextFont*(font: Font,
+                     text: openarray[string],
+                     align = TextAlign.left,
+                     color: Color = DefaultfontColor): Texture =
   ##  Render a multi-line ``text`` in ``font``
   ##  with given ``align`` and ``color``.
   ##
@@ -116,4 +129,13 @@ method renderText*(font: Font,
                     "Can't render text: %s",
                     sdl.getError())
     return nil
+
+
+method renderText*(font: Font,
+                   text: openarray[string],
+                   align = TextAlign.left,
+                   color: Color = DefaultfontColor): Texture {.base.} =
+  ##  Base ``renderText()`` font method.
+  ##
+  renderTextFont(font, text, align, color)
 

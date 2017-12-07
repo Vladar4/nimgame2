@@ -29,6 +29,7 @@ import
 
 type
   TrueTypeFont* = ref object of font.Font
+    # Private
     fFont: ttf.Font
 
 
@@ -88,9 +89,9 @@ method lineDim*(font: TrueTypeFont, line: string): Dim =
   return (w.int, h.int)
 
 
-method render(font: TrueTypeFont,
-              line: string,
-              color: Color = DefaultFontColor): Surface =
+proc renderTrueTypeFont*(font: TrueTypeFont,
+                         line: string,
+                         color: Color = DefaultFontColor): Surface =
   if font.fFont == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render nil font")
@@ -102,4 +103,10 @@ method render(font: TrueTypeFont,
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set surface alpha modifier: %s",
                     sdl.getError())
+
+
+method render*(font: TrueTypeFont,
+               line: string,
+               color: Color = DefaultFontColor): Surface =
+  renderTrueTypeFont(font, line, color)
 

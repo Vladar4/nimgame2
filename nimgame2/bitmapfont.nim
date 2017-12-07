@@ -29,6 +29,7 @@ import
 
 type
   BitmapFont* = ref object of Font
+    # Private
     fSurface: Surface     ##  Source font surface
     fDim, fCharDim: Dim   ##  Dimensions of the surface and a single character
     fChars: seq[CoordInt] ##  Coordinates of all characters
@@ -114,13 +115,14 @@ method lineDim*(font: BitmapFont, line: string): Dim {.inline.} =
   (font.fCharDim.w * line.len, font.fCharDim.h)
 
 
-method render(font: BitmapFont,
-              line: string,
-              color: Color = DefaultFontColor): Surface =
+proc renderBitmapFont*(font: BitmapFont,
+                       line: string,
+                       color: Color = DefaultFontColor): Surface =
   if font.fSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render nil font surface")
     return nil
+
   # create surface
   let
     dim = font.lineDim(line)
@@ -158,4 +160,10 @@ method render(font: BitmapFont,
     dstRect.x = i * font.fCharDim.w
     discard font.fSurface.blitSurface(addr(srcRect), lineSurface, addr(dstRect))
   return lineSurface
+
+
+method render*(font: BitmapFont,
+               line: string,
+               color: Color = DefaultFontColor): Surface =
+  renderBitmapFont(font, line, color)
 
