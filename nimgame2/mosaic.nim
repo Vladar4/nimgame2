@@ -31,10 +31,12 @@ type
   MosaicPattern* = seq[seq[int]]
 
   Mosaic* = ref object of RootObj
+    # Private
     fSurface: Surface   ##  Source surface
-    fDim, tileDim*, offset*: Dim ## \
-      ##  Dimensions of the surface, a single mosaic tile, \
-      ##  and offset from the edge.
+    fDim: Dim           ##  Dimensions of the surface
+    # Public
+    tileDim*, offset*: Dim ## \
+      ##  Dimensions of a single mosaic tile, and offset from the edge.
 
 
 #========#

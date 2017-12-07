@@ -31,6 +31,7 @@ type
   Palette* = ptr sdl.Palette
 
   IndexedImage* = ref object of RootObj
+    # Private
     fSurface: Surface   ##  Source surface
 
 
@@ -93,7 +94,6 @@ proc `[]=`*(palette: Palette, i: int, color: Color) =
 #==============#
 # IndexedImage #
 #==============#
-
 
 proc free*(image: IndexedImage) =
   if not (image.fSurface == nil):

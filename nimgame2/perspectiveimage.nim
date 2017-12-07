@@ -32,6 +32,7 @@ type
   PerspectiveDirection* = enum pdHor, pdVer
 
   PerspectiveImage* = ref object of RootObj
+    # Private
     fDim: Dim
     fSurface: Surface   ## Source surface
 

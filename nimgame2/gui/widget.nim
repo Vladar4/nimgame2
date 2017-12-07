@@ -40,9 +40,12 @@ type
     disabledDown
 
   GuiWidget* = ref object of Entity
-    actions*: seq[GuiAction]  ##  A list of action to perform on click.
+    # Private
     fState: GuiState
-    mbAllow*, fWasPressed: MouseState ##  Mouse buttons allowed for interaction.
+    fWasPressed: MouseState
+    # Public
+    actions*: seq[GuiAction]##  A list of action to perform on click.
+    mbAllow*: MouseState    ##  Mouse buttons allowed for interaction.
     toggle*, fToggled: bool ##  If `true`, the widget is in toggle on/off mode.
 
 

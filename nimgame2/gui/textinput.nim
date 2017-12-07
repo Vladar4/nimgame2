@@ -36,6 +36,7 @@ import
 
 type
   GuiTextInput* = ref object of GuiWidget
+    # Public
     text*: TextField
     textPos*: Coord     ##  Relative text position
     keysBackspace*, keysDelete*, keysLeft*, keysRight*,

@@ -34,10 +34,12 @@ type
   Volume* = range[0..mix.MaxVolume]
 
   Sound* = ref object of RootObj
+    # Private
     fChunk: mix.Chunk
     fChannel: Channel
 
   Music* = ref object of RootObj
+    # Private
     fMusic: mix.Music
 
 
@@ -207,6 +209,7 @@ proc setPanning*(channel: Channel,
                     "Can't set the panning on the channel %s: %s",
                     channel, mix.getError())
 
+
 proc setPosition*(channel: Channel,
                   angle: Angle,
                   distance: Distance) {.inline.} =
@@ -322,6 +325,7 @@ proc play*(music: Music, loops: int = 0) =
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't play music: %s",
                     mix.getError())
+
 
 #==============#
 # Music Global #

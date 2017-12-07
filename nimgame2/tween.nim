@@ -45,12 +45,14 @@ type
   TweenEnder*[T,V] = proc(tween: Tween[T,V])
 
   Tween*[T,V] = ref object of RootObj
+    # Private
     target: T                   ##  Target object
     get: proc(e: T): V          ##  A value getter procedure
     set: proc(e: T, v: V)       ##  A value setter procedure
     fStart, fFinish: V          ##  Starting and finishing values
     fDistance: V                ##  Total distance (finish - start)
     fElapsed, fDuration: float  ##  Elapsed and total duration (in seconds)
+    # Public
     amplitude*, period*: V      ##  Ease elastic amplitude and period
     back*: float                ##  Ease Back coefficient
     loop*, loopLimit*: int      ##  Loop counter and loop limit
@@ -266,7 +268,6 @@ proc outInCubic*[V](start, distance: V, elapsed, duration: float,
     else:
       inCubic(start + distance2, distance2, x2elapsed - duration, duration,
                amplitude, period, back)
-
 
 
 # QUART #
@@ -502,7 +503,7 @@ proc outInCirc*[V](start, distance: V, elapsed, duration: float,
              amplitude, period, back)
 
 
-# Bounce #
+# BOUNCE #
 
 proc outBounce*[V](start, distance: V, elapsed, duration: float,
                    amplitude, period: V, back: float): V {.procvar.} =
@@ -591,7 +592,6 @@ proc inElastic*[V](start, distance: V, elapsed, duration: float,
     start -
       amp * pow(2, 10 * progress1) *
       sin((progress1 * duration - s) * X2Pi / period)
-
 
 
 proc outElastic*[V](start, distance: V, elapsed, duration: float,
@@ -687,7 +687,6 @@ proc outBack*[V](start, distance: V, elapsed, duration: float,
       (pow(progress1, 2) * ((back + 1) * progress1 + back) + 1)
 
 
-
 proc inOutBack*[V](start, distance: V, elapsed, duration: float,
                    amplitude, period: V, back: float): V {.procvar.} =
   ##  Ease In/Out Back tween procedure.
@@ -704,7 +703,6 @@ proc inOutBack*[V](start, distance: V, elapsed, duration: float,
     return
       start + distance / 2.0 *
         (pow(x2progress2, 2) * ((backN + 1) * x2progress2 + backN) + 2)
-
 
 
 proc outInBack*[V](start, distance: V, elapsed, duration: float,

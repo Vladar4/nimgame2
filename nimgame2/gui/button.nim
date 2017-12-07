@@ -30,6 +30,7 @@ import
 
 type
   GuiButton* = ref object of GuiWidget
+    # Public
     image*: Graphic ##  The graphic to render on top of a button
     imageOffset*: Coord ##  Image drawing offset from button's center. \
       ##  Calcuclated automatically if the image is passed in ``init()``

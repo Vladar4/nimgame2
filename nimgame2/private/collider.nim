@@ -442,6 +442,7 @@ method collide*(c: CircleCollider, d: LineCollider): bool =
     else:
       return true
 
+
 # Circle - Poly
 method collide*(c: CircleCollider, p: PolyCollider): bool =
   if p.points.len < 1:    # No points

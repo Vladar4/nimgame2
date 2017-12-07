@@ -37,7 +37,7 @@ type
     fWindow: sdl.Window
     fSize: Dim
     fIcon: sdl.Surface
-    # Scene
+    # Public
     fScene: Scene   ##  Current scene
 
 
@@ -359,6 +359,10 @@ proc resetViewport*(game: Game) =
       sdl.LogCategoryError, "Can't reset viewport: %s",
         sdl.getError())
 
+
+#=====#
+# RUN #
+#=====#
 
 proc run*(game: Game) =
   ##  Start the game.

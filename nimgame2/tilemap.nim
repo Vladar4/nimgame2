@@ -33,6 +33,7 @@ type
   TileShow* = tuple[x: Slice[int], y: Slice[int]]
 
   TileMap* = ref object of Entity
+    # Public
     map*: seq[seq[int]] ##  Two-dimensional sequence of tile indexes (y, x)
     fShow: TileShow     ##  Slice of what part of map to show
     hidden*: seq[int]   ##  The list of tile indexes to not render
@@ -45,10 +46,12 @@ type
       ##  Set to `1.0` if your map isn't rotating or scaling.
 
   TileCollider* = ref object of BoxCollider
+    # Public
     value*: int       ##  Tile kind value
     index*: CoordInt  ##  Map coordinates
 
   TileMapCollider* = ref object of Collider  ## Collider to use with TileMap
+    # Private
     map: TileMap
     tiles: seq[seq[TileCollider]] ##  Two-dimensional sequence of colliders \
                                   ##  (y, x)

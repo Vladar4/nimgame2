@@ -32,13 +32,15 @@ import
 
 type
   GuiProgressBar* = ref object of GuiWidget
+    # Private
+    fText: TextGraphic
+    # Public
     min*, max*, value*: float
     precision*: range[0..32]  ## value format precision (defaults to 0)
     unit*: string             ## value format unit (defaults to '%')
     decimalSep*: char       ## value format decimal separator (defaults to '.')
     direction*: Direction
     dim*: Dim
-    text: TextGraphic
     outline*: Dim            ## outline border size
     bgColor*, fgColor*: Color
     bgGraphic*, fgGraphic*: TextureGraphic
@@ -73,10 +75,10 @@ proc init*(bar: GuiProgressBar,
   bar.bgColor = bgColor
   bar.fgColor = fgColor
   if font == nil:
-    bar.text = nil
+    bar.fText = nil
   else:
-    bar.text = newTextGraphic(font)
-    bar.text.setText("0%")
+    bar.fText = newTextGraphic(font)
+    bar.fText.setText("0%")
   bar.bgGraphic = bgGraphic
   bar.fgGraphic = fgGraphic
   bar.reverseX = false
@@ -181,13 +183,13 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
           reverseY = bar.reverseY)
 
   # text
-  if not(bar.text == nil):
-    bar.text.setText(formatEng(
+  if not(bar.fText == nil):
+    bar.fText.setText(formatEng(
       bar.value,
       precision = bar.precision,
       decimalSep = bar.decimalSep) & bar.unit)
-    let offset = bar.dim / 2.0 - Coord(bar.text.dim) / 2.0
-    bar.text.draw(bar.pos + offset)
+    let offset = bar.dim / 2.0 - Coord(bar.fText.dim) / 2.0
+    bar.fText.draw(bar.pos + offset)
 
 
 method render*(bar: GuiProgressBar) =

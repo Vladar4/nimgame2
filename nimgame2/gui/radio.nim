@@ -31,9 +31,11 @@ import
 
 type
   GuiRadioGroup* = ref object of Entity
+    # Public
     list*: seq[GuiWidget]
 
   GuiRadioButton* = ref object of GuiButton
+    # Public
     group*: GuiRadioGroup
 
 

@@ -33,19 +33,17 @@ const
 
 type
   TextField* = ref object of TextGraphic
+    # Private
     fActive: bool
     fCursorIndex: int
+    # Public
     cursor*: string
     limit*: int
 
 
-# PRIVATE #
-
 template cursorLen(tf: TextField): int =
   tf.cursor.runeLen
 
-
-# PUBLIC #
 
 proc init*(tf: TextField, font: Font) =
   TextGraphic(tf).init(font)

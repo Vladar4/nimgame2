@@ -29,12 +29,13 @@ import
 
 type
   Animation* = object
+    # Public
     frames*: seq[int] ##  List of animation's frame indexes
     frameRate*: float ##  Frame rate (in seconds per frame)
     flip*: Flip       ##  Flip flag
 
-
   Sprite* = ref object
+    # Public
     animationKeys*: seq[string] ##  List of animation names
     animations*: seq[Animation] ##  List of animations
     currentAnimation*: int      ##  Index of currently playing animation
@@ -48,32 +49,41 @@ type
 
 
   Collider* = ref object of RootObj
+    # Public
     parent*: Entity
     tags*: seq[string]  ##  only check collisios with entities with given tags
     pos*: Coord
 
   BoxCollider* = ref object of Collider
+    # Public
     dim*: Dim
 
   CircleCollider* = ref object of Collider
+    # Public
     radius*: float
 
   LineCollider* = ref object of Collider
+    # Public
     pos2*: Coord
 
   PolyCollider* = ref object of Collider
-    points*: seq[Coord]
+    # Private
     farthest: float
+    # Public
+    points*: seq[Coord]
 
   GroupCollider* = ref object of Collider
+    # Public
     list*: seq[Collider]
 
 
   Entity* = ref object of RootObj
+    # Private
+    fLayer: int                   ##  Rendering layer
+    # Public
     parent*: Entity               ##  Parent entity reference
     tags*: seq[string]            ##  List of entity tags
     dead*: bool                   ##  `true` if marked for removal
-    fLayer: int                   ##  Rendering layer
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
     sprite*: Sprite
@@ -243,7 +253,6 @@ proc addAnimation*(entity: Entity,
   entity.sprite.animationKeys.add(name)
   entity.sprite.animations.add(Animation(
     frames: @frames, frameRate: frameRate, flip: flip))
-
 
 
 proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
@@ -440,7 +449,6 @@ proc platformerPhysics*(entity: Entity, elapsed: float) =
 # Entity #
 #========#
 
-
 proc initEntity*(entity: Entity) =
   ##  Default entity initialization procedure.
   ##
@@ -598,7 +606,6 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   # collider adjustment
   if entity.collider != nil:
     entity.collider.pos += oldCenter - entity.center
-
 
 
 method event*(entity: Entity, e: sdl.Event) {.base.} = discard

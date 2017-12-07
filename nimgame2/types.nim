@@ -313,6 +313,7 @@ converter toDim*(c: CoordInt): Dim =
   result.w = c.x
   result.h = c.y
 
+
 #=====#
 # Dim #
 #=====#
