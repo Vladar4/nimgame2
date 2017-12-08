@@ -105,7 +105,7 @@ proc add*(tf: TextField, str: string, index = -1) =
   ##
   if not tf.fActive:
     return
-  if (index >= tf.len) or (tf.len - tf.cursorLen + str.runeLen > tf.limit):
+  if (index >= tf.len) or ((tf.len - tf.cursorLen + str.runeLen) > tf.limit):
     return
   let
     runes = tf.text.toRunes

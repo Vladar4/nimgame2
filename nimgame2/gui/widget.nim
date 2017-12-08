@@ -128,7 +128,7 @@ proc setToggled*(widget: GuiWidget, val: bool) =
   widget.state = widget.state
 
 
-method `toggled=`*(widget: GuiWidget, val: bool) =
+method `toggled=`*(widget: GuiWidget, val: bool) {.base.} =
   widget.setToggled(val)
 
 
@@ -136,7 +136,7 @@ template pressWidget*(widget: GuiWidget) =
   widget.toggled = true
 
 
-method press*(widget: GuiWidget) =
+method press*(widget: GuiWidget) {.base.} =
   widget.pressWidget()
 
 
@@ -144,7 +144,7 @@ template releaseWidget*(widget: GuiWidget) =
   widget.toggled = false
 
 
-method release*(widget: GuiWidget) =
+method release*(widget: GuiWidget) {.base.} =
   widget.releaseWidget()
 
 
