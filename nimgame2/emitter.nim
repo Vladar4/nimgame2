@@ -29,6 +29,18 @@ type
   Particle* = ref object of Entity
     ttl*: float ##  Time to live (in seconds)
 
+  EmissionAreaKind* = enum
+    eaPoint,
+    eaLine,
+    eaCircle,
+    eaBox
+
+  EmissionArea* = object
+    case kind*: EmissionAreaKind
+    of eaPoint:   discard
+    of eaLine:    length*: float  ## line length
+    of eaCircle:  radius*: float  ## circle radius
+    of eaBox:     dim*: Dim       ## box dimensions
 
   Emitter* = ref object of Entity
     # Public
@@ -37,6 +49,7 @@ type
     randomScale*: Scale               ##  Range of scale deviation
     randomTTL*: float                 ##  Range of TTL deviation
     scene*: Scene                     ##  Target scene
+    area*: EmissionArea  ##  Area of particle emission
     particle*: Particle  ##  A stencil particle, its properties will be \\
                          ##  assigned to any created particles.
 
@@ -83,6 +96,7 @@ proc initEmitter*(emitter: Emitter, scene: Scene) =
   ##
   emitter.initEntity()
   emitter.scene = scene
+  emitter.area = EmissionArea(kind: eaPoint)
   emitter.particle = nil
 
 
@@ -104,13 +118,38 @@ proc emit*(emitter: Emitter, amount: int = 1) =
     particle.pos = emitter.pos
     particle.rot = emitter.rot
     # set random deviations
+    # position
+    case emitter.area.kind:
+    of eaPoint: discard
+    of eaLine:
+      let point: Coord = (random(emitter.area.length), 0.0)
+      particle.pos = rotate(point * emitter.absScale,
+                            emitter.absPos * emitter.parallax, emitter.absRot)
+    of eaCircle:
+      let
+        angle = random(360.0)
+        point: Coord = (random(emitter.area.radius), 0.0)
+      particle.pos = rotate(point * emitter.absScale,
+                            emitter.absPos * emitter.parallax, angle)
+    of eaBox:
+      let
+        half = emitter.area.dim / 2
+        point: Coord = (random(-half.w..half.w), random(-half.h..half.h))
+      particle.pos = rotate(point * emitter.absScale,
+                            emitter.absPos * emitter.parallax, emitter.absRot)
+    # end of case emitter.area.kind
+    # velocity
     particle.vel.x += random(-emitter.randomVel.x..emitter.randomVel.x)
     particle.vel.y += random(-emitter.randomVel.y..emitter.randomVel.y)
+    # acceleration
     particle.acc.x += random(-emitter.randomAcc.x..emitter.randomAcc.x)
     particle.acc.y += random(-emitter.randomAcc.y..emitter.randomAcc.y)
+    # rotation
     particle.rot += random(-emitter.randomRot..emitter.randomRot)
     particle.rotVel += random(-emitter.randomRotVel..emitter.randomRotVel)
+    # scale
     particle.scale += random(-emitter.randomScale..emitter.randomScale)
+    # time to live
     particle.ttl += random(-emitter.randomTTL..emitter.randomTTL)
     # add to the scene
     emitter.scene.add(particle)
