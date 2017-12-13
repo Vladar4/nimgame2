@@ -80,6 +80,7 @@ type
   Entity* = ref object of RootObj
     # Private
     fLayer: int                   ##  Rendering layer
+    fBlinkTimer: float            ##  Used internally for blinking
     # Public
     parent*: Entity               ##  Parent entity reference
     tags*: seq[string]            ##  List of entity tags
@@ -101,6 +102,8 @@ type
     center*: Coord                ##  Center for drawing and rotating
     flip*: Flip                   ##  Texture flip status
     visible*: bool                ##  Visibility status
+    blinking*: bool               ##  Blinking status
+    blinkOn*, blinkOff*: float    ##  Blinking rate (in seconds)
 
   LogicProc* = proc(entity: Entity, elapsed: float)
 
@@ -458,6 +461,7 @@ proc initEntity*(entity: Entity) =
   entity.tags = @[]
   entity.dead = false
   entity.fLayer = 0
+  entity.fBlinkTimer = 0.0
   entity.updLayer = false
   entity.graphic = nil
   entity.sprite = nil
@@ -480,6 +484,9 @@ proc initEntity*(entity: Entity) =
   entity.center = (0.0, 0.0)
   entity.flip = Flip.none
   entity.visible = true
+  entity.blinking = false
+  entity.blinkOn = 0.0
+  entity.blinkOff = 0.0
 
 
 proc newEntity*(): Entity =
@@ -511,6 +518,7 @@ proc copy*(target, source: Entity) =
     target.tags.add(tag)
   target.dead     = source.dead
   target.fLayer   = source.layer
+  target.fBlinkTimer = source.fBlinkTimer
   target.updLayer = source.updLayer
   target.graphic  = source.graphic
   target.sprite   = new Sprite
@@ -535,6 +543,9 @@ proc copy*(target, source: Entity) =
   target.center   = source.center
   target.flip     = source.flip
   target.visible  = source.visible
+  target.blinking = source.blinking
+  target.blinkOn  = source.blinkOn
+  target.blinkOff = source.blinkOff
 
 
 proc absRot*(entity: Entity): Angle =
@@ -616,7 +627,8 @@ proc renderEntity*(entity: Entity) =
   ##
   ##  Call it from your entity render method.
   ##
-  if not (entity.graphic == nil) and entity.visible:
+  if not (entity.graphic == nil) and entity.visible and
+    ((entity.blinking and (entity.fBlinkTimer >= 0)) or (not entity.blinking)):
     if entity.sprite == nil:
       entity.graphic.draw(entity.absPos,
                           entity.absRot,
@@ -646,6 +658,21 @@ method render*(entity: Entity) {.base.} =
   entity.renderEntity()
 
 
+proc updateBlinking(entity: Entity, elapsed: float) =
+  if entity.fBlinkTimer < 0:
+    entity.fBlinkTimer += elapsed
+    if entity.fBlinkTimer > 0:
+      let remainder = entity.fBlinkTimer
+      entity.fBlinkTimer = entity.blinkOn
+      entity.updateBlinking(remainder)
+  else:
+    entity.fBlinkTimer -= elapsed
+    if entity.fBlinkTimer < 0:
+      let remainder = entity.fBlinkTimer
+      entity.fBlinkTimer = -entity.blinkOff
+      entity.updateBLinking(remainder)
+
+
 proc updateEntity*(entity: Entity, elapsed: float) =
   ##  Default entity update procedure.
   ##
@@ -657,6 +684,9 @@ proc updateEntity*(entity: Entity, elapsed: float) =
     entity.logic(entity, elapsed)
   if not(entity.physics == nil):
     entity.physics(entity, elapsed)
+  # blinking
+  if entity.blinking and (entity.blinkOn > 0) and (entity.blinkOff > 0):
+    entity.updateBlinking(elapsed)
 
 
 method update*(entity: Entity, elapsed: float) {.base.} =
