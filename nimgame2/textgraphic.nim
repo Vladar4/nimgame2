@@ -149,7 +149,7 @@ proc wordWrap(s: string, maxLineWidth: int): seq[string] =
         result.addIfNotSpace($runes[start..<lastSep])
         start = lastSep + 1
         lastSep = -1
-  if runes.high - start > 0:
+  if runes.len - start > 0:
     result.addIfNotSpace($runes[start..^1])
 
 

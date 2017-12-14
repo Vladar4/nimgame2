@@ -9,6 +9,7 @@ import sdl2/sdl,
   nimgame2/graphic,
   nimgame2/textgraphic,
   nimgame2/texturegraphic,
+  nimgame2/typewriter,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
@@ -26,6 +27,8 @@ type
     ttFont: TrueTypeFont
     ttText: TextGraphic
     ttEntity: Entity
+    twText: TextGraphic
+    twEntity: Typewriter
 
 
 proc init*(scene: MainScene) =
@@ -58,6 +61,9 @@ proc init*(scene: MainScene) =
     [ "В чащах юга жил бы цитрус?",
       "Да, но фальшивый экземпляр!"]
 
+  scene.twText = newTextGraphic()
+  scene.twText.font = scene.ttFont
+
   # Entity
   scene.bmEntity = newEntity()
   scene.bmEntity.pos = (8, 128)
@@ -67,9 +73,15 @@ proc init*(scene: MainScene) =
   scene.ttEntity.pos = (8, 192)
   scene.ttEntity.graphic = scene.ttText
 
+  scene.twEntity = newTypewriter(scene.twText, 0.1)
+  #scene.twEntity.width = 10 # uncomment to enable text wrapping
+  scene.twEntity.pos = (300, 8)
+  scene.twEntity.add "Fancy typewriter effect!"
+
   # add to scene
   scene.add(scene.bmEntity)
   scene.add(scene.ttEntity)
+  scene.add(scene.twEntity)
   scene.add(scene.e)
 
 
@@ -180,4 +192,6 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
+
+  if ScancodeReturn.down: scene.twEntity.force()
 
