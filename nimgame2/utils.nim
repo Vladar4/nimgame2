@@ -23,7 +23,7 @@
 
 
 import
-  math, parsecsv, random, streams,
+  math, random,
   sdl2/sdl,
   texturegraphic, types
 
@@ -158,6 +158,9 @@ proc textureFormat*(renderer: Renderer, n: uint32 = 0): uint32 =
 # Parsing #
 #=========#
 
+import parsecsv, streams
+
+
 proc readAll*(src: ptr RWops): string =
   const BufferSize = 1000
   result = newString(BufferSize)
@@ -226,6 +229,30 @@ import
   strutils, indexedimage
 
 
+proc loadPalette(palette: var indexedimage.Palette,
+                 parser: var CsvParser) =
+  var
+    ncolors = 0
+    colors: seq[Color] = @[]
+    r, g, b, a: int
+  while parser.readRow():
+    let cols = parser.row.len
+    if cols in {3, 4}:
+      r = parser.row[0].parseInt
+      g = parser.row[1].parseInt
+      b = parser.row[2].parseInt
+      a = if cols == 4: parser.row[3].parseInt
+          else: 255
+      inc ncolors
+    else:
+      continue
+  if ncolors > 0:
+    if not (palette == nil):
+      palette.free()
+    palette.init(ncolors)
+    palette[0] = colors
+
+
 proc loadPalette*(palette: var indexedimage.Palette,
                   file: string,
                   separator = ' ',
@@ -252,28 +279,9 @@ proc loadPalette*(palette: var indexedimage.Palette,
   ##
   ##  Other types of lines are ignored.
   ##
-  var
-    ncolors = 0
-    colors: seq[Color] = @[]
-    parser: CsvParser
-    r, g, b, a: int
+  var parser: CsvParser
   parser.open(file, separator, quote, escape, skipInitialSpace)
-  while parser.readRow():
-    let cols = parser.row.len
-    if cols in {3, 4}:
-      r = parser.row[0].parseInt
-      g = parser.row[1].parseInt
-      b = parser.row[2].parseInt
-      a = if cols == 4: parser.row[3].parseInt
-          else: 255
-      inc ncolors
-    else:
-      continue
-  if ncolors > 0:
-    if not (palette == nil):
-      palette.free()
-    palette.init(ncolors)
-    palette[0] = colors
+  loadPalette(palette, parser)
   parser.close()
 
 
@@ -286,32 +294,27 @@ proc loadPalette*(palette: var indexedimage.Palette,
                   skipInitialSpace = true,
                   freeSrc = true) =
   var
-    ncolors = 0
-    colors: seq[Color] = @[]
     parser: CsvParser
     stream = newStringStream(src.readAll())
-    r, g, b, a: int
   parser.open(stream, file, separator, quote, escape, skipInitialSpace)
-  while parser.readRow():
-    let cols = parser.row.len
-    if cols in {3, 4}:
-      r = parser.row[0].parseInt
-      g = parser.row[1].parseInt
-      b = parser.row[2].parseInt
-      a = if cols == 4: parser.row[3].parseInt
-          else: 255
-      inc ncolors
-    else:
-      continue
-  if ncolors > 0:
-    if not (palette == nil):
-      palette.free()
-    palette.init(ncolors)
-    palette[0] = colors
+  loadPalette(palette, parser)
   parser.close()
   stream.close()
   if freeSrc:
     freeRW(src)
+
+
+template atlasValues(parser: CsvParser): untyped =
+  var val: tuple[name: string, rect: Rect]
+  while parser.readRow():
+    if not(parser.row.len == 5):
+      continue
+    val.name = parser.row[0]
+    val.rect.x = parser.row[1].parseInt
+    val.rect.y = parser.row[2].parseInt
+    val.rect.w = parser.row[3].parseInt
+    val.rect.h = parser.row[4].parseInt
+    yield val
 
 
 iterator atlasValues*(file: string,
@@ -328,19 +331,9 @@ iterator atlasValues*(file: string,
   ##    name, x, y, w, h
   ##    ...
   ##
-  var
-    parser: CsvParser
-    val: tuple[name: string, rect: Rect]
+  var parser: CsvParser
   parser.open(file, separator, quote, escape, skipInitialSpace)
-  while parser.readRow():
-    if not(parser.row.len == 5):
-      continue
-    val.name = parser.row[0]
-    val.rect.x = parser.row[1].parseInt
-    val.rect.y = parser.row[2].parseInt
-    val.rect.w = parser.row[3].parseInt
-    val.rect.h = parser.row[4].parseInt
-    yield val
+  atlasValues(parser)
   parser.close()
 
 
@@ -355,17 +348,8 @@ iterator atlasValues*(src: ptr RWops,
   var
     parser: CsvParser
     stream = newStringStream(src.readAll())
-    val: tuple[name: string, rect: Rect]
   parser.open(stream, file, separator, quote, escape, skipInitialSpace)
-  while parser.readRow():
-    if not(parser.row.len == 5):
-      continue
-    val.name = parser.row[0]
-    val.rect.x = parser.row[1].parseInt
-    val.rect.y = parser.row[2].parseInt
-    val.rect.w = parser.row[3].parseInt
-    val.rect.h = parser.row[4].parseInt
-    yield val
+  atlasValues(parser)
   parser.close()
   stream.close()
   if freeSrc:
