@@ -111,6 +111,7 @@ proc load*(image: IndexedImage,
   ##
   result = true
   image.free()
+  # load image
   image.fSurface = img.load(file)
   if image.fSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
@@ -126,6 +127,27 @@ proc load*(image: IndexedImage,
     return false
 
 
+proc load*(image: IndexedImage,
+           src: ptr RWops, freeSrc: bool = true): bool =
+  ##  Load ``image``graphic source from a ``src`` ``RWops``.
+  ##
+  result = true
+  image.free()
+  # load image
+  image.fSurface = img.loadRW(src, freeSrc)
+  if image.fSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load indexed image RW: %s",
+                    img.getError())
+    return false
+
+  if image.fSurface.format.palette == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "No palette found in image RW")
+    image.fSurface.freeSurface()
+    return false
+
+
 proc newIndexedImage*(): IndexedImage =
   new result, free
   result.init()
@@ -136,6 +158,13 @@ proc newIndexedImage*(file: string): IndexedImage =
   ##
   result = newIndexedImage()
   discard result.load(file)
+
+
+proc newIndexedImage*(src: ptr RWops, freeSrc: bool = true): IndexedImage =
+  ##  Create a new IndexedImage and load it from a ``src`` ``RWops``.
+  ##
+  result = newIndexedImage()
+  discard result.load(src, freeSrc)
 
 
 proc palette*(image: IndexedImage): Palette {.inline.} =

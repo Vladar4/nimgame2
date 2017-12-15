@@ -65,14 +65,26 @@ proc generate(source: Surface, rect: Rect): TextureGraphic =
   surface.freeSurface()
 
 
-proc load(atlas: TextureAtlas, imagefile, mapfile: string) =
-  var source = load(imagefile)
+proc load(atlas: TextureAtlas, imagefile, mapfile: string): bool =
+  var source = loadSurface(imagefile)
   if source == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load texture atlas image %s: %s",
                     imagefile, img.getError())
     return
   for mapping in mapfile.atlasValues:
+    atlas.add(mapping.name, source.generate(mapping.rect))
+
+
+proc load(atlas: TextureAtlas, imageSrc, mapSrc: ptr RWops,
+          freeImageSrc: bool = true, freeMapSrc: bool = true): bool =
+  var source = loadSurface(imageSrc, freeImageSrc)
+  if source == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load texture atlas image RW: %s",
+                    img.getError())
+    return
+  for mapping in mapSrc.atlasValues("", freeSrc = freeMapSrc):
     atlas.add(mapping.name, source.generate(mapping.rect))
 
 
@@ -92,5 +104,14 @@ proc newTextureAtlas*(imagefile, mapfile: string,
   ##
   new result, free
   result[] = initOrderedTable[string, TextureGraphic](nextPowerOfTwo(count))
-  result.load(imagefile, mapfile)
+  discard result.load(imagefile, mapfile)
+
+
+proc newTextureAtlas*(imageSrc, mapSrc: ptr RWops,
+                      count: int = 64,
+                      freeImageSrc: bool = true,
+                      freeMapSrc: bool = true): TextureAtlas =
+  new result, free
+  result[] = initOrderedTable[string, TextureGraphic](nextPowerOfTwo(count))
+  discard result.load(imageSrc, mapSrc, freeImageSrc, freeMapSrc)
 

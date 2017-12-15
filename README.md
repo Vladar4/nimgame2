@@ -21,6 +21,11 @@ Requires:
   * SDL_mixer 2.0.1
   * SDL_ttf 2.0.14
 
+Recommended:
+------------
+
+* [zip](https://github.com/nim-lang/zip) for 'rwops_zzip' usage (to load archived assets).
+
 
 Installation through [Nimble](https://github.com/nim-lang/nimble):
 ------------------------------------------------------------------

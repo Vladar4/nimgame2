@@ -95,6 +95,24 @@ proc load*(
   result = graphic.updateTexture()
 
 
+proc load*(
+    graphic: TextureGraphic, rw: ptr RWops, freeSrc: bool = true): bool =
+  ##  Load texture from ``src`` ``RWops``.
+  ##
+  ##  ``Return`` `true` on success, `false` otherwise.
+  ##
+  result = true
+  graphic.free()
+  # load texture
+  graphic.fTexture = renderer.loadTextureRW(rw, freeSrc)
+  if graphic.fTexture == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load image RW: %s",
+                    img.getError())
+    return false
+  result = graphic.updateTexture()
+
+
 proc assignTexture*(
   graphic: TextureGraphic, texture: Texture, freeCurrent: bool = true): bool =
   ##  Assign already created ``texture``.
@@ -126,6 +144,11 @@ proc newTextureGraphic*(): TextureGraphic =
 proc newTextureGraphic*(file: string): TextureGraphic =
   result = newTextureGraphic()
   discard result.load(file)
+
+
+proc newTextureGraphic*(src: ptr RWops, freeSrc: bool = true): TextureGraphic =
+  result = newTextureGraphic()
+  discard result.load(src, freeSrc)
 
 
 proc newTextureGraphic*(texture: Texture): TextureGraphic =

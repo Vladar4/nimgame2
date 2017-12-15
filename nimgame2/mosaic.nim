@@ -59,8 +59,14 @@ proc init*(mosaic: Mosaic) =
   mosaic.offset = (0, 0)
 
 
-proc load*(mosaic: Mosaic,
-           file: string, tileDim: Dim, offset: Dim = (0, 0)): bool =
+template afterLoad(mosaic: Mosaic, tileDIm: Dim, offset: Dim = (0, 0)) =
+  mosaic.fDim = (mosaic.fSurface.w.int, mosaic.fSurface.h.int)
+  mosaic.tileDim = tileDim
+  mosaic.offset = offset
+
+
+proc load*(mosaic: Mosaic, file: string,
+           tileDim: Dim, offset: Dim = (0, 0)): bool =
   ##  Load ``mosaic`` graphic source from a ``file``.
   ##
   ##  ``tileDim`` dimensions of a single mosaic tile.
@@ -71,16 +77,31 @@ proc load*(mosaic: Mosaic,
   ##
   result = true
   mosaic.free()
+  # load image
   mosaic.fSurface = img.load(file)
   if mosaic.fSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load mosaic %s: %s",
                     file, img.getError())
     return false
+  # after-load
+  afterLoad(mosaic, tileDim, offset)
 
-  mosaic.fDim = (mosaic.fSurface.w.int, mosaic.fSurface.h.int)
-  mosaic.tileDim = tileDim
-  mosaic.offset = offset
+
+proc load*(mosaic: Mosaic, src: ptr RWops,
+           tileDim: Dim, offset: Dim = (0, 0),
+           freeSrc: bool = true): bool =
+  result = true
+  mosaic.free()
+  # load image
+  mosaic.fSurface = img.loadRW(src, freeSrc)
+  if mosaic.fSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load mosaic RW: %s",
+                    img.getError())
+    return false
+  # after-load
+  afterLoad(mosaic, tileDim, offset)
 
 
 proc newMosaic*(): Mosaic =
@@ -88,7 +109,8 @@ proc newMosaic*(): Mosaic =
   result.init()
 
 
-proc newMosaic*(file: string, tileDim: Dim, offset: Dim = (0, 0)): Mosaic =
+proc newMosaic*(file: string,
+                tileDim: Dim, offset: Dim = (0, 0)): Mosaic =
   ##  Create a new Mosaic and load tileset from a ``file``.
   ##
   ##  ``tileDim`` the size of a single tile.
@@ -97,6 +119,13 @@ proc newMosaic*(file: string, tileDim: Dim, offset: Dim = (0, 0)): Mosaic =
   ##
   result = newMosaic()
   discard result.load(file, tileDim, offset)
+
+
+proc newMosaic*(src: ptr RWops,
+                tileDim: Dim, offset: Dim = (0, 0),
+                freeSrc: bool = true): Mosaic =
+  result = newMosaic()
+  discard result.load(src, tileDim, offset, freeSrc)
 
 
 proc dim*(mosaic: Mosaic): Dim {.inline.} =

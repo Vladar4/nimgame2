@@ -51,19 +51,42 @@ proc init*(image: PerspectiveImage) =
   image.fSurface = nil
 
 
+template afterLoad(image: PerspectiveImage) =
+  image.fDim = (image.fSurface.w.int, image.fSurface.h.int)
+
+
 proc load*(image: PerspectiveImage,
            file: string): bool =
   ##  Load ``image`` graphic source from a ``file``.
   ##
   result = true
   image.free()
+  # load image
   image.fSurface = img.load(file)
   if image.fSurface == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load perspective image %s: %s",
                     file, img.getError())
     return false
-  image.fDim = (image.fSurface.w.int, image.fSurface.h.int)
+  # after-load
+  afterLoad(image)
+
+
+proc load*(image: PerspectiveImage,
+           src: ptr RWops, freeSrc: bool = true): bool =
+  ##  Load ``image`` graphic source from a ``src`` ``RWops``.
+  ##
+  result = true
+  image.free()
+  # load image
+  image.fSurface = img.loadRW(src, freeSrc)
+  if image.fSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load perspective image RW: %s",
+                    img.getError())
+    return false
+  # after-load
+  afterLoad(image)
 
 
 proc newPerspectiveImage*(): PerspectiveImage =
@@ -76,6 +99,14 @@ proc newPerspectiveImage*(file: string): PerspectiveImage =
   ##
   result = newPerspectiveImage()
   discard result.load(file)
+
+
+proc newPerspectiveImage*(
+    src: ptr RWops, freeSrc: bool = true): PerspectiveImage =
+  ##  Create a new PerspectiveImage and load it from a ``src`` ``RWops``.
+  ##
+  result = newPerspectiveImage()
+  discard result.load(src, freeSrc)
 
 
 proc dim*(image: PerspectiveImage): Dim {.inline.} =
@@ -99,18 +130,27 @@ proc render*(image: PerspectiveImage,
   ##  ``Return`` a new ``Texture`` created from the ``image``.
   ##
   let
-    sizeFrom = if sizeFrom > 0: sizeFrom
-      else: case direction:
+    sizeFrom =
+      if sizeFrom > 0:
+        sizeFrom
+      else:
+        case direction:
         of pdHor: image.fDim.h
         of pdVer: image.fDim.w
 
-    sizeTo = if sizeTo > 0: sizeTo
-      else: case direction:
+    sizeTo =
+      if sizeTo > 0:
+        sizeTo
+      else:
+        case direction:
         of pdHor: image.fDim.h
         of pdVer: image.fDim.w
 
-    sizeNormal = if sizeNormal > 0: sizeNormal
-      else: case direction:
+    sizeNormal =
+      if sizeNormal > 0:
+        sizeNormal
+      else:
+        case direction:
         of pdHor: image.fDim.w
         of pdVer: image.fDim.h
 

@@ -54,27 +54,8 @@ proc init*(font: BitmapFont) =
   font.fChars = @[]
 
 
-proc load*(font: BitmapFont, file: string, charDim: Dim,
-           offset: Dim = (0, 0), border: Dim = (0, 0)): bool =
-  ##  Load ``font`` data from a ``file``.
-  ##
-  ##  ``charDim`` dimensions of a single font character.
-  ##
-  ##  ``offset``  offset from the edge of the texture.
-  ##
-  ##  ``border``  border around individual characters.
-  ##
-  ##  ``Return`` `true` on success, or `false` otherwise.
-  ##
-  result = true
-  font.free()
-  font.fSurface = img.load(file)
-  if font.fSurface == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't load font %s: %s",
-                    file, img.getError())
-    return false
-
+template postLoad(font: BitmapFont, charDim: Dim,
+                  offset: Dim = (0, 0), border: Dim = (0, 0)) =
   font.fDim = (font.fSurface.w.int, font.fSurface.h.int)
   font.fCharDim = charDim
   let
@@ -89,18 +70,65 @@ proc load*(font: BitmapFont, file: string, charDim: Dim,
         offset.h + font.fCharDim.h * r + border.h * (1 + r * 2)))
 
 
+proc load*(font: BitmapFont, file: string, charDim: Dim,
+           offset: Dim = (0, 0), border: Dim = (0, 0)): bool =
+  ##  Load ``font`` data from a ``file``.
+  ##
+  ##  ``charDim`` dimensions of a single font character.
+  ##
+  ##  ``offset``  offset from the edge of the texture.
+  ##
+  ##  ``border``  border around individual characters.
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise.
+  ##
+  result = true
+  font.free()
+  # load font
+  font.fSurface = img.load(file)
+  if font.fSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load font %s: %s",
+                    file, img.getError())
+    return false
+  # post-load
+  postLoad(font, charDim, offset, border)
+
+
+proc load*(font: BitmapFont, src: ptr RWops, charDim: Dim,
+           offset: Dim = (0, 0), border: Dim = (0, 0),
+           freeSrc: bool = true): bool =
+  result = true
+  font.free()
+  # load font
+  font.fSurface = img.loadRW(src, freeSrc)
+  if font.fSurface == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load font RW: %s",
+                    img.getError())
+    return false
+  # post-load
+  postLoad(font, charDim, offset, border)
+
+
 proc newBitmapFont*(): BitmapFont =
   new result, free
   result.init()
 
 
-proc newBitmapFont*(file: string, charDim: Dim): BitmapFont =
+proc newBitmapFont*(file: string, charDim: Dim,
+                    offset: Dim = (0, 0), border: Dim = (0, 0)): BitmapFont =
   ##  Create and load a new bitmap font from a ``file``.
   ##
-  ##  ``charDim`` dimensions of a single font character.
-  ##
   result = newBitmapFont()
-  discard result.load(file, charDim)
+  discard result.load(file, charDim, offset, border)
+
+
+proc newBitmapFont*(src: ptr RWops, charDim: Dim,
+                    offset: Dim = (0, 0), border: Dim = (0, 0),
+                    freeSrc: bool = true): BitmapFont =
+  result = newBitmapFont()
+  discard result.load(src, charDim, offset, border, freeSrc)
 
 
 method charH*(font: BitmapFont): int {.inline.} =

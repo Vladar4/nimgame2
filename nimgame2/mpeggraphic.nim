@@ -74,21 +74,7 @@ proc update(data: pointer, frame: Frame) {.cdecl.} =
   graphic.fUpdated = true
 
 
-proc load*(graphic: MpegGraphic, filename: string): bool =
-  ##  Load MPEG movie file.
-  ##
-  ##  ``Return`` `true` on success, `false` otherwise.
-  ##
-  result = true
-  graphic.free()
-  graphic.fSmpeg = smpeg.new(filename, addr(graphic.fInfo), true)
-  let error = graphic.fSmpeg.error()
-  if error != nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "SMPEG error: %s",
-                    error)
-    graphic.fSmpeg = nil
-    return false
+template afterLoad(graphic: MpegGraphic) =
   graphic.fMutex = sdl.createMutex()
   discard graphic.assignTexture(renderer.createTexture(
     sdl.PixelFormat_YV12, sdl.TextureAccessStreaming,
@@ -103,9 +89,56 @@ proc load*(graphic: MpegGraphic, filename: string): bool =
   graphic.fVolume = MpegVolume.high
 
 
+proc load*(graphic: MpegGraphic, filename: string): bool =
+  ##  Load MPEG movie file.
+  ##
+  ##  ``Return`` `true` on success, `false` otherwise.
+  ##
+  result = true
+  graphic.free()
+  # load smpeg
+  graphic.fSmpeg = smpeg.new(filename, addr(graphic.fInfo), true)
+  let error = graphic.fSmpeg.error()
+  if error != nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "SMPEG error: %s",
+                    error)
+    graphic.fSmpeg = nil
+    return false
+  # after-load
+  afterLoad(graphic)
+
+
+proc load*(graphic: MpegGraphic, src: ptr RWops, freeSrc: bool = true): bool =
+  ##  Load MPEG movie file.
+  ##
+  ##  ``Return`` `true` on success, `false` otherwise.
+  ##
+  result = true
+  graphic.free()
+  # load smpeg
+  graphic.fSmpeg = smpeg.newRWops(src, addr(graphic.fInfo), freeSrc, true)
+  let error = graphic.fSmpeg.error()
+  if error != nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "SMPEG error: %s",
+                    error)
+    graphic.fSmpeg = nil
+    return false
+  # after-load
+  afterLoad(graphic)
+
+
 proc newMpegGraphic*(filename: string): MpegGraphic =
   new result, free
   if not result.load(filename):
+    result.free()
+    return nil
+
+
+proc newMpegGraphic*(src: ptr RWops, freeSrc: bool): MpegGraphic =
+  new result, free
+  if not result.load(src, freeSrc):
     result.free()
     return nil
 

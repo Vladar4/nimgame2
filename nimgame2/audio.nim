@@ -60,19 +60,40 @@ proc free*(sound: Sound) =
   sound.fChannel = -1
 
 
-proc load*(sound: Sound, file: string) =
+proc load*(sound: Sound, file: string): bool =
+  result = true
   sound.free()
+  # load sound
   sound.fChunk = loadWAV(file)
   if sound.fChunk == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load sound file %s: %s",
                     file, mix.getError())
+    return false
+  sound.fChannel = -1
+
+
+proc load*(sound: Sound, src: ptr RWops, freeSrc: bool = true): bool =
+  result = true
+  sound.free()
+  # load sound
+  sound.fChunk = loadWAV_RW(src, freeSrc)
+  if sound.fChunk == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load sound file RW: %s",
+                    mix.getError())
+    return false
   sound.fChannel = -1
 
 
 proc newSound*(file: string): Sound =
   new result, free
-  result.load(file)
+  discard result.load(file)
+
+
+proc newSound*(src: ptr RWops, freeSrc: bool = true): Sound =
+  new result, free
+  discard result.load(src, freeSrc)
 
 
 proc available*(sound: Sound): bool =
@@ -298,18 +319,38 @@ proc free*(music: Music) =
     music.fMusic = nil
 
 
-proc init*(music: Music, file: string) =
+proc load*(music: Music, file: string): bool =
+  result = true
   music.free()
+  # load music
   music.fMusic = mix.loadMUS(file)
   if music.fMusic == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load music file %s: %s",
                     file, mix.getError())
+    return false
+
+
+proc load*(music: Music, src: ptr RWops, freeSrc: bool = true): bool =
+  result = true
+  music.free()
+  # load music
+  music.fMusic = mix.loadMUS_RW(src, freeSrc)
+  if music.fMusic == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load music file RW: %s",
+                    mix.getError())
+    return false
 
 
 proc newMusic*(file: string): Music =
   new result, free
-  result.init(file)
+  discard result.load(file)
+
+
+proc newMusic*(src: ptr RWops, freeSrc: bool = true): Music =
+  new result, free
+  discard result.load(src, freeSrc)
 
 
 proc available*(music: Music): bool {.inline.} =

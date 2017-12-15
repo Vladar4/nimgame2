@@ -23,7 +23,7 @@
 
 
 import
-  math, parsecsv, random,
+  math, parsecsv, random, streams,
   sdl2/sdl,
   texturegraphic, types
 
@@ -114,6 +114,19 @@ proc loadSurface*(file: string): Surface =
     return nil
 
 
+proc loadSurface*(src: ptr RWops, freeSrc: bool = true): Surface =
+  ##  Load ``src`` ``RWops`` to the ``sdl.Surface``.
+  ##
+  ##  ``Return`` the surface on success, or `nil` otherwise.
+  ##
+  result = img.loadRW(src, freeSrc)
+  if result == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load image RW: %s",
+                    img.getError())
+    return nil
+
+
 proc textureFormats*(renderer: Renderer):
     tuple[num: uint32, formats: array[16, uint32]] =
   ##  ``Return`` number and array of available texture formats
@@ -145,6 +158,19 @@ proc textureFormat*(renderer: Renderer, n: uint32 = 0): uint32 =
 # Parsing #
 #=========#
 
+proc readAll*(src: ptr RWops): string =
+  const BufferSize = 1000
+  result = newString(BufferSize)
+  var r = 0
+  while true:
+    let readBytes = rwRead(src, addr(result[r]), sizeof(uint8), BufferSize)
+    if readBytes < BufferSize:
+      setLen(result, r+readBytes)
+      break
+    inc r, BufferSize
+    setLen(result, r+BufferSize)
+
+
 proc loadCSV*[T](file: string,
                  parse: proc(input: string): T,
                  separator = ',',
@@ -164,6 +190,36 @@ proc loadCSV*[T](file: string,
     for item in parser.row:
       result[^1].add(parse(item))
   parser.close()
+
+
+proc loadCSV*[T](src: ptr RWops,
+                 file: string,
+                 parse: proc(input: string): T,
+                 separator = ',',
+                 quote = '\"',
+                 escape = '\0',
+                 skipInitialSpace = true,
+                 freeSrc = true): seq[seq[T]] =
+  ##  Load data from ``src`` ``RWops``.
+  ##
+  ##  ``file`` is only used for nice error messages.
+  ##
+  ##  ``Return`` a two-dimensional sequence of values from the ``file``,
+  ##  or empty sequence (`@[]`) otherwise.
+  ##
+  result = @[]
+  var
+    parser: CsvParser
+    stream = newStringStream(src.readAll())
+  parser.open(stream, file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    result.add(@[])
+    for item in parser.row:
+      result[^1].add(parse(item))
+  parser.close()
+  stream.close()
+  if freeSrc:
+    freeRW(src)
 
 
 import
@@ -218,6 +274,44 @@ proc loadPalette*(palette: var indexedimage.Palette,
       palette.free()
     palette.init(ncolors)
     palette[0] = colors
+  parser.close()
+
+
+proc loadPalette*(palette: var indexedimage.Palette,
+                  src: ptr RWops,
+                  file: string,
+                  separator = ' ',
+                  quote = '\"',
+                  escape = '\0',
+                  skipInitialSpace = true,
+                  freeSrc = true) =
+  var
+    ncolors = 0
+    colors: seq[Color] = @[]
+    parser: CsvParser
+    stream = newStringStream(src.readAll())
+    r, g, b, a: int
+  parser.open(stream, file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    let cols = parser.row.len
+    if cols in {3, 4}:
+      r = parser.row[0].parseInt
+      g = parser.row[1].parseInt
+      b = parser.row[2].parseInt
+      a = if cols == 4: parser.row[3].parseInt
+          else: 255
+      inc ncolors
+    else:
+      continue
+  if ncolors > 0:
+    if not (palette == nil):
+      palette.free()
+    palette.init(ncolors)
+    palette[0] = colors
+  parser.close()
+  stream.close()
+  if freeSrc:
+    freeRW(src)
 
 
 iterator atlasValues*(file: string,
@@ -247,6 +341,35 @@ iterator atlasValues*(file: string,
     val.rect.w = parser.row[3].parseInt
     val.rect.h = parser.row[4].parseInt
     yield val
+  parser.close()
+
+
+iterator atlasValues*(src: ptr RWops,
+                      file: string,
+                      separator = ',',
+                      quote = '\"',
+                      escape = '\0',
+                      skipInitialSpace = true,
+                      freeSrc = true):
+    tuple[name: string, rect: Rect] =
+  var
+    parser: CsvParser
+    stream = newStringStream(src.readAll())
+    val: tuple[name: string, rect: Rect]
+  parser.open(stream, file, separator, quote, escape, skipInitialSpace)
+  while parser.readRow():
+    if not(parser.row.len == 5):
+      continue
+    val.name = parser.row[0]
+    val.rect.x = parser.row[1].parseInt
+    val.rect.y = parser.row[2].parseInt
+    val.rect.w = parser.row[3].parseInt
+    val.rect.h = parser.row[4].parseInt
+    yield val
+  parser.close()
+  stream.close()
+  if freeSrc:
+    freeRW(src)
 
 
 #========#

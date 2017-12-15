@@ -59,11 +59,29 @@ proc load*(font: TrueTypeFont, file: string, size: int): bool =
   ##
   result = true
   font.free()
+  # load font
   font.fFont = ttf.openFont(file, size)
   if font.fFont == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't load font %s: %s",
                     file, ttf.getError())
+    return false
+
+
+proc load*(font: TrueTypeFont, src: ptr RWops, size: int,
+           freeSrc: bool = true): bool =
+  ##  Load ``font`` data from a ``src`` ``RWops``.
+  ##
+  ##  ``size`` required font size.
+  ##
+  result = true
+  font.free()
+  # load font
+  font.fFont = ttf.openFontRW(src, freeSrc, size)
+  if font.fFont == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't load font RW: %s",
+                    ttf.getError())
     return false
 
 
