@@ -12,6 +12,8 @@
 ##  `game/greetings.bmp` in the zip-archive (for reading that is).
 ##
 ##  See original code at http://zziplib.sourceforge.net/zzip-sdl-rwops.html
+##
+##  ``Note:`` zzip dynamic library should be available in the system.
 
 import
   sdl2/sdl, zip/zzip
@@ -48,19 +50,18 @@ proc zzipClose*(context: ptr RWops): cint {.cdecl.} =
 # PUBLIC
 
 proc rwFromZZip*(file, mode: string = "r"): ptr RWops =
-  var rwops: ptr RWops
-  var zzipFile: ptr ZZipFile
+  var f: ptr ZZipFile
   if not ('r' in mode): return rwFromFile(file, mode)
-  zzipFile = zzipFopen(file, mode)
-  if zzipFile == nil: return nil
-  rwops = allocRW()
-  if rwops == nil:
-    zzipClose(zzipFile)
+  f = zzipFopen(file, mode)
+  if f == nil:
+    return nil
+  result = allocRW()
+  if result == nil:
+    zzipClose(f)
     raise newException(OutOfMemError, "allocRW(): out of memory")
-  rwopsZzipData(rwops) = zzipFile
-  rwops.read = zzipRead
-  rwops.write = zzipWrite
-  rwops.seek = zzipSeek
-  rwops.close = zzipClose
-  return rwops
+  rwopsZzipData(result) = f
+  result.read = zzipRead
+  result.write = zzipWrite
+  result.seek = zzipSeek
+  result.close = zzipClose
 
