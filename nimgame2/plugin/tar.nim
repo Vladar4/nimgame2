@@ -4,7 +4,7 @@
 #  authored from 2017 by Dmitry Hrabrov a.k.a. DeXPeriX
 #  http://dexperix.net
 #
-# LICENSE:
+# ORIGINAL CODE LICENSE:
 #     This software is dual-licensed to the public domain and under the following
 #     license: you are granted a perpetual, irrevocable license to copy, modify,
 #     publish and distribute this file as you see fit.
@@ -38,6 +38,8 @@ const
   MagicSize   = 5
   Magic       = "ustar" # Modern GNU tar's magic const
 
+# OLD VERSION
+#[
 proc dxTarRead(data: ptr uint8, dataSize: int,
                fileName: string, fileSize: var int): ptr uint8 =
   fileSize = 0 #  will be zero if TAR wrong or there is no such file
@@ -84,7 +86,36 @@ proc dxTarRead(data: ptr uint8, dataSize: int,
     #  skip header, point to data
   else:
     return nil # No file found in TAR - return nil
+]#
 
+proc dxTarContents(data: ptr uint8, dataSize: int): seq[tuple[name: cstring, size: int, data: ptr uint8]] =
+  result = @[]
+  var size, mul, p, newOffset: int
+
+  while true: # "Load" data from tar - just point to passed memory
+    var name, sz: ptr uint8
+    name = data + (NameOffset + p + newOffset)
+    sz = data + (SizeOffset + p + newOffset) # size string
+    inc(p, newOffset) # pointer to current file's data in TAR
+
+    for i in 0..<MagicSize: # Check for supported TAR version
+      if data[i + MagicOffset + p] != Magic[i].uint8:
+        return
+
+    size = 0
+    mul = 1
+    for i in countdown(SzSize - 2, 0):
+      if (sz[i] >= '0'.uint8) and (sz[i] <= '9'.uint8):
+        inc(size, int(sz[i] - '0'.uint8) * mul)
+      mul = mul * 8
+    newOffset = (1 + size div BlockSize) * BlockSize # trim by block
+    if (size mod BlockSize) > 0: inc(newOffset, BlockSize)
+
+    result.add((cast[cstring](name), size, data + p + BlockSize))
+
+    if not (p + newOffset + BlockSize <= dataSize):
+      break
+  # while true
 
 import sdl2/sdl
 
@@ -94,6 +125,7 @@ type
   TarFile* = object
     data: ptr uint8
     size: int
+    contents: seq[tuple[name: cstring, size: int, data: ptr uint8]]
 
 
 proc close*(tar: var TarFile) =
@@ -101,6 +133,7 @@ proc close*(tar: var TarFile) =
     dealloc(tar.data)
   tar.data = nil
   tar.size = 0
+  tar.contents = nil
 
 
 proc open*(tar: var TarFile, filename: string): bool =
@@ -117,15 +150,24 @@ proc open*(tar: var TarFile, filename: string): bool =
     tar.close()
     return false
   tar.data[tar.size] = 0
+  tar.contents = dxTarContents(tar.data, tar.size)
+
+
+proc index*(tar: TarFile, filename: string): int =
+  ##  ``Return`` index of ``filename`` in ``tar`` file, or `-1` if not found.
+  ##
+  for i in 0..tar.contents.high:
+    if tar.contents[i].name == filename:
+      return i
+  return -1
 
 
 proc read*(tar: TarFile, filename: string): ptr RWops =
   ##  Read ``filename`` from ``tar``
   ##  and return its content as a new ``RWops`` pointer.
   ##
-  var size = 0
-  var buffer = dxTarRead(tar.data, tar.size, filename, size)
-  if buffer == nil:
+  let idx = tar.index(filename)
+  if idx < 0:
     return nil
-  return rwFromMem(cast[pointer](buffer), size)
+  return rwFromMem(cast[pointer](tar.contents[idx].data), tar.contents[idx].size)
 
