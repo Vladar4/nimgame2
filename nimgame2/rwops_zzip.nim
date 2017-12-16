@@ -10,6 +10,8 @@
 ##  are found: a filepath like `X/shared/graphics/game/greetings.bmp`
 ##  will open `X/shared/graphics.zip` and return the zipped file
 ##  `game/greetings.bmp` in the zip-archive (for reading that is).
+##
+##  See original code at http://zziplib.sourceforge.net/zzip-sdl-rwops.html
 
 import
   sdl2/sdl, zip/zzip
