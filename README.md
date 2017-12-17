@@ -26,10 +26,10 @@ Optional dependencies:
 
 * For plugin/tar:
   * [zip](https://github.com/nim-lang/zip)
-  * zlib runtime library (dll is distributed within SDL2_mixer builds)
+  * zlib runtime library (dll is distributed within SDL2_image builds)
 * For plugin/zzip:
   * [zip](https://github.com/nim-lang/zip)
-  * zlib runtime library (dll is distributed within SDL2_mixer builds)
+  * zlib runtime library (dll is distributed within SDL2_image builds)
   * zzip runtime library
 
 
