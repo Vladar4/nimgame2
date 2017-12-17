@@ -36,7 +36,9 @@ const
   NameSize    = 100
   SzSize      = 12
   MagicSize   = 5
-  Magic       = "ustar" # Modern GNU tar's magic const
+  Magic       = cast[ptr uint8]("ustar") # Modern GNU tar's magic const
+  Char0       = uint8('0')
+  Char9       = uint8('9')
 
 # OLD VERSION
 #[
@@ -90,30 +92,34 @@ proc dxTarRead(data: ptr uint8, dataSize: int,
 
 proc dxTarContents(data: ptr uint8, dataSize: int): seq[tuple[name: cstring, size: int, data: ptr uint8]] =
   result = @[]
-  var size, mul, p, newOffset: int
+  var p, newOffset, size, mul: int
 
   while true: # "Load" data from tar - just point to passed memory
-    var name, sz: ptr uint8
-    name = data + (NameOffset + p + newOffset)
-    sz = data + (SizeOffset + p + newOffset) # size string
     inc(p, newOffset) # pointer to current file's data in TAR
+    let dataPtr = data + p
 
-    for i in 0..<MagicSize: # Check for supported TAR version
-      if data[i + MagicOffset + p] != Magic[i].uint8:
+    # Check for supported TAR version
+    let namePtr = dataPtr + NameOffset
+    let magic = p + MagicOffset
+    for i in 0..<MagicSize:
+      if data[magic + i] != Magic[i]:
         return
 
+    # Calculate size
     size = 0
     mul = 1
+    let sizePtr = dataPtr + SizeOffset # size string
     for i in countdown(SzSize - 2, 0):
-      if (sz[i] >= '0'.uint8) and (sz[i] <= '9'.uint8):
-        inc(size, int(sz[i] - '0'.uint8) * mul)
+      if (sizePtr[i] >= Char0) and (sizePtr[i] <= Char9):
+        inc(size, int(sizePtr[i] - Char0) * mul)
       mul = mul * 8
     newOffset = (1 + size div BlockSize) * BlockSize # trim by block
     if (size mod BlockSize) > 0: inc(newOffset, BlockSize)
 
-    result.add((cast[cstring](name), size, data + p + BlockSize))
+    # add new entry
+    result.add((cast[cstring](namePtr), size, dataPtr + BlockSize))
 
-    if not (p + newOffset + BlockSize <= dataSize):
+    if p + newOffset + BlockSize > dataSize:
       break
   # while true
 
@@ -131,7 +137,7 @@ type
 proc close*(tar: var TarFile) =
   if tar.data != nil:
     dealloc(tar.data)
-  tar.data = nil
+    tar.data = nil
   tar.size = 0
   tar.contents = nil
 
@@ -139,6 +145,7 @@ proc close*(tar: var TarFile) =
 proc open*(tar: var TarFile, filename: string): bool =
   if tar.data != nil:
     tar.close()
+  # read from file
   var f: File
   if not f.open(filename, fmRead):
     return false
@@ -146,10 +153,12 @@ proc open*(tar: var TarFile, filename: string): bool =
   tar.data = cast[ptr uint8](alloc(tar.size + 1))
   let bytesRead = f.readBuffer(tar.data, tar.size)
   f.close()
+  # check size
   if bytesRead != tar.size:
     tar.close()
     return false
   tar.data[tar.size] = 0
+  # read contents
   tar.contents = dxTarContents(tar.data, tar.size)
 
 
@@ -160,6 +169,10 @@ proc index*(tar: TarFile, filename: string): int =
     if tar.contents[i].name == filename:
       return i
   return -1
+
+
+template exists*(tar: TarFile, filename: string): bool =
+  (tar.index(filename) >= 0)
 
 
 proc read*(tar: TarFile, filename: string): ptr RWops =
