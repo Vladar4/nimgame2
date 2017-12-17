@@ -33,7 +33,7 @@ const
   SizeOffset  = 124
   MagicOffset = 257
   BlockSize   = 512
-  NameSize    = 100
+  #NameSize    = 100
   SzSize      = 12
   MagicSize   = 5
   Magic       = cast[ptr uint8]("ustar") # Modern GNU tar's magic const
@@ -117,13 +117,14 @@ proc dxTarContents(data: ptr uint8, dataSize: int): seq[tuple[name: cstring, siz
     if (size mod BlockSize) > 0: inc(newOffset, BlockSize)
 
     # add new entry
-    result.add((cast[cstring](namePtr), size, dataPtr + BlockSize))
+    if size > 0: # check if not directory
+      result.add((cast[cstring](namePtr), size, dataPtr + BlockSize))
 
     if p + newOffset + BlockSize > dataSize:
       break
   # while true
 
-import sdl2/sdl
+import zip/zlib, sdl2/sdl
 
 # PUBLIC
 
@@ -134,6 +135,12 @@ type
     contents: seq[tuple[name: cstring, size: int, data: ptr uint8]]
 
 
+proc contents*(tar: TarFile): seq[string] =
+  result = @[]
+  for entry in tar.contents:
+    result.add($entry.name)
+
+
 proc close*(tar: var TarFile) =
   if tar.data != nil:
     dealloc(tar.data)
@@ -142,24 +149,55 @@ proc close*(tar: var TarFile) =
   tar.contents = nil
 
 
-proc open*(tar: var TarFile, filename: string): bool =
-  if tar.data != nil:
-    tar.close()
-  # read from file
+proc dump(filename: string, buf: var ptr uint8): int =
+  ##  Internal file dump procedure.
+  ##
+  ##  ``Return`` number of bytes read, or `-1` on errors.
+  ##
   var f: File
   if not f.open(filename, fmRead):
-    return false
-  tar.size = f.getFileSize().int
-  tar.data = cast[ptr uint8](alloc(tar.size + 1))
-  let bytesRead = f.readBuffer(tar.data, tar.size)
+    return -1
+  let size = f.getFileSize().int
+  buf = cast[ptr uint8](alloc(size + 1))
+  result = f.readBuffer(buf, size)
   f.close()
-  # check size
-  if bytesRead != tar.size:
+  if result != size:
+    return -1
+
+
+proc open*(tar: var TarFile, filename: string): bool =
+  ##  Open uncompressed TAR archive (eg. "archive.tar").
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise
+  ##  (or if no usable files found inside).
+  if tar.data != nil:
     tar.close()
-    return false
+  # load file
+  tar.size = dump(filename, tar.data)
   tar.data[tar.size] = 0
   # read contents
   tar.contents = dxTarContents(tar.data, tar.size)
+  return tar.contents.len > 0
+
+
+proc openz*(tar: var TarFile, filename: string): bool =
+  ##  Open compressed TAR archive (e.g. "archive.tar.gz").
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise
+  ##  (or if no usable files found inside).
+  if tar.data != nil:
+    tar.close()
+  # load file
+  var buffer: ptr uint8
+  let size = dump(filename, buffer)
+  # uncompress
+  var decompressed = uncompress(cast[cstring](buffer), size)
+  dealloc(buffer)
+  tar.size = decompressed.len
+  tar.data = cast[ptr uint8](cstring(decompressed))
+  # read contents
+  tar.contents = dxTarContents(tar.data, tar.size)
+  return tar.contents.len > 0
 
 
 proc index*(tar: TarFile, filename: string): int =
