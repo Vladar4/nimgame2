@@ -100,6 +100,7 @@ type
     rot*: Angle                   ##  Rotation angle in degrees
     rotVel*, rotAcc*, rotDrg*: Angle  ##  Rotation velocity, acceleration, drag
     parallax*, scale*: Scale      ##  Parallax and scale ratio
+    scaleVel*, scaleAcc*, scaleDrg*: Scale ## Scale's velocity, accel., and drag
     center*: Coord                ##  Center for drawing and rotating
     flip*: Flip                   ##  Texture flip status
     visible*: bool                ##  Visibility status
@@ -358,6 +359,17 @@ proc defaultPhysics*(entity: Entity, elapsed: float) =
   # rotatiton velocity -> rotation
   entity.rot += entity.rotVel * elapsed
 
+  # scale
+  entity.scale += entity.scaleVel * elapsed
+  entity.scaleVel += entity.scaleAcc * elapsed
+  let abss = entity.scaleVel.abs
+  if abss > 0.0:
+    var dr = entity.scaleDrg * elapsed
+    if dr > abss:
+      entity.scaleVel = 0.0
+    else:
+      entity.scaleVel += (if entity.scaleVel > 0.0: -dr else: dr)
+
 
 proc willCollide*(
   entity: Entity, pos: Coord, rot: Angle, scale: Scale, list: seq[Entity]): bool
@@ -482,6 +494,9 @@ proc initEntity*(entity: Entity) =
   entity.rotDrg = 0.0
   entity.parallax = 1.0
   entity.scale = 1.0
+  entity.scaleVel = 0.0
+  entity.scaleAcc = 0.0
+  entity.scaleDrg = 0.0
   entity.center = (0.0, 0.0)
   entity.flip = Flip.none
   entity.visible = true
@@ -541,6 +556,9 @@ proc copy*(target, source: Entity) =
   target.rotAcc   = source.rotAcc
   target.rotDrg   = source.rotDrg
   target.scale    = source.scale
+  target.scaleVel = source.scaleVel
+  target.scaleAcc = source.scaleAcc
+  target.scaleDrg = source.scaleDrg
   target.center   = source.center
   target.flip     = source.flip
   target.visible  = source.visible
