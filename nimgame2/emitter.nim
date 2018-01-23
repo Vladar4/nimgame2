@@ -108,8 +108,10 @@ proc newEmitter*(scene: Scene): Emitter =
   result.initEmitter(scene)
 
 
-proc emit*(emitter: Emitter, amount: int = 1) =
-  ##  Emit an ``amount`` of particles.
+proc emit*(emitter: Emitter, amount: int = 1,
+           procedure: proc(p: Particle) = nil) =
+  ##  Emit an ``amount`` of particles,
+  ##  apply the ``procedure`` for eact emitted particle.
   ##
   if emitter.particle == nil:
     return
@@ -152,6 +154,9 @@ proc emit*(emitter: Emitter, amount: int = 1) =
     particle.scale += random(-emitter.randomScale..emitter.randomScale)
     # time to live
     particle.ttl += random(-emitter.randomTTL..emitter.randomTTL)
+    # perform the procedure
+    if not (procedure == nil):
+      procedure(particle)
     # add to the scene
     emitter.scene.add(particle)
 
