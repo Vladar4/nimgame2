@@ -17,13 +17,13 @@ proc init*(entity: Spaceman, s: Scene, g: Graphic, p: PhysicsProc) =
   entity.scene = s
   entity.graphic = g
   entity.physics = p
-  entity.pos.x = random(game.size.w).float
-  entity.pos.y = random(game.size.h).float
-  entity.vel.x = random(10.0..100.0) * randomSign().float
-  entity.vel.y = random(10.0..100.0) * randomSign().float
+  entity.pos.x = rand(game.size.w).float
+  entity.pos.y = rand(game.size.h).float
+  entity.vel.x = rand(10.0..100.0) * randSign().float
+  entity.vel.y = rand(10.0..100.0) * randSign().float
   entity.centrify()
-  entity.rot = random(0.0..360.0)
-  entity.rotVel = random(10.0..60.0) * randomSign().float
+  entity.rot = rand(360.0)
+  entity.rotVel = rand(10.0..60.0) * randSign().float
 
 
 proc newSpaceman*(s: Scene, g: Graphic, p: PhysicsProc): Spaceman =

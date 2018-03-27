@@ -39,12 +39,12 @@ proc init*(scene: MainScene) =
   scene.e = newEntity()
   scene.e.graphic = scene.movie
   scene.e.physics = moviePhysics
-  scene.e.pos.x = random(game.size.w).float
-  scene.e.pos.y = random(game.size.h).float
-  scene.e.vel.x = random(10.0..100.0) * randomSign().float
-  scene.e.vel.y = random(10.0..100.0) * randomSign().float
+  scene.e.pos.x = rand(game.size.w).float
+  scene.e.pos.y = rand(game.size.h).float
+  scene.e.vel.x = rand(10.0..100.0) * randSign().float
+  scene.e.vel.y = rand(10.0..100.0) * randSign().float
   scene.e.centrify()
-  scene.e.rotVel = random(10.0..60.0) * randomSign().float
+  scene.e.rotVel = rand(10.0..60.0) * randSign().float
 
   # add to scene
   scene.add(scene.e)
