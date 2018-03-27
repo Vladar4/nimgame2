@@ -111,7 +111,7 @@ proc newEmitter*(scene: Scene): Emitter =
 proc emit*(emitter: Emitter, amount: int = 1,
            procedure: proc(p: Particle) = nil) =
   ##  Emit an ``amount`` of particles,
-  ##  apply the ``procedure`` for eact emitted particle.
+  ##  apply the ``procedure`` for each emitted particle.
   ##
   if emitter.particle == nil:
     return
@@ -125,35 +125,35 @@ proc emit*(emitter: Emitter, amount: int = 1,
     case emitter.area.kind:
     of eaPoint: discard
     of eaLine:
-      let point: Coord = (random(emitter.area.length), 0.0)
+      let point: Coord = (rand(emitter.area.length), 0.0)
       particle.pos = rotate(point * emitter.absScale,
                             emitter.absPos * emitter.parallax, emitter.absRot)
     of eaCircle:
       let
-        angle = random(360.0)
-        point: Coord = (random(emitter.area.radius), 0.0)
+        angle = rand(360.0)
+        point: Coord = (rand(emitter.area.radius), 0.0)
       particle.pos = rotate(point * emitter.absScale,
                             emitter.absPos * emitter.parallax, angle)
     of eaBox:
       let
         half = emitter.area.dim / 2
-        point: Coord = (random(-half.w..half.w), random(-half.h..half.h))
+        point: Coord = (rand(-half.w..half.w), rand(-half.h..half.h))
       particle.pos = rotate(point * emitter.absScale,
                             emitter.absPos * emitter.parallax, emitter.absRot)
     # end of case emitter.area.kind
     # velocity
-    particle.vel.x += random(-emitter.randomVel.x..emitter.randomVel.x)
-    particle.vel.y += random(-emitter.randomVel.y..emitter.randomVel.y)
+    particle.vel.x += rand(-emitter.randomVel.x..emitter.randomVel.x)
+    particle.vel.y += rand(-emitter.randomVel.y..emitter.randomVel.y)
     # acceleration
-    particle.acc.x += random(-emitter.randomAcc.x..emitter.randomAcc.x)
-    particle.acc.y += random(-emitter.randomAcc.y..emitter.randomAcc.y)
+    particle.acc.x += rand(-emitter.randomAcc.x..emitter.randomAcc.x)
+    particle.acc.y += rand(-emitter.randomAcc.y..emitter.randomAcc.y)
     # rotation
-    particle.rot += random(-emitter.randomRot..emitter.randomRot)
-    particle.rotVel += random(-emitter.randomRotVel..emitter.randomRotVel)
+    particle.rot += rand(-emitter.randomRot..emitter.randomRot)
+    particle.rotVel += rand(-emitter.randomRotVel..emitter.randomRotVel)
     # scale
-    particle.scale += random(-emitter.randomScale..emitter.randomScale)
+    particle.scale += rand(-emitter.randomScale..emitter.randomScale)
     # time to live
-    particle.ttl += random(-emitter.randomTTL..emitter.randomTTL)
+    particle.ttl += rand(-emitter.randomTTL..emitter.randomTTL)
     # perform the procedure
     if not (procedure == nil):
       procedure(particle)

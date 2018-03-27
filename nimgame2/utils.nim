@@ -360,46 +360,94 @@ iterator atlasValues*(src: ptr RWops,
 # Random #
 #========#
 
-proc random*[T](max: T, exclude: seq[T]): T =
-  ##  ``Return`` a random number in the range ``min``..<``max``,
+proc random*[T](max: T, exclude: seq[T]): T {.deprecated.} =
+  ##  ``Return`` a random number in the range `0`..<``max``,
   ##  except values in the ``exclude``.
+  ##
+  ##  ``Deprecated:`` Use ``rand`` instead.
   ##
   result = random(max)
   while exclude.contains(result):
     result = random(max)
 
 
-template random*[T](max: T, exclude: openArray[T]): T =
+template random*[T](max: T, exclude: openArray[T]): T {.deprecated.} =
   random(max, @exclude)
 
 
-proc random*[T](x, exclude: seq[T]): T =
+proc rand*[T](max: T, exclude: seq[T]): T =
+  ##  ``Return`` a random number in the range `0`..``max``,
+  ##  except values in the ``exclude``.
+  ##
+  result = rand(max)
+  while exclude.contains(result):
+    result = rand(max)
+
+
+template rand*[T](max: T, exclude: openArray[T]): T =
+  rand(max, @exclude)
+
+
+proc random*[T](x, exclude: seq[T]): T {.deprecated.} =
   ##  ``Return`` a random number in the sequence ``x``,
   ##  except values in the ``exclude``.
-  result = random(x)
-  while exclude.contains(result):
-    result = random(x)
-
-
-template random*[T](x, exclude: openArray[T]): T =
-  random(@x, @exclude)
-
-
-proc random*[T](x: Slice[T], exclude: seq[T]): T =
-  ##  ``Return`` a random number in the range ``min``..<``max``,
-  ##  except values in the ``exclude``.
+  ##
+  ##  ``Deprecated:`` use ``rand`` instaead.
   ##
   result = random(x)
   while exclude.contains(result):
     result = random(x)
 
 
-template random*[T](x: Slice[T], exclude: openArray[T]): T =
+template random*[T](x, exclude: openArray[T]): T {.deprecated.} =
+  random(@x, @exclude)
+
+
+proc rand*[T](x, exclude: seq[T]): T =
+  ##  ``Return`` a random number in the sequence ``x``,
+  ##  except values in the ``exclude``.
+  ##
+  result = rand(x)
+  while exclude.contains(result):
+    result = rand(x)
+
+
+template rand*[T](x, exclude: openArray[T]): T =
+  rand(@x, @exclude)
+
+
+proc random*[T](x: Slice[T], exclude: seq[T]): T {.deprecated.} =
+  ##  ``Return`` a random number in the range ``min``..<``max``,
+  ##  except values in the ``exclude``.
+  ##
+  ##  ``Deprecated:`` use ``rand`` instead.
+  ##
+  result = random(x)
+  while exclude.contains(result):
+    result = random(x)
+
+
+template random*[T](x: Slice[T], exclude: openArray[T]): T {.deprecated.} =
   random(x, @exclude)
 
 
-proc random*[T](x: set[T]): T =
+proc rand*[T](x: Slice[T], exclude: seq[T]): T =
+  ##  ``Return`` a random number in the range ``min``..``max``,
+  ##  except values in the ``exclude``.
+  ##
+  result = rand(x)
+  while exclude.contains(result):
+    result = rand(x)
+
+
+template rand*[T](x: Slice[T], exclude: openArray[T]): T =
+  rand(x, @exclude)
+
+
+proc random*[T](x: set[T]): T {.deprecated.} =
   ##  ``Return`` a random member of set ``x``.
+  ##
+  ##  ``Deprecated:`` use ``rand`` instead.
   ##
   var r: seq[T] = @[]
   for i in x:
@@ -407,11 +455,23 @@ proc random*[T](x: set[T]): T =
   return random(r)
 
 
-proc randomBool*(chance: float = 0.5): bool =
+proc rand*[T](x: set[T]): T =
+  ##  ``Return`` a random member of set ``x``.
+  ##
+  var r: seq[T] = @[]
+  for i in x:
+    r.add(i)
+  return rand(r)
+
+
+proc randomBool*(chance: float = 0.5): bool {.deprecated.} =
   ##  ``Return`` `true` or `false`,
   ##  based on the ``chance`` value (from `0.0` to `1.0`).
   ##
   return random(1.0) < chance.clamp(0.0, 1.0)
+
+
+template randBool*(chance: float = 0.5): bool = randomBool(chance)
 
 
 proc randomSign*(chance: float = 0.5): int =
@@ -419,6 +479,9 @@ proc randomSign*(chance: float = 0.5): int =
   ##  based on the ``chance`` value (from `0.0` to `1.0`).
   ##
   return if randomBool(chance): 1 else: -1
+
+
+template randSign*(chance: float = 0.5): int = randomSign(chance)
 
 
 proc randomWeighted*[T](weights: openArray[T]): int =
@@ -432,12 +495,15 @@ proc randomWeighted*[T](weights: openArray[T]): int =
   for i in weights:
     total += i
 
-  total = random(T(0)..total)
+  total = rand(T(0)..total)
   for i in 0..weights.high:
     if total < weights[i]:
       result = i
       break
     total -= weights[i]
+
+
+template randWeighted*[T](weights: openArray[T]): int = randomWeighted(weights)
 
 
 #======#

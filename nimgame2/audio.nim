@@ -492,7 +492,7 @@ proc play*(pl: Playlist, index: int = -1): int =
   ##
   ##  ``Retrun`` current track index.
   ##
-  pl.fIndex = if index < 0: random(pl.list.len, exclude = [pl.fIndex])
+  pl.fIndex = if index < 0: rand(pl.list.high, exclude = [pl.fIndex])
               else: index
   pl.list[pl.fIndex].play()
   mix.hookMusicFinished(finished)
