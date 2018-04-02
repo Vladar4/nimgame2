@@ -1,9 +1,9 @@
 import
   random, strutils,
+  nimgame2/plugin/mpeggraphic,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/mpeggraphic,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,

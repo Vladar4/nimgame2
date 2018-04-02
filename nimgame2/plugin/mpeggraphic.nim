@@ -25,8 +25,9 @@
 import
   sdl2/sdl,
   sdl2/smpeg,
-  graphic, texturegraphic, settings, types
+  ../graphic, ../texturegraphic, ../settings, ../types
 
+##  ``Note:`` mpg123 dynamic library should be available in the system.
 
 type
   MpegVolume* = range[0..100]
