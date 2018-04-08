@@ -35,7 +35,10 @@ type
     frameRate*: float ##  Frame rate (in seconds per frame)
     flip*: Flip       ##  Flip flag
 
-  AnimationCallback* = proc(entity: Entity, index: int)
+  AnimationCallback* = proc(entity: Entity, index: int) ##  \
+    ##  Called after animation is finished (see ``play()`` procedure).
+    ##
+    ##  ``index`` The index of the finished animation.
 
   Sprite* = ref object
     # Public
