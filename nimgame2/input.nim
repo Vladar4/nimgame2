@@ -626,11 +626,11 @@ type
   GeneralInput* = object
     case kind*: GeneralInputKind
     of giKeyboard:
-      keyboard: GeneralInputKeyboard
+      keyboard*: GeneralInputKeyboard
     of giMouse:
-      mouse: GeneralInputMouse
+      mouse*: GeneralInputMouse
     of giJoystick:
-      joystick: GeneralInputJoystick
+      joystick*: GeneralInputJoystick
 
   InputMap* = OrderedTableRef[string, GeneralInput]
 
