@@ -35,6 +35,8 @@ type
     frameRate*: float ##  Frame rate (in seconds per frame)
     flip*: Flip       ##  Flip flag
 
+  AnimationCallback* = proc(entity: Entity, index: int)
+
   Sprite* = ref object
     # Public
     animationKeys*: seq[string] ##  List of animation names
@@ -43,6 +45,7 @@ type
     currentFrame*: int          ##  Incex of current frame
     cycles*: int                ##  Animation cycles counter (`-1` for looping)
     kill*: bool                 ##  Kill when animation is finished
+    callback*: AnimationCallback##  Call this when animation is finished
     time*: float                ##  Animation timer
     playing*: bool              ##  Animation playing flag
     dim*: Dim                   ##  Sprite frame dimensions
@@ -135,6 +138,7 @@ proc initSprite*(entity: Entity,
   entity.sprite.currentFrame = 0
   entity.sprite.cycles = 0
   entity.sprite.kill = false
+  entity.sprite.callback = nil
   entity.sprite.time = 0
   entity.sprite.playing = false
   entity.sprite.dim = dim
@@ -170,6 +174,7 @@ proc copy(target, source: Sprite) =
   target.currentFrame     = source.currentFrame
   target.cycles           = source.cycles
   target.kill             = source.kill
+  target.callback         = source.callback
   target.time             = source.time
   target.playing          = source.playing
   target.dim              = source.dim
@@ -260,7 +265,8 @@ proc addAnimation*(entity: Entity,
     frames: @frames, frameRate: frameRate, flip: flip))
 
 
-proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
+proc play*(entity: Entity, anim: string, cycles = -1,
+           kill: bool = false, callback: AnimationCallback = nil) =
   ##  Start playing the animation.
   ##
   ##  ``anim``  name of the animation.
@@ -268,6 +274,8 @@ proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
   ##  ``cycles``  number of times to repeat the animation, or `-1` for looping.
   ##
   ##  ``kill``  kill when finished.
+  ##
+  ##  ``callback`` called when animation is finished.
   ##
   if entity.sprite == nil:
     return
@@ -277,6 +285,7 @@ proc play*(entity: Entity, anim: string, cycles = -1, kill: bool = false) =
   entity.sprite.currentAnimation = entity.animationIndex(anim)
   entity.sprite.cycles = cycles
   entity.sprite.kill = kill
+  entity.sprite.callback = callback
   entity.sprite.time = 0.0
   entity.sprite.currentFrame = 0
   if cycles != 0:
@@ -305,6 +314,9 @@ proc update(sprite: Sprite, entity: Entity, elapsed: float) =
           if entity.sprite.kill:
             entity.dead = true
             entity.visible = false
+          # Check for the callback
+          if not (entity.sprite.callback == nil):
+            entity.sprite.callback(entity, entity.sprite.currentAnimation)
       # cycles <= 0 - animation either stopped or looped
       # Set current frame to first one of the current animation
       entity.sprite.currentFrame = 0
