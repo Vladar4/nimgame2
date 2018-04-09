@@ -60,8 +60,12 @@ type
 
 converter toSeq*[T](s: Slice[T]): seq[T] =
   result = @[]
-  for i in s:
-    result.add(i)
+  if s.a <= s.b:
+    for i in s:
+      result.add(i)
+  else:
+    for i in countdown(s.a, s.b):
+      result.add(i)
 
 
 #=======#
