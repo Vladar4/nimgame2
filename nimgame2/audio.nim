@@ -204,6 +204,12 @@ template volumeDec*(sound: Sound, val: int) =
 # Sound Channel #
 #===============#
 
+template playing*(channel: Channel): bool = ##  \
+  ##  ``Return`` `true` if ``channel`` is playing right now, `false` otherwise.
+  ##
+  (mix.playing(channel.cint) > 0)
+
+
 proc setDistance*(channel: Channel,
                   distance: Distance) {.inline.} =
   ##  Set the distance on a ``channel``.
