@@ -384,7 +384,7 @@ proc rand*[T](max: T, exclude: seq[T]): T =
     result = rand(max)
 
 
-template rand*[T](max: T, exclude: openArray[T]): T =
+proc rand*[T](max: T, exclude: openArray[T]): T {.inline.} =
   rand(max, @exclude)
 
 
@@ -412,7 +412,7 @@ proc rand*[T](x, exclude: seq[T]): T =
     result = rand(x)
 
 
-template rand*[T](x, exclude: openArray[T]): T =
+proc rand*[T](x, exclude: openArray[T]): T {.inline.} =
   rand(@x, @exclude)
 
 
@@ -440,7 +440,7 @@ proc rand*[T](x: Slice[T], exclude: seq[T]): T =
     result = rand(x)
 
 
-template rand*[T](x: Slice[T], exclude: openArray[T]): T =
+proc rand*[T](x: Slice[T], exclude: openArray[T]): T {.inline.} =
   rand(x, @exclude)
 
 
@@ -471,7 +471,7 @@ proc randomBool*(chance: float = 0.5): bool {.deprecated.} =
   return random(1.0) < chance.clamp(0.0, 1.0)
 
 
-template randBool*(chance: float = 0.5): bool = randomBool(chance)
+proc randBool*(chance: float = 0.5): bool {.inline.} = randomBool(chance)
 
 
 proc randomSign*(chance: float = 0.5): int =
@@ -481,7 +481,7 @@ proc randomSign*(chance: float = 0.5): int =
   return if randomBool(chance): 1 else: -1
 
 
-template randSign*(chance: float = 0.5): int = randomSign(chance)
+proc randSign*(chance: float = 0.5): int {.inline.} = randomSign(chance)
 
 
 proc randomWeighted*[T](weights: openArray[T]): int =
@@ -503,7 +503,8 @@ proc randomWeighted*[T](weights: openArray[T]): int =
     total -= weights[i]
 
 
-template randWeighted*[T](weights: openArray[T]): int = randomWeighted(weights)
+proc randWeighted*[T](weights: openArray[T]): int {.inline.} =
+  randomWeighted(weights)
 
 
 #======#
