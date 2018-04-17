@@ -124,7 +124,7 @@ proc dxTarContents(data: ptr uint8, dataSize: int): seq[tuple[name: cstring, siz
       break
   # while true
 
-import zip/zlib, sdl2/sdl
+import strutils, zip/zlib, sdl2/sdl
 
 # PUBLIC
 
@@ -136,9 +136,24 @@ type
 
 
 proc contents*(tar: TarFile): seq[string] =
+  ##  ``Return`` a sequence of filenames (including paths) inside the ``tar``.
+  ##
   result = @[]
   for entry in tar.contents:
     result.add($entry.name)
+
+
+proc contents*(tar: TarFile, sub: string, pos: int = 0): seq[string] =
+  ##  ``Return`` a sequence of filenames (including paths),
+  ##  which start with ``sub`` string, starting at ``pos`` index,
+  ##  inside the ``tar``.
+  ##  Useful for getting all files inside one archived directory.
+  ##
+  result = @[]
+  for entry in tar.contents:
+    let name = $entry.name
+    if name.find(sub, start=pos) == 0:
+      result.add(name)
 
 
 proc close*(tar: var TarFile) =
