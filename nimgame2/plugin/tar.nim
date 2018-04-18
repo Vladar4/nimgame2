@@ -189,6 +189,8 @@ proc open*(tar: var TarFile, filename: string): bool =
     tar.close()
   # load file
   tar.size = dump(filename, tar.data)
+  if tar.size < 0:
+    return false
   tar.data[tar.size] = 0
   # read contents
   tar.contents = dxTarContents(tar.data, tar.size)
@@ -205,6 +207,8 @@ proc openz*(tar: var TarFile, filename: string): bool =
   # load file
   var buffer: ptr uint8
   let size = dump(filename, buffer)
+  if size < 0:
+    return false
   # uncompress
   var decompressed = uncompress(cast[cstring](buffer), size)
   dealloc(buffer)
