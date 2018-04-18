@@ -44,8 +44,9 @@ type
     # Public
     animationKeys*: seq[string] ##  List of animation names
     animations*: seq[Animation] ##  List of animations
-    currentAnimation*: int      ##  Index of currently playing animation
-    currentFrame*: int          ##  Incex of current frame
+    currentAnimationIndex*: int ##  Index of currently playing animation
+    currentFrame*: int          ##  Index of current frame in currentAnimation \
+      ## (or in ``frames``, if no currentAnimation is set)
     cycles*: int                ##  Animation cycles counter (`-1` for looping)
     kill*: bool                 ##  Kill when animation is finished
     callback*: AnimationCallback##  Call this when animation is finished
@@ -137,7 +138,7 @@ proc initSprite*(entity: Entity,
   entity.sprite = new Sprite
   entity.sprite.animationKeys = @[]
   entity.sprite.animations = @[]
-  entity.sprite.currentAnimation = -1
+  entity.sprite.currentAnimationIndex = -1
   entity.sprite.currentFrame = 0
   entity.sprite.cycles = 0
   entity.sprite.kill = false
@@ -173,7 +174,7 @@ proc copy(target, source: Sprite) =
   target.animations = @[]
   for anim in source.animations:
     target.animations.add(anim)
-  target.currentAnimation = source.currentAnimation
+  target.currentAnimationIndex = source.currentAnimationIndex
   target.currentFrame     = source.currentFrame
   target.cycles           = source.cycles
   target.kill             = source.kill
@@ -186,59 +187,113 @@ proc copy(target, source: Sprite) =
     target.frames.add(frame)
 
 
-
-proc animationIndex*(entity: Entity, name: string): int {.inline.} =
+proc animationIndex*(sprite: Sprite, name: string): int {.inline.} =
   ##  ``Return`` the index of the animation named ``name``.
   ##
-  if entity.sprite == nil:
-    return -1
-  entity.sprite.animationKeys.find(name)
+  if sprite == nil:
+    -1
+  else:
+    sprite.animationKeys.find(name)
 
 
-proc animation*(entity: Entity, name: string): var Animation =
+template animationIndex*(entity: Entity, name: string): int =
+  ##  ``Return`` the index of the animation named ``name``.
+  ##
+  entity.sprite.animationIndex(name)
+
+
+proc animation*(sprite: Sprite, name: string): var Animation =
   ##  ``Return`` the animation named ``name``.
   ##
-  let index = entity.animationIndex(name)
+  if sprite == nil:
+    return
+  let index = sprite.animationIndex(name)
   if index < 0:
     return
-  entity.sprite.animations[index]
+  sprite.animations[index]
 
 
-proc animation*(entity: Entity, index: int): var Animation =
+template animation*(entity: Entity, name: string): var Animation =
+  ##  ``Return`` the animation named ``name``.
+  ##
+  entity.sprite.animation(name)
+
+
+proc animation*(sprite: Sprite, index: int): var Animation =
   ##  ``Return`` the animation under given ``index``.
   ##
-  if index < 0 or index >= entity.sprite.animations.len:
+  if sprite == nil:
     return
-  entity.sprite.animations[index]
+  if index < 0 or index >= sprite.animations.len:
+    return
+  sprite.animations[index]
+
+
+template animation*(entity: Entity, index: int): var Animation =
+  ##  ``Return`` the animation under given ``index``.
+  ##
+  entity.sprite.animation(index)
+
+
+template currentAnimationIndex*(entity: Entity): int =
+  if entity.sprite == nil:
+    -1
+  else:
+    entity.sprite.currentAnimationIndex
+
+
+proc currentAnimation*(sprite: Sprite): var Animation =
+  ##  ``Return`` the current animation.
+  ##
+  if sprite == nil:
+    return
+  sprite.animation(sprite.currentAnimationIndex)
 
 
 template currentAnimation*(entity: Entity): var Animation =
   ##  ``Return`` the current animation.
   ##
-  entity.animation(entity.sprite.currentAnimation)
+  entity.sprite.currentAnimation()
 
 
-proc currentAnimationName*(entity: Entity): string =
-  ##  ``Return`` the name of the current animation.
+proc currentAnimationName*(sprite: Sprite): string =
+  ##  ``Return`` the name of the current animation, or empty string if none.
   ##
-  if entity.sprite.currentAnimation < 0:
+  if sprite == nil:
     return ""
-  return entity.sprite.animationKeys[entity.sprite.currentAnimation]
+  if sprite.currentAnimationIndex < 0:
+    return ""
+  return sprite.animationKeys[sprite.currentAnimationIndex]
 
 
-proc changeFramerate*(entity: Entity, frameRate: float = 0.1) =
+
+template currentAnimationName*(entity: Entity): string =
+  ##  ``Return`` the name of the current animation or empty string if none.
+  ##
+  entity.sprite.currentAnimationName()
+
+
+proc changeFramerate*(sprite: Sprite, frameRate: float = 0.1) =
   ##  Change framerate for all created animations.
   ##
-  for i in 0..entity.sprite.animations.high:
-    entity.sprite.animations[i].frameRate = frameRate
+  if sprite == nil:
+    return
+  for i in 0..sprite.animations.high:
+    sprite.animations[i].frameRate = frameRate
 
 
-proc addAnimation*(entity: Entity,
+template changeFramerate*(entity: Entity, frameRate: float = 0.1) =
+  ##  Change framerate for all created animations.
+  ##
+  entity.sprite.changeFramerate(frameRate)
+
+
+proc addAnimation*(sprite: Sprite,
                    name: string,
                    frames: openarray[int],
                    frameRate: float = 0.1,
                    flip: Flip = Flip.none): bool =
-  ##  Add animation to the ``entity``.
+  ##  Add a new animation to the ``sprite``.
   ##
   ##  ``name`` name of the animation.
   ##
@@ -250,25 +305,40 @@ proc addAnimation*(entity: Entity,
   ##
   result = true
 
-  if entity.sprite == nil:
+  if (sprite == nil) or (frames.len < 1):
     return false
 
-  if frames.len < 1:
-    return false
-
-  if entity.animationIndex(name) >= 0:
+  if sprite.animationIndex(name) >= 0:
     return false
 
   for frame in frames:
-    if frame < 0 or frame >= entity.sprite.frames.len:
+    if frame < 0 or frame >= sprite.frames.len:
       return false
 
-  entity.sprite.animationKeys.add(name)
-  entity.sprite.animations.add(Animation(
+  sprite.animationKeys.add(name)
+  sprite.animations.add(Animation(
     frames: @frames, frameRate: frameRate, flip: flip))
 
 
-proc play*(entity: Entity, anim: string, cycles = -1,
+template addAnimation*(entity: Entity,
+                       name: string,
+                       frames: openarray[int],
+                       frameRate: float = 0.1,
+                       flip: Flip = Flip.none): bool =
+  ##  Add a new animation to the ``entity``.
+  ##
+  ##  ``name`` name of the animation.
+  ##
+  ##  ``frames``  array of animation frames' indexes.
+  ##
+  ##  ``frameRate`` animation speed in seconds per frame.
+  ##
+  ##  ``flip``  animation flip flag.
+  ##
+  entity.sprite.addAnimation(name, frames, frameRate, flip)
+
+
+proc play*(sprite: Sprite, anim: string, cycles = -1,
            kill: bool = false, callback: AnimationCallback = nil) =
   ##  Start playing the animation.
   ##
@@ -280,49 +350,61 @@ proc play*(entity: Entity, anim: string, cycles = -1,
   ##
   ##  ``callback`` called when animation is finished.
   ##
-  if entity.sprite == nil:
+  if sprite == nil:
     return
-  if entity.animationIndex(anim) < 0:
+  if sprite.animationIndex(anim) < 0:
     return
-  entity.visible = true
-  entity.sprite.currentAnimation = entity.animationIndex(anim)
-  entity.sprite.cycles = cycles
-  entity.sprite.kill = kill
-  entity.sprite.callback = callback
-  entity.sprite.time = 0.0
-  entity.sprite.currentFrame = 0
+  sprite.currentAnimationIndex = sprite.animationIndex(anim)
+  sprite.cycles = cycles
+  sprite.kill = kill
+  sprite.callback = callback
+  sprite.time = 0.0
+  sprite.currentFrame = 0
   if cycles != 0:
-    entity.sprite.playing = true
+    sprite.playing = true
+
+
+template play*(entity: Entity, anim: string, cycles = -1,
+               kill: bool = false, callback: AnimationCallback = nil) =
+  ##  Start playing the animation.
+  ##
+  ##  ``anim``  name of the animation.
+  ##
+  ##  ``cycles``  number of times to repeat the animation, or `-1` for looping.
+  ##
+  ##  ``kill``  kill when finished.
+  ##
+  ##  ``callback`` called when animation is finished.
+  ##
+  entity.sprite.play(anim, cycles, kill, callback)
 
 
 proc update(sprite: Sprite, entity: Entity, elapsed: float) =
-  if entity.sprite == nil:
+  if (sprite.currentAnimationIndex < 0) or (not sprite.playing):
     return
-  if (entity.sprite.currentAnimation < 0) or (not entity.sprite.playing):
-    return
-  let frameRate = entity.currentAnimation.frameRate
-  entity.sprite.time += elapsed
-  while entity.sprite.time >= frameRate:
-    entity.sprite.time -= frameRate
-    inc entity.sprite.currentFrame  # next frame
-    if entity.sprite.currentFrame >= entity.currentAnimation.frames.len:
+  let frameRate = sprite.currentAnimation.frameRate
+  sprite.time += elapsed
+  while sprite.time >= frameRate:
+    sprite.time -= frameRate
+    inc sprite.currentFrame  # next frame
+    if sprite.currentFrame >= sprite.currentAnimation.frames.len:
       # Animation has ended
-      if entity.sprite.cycles > 0:
+      if sprite.cycles > 0:
         # Reduce cycles counter
-        dec entity.sprite.cycles
-        if entity.sprite.cycles == 0:
+        dec sprite.cycles
+        if sprite.cycles == 0:
           # No more cycles left
-          entity.sprite.playing = false
+          sprite.playing = false
           # Check if entity need to be killed
-          if entity.sprite.kill:
+          if sprite.kill:
             entity.dead = true
             entity.visible = false
           # Check for the callback
-          if not (entity.sprite.callback == nil):
-            entity.sprite.callback(entity, entity.sprite.currentAnimation)
+          if not (sprite.callback == nil):
+            sprite.callback(entity, entity.sprite.currentAnimationIndex)
       # cycles <= 0 - animation either stopped or looped
       # Set current frame to first one of the current animation
-      entity.sprite.currentFrame = 0
+      sprite.currentFrame = 0
 
 
 #=========#
@@ -670,7 +752,7 @@ proc renderEntity*(entity: Entity) =
                           entity.center,
                           entity.flip)
     else: # entity.sprite != nil
-      if entity.sprite.currentAnimation < 0:
+      if entity.sprite.currentAnimationIndex < 0:
         entity.graphic.draw(entity.absPos,
                             entity.absRot,
                             entity.absScale,
@@ -678,7 +760,7 @@ proc renderEntity*(entity: Entity) =
                             entity.flip,
                             entity.sprite.frames[entity.sprite.currentFrame])
       else:
-        let anim = entity.currentAnimation
+        let anim = entity.currentAnimation()
         entity.graphic.draw(entity.absPos,
                             entity.absRot,
                             entity.absScale,
