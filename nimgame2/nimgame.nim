@@ -70,6 +70,7 @@ proc init*(
     rendererFlags: uint32 = sdl.RendererAccelerated or sdl.RendererPresentVsync,
     scaleQuality: range[0..2] = 0,
     integerScale: bool = false,
+    iconSurface: sdl.Surface = nil,
     icon: string = "",
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitOGG,
@@ -90,6 +91,10 @@ proc init*(
   ##  ``scaleQuality``  scale quality (pixel sampling)
   ##
   ##  ``integerScale``  force integer scale only
+  ##
+  ##  ``iconSurface``   window icon surface (has priority over ``icon``)
+  ##
+  ##  ``icon``          window icon file name
   ##
   ##  ``imageFlags``    sdl_image flags
   ##
@@ -161,7 +166,10 @@ proc init*(
       sdl.LogCategoryError, "Can't create window: %s", sdl.getError())
     return false
 
-  if icon.len > 0:
+  if not (iconSurface == nil):
+    game.fIcon = iconSurface
+    game.fWindow.setWindowIcon(game.fIcon)
+  elif icon.len > 0:
     game.fIcon = loadSurface(icon)
     game.fWindow.setWindowIcon(game.fIcon)
 
@@ -316,6 +324,26 @@ proc scale*(game: Game): Coord {.inline.} =
   var w, h: cfloat
   renderer.renderGetScale(addr(w), addr(h))
   return (w.float, h.float)
+
+
+proc icon*(game: Game): Surface {.inline.} =
+  ##  ``Return`` game icon surface.
+  ##
+  return game.fIcon
+
+
+proc `icon=`*(game: Game, icon: string) {.inline.} =
+  ##  Load new game icon from the ``icon`` file name.
+  ##
+  game.fIcon = loadSurface(icon)
+  game.fWindow.setWindowIcon(game.fIcon)
+
+
+proc `icon=`*(game: Game, surface: Surface) {.inline.} =
+  ##  Set new game icon surface.
+  ##
+  game.fIcon = surface
+  game.fWindow.setWindowIcon(game.fIcon)
 
 
 proc scene*(game: Game): Scene {.inline.} =
