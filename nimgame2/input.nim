@@ -55,6 +55,7 @@ var
   mPressed, mReleased: int32
   m: Coord2
   mWheel: Coord
+  mWheelFlipped: bool
   mBtn: int32
 
 
@@ -205,22 +206,34 @@ proc updateMouse*(event: Event) =
   discard sdl.getRelativeMouseState(addr(rx), addr(ry))
   m = ((ax.float, ay.float), (rx.float, ry.float))
 
-  if event.kind == MOUSEBUTTONDOWN:
+  if event.kind == MouseButtonDown:
     mPressed.set(event.button.button.int32)
-  elif event.kind == MOUSEBUTTONUP:
+  elif event.kind == MouseButtonUp:
     mReleased.set(event.button.button.int32)
-  elif event.kind == MOUSEWHEEL:
-    mWheel = (event.wheel.x.float,event.wheel.y.float)
+  elif event.kind == MouseWheel:
+    mWheelFlipped= event.wheel.direction==MouseWheelFlipped
+    # In order for mouse wheel to be consistant across platforms 
+    # we have to normalize the mouse wheel direction
+    mWheel = (event.wheel.x.float,event.wheel.y.float)*if mWheelFlipped: -1 else: 1
 
 
 template mouse*(): Coord2 =
   ##  ``Return`` current mouse position.
   ##
   m
+
+
 template mouseWheel*(): Coord = 
   ## ``Return`` current mouse wheel motion
   ##
   mWheel
+
+
+template mouseWheelFlipped*(): Coord = 
+  ## ``Return`` whether mouse wheel is flipped
+  ##
+  mWheelFlipped
+
 
 template mouseRelative*(enabled: bool): bool =
   ##  Set relative mouse mode.
