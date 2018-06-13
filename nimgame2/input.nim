@@ -214,7 +214,7 @@ proc updateMouse*(event: Event) =
     mWheelFlipped = event.wheel.direction == MouseWheelFlipped
     # In order for mouse wheel to be consistant across platforms 
     # we have to normalize the mouse wheel direction
-    mWheel += (event.wheel.x.float, event.wheel.y.float) * if mWheelFlipped: -1 else: 1
+    mWheel += (event.wheel.x.float, event.wheel.y.float) * (if mWheelFlipped: -1.0 else: 1.0)
 
 
 template mouse*(): Coord2 =
