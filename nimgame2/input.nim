@@ -211,10 +211,10 @@ proc updateMouse*(event: Event) =
   elif event.kind == MouseButtonUp:
     mReleased.set(event.button.button.int32)
   elif event.kind == MouseWheel:
-    mWheelFlipped= event.wheel.direction==MouseWheelFlipped
+    mWheelFlipped = event.wheel.direction == MouseWheelFlipped
     # In order for mouse wheel to be consistant across platforms 
     # we have to normalize the mouse wheel direction
-    mWheel = (event.wheel.x.float,event.wheel.y.float)*if mWheelFlipped: -1 else: 1
+    mWheel += (event.wheel.x.float, event.wheel.y.float) * if mWheelFlipped: -1 else: 1
 
 
 template mouse*(): Coord2 =
