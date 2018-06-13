@@ -54,6 +54,7 @@ var
   kbdPressed, kbdReleased: seq[Scancode]
   mPressed, mReleased: int32
   m: Coord2
+  mWheel: Coord
   mBtn: int32
 
 
@@ -193,6 +194,7 @@ proc initMouse*() =
   ##
   mPressed = 0
   mReleased = 0
+  mWheel = (0.0,0.0)
 
 
 proc updateMouse*(event: Event) =
@@ -203,17 +205,22 @@ proc updateMouse*(event: Event) =
   discard sdl.getRelativeMouseState(addr(rx), addr(ry))
   m = ((ax.float, ay.float), (rx.float, ry.float))
 
-  if event.kind == MouseButtonDown:
+  if event.kind == MOUSEBUTTONDOWN:
     mPressed.set(event.button.button.int32)
-  elif event.kind == MouseButtonUp:
+  elif event.kind == MOUSEBUTTONUP:
     mReleased.set(event.button.button.int32)
+  elif event.kind == MOUSEWHEEL:
+    mWheel = (event.wheel.x.float,event.wheel.y.float)
 
 
 template mouse*(): Coord2 =
   ##  ``Return`` current mouse position.
   ##
   m
-
+template mouseWheel*(): Coord = 
+  ## ``Return`` current mouse wheel motion
+  ##
+  mWheel
 
 template mouseRelative*(enabled: bool): bool =
   ##  Set relative mouse mode.
