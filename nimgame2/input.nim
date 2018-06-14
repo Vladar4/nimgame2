@@ -54,9 +54,9 @@ var
   kbdPressed, kbdReleased: seq[Scancode]
   mPressed, mReleased: int32
   m: Coord2
-  mWheel: Coord
-  mWheelFlipped: bool
   mBtn: int32
+  mWheel: Coord
+  mWheelDirection: int
 
 
 #==========#
@@ -195,7 +195,7 @@ proc initMouse*() =
   ##
   mPressed = 0
   mReleased = 0
-  mWheel = (0.0,0.0)
+  mWheel = (0.0, 0.0)
 
 
 proc updateMouse*(event: Event) =
@@ -211,10 +211,12 @@ proc updateMouse*(event: Event) =
   elif event.kind == MouseButtonUp:
     mReleased.set(event.button.button.int32)
   elif event.kind == MouseWheel:
-    mWheelFlipped= event.wheel.direction==MouseWheelFlipped
-    # In order for mouse wheel to be consistant across platforms 
+    mWheelDirection = if event.wheel.direction == MouseWheelNormal: 1
+                      else: -1
+    # In order for mouse wheel to be consistant across platforms
     # we have to normalize the mouse wheel direction
-    mWheel = (event.wheel.x.float,event.wheel.y.float)*if mWheelFlipped: -1 else: 1
+    mWheel += Coord(
+      (event.wheel.x.float, event.wheel.y.float) * mWheelDirection)
 
 
 template mouse*(): Coord2 =
@@ -223,16 +225,16 @@ template mouse*(): Coord2 =
   m
 
 
-template mouseWheel*(): Coord = 
-  ## ``Return`` current mouse wheel motion
+template mouseWheel*(): Coord =
+  ## ``Return`` current mouse wheel motion.
   ##
   mWheel
 
 
-template mouseWheelFlipped*(): Coord = 
-  ## ``Return`` whether mouse wheel is flipped
+template mouseWheelFlipped*(): bool =
+  ## ``Return`` `true` if mouse wheel direction is flipped.
   ##
-  mWheelFlipped
+  (mWheelDirection < 0)
 
 
 template mouseRelative*(enabled: bool): bool =
