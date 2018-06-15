@@ -101,6 +101,8 @@ method render*(scene: MainScene) =
     (8, 80), "Mouse: " & mouse, 0xFF0000FF'u32)
   discard string(
     (8, 88), "Mouse buttons: " & buttons, 0xFF0000FF'u32)
+  discard string(
+    (8, 96), "Mouse wheel: " & $mouseWheel, 0xFF0000FF'u32)
 
 const
   Acc = 100.0
