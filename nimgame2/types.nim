@@ -39,7 +39,7 @@ type
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
   Scale* = float                      ##  Scale type
-
+  Transform* = tuple[pos: Coord, angle: Angle, scale: Scale] #Experimental
   Blend* {.size: sizeof(cint), pure.} = enum
     none  = sdl.BlendModeNone
     blend = sdl.BlendModeBlend
