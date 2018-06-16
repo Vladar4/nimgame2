@@ -454,7 +454,7 @@ proc defaultPhysics*(entity: Entity, elapsed: float) =
       entity.rotVel += (if entity.rotVel > 0.0: -dr else: dr)
 
   # rotatiton velocity -> rotation
-  entity.rot += entity.rotVel * elapsed
+  entity.rot = (entity.rot + entity.rotVel * elapsed) mod 360.0
 
   # scale
   entity.scale += entity.scaleVel * elapsed
@@ -700,7 +700,11 @@ proc absPos*(entity: Entity): Coord =
                entity.parent.absPos * entity.parallax,
                entity.absRot)
 
-
+template dim*(entity: Entity): Dim=
+    (if entity.sprite == nil:
+      entity.graphic.dim
+    else:
+      entity.sprite.dim)
 proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   ##  Set ``entity``'s ``center``, according to the given align.
   ##
@@ -712,10 +716,7 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
     return
 
   let
-    dim = if entity.sprite == nil:
-              entity.graphic.dim
-            else:
-              entity.sprite.dim
+    dim = entity.dim
     oldCenter = entity.center
 
   # horisontal align
