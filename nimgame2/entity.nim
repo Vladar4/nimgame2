@@ -700,12 +700,11 @@ proc absPos*(entity: Entity): Coord =
                entity.parent.absPos * entity.parallax,
                entity.absRot)
 
-proc calcDim*(entity: Entity): Dim=
-  return 
-    if entity.sprite == nil:
+template dim*(entity: Entity): Dim=
+    (if entity.sprite == nil:
       entity.graphic.dim
     else:
-      entity.sprite.dim
+      entity.sprite.dim)
 proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   ##  Set ``entity``'s ``center``, according to the given align.
   ##
@@ -717,7 +716,7 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
     return
 
   let
-    dim = entity.calcDim()
+    dim = entity.dim
     oldCenter = entity.center
 
   # horisontal align
