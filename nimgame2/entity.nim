@@ -832,36 +832,6 @@ proc apply_relative_transform*(self: var Entity, transform: Transform)=
   self.rot = transform.angle
   self.scale = transform.scale
 
-proc apply*(self: var Transform, source: Transform)=
-  self.pos = source.pos 
-  self.angle = source.angle
-  self.scale = source.scale
-
-proc copy*(self: Transform):Transform=
-  result.apply(self)
-
-proc getRelPoint*(self: Entity,point: Coord): Coord=
-  return self.absPos+rotate(point, self.absRot) * self.absScale
-
-proc point*(self: Transform, point: Coord, scaled=true,rotated=true): Coord=
-  return self.pos+rotate(point, (if rotated: self.angle else: 0.0)) * (if scaled: self.scale else: 1.0)
-
-proc inverse_point*(self: Transform, point: Coord): Coord=
-  var
-    relpoint = self.pos-point
-  return self.pos-rotate(relpoint, self.pos, -self.angle)
-
-proc translated*(self: Transform, delta: Coord, scaled=false,rotated=false):Transform=
-  result = self.copy()
-  result.pos += result.point(delta, scaled, rotated)
-
-proc rotated*(self:Transform, angle: float):Transform=
-  result = self.copy()
-  result.angle += angle
-
-proc scaled*(self:Transform, scale: float):Transform=
-  result = self.copy()
-  result.scale *= scale
 
 proc calcRect*(self: Graphic, offset: Coord): Rect=
   return Rect(

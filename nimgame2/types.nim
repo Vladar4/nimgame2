@@ -575,3 +575,35 @@ converter toCoord*(d: Dim): Coord =
   result.x = d.w.float
   result.y = d.h.float
 
+
+#=============#
+#  Transform  #
+#=============#
+
+proc apply*(self: var Transform, source: Transform)=
+  self.pos = source.pos 
+  self.angle = source.angle
+  self.scale = source.scale
+
+proc copy*(self: Transform):Transform=
+  result.apply(self)
+
+proc point*(self: Transform, point: Coord): Coord=
+  return self.pos+rotate(point, self.angle) * self.scale
+
+proc inverse_point*(self: Transform, point: Coord): Coord=
+  var
+    relpoint = self.pos-point
+  return self.pos-rotate(relpoint, self.pos, -self.angle)
+
+proc translated*(self: Transform, delta: Coord):Transform=
+  result = self.copy()
+  result.pos += result.point(delta)
+
+proc rotated*(self:Transform, angle: float):Transform=
+  result = self.copy()
+  result.angle += angle
+
+proc scaled*(self:Transform, scale: float):Transform=
+  result = self.copy()
+  result.scale *= scale
