@@ -833,15 +833,10 @@ proc apply_relative_transform*(self: var Entity, transform: Transform)=
   self.scale = transform.scale
 
 
-proc calcRect*(self: Graphic, offset: Coord): Rect=
-  return Rect(
-    x: (self.dim.w.float - offset.x).cint,
-    y: (self.dim.h.float - offset.y).cint,
-    w: self.dim.w.cint,
-    h: self.dim.h.cint)
+
 
 proc rect*(self: Entity):Rect=
-  return self.graphic.calcRect(self.center * self.scale)
+  return self.graphic.rect(self.center * self.scale)
 
 proc relative_center*(self:Entity): Coord= 
   self.center
