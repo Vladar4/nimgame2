@@ -454,7 +454,7 @@ proc defaultPhysics*(entity: Entity, elapsed: float) =
       entity.rotVel += (if entity.rotVel > 0.0: -dr else: dr)
 
   # rotatiton velocity -> rotation
-  entity.rot += entity.rotVel * elapsed
+  entity.rot = (entity.rot + entity.rotVel * elapsed) mod 360.0
 
   # scale
   entity.scale += entity.scaleVel * elapsed
@@ -700,7 +700,7 @@ proc absPos*(entity: Entity): Coord =
                entity.parent.absPos * entity.parallax,
                entity.absRot)
 
-proc calcDim(entity: Entity): Dim=
+proc calcDim*(entity: Entity): Dim=
   return 
     if entity.sprite == nil:
       entity.graphic.dim
