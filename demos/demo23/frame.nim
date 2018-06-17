@@ -12,16 +12,20 @@ type
     bounds*: Bounds
     angle*: Angle
     center*: Coord
-proc points*(abounds: AngledBounds,):seq[Coord]=
-  let raw_points = [
-    abounds.bounds.a, 
-    (abounds.bounds.b.x, abounds.bounds.a.y),
-    abounds.bounds.b, 
-    (abounds.bounds.a.x, abounds.bounds.b.y),
-    ] 
-  result = newSeq[Coord](4)
-  for i in 0..<4:
-      result[i]= rotate(raw_points[i],abounds.center,abounds.angle)
+proc points*(abounds: AngledBounds): auto {.inline.} =
+  let
+    a = abounds.bounds.a
+    b = abounds.bounds.b
+    center = abounds.center
+    angle = abounds.angle
+  template apply(coord: Coord): Coord =
+    rotate(coord, center, angle)
+  return @[
+    apply(a),
+    apply((b.x, a.y)),
+    apply(b), 
+    apply((a.x, b.y))
+  ]
 proc points*(graphic: FrameGraphic, pos: Coord, angle: Angle, scale: Scale, center: Coord):seq[Coord]=
   var 
     abounds = new AngledBounds
