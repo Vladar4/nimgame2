@@ -5,8 +5,9 @@ import
     graphic, input, settings],
   nimgame2 / gui / widget,
   # helpers, 
-  circle_graphic, 
-  frame
+  private/[
+    circle_graphic, 
+    frame]
 
 type
   MainScene* = ref object of Scene
