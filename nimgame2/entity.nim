@@ -821,10 +821,11 @@ method onCollide*(entity, target: Entity) {.base.} =
   discard
 
 
-template transform*(self:Entity): Transform =
-  ( pos: self.absPos, 
-    angle: self.absRot, 
-    scale: self.absScale )
+template transform*(entity: Entity): Transform =
+  ( pos: entity.absPos, 
+    angle: entity.absRot, 
+    scale: entity.absScale 
+  ).Transform
 
 template `transform=`*(entity: Entity, transform: Transform) =
   entity.pos = transform.pos 

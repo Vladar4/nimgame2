@@ -582,8 +582,8 @@ converter toCoord*(d: Dim): Coord =
 
 from utils import rotate 
 
-template `*`*(self: Transform, point: Coord): Coord=
-  self.pos + rotate(point * self.scale, self.angle) 
+template `*`*(transform: Transform, point: Coord): Coord =
+  transform.pos + rotate(point * transform.scale, transform.angle) 
 
 #[ 
 # experimental
