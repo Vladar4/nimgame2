@@ -822,10 +822,9 @@ method onCollide*(entity, target: Entity) {.base.} =
 
 
 template transform*(self:Entity): Transform =
-  (
-    pos: self.absPos, 
+  ( pos: self.absPos, 
     angle: self.absRot, 
-    scale: self.absScale).Transform
+    scale: self.absScale )
 
 template `transform=`*(entity: Entity, transform: Transform) =
   entity.pos = transform.pos 

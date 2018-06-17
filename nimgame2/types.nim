@@ -594,16 +594,18 @@ proc copy*(transform: Transform): Transform =
 from utils import rotate 
 
 template `*`*(self: Transform, point: Coord): Coord=
-  self.pos + (rotate(point, self.angle) * self.scale)
+  self.pos + rotate(point * self.scale, self.angle) 
 
+#[ 
+# experimental
 template `*`*(transform: Transform, other: Transform)=
   Transform(
-    pos= transform.pos + other.pos,
+    pos= transform * other.pos,
     angle= transform.angle + other.angle,
-    scale= transform.scale * other.scale)
-
-# template transformed(
-#       transform: Transform, translation: Coord=(0.0, 0.0), 
-#       rotation: Angle=0.0, scale: Scale= 1.0)
-#   transform * Transform(translation,rotation,scale)
-
+    scale= transform.scale * other.scale)]#
+    
+template local*(transform: Transform): Transform =
+  ( pos: (0.0, 0.0), 
+    angle: (-transform.angle) mod 360.0, 
+    scale: 1.0 / transform.scale 
+  ).Transform
