@@ -821,70 +821,49 @@ method onCollide*(entity, target: Entity) {.base.} =
   discard
 
 
-proc transform*(self:Entity):Transform=
-  return (
+template transform*(self:Entity): Transform =
+  (
     pos: self.absPos, 
     angle: self.absRot, 
     scale: self.absScale).Transform
 
-proc apply_relative_transform*(self: var Entity, transform: Transform)=
-  self.pos = transform.pos 
-  self.rot = transform.angle
-  self.scale = transform.scale
+template `transform=`*(entity: Entity, transform: Transform) =
+  entity.pos = transform.pos 
+  entity.rot = transform.angle
+  entity.scale = transform.scale
 
 
+template rect*(entity: Entity): Rect =
+  entity.graphic.rect(entity.center * entity.scale)
+
+template topleft*(entity: Entity): Coord = 
+  -entity.center
+
+template topright*(entity: Entity): Coord = 
+  -entity.center + (entity.dim.w.toFloat, 0.0)
+
+template bottomright*(entity: Entity): Coord = 
+  -entity.center + entity.dim.toCoord
+
+template bottomleft*(entity: Entity): Coord = 
+  -entity.center + (0.0, entity.dim.h.toFloat)
 
 
-proc rect*(self: Entity):Rect=
-  return self.graphic.rect(self.center * self.scale)
+template corners*(entity: Entity): untyped =
+  [
+    entity.topleft,
+    entity.topright,
+    entity.bottomright,
+    entity.bottomleft,
+  ]
 
-proc relative_center*(self:Entity): Coord= 
-  self.center
-
-proc relative_topleft*(self: Entity): Coord= 
-  -self.center
-
-proc relative_topright*(self: Entity): Coord= 
-  -self.center + (self.dim.w.toFloat,0.0)
-
-proc relative_bottomright*(self: Entity): Coord= 
-  -self.center + self.dim.toCoord
-
-proc relative_bottomleft*(self: Entity): Coord= 
-  -self.center + (0.0,self.dim.h.toFloat)
-
-proc inverse_center*(self: Entity): Coord= 
-  self.transform.point(self.relative_center)
-
-proc inverse_topleft*(self: Entity): Coord= 
-  self.transform.point(self.relative_topleft)
-
-proc inverse_topright*(self: Entity): Coord= 
-  self.transform.point(self.relative_topright)
-
-proc inverse_bottomright*(self: Entity): Coord= 
-  self.transform.point(self.relative_bottomright)
-
-proc inverse_bottomleft*(self: Entity): Coord= 
-  self.transform.point(self.relative_bottomleft)
-
-iterator relative_corners*(self:Entity):Coord=
-  for c in [
-    self.relative_topleft,
-    self.relative_topright,
-    self.relative_bottomright,
-    self.relative_bottomleft,
-    ]:
-      yield c
-
-iterator inverse_corners*(self:Entity):Coord=
-  for c in [
-    self.inverse_topleft,
-    self.inverse_topright,
-    self.inverse_bottomright,
-    self.inverse_bottomleft,
-    ]:
-      yield c
+template world_corners*(entity: Entity): untyped =
+  [
+    entity.transform * entity.topleft,
+    entity.transform * entity.topright,
+    entity.transform * entity.bottomright,
+    entity.transform * entity.bottomleft,
+  ]
     
 
 include private/collider

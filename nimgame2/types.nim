@@ -580,10 +580,30 @@ converter toCoord*(d: Dim): Coord =
 #  Transform  #
 #=============#
 
-proc apply*(self: var Transform, source: Transform)=
-  self.pos = source.pos 
-  self.angle = source.angle
-  self.scale = source.scale
+proc apply*(transform: var Transform; source: Transform) =
+  shallowCopy(transform.pos, source.pos)
+  shallowCopy(transform.angle, source.angle)
+  shallowCopy(transform.scale, source.scale)
+  # transform.pos = source.pos 
+  # transform.angle = source.angle
+  # transform.scale = source.scale
 
-proc copy*(self: Transform):Transform=
-  result.apply(self)
+proc copy*(transform: Transform): Transform =
+  result=transform
+
+from utils import rotate 
+
+template `*`*(self: Transform, point: Coord): Coord=
+  self.pos + (rotate(point, self.angle) * self.scale)
+
+template `*`*(transform: Transform, other: Transform)=
+  Transform(
+    pos= transform.pos + other.pos,
+    angle= transform.angle + other.angle,
+    scale= transform.scale * other.scale)
+
+# template transformed(
+#       transform: Transform, translation: Coord=(0.0, 0.0), 
+#       rotation: Angle=0.0, scale: Scale= 1.0)
+#   transform * Transform(translation,rotation,scale)
+
