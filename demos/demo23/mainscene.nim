@@ -4,7 +4,6 @@ import
     nimgame, scene, types, 
     graphic, input, settings],
   nimgame2 / gui / widget,
-  # helpers, 
   private/[
     circle_graphic, 
     frame]
@@ -45,14 +44,12 @@ proc createRotScaleTestEnts*(scene: MainScene, text: string; pos: var Coord; rot
   scene.add(frameEnt)
   var fGraphic = newFrameGraphic()
   frameEnt.graphic = fGraphic
-  #new fGraphic.rect#=Rect#(textEnt.topleft.toDim,textEnt.dim.toDim)
   fGraphic.draw_filled = false
   fGraphic.border_color = ColorRed
   fGraphic.rect.x = textEnt.topleft.x.cint
   fGraphic.rect.y = textEnt.topleft.y.cint
   fGraphic.rect.w = textEnt.dim.w.cint
   fGraphic.rect.h = textEnt.dim.h.cint
-  # frameEnt.toggle=true
   frameEnt.logic = proc (entity: Entity; elapsed: float) =
     let color =
       if entity.GuiWidget.state.isFocused: ColorOrange
@@ -75,14 +72,14 @@ proc init*(scene: MainScene)=
   scene.font = newTrueTypeFont()
   discard scene.font.load("../assets/fnt/FSEX300.ttf", 32)
 
-  var rel_pos: Coord = (0.0, 0.0)
+  var rel_pos: Coord = (200.0, 0.0)
   for scale in [0.8, 0.3, 0.4, 0.6, 0.7, 0.2]:
     createRotScaleTestEnts(scene, "Scale Test", rel_pos, scale = scale)
 
   for f in [0.8, 0.3, 0.4, 0.6, 0.7, 0.2]:
     createRotScaleTestEnts(scene, "Rot Scale Test", rel_pos, rot = f, scale = f)
 
-  rel_pos = (200.0, 0.0)
+  rel_pos = (400.0, 0.0)
   for rot in [0.8, 0.3, 0.4, 0.6, 0.7, 0.2]:
     createRotScaleTestEnts(scene, "Rot Test", rel_pos, rot = rot)
 

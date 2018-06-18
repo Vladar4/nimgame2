@@ -9,7 +9,6 @@ type
     radius*: float
     
 
-
 proc drawCircleGraphic*(self: CircleGraphic,
                       pos: Coord = (0.0, 0.0),
                       angle: Angle = 0.0,
@@ -24,8 +23,6 @@ proc drawCircleGraphic*(self: CircleGraphic,
     discard circle(point, self.radius, self.border_color, DrawMode.default)
 
 
-
-
 method draw*(graphic: CircleGraphic,
              pos: Coord = (0.0, 0.0),
              angle: Angle = 0.0,
@@ -34,29 +31,13 @@ method draw*(graphic: CircleGraphic,
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
   drawCircleGraphic(graphic, pos, angle, scale, center, flip, region)
+
+
 proc newCircleGraphic*():CircleGraphic=
   new result
   result.initBorderFillGraphic()
   result.radius = 5.0
 
+
 method dim*(self:CircleGraphic):Dim=
   return (int self.radius*2,int self.radius*2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
