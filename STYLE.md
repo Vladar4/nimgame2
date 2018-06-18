@@ -21,7 +21,7 @@ Comments
   # SomeType #
   #==========#
   ```
-* documentation comments are always one indentation level above their procedures, have two spaces before their text, and one empty comment line to separate it from the code below.
+* documentation comments are always offset by one indentation level inside their procedures, have two spaces before their text, and one empty comment line to separate it from the code below.
   ```
   proc someProc() =
     ##  Documentation comment.
@@ -35,7 +35,10 @@ Naming
 ------
 * types and constants in PascalCase;
 * all other identifiers in camelCase;
-* if an object is a first argument of a procedure, generally it should be named after its type (e.g. `proc foo(bar: Bar, val: int): int =`).
+* if an object is a first argument of a procedure, generally it should be named after its type, e.g.:
+  ```
+  proc foo(bar: Bar, val: int): int =
+  ```
 
 
 Objects
