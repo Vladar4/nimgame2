@@ -72,7 +72,7 @@ proc init*(scene: MainScene)=
   scene.font = newTrueTypeFont()
   discard scene.font.load("../assets/fnt/FSEX300.ttf", 32)
 
-  var rel_pos: Coord = (200.0, 0.0)
+  var rel_pos: Coord = (0.0, 100.0)
   for scale in [0.8, 0.3, 0.4, 0.6, 0.7, 0.2]:
     createRotScaleTestEnts(scene, "Scale Test", rel_pos, scale = scale)
 
