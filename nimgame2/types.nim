@@ -39,7 +39,7 @@ type
   Dim* = tuple[w: int, h: int]        ##  Dimensions type
   Angle* = float                      ##  Angle type
   Scale* = float                      ##  Scale type
-
+  Transform* = tuple[pos: Coord, angle: Angle, scale: Scale] #Experimental
   Blend* {.size: sizeof(cint), pure.} = enum
     none  = sdl.BlendModeNone
     blend = sdl.BlendModeBlend
@@ -575,3 +575,26 @@ converter toCoord*(d: Dim): Coord =
   result.x = d.w.float
   result.y = d.h.float
 
+
+#=============#
+#  Transform  #
+#=============#
+
+from utils import rotate 
+
+template `*`*(transform: Transform, point: Coord): Coord =
+  transform.pos + rotate(point * transform.scale, transform.angle) 
+
+#[ 
+# experimental
+template `*`*(transform: Transform, other: Transform)=
+  Transform(
+    pos= transform * other.pos,
+    angle= transform.angle + other.angle,
+    scale= transform.scale * other.scale)]#
+    
+template local*(transform: Transform): Transform =
+  ( pos: (0.0, 0.0), 
+    angle: (-transform.angle) mod 360.0, 
+    scale: 1.0 / transform.scale 
+  ).Transform

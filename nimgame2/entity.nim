@@ -821,5 +821,50 @@ method onCollide*(entity, target: Entity) {.base.} =
   discard
 
 
+template transform*(entity: Entity): Transform =
+  ( pos: entity.absPos, 
+    angle: entity.absRot, 
+    scale: entity.absScale 
+  ).Transform
+
+template `transform=`*(entity: Entity, transform: Transform) =
+  entity.pos = transform.pos 
+  entity.rot = transform.angle
+  entity.scale = transform.scale
+
+
+template rect*(entity: Entity): Rect =
+  entity.graphic.rect(entity.center * entity.scale)
+
+template topleft*(entity: Entity): Coord = 
+  -entity.center
+
+template topright*(entity: Entity): Coord = 
+  -entity.center + (entity.dim.w.toFloat, 0.0)
+
+template bottomright*(entity: Entity): Coord = 
+  -entity.center + entity.dim.toCoord
+
+template bottomleft*(entity: Entity): Coord = 
+  -entity.center + (0.0, entity.dim.h.toFloat)
+
+
+template corners*(entity: Entity): untyped =
+  [
+    entity.topleft,
+    entity.topright,
+    entity.bottomright,
+    entity.bottomleft,
+  ]
+
+template world_corners*(entity: Entity): untyped =
+  [
+    entity.transform * entity.topleft,
+    entity.transform * entity.topright,
+    entity.transform * entity.bottomright,
+    entity.transform * entity.bottomleft,
+  ]
+    
+
 include private/collider
 
