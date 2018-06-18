@@ -5,6 +5,8 @@ A simple 2D game engine for Nim language.
 
 For more information check [home page](https://vladar4.github.io/nimgame2/).
 
+[Coding style guide](https://github.com/Vladar4/nimgame2/blob/master/STYLE.md) for the contributors.
+
 
 Status: v0.5 alpha (devel)
 --------------------------
