@@ -1,16 +1,19 @@
 import
   nimgame2 / [
-    truetypefont, textgraphic, entity, 
-    nimgame, scene, types, 
+    truetypefont, textgraphic, entity,
+    nimgame, scene, types,
     graphic, input, settings],
   nimgame2 / gui / widget,
-  private/[
-    circle_graphic, 
+  private / [
+    circle_graphic,
     frame]
+
 
 type
   MainScene* = ref object of Scene
     font*: TrueTypeFont
+
+
 proc newCircleEntity*(): Entity =
   var cgraphic = newCircleGraphic()
   cgraphic.radius = 4.0
@@ -20,10 +23,14 @@ proc newCircleEntity*(): Entity =
   result.graphic = cgraphic
   result.centrify()
 
-proc createRotScaleTestEnts*(scene: MainScene, text: string; pos: var Coord; rot: Angle = 0.0; scale: Scale = 1.0) =
+
+proc createRotScaleTestEnts*(
+    scene: MainScene, text: string,
+    pos: var Coord, rot: Angle = 0.0, scale: Scale = 1.0) =
   var
     textEnt = newEntity()
     textgraphic = newTextGraphic(scene.font)
+
   scene.add(textEnt)
   textEnt.graphic = textgraphic
 
@@ -50,12 +57,11 @@ proc createRotScaleTestEnts*(scene: MainScene, text: string; pos: var Coord; rot
   fGraphic.rect.y = textEnt.topleft.y.cint
   fGraphic.rect.w = textEnt.dim.w.cint
   fGraphic.rect.h = textEnt.dim.h.cint
-  frameEnt.logic = proc (entity: Entity; elapsed: float) =
+  frameEnt.logic = proc (entity: Entity, elapsed: float) =
     let color =
       if entity.GuiWidget.state.isFocused: ColorOrange
       else: ColorGreen
     entity.graphic.FrameGraphic.border_color = color
-
 
   frameEnt.center = textEnt.center
   frameEnt.pos = textEnt.pos
@@ -66,8 +72,8 @@ proc createRotScaleTestEnts*(scene: MainScene, text: string; pos: var Coord; rot
     corners.add(c)
   frameEnt.collider = frameEnt.newPolyCollider(frameEnt.pos, corners)
 
-    
-proc init*(scene: MainScene)=
+
+proc init*(scene: MainScene) =
   scene.Scene.init()
   scene.font = newTrueTypeFont()
   discard scene.font.load("../assets/fnt/FSEX300.ttf", 32)
@@ -83,6 +89,8 @@ proc init*(scene: MainScene)=
   for rot in [0.8, 0.3, 0.4, 0.6, 0.7, 0.2]:
     createRotScaleTestEnts(scene, "Rot Test", rel_pos, rot = rot)
 
+
 proc newMainScene*(): MainScene =
   new result
   result.init()
+

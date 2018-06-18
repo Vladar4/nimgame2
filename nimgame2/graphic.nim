@@ -44,9 +44,11 @@ method draw*(graphic: Graphic,
              center: Coord = (0.0, 0.0),
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) {.base.} = discard
-template rect*(self: Graphic, offset: Coord): Rect=
+
+template rect*(self: Graphic, offset: Coord): Rect =
   Rect(
     x: (self.dim.w.float - offset.x).cint,
     y: (self.dim.h.float - offset.y).cint,
     w: self.dim.w.cint,
     h: self.dim.h.cint)
+

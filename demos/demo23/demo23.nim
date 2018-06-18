@@ -11,3 +11,4 @@ if game.init(640, 480, "Nimgame 2: Demo 22 (Transform)"):
   settings.updateInterval = 1000
   settings.showInfo = true
   game.run()
+
