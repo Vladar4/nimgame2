@@ -92,7 +92,7 @@ template neg*(c: Color): Color =  ##  \
 template colorConst(name, value) =  ##  \
   ##  Declare ColorName and ColourName constants from hex RGB values.
   const
-    `Color name`* {.inject.} = uint32((value shl 8) + 0xFF)
+    `Color name`* {.inject.} = (value.uint32 shl 8) + 0xFF
     `Colour name`* {.inject.} = `Color name`
 
 colorConst(Black, 0x000000)
