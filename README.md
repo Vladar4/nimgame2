@@ -5,10 +5,10 @@ A simple 2D game engine for Nim language.
 
 For more information check [home page](https://vladar4.github.io/nimgame2/).
 
-[Coding style guide](https://github.com/Vladar4/nimgame2/blob/master/STYLE.md) for the contributors.
+[Coding style guide](STYLE.md) for the contributors.
 
 
-Status: v0.5 alpha (devel)
+Status: v0.6 alpha (devel)
 --------------------------
 
 
@@ -22,6 +22,7 @@ Requires:
   * SDL_image 2.0.1
   * SDL_mixer 2.0.1
   * SDL_ttf 2.0.14
+(see [SDL2 links](https://github.com/Vladar4/sdl2_nim/blob/master/LINKS.md))
 
 Optional dependencies:
 ----------------------
