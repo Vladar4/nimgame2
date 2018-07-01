@@ -20,11 +20,13 @@ Requires:
   * SDL_image 2.0.1
   * SDL_mixer 2.0.1
   * SDL_ttf 2.0.14
+(see [SDL2 links](https://github.com/Vladar4/sdl2_nim/blob/master/LINKS.md))
 
 
 Installation through [Nimble](https://github.com/nim-lang/nimble):
 ------------------------------------------------------------------
-`nimble install nimgame2@#head`
+For the Nim 0.17: `nimble install nimgame2@#head`
+For the Nim 0.18 and newer: `nimble install nimgame2@#devel`
 
 
 Recommended compilation flags:
