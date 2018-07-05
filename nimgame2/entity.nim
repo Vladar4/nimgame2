@@ -634,8 +634,9 @@ proc copy*(target, source: Entity) =
   target.fBlinkTimer = source.fBlinkTimer
   target.updLayer = source.updLayer
   target.graphic  = source.graphic
-  target.sprite   = new Sprite
-  target.sprite.copy(source.sprite)
+  if source.sprite!=nil:
+    target.sprite   = new Sprite
+    target.sprite.copy(source.sprite)
   target.logic    = source.logic
   target.physics  = source.physics
   target.collider = source.collider
