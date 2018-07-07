@@ -70,7 +70,7 @@ proc newParticle*(): Particle =
   result.initParticle()
 
 
-proc copy*(target, source: Particle) =
+template copy*(target, source: Particle) =
   ##  Copy ``source`` properties to the ``target``.
   ##
   Entity(target).copy(Entity(source))
