@@ -23,7 +23,7 @@ Requires:
   * SDL_mixer 2.0.1
   * SDL_ttf 2.0.14
 (see [SDL2 links](https://github.com/Vladar4/sdl2_nim/blob/master/LINKS.md))
-<<<<<<< HEAD
+
 
 Optional dependencies:
 ----------------------
@@ -35,8 +35,6 @@ Optional dependencies:
   * [zip](https://github.com/nim-lang/zip)
   * zlib runtime library (dll is distributed within SDL2_image builds)
   * zzip runtime library
-=======
->>>>>>> ee75bf82673db4e907bfc2a01d00081e45ccc3a7
 
 
 Installation through [Nimble](https://github.com/nim-lang/nimble):

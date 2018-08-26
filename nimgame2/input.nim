@@ -400,8 +400,8 @@ proc openJoystick*(id: int): bool =
   newJoystick.numBalls = joystickNumBalls(joy)
   newJoystick.numHats = joystickNumHats(joy)
   # add to the ``joysticks`` sequence
-  if joysticks == nil:
-    joysticks = @[]
+  #if joysticks == nil:
+  #  joysticks = @[]
   if joysticks.high >= id:
     if not (joysticks[id] == nil):
       joystickClose(joysticks[id].joy)
@@ -428,13 +428,13 @@ proc initJoysticks*() =
   ##
   ##  Called automatically from the main game cycle.
   ##
-  if joysticks == nil:
-    joysticks = @[]
-  else:
-    for j in joysticks.opened:
-      for i in 0..<j.numButtons:
-        j.pressed[i] = 0
-        j.released[i] = 0
+  #if joysticks == nil:
+  #  joysticks = @[]
+  #else:
+  for j in joysticks.opened:
+    for i in 0..<j.numButtons:
+      j.pressed[i] = 0
+      j.released[i] = 0
 
 
 proc updateJoysticks*(event: Event) =
