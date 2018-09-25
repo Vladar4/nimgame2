@@ -161,7 +161,7 @@ proc close*(tar: var TarFile) =
     dealloc(tar.data)
     tar.data = nil
   tar.size = 0
-  tar.contents = nil
+  tar.contents = @[]
 
 
 proc dump(filename: string, buf: var ptr uint8): int =
