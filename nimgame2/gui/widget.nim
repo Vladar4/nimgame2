@@ -74,7 +74,7 @@ method onPress*(widget: GuiWidget) {.base.} =
 
 
 proc clickAction*(widget: GuiWidget) =
-  if not(widget.actions == nil):
+  if not(widget.actions.len < 1):
     for action in widget.actions:
       action(widget)
 
