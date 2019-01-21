@@ -8,8 +8,8 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 [Coding style guide](STYLE.md) for the contributors.
 
 
-Status: v0.6 alpha (devel)
---------------------------
+Status: v0.6 alpha
+------------------
 
 
 Requires:
@@ -28,6 +28,8 @@ Requires:
 Optional dependencies:
 ----------------------
 
+* For plugin/mpeggraphic
+  * mpg123 runtime library (dll is distributed within SDL_)
 * For plugin/tar:
   * [zip](https://github.com/nim-lang/zip)
   * zlib runtime library (dll is distributed within SDL2_image builds)
