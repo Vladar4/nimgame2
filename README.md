@@ -15,9 +15,9 @@ Status: v0.6 alpha (devel)
 Requires:
 ---------
 
-* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.5.0 or newer).
+* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.7.1 or newer).
 * Runtime libraries for:
-  * SDL 2.0.5 or newer
+  * SDL 2.0.7 or newer
   * SDL_gfx 1.0.1
   * SDL_image 2.0.2
   * SDL_mixer 2.0.2
@@ -69,13 +69,14 @@ Changelog:
 * new utils procedures: textureFormat, textureFormats, toSeq, neg, new rand procedures
 * color constants
 * audio: playing template
-* emitter: emission areas
-* entity: animation callback, blinking, scale parameters, dim template
-* input: mouse wheel events
+* emitter: emission areas, procedure argument for emit
+* entity: animation callback, blinking, scale parameters, dim template (by [CodeDoes](https://github.com/CodeDoes))
+* input: mouse wheel events (by [CodeDoes](https://github.com/CodeDoes))
 * icon surface init option
 * RW loading procedures
-* demo23 (transform) by [CodeDoes](https://github.com/CodeDoes).
-* various minor changes and upgrades
+* simplified time counters
+* demo23 (transform) (by [CodeDoes](https://github.com/CodeDoes))
+* various minor changes and upgrades, code refactoring
 * Nim v0.19.0 transition
 
 
