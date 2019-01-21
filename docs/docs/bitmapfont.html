@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module bitmapfont</title>
+<title>bitmapfont</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module bitmapfont</h1>
+    <h1 class="title">bitmapfont</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,8 +1248,8 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#BitmapFont"
-    title="BitmapFont* = ref object of Font
-  fSurface: Surface
+    title="BitmapFont = ref object of Font
+  fSurface: Surface            ## Source font surface
   fDim, fCharDim: Dim           ## Dimensions of the surface and a single character
   fChars: seq[CoordInt]        ## Coordinates of all characters"><wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
 
@@ -1230,32 +1258,37 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#free,BitmapFont"
-    title="free*(font: BitmapFont)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,BitmapFont"
-    title="init*(font: BitmapFont)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#load,BitmapFont,string,Dim,Dim,Dim"
-    title="load*(font: BitmapFont; file: string; charDim: Dim; offset: Dim = (0, 0);
-      border: Dim = (0, 0)): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newBitmapFont,"
-    title="newBitmapFont*(): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newBitmapFont,string,Dim"
-    title="newBitmapFont*(file: string; charDim: Dim): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#free%2CBitmapFont"
+    title="free(font: BitmapFont)"><wbr />free<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#init%2CBitmapFont"
+    title="init(font: BitmapFont)"><wbr />init<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#load%2CBitmapFont%2Cstring%2CDim%2CDim%2CDim"
+    title="load(font: BitmapFont; file: string; charDim: Dim; offset: Dim = (0, 0);
+     border: Dim = (0, 0)): bool"><wbr />load<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#load%2CBitmapFont%2Cptr.RWops%2CDim%2CDim%2CDim%2Cbool"
+    title="load(font: BitmapFont; src: ptr RWops; charDim: Dim; offset: Dim = (0, 0);
+     border: Dim = (0, 0); freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#newBitmapFont%2C"
+    title="newBitmapFont(): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#newBitmapFont%2Cstring%2CDim%2CDim%2CDim"
+    title="newBitmapFont(file: string; charDim: Dim; offset: Dim = (0, 0); border: Dim = (0, 0)): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#newBitmapFont%2Cptr.RWops%2CDim%2CDim%2CDim%2Cbool"
+    title="newBitmapFont(src: ptr RWops; charDim: Dim; offset: Dim = (0, 0); border: Dim = (0, 0);
+              freeSrc: bool = true): BitmapFont"><wbr />new<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#renderBitmapFont%2CBitmapFont%2Cstring%2CColor"
+    title="renderBitmapFont(font: BitmapFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<wbr />Bitmap<wbr />Font<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#13" id="63">Methods</a>
+  <a class="reference reference-toplevel" href="#14" id="64">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#charH.e,BitmapFont"
-    title="charH*(font: BitmapFont): int"><wbr />char<wbr />H<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#lineDim.e,BitmapFont,string"
-    title="lineDim*(font: BitmapFont; line: string): Dim"><wbr />line<wbr />Dim<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#renderLine.e,BitmapFont,string,Color"
-    title="renderLine*(font: BitmapFont; line: string; color: Color = DefaultFontColor): Texture"><wbr />render<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#renderText.e,BitmapFont,openarray[string],Color"
-    title="renderText*(font: BitmapFont; text: openarray[string]; align = TextAlign.left;
-            color: Color = DefaultFontColor): Texture"><wbr />render<wbr />Text<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#charH.e%2CBitmapFont"
+    title="charH(font: BitmapFont): int"><wbr />char<wbr />H<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#lineDim.e%2CBitmapFont%2Cstring"
+    title="lineDim(font: BitmapFont; line: string): Dim"><wbr />line<wbr />Dim<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
+  <li><a class="reference" href="#render.e%2CBitmapFont%2Cstring%2CColor"
+    title="render(font: BitmapFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<span class="attachedType" style="visibility:hidden">BitmapFont</span></a></li>
 
   </ul>
 </li>
@@ -1269,22 +1302,19 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="sdl2/sdl_image.html">sdl2/sdl_image</a>, <a class="reference external" href="font.html">font</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
+<a class="reference external" href="font.html">font</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="BitmapFont"><a name="BitmapFont"></a><pre><span class="Identifier">BitmapFont</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Font</span>
-  <span class="Identifier">fSurface</span><span class="Other">:</span> <span class="Identifier">Surface</span>
-  <span class="Identifier">fDim</span><span class="Other">,</span> <span class="Identifier">fCharDim</span><span class="Other">:</span> <span class="Identifier">Dim</span>           <span class="Comment">## Dimensions of the surface and a single character</span>
-  <span class="Identifier">fChars</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">CoordInt</span><span class="Other">]</span>        <span class="Comment">## Coordinates of all characters</span>
+<a id="BitmapFont"></a>
+<dt><pre><a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="font.html#Font"><span class="Identifier">Font</span></a>
+  <span class="Identifier">fSurface</span><span class="Other">:</span> <span class="Identifier">Surface</span>            <span class="Comment">## Source font surface</span>
+  <span class="Identifier">fDim</span><span class="Other">,</span> <span class="Identifier">fCharDim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a>           <span class="Comment">## Dimensions of the surface and a single character</span>
+  <span class="Identifier">fChars</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="types.html#CoordInt"><span class="Identifier">CoordInt</span></a><span class="Other">]</span>        <span class="Comment">## Coordinates of all characters</span>
   </pre></dt>
 <dd>
-Source font surface
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
+
 
 </dd>
 
@@ -1292,26 +1322,21 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="free"><a name="free,BitmapFont"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">)</span></pre></dt>
+<a id="free,BitmapFont"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L41"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,BitmapFont"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">)</span></pre></dt>
+<a id="init,BitmapFont"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L49"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="load"><a name="load,BitmapFont,string,Dim,Dim,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
-          <span class="Identifier">border</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="load,BitmapFont,string,Dim,Dim,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
+         <span class="Identifier">border</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">charDim</span></tt> dimensions of a single font character.</p>
@@ -1319,72 +1344,65 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">border</span></tt>  border around individual characters.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, or <cite>false</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L56"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L56" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newBitmapFont"><a name="newBitmapFont,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span></pre></dt>
+<a id="load,BitmapFont,ptr.RWops,Dim,Dim,Dim,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
+         <span class="Identifier">border</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L91"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newBitmapFont"><a name="newBitmapFont,string,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span></pre></dt>
+<a id="newBitmapFont,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<p>Create and load a new bitmap font from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">charDim</span></tt> dimensions of a single font character. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L96"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L96" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="newBitmapFont,string,Dim,Dim,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">border</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Create and load a new bitmap font from a <tt class="docutils literal"><span class="pre">file</span></tt>. 
+
+</dd>
+<a id="newBitmapFont,ptr.RWops,Dim,Dim,Dim,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newBitmapFont</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">charDim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">;</span> <span class="Identifier">offset</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span>
+                  <span class="Identifier">border</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="renderBitmapFont,BitmapFont,string,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">renderBitmapFont</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
 
 </dd>
 
 </dl></div>
-<div class="section" id="13">
-<h1><a class="toc-backref" href="#13">Methods</a></h1>
+<div class="section" id="14">
+<h1><a class="toc-backref" href="#14">Methods</a></h1>
 <dl class="item">
-<dt id="charH"><a name="charH.e,BitmapFont"></a><pre><span class="Keyword">method</span> <span class="Identifier">charH</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="charH.e,BitmapFont"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">charH</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a font character's height. 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L105"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="lineDim"><a name="lineDim.e,BitmapFont,string"></a><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="lineDim.e,BitmapFont,string"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of a <tt class="docutils literal"><span class="pre">line</span></tt> of text, written in <tt class="docutils literal"><span class="pre">font</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L111"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="renderLine"><a name="renderLine.e,BitmapFont,string,Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Texture</span></pre></dt>
+<a id="render.e,BitmapFont,string,Color"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="bitmapfont.html#BitmapFont"><span class="Identifier">BitmapFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-Render a text <tt class="docutils literal"><span class="pre">line</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">color</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L163"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
 
-</dd>
-<dt id="renderText"><a name="renderText.e,BitmapFont,openarray[string],Color"></a><pre><span class="Keyword">method</span> <span class="Identifier">renderText</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">BitmapFont</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">align</span> <span class="Other">=</span> <span class="Identifier">TextAlign</span><span class="Other">.</span><span class="Identifier">left</span><span class="Other">;</span>
-                  <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Texture</span></pre></dt>
-<dd>
-Render a multi-line <tt class="docutils literal"><span class="pre">text</span></tt> in <tt class="docutils literal"><span class="pre">font</span></tt> with given <tt class="docutils literal"><span class="pre">align</span></tt> and <tt class="docutils literal"><span class="pre">color</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/bitmapfont.nim#L180"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/bitmapfont.nim#L180" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1397,7 +1415,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:32 UTC</small>
       </div>
     </div>
   </div>

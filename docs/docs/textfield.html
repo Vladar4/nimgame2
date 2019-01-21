@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module textfield</title>
+<title>textfield</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module textfield</h1>
+    <h1 class="title">textfield</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,7 +1248,7 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#TextField"
-    title="TextField* = ref object of TextGraphic
+    title="TextField = ref object of TextGraphic
   fActive: bool
   fCursorIndex: int
   cursor*: string
@@ -1231,44 +1259,44 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#init,TextField,Font"
-    title="init*(tf: TextField; font: Font)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTextField,Font"
-    title="newTextField*(font: Font): TextField"><wbr />new<wbr />Text<wbr />Field<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#text,TextField"
-    title="text*(tf: TextField): string"><wbr />text<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,TextField,string"
-    title="`text =`*(tf: TextField; val: string)">`<wbr />text<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#bs,TextField"
-    title="bs*(tf: TextField; index = - 1)"><wbr />bs<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#del,TextField"
-    title="del*(tf: TextField; index = - 1)"><wbr />del<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#add,TextField,string"
-    title="add*(tf: TextField; str: string; index = - 1)"><wbr />add<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#left,TextField"
-    title="left*(tf: TextField)"><wbr />left<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#right,TextField"
-    title="right*(tf: TextField)"><wbr />right<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#toFirst,TextField"
-    title="toFirst*(tf: TextField)"><wbr />to<wbr />First<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#toLast,TextField"
-    title="toLast*(tf: TextField)"><wbr />to<wbr />Last<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#activate,TextField"
-    title="activate*(tf: TextField)"><wbr />activate<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#deactivate,TextField"
-    title="deactivate*(tf: TextField)"><wbr />deactivate<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#draw,TextField,Coord"
-    title="draw*(tf: TextField; pos: Coord)"><wbr />draw<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#init%2CTextField%2CFont"
+    title="init(tf: TextField; font: Font)"><wbr />init<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#newTextField%2CFont"
+    title="newTextField(font: Font): TextField"><wbr />new<wbr />Text<wbr />Field<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#text%2CTextField"
+    title="text(tf: TextField): string"><wbr />text<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#text%3D%2CTextField%2Cstring"
+    title="text=(tf: TextField; val: string)"><wbr />text=<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#bs%2CTextField"
+    title="bs(tf: TextField; index = -1)"><wbr />bs<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#del%2CTextField"
+    title="del(tf: TextField; index = -1)"><wbr />del<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#add%2CTextField%2Cstring"
+    title="add(tf: TextField; str: string; index = -1)"><wbr />add<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#left%2CTextField"
+    title="left(tf: TextField)"><wbr />left<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#right%2CTextField"
+    title="right(tf: TextField)"><wbr />right<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#toFirst%2CTextField"
+    title="toFirst(tf: TextField)"><wbr />to<wbr />First<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#toLast%2CTextField"
+    title="toLast(tf: TextField)"><wbr />to<wbr />Last<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#activate%2CTextField"
+    title="activate(tf: TextField)"><wbr />activate<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#deactivate%2CTextField"
+    title="deactivate(tf: TextField)"><wbr />deactivate<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#draw%2CTextField%2CCoord"
+    title="draw(tf: TextField; pos: Coord)"><wbr />draw<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#isActive.t,TextField"
-    title="isActive*(tf: TextField): bool"><wbr />is<wbr />Active<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#len.t,TextField"
-    title="len*(tf: TextField): int"><wbr />len<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#isActive.t%2CTextField"
+    title="isActive(tf: TextField): bool"><wbr />is<wbr />Active<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
+  <li><a class="reference" href="#len.t%2CTextField"
+    title="len(tf: TextField): int"><wbr />len<span class="attachedType" style="visibility:hidden">TextField</span></a></li>
 
   </ul>
 </li>
@@ -1282,12 +1310,13 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="unicode.html">unicode</a>, <a class="reference external" href="font.html">font</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="textgraphic.html">textgraphic</a>, <a class="reference external" href="types.html">types</a>
+<a class="reference external" href="font.html">font</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="textgraphic.html">textgraphic</a>, <a class="reference external" href="types.html">types</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="TextField"><a name="TextField"></a><pre><span class="Identifier">TextField</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">TextGraphic</span>
+<a id="TextField"></a>
+<dt><pre><a href="textfield.html#TextField"><span class="Identifier">TextField</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="textgraphic.html#TextGraphic"><span class="Identifier">TextGraphic</span></a>
   <span class="Identifier">fActive</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">fCursorIndex</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Identifier">cursor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
@@ -1295,10 +1324,6 @@ function main() {
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1306,153 +1331,105 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="init"><a name="init,TextField,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span></pre></dt>
+<a id="init,TextField,Font"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="font.html#Font"><span class="Identifier">Font</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L50"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L50" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextField"><a name="newTextField,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextField</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextField</span></pre></dt>
+<a id="newTextField,Font"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTextField</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="font.html#Font"><span class="Identifier">Font</span></a><span class="Other">)</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L59"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="text"><a name="text,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="text,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L64"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L64" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,TextField,string"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">text</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+<a id="text=,TextField,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">text=</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L68"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="bs"><a name="bs,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">bs</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">)</span></pre></dt>
+<a id="bs,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">bs</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Backspace text action. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L80"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="del"><a name="del,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">del</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">)</span></pre></dt>
+<a id="del,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">del</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Delete text action. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L93"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="add"><a name="add,TextField,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">)</span></pre></dt>
+<a id="add,TextField,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Add text action. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L105"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="left"><a name="left,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">left</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="left,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">left</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Move cursor to the left. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="right"><a name="right,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">right</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="right,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">right</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Move cursor to the right. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L133"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toFirst"><a name="toFirst,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toFirst</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="toFirst,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">toFirst</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Move cursor to the beginning. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L147"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L147" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toLast"><a name="toLast,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toLast</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="toLast,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">toLast</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Move cursor to the end. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L155"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="activate"><a name="activate,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">activate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="activate,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">activate</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Activate text field. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L163"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="deactivate"><a name="deactivate,TextField"></a><pre><span class="Keyword">proc</span> <span class="Identifier">deactivate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span></pre></dt>
+<a id="deactivate,TextField"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">deactivate</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Deactivate text field. 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L172"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L172" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="draw"><a name="draw,TextField,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">draw</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span></pre></dt>
+<a id="draw,TextField,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">draw</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L184"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L184" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="isActive"><a name="isActive.t,TextField"></a><pre><span class="Keyword">template</span> <span class="Identifier">isActive</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="isActive.t,TextField"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">isActive</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L72"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="len"><a name="len.t,TextField"></a><pre><span class="Keyword">template</span> <span class="Identifier">len</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <span class="Identifier">TextField</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="len.t,TextField"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">len</span><span class="Other">(</span><span class="Identifier">tf</span><span class="Other">:</span> <a href="textfield.html#TextField"><span class="Identifier">TextField</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/textfield.nim#L76"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/textfield.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1465,7 +1442,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:39 UTC</small>
       </div>
     </div>
   </div>

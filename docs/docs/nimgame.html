@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module nimgame</title>
+<title>nimgame</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module nimgame</h1>
+    <h1 class="title">nimgame</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,11 +1248,11 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#Game"
-    title="Game* = ref object
+    title="Game = ref object
   fWindow: sdl.Window
   fSize: Dim
   fIcon: sdl.Surface
-  fScene: Scene"><wbr />Game<span class="attachedType" style="visibility:hidden"></span></a></li>
+  fScene: Scene                ## Current scene"><wbr />Game<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1232,77 +1260,84 @@ function main() {
   <a class="reference reference-toplevel" href="#8" id="58">Vars</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#game_2"
-    title="game*: Game"><wbr />game<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="game: Game"><wbr />game<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#free,Game"
-    title="free*(game: Game)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,Game,int,int,uint32,uint32,range[],bool,string,cint,cint,int"
-    title="init*(game: Game; w, h: int; title = &quot;Nimgame2&quot;;
-      bgColor = sdl.Color(r: 0, g: 0, b: 0, a: 255); windowFlags: uint32 = 0; rendererFlags: uint32 = sdl.RendererAccelerated or
-    sdl.RendererPresentVsync; scaleQuality: range[0 .. 2] = 0;
-      integerScale: bool = false; icon: string = &quot;&quot;; imageFlags: cint = img.InitPNG;
-      mixerFlags: cint = mix.InitOGG; mixerChannels: int = 32): bool"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newGame,"
-    title="newGame*(): Game"><wbr />new<wbr />Game<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#title,Game"
-    title="title*(game: Game): string"><wbr />title<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,string"
-    title="`title =`*(game: Game; title: string)">`<wbr />title<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pos,Game"
-    title="pos*(game: Game): Coord"><wbr />pos<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Coord"
-    title="`pos =`*(game: Game; pos: Coord)">`<wbr />pos<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#centrify,Game"
-    title="centrify*(game: Game; centerX = true; centerY = true)"><wbr />centrify<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#windowSize,Game"
-    title="windowSize*(game: Game): Dim"><wbr />window<wbr />Size<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Dim"
-    title="`windowSize =`*(game: Game; dim: Dim)">`<wbr />window<wbr />Size<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#minSize,Game"
-    title="minSize*(game: Game): Dim"><wbr />min<wbr />Size<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Dim_2"
-    title="`minSize =`*(game: Game; dim: Dim)">`<wbr />min<wbr />Size<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#maxSize,Game"
-    title="maxSize*(game: Game): Dim"><wbr />max<wbr />Size<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Dim_3"
-    title="`maxSize =`*(game: Game; dim: Dim)">`<wbr />max<wbr />Size<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setBordered,Game,bool"
-    title="setBordered*(game: Game; enabled: bool)"><wbr />set<wbr />Bordered<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setResizable,Game,bool"
-    title="setResizable*(game: Game; enabled: bool)"><wbr />set<wbr />Resizable<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#show,Game"
-    title="show*(game: Game)"><wbr />show<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#hide,Game"
-    title="hide*(game: Game)"><wbr />hide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#focus,Game"
-    title="focus*(game: Game)"><wbr />focus<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#maximize,Game"
-    title="maximize*(game: Game)"><wbr />maximize<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#minimize,Game"
-    title="minimize*(game: Game)"><wbr />minimize<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#restore,Game"
-    title="restore*(game: Game)"><wbr />restore<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#size,Game"
-    title="size*(game: Game): Dim"><wbr />size<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#scale,Game"
-    title="scale*(game: Game): Coord"><wbr />scale<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#scene,Game"
-    title="scene*(game: Game): Scene"><wbr />scene<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Scene"
-    title="`scene =`*(game: Game; val: Scene)">`<wbr />scene<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#viewport,Game"
-    title="viewport*(game: Game): Rect"><wbr />viewport<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Game,Rect"
-    title="`viewport =`*(game: Game; rect: Rect)">`<wbr />viewport<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#resetViewport,Game"
-    title="resetViewport*(game: Game)"><wbr />reset<wbr />Viewport<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#run,Game"
-    title="run*(game: Game)"><wbr />run<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#free%2CGame"
+    title="free(game: Game)"><wbr />free<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#init%2CGame%2Cint%2Cint%2Cstring%2Cuint32%2Cuint32%2Crange%5B%5D%2Cbool%2Cnil%2Cstring%2Ccint%2Ccint%2Cint"
+    title="init(game: Game; w, h: int; title = &quot;Nimgame2&quot;;
+     bgColor = sdl.Color(r: 0, g: 0, b: 0, a: 255); windowFlags: uint32 = 0;
+     rendererFlags: uint32 = 0x00000002 or 0x00000004;
+     scaleQuality: range[0 .. 2] = 0; integerScale: bool = false;
+     iconSurface: sdl.Surface = nil; icon: string = &quot;&quot;; imageFlags: cint = img.InitPNG;
+     mixerFlags: cint = mix.InitOGG; mixerChannels: int = 32): bool"><wbr />init<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#newGame%2C"
+    title="newGame(): Game"><wbr />new<wbr />Game<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#title%2CGame"
+    title="title(game: Game): string"><wbr />title<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#title%3D%2CGame%2Cstring"
+    title="title=(game: Game; title: string)"><wbr />title=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#pos%2CGame"
+    title="pos(game: Game): Coord"><wbr />pos<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#pos%3D%2CGame%2CCoord"
+    title="pos=(game: Game; pos: Coord)"><wbr />pos=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#centrify%2CGame"
+    title="centrify(game: Game; centerX = true; centerY = true)"><wbr />centrify<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#windowSize%2CGame"
+    title="windowSize(game: Game): Dim"><wbr />window<wbr />Size<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#windowSize%3D%2CGame%2CDim"
+    title="windowSize=(game: Game; dim: Dim)"><wbr />window<wbr />Size=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#minSize%2CGame"
+    title="minSize(game: Game): Dim"><wbr />min<wbr />Size<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#minSize%3D%2CGame%2CDim"
+    title="minSize=(game: Game; dim: Dim)"><wbr />min<wbr />Size=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#maxSize%2CGame"
+    title="maxSize(game: Game): Dim"><wbr />max<wbr />Size<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#maxSize%3D%2CGame%2CDim"
+    title="maxSize=(game: Game; dim: Dim)"><wbr />max<wbr />Size=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#setBordered%2CGame%2Cbool"
+    title="setBordered(game: Game; enabled: bool)"><wbr />set<wbr />Bordered<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#setResizable%2CGame%2Cbool"
+    title="setResizable(game: Game; enabled: bool)"><wbr />set<wbr />Resizable<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#show%2CGame"
+    title="show(game: Game)"><wbr />show<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#hide%2CGame"
+    title="hide(game: Game)"><wbr />hide<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#focus%2CGame"
+    title="focus(game: Game)"><wbr />focus<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#maximize%2CGame"
+    title="maximize(game: Game)"><wbr />maximize<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#minimize%2CGame"
+    title="minimize(game: Game)"><wbr />minimize<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#restore%2CGame"
+    title="restore(game: Game)"><wbr />restore<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#size%2CGame"
+    title="size(game: Game): Dim"><wbr />size<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#scale%2CGame"
+    title="scale(game: Game): Coord"><wbr />scale<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#icon%2CGame"
+    title="icon(game: Game): Surface"><wbr />icon<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#icon%3D%2CGame%2Cstring"
+    title="icon=(game: Game; icon: string)"><wbr />icon=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#icon%3D%2CGame%2CSurface"
+    title="icon=(game: Game; surface: Surface)"><wbr />icon=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#scene%2CGame"
+    title="scene(game: Game): Scene"><wbr />scene<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#scene%3D%2CGame%2CScene"
+    title="scene=(game: Game; val: Scene)"><wbr />scene=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#viewport%2CGame"
+    title="viewport(game: Game): Rect"><wbr />viewport<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#viewport%3D%2CGame%2CRect"
+    title="viewport=(game: Game; rect: Rect)"><wbr />viewport=<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#resetViewport%2CGame"
+    title="resetViewport(game: Game)"><wbr />reset<wbr />Viewport<span class="attachedType" style="visibility:hidden">Game</span></a></li>
+  <li><a class="reference" href="#run%2CGame"
+    title="run(game: Game)"><wbr />run<span class="attachedType" style="visibility:hidden">Game</span></a></li>
 
   </ul>
 </li>
@@ -1316,23 +1351,20 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="math.html">math</a>, <a class="reference external" href="parseutils.html">parseutils</a>, <a class="reference external" href="random.html">random</a>, <a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="sdl2/sdl_image.html">sdl2/sdl_image</a>, <a class="reference external" href="sdl2/sdl_ttf.html">sdl2/sdl_ttf</a>, <a class="reference external" href="sdl2/sdl_mixer.html">sdl2/sdl_mixer</a>, <a class="reference external" href="audio.html">audio</a>, <a class="reference external" href="count.html">count</a>, <a class="reference external" href="draw.html">draw</a>, <a class="reference external" href="input.html">input</a>, <a class="reference external" href="entity.html">entity</a>, <a class="reference external" href="scene.html">scene</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
+<a class="reference external" href="audio.html">audio</a>, <a class="reference external" href="draw.html">draw</a>, <a class="reference external" href="input.html">input</a>, <a class="reference external" href="entity.html">entity</a>, <a class="reference external" href="scene.html">scene</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="Game"><a name="Game"></a><pre><span class="Identifier">Game</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<a id="Game"></a>
+<dt><pre><a href="nimgame.html#Game"><span class="Identifier">Game</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">fWindow</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Window</span>
-  <span class="Identifier">fSize</span><span class="Other">:</span> <span class="Identifier">Dim</span>
+  <span class="Identifier">fSize</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a>
   <span class="Identifier">fIcon</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Surface</span>
-  <span class="Identifier">fScene</span><span class="Other">:</span> <span class="Identifier">Scene</span>
-</pre></dt>
+  <span class="Identifier">fScene</span><span class="Other">:</span> <a href="scene.html#Scene"><span class="Identifier">Scene</span></a>                <span class="Comment">## Current scene</span>
+  </pre></dt>
 <dd>
-Current scene
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
+
 
 </dd>
 
@@ -1340,13 +1372,10 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="8">
 <h1><a class="toc-backref" href="#8">Vars</a></h1>
 <dl class="item">
-<dt id="game"><a name="game_2"></a><pre><span class="Identifier">game</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Game</span></pre></dt>
+<a id="game_2"></a>
+<dt><pre><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a></pre></dt>
 <dd>
 Global game variable
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L45"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1354,21 +1383,20 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="free"><a name="free,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span></pre></dt>
+<a id="free,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L52"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L52" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,Game,int,int,uint32,uint32,range[],bool,string,cint,cint,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">title</span> <span class="Other">=</span> <span class="StringLit">&quot;Nimgame2&quot;</span><span class="Other">;</span>
-          <span class="Identifier">bgColor</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">(</span><span class="Identifier">r</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="DecNumber">255</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">windowFlags</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
-    <span class="Identifier">rendererFlags</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">RendererAccelerated</span> <span class="Keyword">or</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">RendererPresentVsync</span><span class="Other">;</span>
-          <span class="Identifier">scaleQuality</span><span class="Other">:</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">2</span><span class="Other">]</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span> <span class="Identifier">integerScale</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
-          <span class="Identifier">imageFlags</span><span class="Other">:</span> <span class="Identifier">cint</span> <span class="Other">=</span> <span class="Identifier">img</span><span class="Other">.</span><span class="Identifier">InitPNG</span><span class="Other">;</span> <span class="Identifier">mixerFlags</span><span class="Other">:</span> <span class="Identifier">cint</span> <span class="Other">=</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">InitOGG</span><span class="Other">;</span>
-          <span class="Identifier">mixerChannels</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="init,Game,int,int,string,uint32,uint32,range[],bool,nil,string,cint,cint,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">title</span> <span class="Other">=</span> <span class="StringLit">&quot;Nimgame2&quot;</span><span class="Other">;</span>
+         <span class="Identifier">bgColor</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">(</span><span class="Identifier">r</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="DecNumber">255</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">windowFlags</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
+         <span class="Identifier">rendererFlags</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other">=</span> <span class="DecNumber">0x00000002</span> <span class="Keyword">or</span> <span class="DecNumber">0x00000004</span><span class="Other">;</span>
+         <span class="Identifier">scaleQuality</span><span class="Other">:</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">2</span><span class="Other">]</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span> <span class="Identifier">integerScale</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span>
+         <span class="Identifier">iconSurface</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Surface</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+         <span class="Identifier">imageFlags</span><span class="Other">:</span> <span class="Identifier">cint</span> <span class="Other">=</span> <span class="Identifier">img</span><span class="Other">.</span><span class="Identifier">InitPNG</span><span class="Other">;</span> <span class="Identifier">mixerFlags</span><span class="Other">:</span> <span class="Identifier">cint</span> <span class="Other">=</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">InitOGG</span><span class="Other">;</span>
+         <span class="Identifier">mixerChannels</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Init game.</p>
 <p><tt class="docutils literal"><span class="pre">w</span></tt>, <tt class="docutils literal"><span class="pre">h</span></tt>      window dimensions</p>
@@ -1378,267 +1406,199 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">rendererFlags</span></tt> sdl renderer flags</p>
 <p><tt class="docutils literal"><span class="pre">scaleQuality</span></tt>  scale quality (pixel sampling)</p>
 <p><tt class="docutils literal"><span class="pre">integerScale</span></tt>  force integer scale only</p>
+<p><tt class="docutils literal"><span class="pre">iconSurface</span></tt>   window icon surface (has priority over <tt class="docutils literal"><span class="pre">icon</span></tt>)</p>
+<p><tt class="docutils literal"><span class="pre">icon</span></tt>          window icon file name</p>
 <p><tt class="docutils literal"><span class="pre">imageFlags</span></tt>    sdl_image flags</p>
 <p><tt class="docutils literal"><span class="pre">mixerFlags</span></tt>    sdl_mixer flags</p>
 <p><tt class="docutils literal"><span class="pre">mixerChannels</span></tt> Number of channels to allocate for mixing.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, <cite>false</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L62"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newGame"><a name="newGame,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newGame</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Game</span></pre></dt>
+<a id="newGame,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newGame</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L187"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L187" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="title"><a name="title,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">title</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="title,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">title</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L191"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L191" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,string"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">title</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="title=,Game,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">title=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L195"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pos"><a name="pos,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pos</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
+<a id="pos,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pos</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L199"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L199" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Coord"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">pos</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span></pre></dt>
+<a id="pos=,Game,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pos=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L205"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="centrify"><a name="centrify,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">centerX</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">centerY</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span></pre></dt>
+<a id="centrify,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">centrify</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">centerX</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">centerY</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L210"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L210" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="windowSize"><a name="windowSize,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">windowSize</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
+<a id="windowSize,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">windowSize</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> game window dimensions. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L230"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L230" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Dim"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">windowSize</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="windowSize=,Game,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">windowSize=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L238"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L238" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="minSize"><a name="minSize,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">minSize</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
+<a id="minSize,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">minSize</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L243"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Dim_2"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">minSize</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span></pre></dt>
+<a id="minSize=,Game,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">minSize=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L249"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="maxSize"><a name="maxSize,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">maxSize</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span></pre></dt>
+<a id="maxSize,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">maxSize</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L257"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L257" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Dim_3"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">maxSize</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span></pre></dt>
+<a id="maxSize=,Game,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">maxSize=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L263"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L263" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setBordered"><a name="setBordered,Game,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setBordered</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setBordered,Game,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setBordered</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L271"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L271" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setResizable"><a name="setResizable,Game,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setResizable</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setResizable,Game,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setResizable</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L275"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L275" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="show"><a name="show,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">show</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="show,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">show</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L279"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L279" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="hide"><a name="hide,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">hide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="hide,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">hide</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L283"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L283" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="focus"><a name="focus,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">focus</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="focus,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">focus</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L287"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L287" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="maximize"><a name="maximize,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">maximize</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="maximize,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">maximize</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L291"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L291" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="minimize"><a name="minimize,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">minimize</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="minimize,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">minimize</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L295"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L295" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="restore"><a name="restore,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">restore</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="restore,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">restore</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L299"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L299" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="size"><a name="size,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">size</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="size,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">size</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Get logical size of the game renderer. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L303"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L303" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="scale"><a name="scale,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">scale</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="scale,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">scale</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the scale of the game renderer. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L309"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L309" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="scene"><a name="scene,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">scene</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Scene</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="icon,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">icon</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> game icon surface. 
+
+</dd>
+<a id="icon=,Game,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">icon=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Load new game icon from the <tt class="docutils literal"><span class="pre">icon</span></tt> file name. 
+
+</dd>
+<a id="icon=,Game,Surface"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">icon=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">surface</span><span class="Other">:</span> <span class="Identifier">Surface</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Set new game icon surface. 
+
+</dd>
+<a id="scene,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">scene</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <a href="scene.html#Scene"><span class="Identifier">Scene</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current game scene. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L317"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L317" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Scene"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">scene</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span></pre></dt>
+<a id="scene=,Game,Scene"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">scene=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <a href="scene.html#Scene"><span class="Identifier">Scene</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set a new game scene. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L323"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L323" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="viewport"><a name="viewport,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">viewport</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Rect</span></pre></dt>
+<a id="viewport,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">viewport</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Get current viewport. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L332"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L332" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Game,Rect"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">viewport</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">)</span></pre></dt>
+<a id="viewport=,Game,Rect"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">viewport=</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set current viewport. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L340"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L340" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="resetViewport"><a name="resetViewport,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">resetViewport</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span></pre></dt>
+<a id="resetViewport,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">resetViewport</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set default viewport. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L350"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L350" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="run"><a name="run,Game"></a><pre><span class="Keyword">proc</span> <span class="Identifier">run</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">Game</span><span class="Other">)</span></pre></dt>
+<a id="run,Game"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">run</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <a href="nimgame.html#Game"><span class="Identifier">Game</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Start the game. 
-&nbsp;&nbsp;<a
-href="/tree/master/nimgame.nim#L359"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/nimgame.nim#L359" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1651,7 +1611,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:37 UTC</small>
       </div>
     </div>
   </div>

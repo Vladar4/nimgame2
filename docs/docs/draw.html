@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module draw</title>
+<title>draw</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module draw</h1>
+    <h1 class="title">draw</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,7 +1248,7 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#DrawMode"
-    title="DrawMode* = enum
+    title="DrawMode {.pure.} = enum
   default, aa, filled"><wbr />Draw<wbr />Mode<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
@@ -1228,58 +1256,58 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#pixel,Coord,Color"
-    title="pixel*(pos: Coord; color: Color): bool"><wbr />pixel<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#hline,Coord,float,Color"
-    title="hline*(pos: Coord; length: float; color: Color): bool"><wbr />hline<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#vline,Coord,float,Color"
-    title="vline*(pos: Coord; height: float; color: Color): bool"><wbr />vline<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#rect,Coord,Coord,Color"
-    title="rect*(pos1, pos2: Coord; color: Color): bool"><wbr />rect<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#roundedRect,Coord,Coord,float,Color"
-    title="roundedRect*(pos1, pos2: Coord; rad: float; color: Color): bool"><wbr />rounded<wbr />Rect<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#box,Coord,Coord,Color"
-    title="box*(pos1, pos2: Coord; color: Color): bool"><wbr />box<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#roundedBox,Coord,Coord,float,Color"
-    title="roundedBox*(pos1, pos2: Coord; rad: float; color: Color): bool"><wbr />rounded<wbr />Box<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#line,Coord,Coord,Color"
-    title="line*(pos1, pos2: Coord; color: Color): bool"><wbr />line<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#aaLine,Coord,Coord,Color"
-    title="aaLine*(pos1, pos2: Coord; color: Color): bool"><wbr />aa<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#thickLine,Coord,Coord,float,Color"
-    title="thickLine*(pos1, pos2: Coord; width: float; color: Color): bool"><wbr />thick<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#circle,Coord,float,Color,DrawMode"
-    title="circle*(pos: Coord; rad: float; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />circle<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#arc,Coord,Angle,Angle,Angle,Color"
-    title="arc*(pos: Coord; rad, start, finish: Angle; color: Color): bool"><wbr />arc<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#ellipse,Coord,Coord,Color,DrawMode"
-    title="ellipse*(pos, rad: Coord; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />ellipse<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pie,Coord,Angle,Angle,Angle,Color,DrawMode"
-    title="pie*(pos: Coord; rad, start, finish: Angle; color: Color;
-     mode: DrawMode = DrawMode.default): bool"><wbr />pie<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#trigon,Coord,Coord,Coord,Color,DrawMode"
-    title="trigon*(pos1, pos2, pos3: Coord; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />trigon<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#polygon,openarray[Coord],Color,DrawMode,Coord"
-    title="polygon*(pos: openarray[Coord]; color: Color; mode: DrawMode = DrawMode.default;
-         surface: sdl.Surface = nil; surfaceD: Coord = (0, 0)): bool"><wbr />polygon<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#bezier,openarray[Coord],float,Color"
-    title="bezier*(pos: openarray[Coord]; s: float; color: Color): bool"><wbr />bezier<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setFont,pointer,Dim"
-    title="setFont*(fontdata: pointer; dim: Dim)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#character,Coord,char,Color"
-    title="character*(pos: Coord; c: char; color: Color): bool"><wbr />character<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#string,Coord,string,Color"
-    title="string*(pos: Coord; s: string; color: Color): bool"><wbr />string<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#pixel%2CCoord%2CColor"
+    title="pixel(pos: Coord; color: Color): bool"><wbr />pixel<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#hline%2CCoord%2Cfloat%2CColor"
+    title="hline(pos: Coord; length: float; color: Color): bool"><wbr />hline<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#vline%2CCoord%2Cfloat%2CColor"
+    title="vline(pos: Coord; height: float; color: Color): bool"><wbr />vline<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rect%2CCoord%2CCoord%2CColor"
+    title="rect(pos1, pos2: Coord; color: Color): bool"><wbr />rect<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#roundedRect%2CCoord%2CCoord%2Cfloat%2CColor"
+    title="roundedRect(pos1, pos2: Coord; rad: float; color: Color): bool"><wbr />rounded<wbr />Rect<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#box%2CCoord%2CCoord%2CColor"
+    title="box(pos1, pos2: Coord; color: Color): bool"><wbr />box<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#roundedBox%2CCoord%2CCoord%2Cfloat%2CColor"
+    title="roundedBox(pos1, pos2: Coord; rad: float; color: Color): bool"><wbr />rounded<wbr />Box<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#line%2CCoord%2CCoord%2CColor"
+    title="line(pos1, pos2: Coord; color: Color): bool"><wbr />line<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#aaLine%2CCoord%2CCoord%2CColor"
+    title="aaLine(pos1, pos2: Coord; color: Color): bool"><wbr />aa<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#thickLine%2CCoord%2CCoord%2Cfloat%2CColor"
+    title="thickLine(pos1, pos2: Coord; width: float; color: Color): bool"><wbr />thick<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#circle%2CCoord%2Cfloat%2CColor%2CDrawMode"
+    title="circle(pos: Coord; rad: float; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />circle<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#arc%2CCoord%2CAngle%2CAngle%2CAngle%2CColor"
+    title="arc(pos: Coord; rad, start, finish: Angle; color: Color): bool"><wbr />arc<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ellipse%2CCoord%2CCoord%2CColor%2CDrawMode"
+    title="ellipse(pos, rad: Coord; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />ellipse<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#pie%2CCoord%2CAngle%2CAngle%2CAngle%2CColor%2CDrawMode"
+    title="pie(pos: Coord; rad, start, finish: Angle; color: Color;
+    mode: DrawMode = DrawMode.default): bool"><wbr />pie<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#trigon%2CCoord%2CCoord%2CCoord%2CColor%2CDrawMode"
+    title="trigon(pos1, pos2, pos3: Coord; color: Color; mode: DrawMode = DrawMode.default): bool"><wbr />trigon<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#polygon%2CopenArray%5BCoord%5D%2CColor%2CDrawMode%2Cnil%2CCoord"
+    title="polygon(pos: openArray[Coord]; color: Color; mode: DrawMode = DrawMode.default;
+        surface: sdl.Surface = nil; surfaceD: Coord = (0, 0)): bool"><wbr />polygon<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#bezier%2CopenArray%5BCoord%5D%2Cfloat%2CColor"
+    title="bezier(pos: openArray[Coord]; s: float; color: Color): bool"><wbr />bezier<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#setFont%2Cpointer%2CDim"
+    title="setFont(fontdata: pointer; dim: Dim)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#character%2CCoord%2Cchar%2CColor"
+    title="character(pos: Coord; c: char; color: Color): bool"><wbr />character<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#string%2CCoord%2Cstring%2CColor"
+    title="string(pos: Coord; s: string; color: Color): bool"><wbr />string<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#setFont.t,"
-    title="setFont*()"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setFontRotation.t,uint32"
-    title="setFontRotation*(rotation: uint32)"><wbr />set<wbr />Font<wbr />Rotation<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#setFont.t%2C"
+    title="setFont()"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#setFontRotation.t%2Cuint32"
+    title="setFontRotation(rotation: uint32)"><wbr />set<wbr />Font<wbr />Rotation<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1293,19 +1321,16 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="sdl2/sdl_gfx_primitives.html">sdl2/sdl_gfx_primitives</a>, <a class="reference external" href="sdl2/sdl_gfx_primitives_font.html">sdl2/sdl_gfx_primitives_font</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
+<a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="DrawMode"><a name="DrawMode"></a><pre><span class="Identifier">DrawMode</span><span class="Operator">*</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">pure</span></div><span class="Other pragmaend">.}</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="DrawMode"></a>
+<dt><pre><a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">pure</span></span><span class="Other">.}</span></span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">default</span><span class="Other">,</span> <span class="Identifier">aa</span><span class="Other">,</span> <span class="Identifier">filled</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L30"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L30" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1313,209 +1338,152 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="pixel"><a name="pixel,Coord,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pixel</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="pixel,Coord,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pixel</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a single pixel. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L36"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="hline"><a name="hline,Coord,float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">hline</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">length</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="hline,Coord,float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">hline</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">length</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a horizontal line from <tt class="docutils literal"><span class="pre">pos</span></tt> to the right. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L44"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="vline"><a name="vline,Coord,float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">vline</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="vline,Coord,float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">vline</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a vertical line from <tt class="docutils literal"><span class="pre">pos</span></tt> down. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L52"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L52" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="rect"><a name="rect,Coord,Coord,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rect</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="rect,Coord,Coord,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rect</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a rectangle. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L60"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="roundedRect"><a name="roundedRect,Coord,Coord,float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">roundedRect</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="roundedRect,Coord,Coord,float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">roundedRect</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a rounded rectangle. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L68"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="box"><a name="box,Coord,Coord,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">box</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="box,Coord,Coord,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">box</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a filled rectangle (box). 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L77"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="roundedBox"><a name="roundedBox,Coord,Coord,float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">roundedBox</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="roundedBox,Coord,Coord,float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">roundedBox</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a rounded filled rectangle (box). 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L85"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="line"><a name="line,Coord,Coord,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">line</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="line,Coord,Coord,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">line</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a line. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L94"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="aaLine"><a name="aaLine,Coord,Coord,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">aaLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="aaLine,Coord,Coord,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">aaLine</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw an anti-aliased line. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L102"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="thickLine"><a name="thickLine,Coord,Coord,float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">thickLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="thickLine,Coord,Coord,float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">thickLine</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a <tt class="docutils literal"><span class="pre">width</span></tt> pixels wide line. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L110"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L110" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="circle"><a name="circle,Coord,float,Color,DrawMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">circle</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">DrawMode</span> <span class="Other">=</span> <span class="Identifier">DrawMode</span><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="circle,Coord,float,Color,DrawMode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">circle</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span class="Other">=</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a circle. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="arc"><a name="arc,Coord,Angle,Angle,Angle,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">arc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">,</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="arc,Coord,Angle,Angle,Angle,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">arc</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">,</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw an arc. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L138"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L138" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="ellipse"><a name="ellipse,Coord,Coord,Color,DrawMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ellipse</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">,</span> <span class="Identifier">rad</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">DrawMode</span> <span class="Other">=</span> <span class="Identifier">DrawMode</span><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="ellipse,Coord,Coord,Color,DrawMode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">ellipse</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">,</span> <span class="Identifier">rad</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span class="Other">=</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw an ellipse. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L147"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L147" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pie"><a name="pie,Coord,Angle,Angle,Angle,Color,DrawMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pie</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">,</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span>
-         <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">DrawMode</span> <span class="Other">=</span> <span class="Identifier">DrawMode</span><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pie,Coord,Angle,Angle,Angle,Color,DrawMode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pie</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">rad</span><span class="Other">,</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span>
+        <span class="Identifier">mode</span><span class="Other">:</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span class="Other">=</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a circular sector (pie). 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L166"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L166" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="trigon"><a name="trigon,Coord,Coord,Coord,Color,DrawMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">trigon</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">,</span> <span class="Identifier">pos3</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">DrawMode</span> <span class="Other">=</span> <span class="Identifier">DrawMode</span><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="trigon,Coord,Coord,Coord,Color,DrawMode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">trigon</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">,</span> <span class="Identifier">pos3</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span class="Other">=</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a trigon. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L183"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="polygon"><a name="polygon,openarray[Coord],Color,DrawMode,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">polygon</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Coord</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">DrawMode</span> <span class="Other">=</span> <span class="Identifier">DrawMode</span><span class="Other">.</span><span class="Identifier">default</span><span class="Other">;</span>
-             <span class="Identifier">surface</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Surface</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span> <span class="Identifier">surfaceD</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="polygon,openArray[Coord],Color,DrawMode,nil,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">polygon</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a> <span class="Other">=</span> <a href="draw.html#DrawMode"><span class="Identifier">DrawMode</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">;</span>
+            <span class="Identifier">surface</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Surface</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span> <span class="Identifier">surfaceD</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a polygon. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L216"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L216" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="bezier"><a name="bezier,openarray[Coord],float,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">bezier</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Coord</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="bezier,openArray[Coord],float,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">bezier</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a bezier curve. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L250"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setFont"><a name="setFont,pointer,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">fontdata</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span><span class="Other">)</span></pre></dt>
+<a id="setFont,pointer,Dim"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Identifier">fontdata</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set sdl_gfx_primitives font. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L267"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L267" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="character"><a name="character,Coord,char,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">character</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="character,Coord,char,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">character</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a single character. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L285"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L285" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="string"><a name="string,Coord,string,Color"></a><pre><span class="Keyword">proc</span> <span class="Identifier">string</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="string,Coord,string,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">string</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Draw a string of text. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L293"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L293" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="setFont"><a name="setFont.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">setFont</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="setFont.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
 <dd>
 Set default sdl_gfx_primitives font. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L273"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L273" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setFontRotation"><a name="setFontRotation.t,uint32"></a><pre><span class="Keyword">template</span> <span class="Identifier">setFontRotation</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">rotation</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">)</span></pre></dt>
+<a id="setFontRotation.t,uint32"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">setFontRotation</span><span class="Other">(</span><span class="Identifier">rotation</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">)</span></pre></dt>
 <dd>
 Set sdl_gfx_primitives font rotation. 
-&nbsp;&nbsp;<a
-href="/tree/master/draw.nim#L279"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/draw.nim#L279" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1528,7 +1496,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:33 UTC</small>
       </div>
     </div>
   </div>

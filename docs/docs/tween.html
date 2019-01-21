@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module tween</title>
+<title>tween</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module tween</h1>
+    <h1 class="title">tween</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1211,22 +1239,16 @@ function main() {
   </div>
   <ul class="simple simple-toc" id="toc-list">
 <li>
-  <a class="reference reference-toplevel" href="#6" id="56">Imports</a>
-  <ul class="simple simple-toc-section">
-    
-  </ul>
-</li>
-<li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#TweenProcedure"
-    title="TweenProcedure*[V] = proc (start, distance: V; elapsed, duration: float;
-                        amplitude, period: V; back: float): V"><wbr />Tween<wbr />Procedure<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="TweenProcedure[V] = proc (start, distance: V; elapsed, duration: float;
+                       amplitude, period: V; back: float): V"><wbr />Tween<wbr />Procedure<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#TweenEnder"
-    title="TweenEnder*[T, V] = proc (tween: Tween[T, V])"><wbr />Tween<wbr />Ender<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="TweenEnder[T; V] = proc (tween: Tween[T, V])"><wbr />Tween<wbr />Ender<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Tween"
-    title="Tween*[T, V] = ref object of RootObj
-  target: T
+    title="Tween[T; V] = ref object of RootObj
+  target: T                    ## Target object
   get: proc (e: T): V             ## A value getter procedure
   set: proc (e: T; v: V)           ## A value setter procedure
   fStart, fFinish: V            ## Starting and finishing values
@@ -1246,158 +1268,152 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#value,Tween[T,V]"
-    title="value*[T, V](tween: Tween[T, V]): V"><wbr />value<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Tween[T,V],V"
-    title="`value =`*[T, V](tween: Tween[T, V]; val: V)">`<wbr />value<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#start,Tween[T,V]"
-    title="start*[T, V](tween: Tween[T, V]): V"><wbr />start<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#finish,Tween[T,V]"
-    title="finish*[T, V](tween: Tween[T, V]): V"><wbr />finish<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#distance,Tween[T,V]"
-    title="distance*[T, V](tween: Tween[T, V]): V"><wbr />distance<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#duration,Tween"
-    title="duration*(tween: Tween): float"><wbr />duration<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#elapsed,Tween"
-    title="elapsed*(tween: Tween): float"><wbr />elapsed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#progress,Tween"
-    title="progress*(tween: Tween): float"><wbr />progress<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#play,Tween"
-    title="play*(tween: Tween)"><wbr />play<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#stop,Tween"
-    title="stop*(tween: Tween)"><wbr />stop<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setup,Tween[T,V],V,V,float"
-    title="setup*[T, V](tween: Tween[T, V]; start, finish: V; duration: float; loops = 0)"><wbr />setup<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#update,Tween,float"
-    title="update*(tween: Tween; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#linear,V,V,float,float,V,V,float"
-    title="linear*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />linear<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inQuad,V,V,float,float,V,V,float"
-    title="inQuad*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />in<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outQuad,V,V,float,float,V,V,float"
-    title="outQuad*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />out<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutQuad,V,V,float,float,V,V,float"
-    title="inOutQuad*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Out<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inCubic,V,V,float,float,V,V,float"
-    title="inCubic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />in<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outCubic,V,V,float,float,V,V,float"
-    title="outCubic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-             back: float): V"><wbr />out<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutCubic,V,V,float,float,V,V,float"
-    title="inOutCubic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />in<wbr />Out<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInCubic,V,V,float,float,V,V,float"
-    title="outInCubic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />out<wbr />In<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inQuart,V,V,float,float,V,V,float"
-    title="inQuart*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />in<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outQuart,V,V,float,float,V,V,float"
-    title="outQuart*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-             back: float): V"><wbr />out<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutQuart,V,V,float,float,V,V,float"
-    title="inOutQuart*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />in<wbr />Out<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInQuart,V,V,float,float,V,V,float"
-    title="outInQuart*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />out<wbr />In<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inQuint,V,V,float,float,V,V,float"
-    title="inQuint*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />in<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outQuint,V,V,float,float,V,V,float"
-    title="outQuint*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-             back: float): V"><wbr />out<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutQuint,V,V,float,float,V,V,float"
-    title="inOutQuint*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />in<wbr />Out<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInQuint,V,V,float,float,V,V,float"
-    title="outInQuint*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />out<wbr />In<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inSine,V,V,float,float,V,V,float"
-    title="inSine*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />in<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outSine,V,V,float,float,V,V,float"
-    title="outSine*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />out<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutSine,V,V,float,float,V,V,float"
-    title="inOutSine*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Out<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInSine,V,V,float,float,V,V,float"
-    title="outInSine*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />out<wbr />In<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inExpo,V,V,float,float,V,V,float"
-    title="inExpo*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />in<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outExpo,V,V,float,float,V,V,float"
-    title="outExpo*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />out<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutExpo,V,V,float,float,V,V,float"
-    title="inOutExpo*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Out<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInExpo,V,V,float,float,V,V,float"
-    title="outInExpo*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />out<wbr />In<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inCirc,V,V,float,float,V,V,float"
-    title="inCirc*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />in<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outCirc,V,V,float,float,V,V,float"
-    title="outCirc*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />out<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutCirc,V,V,float,float,V,V,float"
-    title="inOutCirc*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Out<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInCirc,V,V,float,float,V,V,float"
-    title="outInCirc*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />out<wbr />In<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outBounce,V,V,float,float,V,V,float"
-    title="outBounce*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />out<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inBounce,V,V,float,float,V,V,float"
-    title="inBounce*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-             back: float): V"><wbr />in<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutBounce,V,V,float,float,V,V,float"
-    title="inOutBounce*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-                back: float): V"><wbr />in<wbr />Out<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInBounce,V,V,float,float,V,V,float"
-    title="outInBounce*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-                back: float): V"><wbr />out<wbr />In<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inElastic,V,V,float,float,V,V,float"
-    title="inElastic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outElastic,V,V,float,float,V,V,float"
-    title="outElastic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-               back: float): V"><wbr />out<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutElastic,V,V,float,float,V,V,float"
-    title="inOutElastic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-                 back: float): V"><wbr />in<wbr />Out<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInElastic,V,V,float,float,V,V,float"
-    title="outInElastic*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-                 back: float): V"><wbr />out<wbr />In<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inBack,V,V,float,float,V,V,float"
-    title="inBack*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-           back: float): V"><wbr />in<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outBack,V,V,float,float,V,V,float"
-    title="outBack*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-            back: float): V"><wbr />out<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#inOutBack,V,V,float,float,V,V,float"
-    title="inOutBack*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />in<wbr />Out<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#outInBack,V,V,float,float,V,V,float"
-    title="outInBack*[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
-              back: float): V"><wbr />out<wbr />In<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#reversing,Tween"
-    title="reversing*(tween: Tween)"><wbr />reversing<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#repeating,Tween"
-    title="repeating*(tween: Tween)"><wbr />repeating<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,Tween[T,V],T,proc(T),proc(T,V)"
-    title="init*[T, V](tween: Tween[T, V]; target: T; get: proc (e: T): V; set: proc (e: T; v: V))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTween,T,proc(T),proc(T,V)"
-    title="newTween*[T, V](target: T; get: proc (e: T): V; set: proc (e: T; v: V)): Tween[T, V]"><wbr />new<wbr />Tween<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#value%2CTween%5BT%2CV%5D"
+    title="value[T, V](tween: Tween[T, V]): V"><wbr />value<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#value%3D%2CTween%5BT%2CV%5D%2CV"
+    title="value=[T, V](tween: Tween[T, V]; val: V)"><wbr />value=<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#start%2CTween%5BT%2CV%5D"
+    title="start[T, V](tween: Tween[T, V]): V"><wbr />start<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#finish%2CTween%5BT%2CV%5D"
+    title="finish[T, V](tween: Tween[T, V]): V"><wbr />finish<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#distance%2CTween%5BT%2CV%5D"
+    title="distance[T, V](tween: Tween[T, V]): V"><wbr />distance<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#duration%2CTween"
+    title="duration(tween: Tween): float"><wbr />duration<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#elapsed%2CTween"
+    title="elapsed(tween: Tween): float"><wbr />elapsed<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#progress%2CTween"
+    title="progress(tween: Tween): float"><wbr />progress<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#play%2CTween"
+    title="play(tween: Tween)"><wbr />play<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#stop%2CTween"
+    title="stop(tween: Tween)"><wbr />stop<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#setup%2CTween%5BT%2CV%5D%2CV%2CV%2Cfloat%2Cint"
+    title="setup[T, V](tween: Tween[T, V]; start, finish: V; duration: float; loops = 0)"><wbr />setup<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#update%2CTween%2Cfloat"
+    title="update(tween: Tween; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#linear%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="linear[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />linear<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inQuad%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inQuad[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />in<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outQuad%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outQuad[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />out<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutQuad%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutQuad[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Out<wbr />Quad<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inCubic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inCubic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />in<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outCubic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outCubic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+            back: float): V"><wbr />out<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutCubic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutCubic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />in<wbr />Out<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInCubic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInCubic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />out<wbr />In<wbr />Cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inQuart%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inQuart[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />in<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outQuart%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outQuart[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+            back: float): V"><wbr />out<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutQuart%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutQuart[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />in<wbr />Out<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInQuart%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInQuart[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />out<wbr />In<wbr />Quart<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inQuint%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inQuint[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />in<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outQuint%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outQuint[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+            back: float): V"><wbr />out<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutQuint%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutQuint[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />in<wbr />Out<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInQuint%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInQuint[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />out<wbr />In<wbr />Quint<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inSine%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inSine[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />in<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outSine%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outSine[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />out<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutSine%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutSine[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Out<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInSine%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInSine[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />out<wbr />In<wbr />Sine<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inExpo%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inExpo[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />in<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outExpo%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outExpo[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />out<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutExpo%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutExpo[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Out<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInExpo%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInExpo[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />out<wbr />In<wbr />Expo<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inCirc%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inCirc[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />in<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outCirc%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outCirc[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />out<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutCirc%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutCirc[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Out<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInCirc%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInCirc[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />out<wbr />In<wbr />Circ<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outBounce%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outBounce[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />out<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inBounce%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inBounce[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+            back: float): V"><wbr />in<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutBounce%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutBounce[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+               back: float): V"><wbr />in<wbr />Out<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInBounce%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInBounce[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+               back: float): V"><wbr />out<wbr />In<wbr />Bounce<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inElastic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inElastic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outElastic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outElastic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+              back: float): V"><wbr />out<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutElastic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutElastic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+                back: float): V"><wbr />in<wbr />Out<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInElastic%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInElastic[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+                back: float): V"><wbr />out<wbr />In<wbr />Elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inBack%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inBack[V](start, distance: V; elapsed, duration: float; amplitude, period: V; back: float): V"><wbr />in<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outBack%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outBack[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+           back: float): V"><wbr />out<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#inOutBack%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="inOutBack[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />in<wbr />Out<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#outInBack%2CV%2CV%2Cfloat%2Cfloat%2CV%2CV%2Cfloat"
+    title="outInBack[V](start, distance: V; elapsed, duration: float; amplitude, period: V;
+             back: float): V"><wbr />out<wbr />In<wbr />Back<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#reversing%2CTween"
+    title="reversing(tween: Tween)"><wbr />reversing<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#repeating%2CTween"
+    title="repeating(tween: Tween)"><wbr />repeating<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#init%2CTween%5BT%2CV%5D%2CT%2Cproc%28T%29%2Cproc%28T%2CV%29"
+    title="init[T, V](tween: Tween[T, V]; target: T; get: proc (e: T): V; set: proc (e: T; v: V))"><wbr />init<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
+  <li><a class="reference" href="#newTween%2CT%2Cproc%28T%29%2Cproc%28T%2CV%29"
+    title="newTween[T, V](target: T; get: proc (e: T): V; set: proc (e: T; v: V)): Tween[T, V]"><wbr />new<wbr />Tween<span class="attachedType" style="visibility:hidden">Tween</span></a></li>
 
   </ul>
 </li>
@@ -1408,35 +1424,25 @@ function main() {
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   <p class="module-desc"></p>
-  <div class="section" id="6">
-<h1><a class="toc-backref" href="#6">Imports</a></h1>
-<dl class="item">
-<a class="reference external" href="math.html">math</a>
-</dl></div>
-<div class="section" id="7">
+  <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="TweenProcedure"><a name="TweenProcedure"></a><pre><span class="Identifier">TweenProcedure</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
-                        <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span></pre></dt>
+<a id="TweenProcedure"></a>
+<dt><pre><a href="tween.html#TweenProcedure"><span class="Identifier">TweenProcedure</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+                       <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L40"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="TweenEnder"><a name="TweenEnder"></a><pre><span class="Identifier">TweenEnder</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<a id="TweenEnder"></a>
+<dt><pre><a href="tween.html#TweenEnder"><span class="Identifier">TweenEnder</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L45"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Tween"><a name="Tween"></a><pre><span class="Identifier">Tween</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
-  <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span>
+<a id="Tween"></a>
+<dt><pre><a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">V</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+  <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span>                    <span class="Comment">## Target object</span>
   <span class="Identifier">get</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span>             <span class="Comment">## A value getter procedure</span>
   <span class="Identifier">set</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span>           <span class="Comment">## A value setter procedure</span>
   <span class="Identifier">fStart</span><span class="Other">,</span> <span class="Identifier">fFinish</span><span class="Other">:</span> <span class="Identifier">V</span>            <span class="Comment">## Starting and finishing values</span>
@@ -1446,17 +1452,13 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">back</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">float</span>                 <span class="Comment">## Ease Back coefficient</span>
   <span class="Identifier">loop</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">loopLimit</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>        <span class="Comment">## Loop counter and loop limit</span>
   <span class="Identifier">playing</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>               <span class="Comment">## Playing status flag</span>
-  <span class="Identifier">procedure</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TweenProcedure</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span> <span class="Comment">## \</span>
+  <span class="Identifier">procedure</span><span class="Operator">*</span><span class="Other">:</span> <a href="tween.html#TweenProcedure"><span class="Identifier">TweenProcedure</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span> <span class="Comment">## \</span>
                               <span class="Comment">## Value changing procedure, called from the ``update()``</span>
-  <span class="Identifier">ender</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TweenEnder</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span>      <span class="Comment">## \</span>
+  <span class="Identifier">ender</span><span class="Operator">*</span><span class="Other">:</span> <a href="tween.html#TweenEnder"><span class="Identifier">TweenEnder</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span>      <span class="Comment">## \</span>
                         <span class="Comment">##  Loop ending procedure, called from the ``update()``</span>
   </pre></dt>
 <dd>
-Target object
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L47"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
+
 
 </dd>
 
@@ -1464,566 +1466,398 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="value"><a name="value,Tween[T,V]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">value</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="value,Tween[T,V]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">value</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the target value of <tt class="docutils literal"><span class="pre">tween</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L85"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Tween[T,V],V"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">value</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="value=,Tween[T,V],V"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">value=</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set the target value of <tt class="docutils literal"><span class="pre">tween</span></tt> to <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L92"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L92" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="start"><a name="start,Tween[T,V]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">start</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="start,Tween[T,V]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">start</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> starting value. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L99"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L99" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="finish"><a name="finish,Tween[T,V]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">finish</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="finish,Tween[T,V]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">finish</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> final value. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L105"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="distance"><a name="distance,Tween[T,V]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">distance</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="distance,Tween[T,V]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">distance</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the total distance. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L111"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="duration"><a name="duration,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">duration</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="duration,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">duration</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <tt class="docutils literal"><span class="pre">tween</span></tt>'s total duration. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L117"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="elapsed"><a name="elapsed,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">elapsed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="elapsed,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">elapsed</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <tt class="docutils literal"><span class="pre">tween</span></tt>'s elapsed duration. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L123"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="progress"><a name="progress,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">progress</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span></pre></dt>
+<a id="progress,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">progress</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <tt class="docutils literal"><span class="pre">tween</span></tt> progress in <cite>0.0</cite>..`1.0` range. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L129"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="play"><a name="play,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span></pre></dt>
+<a id="play,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span></pre></dt>
 <dd>
 Start playing <tt class="docutils literal"><span class="pre">tween</span></tt> with previously set params. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L135"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="stop"><a name="stop,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span></pre></dt>
+<a id="stop,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span></pre></dt>
 <dd>
 Stop playing <tt class="docutils literal"><span class="pre">tween</span></tt> immediately. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L144"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setup"><a name="setup,Tween[T,V],V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setup</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">loops</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
+<a id="setup,Tween[T,V],V,V,float,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setup</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">loops</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
 <dd>
 <p>Set up <tt class="docutils literal"><span class="pre">tween</span></tt> params.</p>
 <p><tt class="docutils literal"><span class="pre">start</span></tt>, <tt class="docutils literal"><span class="pre">finish</span></tt> Limiting values for the target variable.</p>
 <p><tt class="docutils literal"><span class="pre">duration</span></tt> Duration (in seconds).</p>
 <p><tt class="docutils literal"><span class="pre">loops</span></tt> Loop limit. <cite>0</cite> for one loop, <cite>-1</cite> for looping forever. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L153"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="update"><a name="update,Tween,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
+<a id="update,Tween,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span></pre></dt>
 <dd>
 Tween update procedure. Call it from the scene update method. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L173"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L173" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="linear"><a name="linear,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">linear</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="linear,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">linear</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Linear tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L190"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L190" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inQuad"><a name="inQuad,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inQuad</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inQuad,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inQuad</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Quadratic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L199"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L199" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outQuad"><a name="outQuad,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outQuad</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outQuad,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outQuad</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Quadratic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L206"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L206" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutQuad"><a name="inOutQuad,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuad</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutQuad,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuad</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Quadratic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L214"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L214" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inCubic"><a name="inCubic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inCubic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inCubic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inCubic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Cubic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L229"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L229" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outCubic"><a name="outCubic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outCubic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outCubic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outCubic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Cubic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L236"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L236" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutCubic"><a name="inOutCubic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutCubic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutCubic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutCubic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Cubic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L243"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInCubic"><a name="outInCubic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInCubic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInCubic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInCubic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Cubic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L255"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L255" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inQuart"><a name="inQuart,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inQuart</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inQuart,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inQuart</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Quart tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L274"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L274" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outQuart"><a name="outQuart,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outQuart</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outQuart,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outQuart</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Quart tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L281"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L281" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutQuart"><a name="inOutQuart,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuart</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutQuart,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuart</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Quart tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L288"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L288" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInQuart"><a name="outInQuart,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInQuart</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInQuart,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInQuart</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Quart tween procedure 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L300"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L300" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inQuint"><a name="inQuint,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inQuint</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inQuint,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inQuint</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Quint tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L318"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L318" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outQuint"><a name="outQuint,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outQuint</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outQuint,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outQuint</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Quint tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L325"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L325" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutQuint"><a name="inOutQuint,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuint</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutQuint,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutQuint</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Quint tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L332"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L332" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInQuint"><a name="outInQuint,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInQuint</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInQuint,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInQuint</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Quint tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L344"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L344" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inSine"><a name="inSine,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inSine</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inSine,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inSine</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Sine tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L362"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L362" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outSine"><a name="outSine,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outSine</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outSine,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outSine</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Sine tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L369"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L369" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutSine"><a name="inOutSine,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutSine</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutSine,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutSine</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Sine tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L376"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L376" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInSine"><a name="outInSine,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInSine</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInSine,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInSine</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Sine tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L383"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L383" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inExpo"><a name="inExpo,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inExpo</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inExpo,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inExpo</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Expo tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L401"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L401" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outExpo"><a name="outExpo,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outExpo</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outExpo,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outExpo</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Expo tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L413"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L413" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutExpo"><a name="inOutExpo,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutExpo</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutExpo,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutExpo</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Expo tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L425"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L425" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInExpo"><a name="outInExpo,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInExpo</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInExpo,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInExpo</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Expo tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L444"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L444" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inCirc"><a name="inCirc,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inCirc</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inCirc,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inCirc</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Circ tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L462"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L462" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outCirc"><a name="outCirc,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outCirc</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outCirc,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outCirc</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Circ tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L470"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L470" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutCirc"><a name="inOutCirc,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutCirc</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutCirc,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutCirc</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Circ tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L478"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L478" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInCirc"><a name="outInCirc,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInCirc</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInCirc,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInCirc</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Circ tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L490"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L490" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outBounce"><a name="outBounce,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outBounce</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outBounce,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outBounce</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Bounce tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L508"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L508" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inBounce"><a name="inBounce,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inBounce</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inBounce,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inBounce</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Bounce tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L528"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L528" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutBounce"><a name="inOutBounce,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutBounce</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
-                    <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutBounce,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutBounce</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Bounce tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L538"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L538" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInBounce"><a name="outInBounce,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInBounce</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
-                    <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInBounce,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInBounce</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Bounce tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L554"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L554" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inElastic"><a name="inElastic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inElastic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inElastic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inElastic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Elastic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L572"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L572" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outElastic"><a name="outElastic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outElastic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                   <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outElastic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outElastic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Elastic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L598"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L598" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutElastic"><a name="inOutElastic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutElastic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
-                     <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutElastic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutElastic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+                    <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Elastic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L623"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L623" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInElastic"><a name="outInElastic,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInElastic</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
-                     <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInElastic,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInElastic</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+                    <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Elastic tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L653"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L653" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inBack"><a name="inBack,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inBack</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inBack,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inBack</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+              <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In Back tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L671"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L671" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outBack"><a name="outBack,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outBack</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outBack,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outBack</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+               <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out Back tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L681"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L681" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="inOutBack"><a name="inOutBack,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">inOutBack</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="inOutBack,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">inOutBack</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease In/Out Back tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L692"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L692" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="outInBack"><a name="outInBack,V,V,float,float,V,V,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">outInBack</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
-                  <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="outInBack,V,V,float,float,V,V,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">outInBack</span><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">,</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">amplitude</span><span class="Other">,</span> <span class="Identifier">period</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span>
+                 <span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Ease Out/In Back tween procedure. 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L711"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L711" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="reversing"><a name="reversing,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">reversing</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="reversing,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">reversing</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Tween ender.</p>
 <p>Reverses the direction on each loop.</p>
 <p>Default option.</p>
 <p><tt class="docutils literal"><span class="pre">Note:</span></tt> each reversal counts as one loop. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L731"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L731" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="repeating"><a name="repeating,Tween"></a><pre><span class="Keyword">proc</span> <span class="Identifier">repeating</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">procvar</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="repeating,Tween"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">repeating</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">procvar</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Tween ender.</p>
 <p>Repeats from <tt class="docutils literal"><span class="pre">start</span></tt> to <tt class="docutils literal"><span class="pre">finish</span></tt> on each loop. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L747"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L747" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,Tween[T,V],T,proc(T),proc(T,V)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">get</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">set</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+<a id="init,Tween[T,V],T,proc(T),proc(T,V)"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">tween</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">get</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">set</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
 <dd>
 <p>Set new bindings for the <tt class="docutils literal"><span class="pre">tween</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">target</span></tt> The target object of this tween.</p>
 <p><tt class="docutils literal"><span class="pre">get</span></tt> A value getter procedure.</p>
 <p><tt class="docutils literal"><span class="pre">set</span></tt> A value setter procedure. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L762"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L762" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTween"><a name="newTween,T,proc(T),proc(T,V)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTween</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">get</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">set</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Tween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span></pre></dt>
+<a id="newTween,T,proc(T),proc(T,V)"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTween</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">target</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">get</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">set</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">V</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="tween.html#Tween"><span class="Identifier">Tween</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">V</span><span class="Other">]</span></pre></dt>
 <dd>
 <p>Create a new <tt class="docutils literal"><span class="pre">Tween</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">target</span></tt> The target object of this tween.</p>
 <p><tt class="docutils literal"><span class="pre">get</span></tt> A value getter procedure.</p>
 <p><tt class="docutils literal"><span class="pre">set</span></tt> A value setter procedure. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/tween.nim#L782"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/tween.nim#L782" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -2036,7 +1870,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:42 UTC</small>
       </div>
     </div>
   </div>

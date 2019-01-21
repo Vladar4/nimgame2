@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module collider</title>
+<title>collider</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module collider</h1>
+    <h1 class="title">collider</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1211,166 +1239,112 @@ function main() {
   </div>
   <ul class="simple simple-toc" id="toc-list">
 <li>
-  <a class="reference reference-toplevel" href="#6" id="56">Imports</a>
-  <ul class="simple simple-toc-section">
-    
-  </ul>
-</li>
-<li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#init,Collider,Entity,Coord"
-    title="init*(a: Collider; parent: Entity; pos: Coord = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newCollider,Entity,Coord"
-    title="newCollider*(parent: Entity; pos: Coord = (0, 0)): Collider"><wbr />new<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#renderCollider,Collider"
-    title="renderCollider*(a: Collider)"><wbr />render<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,BoxCollider,Entity,Coord,Dim"
-    title="init*(b: BoxCollider; parent: Entity; pos: Coord = (0, 0); dim: Dim = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newBoxCollider,Entity,Coord,Dim"
-    title="newBoxCollider*(parent: Entity; pos: Coord = (0, 0); dim: Dim = (0, 0)): BoxCollider"><wbr />new<wbr />Box<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,CircleCollider,Entity,Coord,float"
-    title="init*(c: CircleCollider; parent: Entity; pos: Coord = (0, 0); radius: float = 0)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newCircleCollider,Entity,Coord,float"
-    title="newCircleCollider*(parent: Entity; pos: Coord = (0, 0); radius: float = 0): CircleCollider"><wbr />new<wbr />Circle<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,LineCollider,Entity,Coord,Coord"
-    title="init*(d: LineCollider; parent: Entity; pos: Coord = (0, 0); pos2: Coord = (0, 0))"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newLineCollider,Entity,Coord,Coord"
-    title="newLineCollider*(parent: Entity; pos: Coord = (0, 0); pos2: Coord = (0, 0)): LineCollider"><wbr />new<wbr />Line<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,PolyCollider,Entity,Coord,openarray[Coord]"
-    title="init*(p: PolyCollider; parent: Entity; pos: Coord = (0, 0); points: openarray[Coord])"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updateFarthest,PolyCollider"
-    title="updateFarthest*(p: PolyCollider)"><wbr />update<wbr />Farthest<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newPolyCollider,Entity,Coord,openarray[Coord]"
-    title="newPolyCollider*(parent: Entity; pos: Coord = (0, 0); points: openarray[Coord]): PolyCollider"><wbr />new<wbr />Poly<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,GroupCollider,Entity"
-    title="init*(g: GroupCollider; parent: Entity)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newGroupCollider,Entity"
-    title="newGroupCollider*(parent: Entity): GroupCollider"><wbr />new<wbr />Group<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#checkCollisions,Entity,seq[Entity]"
-    title="checkCollisions*(entity: Entity; list: seq[Entity])"><wbr />check<wbr />Collisions<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#isColliding,Entity,seq[Entity]"
-    title="isColliding*(entity: Entity; list: seq[Entity]): bool"><wbr />is<wbr />Colliding<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#willCollide,Entity,Coord,Angle,Scale,seq[Entity]"
-    title="willCollide*(entity: Entity; pos: Coord; rot: Angle; scale: Scale; list: seq[Entity]): bool"><wbr />will<wbr />Collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#renderCollider%2CCollider"
+    title="renderCollider(a: Collider)"><wbr />render<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#updateFarthest%2CPolyCollider"
+    title="updateFarthest(p: PolyCollider)"><wbr />update<wbr />Farthest<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#init%2CGroupCollider%2CEntity"
+    title="init(g: GroupCollider; parent: Entity)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#newGroupCollider%2CEntity"
+    title="newGroupCollider(parent: Entity): GroupCollider"><wbr />new<wbr />Group<wbr />Collider<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#checkCollisions%2CEntity%2Cseq%5BEntity%5D"
+    title="checkCollisions(entity: Entity; list: seq[Entity])"><wbr />check<wbr />Collisions<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#isColliding%2CEntity%2Cseq%5BEntity%5D"
+    title="isColliding(entity: Entity; list: seq[Entity]): bool"><wbr />is<wbr />Colliding<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#willCollide%2CEntity%2CCoord%2CAngle%2CScale%2Cseq%5BEntity%5D"
+    title="willCollide(entity: Entity; pos: Coord; rot: Angle; scale: Scale; list: seq[Entity]): bool"><wbr />will<wbr />Collide<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#13" id="63">Methods</a>
+  <a class="reference reference-toplevel" href="#14" id="64">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#collide.e,Coord,Collider"
-    title="collide*(pos: Coord; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Coord,BoxCollider"
-    title="collide*(pos: Coord; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Coord,CircleCollider"
-    title="collide*(pos: Coord; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Coord,LineCollider"
-    title="collide*(pos: Coord; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Coord,PolyCollider"
-    title="collide*(pos: Coord; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,Collider"
-    title="render*(a: Collider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,Coord"
-    title="collide*(a: Collider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,Collider"
-    title="collide*(a1, a2: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,BoxCollider"
-    title="collide*(a: Collider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,CircleCollider"
-    title="collide*(a: Collider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,LineCollider"
-    title="collide*(a: Collider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,PolyCollider"
-    title="collide*(a: Collider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,Collider,GroupCollider"
-    title="collide*(a: Collider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,BoxCollider"
-    title="render*(b: BoxCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,Coord"
-    title="collide*(b: BoxCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,Collider"
-    title="collide*(b: BoxCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,BoxCollider"
-    title="collide*(b1, b2: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,CircleCollider"
-    title="collide*(b: BoxCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,LineCollider"
-    title="collide*(b: BoxCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,PolyCollider"
-    title="collide*(b: BoxCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,BoxCollider,GroupCollider"
-    title="collide*(b: BoxCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,CircleCollider"
-    title="render*(c: CircleCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,Coord"
-    title="collide*(c: CircleCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,Collider"
-    title="collide*(c: CircleCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,BoxCollider"
-    title="collide*(c: CircleCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,CircleCollider"
-    title="collide*(c1, c2: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,LineCollider"
-    title="collide*(c: CircleCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,PolyCollider"
-    title="collide*(c: CircleCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,CircleCollider,GroupCollider"
-    title="collide*(c: CircleCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,LineCollider"
-    title="render*(d: LineCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,Coord"
-    title="collide*(d: LineCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,Collider"
-    title="collide*(d: LineCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,BoxCollider"
-    title="collide*(d: LineCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,CircleCollider"
-    title="collide*(d: LineCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,LineCollider"
-    title="collide*(d1, d2: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,PolyCollider"
-    title="collide*(d: LineCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,GroupCollider"
-    title="collide*(d: LineCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,PolyCollider"
-    title="render*(p: PolyCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,Coord"
-    title="collide*(p: PolyCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,Collider"
-    title="collide*(p: PolyCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,BoxCollider"
-    title="collide*(p: PolyCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,CircleCollider"
-    title="collide*(p: PolyCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,LineCollider"
-    title="collide*(p: PolyCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,PolyCollider,PolyCollider"
-    title="collide*(p1, p2: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,LineCollider,GroupCollider_2"
-    title="collide*(p: LineCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#render.e,GroupCollider"
-    title="render*(g: GroupCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,Coord"
-    title="collide*(g: GroupCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,Collider"
-    title="collide*(g: GroupCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,BoxCollider"
-    title="collide*(g: GroupCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,CircleCollider"
-    title="collide*(g: GroupCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,LineCollider"
-    title="collide*(g: GroupCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#collide.e,GroupCollider,PolyCollider"
-    title="collide*(g: GroupCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#collide.e%2CCoord%2CCollider"
+    title="collide(pos: Coord; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#render.e%2CCollider"
+    title="render(a: Collider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CCoord"
+    title="collide(a: Collider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CCollider"
+    title="collide(a1, a2: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CBoxCollider"
+    title="collide(a: Collider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CCircleCollider"
+    title="collide(a: Collider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CLineCollider"
+    title="collide(a: Collider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CPolyCollider"
+    title="collide(a: Collider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCollider%2CGroupCollider"
+    title="collide(a: Collider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CBoxCollider%2CCoord"
+    title="collide(b: BoxCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CBoxCollider%2CCollider"
+    title="collide(b: BoxCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CBoxCollider%2CPolyCollider"
+    title="collide(b: BoxCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CBoxCollider%2CGroupCollider"
+    title="collide(b: BoxCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCircleCollider%2CCoord"
+    title="collide(c: CircleCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCircleCollider%2CCollider"
+    title="collide(c: CircleCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCircleCollider%2CBoxCollider"
+    title="collide(c: CircleCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCircleCollider%2CPolyCollider"
+    title="collide(c: CircleCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CCircleCollider%2CGroupCollider"
+    title="collide(c: CircleCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CCoord"
+    title="collide(d: LineCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CCollider"
+    title="collide(d: LineCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CBoxCollider"
+    title="collide(d: LineCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CCircleCollider"
+    title="collide(d: LineCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CPolyCollider"
+    title="collide(d: LineCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CGroupCollider"
+    title="collide(d: LineCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CCoord"
+    title="collide(p: PolyCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CCollider"
+    title="collide(p: PolyCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CBoxCollider"
+    title="collide(p: PolyCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CCircleCollider"
+    title="collide(p: PolyCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CLineCollider"
+    title="collide(p: PolyCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CPolyCollider%2CPolyCollider"
+    title="collide(p1, p2: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CLineCollider%2CGroupCollider_2"
+    title="collide(p: LineCollider; g: GroupCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#render.e%2CGroupCollider"
+    title="render(g: GroupCollider)"><wbr />render<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CCoord"
+    title="collide(g: GroupCollider; pos: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CCollider"
+    title="collide(g: GroupCollider; a: Collider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CBoxCollider"
+    title="collide(g: GroupCollider; b: BoxCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CCircleCollider"
+    title="collide(g: GroupCollider; c: CircleCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CLineCollider"
+    title="collide(g: GroupCollider; d: LineCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#collide.e%2CGroupCollider%2CPolyCollider"
+    title="collide(g: GroupCollider; p: PolyCollider): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#collide.t,Coord,Coord"
-    title="collide*(pos1, pos2: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#collide.t%2CCoord%2CCoord"
+    title="collide(pos1, pos2: Coord): bool"><wbr />collide<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1381,652 +1355,294 @@ function main() {
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   <p class="module-desc">Do not import this file. It is included in <cite>entity.nim</cite> automatically.</p>
-  <div class="section" id="6">
-<h1><a class="toc-backref" href="#6">Imports</a></h1>
-<dl class="item">
-<a class="reference external" href="fenv.html">fenv</a>
-</dl></div>
-<div class="section" id="12">
+  <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="init"><a name="init,Collider,Entity,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+<a id="renderCollider,Collider"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">renderCollider</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L195"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newCollider"><a name="newCollider,Entity,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Collider</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L201"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L201" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="renderCollider"><a name="renderCollider,Collider"></a><pre><span class="Keyword">proc</span> <span class="Identifier">renderCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L206"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L206" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="init"><a name="init,BoxCollider,Entity,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L258"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L258" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="newBoxCollider"><a name="newBoxCollider,Entity,Coord,Dim"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newBoxCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">dim</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L264"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L264" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="init"><a name="init,CircleCollider,Entity,Coord,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L376"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L376" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="newCircleCollider"><a name="newCircleCollider,Entity,Coord,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newCircleCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L382"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L382" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="init"><a name="init,LineCollider,Entity,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L482"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L482" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="newLineCollider"><a name="newLineCollider,Entity,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newLineCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">LineCollider</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L488"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L488" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="init"><a name="init,PolyCollider,Entity,Coord,openarray[Coord]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">points</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Coord</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L577"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L577" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="updateFarthest"><a name="updateFarthest,PolyCollider"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateFarthest</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="updateFarthest,PolyCollider"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateFarthest</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Call this procedure any time you changed points' coordinates. 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L584"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L584" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newPolyCollider"><a name="newPolyCollider,Entity,Coord,openarray[Coord]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newPolyCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">points</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Coord</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span></pre></dt>
+<a id="init,GroupCollider,Entity"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L590"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L590" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,GroupCollider,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span></pre></dt>
+<a id="newGroupCollider,Entity"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newGroupCollider</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L689"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L689" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newGroupCollider"><a name="newGroupCollider,Entity"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newGroupCollider</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L694"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L694" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="checkCollisions"><a name="checkCollisions,Entity,seq[Entity]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">checkCollisions</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<a id="checkCollisions,Entity,seq[Entity]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">checkCollisions</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Trigger <tt class="docutils literal"><span class="pre">onCollide</span></tt> method of <tt class="docutils literal"><span class="pre">entity</span></tt> with a given <tt class="docutils literal"><span class="pre">list</span></tt> of targets. 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L761"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L761" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="isColliding"><a name="isColliding,Entity,seq[Entity]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isColliding</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="isColliding,Entity,seq[Entity]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">isColliding</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if <tt class="docutils literal"><span class="pre">entity</span></tt> collides with one of the elements in the given <tt class="docutils literal"><span class="pre">list</span></tt>, or <cite>false</cite> if no collisions occurs. 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L771"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L771" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="willCollide"><a name="willCollide,Entity,Coord,Angle,Scale,seq[Entity]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">willCollide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rot</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">scale</span><span class="Other">:</span> <span class="Identifier">Scale</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="willCollide,Entity,Coord,Angle,Scale,seq[Entity]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">willCollide</span><span class="Other">(</span><span class="Identifier">entity</span><span class="Other">:</span> <span class="Identifier">Entity</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">rot</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">scale</span><span class="Other">:</span> <span class="Identifier">Scale</span><span class="Other">;</span> <span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Entity</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if <tt class="docutils literal"><span class="pre">entity</span></tt> will collide with one of the elements in the given list, if <tt class="docutils literal"><span class="pre">entity</span></tt>'s coordinates or dimentsions will change. 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L780"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L780" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="13">
-<h1><a class="toc-backref" href="#13">Methods</a></h1>
+<div class="section" id="14">
+<h1><a class="toc-backref" href="#14">Methods</a></h1>
 <dl class="item">
-<dt id="collide"><a name="collide.e,Coord,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Coord,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L122"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Coord,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="render.e,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L127"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L127" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Coord,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Collider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L132"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L132" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Coord,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,Collider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a1</span><span class="Other">,</span> <span class="Identifier">a2</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L137"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Coord,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,Collider,BoxCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L152"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Collider,CircleCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L215"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L215" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Collider,LineCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L220"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L220" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a1</span><span class="Other">,</span> <span class="Identifier">a2</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">base</span><span class="Other">,</span> <span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Collider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L225"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L225" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,Collider,GroupCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L230"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L230" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,BoxCollider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L235"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L235" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,BoxCollider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L240"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,BoxCollider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L245"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,Collider,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,BoxCollider,GroupCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L250"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span></pre></dt>
+<a id="collide.e,CircleCollider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L270"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L270" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,CircleCollider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L276"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L276" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,CircleCollider,BoxCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L281"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L281" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b1</span><span class="Other">,</span> <span class="Identifier">b2</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,CircleCollider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L286"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L286" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,CircleCollider,GroupCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L295"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L295" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,LineCollider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L314"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L314" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,LineCollider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L339"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L339" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,BoxCollider,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,LineCollider,BoxCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L368"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L368" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span></pre></dt>
+<a id="collide.e,LineCollider,CircleCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L388"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L388" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,LineCollider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L394"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L394" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,LineCollider,GroupCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L399"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L399" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,PolyCollider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L404"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L404" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c1</span><span class="Other">,</span> <span class="Identifier">c2</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,PolyCollider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L409"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L409" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,PolyCollider,BoxCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L415"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L415" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,PolyCollider,CircleCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L446"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L446" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,CircleCollider,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,PolyCollider,LineCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L474"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L474" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span></pre></dt>
+<a id="collide.e,PolyCollider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p1</span><span class="Other">,</span> <span class="Identifier">p2</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L494"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L494" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,LineCollider,GroupCollider_2"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L505"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L505" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="render.e,GroupCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L510"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L510" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,GroupCollider,Coord"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L515"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L515" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="collide.e,GroupCollider,Collider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L520"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L520" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d1</span><span class="Other">,</span> <span class="Identifier">d2</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,GroupCollider,BoxCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L525"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L525" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,GroupCollider,CircleCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L539"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L539" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="collide"><a name="collide.e,LineCollider,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.e,GroupCollider,LineCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L569"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L569" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="render"><a name="render.e,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span></pre></dt>
+<a id="collide.e,GroupCollider,PolyCollider"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L596"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L596" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L615"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L615" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L620"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L620" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L625"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L625" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L630"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L630" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L635"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L635" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,PolyCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p1</span><span class="Other">,</span> <span class="Identifier">p2</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L640"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L640" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,LineCollider,GroupCollider_2"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">;</span> <span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L681"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L681" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="render"><a name="render.e,GroupCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">)</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L699"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L699" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,Coord"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L707"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L707" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,Collider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Collider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L712"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L712" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,BoxCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">BoxCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L717"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L717" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,CircleCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CircleCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L722"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L722" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,LineCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">d</span><span class="Other">:</span> <span class="Identifier">LineCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L727"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L727" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="collide"><a name="collide.e,GroupCollider,PolyCollider"></a><pre><span class="Keyword">method</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">g</span><span class="Other">:</span> <span class="Identifier">GroupCollider</span><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Identifier">PolyCollider</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L732"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L732" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="collide"><a name="collide.t,Coord,Coord"></a><pre><span class="Keyword">template</span> <span class="Identifier">collide</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="collide.t,Coord,Coord"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">collide</span><span class="Other">(</span><span class="Identifier">pos1</span><span class="Other">,</span> <span class="Identifier">pos2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/collider.nim#L117"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/collider.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -2039,7 +1655,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:07:23 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 15:00:26 UTC</small>
       </div>
     </div>
   </div>

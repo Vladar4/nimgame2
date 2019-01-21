@@ -16,7 +16,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>truetypefont</title>
+<title>tar</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -1219,7 +1219,7 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">truetypefont</h1>
+    <h1 class="title">tar</h1>
     <div class="row">
   <div class="three columns">
   <div id="global-links">
@@ -1239,49 +1239,41 @@ function main() {
   </div>
   <ul class="simple simple-toc" id="toc-list">
 <li>
-  <a class="reference reference-toplevel" href="#6" id="56">Imports</a>
-  <ul class="simple simple-toc-section">
-    
-  </ul>
-</li>
-<li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#TrueTypeFont"
-    title="TrueTypeFont = ref object of font.Font
-  fFont: ttf.Font"><wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#TarFile"
+    title="TarFile = object
+  data: ptr uint8
+  size: int
+  contents: seq[tuple[name: cstring, size: int, data: ptr uint8]]"><wbr />Tar<wbr />File<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#free%2CTrueTypeFont"
-    title="free(font: TrueTypeFont)"><wbr />free<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#init%2CTrueTypeFont"
-    title="init(font: TrueTypeFont)"><wbr />init<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#newTrueTypeFont%2C"
-    title="newTrueTypeFont(): TrueTypeFont"><wbr />new<wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#load%2CTrueTypeFont%2Cstring%2Cint"
-    title="load(font: TrueTypeFont; file: string; size: int): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#load%2CTrueTypeFont%2Cptr.RWops%2Cint%2Cbool"
-    title="load(font: TrueTypeFont; src: ptr RWops; size: int; freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#renderTrueTypeFont%2CTrueTypeFont%2Cstring%2CColor"
-    title="renderTrueTypeFont(font: TrueTypeFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
+      <li><a class="reference" href="#contents%2CTarFile"
+    title="contents(tar: TarFile): seq[string]"><wbr />contents<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#contents%2CTarFile%2Cstring%2Cint"
+    title="contents(tar: TarFile; sub: string; pos: int = 0): seq[string]"><wbr />contents<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#close%2CTarFile"
+    title="close(tar: var TarFile)"><wbr />close<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#open%2CTarFile%2Cstring"
+    title="open(tar: var TarFile; filename: string): bool"><wbr />open<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#openz%2CTarFile%2Cstring"
+    title="openz(tar: var TarFile; filename: string): bool"><wbr />openz<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#index%2CTarFile%2Cstring"
+    title="index(tar: TarFile; filename: string): int"><wbr />index<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
+  <li><a class="reference" href="#read%2CTarFile%2Cstring"
+    title="read(tar: TarFile; filename: string): ptr RWops"><wbr />read<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#14" id="64">Methods</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#getError.e%2CTrueTypeFont"
-    title="getError(font: TrueTypeFont): string"><wbr />get<wbr />Error<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#charH.e%2CTrueTypeFont"
-    title="charH(font: TrueTypeFont): int"><wbr />char<wbr />H<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#lineDim.e%2CTrueTypeFont%2Cstring"
-    title="lineDim(font: TrueTypeFont; line: string): Dim"><wbr />line<wbr />Dim<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#render.e%2CTrueTypeFont%2Cstring%2CColor"
-    title="render(font: TrueTypeFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
+      <li><a class="reference" href="#exists.t%2CTarFile%2Cstring"
+    title="exists(tar: TarFile; filename: string): bool"><wbr />exists<span class="attachedType" style="visibility:hidden">TarFile</span></a></li>
 
   </ul>
 </li>
@@ -1291,18 +1283,17 @@ function main() {
   </div>
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
-  <p class="module-desc"></p>
-  <div class="section" id="6">
-<h1><a class="toc-backref" href="#6">Imports</a></h1>
-<dl class="item">
-<a class="reference external" href="font.html">font</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
-</dl></div>
-<div class="section" id="7">
+  <p class="module-desc"><p>Simple utility for reading TAR archives and loading their contents into <tt class="docutils literal"><span class="pre">sdl.RWops</span></tt>. Based on <tt class="docutils literal"><span class="pre">dxTarRead</span></tt> by Dmitry Hrabrov a.k.a. DeXPeriX.</p>
+<p>Original source link: <a class="reference external" href="https://github.com/DeXP/dxTarRead/blob/master/dxTarRead.c">https://github.com/DeXP/dxTarRead/blob/master/dxTarRead.c</a> </p>
+</p>
+  <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<a id="TrueTypeFont"></a>
-<dt><pre><a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">font</span><span class="Other">.</span><span class="Identifier">Font</span>
-  <span class="Identifier">fFont</span><span class="Other">:</span> <span class="Identifier">ttf</span><span class="Other">.</span><span class="Identifier">Font</span>
+<a id="TarFile"></a>
+<dt><pre><a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Identifier">data</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">uint8</span>
+  <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span>
+  <span class="Identifier">contents</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">,</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">,</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">uint8</span><span class="Other">]</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 
@@ -1313,74 +1304,61 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="free,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="contents,TarFile"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">contents</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> a sequence of filenames (including paths) inside the <tt class="docutils literal"><span class="pre">tar</span></tt>. 
+
+</dd>
+<a id="contents,TarFile,string,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">contents</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">sub</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> a sequence of filenames (including paths), which start with <tt class="docutils literal"><span class="pre">sub</span></tt> string, starting at <tt class="docutils literal"><span class="pre">pos</span></tt> index, inside the <tt class="docutils literal"><span class="pre">tar</span></tt>. Useful for getting all files inside one archived directory. 
+
+</dd>
+<a id="close,TarFile"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">close</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 </dd>
-<a id="init,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="open,TarFile,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">open</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
+<p>Open uncompressed TAR archive (eg. &quot;archive.tar&quot;).</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, or <cite>false</cite> otherwise (or if no usable files found inside).</p>
 
 
 </dd>
-<a id="newTrueTypeFont,"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTrueTypeFont</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="openz,TarFile,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">openz</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span>
+    <span class="Identifier">OutOfMemError</span><span class="Other">,</span> <span class="Identifier">ZlibStreamError</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
+<p>Open compressed TAR archive (e.g. &quot;archive.tar.gz&quot;).</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, or <cite>false</cite> otherwise (or if no usable files found inside).</p>
 
 
 </dd>
-<a id="load,TrueTypeFont,string,int"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="index,TarFile,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">index</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">size</span></tt> required font size. </p>
-
+<tt class="docutils literal"><span class="pre">Return</span></tt> index of <tt class="docutils literal"><span class="pre">filename</span></tt> in <tt class="docutils literal"><span class="pre">tar</span></tt> file, or <cite>-1</cite> if not found. 
 
 </dd>
-<a id="load,TrueTypeFont,ptr.RWops,int,bool"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="read,TarFile,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">read</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">src</span></tt> <tt class="docutils literal"><span class="pre">RWops</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">size</span></tt> required font size. </p>
-
-
-</dd>
-<a id="renderTrueTypeFont,TrueTypeFont,string,Color"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">renderTrueTypeFont</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                       <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
+Read <tt class="docutils literal"><span class="pre">filename</span></tt> from <tt class="docutils literal"><span class="pre">tar</span></tt> and return its content as a new <tt class="docutils literal"><span class="pre">RWops</span></tt> pointer. 
 
 </dd>
 
 </dl></div>
-<div class="section" id="14">
-<h1><a class="toc-backref" href="#14">Methods</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<a id="getError.e,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">getError</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-</dd>
-<a id="charH.e,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">charH</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> a font character's height. 
-
-</dd>
-<a id="lineDim.e,TrueTypeFont,string"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of a <tt class="docutils literal"><span class="pre">line</span></tt> of text, written in <tt class="docutils literal"><span class="pre">font</span></tt>. 
-
-</dd>
-<a id="render.e,TrueTypeFont,string,Color"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="exists.t,TarFile,string"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">exists</span><span class="Other">(</span><span class="Identifier">tar</span><span class="Other">:</span> <a href="tar.html#TarFile"><span class="Identifier">TarFile</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 
@@ -1395,7 +1373,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-01-21 14:58:42 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 15:00:53 UTC</small>
       </div>
     </div>
   </div>

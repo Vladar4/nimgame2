@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module texturegraphic</title>
+<title>texturegraphic</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module texturegraphic</h1>
+    <h1 class="title">texturegraphic</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,7 +1248,7 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#TextureGraphic"
-    title="TextureGraphic* = ref object of Graphic
+    title="TextureGraphic = ref object of Graphic
   fTexture: sdl.Texture
   fFormat: uint32
   fSize: Dim"><wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
@@ -1230,57 +1258,68 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#freeTexture,TextureGraphic"
-    title="freeTexture*(graphic: TextureGraphic)"><wbr />free<wbr />Texture<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#free,TextureGraphic"
-    title="free*(graphic: TextureGraphic)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,TextureGraphic"
-    title="init*(graphic: TextureGraphic)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updateTexture,TextureGraphic"
-    title="updateTexture*(graphic: TextureGraphic): bool"><wbr />update<wbr />Texture<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#format,TextureGraphic"
-    title="format*(graphic: TextureGraphic): uint32"><wbr />format<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#load,TextureGraphic,string"
-    title="load*(graphic: TextureGraphic; file: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#assignTexture,TextureGraphic,Texture,bool"
-    title="assignTexture*(graphic: TextureGraphic; texture: Texture; freeCurrent: bool = true): bool"><wbr />assign<wbr />Texture<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTextureGraphic,"
-    title="newTextureGraphic*(): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTextureGraphic,string"
-    title="newTextureGraphic*(file: string): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newTextureGraphic,Texture"
-    title="newTextureGraphic*(texture: Texture): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#drawTiled,TextureGraphic,Rect,Rect"
-    title="drawTiled*(graphic: TextureGraphic; rect: Rect;
-           region: Rect = Rect(x: 0, y: 0, w: 0, h: 0); reverseX = false; reverseY = false)"><wbr />draw<wbr />Tiled<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#colorMod,TextureGraphic"
-    title="colorMod*(graphic: TextureGraphic): Color"><wbr />color<wbr />Mod<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,TextureGraphic,Color"
-    title="`colorMod =`*(graphic: TextureGraphic; color: Color)">`<wbr />color<wbr />Mod<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#alphaMod,TextureGraphic"
-    title="alphaMod*(graphic: TextureGraphic): uint8"><wbr />alpha<wbr />Mod<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,TextureGraphic,uint8"
-    title="`alphaMod =`*(graphic: TextureGraphic; alpha: uint8)">`<wbr />alpha<wbr />Mod<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#blendMod,TextureGraphic"
-    title="blendMod*(graphic: TextureGraphic): Blend"><wbr />blend<wbr />Mod<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,TextureGraphic,Blend"
-    title="`blendMod =`*(graphic: TextureGraphic; blend: Blend)">`<wbr />blend<wbr />Mod<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#freeTexture%2CTextureGraphic"
+    title="freeTexture(graphic: TextureGraphic)"><wbr />free<wbr />Texture<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#free%2CTextureGraphic"
+    title="free(graphic: TextureGraphic)"><wbr />free<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#init%2CTextureGraphic"
+    title="init(graphic: TextureGraphic)"><wbr />init<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#updateTexture%2CTextureGraphic"
+    title="updateTexture(graphic: TextureGraphic): bool"><wbr />update<wbr />Texture<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#format%2CTextureGraphic"
+    title="format(graphic: TextureGraphic): uint32"><wbr />format<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#load%2CTextureGraphic%2Cstring"
+    title="load(graphic: TextureGraphic; file: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#load%2CTextureGraphic%2Cptr.RWops%2Cbool"
+    title="load(graphic: TextureGraphic; rw: ptr RWops; freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#assignTexture%2CTextureGraphic%2CTexture%2Cbool"
+    title="assignTexture(graphic: TextureGraphic; texture: Texture; freeCurrent: bool = true): bool"><wbr />assign<wbr />Texture<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#texture%2CTextureGraphic"
+    title="texture(graphic: TextureGraphic): sdl.Texture"><wbr />texture<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#newTextureGraphic%2C"
+    title="newTextureGraphic(): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#newTextureGraphic%2Cstring"
+    title="newTextureGraphic(file: string): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#newTextureGraphic%2Cptr.RWops%2Cbool"
+    title="newTextureGraphic(src: ptr RWops; freeSrc: bool = true): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#newTextureGraphic%2CTexture"
+    title="newTextureGraphic(texture: Texture): TextureGraphic"><wbr />new<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#drawTextureGraphic%2CTextureGraphic%2CCoord%2CAngle%2CScale%2CCoord%2CFlip%2CRect"
+    title="drawTextureGraphic(graphic: TextureGraphic; pos: Coord = (0.0, 0.0);
+                   angle: Angle = 0.0; scale: Scale = 1.0; center: Coord = (0.0, 0.0);
+                   flip: Flip = Flip.none;
+                   region: Rect = Rect(x: 0, y: 0, w: 0, h: 0))"><wbr />draw<wbr />Texture<wbr />Graphic<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#drawTiled%2CTextureGraphic%2CRect%2CRect"
+    title="drawTiled(graphic: TextureGraphic; rect: Rect;
+          region: Rect = Rect(x: 0, y: 0, w: 0, h: 0); reverseX = false; reverseY = false)"><wbr />draw<wbr />Tiled<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#colorMod%2CTextureGraphic"
+    title="colorMod(graphic: TextureGraphic): Color"><wbr />color<wbr />Mod<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#colorMod%3D%2CTextureGraphic%2CColor"
+    title="colorMod=(graphic: TextureGraphic; color: Color)"><wbr />color<wbr />Mod=<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#alphaMod%2CTextureGraphic"
+    title="alphaMod(graphic: TextureGraphic): uint8"><wbr />alpha<wbr />Mod<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#alphaMod%3D%2CTextureGraphic%2Cuint8"
+    title="alphaMod=(graphic: TextureGraphic; alpha: uint8)"><wbr />alpha<wbr />Mod=<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#blendMod%2CTextureGraphic"
+    title="blendMod(graphic: TextureGraphic): Blend"><wbr />blend<wbr />Mod<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#blendMod%3D%2CTextureGraphic%2CBlend"
+    title="blendMod=(graphic: TextureGraphic; blend: Blend)"><wbr />blend<wbr />Mod=<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#13" id="63">Methods</a>
+  <a class="reference reference-toplevel" href="#14" id="64">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#w.e,TextureGraphic"
-    title="w*(graphic: TextureGraphic): int"><wbr />w<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#h.e,TextureGraphic"
-    title="h*(graphic: TextureGraphic): int"><wbr />h<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#dim.e,TextureGraphic"
-    title="dim*(graphic: TextureGraphic): Dim"><wbr />dim<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#draw.e,TextureGraphic,Coord,Angle,Scale,Coord,Flip,Rect"
-    title="draw*(graphic: TextureGraphic; pos: Coord = (0.0&#x27;f64, 0.0&#x27;f64); angle: Angle = 0.0&#x27;f64;
-      scale: Scale = 1.0&#x27;f64; center: Coord = (0.0&#x27;f64, 0.0&#x27;f64); flip: Flip = Flip.none;
-      region: Rect = Rect(x: 0, y: 0, w: 0, h: 0))"><wbr />draw<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#w.e%2CTextureGraphic"
+    title="w(graphic: TextureGraphic): int"><wbr />w<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#h.e%2CTextureGraphic"
+    title="h(graphic: TextureGraphic): int"><wbr />h<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#dim.e%2CTextureGraphic"
+    title="dim(graphic: TextureGraphic): Dim"><wbr />dim<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
+  <li><a class="reference" href="#draw.e%2CTextureGraphic%2CCoord%2CAngle%2CScale%2CCoord%2CFlip%2CRect"
+    title="draw(graphic: TextureGraphic; pos: Coord = (0.0, 0.0); angle: Angle = 0.0;
+     scale: Scale = 1.0; center: Coord = (0.0, 0.0); flip: Flip = Flip.none;
+     region: Rect = Rect(x: 0, y: 0, w: 0, h: 0))"><wbr />draw<span class="attachedType" style="visibility:hidden">TextureGraphic</span></a></li>
 
   </ul>
 </li>
@@ -1294,22 +1333,19 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="sdl2/sdl_image.html">sdl2/sdl_image</a>, <a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
+<a class="reference external" href="graphic.html">graphic</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="TextureGraphic"><a name="TextureGraphic"></a><pre><span class="Identifier">TextureGraphic</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Graphic</span>
+<a id="TextureGraphic"></a>
+<dt><pre><a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="graphic.html#Graphic"><span class="Identifier">Graphic</span></a>
   <span class="Identifier">fTexture</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Texture</span>
   <span class="Identifier">fFormat</span><span class="Other">:</span> <span class="Identifier">uint32</span>
-  <span class="Identifier">fSize</span><span class="Other">:</span> <span class="Identifier">Dim</span>
+  <span class="Identifier">fSize</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1317,206 +1353,106 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="freeTexture"><a name="freeTexture,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">freeTexture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span></pre></dt>
+<a id="freeTexture,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">freeTexture</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L41"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="free"><a name="free,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span></pre></dt>
+<a id="free,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L47"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span></pre></dt>
+<a id="init,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L53"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="updateTexture"><a name="updateTexture,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateTexture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="updateTexture,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateTexture</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L59"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="format"><a name="format,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">format</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="format,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">format</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L75"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="load"><a name="load,TextureGraphic,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="load,TextureGraphic,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Load texture from <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, <cite>false</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L79"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="assignTexture"><a name="assignTexture,TextureGraphic,Texture,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">assignTexture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">;</span>
-                   <span class="Identifier">freeCurrent</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="load,TextureGraphic,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">rw</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p>Load texture from <tt class="docutils literal"><span class="pre">src</span></tt> <tt class="docutils literal"><span class="pre">RWops</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, <cite>false</cite> otherwise. </p>
+
+
+</dd>
+<a id="assignTexture,TextureGraphic,Texture,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">assignTexture</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">;</span>
+                  <span class="Identifier">freeCurrent</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Assign already created <tt class="docutils literal"><span class="pre">texture</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">freeCurrent</span></tt> Free the currently assigned texture. Set to <cite>false</cite> if it used by other objects.</p>
 <p><tt class="docutils literal"><span class="pre">ATTENTION!</span></tt> The <tt class="docutils literal"><span class="pre">texture</span></tt> will be destroyed on <tt class="docutils literal"><span class="pre">free()</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> on success, <cite>false</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L97"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextureGraphic"><a name="newTextureGraphic,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span></pre></dt>
+<a id="texture,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">texture</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Texture</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Direct access to the <tt class="docutils literal"><span class="pre">graphic</span></tt>'s texture. Be careful. 
+
+</dd>
+<a id="newTextureGraphic,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L114"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextureGraphic"><a name="newTextureGraphic,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span></pre></dt>
+<a id="newTextureGraphic,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newTextureGraphic"><a name="newTextureGraphic,Texture"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span></pre></dt>
+<a id="newTextureGraphic,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L124"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="drawTiled"><a name="drawTiled,TextureGraphic,Rect,Rect"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawTiled</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">;</span>
-               <span class="Identifier">region</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span class="Other">=</span> <span class="Identifier">Rect</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">reverseX</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">reverseY</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
-<dd>
-<p>Repeatedly draw the <tt class="docutils literal"><span class="pre">graphic</span></tt> to fill the <tt class="docutils literal"><span class="pre">rect</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">region</span></tt> Source texture region to draw.</p>
-<p><tt class="docutils literal"><span class="pre">reverseX</span></tt>, <tt class="docutils literal"><span class="pre">reverseY</span></tt> Drawing progression order. </p>
-
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L217"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L217" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="colorMod"><a name="colorMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">colorMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> current color modifier. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L286"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L286" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="="><a name="=,TextureGraphic,Color"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">colorMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span></pre></dt>
-<dd>
-Set a new color modifier. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L301"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L301" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="alphaMod"><a name="alphaMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">alphaMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> current alpha (transparency) modifier. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L310"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L310" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="="><a name="=,TextureGraphic,uint8"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">alphaMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span></pre></dt>
-<dd>
-Set a new alpha (transparency) modifier. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L322"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L322" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="blendMod"><a name="blendMod,TextureGraphic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">blendMod</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Blend</span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> current blending mode. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L331"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L331" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="="><a name="=,TextureGraphic,Blend"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">blendMod</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">blend</span><span class="Other">:</span> <span class="Identifier">Blend</span><span class="Other">)</span></pre></dt>
-<dd>
-Set a new blending mode. 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L344"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L344" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-
-</dl></div>
-<div class="section" id="13">
-<h1><a class="toc-backref" href="#13">Methods</a></h1>
-<dl class="item">
-<dt id="w"><a name="w.e,TextureGraphic"></a><pre><span class="Keyword">method</span> <span class="Identifier">w</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="newTextureGraphic,Texture"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTextureGraphic</span><span class="Other">(</span><span class="Identifier">texture</span><span class="Other">:</span> <span class="Identifier">Texture</span><span class="Other">)</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L129"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="h"><a name="h.e,TextureGraphic"></a><pre><span class="Keyword">method</span> <span class="Identifier">h</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L133"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="dim"><a name="dim.e,TextureGraphic"></a><pre><span class="Keyword">method</span> <span class="Identifier">dim</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Dim</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L137"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="draw"><a name="draw.e,TextureGraphic,Coord,Angle,Scale,Coord,Flip,Rect"></a><pre><span class="Keyword">method</span> <span class="Identifier">draw</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <span class="Identifier">TextureGraphic</span><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0'f64</span><span class="Other">,</span> <span class="FloatNumber">0.0'f64</span><span class="Other">)</span><span class="Other">;</span>
-            <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span> <span class="Other">=</span> <span class="FloatNumber">0.0'f64</span><span class="Other">;</span> <span class="Identifier">scale</span><span class="Other">:</span> <span class="Identifier">Scale</span> <span class="Other">=</span> <span class="FloatNumber">1.0'f64</span><span class="Other">;</span>
-            <span class="Identifier">center</span><span class="Other">:</span> <span class="Identifier">Coord</span> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0'f64</span><span class="Other">,</span> <span class="FloatNumber">0.0'f64</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">flip</span><span class="Other">:</span> <span class="Identifier">Flip</span> <span class="Other">=</span> <span class="Identifier">Flip</span><span class="Other">.</span><span class="Identifier">none</span><span class="Other">;</span>
-            <span class="Identifier">region</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span class="Other">=</span> <span class="Identifier">Rect</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+<a id="drawTextureGraphic,TextureGraphic,Coord,Angle,Scale,Coord,Flip,Rect"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">drawTextureGraphic</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0</span><span class="Other">,</span> <span class="FloatNumber">0.0</span><span class="Other">)</span><span class="Other">;</span>
+                       <span class="Identifier">angle</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">;</span> <span class="Identifier">scale</span><span class="Other">:</span> <a href="types.html#Scale"><span class="Identifier">Scale</span></a> <span class="Other">=</span> <span class="FloatNumber">1.0</span><span class="Other">;</span>
+                       <span class="Identifier">center</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0</span><span class="Other">,</span> <span class="FloatNumber">0.0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">flip</span><span class="Other">:</span> <a href="types.html#Flip"><span class="Identifier">Flip</span></a> <span class="Other">=</span> <a href="types.html#Flip"><span class="Identifier">Flip</span></a><span class="Other">.</span><span class="Identifier">none</span><span class="Other">;</span>
+                       <span class="Identifier">region</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span class="Other">=</span> <span class="Identifier">Rect</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Draw procedure.</p>
 <p><tt class="docutils literal"><span class="pre">pos</span></tt> Draw coordinates.</p>
@@ -1526,10 +1462,85 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre">flip</span></tt> <tt class="docutils literal"><span class="pre">RendererFlip</span></tt> value, could be set to: <tt class="docutils literal"><span class="pre">FlipNone</span></tt>, <tt class="docutils literal"><span class="pre">FlipHorizontal</span></tt>, <tt class="docutils literal"><span class="pre">FlipVertical</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">region</span></tt> Source texture region to draw. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/texturegraphic.nim#L141"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/texturegraphic.nim#L141" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="drawTiled,TextureGraphic,Rect,Rect"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">drawTiled</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">;</span>
+              <span class="Identifier">region</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span class="Other">=</span> <span class="Identifier">Rect</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">reverseX</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">reverseY</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p>Repeatedly draw the <tt class="docutils literal"><span class="pre">graphic</span></tt> to fill the <tt class="docutils literal"><span class="pre">rect</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">region</span></tt> Source texture region to draw.</p>
+<p><tt class="docutils literal"><span class="pre">reverseX</span></tt>, <tt class="docutils literal"><span class="pre">reverseY</span></tt> Drawing progression order. </p>
+
+
+</dd>
+<a id="colorMod,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">colorMod</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> current color modifier. 
+
+</dd>
+<a id="colorMod=,TextureGraphic,Color"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">colorMod=</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Set a new color modifier. 
+
+</dd>
+<a id="alphaMod,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">alphaMod</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> current alpha (transparency) modifier. 
+
+</dd>
+<a id="alphaMod=,TextureGraphic,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">alphaMod=</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Set a new alpha (transparency) modifier. 
+
+</dd>
+<a id="blendMod,TextureGraphic"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">blendMod</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Blend"><span class="Identifier">Blend</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> current blending mode. 
+
+</dd>
+<a id="blendMod=,TextureGraphic,Blend"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">blendMod=</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">blend</span><span class="Other">:</span> <a href="types.html#Blend"><span class="Identifier">Blend</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Set a new blending mode. 
+
+</dd>
+
+</dl></div>
+<div class="section" id="14">
+<h1><a class="toc-backref" href="#14">Methods</a></h1>
+<dl class="item">
+<a id="w.e,TextureGraphic"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">w</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="h.e,TextureGraphic"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">h</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="dim.e,TextureGraphic"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">dim</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="draw.e,TextureGraphic,Coord,Angle,Scale,Coord,Flip,Rect"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">draw</span><span class="Other">(</span><span class="Identifier">graphic</span><span class="Other">:</span> <a href="texturegraphic.html#TextureGraphic"><span class="Identifier">TextureGraphic</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0</span><span class="Other">,</span> <span class="FloatNumber">0.0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">;</span>
+           <span class="Identifier">scale</span><span class="Other">:</span> <a href="types.html#Scale"><span class="Identifier">Scale</span></a> <span class="Other">=</span> <span class="FloatNumber">1.0</span><span class="Other">;</span> <span class="Identifier">center</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span class="Other">=</span> <span class="Other">(</span><span class="FloatNumber">0.0</span><span class="Other">,</span> <span class="FloatNumber">0.0</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">flip</span><span class="Other">:</span> <a href="types.html#Flip"><span class="Identifier">Flip</span></a> <span class="Other">=</span> <a href="types.html#Flip"><span class="Identifier">Flip</span></a><span class="Other">.</span><span class="Identifier">none</span><span class="Other">;</span>
+           <span class="Identifier">region</span><span class="Other">:</span> <span class="Identifier">Rect</span> <span class="Other">=</span> <span class="Identifier">Rect</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
 
 </dd>
 
@@ -1542,7 +1553,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:41 UTC</small>
       </div>
     </div>
   </div>

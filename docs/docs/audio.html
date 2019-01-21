@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module audio</title>
+<title>audio</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module audio</h1>
+    <h1 class="title">audio</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,22 +1248,22 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#Channel"
-    title="Channel* = int"><wbr />Channel<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="Channel = int"><wbr />Channel<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Distance"
-    title="Distance* = range[0 .. 255]"><wbr />Distance<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="Distance = range[0 .. 255]"><wbr />Distance<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Panning"
-    title="Panning* = range[0 .. 255]"><wbr />Panning<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="Panning = range[0 .. 255]"><wbr />Panning<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Volume"
-    title="Volume* = range[0 .. mix.MaxVolume]"><wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="Volume = range[0 .. mix.MaxVolume]"><wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Sound"
-    title="Sound* = ref object of RootObj
+    title="Sound = ref object of RootObj
   fChunk: mix.Chunk
   fChannel: Channel"><wbr />Sound<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Music"
-    title="Music* = ref object of RootObj
+    title="Music = ref object of RootObj
   fMusic: mix.Music"><wbr />Music<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Playlist"
-    title="Playlist* = ref object of RootObj
+    title="Playlist = ref object of RootObj
   list*: seq[Music]
   fIndex: int
   fFinished: bool"><wbr />Playlist<span class="attachedType" style="visibility:hidden"></span></a></li>
@@ -1246,120 +1274,130 @@ function main() {
   <a class="reference reference-toplevel" href="#8" id="58">Vars</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#playlist_2"
-    title="playlist*: Playlist = nil"><wbr />playlist<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="playlist: Playlist = nil"><wbr />playlist<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#free,Sound"
-    title="free*(sound: Sound)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#load,Sound,string"
-    title="load*(sound: Sound; file: string)"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newSound,string"
-    title="newSound*(file: string): Sound"><wbr />new<wbr />Sound<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#available,Sound"
-    title="available*(sound: Sound): bool"><wbr />available<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#playing,Sound"
-    title="playing*(sound: Sound): bool"><wbr />playing<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#stop,Sound"
-    title="stop*(sound: Sound)"><wbr />stop<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#play,Sound,int"
-    title="play*(sound: Sound; loops: int = 0): Channel"><wbr />play<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#channel,Sound"
-    title="channel*(sound: Sound): Channel"><wbr />channel<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#paused,Sound"
-    title="paused*(sound: Sound): bool"><wbr />paused<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pause,Sound"
-    title="pause*(sound: Sound)"><wbr />pause<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#resume,Sound"
-    title="resume*(sound: Sound)"><wbr />resume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#volume,Sound"
-    title="volume*(sound: Sound): Volume"><wbr />volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#normalizeVolume,int"
-    title="normalizeVolume*(val: int): Volume"><wbr />normalize<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#=,Sound,Volume"
-    title="`volume =`*(sound: Sound; val: Volume)">`<wbr />volume<wbr />=`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setDistance,Channel,Distance"
-    title="setDistance*(channel: Channel; distance: Distance)"><wbr />set<wbr />Distance<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setPanning,Channel,Panning,Panning"
-    title="setPanning*(channel: Channel; left: Panning = Panning.high;
-            right: Panning = Panning.high)"><wbr />set<wbr />Panning<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setPosition,Channel,Angle,Distance"
-    title="setPosition*(channel: Channel; angle: Angle; distance: Distance)"><wbr />set<wbr />Position<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundStop,"
-    title="soundStop*()"><wbr />sound<wbr />Stop<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundPlayingNum,"
-    title="soundPlayingNum*(): int"><wbr />sound<wbr />Playing<wbr />Num<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundPausedNum,"
-    title="soundPausedNum*(): int"><wbr />sound<wbr />Paused<wbr />Num<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundPause,"
-    title="soundPause*()"><wbr />sound<wbr />Pause<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundResume,"
-    title="soundResume*()"><wbr />sound<wbr />Resume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#getSoundVolume,"
-    title="getSoundVolume*(): Volume"><wbr />get<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setSoundVolume,Volume"
-    title="setSoundVolume*(val: Volume)"><wbr />set<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#free,Music"
-    title="free*(music: Music)"><wbr />free<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,Music,string"
-    title="init*(music: Music; file: string)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newMusic,string"
-    title="newMusic*(file: string): Music"><wbr />new<wbr />Music<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#available,Music"
-    title="available*(music: Music): bool"><wbr />available<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#play,Music,int"
-    title="play*(music: Music; loops: int = 0)"><wbr />play<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicPaused,"
-    title="musicPaused*(): bool"><wbr />music<wbr />Paused<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicPause,"
-    title="musicPause*()"><wbr />music<wbr />Pause<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicResume,"
-    title="musicResume*()"><wbr />music<wbr />Resume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicRewind,"
-    title="musicRewind*()"><wbr />music<wbr />Rewind<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicPlaying,"
-    title="musicPlaying*(): bool"><wbr />music<wbr />Playing<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicStop,"
-    title="musicStop*()"><wbr />music<wbr />Stop<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicPosition,float"
-    title="musicPosition*(val: float)"><wbr />music<wbr />Position<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#init,Playlist"
-    title="init*(pl: Playlist)"><wbr />init<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newPlaylist,"
-    title="newPlaylist*(): Playlist"><wbr />new<wbr />Playlist<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#index,Playlist"
-    title="index*(pl: Playlist): int"><wbr />index<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#play,Playlist,int"
-    title="play*(pl: Playlist; index: int = - 1): int"><wbr />play<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#stop,Playlist"
-    title="stop*(pl: Playlist)"><wbr />stop<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#update,Playlist"
-    title="update*(pl: Playlist)"><wbr />update<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#free%2CSound"
+    title="free(sound: Sound)"><wbr />free<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#load%2CSound%2Cstring"
+    title="load(sound: Sound; file: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#load%2CSound%2Cptr.RWops%2Cbool"
+    title="load(sound: Sound; src: ptr RWops; freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#newSound%2Cstring"
+    title="newSound(file: string): Sound"><wbr />new<wbr />Sound<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#newSound%2Cptr.RWops%2Cbool"
+    title="newSound(src: ptr RWops; freeSrc: bool = true): Sound"><wbr />new<wbr />Sound<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#available%2CSound"
+    title="available(sound: Sound): bool"><wbr />available<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#playing%2CSound"
+    title="playing(sound: Sound): bool"><wbr />playing<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#stop%2CSound"
+    title="stop(sound: Sound)"><wbr />stop<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#play%2CSound%2Cint"
+    title="play(sound: Sound; loops: int = 0): Channel"><wbr />play<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#channel%2CSound"
+    title="channel(sound: Sound): Channel"><wbr />channel<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#paused%2CSound"
+    title="paused(sound: Sound): bool"><wbr />paused<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#pause%2CSound"
+    title="pause(sound: Sound)"><wbr />pause<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#resume%2CSound"
+    title="resume(sound: Sound)"><wbr />resume<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#volume%2CSound"
+    title="volume(sound: Sound): Volume"><wbr />volume<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#normalizeVolume%2Cint"
+    title="normalizeVolume(val: int): Volume"><wbr />normalize<wbr />Volume<span class="attachedType" style="visibility:hidden">Volume</span></a></li>
+  <li><a class="reference" href="#volume%3D%2CSound%2CVolume"
+    title="volume=(sound: Sound; val: Volume)"><wbr />volume=<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#setDistance%2CChannel%2CDistance"
+    title="setDistance(channel: Channel; distance: Distance)"><wbr />set<wbr />Distance<span class="attachedType" style="visibility:hidden">Channel</span></a></li>
+  <li><a class="reference" href="#setPanning%2CChannel%2CPanning%2CPanning"
+    title="setPanning(channel: Channel; left: Panning = Panning.high;
+           right: Panning = Panning.high)"><wbr />set<wbr />Panning<span class="attachedType" style="visibility:hidden">Channel</span></a></li>
+  <li><a class="reference" href="#setPosition%2CChannel%2CAngle%2CDistance"
+    title="setPosition(channel: Channel; angle: Angle; distance: Distance)"><wbr />set<wbr />Position<span class="attachedType" style="visibility:hidden">Channel</span></a></li>
+  <li><a class="reference" href="#soundStop%2C"
+    title="soundStop()"><wbr />sound<wbr />Stop<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#soundPlayingNum%2C"
+    title="soundPlayingNum(): int"><wbr />sound<wbr />Playing<wbr />Num<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#soundPausedNum%2C"
+    title="soundPausedNum(): int"><wbr />sound<wbr />Paused<wbr />Num<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#soundPause%2C"
+    title="soundPause()"><wbr />sound<wbr />Pause<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#soundResume%2C"
+    title="soundResume()"><wbr />sound<wbr />Resume<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#getSoundVolume%2C"
+    title="getSoundVolume(): Volume"><wbr />get<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden">Volume</span></a></li>
+  <li><a class="reference" href="#setSoundVolume%2CVolume"
+    title="setSoundVolume(val: Volume)"><wbr />set<wbr />Sound<wbr />Volume<span class="attachedType" style="visibility:hidden">Volume</span></a></li>
+  <li><a class="reference" href="#free%2CMusic"
+    title="free(music: Music)"><wbr />free<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#load%2CMusic%2Cstring"
+    title="load(music: Music; file: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#load%2CMusic%2Cptr.RWops%2Cbool"
+    title="load(music: Music; src: ptr RWops; freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#newMusic%2Cstring"
+    title="newMusic(file: string): Music"><wbr />new<wbr />Music<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#newMusic%2Cptr.RWops%2Cbool"
+    title="newMusic(src: ptr RWops; freeSrc: bool = true): Music"><wbr />new<wbr />Music<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#available%2CMusic"
+    title="available(music: Music): bool"><wbr />available<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#play%2CMusic%2Cint"
+    title="play(music: Music; loops: int = 0)"><wbr />play<span class="attachedType" style="visibility:hidden">Music</span></a></li>
+  <li><a class="reference" href="#musicPaused%2C"
+    title="musicPaused(): bool"><wbr />music<wbr />Paused<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicPause%2C"
+    title="musicPause()"><wbr />music<wbr />Pause<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicResume%2C"
+    title="musicResume()"><wbr />music<wbr />Resume<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicRewind%2C"
+    title="musicRewind()"><wbr />music<wbr />Rewind<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicPlaying%2C"
+    title="musicPlaying(): bool"><wbr />music<wbr />Playing<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicStop%2C"
+    title="musicStop()"><wbr />music<wbr />Stop<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicPosition%2Cfloat"
+    title="musicPosition(val: float)"><wbr />music<wbr />Position<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#init%2CPlaylist"
+    title="init(pl: Playlist)"><wbr />init<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
+  <li><a class="reference" href="#newPlaylist%2C"
+    title="newPlaylist(): Playlist"><wbr />new<wbr />Playlist<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
+  <li><a class="reference" href="#index%2CPlaylist"
+    title="index(pl: Playlist): int"><wbr />index<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
+  <li><a class="reference" href="#play%2CPlaylist%2Cint"
+    title="play(pl: Playlist; index: int = -1): int"><wbr />play<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
+  <li><a class="reference" href="#stop%2CPlaylist"
+    title="stop(pl: Playlist)"><wbr />stop<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
+  <li><a class="reference" href="#update%2CPlaylist"
+    title="update(pl: Playlist)"><wbr />update<span class="attachedType" style="visibility:hidden">Playlist</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#volumeInc.t,Sound,int"
-    title="volumeInc*(sound: Sound; val: int)"><wbr />volume<wbr />Inc<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#volumeDec.t,Sound,int"
-    title="volumeDec*(sound: Sound; val: int)"><wbr />volume<wbr />Dec<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundVolumeInc.t,int"
-    title="soundVolumeInc*(val: int)"><wbr />sound<wbr />Volume<wbr />Inc<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#soundVolumeDec.t,int"
-    title="soundVolumeDec*(val: int)"><wbr />sound<wbr />Volume<wbr />Dec<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#setMusicVolume.t,Volume"
-    title="setMusicVolume*(val: Volume)"><wbr />set<wbr />Music<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#getMusicVolume.t,"
-    title="getMusicVolume*(): Volume"><wbr />get<wbr />Music<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicVolumeInc.t,int"
-    title="musicVolumeInc*(val: int)"><wbr />music<wbr />Volume<wbr />Inc<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#musicVolumeDec.t,int"
-    title="musicVolumeDec*(val: int)"><wbr />music<wbr />Volume<wbr />Dec<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#volumeInc.t%2CSound%2Cint"
+    title="volumeInc(sound: Sound; val: int)"><wbr />volume<wbr />Inc<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#volumeDec.t%2CSound%2Cint"
+    title="volumeDec(sound: Sound; val: int)"><wbr />volume<wbr />Dec<span class="attachedType" style="visibility:hidden">Sound</span></a></li>
+  <li><a class="reference" href="#playing.t%2CChannel"
+    title="playing(channel: Channel): bool"><wbr />playing<span class="attachedType" style="visibility:hidden">Channel</span></a></li>
+  <li><a class="reference" href="#soundVolumeInc.t%2Cint"
+    title="soundVolumeInc(val: int)"><wbr />sound<wbr />Volume<wbr />Inc<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#soundVolumeDec.t%2Cint"
+    title="soundVolumeDec(val: int)"><wbr />sound<wbr />Volume<wbr />Dec<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#setMusicVolume.t%2CVolume"
+    title="setMusicVolume(val: Volume)"><wbr />set<wbr />Music<wbr />Volume<span class="attachedType" style="visibility:hidden">Volume</span></a></li>
+  <li><a class="reference" href="#getMusicVolume.t%2C"
+    title="getMusicVolume(): Volume"><wbr />get<wbr />Music<wbr />Volume<span class="attachedType" style="visibility:hidden">Volume</span></a></li>
+  <li><a class="reference" href="#musicVolumeInc.t%2Cint"
+    title="musicVolumeInc(val: int)"><wbr />music<wbr />Volume<wbr />Inc<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#musicVolumeDec.t%2Cint"
+    title="musicVolumeDec(val: int)"><wbr />music<wbr />Volume<wbr />Dec<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1373,81 +1411,60 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="sdl2/sdl_mixer.html">sdl2/sdl_mixer</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="utils.html">utils</a>
+<a class="reference external" href="types.html">types</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="Channel"><a name="Channel"></a><pre><span class="Identifier">Channel</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">int</span></pre></dt>
+<a id="Channel"></a>
+<dt><pre><a href="audio.html#Channel"><span class="Identifier">Channel</span></a> <span class="Other">=</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Distance"><a name="Distance"></a><pre><span class="Identifier">Distance</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
+<a id="Distance"></a>
+<dt><pre><a href="audio.html#Distance"><span class="Identifier">Distance</span></a> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L32"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Panning"><a name="Panning"></a><pre><span class="Identifier">Panning</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
+<a id="Panning"></a>
+<dt><pre><a href="audio.html#Panning"><span class="Identifier">Panning</span></a> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Volume"><a name="Volume"></a><pre><span class="Identifier">Volume</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">MaxVolume</span><span class="Other">]</span></pre></dt>
+<a id="Volume"></a>
+<dt><pre><a href="audio.html#Volume"><span class="Identifier">Volume</span></a> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">MaxVolume</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L34"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Sound"><a name="Sound"></a><pre><span class="Identifier">Sound</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="Sound"></a>
+<dt><pre><a href="audio.html#Sound"><span class="Identifier">Sound</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">fChunk</span><span class="Other">:</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">Chunk</span>
-  <span class="Identifier">fChannel</span><span class="Other">:</span> <span class="Identifier">Channel</span>
+  <span class="Identifier">fChannel</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L36"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Music"><a name="Music"></a><pre><span class="Identifier">Music</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="Music"></a>
+<dt><pre><a href="audio.html#Music"><span class="Identifier">Music</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">fMusic</span><span class="Other">:</span> <span class="Identifier">mix</span><span class="Other">.</span><span class="Identifier">Music</span>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L40"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="Playlist"><a name="Playlist"></a><pre><span class="Identifier">Playlist</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
-  <span class="Identifier">list</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Music</span><span class="Other">]</span>
+<a id="Playlist"></a>
+<dt><pre><a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+  <span class="Identifier">list</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">]</span>
   <span class="Identifier">fIndex</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Identifier">fFinished</span><span class="Other">:</span> <span class="Identifier">bool</span>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L407"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L407" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1455,13 +1472,10 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="8">
 <h1><a class="toc-backref" href="#8">Vars</a></h1>
 <dl class="item">
-<dt id="playlist"><a name="playlist_2"></a><pre><span class="Identifier">playlist</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Playlist</span> <span class="Other">=</span> <span class="Keyword">nil</span></pre></dt>
+<a id="playlist_2"></a>
+<dt><pre><span class="Identifier">playlist</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a> <span class="Other">=</span> <span class="Keyword">nil</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L414"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L414" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1469,159 +1483,125 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="free"><a name="free,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
+<a id="free,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L48"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="load"><a name="load,Sound,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+<a id="load,Sound,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L61"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newSound"><a name="newSound,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newSound</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Sound</span></pre></dt>
+<a id="load,Sound,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L71"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="available"><a name="available,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="newSound,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newSound</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="newSound,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newSound</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="available,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is ready to use, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L76"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="playing"><a name="playing,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playing</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="playing,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">playing</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is playing, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L84"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="stop"><a name="stop,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
+<a id="stop,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stop the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L92"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L92" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="play"><a name="play,Sound,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Channel</span></pre></dt>
+<a id="play,Sound,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Play the <tt class="docutils literal"><span class="pre">sound</span></tt> <tt class="docutils literal"><span class="pre">loops</span></tt> + <cite>1</cite> times.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> the channel the <tt class="docutils literal"><span class="pre">sound</span></tt> is played on. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L99"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L99" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="channel"><a name="channel,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">channel</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Channel</span></pre></dt>
+<a id="channel,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">channel</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the channel, the <tt class="docutils literal"><span class="pre">sound</span></tt> is played on. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L114"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="paused"><a name="paused,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">paused</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="paused,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">paused</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">sound</span></tt> is paused, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L123"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pause"><a name="pause,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
+<a id="pause,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Pause the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L131"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L131" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="resume"><a name="resume,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">resume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span></pre></dt>
+<a id="resume,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">resume</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Resume the <tt class="docutils literal"><span class="pre">sound</span></tt> if it is paused. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L140"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L140" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="volume"><a name="volume,Sound"></a><pre><span class="Keyword">proc</span> <span class="Identifier">volume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="volume,Sound"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">volume</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the volume of the <tt class="docutils literal"><span class="pre">sound</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L149"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L149" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="normalizeVolume"><a name="normalizeVolume,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">normalizeVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span></pre></dt>
+<a id="normalizeVolume,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">normalizeVolume</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L155"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="="><a name="=,Sound,Volume"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Identifier">volume</span> <span class="Operator">=</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="volume=,Sound,Volume"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">volume=</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set <tt class="docutils literal"><span class="pre">sound</span></tt> volume. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L161"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setDistance"><a name="setDistance,Channel,Distance"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setDistance</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">Distance</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setDistance,Channel,Distance"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setDistance</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <a href="audio.html#Distance"><span class="Identifier">Distance</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set the distance on a <tt class="docutils literal"><span class="pre">channel</span></tt>.<dl class="docutils"><dt><tt class="docutils literal"><span class="pre">distance</span></tt>:</dt>
 <dd><cite>0</cite> - near (loud) <cite>255</cite> - far (quiet)</dd>
 </dl>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L183"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setPanning"><a name="setPanning,Channel,Panning,Panning"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setPanning</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">:</span> <span class="Identifier">Panning</span> <span class="Other">=</span> <span class="Identifier">Panning</span><span class="Other">.</span><span class="Identifier">high</span><span class="Other">;</span>
-                <span class="Identifier">right</span><span class="Other">:</span> <span class="Identifier">Panning</span> <span class="Other">=</span> <span class="Identifier">Panning</span><span class="Other">.</span><span class="Identifier">high</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setPanning,Channel,Panning,Panning"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setPanning</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">:</span> <a href="audio.html#Panning"><span class="Identifier">Panning</span></a> <span class="Other">=</span> <a href="audio.html#Panning"><span class="Identifier">Panning</span></a><span class="Other">.</span><span class="Identifier">high</span><span class="Other">;</span>
+               <span class="Identifier">right</span><span class="Other">:</span> <a href="audio.html#Panning"><span class="Identifier">Panning</span></a> <span class="Other">=</span> <a href="audio.html#Panning"><span class="Identifier">Panning</span></a><span class="Other">.</span><span class="Identifier">high</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Set the panning on a <tt class="docutils literal"><span class="pre">channel</span></tt>.</p>
 <p>Setting both <tt class="docutils literal"><span class="pre">left</span></tt> and <tt class="docutils literal"><span class="pre">right</span></tt> to <cite>255</cite> (<tt class="docutils literal"><span class="pre">Panning.high</span></tt>) will unregister the effect from <tt class="docutils literal"><span class="pre">channel</span></tt>. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L197"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L197" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setPosition"><a name="setPosition,Channel,Angle,Distance"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setPosition</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <span class="Identifier">Channel</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <span class="Identifier">Distance</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setPosition,Channel,Angle,Distance"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setPosition</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">;</span> <span class="Identifier">distance</span><span class="Other">:</span> <a href="audio.html#Distance"><span class="Identifier">Distance</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set the position on a <tt class="docutils literal"><span class="pre">channel</span></tt>.<dl class="docutils"><dt><tt class="docutils literal"><span class="pre">angle</span></tt>:</dt>
 <dd><cite>0</cite> - front <cite>90</cite> - right <cite>180</cite> - behind <cite>270</cite> - left</dd>
@@ -1629,175 +1609,130 @@ Set the position on a <tt class="docutils literal"><span class="pre">channel</sp
 <dd><cite>0</cite> - near (loud) <cite>255</cite> - far (quiet)</dd>
 </dl>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L210"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L210" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundStop"><a name="soundStop,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundStop</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="soundStop,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">soundStop</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stop all sound channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L234"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L234" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundPlayingNum"><a name="soundPlayingNum,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPlayingNum</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="soundPlayingNum,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">soundPlayingNum</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the number of currently playing channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L240"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundPausedNum"><a name="soundPausedNum,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPausedNum</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="soundPausedNum,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">soundPausedNum</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the number of currently paused channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L246"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L246" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundPause"><a name="soundPause,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundPause</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="soundPause,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">soundPause</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Pause all sound channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L252"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L252" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundResume"><a name="soundResume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">soundResume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="soundResume,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">soundResume</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Resume all sound channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L258"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L258" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="getSoundVolume"><a name="getSoundVolume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="getSoundVolume,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">getSoundVolume</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> average sound volume. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L264"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L264" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setSoundVolume"><a name="setSoundVolume,Volume"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setSoundVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setSoundVolume,Volume"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setSoundVolume</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set new volume for all sound channels. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L270"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L270" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="free"><a name="free,Music"></a><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">)</span></pre></dt>
+<a id="free,Music"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L292"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L292" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,Music,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+<a id="load,Music,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L298"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L298" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newMusic"><a name="newMusic,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newMusic</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Music</span></pre></dt>
+<a id="load,Music,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L307"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L307" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="available"><a name="available,Music"></a><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="newMusic,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newMusic</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="newMusic,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newMusic</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="available,Music"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">available</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the <tt class="docutils literal"><span class="pre">music</span></tt> is ready to use, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L312"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L312" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="play"><a name="play,Music,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
+<a id="play,Music,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">music</span><span class="Other">:</span> <a href="audio.html#Music"><span class="Identifier">Music</span></a><span class="Other">;</span> <span class="Identifier">loops</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Play the <tt class="docutils literal"><span class="pre">music</span></tt> <tt class="docutils literal"><span class="pre">loops</span></tt> + <cite>1</cite> times. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L318"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L318" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicPaused"><a name="musicPaused,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPaused</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicPaused,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicPaused</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if music is paused, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L330"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L330" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicPause"><a name="musicPause,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPause</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicPause,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicPause</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Pause music. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L336"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L336" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicResume"><a name="musicResume,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicResume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicResume,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicResume</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Resume music. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L342"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L342" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicRewind"><a name="musicRewind,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicRewind</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicRewind,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicRewind</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Rewind music. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L348"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L348" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicPlaying"><a name="musicPlaying,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPlaying</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicPlaying,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicPlaying</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if music is playing, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L354"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L354" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicStop"><a name="musicStop,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicStop</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicStop,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicStop</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stop music. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L360"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L360" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicPosition"><a name="musicPosition,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">musicPosition</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="musicPosition,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">musicPosition</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Set current position in the music stream.</p>
 <p>Works only on MOD, OGG, and MP3 music:</p>
@@ -1805,144 +1740,105 @@ class="link-seesrc" target="_blank">Source</a>
 <p>OGG <tt class="docutils literal"><span class="pre">val</span></tt> is seconds from from the beginning.</p>
 <p>MP3 <tt class="docutils literal"><span class="pre">val</span></tt> is seconds from the current position. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L366"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L366" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="init"><a name="init,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
+<a id="init,Playlist"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L425"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L425" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newPlaylist"><a name="newPlaylist,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newPlaylist</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Playlist</span></pre></dt>
+<a id="newPlaylist,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newPlaylist</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L431"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L431" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="index"><a name="index,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">index</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="index,Playlist"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">index</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current track index. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L436"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L436" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="play"><a name="play,Playlist,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="play,Playlist,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Play a music track from the <tt class="docutils literal"><span class="pre">playlist</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">index</span></tt> track index, or <cite>-1</cite> for a random track.</p>
 <p><tt class="docutils literal"><span class="pre">Retrun</span></tt> current track index. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L442"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L442" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="stop"><a name="stop,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
+<a id="stop,Playlist"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L456"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L456" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="update"><a name="update,Playlist"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <span class="Identifier">Playlist</span><span class="Other">)</span></pre></dt>
+<a id="update,Playlist"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">pl</span><span class="Other">:</span> <a href="audio.html#Playlist"><span class="Identifier">Playlist</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L461"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L461" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="volumeInc"><a name="volumeInc.t,Sound,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">volumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="volumeInc.t,Sound,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">volumeInc</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase <tt class="docutils literal"><span class="pre">sound</span></tt> volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L167"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="volumeDec"><a name="volumeDec.t,Sound,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">volumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="volumeDec.t,Sound,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">volumeDec</span><span class="Other">(</span><span class="Identifier">sound</span><span class="Other">:</span> <a href="audio.html#Sound"><span class="Identifier">Sound</span></a><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease <tt class="docutils literal"><span class="pre">sound</span></tt> volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L173"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L173" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundVolumeInc"><a name="soundVolumeInc.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="playing.t,Channel"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">playing</span><span class="Other">(</span><span class="Identifier">channel</span><span class="Other">:</span> <a href="audio.html#Channel"><span class="Identifier">Channel</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+<tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if <tt class="docutils literal"><span class="pre">channel</span></tt> is playing right now, <cite>false</cite> otherwise. 
+
+</dd>
+<a id="soundVolumeInc.t,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeInc</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase global sound volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L276"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L276" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="soundVolumeDec"><a name="soundVolumeDec.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="soundVolumeDec.t,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">soundVolumeDec</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease global sound volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L282"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L282" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="setMusicVolume"><a name="setMusicVolume.t,Volume"></a><pre><span class="Keyword">template</span> <span class="Identifier">setMusicVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">Volume</span><span class="Other">)</span></pre></dt>
+<a id="setMusicVolume.t,Volume"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">setMusicVolume</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a><span class="Other">)</span></pre></dt>
 <dd>
 Set music volume, or return current setting, if <tt class="docutils literal"><span class="pre">val</span></tt> = <cite>-1</cite>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L380"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L380" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="getMusicVolume"><a name="getMusicVolume.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">getMusicVolume</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Volume</span></pre></dt>
+<a id="getMusicVolume.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">getMusicVolume</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="audio.html#Volume"><span class="Identifier">Volume</span></a></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L386"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L386" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicVolumeInc"><a name="musicVolumeInc.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeInc</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="musicVolumeInc.t,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeInc</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Increase music volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L390"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L390" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="musicVolumeDec"><a name="musicVolumeDec.t,int"></a><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeDec</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
+<a id="musicVolumeDec.t,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">musicVolumeDec</span><span class="Other">(</span><span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span></pre></dt>
 <dd>
 Decrease music volume by <tt class="docutils literal"><span class="pre">val</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/audio.nim#L396"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/audio.nim#L396" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1955,7 +1851,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:32 UTC</small>
       </div>
     </div>
   </div>

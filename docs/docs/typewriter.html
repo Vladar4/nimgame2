@@ -16,7 +16,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>truetypefont</title>
+<title>typewriter</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -1219,7 +1219,7 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">truetypefont</h1>
+    <h1 class="title">typewriter</h1>
     <div class="row">
   <div class="three columns">
   <div id="global-links">
@@ -1247,41 +1247,38 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#TrueTypeFont"
-    title="TrueTypeFont = ref object of font.Font
-  fFont: ttf.Font"><wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#Typewriter"
+    title="Typewriter = ref object of Entity
+  fText: seq[char]             ## typewriter&#x27;s queue
+  fRemainder: float            ## internal timer (in seconds)
+  rate*: float                 ## typewriter&#x27;s rate (in seconds)
+  width*: int                  ## line width limit, no limit if `0` (default)"><wbr />Typewriter<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#free%2CTrueTypeFont"
-    title="free(font: TrueTypeFont)"><wbr />free<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#init%2CTrueTypeFont"
-    title="init(font: TrueTypeFont)"><wbr />init<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#newTrueTypeFont%2C"
-    title="newTrueTypeFont(): TrueTypeFont"><wbr />new<wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#load%2CTrueTypeFont%2Cstring%2Cint"
-    title="load(font: TrueTypeFont; file: string; size: int): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#load%2CTrueTypeFont%2Cptr.RWops%2Cint%2Cbool"
-    title="load(font: TrueTypeFont; src: ptr RWops; size: int; freeSrc: bool = true): bool"><wbr />load<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#renderTrueTypeFont%2CTrueTypeFont%2Cstring%2CColor"
-    title="renderTrueTypeFont(font: TrueTypeFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<wbr />True<wbr />Type<wbr />Font<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
+      <li><a class="reference" href="#newTypewriter%2CTextGraphic%2Cfloat"
+    title="newTypewriter(text: TextGraphic; rate: float): Typewriter"><wbr />new<wbr />Typewriter<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
+  <li><a class="reference" href="#add%2CTypewriter%2Cstring"
+    title="add(tw: Typewriter; text: string)"><wbr />add<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
+  <li><a class="reference" href="#dump%2CTypewriter"
+    title="dump(tw: Typewriter): string"><wbr />dump<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
+  <li><a class="reference" href="#clear%2CTypewriter"
+    title="clear(tw: Typewriter)"><wbr />clear<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
+  <li><a class="reference" href="#force%2CTypewriter%2Cstring"
+    title="force(tw: Typewriter; text: string = &quot;&quot;)"><wbr />force<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
+  <li><a class="reference" href="#updateTypewriter%2CTypewriter%2Cfloat"
+    title="updateTypewriter(tw: Typewriter; elapsed: float)"><wbr />update<wbr />Typewriter<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#14" id="64">Methods</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#getError.e%2CTrueTypeFont"
-    title="getError(font: TrueTypeFont): string"><wbr />get<wbr />Error<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#charH.e%2CTrueTypeFont"
-    title="charH(font: TrueTypeFont): int"><wbr />char<wbr />H<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#lineDim.e%2CTrueTypeFont%2Cstring"
-    title="lineDim(font: TrueTypeFont; line: string): Dim"><wbr />line<wbr />Dim<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
-  <li><a class="reference" href="#render.e%2CTrueTypeFont%2Cstring%2CColor"
-    title="render(font: TrueTypeFont; line: string; color: Color = DefaultFontColor): Surface"><wbr />render<span class="attachedType" style="visibility:hidden">TrueTypeFont</span></a></li>
+      <li><a class="reference" href="#update.e%2CTypewriter%2Cfloat"
+    title="update(tw: Typewriter; elapsed: float)"><wbr />update<span class="attachedType" style="visibility:hidden">Typewriter</span></a></li>
 
   </ul>
 </li>
@@ -1295,15 +1292,18 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="font.html">font</a>, <a class="reference external" href="settings.html">settings</a>, <a class="reference external" href="types.html">types</a>
+<a class="reference external" href="entity.html">entity</a>, <a class="reference external" href="textgraphic.html">textgraphic</a>, <a class="reference external" href="types.html">types</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<a id="TrueTypeFont"></a>
-<dt><pre><a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">font</span><span class="Other">.</span><span class="Identifier">Font</span>
-  <span class="Identifier">fFont</span><span class="Other">:</span> <span class="Identifier">ttf</span><span class="Other">.</span><span class="Identifier">Font</span>
-</pre></dt>
+<a id="Typewriter"></a>
+<dt><pre><a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="entity.html#Entity"><span class="Identifier">Entity</span></a>
+  <span class="Identifier">fText</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">char</span><span class="Other">]</span>             <span class="Comment">## typewriter's queue</span>
+  <span class="Identifier">fRemainder</span><span class="Other">:</span> <span class="Identifier">float</span>            <span class="Comment">## internal timer (in seconds)</span>
+  <span class="Identifier">rate</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">float</span>                 <span class="Comment">## typewriter's rate (in seconds)</span>
+  <span class="Identifier">width</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>                  <span class="Comment">## line width limit, no limit if `0` (default)</span>
+  </pre></dt>
 <dd>
 
 
@@ -1313,44 +1313,40 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="free,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">free</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="newTypewriter,TextGraphic,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTypewriter</span><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <a href="textgraphic.html#TextGraphic"><span class="Identifier">TextGraphic</span></a><span class="Other">;</span> <span class="Identifier">rate</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 </dd>
-<a id="init,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="add,Typewriter,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-
+Add new <tt class="docutils literal"><span class="pre">text</span></tt> to the typewriter's queue. 
 
 </dd>
-<a id="newTrueTypeFont,"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTrueTypeFont</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="dump,Typewriter"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">dump</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-
+<tt class="docutils literal"><span class="pre">Return</span></tt> the text awaiting in the typewriter's queue. 
 
 </dd>
-<a id="load,TrueTypeFont,string,int"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="clear,Typewriter"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">size</span></tt> required font size. </p>
-
+Delete the text awaiting in the typewriter's queue. 
 
 </dd>
-<a id="load,TrueTypeFont,ptr.RWops,int,bool"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="force,Typewriter,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">force</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<p>Load <tt class="docutils literal"><span class="pre">font</span></tt> data from a <tt class="docutils literal"><span class="pre">src</span></tt> <tt class="docutils literal"><span class="pre">RWops</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">size</span></tt> required font size. </p>
-
+Add new <tt class="docutils literal"><span class="pre">text</span></tt> to the typewriter's queue and then output it all immediately. 
 
 </dd>
-<a id="renderTrueTypeFont,TrueTypeFont,string,Color"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">renderTrueTypeFont</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                       <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="updateTypewriter,Typewriter,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateTypewriter</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -1360,27 +1356,8 @@ function main() {
 <div class="section" id="14">
 <h1><a class="toc-backref" href="#14">Methods</a></h1>
 <dl class="item">
-<a id="getError.e,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">getError</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-</dd>
-<a id="charH.e,TrueTypeFont"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">charH</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> a font character's height. 
-
-</dd>
-<a id="lineDim.e,TrueTypeFont,string"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">lineDim</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Dim"><span class="Identifier">Dim</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> dimensions of a <tt class="docutils literal"><span class="pre">line</span></tt> of text, written in <tt class="docutils literal"><span class="pre">font</span></tt>. 
-
-</dd>
-<a id="render.e,TrueTypeFont,string,Color"></a>
-<dt><pre><span class="Keyword">method</span> <span class="Identifier">render</span><span class="Other">(</span><span class="Identifier">font</span><span class="Other">:</span> <a href="truetypefont.html#TrueTypeFont"><span class="Identifier">TrueTypeFont</span></a><span class="Other">;</span> <span class="Identifier">line</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">DefaultFontColor</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="update.e,Typewriter,float"></a>
+<dt><pre><span class="Keyword">method</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">tw</span><span class="Other">:</span> <a href="typewriter.html#Typewriter"><span class="Identifier">Typewriter</span></a><span class="Other">;</span> <span class="Identifier">elapsed</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -1395,7 +1372,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-01-21 14:58:42 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:43 UTC</small>
       </div>
     </div>
   </div>

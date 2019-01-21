@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module utils</title>
+<title>utils</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module utils</h1>
+    <h1 class="title">utils</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1217,65 +1245,126 @@ function main() {
   </ul>
 </li>
 <li>
+  <a class="reference reference-toplevel" href="#7" id="57">Types</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#Counter"
+    title="Counter = ref object
+  counter, current, interval: int
+  time: uint64"><wbr />Counter<span class="attachedType" style="visibility:hidden"></span></a></li>
+
+  </ul>
+</li>
+<li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#distance,Coord,Coord"
-    title="distance*(a, b: Coord): float"><wbr />distance<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#distanceToLine,Coord,Coord,Coord"
-    title="distanceToLine*(a, d1, d2: Coord): float"><wbr />distance<wbr />To<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#direction,Coord,Coord"
-    title="direction*(a, b: Coord): Angle"><wbr />direction<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#rotate,Coord,Angle"
-    title="rotate*(a: Coord; angle: Angle): Coord"><wbr />rotate<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#rotate,Coord,Coord,Angle"
-    title="rotate*(point, offset: Coord; angle: Angle): Coord"><wbr />rotate<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#loadSurface,string"
-    title="loadSurface*(file: string): Surface"><wbr />load<wbr />Surface<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#loadCSV,string,proc(string)"
-    title="loadCSV*[T](file: string; parse: proc (input: string): T; separator = &#x27;,&#x27;; quote = &#x27;\&quot;&#x27;;
-            escape = &#x27;\0&#x27;; skipInitialSpace = true): seq[seq[T]]"><wbr />load<wbr />CSV<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#loadPalette,,string"
-    title="loadPalette*(palette: var indexedimage.Palette; file: string; separator = &#x27; &#x27;;
-             quote = &#x27;\&quot;&#x27;; escape = &#x27;\0&#x27;; skipInitialSpace = true)"><wbr />load<wbr />Palette<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random,T,seq[T]"
-    title="random*[T](max: T; exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random,seq[T],seq[T]"
-    title="random*[T](x, exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random,Slice[T],seq[T]"
-    title="random*[T](x: Slice[T]; exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random,set[T]"
-    title="random*[T](x: set[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#randomBool,float"
-    title="randomBool*(chance: float = 0.5&#x27;f64): bool"><wbr />random<wbr />Bool<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#randomSign,float"
-    title="randomSign*(chance: float = 0.5&#x27;f64): int"><wbr />random<wbr />Sign<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#randomWeighted,openArray[T]"
-    title="randomWeighted*[T](weights: openArray[T]): int"><wbr />random<wbr />Weighted<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#distance%2CCoord%2CCoord"
+    title="distance(a, b: Coord): float"><wbr />distance<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#distanceToLine%2CCoord%2CCoord%2CCoord"
+    title="distanceToLine(a, d1, d2: Coord): float"><wbr />distance<wbr />To<wbr />Line<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#direction%2CCoord%2CCoord"
+    title="direction(a, b: Coord): Angle"><wbr />direction<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rotate%2CCoord%2CAngle"
+    title="rotate(a: Coord; angle: Angle): Coord"><wbr />rotate<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rotate%2CCoord%2CCoord%2CAngle"
+    title="rotate(point, offset: Coord; angle: Angle): Coord"><wbr />rotate<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadSurface%2Cstring"
+    title="loadSurface(file: string): Surface"><wbr />load<wbr />Surface<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadSurface%2Cptr.RWops%2Cbool"
+    title="loadSurface(src: ptr RWops; freeSrc: bool = true): Surface"><wbr />load<wbr />Surface<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#textureFormats%2CRenderer"
+    title="textureFormats(renderer: Renderer): tuple[num: uint32, formats: array[16, uint32]]"><wbr />texture<wbr />Formats<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#textureFormat%2CRenderer%2Cuint32"
+    title="textureFormat(renderer: Renderer; n: uint32 = 0): uint32"><wbr />texture<wbr />Format<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#readAll%2Cptr.RWops"
+    title="readAll(src: ptr RWops): string"><wbr />read<wbr />All<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadCSV%2Cstring%2Cproc%28string%29%2CChar%2CChar%2CChar"
+    title="loadCSV[T](file: string; parse: proc (input: string): T; separator = &#x27;,&#x27;; quote = &#x27;\&quot;&#x27;;
+           escape = &#x27;\x00&#x27;; skipInitialSpace = true): seq[seq[T]]"><wbr />load<wbr />CSV<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadCSV%2Cptr.RWops%2Cstring%2Cproc%28string%29%2CChar%2CChar%2CChar"
+    title="loadCSV[T](src: ptr RWops; file: string; parse: proc (input: string): T; separator = &#x27;,&#x27;;
+           quote = &#x27;\&quot;&#x27;; escape = &#x27;\x00&#x27;; skipInitialSpace = true; freeSrc = true): seq[
+    seq[T]]"><wbr />load<wbr />CSV<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadPalette%2C%2Cstring%2CChar%2CChar%2CChar"
+    title="loadPalette(palette: var indexedimage.Palette; file: string; separator = &#x27; &#x27;;
+            quote = &#x27;\&quot;&#x27;; escape = &#x27;\x00&#x27;; skipInitialSpace = true)"><wbr />load<wbr />Palette<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadPalette%2C%2Cptr.RWops%2Cstring%2CChar%2CChar%2CChar"
+    title="loadPalette(palette: var indexedimage.Palette; src: ptr RWops; file: string;
+            separator = &#x27; &#x27;; quote = &#x27;\&quot;&#x27;; escape = &#x27;\x00&#x27;; skipInitialSpace = true;
+            freeSrc = true)"><wbr />load<wbr />Palette<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random%2CT%2Cseq%5BT%5D"
+    title="random[T](max: T; exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2CT%2Cseq%5BT%5D"
+    title="rand[T](max: T; exclude: seq[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2CT%2CopenArray%5BT%5D"
+    title="rand[T](max: T; exclude: openArray[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random%2Cseq%5BT%5D%2Cseq%5BT%5D"
+    title="random[T](x, exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2Cseq%5BT%5D%2Cseq%5BT%5D"
+    title="rand[T](x, exclude: seq[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2CopenArray%5BT%5D%2CopenArray%5BT%5D"
+    title="rand[T](x, exclude: openArray[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random%2CSlice%5BT%5D%2Cseq%5BT%5D"
+    title="random[T](x: Slice[T]; exclude: seq[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2CSlice%5BT%5D%2Cseq%5BT%5D"
+    title="rand[T](x: Slice[T]; exclude: seq[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2CSlice%5BT%5D%2CopenArray%5BT%5D"
+    title="rand[T](x: Slice[T]; exclude: openArray[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random%2Cset%5BT%5D"
+    title="random[T](x: set[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#rand%2Cset%5BT%5D"
+    title="rand[T](x: set[T]): T"><wbr />rand<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randomBool%2Cfloat"
+    title="randomBool(chance: float = 0.5): bool"><wbr />random<wbr />Bool<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randBool%2Cfloat"
+    title="randBool(chance: float = 0.5): bool"><wbr />rand<wbr />Bool<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randomSign%2Cfloat"
+    title="randomSign(chance: float = 0.5): int"><wbr />random<wbr />Sign<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randSign%2Cfloat"
+    title="randSign(chance: float = 0.5): int"><wbr />rand<wbr />Sign<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randomWeighted%2CopenArray%5BT%5D"
+    title="randomWeighted[T](weights: openArray[T]): int"><wbr />random<wbr />Weighted<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#randWeighted%2CopenArray%5BT%5D"
+    title="randWeighted[T](weights: openArray[T]): int"><wbr />rand<wbr />Weighted<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#newCounter%2Cint"
+    title="newCounter(interval: int = 1000): Counter"><wbr />new<wbr />Counter<span class="attachedType" style="visibility:hidden">Counter</span></a></li>
+  <li><a class="reference" href="#update%2CCounter"
+    title="update(counter: Counter)"><wbr />update<span class="attachedType" style="visibility:hidden">Counter</span></a></li>
+  <li><a class="reference" href="#value%2CCounter"
+    title="value(counter: Counter): int"><wbr />value<span class="attachedType" style="visibility:hidden">Counter</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#14" id="64">Iterators</a>
+  <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#atlasValues.i,string"
-    title="atlasValues*(file: string; separator = &#x27;,&#x27;; quote = &#x27;\&quot;&#x27;; escape = &#x27;\0&#x27;;
-             skipInitialSpace = true): tuple[name: string, rect: Rect]"><wbr />atlas<wbr />Values<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#atlasValues.i%2Cstring%2CChar%2CChar%2CChar"
+    title="atlasValues(file: string; separator = &#x27;,&#x27;; quote = &#x27;\&quot;&#x27;; escape = &#x27;\x00&#x27;;
+            skipInitialSpace = true): tuple[name: string, rect: Rect]"><wbr />atlas<wbr />Values<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#atlasValues.i%2Cptr.RWops%2Cstring%2CChar%2CChar%2CChar"
+    title="atlasValues(src: ptr RWops; file: string; separator = &#x27;,&#x27;; quote = &#x27;\&quot;&#x27;; escape = &#x27;\x00&#x27;;
+            skipInitialSpace = true; freeSrc = true): tuple[name: string, rect: Rect]"><wbr />atlas<wbr />Values<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#rad.t,Angle"
-    title="rad*(a: Angle): Angle"><wbr />rad<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#deg.t,Angle"
-    title="deg*(a: Angle): Angle"><wbr />deg<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random.t,T,openArray[T]"
-    title="random*[T](max: T; exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random.t,openArray[T],openArray[T]"
-    title="random*[T](x, exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#random.t,Slice[T],openArray[T]"
-    title="random*[T](x: Slice[T]; exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#rad.t%2CAngle"
+    title="rad(a: Angle): Angle"><wbr />rad<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#deg.t%2CAngle"
+    title="deg(a: Angle): Angle"><wbr />deg<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random.t%2CT%2CopenArray%5BT%5D"
+    title="random[T](max: T; exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random.t%2CopenArray%5BT%5D%2CopenArray%5BT%5D"
+    title="random[T](x, exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#random.t%2CSlice%5BT%5D%2CopenArray%5BT%5D"
+    title="random[T](x: Slice[T]; exclude: openArray[T]): T"><wbr />random<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#timeDiff.t%2Cuntyped%2Cuntyped"
+    title="timeDiff(first, second: untyped): untyped"><wbr />time<wbr />Diff<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#msToSec.t%2Cint"
+    title="msToSec(ms: int): float"><wbr />ms<wbr />To<wbr />Sec<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#secToMs.t%2Cfloat"
+    title="secToMs(sec: float): int"><wbr />sec<wbr />To<wbr />Ms<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1289,83 +1378,117 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="math.html">math</a>, <a class="reference external" href="parsecsv.html">parsecsv</a>, <a class="reference external" href="random.html">random</a>, <a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="texturegraphic.html">texturegraphic</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="sdl2/sdl_image.html">sdl2/sdl_image</a>, <a class="reference external" href="strutils.html">strutils</a>, <a class="reference external" href="indexedimage.html">indexedimage</a>
+<a class="reference external" href="texturegraphic.html">texturegraphic</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="indexedimage.html">indexedimage</a>
+</dl></div>
+<div class="section" id="7">
+<h1><a class="toc-backref" href="#7">Types</a></h1>
+<dl class="item">
+<a id="Counter"></a>
+<dt><pre><a href="utils.html#Counter"><span class="Identifier">Counter</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+  <span class="Identifier">counter</span><span class="Other">,</span> <span class="Identifier">current</span><span class="Other">,</span> <span class="Identifier">interval</span><span class="Other">:</span> <span class="Identifier">int</span>
+  <span class="Identifier">time</span><span class="Other">:</span> <span class="Identifier">uint64</span>
+</pre></dt>
+<dd>
+
+
+</dd>
+
 </dl></div>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="distance"><a name="distance,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">distance</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="distance,Coord,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">distance</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> distance between two coordinates. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L47"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="distanceToLine"><a name="distanceToLine,Coord,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">distanceToLine</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">d1</span><span class="Other">,</span> <span class="Identifier">d2</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span></pre></dt>
+<a id="distanceToLine,Coord,Coord,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">distanceToLine</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">d1</span><span class="Other">,</span> <span class="Identifier">d2</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> distance between point <tt class="docutils literal"><span class="pre">a</span></tt> and line <tt class="docutils literal"><span class="pre">d1</span></tt>-<tt class="docutils literal"><span class="pre">d2</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L53"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="direction"><a name="direction,Coord,Coord"></a><pre><span class="Keyword">proc</span> <span class="Identifier">direction</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
+<a id="direction,Coord,Coord"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">direction</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> angle direction from coordinate <tt class="docutils literal"><span class="pre">a</span></tt> to <tt class="docutils literal"><span class="pre">b</span></tt> (in degrees). 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L61"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="rotate"><a name="rotate,Coord,Angle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
+<a id="rotate,Coord,Angle"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Rotate point <tt class="docutils literal"><span class="pre">a</span></tt> by the given <tt class="docutils literal"><span class="pre">angle</span></tt> (in degrees). 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L70"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="rotate"><a name="rotate,Coord,Coord,Angle"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">point</span><span class="Other">,</span> <span class="Identifier">offset</span><span class="Other">:</span> <span class="Identifier">Coord</span><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord</span></pre></dt>
+<a id="rotate,Coord,Coord,Angle"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rotate</span><span class="Other">(</span><span class="Identifier">point</span><span class="Other">,</span> <span class="Identifier">offset</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Rotate <tt class="docutils literal"><span class="pre">point</span></tt> by the given <tt class="docutils literal"><span class="pre">angle</span></tt> and with given <tt class="docutils literal"><span class="pre">offset</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">offset</span></tt>  Offset coordinate (parent position) <tt class="docutils literal"><span class="pre">point</span></tt>   Point to rotate <tt class="docutils literal"><span class="pre">angle</span></tt>   Angle of rotation (in degrees) </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L83"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="loadSurface"><a name="loadSurface,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadSurface</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span></pre></dt>
+<a id="loadSurface,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadSurface</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Load an image <tt class="docutils literal"><span class="pre">file</span></tt> to the <tt class="docutils literal"><span class="pre">sdl.Surface</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> the surface on success, or <cite>nil</cite> otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L102"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="loadCSV"><a name="loadCSV,string,proc(string)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadCSV</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">parse</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span>
-                <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\0'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
+<a id="loadSurface,ptr.RWops,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadSurface</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">freeSrc</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Surface</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p>Load <tt class="docutils literal"><span class="pre">src</span></tt> <tt class="docutils literal"><span class="pre">RWops</span></tt> to the <tt class="docutils literal"><span class="pre">sdl.Surface</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> the surface on success, or <cite>nil</cite> otherwise. </p>
+
+
+</dd>
+<a id="textureFormats,Renderer"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">textureFormats</span><span class="Other">(</span><span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">Renderer</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">num</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">,</span>
+    <span class="Identifier">formats</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="DecNumber">16</span><span class="Other">,</span> <span class="Identifier">uint32</span><span class="Other">]</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> number and array of available texture formats from the <tt class="docutils literal"><span class="pre">renderer</span></tt>. 
+
+</dd>
+<a id="textureFormat,Renderer,uint32"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">textureFormat</span><span class="Other">(</span><span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">Renderer</span><span class="Other">;</span> <span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> <tt class="docutils literal"><span class="pre">n</span></tt>'th texture format from the <tt class="docutils literal"><span class="pre">renderer</span></tt>. 
+
+</dd>
+<a id="readAll,ptr.RWops"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">readAll</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="loadCSV,string,proc(string),Char,Char,Char"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadCSV</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">parse</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span>
+               <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
 <dd>
 <p>Load data from a CSV <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> a two-dimensional sequence of values from the <tt class="docutils literal"><span class="pre">file</span></tt>, or empty sequence (<cite>@[]</cite>) otherwise. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="loadPalette"><a name="loadPalette,,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadPalette</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">palette</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">indexedimage</span><span class="Other">.</span><span class="Identifier">Palette</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">' '</span><span class="Other">;</span>
-                 <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\0'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span></pre></dt>
+<a id="loadCSV,ptr.RWops,string,proc(string),Char,Char,Char"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadCSV</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">parse</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span>
+               <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span> <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+               <span class="Identifier">freeSrc</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
+<dd>
+<p>Load data from <tt class="docutils literal"><span class="pre">src</span></tt> <tt class="docutils literal"><span class="pre">RWops</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">file</span></tt> is only used for nice error messages.</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> a two-dimensional sequence of values from the <tt class="docutils literal"><span class="pre">file</span></tt>, or empty sequence (<cite>@[]</cite>) otherwise. </p>
+
+
+</dd>
+<a id="loadPalette,,string,Char,Char,Char"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadPalette</span><span class="Other">(</span><span class="Identifier">palette</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">indexedimage</span><span class="Other">.</span><span class="Identifier">Palette</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">' '</span><span class="Other">;</span>
+                <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">CsvError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IndexError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Load palette color data from a <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
 <p><tt class="docutils literal"><span class="pre">palette</span></tt> Target palette. If <tt class="docutils literal"><span class="pre">palette</span></tt> is <cite>nil</cite>, allocates a new palette, otherwise the <tt class="docutils literal"><span class="pre">palette</span></tt> will be freed.</p>
@@ -1376,143 +1499,227 @@ class="link-seesrc" target="_blank">Source</a>
 <p>where <cite>rrr</cite>, <cite>ggg</cite>, <cite>bbb</cite>, and <cite>aaa</cite> is in <cite>0</cite>..`255` range.</p>
 <p>Other types of lines are ignored. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L144"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="random"><a name="random,T,seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="loadPalette,,ptr.RWops,string,Char,Char,Char"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">loadPalette</span><span class="Other">(</span><span class="Identifier">palette</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">indexedimage</span><span class="Other">.</span><span class="Identifier">Palette</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+                <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">' '</span><span class="Other">;</span> <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+                <span class="Identifier">freeSrc</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">CsvError</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">,</span>
+                                       <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IndexError</span><span class="Other">]</span><span class="Other">,</span>
+                               <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L227"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L227" class="link-seesrc" target="_blank" >Edit</a>
+
 
 </dd>
-<dt id="random"><a name="random,seq[T],seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="random,T,seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the sequence <tt class="docutils literal"><span class="pre">x</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>.
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L240"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <cite>0</cite>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Deprecated:</span></tt> Use <tt class="docutils literal"><span class="pre">rand</span></tt> instead. </p>
+
 
 </dd>
-<dt id="random"><a name="random,Slice[T],seq[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="rand,T,seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
-<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L252"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L252" class="link-seesrc" target="_blank" >Edit</a>
+<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <cite>0</cite>..``max``, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
 
 </dd>
-<dt id="random"><a name="random,set[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="rand,T,openArray[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="random,seq[T],seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the sequence <tt class="docutils literal"><span class="pre">x</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Deprecated:</span></tt> use <tt class="docutils literal"><span class="pre">rand</span></tt> instaead. </p>
+
+
+</dd>
+<a id="rand,seq[T],seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the sequence <tt class="docutils literal"><span class="pre">x</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
+
+</dd>
+<a id="rand,openArray[T],openArray[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="random,Slice[T],seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..&lt;<tt class="docutils literal"><span class="pre">max</span></tt>, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Deprecated:</span></tt> use <tt class="docutils literal"><span class="pre">rand</span></tt> instead. </p>
+
+
+</dd>
+<a id="rand,Slice[T],seq[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> a random number in the range <tt class="docutils literal"><span class="pre">min</span></tt>..``max``, except values in the <tt class="docutils literal"><span class="pre">exclude</span></tt>. 
+
+</dd>
+<a id="rand,Slice[T],openArray[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="random,set[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> a random member of set <tt class="docutils literal"><span class="pre">x</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Deprecated:</span></tt> use <tt class="docutils literal"><span class="pre">rand</span></tt> instead. </p>
+
+
+</dd>
+<a id="rand,set[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rand</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a random member of set <tt class="docutils literal"><span class="pre">x</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L265"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L265" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="randomBool"><a name="randomBool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomBool</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5'f64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="randomBool,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randomBool</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> or <cite>false</cite>, based on the <tt class="docutils literal"><span class="pre">chance</span></tt> value (from <cite>0.0</cite> to <cite>1.0</cite>). 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L274"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L274" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="randomSign"><a name="randomSign,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomSign</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5'f64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="randBool,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randBool</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="randomSign,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randomSign</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>1</cite> or <cite>-1</cite>, based on the <tt class="docutils literal"><span class="pre">chance</span></tt> value (from <cite>0.0</cite> to <cite>1.0</cite>). 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L281"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L281" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="randomWeighted"><a name="randomWeighted,openArray[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">randomWeighted</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">weights</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="randSign,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randSign</span><span class="Other">(</span><span class="Identifier">chance</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.5</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="randomWeighted,openArray[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randomWeighted</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">weights</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 <p><tt class="docutils literal"><span class="pre">Return</span></tt> a random integer, based on the <tt class="docutils literal"><span class="pre">weights</span></tt> array.</p>
 <p>E.g., call of randomWeighted([2, 3, 5]) will have a 20% chance of returning <cite>0</cite>, 30% chance of returning <cite>1</cite>, and 50% chance of returning <cite>2</cite>. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L288"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L288" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="randWeighted,openArray[T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">randWeighted</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">weights</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="newCounter,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newCounter</span><span class="Other">(</span><span class="Identifier">interval</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">1000</span><span class="Other">)</span><span class="Other">:</span> <a href="utils.html#Counter"><span class="Identifier">Counter</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="update,Counter"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">counter</span><span class="Other">:</span> <a href="utils.html#Counter"><span class="Identifier">Counter</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="value,Counter"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">value</span><span class="Other">(</span><span class="Identifier">counter</span><span class="Other">:</span> <a href="utils.html#Counter"><span class="Identifier">Counter</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
 
 </dd>
 
 </dl></div>
-<div class="section" id="14">
-<h1><a class="toc-backref" href="#14">Iterators</a></h1>
+<div class="section" id="15">
+<h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
-<dt id="atlasValues"><a name="atlasValues.i,string"></a><pre><span class="Keyword">iterator</span> <span class="Identifier">atlasValues</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span> <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\0'</span><span class="Other">;</span>
-                     <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">]</span></pre></dt>
+<a id="atlasValues.i,string,Char,Char,Char"></a>
+<dt><pre><span class="Keyword">iterator</span> <span class="Identifier">atlasValues</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span> <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span> <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span>
+                    <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">CsvError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Load and iterate over atlas mapping file.</p>
 <p>Mapping should be in a format of:</p>
 <blockquote><p>name, x, y, w, h ...</p></blockquote>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L194"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L194" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="atlasValues.i,ptr.RWops,string,Char,Char,Char"></a>
+<dt><pre><span class="Keyword">iterator</span> <span class="Identifier">atlasValues</span><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">RWops</span><span class="Other">;</span> <span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">separator</span> <span class="Other">=</span> <span class="CharLit">','</span><span class="Other">;</span> <span class="Identifier">quote</span> <span class="Other">=</span> <span class="CharLit">'\&quot;'</span><span class="Other">;</span>
+                    <span class="Identifier">escape</span> <span class="Other">=</span> <span class="CharLit">'\x00'</span><span class="Other">;</span> <span class="Identifier">skipInitialSpace</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">freeSrc</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span>
+    <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">Rect</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">CsvError</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+                            <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="rad"><a name="rad.t,Angle"></a><pre><span class="Keyword">template</span> <span class="Identifier">rad</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
+<a id="rad.t,Angle"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">rad</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a></pre></dt>
 <dd>
 Convert degrees to radians. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="deg"><a name="deg.t,Angle"></a><pre><span class="Keyword">template</span> <span class="Identifier">deg</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">Angle</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Angle</span></pre></dt>
+<a id="deg.t,Angle"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">deg</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Angle"><span class="Identifier">Angle</span></a></pre></dt>
 <dd>
 Convert radians to degrees. 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L41"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="random"><a name="random.t,T,openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="random.t,T,openArray[T]"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">max</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L236"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L236" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="random"><a name="random.t,openArray[T],openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="random.t,openArray[T],openArray[T]"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L248"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L248" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="random"><a name="random.t,Slice[T],openArray[T]"></a><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Operator">*</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<a id="random.t,Slice[T],openArray[T]"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">random</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">exclude</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">deprecated</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/utils.nim#L261"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/utils.nim#L261" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="timeDiff.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">timeDiff</span><span class="Other">(</span><span class="Identifier">first</span><span class="Other">,</span> <span class="Identifier">second</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+<p>
+<tt class="docutils literal"><span class="pre">first</span></tt>, <tt class="docutils literal"><span class="pre">second</span></tt> two results of <tt class="docutils literal"><span class="pre">sdl.getPerformanceCounter()</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Return</span></tt> time difference between two time stamps (in ms). </p>
+
+
+</dd>
+<a id="msToSec.t,int"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">msToSec</span><span class="Other">(</span><span class="Identifier">ms</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span></pre></dt>
+<dd>
+
+
+</dd>
+<a id="secToMs.t,float"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">secToMs</span><span class="Other">(</span><span class="Identifier">sec</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<dd>
+
 
 </dd>
 
@@ -1525,7 +1732,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:43 UTC</small>
       </div>
     </div>
   </div>

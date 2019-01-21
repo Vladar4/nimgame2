@@ -165,11 +165,6 @@ var docsList = [
     'entity',
     'font',
     'graphic',
-    'gui/button',
-    'gui/progressbar',
-    'gui/radio',
-    'gui/textinput',
-    'gui/widget',
     'indexedimage',
     'input',
     'mosaic',
@@ -186,7 +181,19 @@ var docsList = [
     'truetypefont',
     'tween',
     'types',
+    'typewriter',
     'utils',
+
+    'gui/button',
+    'gui/progressbar',
+    'gui/radio',
+    'gui/textinput',
+    'gui/widget',
+
+    'plugin/mpeggraphic',
+    'plugin/tar',
+    'plugin/zzip',
+
     'private/collider',
 ];
 

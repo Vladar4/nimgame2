@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module input</title>
+<title>input</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInputDiv {
+  margin-bottom: 8px;
+}
+div#searchInputDiv input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1130,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1145,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
 
 div.search_results {
   background-color: antiquewhite;
@@ -1161,32 +1165,52 @@ div.search_results {
   padding: 1em;
   border: 1px solid #4d4d4d;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
-
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
+
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
+}
+
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1195,10 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module input</h1>
+    <h1 class="title">input</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1220,36 +1248,38 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#MouseButton"
-    title="MouseButton* = enum
+    title="MouseButton {.size: 4, pure.} = enum
   left = sdl.ButtonLeft, middle = sdl.ButtonMiddle, right = sdl.ButtonRight,
   x1 = sdl.ButtonX1, x2 = sdl.ButtonX2"><wbr />Mouse<wbr />Button<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#MouseState"
-    title="MouseState* = int32"><wbr />Mouse<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="MouseState = int32"><wbr />Mouse<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#JoyAxis"
-    title="JoyAxis* = range[low(int16) .. high(int16)]"><wbr />Joy<wbr />Axis<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="JoyAxis = range[low(int16) .. high(int16)]"><wbr />Joy<wbr />Axis<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#JoyBall"
-    title="JoyBall* = CoordInt"><wbr />Joy<wbr />Ball<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="JoyBall = CoordInt"><wbr />Joy<wbr />Ball<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#JoyHat"
-    title="JoyHat* = sdl.HatPosition"><wbr />Joy<wbr />Hat<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="JoyHat = sdl.HatPosition"><wbr />Joy<wbr />Hat<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputKeyboard"
-    title="GeneralInputKeyboard* = object
+    title="GeneralInputKeyboard = object
   key*: Scancode"><wbr />General<wbr />Input<wbr />Keyboard<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputDirection"
-    title="GeneralInputDirection* = enum
+    title="GeneralInputDirection = enum
   dirX, dirY"><wbr />General<wbr />Input<wbr />Direction<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputMouseKind"
-    title="GeneralInputMouseKind* = enum
+    title="GeneralInputMouseKind = enum
   mButton, mMove"><wbr />General<wbr />Input<wbr />Mouse<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputMouse"
-    title="GeneralInputMouse* = object
+    title="GeneralInputMouse = object
   case kind*: GeneralInputMouseKind
-  of mButton: button*: MouseButton
-  of mMove: direction*: GeneralInputDirection"><wbr />General<wbr />Input<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
+  of mButton:
+    button*: MouseButton
+  of mMove:
+    direction*: GeneralInputDirection"><wbr />General<wbr />Input<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputJoystickKind"
-    title="GeneralInputJoystickKind* = enum
+    title="GeneralInputJoystickKind = enum
   jButton, jAxis, jBall, jHat"><wbr />General<wbr />Input<wbr />Joystick<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputJoystick"
-    title="GeneralInputJoystick* = object
+    title="GeneralInputJoystick = object
   guid*: JoystickGUID
   case kind*: GeneralInputJoystickKind
   of jButton:
@@ -1264,179 +1294,183 @@ function main() {
       hat*: int
       hatPosition*: HatPosition"><wbr />General<wbr />Input<wbr />Joystick<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInputKind"
-    title="GeneralInputKind* = enum
+    title="GeneralInputKind = enum
   giKeyboard, giMouse, giJoystick"><wbr />General<wbr />Input<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#GeneralInput"
-    title="GeneralInput* = object
+    title="GeneralInput = object
   case kind*: GeneralInputKind
   of giKeyboard:
-      keyboard: GeneralInputKeyboard
+      keyboard*: GeneralInputKeyboard
 
   of giMouse:
-      mouse: GeneralInputMouse
+      mouse*: GeneralInputMouse
 
   of giJoystick:
-      joystick: GeneralInputJoystick"><wbr />General<wbr />Input<span class="attachedType" style="visibility:hidden"></span></a></li>
+      joystick*: GeneralInputJoystick"><wbr />General<wbr />Input<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#InputMap"
-    title="InputMap* = OrderedTableRef[string, GeneralInput]"><wbr />Input<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="InputMap = OrderedTableRef[string, GeneralInput]"><wbr />Input<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#initKeyboard,"
-    title="initKeyboard*()"><wbr />init<wbr />Keyboard<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updateKeyboard,Event"
-    title="updateKeyboard*(event: Event)"><wbr />update<wbr />Keyboard<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down,openarray[Scancode]"
-    title="down*(scancodes: openarray[Scancode]): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down,openarray[Keymod]"
-    title="down*(keymods: openarray[Keymod]): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pressed,openarray[Scancode]"
-    title="pressed*(scancodes: openarray[Scancode]): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#released,openarray[Scancode]"
-    title="released*(scancodes: openarray[Scancode]): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearPressed,Scancode"
-    title="clearPressed*(scancode: Scancode)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearReleased,Scancode"
-    title="clearReleased*(scancode: Scancode)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#initMouse,"
-    title="initMouse*()"><wbr />init<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updateMouse,Event"
-    title="updateMouse*(event: Event)"><wbr />update<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyIsOpened,int"
-    title="joyIsOpened*(id: int): bool"><wbr />joy<wbr />Is<wbr />Opened<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#getId,JoystickGUID"
-    title="getId*(guid: JoystickGUID): int"><wbr />get<wbr />Id<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyGuid,int"
-    title="joyGuid*(id: int): JoystickGUID"><wbr />joy<wbr />Guid<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#openJoystick,int"
-    title="openJoystick*(id: int): bool"><wbr />open<wbr />Joystick<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#closeJoystick,int"
-    title="closeJoystick*(id: int): bool"><wbr />close<wbr />Joystick<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#initJoysticks,"
-    title="initJoysticks*()"><wbr />init<wbr />Joysticks<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#updateJoysticks,Event"
-    title="updateJoysticks*(event: Event)"><wbr />update<wbr />Joysticks<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyName,int"
-    title="joyName*(joystick: int): string"><wbr />joy<wbr />Name<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyNumButtons,int"
-    title="joyNumButtons*(joystick: int): int"><wbr />joy<wbr />Num<wbr />Buttons<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyNumAxes,int"
-    title="joyNumAxes*(joystick: int): int"><wbr />joy<wbr />Num<wbr />Axes<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyNumBalls,int"
-    title="joyNumBalls*(joystick: int): int"><wbr />joy<wbr />Num<wbr />Balls<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyNumHats,int"
-    title="joyNumHats*(joystick: int): int"><wbr />joy<wbr />Num<wbr />Hats<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyDown,int,int"
-    title="joyDown*(joystick: int; button: int): bool"><wbr />joy<wbr />Down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyPressed,int,int"
-    title="joyPressed*(joystick: int; button: int): bool"><wbr />joy<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyReleased,int,int"
-    title="joyReleased*(joystick: int; button: int): bool"><wbr />joy<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyAxis,int,int"
-    title="joyAxis*(joystick: int; axis: int): JoyAxis"><wbr />joy<wbr />Axis<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyBall,int,int"
-    title="joyBall*(joystick: int; ball: int): JoyBall"><wbr />joy<wbr />Ball<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#joyHat,int,int"
-    title="joyHat*(joystick: int; hat: int): JoyHat"><wbr />joy<wbr />Hat<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newInputMap,"
-    title="newInputMap*(): InputMap"><wbr />new<wbr />Input<wbr />Map<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addKey,InputMap,string,Scancode"
-    title="addKey*(map: InputMap; name: string; key: Scancode)"><wbr />add<wbr />Key<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addMouseButton,InputMap,string,MouseButton"
-    title="addMouseButton*(map: InputMap; name: string; button: MouseButton)"><wbr />add<wbr />Mouse<wbr />Button<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addMouseMove,InputMap,string,GeneralInputDirection"
-    title="addMouseMove*(map: InputMap; name: string; direction: GeneralInputDirection)"><wbr />add<wbr />Mouse<wbr />Move<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addJoyButton,InputMap,string,JoystickGUID,int"
-    title="addJoyButton*(map: InputMap; name: string; guid: JoystickGUID; button: int)"><wbr />add<wbr />Joy<wbr />Button<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addJoyAxis,InputMap,string,JoystickGUID,int"
-    title="addJoyAxis*(map: InputMap; name: string; guid: JoystickGUID; axis: int)"><wbr />add<wbr />Joy<wbr />Axis<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addJoyBall,InputMap,string,JoystickGUID,int,GeneralInputDirection"
-    title="addJoyBall*(map: InputMap; name: string; guid: JoystickGUID; ball: int;
-            ballDirection: GeneralInputDirection)"><wbr />add<wbr />Joy<wbr />Ball<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#addJoyHat,InputMap,string,JoystickGUID,int,HatPosition"
-    title="addJoyHat*(map: InputMap; name: string; guid: JoystickGUID; hat: int;
-           hatPosition: HatPosition)"><wbr />add<wbr />Joy<wbr />Hat<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#$,GeneralInput"
-    title="`$`*(gi: GeneralInput): string">`<wbr />$`<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#load,InputMap,string"
-    title="load*(map: InputMap; filename: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#save,InputMap,string"
-    title="save*(map: InputMap; filename: string): bool"><wbr />save<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down,GeneralInput"
-    title="down*(gi: GeneralInput): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pressed,GeneralInput"
-    title="pressed*(gi: GeneralInput): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#released,GeneralInput"
-    title="released*(gi: GeneralInput): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#movement,GeneralInput"
-    title="movement*(gi: GeneralInput): int"><wbr />movement<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#initKeyboard%2C"
+    title="initKeyboard()"><wbr />init<wbr />Keyboard<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#updateKeyboard%2CEvent"
+    title="updateKeyboard(event: Event)"><wbr />update<wbr />Keyboard<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#down%2CopenArray%5BScancode%5D"
+    title="down(scancodes: openArray[Scancode]): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#down%2CopenArray%5BKeymod%5D"
+    title="down(keymods: openArray[Keymod]): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#pressed%2CopenArray%5BScancode%5D"
+    title="pressed(scancodes: openArray[Scancode]): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#released%2CopenArray%5BScancode%5D"
+    title="released(scancodes: openArray[Scancode]): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearPressed%2CScancode"
+    title="clearPressed(scancode: Scancode)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearReleased%2CScancode"
+    title="clearReleased(scancode: Scancode)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#initMouse%2C"
+    title="initMouse()"><wbr />init<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#updateMouse%2CEvent"
+    title="updateMouse(event: Event)"><wbr />update<wbr />Mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyIsOpened%2Cint"
+    title="joyIsOpened(id: int): bool"><wbr />joy<wbr />Is<wbr />Opened<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#getId%2CJoystickGUID"
+    title="getId(guid: JoystickGUID): int"><wbr />get<wbr />Id<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyGuid%2Cint"
+    title="joyGuid(id: int): JoystickGUID"><wbr />joy<wbr />Guid<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#openJoystick%2Cint"
+    title="openJoystick(id: int): bool"><wbr />open<wbr />Joystick<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#closeJoystick%2Cint"
+    title="closeJoystick(id: int): bool"><wbr />close<wbr />Joystick<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#initJoysticks%2C"
+    title="initJoysticks()"><wbr />init<wbr />Joysticks<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#updateJoysticks%2CEvent"
+    title="updateJoysticks(event: Event)"><wbr />update<wbr />Joysticks<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyName%2Cint"
+    title="joyName(joystick: int): string"><wbr />joy<wbr />Name<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyNumButtons%2Cint"
+    title="joyNumButtons(joystick: int): int"><wbr />joy<wbr />Num<wbr />Buttons<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyNumAxes%2Cint"
+    title="joyNumAxes(joystick: int): int"><wbr />joy<wbr />Num<wbr />Axes<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyNumBalls%2Cint"
+    title="joyNumBalls(joystick: int): int"><wbr />joy<wbr />Num<wbr />Balls<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyNumHats%2Cint"
+    title="joyNumHats(joystick: int): int"><wbr />joy<wbr />Num<wbr />Hats<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyDown%2Cint%2Cint"
+    title="joyDown(joystick: int; button: int): bool"><wbr />joy<wbr />Down<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyPressed%2Cint%2Cint"
+    title="joyPressed(joystick: int; button: int): bool"><wbr />joy<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyReleased%2Cint%2Cint"
+    title="joyReleased(joystick: int; button: int): bool"><wbr />joy<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#joyAxis%2Cint%2Cint"
+    title="joyAxis(joystick: int; axis: int): JoyAxis"><wbr />joy<wbr />Axis<span class="attachedType" style="visibility:hidden">JoyAxis</span></a></li>
+  <li><a class="reference" href="#joyBall%2Cint%2Cint"
+    title="joyBall(joystick: int; ball: int): JoyBall"><wbr />joy<wbr />Ball<span class="attachedType" style="visibility:hidden">JoyBall</span></a></li>
+  <li><a class="reference" href="#joyHat%2Cint%2Cint"
+    title="joyHat(joystick: int; hat: int): JoyHat"><wbr />joy<wbr />Hat<span class="attachedType" style="visibility:hidden">JoyHat</span></a></li>
+  <li><a class="reference" href="#newInputMap%2C"
+    title="newInputMap(): InputMap"><wbr />new<wbr />Input<wbr />Map<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addKey%2CInputMap%2Cstring%2CScancode"
+    title="addKey(map: InputMap; name: string; key: Scancode)"><wbr />add<wbr />Key<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addMouseButton%2CInputMap%2Cstring%2CMouseButton"
+    title="addMouseButton(map: InputMap; name: string; button: MouseButton)"><wbr />add<wbr />Mouse<wbr />Button<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addMouseMove%2CInputMap%2Cstring%2CGeneralInputDirection"
+    title="addMouseMove(map: InputMap; name: string; direction: GeneralInputDirection)"><wbr />add<wbr />Mouse<wbr />Move<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addJoyButton%2CInputMap%2Cstring%2CJoystickGUID%2Cint"
+    title="addJoyButton(map: InputMap; name: string; guid: JoystickGUID; button: int)"><wbr />add<wbr />Joy<wbr />Button<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addJoyAxis%2CInputMap%2Cstring%2CJoystickGUID%2Cint"
+    title="addJoyAxis(map: InputMap; name: string; guid: JoystickGUID; axis: int)"><wbr />add<wbr />Joy<wbr />Axis<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addJoyBall%2CInputMap%2Cstring%2CJoystickGUID%2Cint%2CGeneralInputDirection"
+    title="addJoyBall(map: InputMap; name: string; guid: JoystickGUID; ball: int;
+           ballDirection: GeneralInputDirection)"><wbr />add<wbr />Joy<wbr />Ball<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#addJoyHat%2CInputMap%2Cstring%2CJoystickGUID%2Cint%2CHatPosition"
+    title="addJoyHat(map: InputMap; name: string; guid: JoystickGUID; hat: int;
+          hatPosition: HatPosition)"><wbr />add<wbr />Joy<wbr />Hat<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#%24%2CGeneralInput"
+    title="`$`(gi: GeneralInput): string"><wbr />`$`<span class="attachedType" style="visibility:hidden">GeneralInput</span></a></li>
+  <li><a class="reference" href="#load%2CInputMap%2Cstring"
+    title="load(map: InputMap; filename: string): bool"><wbr />load<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#save%2CInputMap%2Cstring"
+    title="save(map: InputMap; filename: string): bool"><wbr />save<span class="attachedType" style="visibility:hidden">InputMap</span></a></li>
+  <li><a class="reference" href="#down%2CGeneralInput"
+    title="down(gi: GeneralInput): bool"><wbr />down<span class="attachedType" style="visibility:hidden">GeneralInput</span></a></li>
+  <li><a class="reference" href="#pressed%2CGeneralInput"
+    title="pressed(gi: GeneralInput): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden">GeneralInput</span></a></li>
+  <li><a class="reference" href="#released%2CGeneralInput"
+    title="released(gi: GeneralInput): bool"><wbr />released<span class="attachedType" style="visibility:hidden">GeneralInput</span></a></li>
+  <li><a class="reference" href="#movement%2CGeneralInput"
+    title="movement(gi: GeneralInput): int"><wbr />movement<span class="attachedType" style="visibility:hidden">GeneralInput</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#15" id="65">Converters</a>
+  <a class="reference reference-toplevel" href="#16" id="66">Converters</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#toInt.c,MouseButton"
-    title="toInt*(button: MouseButton): int32"><wbr />to<wbr />Int<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#toInt.c%2CMouseButton"
+    title="toInt(button: MouseButton): int32"><wbr />to<wbr />Int<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#17" id="67">Templates</a>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#down.t,Scancode"
-    title="down*(scancode: Scancode): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down.t,Keymod"
-    title="down*(keymod: Keymod): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pressed.t,Scancode"
-    title="pressed*(scancode: Scancode): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#released.t,Scancode"
-    title="released*(scancode: Scancode): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#name.t,Keycode"
-    title="name*(keycode: Keycode): string"><wbr />name<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#name.t,Scancode"
-    title="name*(scancode: Scancode): string"><wbr />name<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#set.t,MouseState,int32,bool"
-    title="set*(state: var MouseState; button: int32; enable: bool = true)"><wbr />set<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#mouse.t,"
-    title="mouse*(): Coord2"><wbr />mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#mouseRelative.t,bool"
-    title="mouseRelative*(enabled: bool): bool"><wbr />mouse<wbr />Relative<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#mouseCapture.t,bool"
-    title="mouseCapture*(enabled: bool): bool"><wbr />mouse<wbr />Capture<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down.t,int32,MouseState"
-    title="down*(button: int32; state: MouseState = mBtn): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#down.t,MouseButton,MouseState"
-    title="down*(button: MouseButton; state: MouseState = mBtn): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pressed.t,int32"
-    title="pressed*(button: int32): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#pressed.t,MouseButton"
-    title="pressed*(button: MouseButton): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#released.t,int32"
-    title="released*(button: int32): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#released.t,MouseButton"
-    title="released*(button: MouseButton): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearPressed.t,int32"
-    title="clearPressed*(button: int32)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearPressed.t,MouseButton"
-    title="clearPressed*(button: MouseButton)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearReleased.t,int32"
-    title="clearReleased*(button: int32)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#clearReleased.t,MouseButton"
-    title="clearReleased*(button: MouseButton)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#mbState.t,"
-    title="mbState*(): MouseState"><wbr />mb<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#cursorIsVisible.t,"
-    title="cursorIsVisible*(): bool"><wbr />cursor<wbr />Is<wbr />Visible<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#showCursor.t,"
-    title="showCursor*()"><wbr />show<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#hideCursor.t,"
-    title="hideCursor*()"><wbr />hide<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#toggleCursor.t,"
-    title="toggleCursor*()"><wbr />toggle<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#down.t%2CScancode"
+    title="down(scancode: Scancode): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#down.t%2CKeymod"
+    title="down(keymod: Keymod): bool"><wbr />down<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#pressed.t%2CScancode"
+    title="pressed(scancode: Scancode): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#released.t%2CScancode"
+    title="released(scancode: Scancode): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#name.t%2CKeycode"
+    title="name(keycode: Keycode): string"><wbr />name<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#name.t%2CScancode"
+    title="name(scancode: Scancode): string"><wbr />name<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#set.t%2CMouseState%2Cint32%2Cbool"
+    title="set(state: var MouseState; button: int32; enable: bool = true)"><wbr />set<span class="attachedType" style="visibility:hidden">MouseState</span></a></li>
+  <li><a class="reference" href="#mouse.t%2C"
+    title="mouse(): Coord2"><wbr />mouse<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#mouseWheel.t%2C"
+    title="mouseWheel(): Coord"><wbr />mouse<wbr />Wheel<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#mouseWheelFlipped.t%2C"
+    title="mouseWheelFlipped(): bool"><wbr />mouse<wbr />Wheel<wbr />Flipped<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#mouseRelative.t%2Cbool"
+    title="mouseRelative(enabled: bool): bool"><wbr />mouse<wbr />Relative<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#mouseCapture.t%2Cbool"
+    title="mouseCapture(enabled: bool): bool"><wbr />mouse<wbr />Capture<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#down.t%2Cint32%2CMouseState"
+    title="down(button: int32; state: MouseState = mBtn): bool"><wbr />down<span class="attachedType" style="visibility:hidden">MouseState</span></a></li>
+  <li><a class="reference" href="#down.t%2CMouseButton%2CMouseState"
+    title="down(button: MouseButton; state: MouseState = mBtn): bool"><wbr />down<span class="attachedType" style="visibility:hidden">MouseState</span></a></li>
+  <li><a class="reference" href="#pressed.t%2Cint32"
+    title="pressed(button: int32): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#pressed.t%2CMouseButton"
+    title="pressed(button: MouseButton): bool"><wbr />pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#released.t%2Cint32"
+    title="released(button: int32): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#released.t%2CMouseButton"
+    title="released(button: MouseButton): bool"><wbr />released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearPressed.t%2Cint32"
+    title="clearPressed(button: int32)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearPressed.t%2CMouseButton"
+    title="clearPressed(button: MouseButton)"><wbr />clear<wbr />Pressed<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearReleased.t%2Cint32"
+    title="clearReleased(button: int32)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#clearReleased.t%2CMouseButton"
+    title="clearReleased(button: MouseButton)"><wbr />clear<wbr />Released<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#mbState.t%2C"
+    title="mbState(): MouseState"><wbr />mb<wbr />State<span class="attachedType" style="visibility:hidden">MouseState</span></a></li>
+  <li><a class="reference" href="#cursorIsVisible.t%2C"
+    title="cursorIsVisible(): bool"><wbr />cursor<wbr />Is<wbr />Visible<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#showCursor.t%2C"
+    title="showCursor()"><wbr />show<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#hideCursor.t%2C"
+    title="hideCursor()"><wbr />hide<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#toggleCursor.t%2C"
+    title="toggleCursor()"><wbr />toggle<wbr />Cursor<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1450,123 +1484,96 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="strutils.html">strutils</a>, <a class="reference external" href="sdl2/sdl.html">sdl2/sdl</a>, <a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>, <a class="reference external" href="tables.html">tables</a>
+<a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="MouseButton"><a name="MouseButton"></a><pre><span class="Identifier">MouseButton</span><span class="Operator">*</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">sizeof</span><span class="Other">(</span><span class="Identifier">int32</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">pure</span></div><span class="Other pragmaend">.}</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="MouseButton"></a>
+<dt><pre><a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">size</span><span class="Other">:</span> <span class="DecNumber">4</span><span class="Other">,</span> <span class="Identifier">pure</span></span><span class="Other">.}</span></span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">left</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">ButtonLeft</span><span class="Other">,</span> <span class="Identifier">middle</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">ButtonMiddle</span><span class="Other">,</span> <span class="Identifier">right</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">ButtonRight</span><span class="Other">,</span>
   <span class="Identifier">x1</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">ButtonX1</span><span class="Other">,</span> <span class="Identifier">x2</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">ButtonX2</span></pre></dt>
 <dd>
 
 Mouse buttons. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L35"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="MouseState"><a name="MouseState"></a><pre><span class="Identifier">MouseState</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">int32</span></pre></dt>
+<a id="MouseState"></a>
+<dt><pre><a href="input.html#MouseState"><span class="Identifier">MouseState</span></a> <span class="Other">=</span> <span class="Identifier">int32</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L44"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="JoyAxis"><a name="JoyAxis"></a><pre><span class="Identifier">JoyAxis</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="Identifier">low</span><span class="Other">(</span><span class="Identifier">int16</span><span class="Other">)</span> <span class="Operator">..</span> <span class="Identifier">high</span><span class="Other">(</span><span class="Identifier">int16</span><span class="Other">)</span><span class="Other">]</span></pre></dt>
+<a id="JoyAxis"></a>
+<dt><pre><a href="input.html#JoyAxis"><span class="Identifier">JoyAxis</span></a> <span class="Other">=</span> <span class="Identifier">range</span><span class="Other">[</span><span class="Identifier">low</span><span class="Other">(</span><span class="Identifier">int16</span><span class="Other">)</span> <span class="Operator">..</span> <span class="Identifier">high</span><span class="Other">(</span><span class="Identifier">int16</span><span class="Other">)</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L319"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L319" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="JoyBall"><a name="JoyBall"></a><pre><span class="Identifier">JoyBall</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">CoordInt</span></pre></dt>
+<a id="JoyBall"></a>
+<dt><pre><a href="input.html#JoyBall"><span class="Identifier">JoyBall</span></a> <span class="Other">=</span> <a href="types.html#CoordInt"><span class="Identifier">CoordInt</span></a></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L320"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L320" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="JoyHat"><a name="JoyHat"></a><pre><span class="Identifier">JoyHat</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">HatPosition</span></pre></dt>
+<a id="JoyHat"></a>
+<dt><pre><a href="input.html#JoyHat"><span class="Identifier">JoyHat</span></a> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">HatPosition</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L321"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L321" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputKeyboard"><a name="GeneralInputKeyboard"></a><pre><span class="Identifier">GeneralInputKeyboard</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">object</span>
+<a id="GeneralInputKeyboard"></a>
+<dt><pre><a href="input.html#GeneralInputKeyboard"><span class="Identifier">GeneralInputKeyboard</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
   <span class="Identifier">key</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Scancode</span>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L600"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L600" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputDirection"><a name="GeneralInputDirection"></a><pre><span class="Identifier">GeneralInputDirection</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="GeneralInputDirection"></a>
+<dt><pre><a href="input.html#GeneralInputDirection"><span class="Identifier">GeneralInputDirection</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">dirX</span><span class="Other">,</span> <span class="Identifier">dirY</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L603"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L603" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputMouseKind"><a name="GeneralInputMouseKind"></a><pre><span class="Identifier">GeneralInputMouseKind</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="GeneralInputMouseKind"></a>
+<dt><pre><a href="input.html#GeneralInputMouseKind"><span class="Identifier">GeneralInputMouseKind</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">mButton</span><span class="Other">,</span> <span class="Identifier">mMove</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L605"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L605" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputMouse"><a name="GeneralInputMouse"></a><pre><span class="Identifier">GeneralInputMouse</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">object</span>
-  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">GeneralInputMouseKind</span>
-  <span class="Keyword">of</span> <span class="Identifier">mButton</span><span class="Other">:</span> <span class="Identifier">button</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">MouseButton</span>
-  <span class="Keyword">of</span> <span class="Identifier">mMove</span><span class="Other">:</span> <span class="Identifier">direction</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">GeneralInputDirection</span>
+<a id="GeneralInputMouse"></a>
+<dt><pre><a href="input.html#GeneralInputMouse"><span class="Identifier">GeneralInputMouse</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputMouseKind"><span class="Identifier">GeneralInputMouseKind</span></a>
+  <span class="Keyword">of</span> <span class="Identifier">mButton</span><span class="Other">:</span>
+    <span class="Identifier">button</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a>
+  <span class="Keyword">of</span> <span class="Identifier">mMove</span><span class="Other">:</span>
+    <span class="Identifier">direction</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputDirection"><span class="Identifier">GeneralInputDirection</span></a>
   </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L606"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L606" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputJoystickKind"><a name="GeneralInputJoystickKind"></a><pre><span class="Identifier">GeneralInputJoystickKind</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="GeneralInputJoystickKind"></a>
+<dt><pre><a href="input.html#GeneralInputJoystickKind"><span class="Identifier">GeneralInputJoystickKind</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">jButton</span><span class="Other">,</span> <span class="Identifier">jAxis</span><span class="Other">,</span> <span class="Identifier">jBall</span><span class="Other">,</span> <span class="Identifier">jHat</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L611"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L611" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputJoystick"><a name="GeneralInputJoystick"></a><pre><span class="Identifier">GeneralInputJoystick</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">object</span>
+<a id="GeneralInputJoystick"></a>
+<dt><pre><a href="input.html#GeneralInputJoystick"><span class="Identifier">GeneralInputJoystick</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
   <span class="Identifier">guid</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span>
-  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">GeneralInputJoystickKind</span>
+  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputJoystickKind"><span class="Identifier">GeneralInputJoystickKind</span></a>
   <span class="Keyword">of</span> <span class="Identifier">jButton</span><span class="Other">:</span>
     <span class="Identifier">button</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Keyword">of</span> <span class="Identifier">jAxis</span><span class="Other">:</span>
     <span class="Identifier">axis</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Keyword">of</span> <span class="Identifier">jBall</span><span class="Other">:</span>
       <span class="Identifier">ball</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
-      <span class="Identifier">ballDirection</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">GeneralInputDirection</span>
+      <span class="Identifier">ballDirection</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputDirection"><span class="Identifier">GeneralInputDirection</span></a>
 
   <span class="Keyword">of</span> <span class="Identifier">jHat</span><span class="Other">:</span>
       <span class="Identifier">hat</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
@@ -1575,49 +1582,36 @@ class="link-seesrc" target="_blank">Source</a>
   </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L612"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L612" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInputKind"><a name="GeneralInputKind"></a><pre><span class="Identifier">GeneralInputKind</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="GeneralInputKind"></a>
+<dt><pre><a href="input.html#GeneralInputKind"><span class="Identifier">GeneralInputKind</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">giKeyboard</span><span class="Other">,</span> <span class="Identifier">giMouse</span><span class="Other">,</span> <span class="Identifier">giJoystick</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L624"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L624" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="GeneralInput"><a name="GeneralInput"></a><pre><span class="Identifier">GeneralInput</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Keyword">object</span>
-  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">GeneralInputKind</span>
+<a id="GeneralInput"></a>
+<dt><pre><a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputKind"><span class="Identifier">GeneralInputKind</span></a>
   <span class="Keyword">of</span> <span class="Identifier">giKeyboard</span><span class="Other">:</span>
-      <span class="Identifier">keyboard</span><span class="Other">:</span> <span class="Identifier">GeneralInputKeyboard</span>
+      <span class="Identifier">keyboard</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputKeyboard"><span class="Identifier">GeneralInputKeyboard</span></a>
 
   <span class="Keyword">of</span> <span class="Identifier">giMouse</span><span class="Other">:</span>
-      <span class="Identifier">mouse</span><span class="Other">:</span> <span class="Identifier">GeneralInputMouse</span>
+      <span class="Identifier">mouse</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputMouse"><span class="Identifier">GeneralInputMouse</span></a>
 
   <span class="Keyword">of</span> <span class="Identifier">giJoystick</span><span class="Other">:</span>
-      <span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">GeneralInputJoystick</span>
+      <span class="Identifier">joystick</span><span class="Operator">*</span><span class="Other">:</span> <a href="input.html#GeneralInputJoystick"><span class="Identifier">GeneralInputJoystick</span></a>
 
   </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L625"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L625" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="InputMap"><a name="InputMap"></a><pre><span class="Identifier">InputMap</span><span class="Operator">*</span> <span class="Other">=</span> <span class="Identifier">OrderedTableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">GeneralInput</span><span class="Other">]</span></pre></dt>
+<a id="InputMap"></a>
+<dt><pre><a href="input.html#InputMap"><span class="Identifier">InputMap</span></a> <span class="Other">=</span> <span class="Identifier">OrderedTableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L634"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L634" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1625,662 +1619,472 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="initKeyboard"><a name="initKeyboard,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initKeyboard</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="initKeyboard,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">initKeyboard</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Clear the buffers.</p>
 <p>Called automatically from the main game cycle. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L63"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L63" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="updateKeyboard"><a name="updateKeyboard,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateKeyboard</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
+<a id="updateKeyboard,Event"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateKeyboard</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Called automatically from the main game cycle. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L72"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down,openarray[Scancode]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down,openArray[Scancode]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any scancode in the <tt class="docutils literal"><span class="pre">scancodes</span></tt> array is down. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L95"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down,openarray[Keymod]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">keymods</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Keymod</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down,openArray[Keymod]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">keymods</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">Keymod</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any keymod in the <tt class="docutils literal"><span class="pre">keymodes</span></tt> array is down. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L104"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pressed"><a name="pressed,openarray[Scancode]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pressed,openArray[Scancode]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pressed</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any scancode in the <tt class="docutils literal"><span class="pre">scancodes</span></tt> array was just pressed. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L119"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="released"><a name="released,openarray[Scancode]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">released</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openarray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="released,openArray[Scancode]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">released</span><span class="Other">(</span><span class="Identifier">scancodes</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">Scancode</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any scancode in the <tt class="docutils literal"><span class="pre">scancodes</span></tt> array was just released. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L134"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L134" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearPressed"><a name="clearPressed,Scancode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">clearPressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span></pre></dt>
+<a id="clearPressed,Scancode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clearPressed</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Remove <tt class="docutils literal"><span class="pre">scancode</span></tt> from pressed keys list. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L143"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L143" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearReleased"><a name="clearReleased,Scancode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">clearReleased</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span></pre></dt>
+<a id="clearReleased,Scancode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clearReleased</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Remove <tt class="docutils literal"><span class="pre">scancode</span></tt> from released keys list. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L152"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="initMouse"><a name="initMouse,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initMouse</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="initMouse,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">initMouse</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Clear the buffers.</p>
 <p>Called automatically from the main game cycle. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L188"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L188" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="updateMouse"><a name="updateMouse,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateMouse</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
+<a id="updateMouse,Event"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateMouse</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Called automatically from the main game cycle. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L197"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L197" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyIsOpened"><a name="joyIsOpened,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyIsOpened</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="joyIsOpened,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyIsOpened</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L333"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L333" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="getId"><a name="getId,JoystickGUID"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getId</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="getId,JoystickGUID"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">getId</span><span class="Other">(</span><span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the index of a joystick with a corresponding <tt class="docutils literal"><span class="pre">guid</span></tt>, or <cite>-1</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L351"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L351" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyGuid"><a name="joyGuid,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyGuid</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="joyGuid,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyGuid</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L362"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L362" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="openJoystick"><a name="openJoystick,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">openJoystick</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="openJoystick,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">openJoystick</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L367"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L367" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="closeJoystick"><a name="closeJoystick,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">closeJoystick</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="closeJoystick,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">closeJoystick</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L393"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L393" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="initJoysticks"><a name="initJoysticks,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">initJoysticks</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="initJoysticks,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">initJoysticks</span><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Init the <tt class="docutils literal"><span class="pre">joysticks</span></tt> sequence.</p>
 <p>Called automatically from the main game cycle. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L403"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L403" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="updateJoysticks"><a name="updateJoysticks,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">updateJoysticks</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span></pre></dt>
+<a id="updateJoysticks,Event"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">updateJoysticks</span><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Called automatically from the main game cycle. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L417"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L417" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyName"><a name="joyName,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyName</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="joyName,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyName</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> the name of the <tt class="docutils literal"><span class="pre">joystick</span></tt>, or an empty string otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L433"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L433" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyNumButtons"><a name="joyNumButtons,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumButtons</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="joyNumButtons,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumButtons</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L443"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L443" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyNumAxes"><a name="joyNumAxes,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumAxes</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="joyNumAxes,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumAxes</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L449"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L449" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyNumBalls"><a name="joyNumBalls,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumBalls</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="joyNumBalls,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumBalls</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L455"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L455" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyNumHats"><a name="joyNumHats,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumHats</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="joyNumHats,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyNumHats</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L461"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L461" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyDown"><a name="joyDown,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyDown</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="joyDown,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyDown</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Check if <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">button</span></tt> is down.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID, or <cite>-1</cite> to check every opened joystick.</p>
 <p><tt class="docutils literal"><span class="pre">button</span></tt>  Button ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L467"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L467" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyPressed"><a name="joyPressed,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyPressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="joyPressed,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyPressed</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Check if <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">button</span></tt> was just pressed.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID, or <cite>-1</cite> to check every opened joystick.</p>
 <p><tt class="docutils literal"><span class="pre">button</span></tt>  Joystick button ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L489"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L489" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyReleased"><a name="joyReleased,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyReleased</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="joyReleased,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyReleased</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Check if <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">button</span></tt> was just released.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID, or <cite>-1</cite> to check every opened joystick.</p>
 <p><tt class="docutils literal"><span class="pre">button</span></tt>  Joystick button ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L511"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L511" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyAxis"><a name="joyAxis,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyAxis</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">axis</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JoyAxis</span></pre></dt>
+<a id="joyAxis,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyAxis</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">axis</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="input.html#JoyAxis"><span class="Identifier">JoyAxis</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Get <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">axis</span></tt> current position.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID.</p>
 <p><tt class="docutils literal"><span class="pre">axis</span></tt>  Joystick axis ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L533"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L533" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyBall"><a name="joyBall,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyBall</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">ball</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JoyBall</span></pre></dt>
+<a id="joyBall,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyBall</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">ball</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="input.html#JoyBall"><span class="Identifier">JoyBall</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Get <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">ball</span></tt> axis change since the last poll.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID.</p>
 <p><tt class="docutils literal"><span class="pre">ball</span></tt>  Joystick ball ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L550"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L550" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="joyHat"><a name="joyHat,int,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">joyHat</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">hat</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JoyHat</span></pre></dt>
+<a id="joyHat,int,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">joyHat</span><span class="Other">(</span><span class="Identifier">joystick</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">hat</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="input.html#JoyHat"><span class="Identifier">JoyHat</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 <p>Get <tt class="docutils literal"><span class="pre">joystick</span></tt> <tt class="docutils literal"><span class="pre">hat</span></tt> current position.</p>
 <p><tt class="docutils literal"><span class="pre">joystick</span></tt>  Joystick ID.</p>
 <p><tt class="docutils literal"><span class="pre">hat</span></tt> Joystick hat ID. </p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L570"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L570" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="newInputMap"><a name="newInputMap,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newInputMap</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">InputMap</span></pre></dt>
+<a id="newInputMap,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newInputMap</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L637"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L637" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addKey"><a name="addKey,InputMap,string,Scancode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addKey</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addKey,InputMap,string,Scancode"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addKey</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L642"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L642" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addMouseButton"><a name="addMouseButton,InputMap,string,MouseButton"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addMouseButton</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addMouseButton,InputMap,string,MouseButton"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addMouseButton</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L649"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L649" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addMouseMove"><a name="addMouseMove,InputMap,string,GeneralInputDirection"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addMouseMove</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">direction</span><span class="Other">:</span> <span class="Identifier">GeneralInputDirection</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addMouseMove,InputMap,string,GeneralInputDirection"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addMouseMove</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">direction</span><span class="Other">:</span> <a href="input.html#GeneralInputDirection"><span class="Identifier">GeneralInputDirection</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L656"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L656" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addJoyButton"><a name="addJoyButton,InputMap,string,JoystickGUID,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyButton</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addJoyButton,InputMap,string,JoystickGUID,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyButton</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L663"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L663" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addJoyAxis"><a name="addJoyAxis,InputMap,string,JoystickGUID,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyAxis</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">axis</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addJoyAxis,InputMap,string,JoystickGUID,int"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyAxis</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">axis</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L670"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L670" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addJoyBall"><a name="addJoyBall,InputMap,string,JoystickGUID,int,GeneralInputDirection"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyBall</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">ball</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span>
-                <span class="Identifier">ballDirection</span><span class="Other">:</span> <span class="Identifier">GeneralInputDirection</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addJoyBall,InputMap,string,JoystickGUID,int,GeneralInputDirection"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyBall</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">ball</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span>
+               <span class="Identifier">ballDirection</span><span class="Other">:</span> <a href="input.html#GeneralInputDirection"><span class="Identifier">GeneralInputDirection</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L677"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L677" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="addJoyHat"><a name="addJoyHat,InputMap,string,JoystickGUID,int,HatPosition"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyHat</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">hat</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span>
-               <span class="Identifier">hatPosition</span><span class="Other">:</span> <span class="Identifier">HatPosition</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="addJoyHat,InputMap,string,JoystickGUID,int,HatPosition"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">addJoyHat</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">guid</span><span class="Other">:</span> <span class="Identifier">JoystickGUID</span><span class="Other">;</span> <span class="Identifier">hat</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span>
+              <span class="Identifier">hatPosition</span><span class="Other">:</span> <span class="Identifier">HatPosition</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L684"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L684" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="$"><a name="$,GeneralInput"></a><pre><span class="Keyword">proc</span> <span class="Other">`</span><span class="Operator">$</span><span class="Other">`</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <span class="Identifier">GeneralInput</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$,GeneralInput"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`$`</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L693"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L693" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="load"><a name="load,InputMap,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="load,InputMap,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">load</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">CsvError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L726"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L726" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="save"><a name="save,InputMap,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">save</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <span class="Identifier">InputMap</span><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="save,InputMap,string"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">save</span><span class="Other">(</span><span class="Identifier">map</span><span class="Other">:</span> <a href="input.html#InputMap"><span class="Identifier">InputMap</span></a><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L815"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L815" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down,GeneralInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <span class="Identifier">GeneralInput</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down,GeneralInput"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L837"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L837" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pressed"><a name="pressed,GeneralInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <span class="Identifier">GeneralInput</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pressed,GeneralInput"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pressed</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L856"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L856" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="released"><a name="released,GeneralInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">released</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <span class="Identifier">GeneralInput</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="released,GeneralInput"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">released</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L875"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L875" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="movement"><a name="movement,GeneralInput"></a><pre><span class="Keyword">proc</span> <span class="Identifier">movement</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <span class="Identifier">GeneralInput</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="movement,GeneralInput"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">movement</span><span class="Other">(</span><span class="Identifier">gi</span><span class="Other">:</span> <a href="input.html#GeneralInput"><span class="Identifier">GeneralInput</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L892"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L892" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="15">
-<h1><a class="toc-backref" href="#15">Converters</a></h1>
+<div class="section" id="16">
+<h1><a class="toc-backref" href="#16">Converters</a></h1>
 <dl class="item">
-<dt id="toInt"><a name="toInt.c,MouseButton"></a><pre><span class="Keyword">converter</span> <span class="Identifier">toInt</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int32</span></pre></dt>
+<a id="toInt.c,MouseButton"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toInt</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int32</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L47"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="17">
-<h1><a class="toc-backref" href="#17">Templates</a></h1>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<dt id="down"><a name="down.t,Scancode"></a><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down.t,Scancode"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if <tt class="docutils literal"><span class="pre">scancode</span></tt> (keyboard key) is down. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L83"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down.t,Keymod"></a><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">keymod</span><span class="Other">:</span> <span class="Identifier">Keymod</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down.t,Keymod"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">keymod</span><span class="Other">:</span> <span class="Identifier">Keymod</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if <tt class="docutils literal"><span class="pre">keymod</span></tt> (keyboard mod key) is down. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L89"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pressed"><a name="pressed.t,Scancode"></a><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pressed.t,Scancode"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if <tt class="docutils literal"><span class="pre">scancode</span></tt> (keyboard key) was just pressed. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L113"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L113" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="released"><a name="released.t,Scancode"></a><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="released.t,Scancode"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if <tt class="docutils literal"><span class="pre">scancode</span></tt> (keyboard key) was just released. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L128"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L128" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="name"><a name="name.t,Keycode"></a><pre><span class="Keyword">template</span> <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">keycode</span><span class="Other">:</span> <span class="Identifier">Keycode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="name.t,Keycode"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">name</span><span class="Other">(</span><span class="Identifier">keycode</span><span class="Other">:</span> <span class="Identifier">Keycode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a human-readable name for the <tt class="docutils literal"><span class="pre">keycode</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L161"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="name"><a name="name.t,Scancode"></a><pre><span class="Keyword">template</span> <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="name.t,Scancode"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">name</span><span class="Other">(</span><span class="Identifier">scancode</span><span class="Other">:</span> <span class="Identifier">Scancode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> a human-readable name for the <tt class="docutils literal"><span class="pre">scancode</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L167"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="set"><a name="set.t,MouseState,int32,bool"></a><pre><span class="Keyword">template</span> <span class="Identifier">set</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">MouseState</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">;</span> <span class="Identifier">enable</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span></pre></dt>
+<a id="set.t,MouseState,int32,bool"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">set</span><span class="Other">(</span><span class="Identifier">state</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="input.html#MouseState"><span class="Identifier">MouseState</span></a><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">;</span> <span class="Identifier">enable</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span></pre></dt>
 <dd>
 Enable or disable specific mouse button's flag in the given <tt class="docutils literal"><span class="pre">state</span></tt>. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L177"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L177" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="mouse"><a name="mouse.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">mouse</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Coord2</span></pre></dt>
+<a id="mouse.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mouse</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord2"><span class="Identifier">Coord2</span></a></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current mouse position. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L211"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L211" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="mouseRelative"><a name="mouseRelative.t,bool"></a><pre><span class="Keyword">template</span> <span class="Identifier">mouseRelative</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="mouseWheel.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mouseWheel</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="types.html#Coord"><span class="Identifier">Coord</span></a></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> current mouse wheel motion. 
+
+</dd>
+<a id="mouseWheelFlipped.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mouseWheelFlipped</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+<tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if mouse wheel direction is flipped. 
+
+</dd>
+<a id="mouseRelative.t,bool"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mouseRelative</span><span class="Other">(</span><span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Set relative mouse mode. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L217"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L217" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="mouseCapture"><a name="mouseCapture.t,bool"></a><pre><span class="Keyword">template</span> <span class="Identifier">mouseCapture</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="mouseCapture.t,bool"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mouseCapture</span><span class="Other">(</span><span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Capture or release the mouse. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L223"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L223" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down.t,int32,MouseState"></a><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">;</span> <span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">MouseState</span> <span class="Other">=</span> <span class="Identifier">mBtn</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down.t,int32,MouseState"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">;</span> <span class="Identifier">state</span><span class="Other">:</span> <a href="input.html#MouseState"><span class="Identifier">MouseState</span></a> <span class="Other">=</span> <span class="Identifier">mBtn</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if mouse <tt class="docutils literal"><span class="pre">button</span></tt> is pressed. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L229"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L229" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="down"><a name="down.t,MouseButton,MouseState"></a><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">;</span> <span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">MouseState</span> <span class="Other">=</span> <span class="Identifier">mBtn</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="down.t,MouseButton,MouseState"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">down</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">;</span> <span class="Identifier">state</span><span class="Other">:</span> <a href="input.html#MouseState"><span class="Identifier">MouseState</span></a> <span class="Other">=</span> <span class="Identifier">mBtn</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L235"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L235" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pressed"><a name="pressed.t,int32"></a><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pressed.t,int32"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if mouse <tt class="docutils literal"><span class="pre">button</span></tt> was just pressed. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L239"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L239" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="pressed"><a name="pressed.t,MouseButton"></a><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="pressed.t,MouseButton"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">pressed</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L245"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="released"><a name="released.t,int32"></a><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="released.t,int32"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 Check if mouse <tt class="docutils literal"><span class="pre">button</span></tt> was just released. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L249"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="released"><a name="released.t,MouseButton"></a><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="released.t,MouseButton"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">released</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L255"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L255" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearPressed"><a name="clearPressed.t,int32"></a><pre><span class="Keyword">template</span> <span class="Identifier">clearPressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span></pre></dt>
+<a id="clearPressed.t,int32"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">clearPressed</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span></pre></dt>
 <dd>
 Remove <tt class="docutils literal"><span class="pre">button</span></tt> from pressed buttons list. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L259"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L259" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearPressed"><a name="clearPressed.t,MouseButton"></a><pre><span class="Keyword">template</span> <span class="Identifier">clearPressed</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span></pre></dt>
+<a id="clearPressed.t,MouseButton"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">clearPressed</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L265"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L265" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearReleased"><a name="clearReleased.t,int32"></a><pre><span class="Keyword">template</span> <span class="Identifier">clearReleased</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span></pre></dt>
+<a id="clearReleased.t,int32"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">clearReleased</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span></pre></dt>
 <dd>
 Remove <tt class="docutils literal"><span class="pre">button</span></tt> from released buttons list. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L269"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L269" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="clearReleased"><a name="clearReleased.t,MouseButton"></a><pre><span class="Keyword">template</span> <span class="Identifier">clearReleased</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">MouseButton</span><span class="Other">)</span></pre></dt>
+<a id="clearReleased.t,MouseButton"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">clearReleased</span><span class="Other">(</span><span class="Identifier">button</span><span class="Other">:</span> <a href="input.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">)</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L275"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L275" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="mbState"><a name="mbState.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">mbState</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">MouseState</span></pre></dt>
+<a id="mbState.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">mbState</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="input.html#MouseState"><span class="Identifier">MouseState</span></a></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> current mouse buttons state value. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L279"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L279" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="cursorIsVisible"><a name="cursorIsVisible.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">cursorIsVisible</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="cursorIsVisible.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">cursorIsVisible</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 <tt class="docutils literal"><span class="pre">Return</span></tt> <cite>true</cite> if the system mouse cursor is visible, or <cite>false</cite> otherwise. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L285"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L285" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="showCursor"><a name="showCursor.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">showCursor</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="showCursor.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">showCursor</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
 <dd>
 Show the system mouse cursor. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L292"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L292" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="hideCursor"><a name="hideCursor.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">hideCursor</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="hideCursor.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">hideCursor</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
 <dd>
 Hide the system mouse cursor. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L298"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L298" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toggleCursor"><a name="toggleCursor.t,"></a><pre><span class="Keyword">template</span> <span class="Identifier">toggleCursor</span><span class="Operator">*</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
+<a id="toggleCursor.t,"></a>
+<dt><pre><span class="Keyword">template</span> <span class="Identifier">toggleCursor</span><span class="Other">(</span><span class="Other">)</span></pre></dt>
 <dd>
 Toggle the visibility of the system mouse cursor. 
-&nbsp;&nbsp;<a
-href="/tree/master/input.nim#L304"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/input.nim#L304" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -2293,7 +2097,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-08-01 10:09:07 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-21 14:58:36 UTC</small>
       </div>
     </div>
   </div>
