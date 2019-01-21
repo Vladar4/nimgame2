@@ -26,9 +26,9 @@ method draw*(graphic: BorderFillGraphic,
              center: Coord = (0.0, 0.0),
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
-  raise newException(SystemError, "Can't use BorderFillGraphic draw method.")
+  raise newException(CatchableError, "Can't use BorderFillGraphic draw method.")
 
 
 method dim*(graphic: BorderFillGraphic): Dim =
-  raise newException(SystemError, "Can't use BorderFillGraphic dim method.")
+  raise newException(CatchableError, "Can't use BorderFillGraphic dim method.")
 
