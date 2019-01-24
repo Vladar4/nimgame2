@@ -8,7 +8,7 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 [Coding style guide](STYLE.md) for the contributors.
 
 
-Status: v0.6 alpha
+Status: v0.7 devel
 ------------------
 
 
