@@ -7,6 +7,7 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 
 [Coding style guide](STYLE.md) for the contributors.
 
+All pull requests should be done into the **devel** branch.
 
 Status: v0.6 alpha
 ------------------
