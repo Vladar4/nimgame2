@@ -30,8 +30,8 @@ import
 
 type
   Channel* = int
-  Distance* = range[0..255]
-  Panning* = range[0..255]
+  Distance* = range[0'u8..255'u8]
+  Panning* = range[0'u8..255'u8]
   Volume* = range[0..mix.MaxVolume]
 
   Sound* = ref object of RootObj
