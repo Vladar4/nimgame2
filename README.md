@@ -43,8 +43,8 @@ Optional dependencies:
 Installation through [Nimble](https://github.com/nim-lang/nimble):
 ------------------------------------------------------------------
 
-* For the Nim 0.17: `nimble install nimgame2@#head`
-* For the Nim 0.18 and newer: `nimble install nimgame2@#devel`
+* latest release: `nimble install nimgame2@#head`
+* development branch: `nimble install nimgame2@#devel`
 
 
 Recommended compilation flags:
