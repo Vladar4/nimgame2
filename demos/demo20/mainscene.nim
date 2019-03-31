@@ -15,8 +15,8 @@ type
     atlas: TextureAtlas
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   scene.atlas = newTextureAtlas("../assets/gfx/atlas.png",
                                 "../assets/csv/atlas.csv")
@@ -53,7 +53,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

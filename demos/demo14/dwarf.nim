@@ -22,7 +22,7 @@ type
     map*: TileMap
 
 
-proc init*(entity: Dwarf, graphic: TextureGraphic, map: TileMap) =
+proc initDwarf*(entity: Dwarf, graphic: TextureGraphic, map: TileMap) =
   entity.initEntity()
   entity.tags.add("dwarf")
   entity.graphic = graphic
@@ -47,7 +47,7 @@ proc init*(entity: Dwarf, graphic: TextureGraphic, map: TileMap) =
 
 proc newDwarf*(graphic: TextureGraphic, map: TileMap): Dwarf =
   result = new Dwarf
-  result.init(graphic, map)
+  result.initDwarf(graphic, map)
 
 
 proc actuate(entity: Dwarf, anim: string, movement: Coord) =

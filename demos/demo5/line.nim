@@ -7,7 +7,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Line) =
+proc initLine*(entity: Line) =
   entity.initEntity()
   entity.tags.add("Line")
   entity.collidedWith = @[]
@@ -15,7 +15,7 @@ proc init*(entity: Line) =
 
 proc newLine*(): Line =
   result = new Line
-  result.init()
+  result.initLine()
 
 
 method update*(entity: Line, elapsed: float) =

@@ -7,12 +7,12 @@ type
   Earth* = ref object of Entity
 
 
-proc init*(entity: Earth, pos: Coord) =
+proc initEarth*(entity: Earth, pos: Coord) =
   entity.initEntity()
   entity.pos = pos
 
 
 proc newEarth*(pos: Coord): Earth =
   result = new Earth
-  result.init(pos)
+  result.initEarth(pos)
 

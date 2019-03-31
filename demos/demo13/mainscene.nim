@@ -18,8 +18,8 @@ type
     cursor: Cursor
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   # Cursor
   hideCursor()
@@ -45,7 +45,7 @@ proc init*(scene: MainScene) =
   ]
   scene.tm.passable.add(0)
   scene.tm.centrify()
-  scene.tm.initCollider()
+  scene.tm.createCollider()
   scene.tm.pos = (320.0, 240.0)
   scene.add(scene.tm)
 
@@ -57,7 +57,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

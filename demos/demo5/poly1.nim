@@ -7,7 +7,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Poly1) =
+proc initPoly1*(entity: Poly1) =
   entity.initEntity()
   entity.tags.add("Poly1")
   entity.collider = entity.newPolyCollider((0.0, 0.0),
@@ -17,7 +17,7 @@ proc init*(entity: Poly1) =
 
 proc newPoly1*(): Poly1 =
   result = new Poly1
-  result.init()
+  result.initPoly1()
 
 
 method update*(entity: Poly1, elapsed: float) =

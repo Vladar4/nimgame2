@@ -31,8 +31,8 @@ type
     twEntity: Typewriter
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   # Earth
   scene.e = newEarth()
@@ -94,7 +94,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 proc changeAlign(scene: MainScene, increase = true) =

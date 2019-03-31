@@ -20,8 +20,8 @@ type
     map: TileMap
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   scene.camera = newEntity()
   scene.cameraBondOffset = game.size / 2
@@ -39,7 +39,7 @@ proc init*(scene: MainScene) =
   scene.map.map = loadCSV[int]("../assets/csv/map_camera_test.csv",
     proc(s: string): int = discard parseInt(s, result))
   scene.map.passable.add(0)
-  scene.map.initCollider()
+  scene.map.createCollider()
   scene.map.pos = (0.0, 0.0)
 
   # SpacemanG
@@ -66,7 +66,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =
@@ -89,7 +89,7 @@ method render*(scene: MainScene) =
   discard string((8, 64), "Arrows - move camera", 0xFFFFFFFF'u32)
   discard string((8, 72), "WSAD - move spaceman", 0xFFFFFFFF'u32)
   discard string((8, 80), "Enter - toggle following (" &
-    (if scene.cameraBond != nil: "on" else: "off")  & ")", 0xFFFFFFFF'u32)
+    (if scene.cameraBond != nil: "on" else: "off") & ")", 0xFFFFFFFF'u32)
 
   discard string((8, 88), "camera.pos = " & $(-scene.camera.pos),
     0xFFFFFFFF'u32)

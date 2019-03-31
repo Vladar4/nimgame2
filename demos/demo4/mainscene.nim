@@ -20,8 +20,8 @@ type
 const Framerate = 1/12
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
   # Dwarf
   scene.dG = newTextureGraphic()
   discard scene.dG.load("../assets/gfx/dwarf.png")
@@ -46,7 +46,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

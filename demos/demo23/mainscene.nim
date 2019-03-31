@@ -73,8 +73,8 @@ proc createRotScaleTestEnts*(
   frameEnt.collider = frameEnt.newPolyCollider(frameEnt.pos, corners)
 
 
-proc init*(scene: MainScene) =
-  scene.Scene.init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
   scene.font = newTrueTypeFont()
   discard scene.font.load("../assets/fnt/FSEX300.ttf", 32)
 
@@ -92,5 +92,5 @@ proc init*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result
-  result.init()
+  result.initMainScene()
 

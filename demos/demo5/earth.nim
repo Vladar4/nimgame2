@@ -7,7 +7,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Earth) =
+proc initEarth*(entity: Earth) =
   entity.initEntity()
   entity.tags.add("Earth")
   entity.pos = (0.0, 150.0)
@@ -16,7 +16,7 @@ proc init*(entity: Earth) =
 
 proc newEarth*(): Earth =
   result = new Earth
-  result.init()
+  result.initEarth()
 
 
 method update*(entity: Earth, elapsed: float) =

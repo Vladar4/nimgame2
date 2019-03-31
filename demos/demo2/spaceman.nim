@@ -6,7 +6,7 @@ type
   Spaceman* = ref object of Entity
 
 
-proc init*(entity: Spaceman) =
+proc initSpaceman*(entity: Spaceman) =
   entity.initEntity()
   entity.pos.x = 200.0
   entity.pos.y = 64.0
@@ -14,5 +14,5 @@ proc init*(entity: Spaceman) =
 
 proc newSpaceman*(): Spaceman =
   result = new Spaceman
-  result.init()
+  result.initSpaceman()
 

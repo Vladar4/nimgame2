@@ -14,8 +14,8 @@ type
     p0125, p025, p05, p1: Entity
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   # Graphics
   scene.spacemanG = newTextureGraphic()
@@ -70,7 +70,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

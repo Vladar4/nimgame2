@@ -6,7 +6,7 @@ type
   Spaceman* = ref object of Entity
 
 
-proc init*(entity: Spaceman) =
+proc initSpaceman*(entity: Spaceman) =
   entity.initEntity()
   entity.tags.add("Spaceman")
   entity.pos = (200.0, 0.0)
@@ -14,7 +14,7 @@ proc init*(entity: Spaceman) =
 
 proc newSpaceman*(): Spaceman =
   result = new Spaceman
-  result.init()
+  result.initSpaceman()
 
 
 method update*(entity: Spaceman, elapsed: float) =

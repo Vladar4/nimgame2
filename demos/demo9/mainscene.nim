@@ -20,8 +20,8 @@ var
   musicData: Assets[Music]
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   # Sound
   scene.tack = newSound("../assets/sfx/tack.wav")
@@ -41,7 +41,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

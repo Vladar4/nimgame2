@@ -31,8 +31,8 @@ proc moviePhysics*(entity: Entity, elapsed: float) =
     entity.vel.y *= -1
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
   # Movie
   scene.movie = newMpegGraphic("video.mpg")
   scene.movie.loop = true
@@ -56,7 +56,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

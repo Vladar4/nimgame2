@@ -6,7 +6,7 @@ type
   Dwarf* = ref object of Entity
 
 
-proc init*(entity: Dwarf) =
+proc initDwarf*(entity: Dwarf) =
   entity.initEntity()
   entity.centrify()
   entity.physics = defaultPhysics
@@ -14,5 +14,5 @@ proc init*(entity: Dwarf) =
 
 proc newDwarf*(): Dwarf =
   result = new Dwarf
-  result.init()
+  result.initDwarf()
 

@@ -28,8 +28,8 @@ type
     font: TrueTypeFont
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
 
   # Graphics
   scene.btnSquareG = newTextureGraphic()
@@ -76,7 +76,7 @@ proc init*(scene: MainScene) =
   scene.btnsRadio[0].toggled = true
 
   # Progress Bar
-  scene.progressBar = newProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
+  scene.progressBar = newGuiProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
     scene.font)
   scene.progressBar.min = 0
   scene.progressBar.max = 100
@@ -106,7 +106,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =

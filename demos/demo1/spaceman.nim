@@ -12,7 +12,7 @@ type
     scene*: Scene
 
 
-proc init*(entity: Spaceman, s: Scene, g: Graphic, p: PhysicsProc) =
+proc initSpaceman*(entity: Spaceman, s: Scene, g: Graphic, p: PhysicsProc) =
   entity.initEntity()
   entity.scene = s
   entity.graphic = g
@@ -28,5 +28,5 @@ proc init*(entity: Spaceman, s: Scene, g: Graphic, p: PhysicsProc) =
 
 proc newSpaceman*(s: Scene, g: Graphic, p: PhysicsProc): Spaceman =
   result = new Spaceman
-  result.init(s, g, p)
+  result.initSpaceman(s, g, p)
 

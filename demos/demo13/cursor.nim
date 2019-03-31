@@ -9,7 +9,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Cursor) =
+proc initCursor*(entity: Cursor) =
   entity.initEntity()
   entity.tags.add("Cursor")
   entity.pos = mouse.abs
@@ -18,7 +18,7 @@ proc init*(entity: Cursor) =
 
 proc newCursor*(): Cursor =
   result = new Cursor
-  result.init()
+  result.initCursor()
 
 
 method update*(entity: Cursor, elapsed: float) =

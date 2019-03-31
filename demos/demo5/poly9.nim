@@ -7,7 +7,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Poly9) =
+proc initPoly9*(entity: Poly9) =
   entity.initEntity()
   entity.tags.add("Poly9")
   entity.centrify
@@ -26,7 +26,7 @@ proc init*(entity: Poly9) =
 
 proc newPoly9*(): Poly9 =
   result = new Poly9
-  result.init()
+  result.initPoly9()
 
 
 method update*(entity: Poly9, elapsed: float) =

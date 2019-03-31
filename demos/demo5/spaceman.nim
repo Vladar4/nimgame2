@@ -7,7 +7,7 @@ type
     collidedWith*: seq[string]
 
 
-proc init*(entity: Spaceman) =
+proc initSpaceman*(entity: Spaceman) =
   entity.initEntity()
   entity.tags.add("Spaceman")
   entity.pos = (450.0, 100.0)
@@ -16,7 +16,7 @@ proc init*(entity: Spaceman) =
 
 proc newSpaceman*(): Spaceman =
   result = new Spaceman
-  result.init()
+  result.initSpaceman()
 
 
 method update*(entity: Spaceman, elapsed: float) =

@@ -16,8 +16,8 @@ type
     ePoint, eLine, eCircle, eBox, eScaled: Emitter
 
 
-proc init*(scene: MainScene) =
-  Scene(scene).init()
+proc initMainScene*(scene: MainScene) =
+  scene.initScene()
   # Particle Graphic
   scene.particleG = newTextureGraphic()
   discard scene.particleG.load("../assets/gfx/puff.png")
@@ -100,7 +100,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  result.init()
+  result.initMainScene()
 
 
 method event*(scene: MainScene, event: Event) =
