@@ -192,7 +192,7 @@ method collide(pos: Coord, g: GroupCollider): bool =
 # Collider (Point) #
 #==================#
 
-proc init*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
+proc initCollider*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
   a.parent = parent
   a.pos = pos
   a.tags = @[]
@@ -200,7 +200,7 @@ proc init*(a: Collider, parent: Entity, pos: Coord = (0, 0)) =
 
 proc newCollider*(parent: Entity, pos: Coord = (0, 0)): Collider =
   result = new Collider
-  result.init(parent, pos)
+  result.initCollider(parent, pos)
 
 
 proc renderCollider*(a: Collider) =
@@ -255,16 +255,16 @@ method collide*(a: Collider, g: GroupCollider): bool =
 # BoxCollider #
 #=============#
 
-proc init*(b: BoxCollider, parent: Entity, pos: Coord = (0, 0),
-           dim: Dim = (0, 0)) =
-  Collider(b).init(parent, pos)
+proc initBoxCollider*(
+    b: BoxCollider, parent: Entity, pos: Coord = (0, 0), dim: Dim = (0, 0)) =
+  b.initCollider(parent, pos)
   b.dim = dim
 
 
 proc newBoxCollider*(parent: Entity, pos: Coord = (0, 0),
                      dim: Dim = (0, 0)): BoxCollider =
   result = new BoxCollider
-  result.init(parent, pos, dim)
+  result.initBoxCollider(parent, pos, dim)
 
 
 method render*(b: BoxCollider) =
@@ -373,16 +373,16 @@ method collide*(b: BoxCollider, g: GroupCollider): bool =
 # CircleCollider #
 #================#
 
-proc init*(c: CircleCollider, parent: Entity, pos: Coord = (0, 0),
-           radius: float = 0) =
-  Collider(c).init(parent, pos)
+proc initCircleCollider*(
+    c: CircleCollider, parent: Entity, pos: Coord = (0, 0), radius: float = 0) =
+  c.initCollider(parent, pos)
   c.radius = radius
 
 
 proc newCircleCollider*(parent: Entity, pos: Coord = (0, 0),
                         radius: float = 0): CircleCollider =
   result = new CircleCollider
-  result.init(parent, pos, radius)
+  result.initCircleCollider(parent, pos, radius)
 
 
 method render*(c: CircleCollider) =
@@ -480,16 +480,17 @@ method collide*(c: CircleCollider, g: GroupCollider): bool =
 # Line Collider #
 #===============#
 
-proc init*(d: LineCollider, parent: Entity, pos: Coord = (0, 0),
-           pos2: Coord = (0, 0)) =
-  Collider(d).init(parent, pos)
+proc initLineCollider*(
+    d: LineCollider,
+    parent: Entity, pos: Coord = (0, 0), pos2: Coord = (0, 0)) =
+  d.initCollider(parent, pos)
   d.pos2 = pos2
 
 
 proc newLineCollider*(parent: Entity, pos: Coord = (0, 0),
                       pos2: Coord = (0, 0)): LineCollider =
   result = new LineCollider
-  result.init(parent, pos, pos2)
+  result.initLineCollider(parent, pos, pos2)
 
 
 method render*(d: LineCollider) =
@@ -575,9 +576,10 @@ method collide*(d: LineCollider, g: GroupCollider): bool =
 # PolyCollider #
 #==============#
 
-proc init*(p: PolyCollider, parent: Entity, pos: Coord = (0, 0),
-           points: openarray[Coord]) =
-  Collider(p).init(parent, pos)
+proc initPolyCollider*(
+    p: PolyCollider,
+    parent: Entity, pos: Coord = (0, 0), points: openarray[Coord]) =
+  p.initCollider(parent, pos)
   p.points = @points
   p.farthest = farthestRadius(p)
 
@@ -591,7 +593,7 @@ proc updateFarthest*(p: PolyCollider) {.inline.} =
 proc newPolyCollider*(parent: Entity, pos: Coord = (0, 0),
                       points: openarray[Coord]): PolyCollider =
   result = new PolyCollider
-  result.init(parent, pos, points)
+  result.initPolyCollider(parent, pos, points)
 
 
 method render*(p: PolyCollider) =
@@ -687,14 +689,14 @@ method collide*(p: LineCollider, g: GroupCollider): bool =
 # GroupCollider #
 #===============#
 
-proc init*(g: GroupCollider, parent: Entity) =
-  Collider(g).init(parent, (0, 0))
+proc initGroupCollider*(g: GroupCollider, parent: Entity) =
+  g.initCollider(parent, (0, 0))
   g.list = @[]
 
 
 proc newGroupCollider*(parent: Entity): GroupCollider =
   result = new GroupCollider
-  result.init(parent)
+  result.initGroupCollider(parent)
 
 
 method render*(g: GroupCollider) =
@@ -798,4 +800,39 @@ proc willCollide*(entity: Entity, pos: Coord, rot: Angle, scale: Scale,
     entity.scale = originalScale
 
   result = isColliding(entity, list)
+
+
+# DEPRECATED
+
+template init*(
+    a: Collider, parent: Entity, pos: Coord = (0, 0)) {.
+    deprecated: "Use initCollider() instead".} =
+  initCollider(a, parent, pos)
+
+template init*(
+    b: BoxCollider, parent: Entity, pos: Coord = (0, 0), dim: Dim = (0, 0)) {.
+    deprecated: "Use initBoxCollider() instead".} =
+  initBoxCollider(b, parent, pos, dim)
+
+template init*(
+    c: CircleCollider,
+    parent: Entity, pos: Coord = (0, 0), radius: float = 0) {.
+    deprecated: "Use initCircleCollider() instead".} =
+  initCircleCollider(c, parent, pos, radius)
+
+template init*(
+    d: LineCollider,
+    parent: Entity, pos: Coord = (0, 0), pos2: Coord = (0, 0)) {.
+    deprecated: "Use initLineCollider() instead".} =
+  initLineCollider(d, parent, pos, pos2)
+
+template init*(
+    p: PolyCollider,
+    parent: Entity, pos: Coord = (0, 0), points: openarray[Coord]) {.
+    deprecated: "Use initPolyCollider() instead".} =
+  initPolyCollider(p, parent, pos, points)
+
+template init*(g: GroupCollider, parent: Entity) {.
+    deprecated: "Use initGroupCollider() instead".} =
+  initGroupCollider(g, parent)
 

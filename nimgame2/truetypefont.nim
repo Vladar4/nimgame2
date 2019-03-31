@@ -44,13 +44,17 @@ proc free*(font: TrueTypeFont) =
     font.fFont = nil
 
 
-proc init*(font: TrueTypeFont) =
+proc initTrueTypeFont*(font: TrueTypeFont) =
   font.fFont = nil
+
+
+template init*(font: TrueTypeFont) {.deprecated: "Use initTrueTypeFont() instead".} =
+  initTrueTypeFont(font)
 
 
 proc newTrueTypeFont*(): TrueTypeFont =
   new result, free
-  result.init()
+  result.initTrueTypeFont()
 
 
 proc load*(font: TrueTypeFont, file: string, size: int): bool =

@@ -34,14 +34,14 @@ type
     # Public
     image*: Graphic ##  The graphic to render on top of a button
     imageOffset*: Coord ##  Image drawing offset from button's center. \
-      ##  Calcuclated automatically if the image is passed in ``init()``
+      ##  Calcuclated automatically
+      ##  if the image is passed in ``initGuiButton()``
     imageShift*: Coord  ##  Image shift when button is pressed
 
 
-proc init*(button: GuiButton,
-           graphic: Graphic,
-           image: Graphic = nil,
-           circle: bool = false) =
+proc initGuiButton*(
+    button: GuiButton,
+    graphic: Graphic, image: Graphic = nil, circle: bool = false) =
   ##  GuiButton initialization.
   ##
   ##  ``graphic`` 2x3 button graphic:
@@ -51,7 +51,7 @@ proc init*(button: GuiButton,
   ##
   ##  ``circle`` Set to `true` if you want a circle shape instead of square one.
   ##
-  GuiWidget(button).init()
+  button.initGuiWidget()
   button.graphic = graphic
   button.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   button.image = image
@@ -71,6 +71,12 @@ proc init*(button: GuiButton,
         button.sprite.dim)
 
 
+template init*(button: GuiButton,
+    graphic: Graphic, image: Graphic = nil, circle: bool = false) {.
+    deprecated: "Use initGuiButton() instead".} =
+  initGuiButton(button, graphic, image, circle)
+
+
 proc newGuiButton*(graphic: Graphic,
                    image: Graphic = nil,
                    circle: bool = false): GuiButton =
@@ -84,7 +90,7 @@ proc newGuiButton*(graphic: Graphic,
   ##  ``circle`` Set to `true` if you want a circle shape instead of square one.
   ##
   result = new GuiButton
-  result.init(graphic, image, circle)
+  result.initGuiButton(graphic, image, circle)
 
 
 method `state=`*(button: GuiButton, val: GuiState) =

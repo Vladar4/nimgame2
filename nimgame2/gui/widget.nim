@@ -50,7 +50,7 @@ type
     toggle*, fToggled: bool ##  If `true`, the widget is in toggle on/off mode.
 
 
-proc init*(widget: GuiWidget) =
+proc initGuiWidget*(widget: GuiWidget) =
   widget.initEntity()
   widget.actions = @[]
   widget.fState = GuiState.defaultUp
@@ -60,9 +60,13 @@ proc init*(widget: GuiWidget) =
   widget.fToggled = false
 
 
+template init*(widget: GuiWidget) {.deprecated: "Use initGuiWidget() instead".} =
+  initGuiWidget(widget)
+
+
 proc newGuiWidget*(): GuiWidget =
   new result
-  result.init()
+  result.initGuiWidget()
 
 
 proc state*(widget: GuiWidget): GuiState {.inline.} =

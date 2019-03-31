@@ -47,9 +47,13 @@ proc free*(image: PerspectiveImage) =
     image.fSurface.freeSurface()
 
 
-proc init*(image: PerspectiveImage) =
+proc initPerspectiveImage*(image: PerspectiveImage) =
   image.free()
   image.fSurface = nil
+
+
+template init*(image: PerspectiveImage) {.deprecated: "Use initPerspectiveImage() instead".} =
+  initPerspectiveImage(image)
 
 
 template afterLoad(image: PerspectiveImage) =
@@ -92,7 +96,7 @@ proc load*(image: PerspectiveImage,
 
 proc newPerspectiveImage*(): PerspectiveImage =
   new result, free
-  result.init()
+  result.initPerspectiveImage()
 
 
 proc newPerspectiveImage*(file: string): PerspectiveImage =

@@ -62,7 +62,7 @@ type
 # TileMap #
 #=========#
 
-proc init*(tilemap: TileMap, scaleFix = false) =
+proc initTileMap*(tilemap: TileMap, scaleFix = false) =
   ##  TileMap initialization.
   ##
   ##  ``scaleFix``  set ``tileScale`` to ``DefaultTileScale`` if `true`,
@@ -76,6 +76,10 @@ proc init*(tilemap: TileMap, scaleFix = false) =
   tilemap.tileScale = if scaleFix: DefaultTileScale else: 1.0
 
 
+template init*(tilemap: TileMap, scaleFix = false) {.deprecated: "Use initTileMap() instead".} =
+  initTileMap(tilemap, scaleFix)
+
+
 proc newTileMap*(scaleFix = false): TileMap =
   ##  Create a new TileMap.
   ##
@@ -83,7 +87,7 @@ proc newTileMap*(scaleFix = false): TileMap =
   ##  or to `1.0` otherwise.
   ##
   result = new TileMap
-  result.init(scaleFix)
+  result.initTileMap(scaleFix)
 
 
 proc show*(tilemap: TileMap): TileShow {.inline.} =
@@ -244,27 +248,35 @@ method render*(tilemap: TileMap) =
 # TileCollider #
 #==============#
 
-proc init*(t: TileCollider,
-           parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
-           value: int, index: CoordInt) =
-  BoxCollider(t).init(parent, pos, dim)
+proc initTileCollider*(
+    t: TileCollider,
+    parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
+    value: int, index: CoordInt) =
+  t.initBoxCollider(parent, pos, dim)
   t.value = value
   t.index = index
+
+
+template init*(t: TileCollider,
+               parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
+               value: int, index: CoordInt) {.deprecated: "Use initTileCollider() instead".} =
+  initTileCollider(t, parent, pos, dim, value, index)
 
 
 proc newTileCollider*(parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0),
                       value: int, index: CoordInt): TileCollider =
   new result
-  result.init(parent, pos, dim, value, index)
+  result.initTileCollider(parent, pos, dim, value, index)
 
 
 #=================#
 # TileMapCollider #
 #=================#
 
-proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
-           dim: Dim = (0, 0)) =
-  Collider(t).init(parent, pos)
+proc initTileMapCollider*(
+    t: TileMapCollider,
+    parent: TileMap, pos: Coord = (0, 0), dim: Dim = (0, 0)) =
+  t.initCollider(parent, pos)
   t.tiles = @[]
 
   parent.updateShow()
@@ -317,19 +329,24 @@ proc init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
           parent, position, dim, parent.map[y][x], (x, y))
 
 
+template init*(t: TileMapCollider, parent: TileMap, pos: Coord = (0, 0),
+               dim: Dim = (0, 0)) {.deprecated: "Use initTileMapCollider() instead".} =
+  initTileMapCollider(t, parent, pos, dim)
+
+
 proc newTileMapCollider*(parent: TileMap,
                          pos: Coord = (0, 0),
                          dim: Dim = (0, 0)): TileMapCollider =
   ##  Create a ``TileMapCollider`` for the ``parent`` ``TileMap``.
   ##
-  ##  Most of the times you should use ``initCollider()`` instead.
+  ##  Most of the times you should use ``createCollider()`` instead.
   ##
   ##  ``pos`` Collider's relative position. Usually `(0, 0)`.
   ##
   ##  ``dim`` Tile dimensions.
   ##
   result = new TileMapCollider
-  result.init(parent, pos, dim)
+  result.initTileMapCollider(parent, pos, dim)
 
 
 iterator tileColliders*(t: TilemapCollider): TileCollider =
@@ -348,12 +365,16 @@ method render*(t: TileMapCollider) =
   t.renderCollider()
 
 
-proc initCollider*(tilemap: TileMap) =
+proc createCollider*(tilemap: TileMap) =
   ##  Initialize a collider for the ``tilemap``.
   ##
   let collider = newTileMapCollider(tilemap, (0, 0), tilemap.sprite.dim)
   collider.map = tilemap
   tilemap.collider = collider
+
+
+template initCollider*(tilemap: TileMap) {.deprecated: "Use createCollider() instead".} =
+  createCollider(tilemap)
 
 
 template collisionList*(t: TileMapCollider,

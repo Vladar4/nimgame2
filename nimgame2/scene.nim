@@ -40,12 +40,21 @@ type
 # Scene #
 #=======#
 
-proc init*(scene: Scene) =
+proc initScene*(scene: Scene) =
   scene.camera = nil
   scene.cameraBond = nil
   scene.cameraBondOffset = (0.0, 0.0)
   scene.fList = @[]
   scene.fAddList = @[]
+
+
+template init*(scene: Scene) {.deprecated: "Use initScene() instead".} =
+  initScene(scene)
+
+
+proc newScene*(): Scene =
+  new result
+  result.initScene()
 
 
 proc eventScene*(scene: Scene, e: sdl.Event) =

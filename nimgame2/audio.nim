@@ -474,15 +474,19 @@ proc finished() {.cdecl.} =
   playlist.fFinished = true
 
 
-proc init*(pl: Playlist) =
+proc initPlaylist*(pl: Playlist) =
   pl.list = @[]
   pl.fIndex = -1
   pl.fFinished = false
 
 
+template init*(pl: Playlist) {.deprecated: "Use initPlaylist() instead"} =
+  initPlaylist(pl)
+
+
 proc newPlaylist*(): Playlist =
   new result
-  result.init()
+  result.initPlaylist()
 
 
 proc index*(pl: Playlist): int {.inline.} =

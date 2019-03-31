@@ -43,14 +43,18 @@ type
 # GuiRadioGroup #
 #===============#
 
-proc init*(radiogroup: GuiRadioGroup) =
+proc initGuiRadioGroup*(radiogroup: GuiRadioGroup) =
   radiogroup.initEntity()
   radiogroup.list = @[]
 
 
+template init*(radiogroup: GuiRadioGroup) {.deprecated: "Use initGuiRadioGroup() instead".} =
+  initGuiRadioGroup(radiogroup)
+
+
 proc newGuiRadioGroup*(): GuiRadioGroup =
   result = new GuiRadioGroup
-  result.init()
+  result.initGuiRadioGroup()
 
 
 proc toggle*(radiogroup: GuiRadioGroup, target: GuiWidget) =
@@ -67,11 +71,9 @@ proc toggle*(radiogroup: GuiRadioGroup, target: GuiWidget) =
 # GuiRadioButton #
 #================#
 
-proc init*(radiobutton: GuiRadioButton,
-           group: GuiRadioGroup,
-           graphic: Graphic,
-           image: Graphic = nil,
-           circle: bool = false) =
+proc initGuiRadioButton*(
+    radiobutton: GuiRadioButton, group: GuiRadioGroup, graphic: Graphic,
+    image: Graphic = nil, circle: bool = false) =
   ##  GuiRadioButton initialization.
   ##
   ##  ``group`` GuiRadioGroup the ``radiobutton`` belongs to.
@@ -79,11 +81,18 @@ proc init*(radiobutton: GuiRadioButton,
   ##  ``graphic``, ``image``, ``circle``
   ##  See "gui/button.nim" initialization docs.
   ##
-  GuiButton(radiobutton).init(graphic, image, circle)
+  radiobutton.initGuiButton(graphic, image, circle)
   radiobutton.toggle = true
   radiobutton.parent = group
   radiobutton.group = group
   group.list.add(radiobutton)
+
+
+template init*(
+    radiobutton: GuiRadioButton, group: GuiRadioGroup, graphic: Graphic,
+    image: Graphic = nil, circle: bool = false) {.
+    deprecated: "Use initGuiRadioButton() instead".} =
+  initGuiRadioButton(radiobutton, group, graphic, image, circle)
 
 
 proc newGuiRadioButton*(group: GuiRadioGroup,
@@ -99,7 +108,7 @@ proc newGuiRadioButton*(group: GuiRadioGroup,
   ##
   ##
   result = new GuiRadioButton
-  result.init(group, graphic, image, circle)
+  result.initGuiRadioButton(group, graphic, image, circle)
 
 
 proc setToggled*(radiobutton: GuiRadioButton, val: bool) =

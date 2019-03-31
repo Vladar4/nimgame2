@@ -101,9 +101,13 @@ proc free*(image: IndexedImage) =
     image.fSurface.freeSurface()
 
 
-proc init*(image: IndexedImage) =
+proc initIndexedImage*(image: IndexedImage) =
   image.free()
   image.fSurface = nil
+
+
+template init*(image: IndexedImage) {.deprecated: "Use initIndexedImage() insteadl".} =
+  initIndexedImage(image)
 
 
 proc load*(image: IndexedImage,
@@ -151,7 +155,7 @@ proc load*(image: IndexedImage,
 
 proc newIndexedImage*(): IndexedImage =
   new result, free
-  result.init()
+  result.initIndexedImage()
 
 
 proc newIndexedImage*(file: string): IndexedImage =

@@ -757,10 +757,10 @@ proc repeating*(tween: Tween) {.procvar.} =
 # Tween #
 #=======#
 
-proc init*[T,V](tween: Tween[T,V],
-                target: T,
-                get: proc(e: T): V,
-                set: proc(e: T, v: V)) =
+proc initTween*[T,V](tween: Tween[T,V],
+                     target: T,
+                     get: proc(e: T): V,
+                     set: proc(e: T, v: V)) =
   ##  Set new bindings for the ``tween``.
   ##
   ##  ``target`` The target object of this tween.
@@ -777,6 +777,14 @@ proc init*[T,V](tween: Tween[T,V],
   tween.ender = reversing
 
 
+template init*[T,V](tween: Tween[T,V],
+                    target: T,
+                    get: proc(e: T): V,
+                    set: proc(e: T, v: V)) {.
+                    deprecated: "Use initTween() instead".} =
+  initTween(tween, target, get, set)
+
+
 proc newTween*[T,V](target: T,
                     get: proc(e: T): V,
                     set: proc(e: T, v: V)): Tween[T,V] =
@@ -789,5 +797,5 @@ proc newTween*[T,V](target: T,
   ##  ``set`` A value setter procedure.
   ##
   new result
-  result.init(target, get, set)
+  result.initTween(target, get, set)
 

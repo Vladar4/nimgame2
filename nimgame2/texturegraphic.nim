@@ -52,10 +52,14 @@ proc free*(graphic: TextureGraphic) =
   graphic.fSize = (0, 0)
 
 
-proc init*(graphic: TextureGraphic) =
+proc initTextureGraphic*(graphic: TextureGraphic) =
   graphic.fTexture = nil
   graphic.fFormat = 0
   graphic.fSize = (0, 0)
+
+
+template init*(graphic: TextureGraphic) {.deprecated: "use initTextureGraphic() instead".} =
+  initTextureGraphic(graphic)
 
 
 proc updateTexture*(graphic: TextureGraphic): bool =
@@ -139,7 +143,7 @@ proc texture*(graphic: TextureGraphic): sdl.Texture {.inline.} =
 
 proc newTextureGraphic*(): TextureGraphic =
   new result, free
-  result.init()
+  result.initTextureGraphic()
 
 
 proc newTextureGraphic*(file: string): TextureGraphic =

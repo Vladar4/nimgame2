@@ -48,11 +48,15 @@ proc free*(font: BitmapFont) =
   font.fChars = @[]
 
 
-proc init*(font: BitmapFont) =
+proc initBitmapFont*(font: BitmapFont) =
   font.fSurface = nil
   font.fDim = (0, 0)
   font.fCharDim = (0, 0)
   font.fChars = @[]
+
+
+template init*(font: BitmapFont) {.deprecated: "Use initBitmapFont() instead".} =
+  initBitmapFont(font)
 
 
 template postLoad(font: BitmapFont, charDim: Dim,
@@ -114,7 +118,7 @@ proc load*(font: BitmapFont, src: ptr RWops, charDim: Dim,
 
 proc newBitmapFont*(): BitmapFont =
   new result, free
-  result.init()
+  result.initBitmapFont()
 
 
 proc newBitmapFont*(file: string, charDim: Dim,

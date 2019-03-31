@@ -44,9 +44,7 @@ type
       keysToFirst*, keysToLast*, keysDone*: seq[Keycode]
 
 
-proc init*(input: GuiTextInput,
-           graphic: Graphic,
-           font: Font) =
+proc initGuiTextInput*(input: GuiTextInput, graphic: Graphic, font: Font) =
   ##  GuiTextInput initialization.
   ##
   ##  ``grapic`` 2x2 input field graphic:
@@ -54,7 +52,7 @@ proc init*(input: GuiTextInput,
   ##
   ##  ``font`` Font object for text rendering.
   ##
-  GuiWidget(input).init()
+  input.initGuiWidget()
   input.toggle = true
   input.keysBackspace = @[K_Backspace]
   input.keysDelete = @[K_Delete]
@@ -74,6 +72,11 @@ proc init*(input: GuiTextInput,
     (input.sprite.dim.h - font.charH) / 2)
 
 
+template init*(input: GuiTextInput, graphic: Graphic, font: Font) {.
+    deprecated: "Use initGuiTextInput() instead".} =
+  initGuiTextInput(input, graphic, font)
+
+
 proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
   ##  Create a new GuiTextInput.
   ##
@@ -83,7 +86,7 @@ proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
   ##  ``font`` Font object for text rendering.
   ##
   result = new GuiTextInput
-  result.init(graphic, font)
+  result.initGuiTextInput(graphic, font)
 
 
 proc eventGuiTextInput*(input: GuiTextInput, e: Event) =

@@ -46,8 +46,8 @@ template cursorLen(tf: TextField): int =
   tf.cursor.runeLen
 
 
-proc init*(tf: TextField, font: Font) =
-  TextGraphic(tf).init(font)
+proc initTextField*(tf: TextField, font: Font) =
+  tf.initTextGraphic(font)
   tf.fActive = false
   tf.fCursorIndex = 0
   tf.cursor = DefaultTextFieldCursor
@@ -55,9 +55,13 @@ proc init*(tf: TextField, font: Font) =
   tf.lines = [""]
 
 
+template init*(tf: TextField, font: Font) {.deprecated: "Use initTextField() instead".} =
+  initTextField(tf, font)
+
+
 proc newTextField*(font: Font): TextField =
   result = new TextField
-  result.init(font)
+  result.initTextField(font)
 
 
 proc text*(tf: TextField): string =

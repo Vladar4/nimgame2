@@ -52,12 +52,16 @@ proc free*(mosaic: Mosaic) =
   mosaic.offset = (0, 0)
 
 
-proc init*(mosaic: Mosaic) =
+proc initMosaic*(mosaic: Mosaic) =
   mosaic.free()
   mosaic.fSurface = nil
   mosaic.fDim = (0, 0)
   mosaic.tileDim = (0, 0)
   mosaic.offset = (0, 0)
+
+
+template init*(mosaic: Mosaic) {.deprecated: "Use initMosaic() instead".} =
+  initMosaic*(mosaic)
 
 
 template afterLoad(mosaic: Mosaic, tileDIm: Dim, offset: Dim = (0, 0)) =
@@ -107,7 +111,7 @@ proc load*(mosaic: Mosaic, src: ptr RWops,
 
 proc newMosaic*(): Mosaic =
   new result, free
-  result.init()
+  result.initMosaic()
 
 
 proc newMosaic*(file: string,
