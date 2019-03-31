@@ -9,8 +9,8 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 
 All pull requests should be done into the **devel** branch.
 
-Status: v0.7 devel
-------------------
+Status: v0.6.1 devel
+--------------------
 
 
 Requires:
