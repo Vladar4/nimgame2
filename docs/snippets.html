@@ -61,9 +61,9 @@
       myEntity: Entity
 
 
-  proc init*(scene: MainScene) =
+  proc initMainScene*(scene: MainScene) =
     # don't forget the parent initialization!
-    Scene(scene).init()
+    scene.initScene()
 
     # create the graphic
     scene.myGraphic = newTextureGraphic()
@@ -87,7 +87,7 @@
   proc newMainScene*(): MainScene =
     # scene constructor
     new result, free
-    result.init()
+    result.initMainScene()
 
 
   method event*(scene: MainScene, event: Event) =
@@ -131,7 +131,7 @@
     MyEntity* = ref object of Entity
 
 
-  proc init*(entity: MyEntity, graphic: TextureGraphic) =
+  proc initMyEntity*(entity: MyEntity, graphic: TextureGraphic) =
     # don't forget to call the parent initialization!
     entity.initEntity()
     # assign the graphic
@@ -145,7 +145,7 @@
   proc newMyEntity*(graphic: TextureGraphic): MyEntity =
     # entity constructor
     new result
-    result.init(graphic)
+    result.initMyEntity(graphic)
 
 
   method update*(entity: MyEntity, elapsed: float) =
@@ -293,8 +293,8 @@
     # your custom drawing routine goes here
 
 
-  proc init*(scene: MyScene) =
-    Scene(scene).init()
+  proc initMyScene*(scene: MyScene) =
+    scene.initScene()
     # create a ProcGraphic
     scene.customGraphic = newProcGraphic()
     # assign the procedure
@@ -505,12 +505,12 @@ import
 type
   MyButton* = ref object of GuiButton
 
-proc init*(btn: MyButton, graphic: Graphic, image: Graphic = nil) =
-  GuiButton(btn).init(graphic, image)
+proc initMyButton*(btn: MyButton, graphic: Graphic, image: Graphic = nil) =
+  btn.initGuiButton(graphic, image)
 
 proc newMyButton*(graphic: Graphic, image: Graphic = nil): MyButton =
   new result
-  result.init(graphic, image)
+  result.initMyButton(graphic, image)
 
 method onClick*(btn: MyButton, mb: MouseButton) =
   echo "clicked my button"

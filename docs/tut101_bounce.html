@@ -130,8 +130,8 @@ type
   TitleScene = ref object of Scene
 
 
-proc init*(scene: TitleScene) =
-  init Scene(scene)
+proc initTitleScene*(scene: TitleScene) =
+  initScene scene
 
 
 proc free*(scene: TitleScene) =
@@ -140,7 +140,7 @@ proc free*(scene: TitleScene) =
 
 proc newTitleScene*(): TitleScene =
   new result, free
-  init result
+  initTitleScene result
 
 
 method event*(scene: TitleScene, event: Event) =
@@ -162,8 +162,8 @@ type
   MainScene = ref object of Scene
 
 
-proc init*(scene: MainScene) =
-  init Scene(scene)
+proc initMainScene*(scene: MainScene) =
+  initScene scene
 
 
 proc free*(scene: MainScene) =
@@ -172,7 +172,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  init result
+  initMainScene result
 
 
 method show*(scene: MainScene) =
@@ -353,7 +353,7 @@ loadData() # Call it before any scene initialization
 </pre>
 
     <p>
-        And finally, we will create our entities in TitleScene's <b>init()</b> procedure.
+        And finally, we will create our entities in <b>initTitleScene()</b> procedure.
     </p>
 
 <h4>title.nim</h4>
@@ -368,7 +368,7 @@ import
   ],
   ...
 
-proc init*(scene: TitleScene) =
+proc initTitleScene*(scene: TitleScene) =
   ...
 
   # Create a title text graphic with a big font
@@ -500,7 +500,7 @@ type
 <pre class="prettyprint">
 ...
 
-proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
+proc initPaddle*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
   paddle.initEntity()
   paddle.graphic = gfxData["paddle"]
   paddle.centrify() # Set the center point offset
@@ -515,7 +515,7 @@ proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
 
 proc newPaddle*(placement: PaddlePlacement, control: PaddleControl): Paddle =
   new result
-  result.init(placement, control)
+  result.initPaddle(placement, control)
 
 </pre>
 
@@ -572,8 +572,8 @@ type
     leftPaddle, rightPaddle: Paddle
 
 
-proc init*(scene: MainScene) =
-  init Scene(scene)
+proc initMainScene*(scene: MainScene) =
+  initScene scene
 
   # left paddle
   scene.leftPaddle = newPaddle(ppLeft, pcPlayer1)
@@ -611,7 +611,7 @@ proc init*(scene: MainScene) =
 <pre class="prettyprint">
 ...
 
-proc init*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
+proc initPaddle*(paddle: Paddle, placement: PaddlePlacement, control: PaddleControl) =
   ...
 
   # Collisions
@@ -653,7 +653,7 @@ proc reset*(ball: Ball) =
   ball.pos = game.size / 2  # place to the center of the screen
 
 
-proc init*(ball: Ball) =
+proc initBall*(ball: Ball) =
   ball.initEntity()
   ball.graphic = gfxData["ball"]
   ball.centrify() # Set the center point offset
@@ -667,7 +667,7 @@ proc init*(ball: Ball) =
 
 proc newBall*(): Ball =
   new result
-  result.init()
+  result.initBall()
 
 </pre>
 
@@ -694,7 +694,7 @@ type
     ball: Ball
 
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # ball
@@ -902,7 +902,7 @@ MainScene = ref object of Scene
   scoreText: TextGraphic
 
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # score
@@ -980,7 +980,7 @@ type
     pause: Entity
 
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # pause

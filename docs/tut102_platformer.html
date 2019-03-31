@@ -192,8 +192,8 @@ type
   TitleScene = ref object of Scene
 
 
-proc init*(scene: TitleScene) =
-  init Scene(scene)
+proc initTitleScene*(scene: TitleScene) =
+  initScene scene
 
   # Title text
   let titleText = newTextGraphic bigFont
@@ -211,7 +211,7 @@ proc free*(scene: TitleScene) =
 
 proc newTitleScene*(): TitleScene =
   new result, free
-  init result
+  initTitleScene result
 
 
 method event*(scene: TitleScene, event: Event) =
@@ -247,8 +247,8 @@ type
   MainScene = ref object of Scene
 
 
-proc init*(scene: MainScene) =
-  init Scene scene
+proc initMainScene*(scene: MainScene) =
+  initScene scene
 
 
 proc free*(scene: MainScene) =
@@ -257,7 +257,7 @@ proc free*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  init result
+  initMainScene result
 
 
 method event*(scene: MainScene, event: Event) =
@@ -338,15 +338,15 @@ proc exit(widget: GuiWidget) =
 </pre>
 
     <p>
-        Now, we just need to initialize both buttons in the <b>init</b> procedure, binding the actions.
+        Now, we just need to initialize both buttons in the <b>initTitleScene</b> procedure, binding the actions.
     </p>
 
 <h4>title.nim</h4>
 <pre class="prettyprint">
 ...
 
-proc init*(scene: TitleScene) =
-  init Scene(scene)
+proc initTitleScene*(scene: TitleScene) =
+  initScene scene
 
   # Create menu buttons
   var
@@ -405,8 +405,8 @@ type
   Level* = ref object of TileMap
 
 
-proc init*(level: Level, tiles: TextureGraphic) =
-  init Tilemap level
+proc initLevel*(level: Level, tiles: TextureGraphic) =
+  initTilemap level
   level.tags.add("level")
   level.graphic = tiles
   level.initSprite(TileDim)
@@ -414,7 +414,7 @@ proc init*(level: Level, tiles: TextureGraphic) =
 
 proc newLevel*(tiles: TextureGraphic): Level =
   new result
-  result.init(tiles)
+  result.initLevel(tiles)
 
 
 proc load*(level: Level, csv: string) =
@@ -425,12 +425,12 @@ proc load*(level: Level, csv: string) =
   level.hidden.add @[8, 9, 10, 11]  # tiles on the third row are invisible markers
   level.passable.add @[0, 2, 3, 4, 8, 9, 10, 11] # tiles without colliders
   level.onlyReachableColliders = true # do not init unreachable colliders
-  level.initCollider()
+  level.createCollider()
 
 </pre>
 
     <p>
-        As you see, we are passing CSV data into the two-dimensional map sequence. The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles, that the player should not be able to walk on, are added to the <b>passable</b> sequence. To speed up phyiscs we enabled the <b>onlyReachableColliders</b> option prior to calling the <b>initCollider</b> procedure.
+        As you see, we are passing CSV data into the two-dimensional map sequence. The third row of tiles should not be visible as it is used for spawn selectors and such. All tiles, that the player should not be able to walk on, are added to the <b>passable</b> sequence. To speed up phyiscs we enabled the <b>onlyReachableColliders</b> option prior to calling the <b>createCollider</b> procedure.
     </p>
     <p>
         Now we could add the level into the main scene.
@@ -449,7 +449,7 @@ type
   MainScene = ref object of Scene
     level: Level
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Level
@@ -513,7 +513,7 @@ proc resetPosition*(player: Player) =
   player.pos = player.level.tilePos player.level.firstTileIndex(Spawn)
 
 
-proc init*(player: Player, graphic: TextureGraphic, level: Level) =
+proc initPlayer*(player: Player, graphic: TextureGraphic, level: Level) =
   player.initEntity()
   player.tags.add "player"
   player.level = level
@@ -526,7 +526,7 @@ proc init*(player: Player, graphic: TextureGraphic, level: Level) =
 
 proc newPlayer*(graphic: TextureGraphic, level: Level): Player =
   new result
-  result.init(graphic, level)
+  result.initPlayer(graphic, level)
 
 
 method update*(player: Player, elapsed: float) =
@@ -557,8 +557,8 @@ type
     player: Player
 
 
-proc init*(scene: MainScene) =
-  init Scene scene
+proc initMainScene*(scene: MainScene) =
+  initScene scene
 
   # Camera
   scene.camera = newEntity()
@@ -602,7 +602,7 @@ const
 
 ...
 
-proc init*(player: Player, graphic: TextureGraphic, level: Level) =
+proc initPlayer*(player: Player, graphic: TextureGraphic, level: Level) =
   ...
 
 
@@ -690,7 +690,7 @@ const
 
 ...
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Spikes
@@ -766,7 +766,7 @@ type
 
 ...
 
-proc init*(player: Player, graphic, TextureGraphic, level: Level) =
+proc initPlayer*(player: Player, graphic, TextureGraphic, level: Level) =
   ...
 
   player.requestCoins = @[]
@@ -815,7 +815,7 @@ proc spawnCoin*(scene: MainScene, index: CoordInt) =
   scene.add e
 
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Boxes
@@ -918,7 +918,7 @@ proc enemyLogic(enemy: Entity, elapsed: float) =
       enemy.prevVel = -WalkVel
 
 
-proc init*(enemy: Enemy, graphic: TextureGraphic, level: Level) =
+proc initEnemy*(enemy: Enemy, graphic: TextureGraphic, level: Level) =
   enemy.initEntity()
   enemy.tags.add "enemy"
   enemy.level = level
@@ -939,7 +939,7 @@ proc init*(enemy: Enemy, graphic: TextureGraphic, level: Level) =
 
 proc newEnemy*(graphic: TextureGraphic, level: Level): Enemy =
   new result
-  result.init(graphic, level)
+  result.initEnemy(graphic, level)
 
 
 method update*(enemy: Enemy, elapsed: float) =
@@ -968,7 +968,7 @@ const
   EnemySpawn = 9  # Enemy spawn tile index
 
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Enemy
@@ -1024,7 +1024,7 @@ type
 
 ...
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Finish
@@ -1106,7 +1106,7 @@ method onCollide*(player: Player, target: Entity) =
 
 ...
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
 
   # Score
@@ -1218,7 +1218,7 @@ method onCollide*(player: Player, target: Entity) =
 <pre class="prettyprint">
 ...
 
-proc init*(scene: MainScene) =
+proc initMainScene*(scene: MainScene) =
   ...
   if scene.level.map.len == 0: scene.level.load "data/csv/map1.csv"
   # changed from: scene.level.load "data/csv/map1.csv"
@@ -1226,7 +1226,7 @@ proc init*(scene: MainScene) =
 
 proc newMainScene*(): MainScene =
   new result, free
-  # removed: init result
+  # removed: initMainScene result
 
 method show*(scene: MainScene) =
   hideCursor()
@@ -1236,7 +1236,7 @@ method show*(scene: MainScene) =
 </pre>
 
     <p>
-        As you can see, we moved the <b>init</b> call from the constructor to the <b>show</b> method, so the scene will be rebuilt each time it is switched to. Nim's GC will take care of previously allocated resources.
+        As you can see, we moved the <b>initMainScene</b> call from the constructor to the <b>show</b> method, so the scene will be rebuilt each time it is switched to. Nim's GC will take care of previously allocated resources.
     </p>
 
 </div>
