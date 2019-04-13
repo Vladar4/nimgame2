@@ -66,10 +66,19 @@ proc dump*(tw: Typewriter): string {.inline.} =
   $tw.fText
 
 
-proc clear*(tw: Typewriter) {.inline.} =
+proc text*(tw: Typewriter): string {.inline.} =
+  ##  ``Return`` the printed text.
+  ##
+  TextGraphic(tw.graphic).text
+
+
+proc clear*(tw: Typewriter, empty: bool = false) {.inline.} =
   ##  Delete the text awaiting in the typewriter's queue.
   ##
+  ##  ``empty`` Set to `true` if you want to clear the printed text as well.
   tw.fText = @[]
+  if empty:
+    TextGraphic(tw.graphic).setText("")
 
 
 proc force*(tw: Typewriter, text: string = "") =
