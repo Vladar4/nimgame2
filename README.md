@@ -49,7 +49,7 @@ Installation through [Nimble](https://github.com/nim-lang/nimble):
 
 Recommended compilation flags:
 ------------------------------
-`-d:release --opt:speed`
+`--multimethods:on -d:release --opt:speed`
 
 
 Links:
