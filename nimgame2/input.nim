@@ -222,11 +222,14 @@ proc updateMouse*(event: Event) =
 template mouse*(): Coord2 =
   ##  ``Return`` current mouse position.
   ##
+  ##  ``Note:`` The absolute position is not adjusted for rescaled windows.
+  ##  Use `MouseMotion` event instead.
+  ##
   m
 
 
 template mouseWheel*(): Coord =
-  ## ``Return`` current mouse wheel motion.
+  ##  ``Return`` current mouse wheel motion.
   ##
   mWheel
 
