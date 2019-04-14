@@ -520,6 +520,10 @@ proc randWeighted*[T](weights: openArray[T]): int {.inline.} =
 # Time #
 #======#
 
+export # from SDL2 timers
+  getTicks, getPerformanceCounter, getPerformanceFrequency, delay, ticksPassed
+
+
 template timeDiff*(first, second: untyped): untyped = ##  \
   ##  ``first``, ``second`` two results of ``sdl.getPerformanceCounter()``.
   ##
