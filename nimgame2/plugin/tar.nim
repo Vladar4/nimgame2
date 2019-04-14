@@ -241,3 +241,16 @@ proc read*(tar: TarFile, filename: string): ptr RWops =
     return nil
   return rwFromMem(cast[pointer](tar.contents[idx].data), tar.contents[idx].size)
 
+
+import streams
+proc stream*(tar: TarFile, filename: string): Stream =
+  ##  Create and return a StringStream of a ``filename`` from ``tar``.
+  ##
+  ##  You'll need to ``close()`` this stream yourself.
+  let idx = tar.index(filename)
+  if idx < 0:
+    return nil
+  result = newStringStream()
+  result.writeData(cast[pointer](tar.contents[idx].data), tar.contents[idx].size)
+  result.setPosition(0)
+
