@@ -115,7 +115,33 @@ proc `lines=`*(text: TextGraphic, lines: openarray[string]) =
   if text.fFont == nil:
     return
   text.fLines = @lines
-  text.freeTexture()
+  text.update()
+
+
+proc len*(text: TextGraphic): int {.inline.} =
+  ##  ``Return`` line count.
+  ##
+  text.fLines.len
+
+
+proc `[]`*(text: TextGraphic, i: int | BackwardsIndex): string {.inline.} =
+  ##  ``Return`` ``i``'th line.
+  ##
+  text.fLines[i]
+
+
+proc `[]=`*(text: TextGraphic, i: int | BackwardsIndex, s: string) =
+  ##  Set ``i``'th line.
+  if text.fFont == nil:
+    return
+  text.fLines[i] = s
+  text.update()
+
+
+proc add*(text: TextGraphic, line: string) =
+  if text.fFont == nil:
+    return
+  text.fLines.add(line)
   text.update()
 
 
