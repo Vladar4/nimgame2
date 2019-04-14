@@ -288,6 +288,31 @@ proc setResizable*(game: Game, enabled: bool) {.inline.} =
   game.fWindow.setWindowResizable(enabled)
 
 
+proc getFullscreen*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game is in fullscreen mode, or `false` otherwise.
+  ##
+  ((game.fWindow.getWindowFlags() and WindowFullscreen) != 0 or
+   (game.fWindow.getWindowFlags() and WindowFullscreenDesktop) != 0)
+
+
+proc setFullscreen*(
+    game: Game, set: bool, desktop: bool = true): bool {.inline.} =
+  ##  Set fullscreen mode.
+  ##
+  ##  ``desktop`` use `WINDOW_FULLSCREEN_DESKTOP` flag instead of
+  ##  `WINDOW_FULLSCREEN`. Default is `true`.
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise.
+  ##
+  return
+    if set:
+      0 == game.fWindow.setWindowFullscreen(
+        if desktop: WindowFullscreenDesktop
+        else: WindowFullscreen)
+    else:
+      0 == game.fWindow.setWindowFullscreen(0)
+
+
 proc show*(game: Game) {.inline.} =
   game.fWindow.showWindow()
 
@@ -386,6 +411,17 @@ proc resetViewport*(game: Game) =
     sdl.logCritical(
       sdl.LogCategoryError, "Can't reset viewport: %s",
         sdl.getError())
+
+
+proc forceRender*(game: Game, elapsed: float = 0.0) =
+  ##  Force game screen rendering outsice of the game loop.
+  ##
+  discard renderer.setRenderDrawColor(background)
+  discard renderer.renderClear()
+  if not (game.fScene == nil):
+    game.fScene.update(elapsed)
+    game.fScene.render()
+  renderer.renderPresent()
 
 
 #=====#
