@@ -55,6 +55,37 @@ proc load[T](assets: Assets[T],
   assets.load(files, init)
 
 
+iterator loadIter*[T](assets: Assets[T],
+                      files: openarray[string],
+                      init: proc(file: string):T): int =
+  ##  Iterative loader.
+  ##
+  ##  ``Yields`` the count of files loaded so far.
+  var count = 0
+  assets[] = initOrderedTable[string, T](nextPowerOfTwo(files.len))
+  for i in files:
+    let
+      name = i.splitFile.name
+      data = init(i)
+    assets.add(name, data)
+    inc count
+    yield count
+
+
+iterator loadIter*[T](assets: Assets[T],
+                      dir: string,
+                      init: proc(file: string): T): int =
+  ##  Iterative loader.
+  ##
+  ##  ``Yields`` the count of files loaded so far.
+  var files: seq[string] = @[]
+  for i in walkDir(dir):
+    if i.kind == pcFile:
+      files.add(i.path)
+  for count in assets.loadIter(files, init):
+    yield count
+
+
 proc newAssets*[T](files: openarray[string], init: proc(file: string): T): Assets[T] =
   ##  Create a new assets collection.
   ##
