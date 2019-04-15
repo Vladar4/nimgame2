@@ -49,6 +49,10 @@ converter toInt*(button: MouseButton): int32 =
   button.int32
 
 
+converter toUint8*(button: MouseButton): uint8 =
+  button.uint8
+
+
 var
   kbd: ptr array[sdl.NumScancodes.int, uint8]
   kbdPressed, kbdReleased: seq[Scancode]
