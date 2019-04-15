@@ -41,17 +41,22 @@ type
 # Typewriter #
 #============#
 
-proc newTypewriter*(text: TextGraphic, rate: float): Typewriter =
-  new result
-  result.initEntity()
-  result.graphic = text
-  let tg = TextGraphic(result.graphic)
+
+proc initTypewriter*(tw: Typewriter, text: TextGraphic, rate: float) =
+  tw.initEntity()
+  tw.graphic = text
+  let tg = TextGraphic(tw.graphic)
   if tg.lines.len < 1:
     tg.lines = [""]
-  result.fText = @[]
-  result.fRemainder = 0.0
-  result.rate = rate
-  result.width = -1
+  tw.fText = @[]
+  tw.fRemainder = 0.0
+  tw.rate = rate
+  tw.width = -1
+
+
+proc newTypewriter*(text: TextGraphic, rate: float): Typewriter =
+  new result
+  result.initTypewriter(text, rate)
 
 
 proc add*(tw: Typewriter, text: string) {.inline.} =
@@ -61,9 +66,15 @@ proc add*(tw: Typewriter, text: string) {.inline.} =
 
 
 proc dump*(tw: Typewriter): string {.inline.} =
-  ##  ``Return`` the text awaiting in the typewriter's queue.
+  ##  ``Return`` the text awaiting in the typewriter's queue (backwards).
   ##
   $tw.fText
+
+
+proc queueLen*(tw: Typewriter): int {.inline.} =
+  ##  ``Return`` queue length.
+  ##
+  tw.fText.len
 
 
 proc text*(tw: Typewriter): string {.inline.} =
@@ -94,6 +105,8 @@ proc force*(tw: Typewriter, text: string = "") =
 
 
 proc updateTypewriter*(tw: Typewriter, elapsed: float) =
+  updateEntity(tw, elapsed)
+
   var str = ""
   tw.fRemainder += elapsed
   while tw.fRemainder >= tw.rate:
