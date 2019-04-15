@@ -381,8 +381,10 @@ proc `scene=`*(game: Game, val: Scene) =
   ##  Set a new game scene.
   ##
   if not (game.fScene == nil):
+    game.fScene.update(0.0)
     game.fScene.hide()
   game.fScene = val
+  game.fScene.update(0.0)
   game.fScene.show()
 
 
