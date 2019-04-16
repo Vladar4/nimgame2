@@ -83,7 +83,13 @@ proc renderTextFont*(font: Font,
   ##  with given ``align`` and ``color``.
   ##
   var text = @text
+
+  # check for empty lines
   if text.len < 1: text.add(" ")
+  else:
+    for i in 0..text.high:
+      if text[i].len < 1:
+        text[i] = " "
 
   # find the longest line of text
   var maxw = 0
