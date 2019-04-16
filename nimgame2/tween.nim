@@ -163,6 +163,8 @@ proc setup*[T,V](tween: Tween[T,V],
   ##
   ##  ``loops`` Loop limit. `0` for one loop, `-1` for looping forever.
   ##
+  let duration = if duration == 0: 0.001 # save vs. division by 0
+                 else: duration
   tween.fStart = start
   tween.fFinish = finish
   tween.fDuration = duration
@@ -585,10 +587,12 @@ proc inElastic*[V](start, distance: V, elapsed, duration: float,
     s = period / 4.0
   else:
     amp = amplitude
+    assert(amp != 0)
     s = period / X2Pi * arcsin(distance / amp)
 
   let progress1 = progress(elapsed, duration) - 1
 
+  assert(period != 0)
   return
     start -
       amp * pow(2, 10 * progress1) *
@@ -610,10 +614,12 @@ proc outElastic*[V](start, distance: V, elapsed, duration: float,
     s = period / 4.0
   else:
     amp = amplitude
+    assert(amp != 0)
     s = period / X2Pi * arcsin(distance / amp)
 
   let progress = progress(elapsed, duration)
 
+  assert(period != 0)
   return
     start + distance +
       amp * pow(2, -10 * progress) *
@@ -635,10 +641,12 @@ proc inOutElastic*[V](start, distance: V, elapsed, duration: float,
     s = period / 4.0
   else:
     amp = amplitude
+    assert(amp != 0)
     s = period / X2Pi * arcsin(distance / amp)
 
   let
     x2progress1 = progress(elapsed, duration) * 2 - 1
+  assert(period != 0)
   return
     if x2progress1 < 0:
       start -
