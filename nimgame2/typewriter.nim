@@ -30,7 +30,7 @@ import
 type
   Typewriter* = ref object of Entity
     # Private
-    fText: seq[char]  ##  typewriter's queue
+    fQueue: seq[seq[char]]  ##  typewriter's queue
     fRemainder: float ##  internal timer (in seconds)
     # Public
     rate*: float  ##  typewriter's rate (in seconds)
@@ -45,10 +45,7 @@ type
 proc initTypewriter*(tw: Typewriter, text: TextGraphic, rate: float) =
   tw.initEntity()
   tw.graphic = text
-  let tg = TextGraphic(tw.graphic)
-  if tg.lines.len < 1:
-    tg.lines = [""]
-  tw.fText = @[]
+  tw.fQueue = @[]
   tw.fRemainder = 0.0
   tw.rate = rate
   tw.width = -1
@@ -59,26 +56,26 @@ proc newTypewriter*(text: TextGraphic, rate: float): Typewriter =
   result.initTypewriter(text, rate)
 
 
-proc add*(tw: Typewriter, text: string) {.inline.} =
-  ##  Add new ``text`` to the typewriter's queue.
+proc add*(tw: Typewriter, line: string) {.inline.} =
+  ##  Add new ``line`` to the typewriter's queue.
   ##
-  tw.fText = reversed(text) & tw.fText
+  tw.fQueue.insert(reversed(line), 0)
 
 
-proc dump*(tw: Typewriter): string {.inline.} =
+proc dump*(tw: Typewriter): seq[seq[char]] {.inline.} =
   ##  ``Return`` the text awaiting in the typewriter's queue (backwards).
   ##
-  $tw.fText
+  tw.fQueue
 
 
 proc queueLen*(tw: Typewriter): int {.inline.} =
-  ##  ``Return`` queue length.
+  ##  ``Return`` queue length (in lines).
   ##
-  tw.fText.len
+  tw.fQueue.len
 
 
 proc text*(tw: Typewriter): string {.inline.} =
-  ##  ``Return`` the printed text.
+  ##  ``Return`` already printed text.
   ##
   TextGraphic(tw.graphic).text
 
@@ -87,39 +84,51 @@ proc clear*(tw: Typewriter, empty: bool = false) {.inline.} =
   ##  Delete the text awaiting in the typewriter's queue.
   ##
   ##  ``empty`` Set to `true` if you want to clear the printed text as well.
-  tw.fText = @[]
+  tw.fQueue = @[]
   if empty:
     TextGraphic(tw.graphic).setText("")
 
 
-proc force*(tw: Typewriter, text: string = "") =
-  ##  Add new ``text`` to the typewriter's queue
+proc force*(tw: Typewriter, line: string = "") =
+  ##  Add new ``line`` to the typewriter's queue
   ##  and then output it all immediately.
   ##
-  if text.len > 0:
-    tw.add(text)
+  if line.len > 0:
+    tw.add(line)
   tw.fRemainder = 0.0
   let tg = TextGraphic(tw.graphic)
-  tg.setText(tg.text & reversed(tw.fText).join())
-  tw.clear()
+  if tw.fQueue.len > 0:
+    if tw.fQueue[^1].len > 0:
+      tg.append(tw.fQueue.pop().reversed.join)
+    while tw.fQueue.len > 0:
+      tg.add(tw.fQueue.pop().reversed.join)
 
 
 proc updateTypewriter*(tw: Typewriter, elapsed: float) =
   updateEntity(tw, elapsed)
 
-  var str = ""
+  let tg = TextGraphic(tw.graphic)
   tw.fRemainder += elapsed
+
   while tw.fRemainder >= tw.rate:
-    if tw.fText.len < 1: # no text to print left
+    if tw.fQueue.len < 1: # no text to print left
       tw.fRemainder = 0.0
       break
-    tw.fRemainder -= tw.rate
-    str.add(tw.fText.pop())
 
-  # update textgraphic
-  if str.len > 0:
-    let tg = TextGraphic(tw.graphic)
-    tg.setText(tg.text & str, tw.width)
+    var str = ""
+    while tw.fQueue[^1].len > 0 and
+          tw.fRemainder >= tw.rate:
+      tw.fRemainder -= tw.rate
+      str.add(tw.fQueue[^1].pop())
+    tg.append(str)
+
+    if tw.fQueue[^1].len < 1: # line has ended
+      discard tw.fQueue.pop()
+      tg.add("") # new line
+
+    elif tw.width > 0 and
+         tg.lines[^1].len >= tw.width: # check for text wrapping
+      tg.add("")
 
 
 method update*(tw: Typewriter, elapsed: float) =

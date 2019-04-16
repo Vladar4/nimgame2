@@ -77,6 +77,7 @@ proc initMainScene*(scene: MainScene) =
   #scene.twEntity.width = 10 # uncomment to enable text wrapping
   scene.twEntity.pos = (300, 8)
   scene.twEntity.add "Fancy typewriter effect!"
+  scene.twEntity.add "Second line of text!"
 
   # add to scene
   scene.add(scene.bmEntity)
@@ -192,6 +193,5 @@ method render*(scene: MainScene) =
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
-
   if ScancodeReturn.down: scene.twEntity.force()
 
