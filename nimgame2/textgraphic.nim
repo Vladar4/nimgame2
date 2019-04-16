@@ -139,9 +139,23 @@ proc `[]=`*(text: TextGraphic, i: int | BackwardsIndex, s: string) =
 
 
 proc add*(text: TextGraphic, line: string) =
+  ##  Add new line.
+  ##
   if text.fFont == nil:
     return
   text.fLines.add(line)
+  text.update()
+
+
+proc append*(text: TextGraphic, line: string) =
+  ##  Append to the last line.
+  ##
+  if text.fFont == nil:
+    return
+  if text.fLines.len < 1:
+    text.fLines.add(line)
+  else:
+    text.fLines[^1].add line
   text.update()
 
 
