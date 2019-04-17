@@ -379,6 +379,10 @@ template play*(entity: Entity, anim: string, cycles = -1,
   entity.sprite.play(anim, cycles, kill, callback)
 
 
+template stop*(entity: Entity) =
+  if not (entity.sprite == nil): entity.sprite.playing = false
+
+
 proc update(sprite: Sprite, entity: Entity, elapsed: float) =
   if (sprite.currentAnimationIndex < 0) or (not sprite.playing):
     return
