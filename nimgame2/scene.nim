@@ -215,6 +215,32 @@ proc findAll*(scene: Scene, tag: string): seq[Entity] =
       result.add(entity)
 
 
+proc find*(scene: Scene, tags: varargs[string]): Entity =
+  ##  ``Return`` the first entity with all ``tags`` in the ``scene``,
+  ##  or `nil` otherwise.
+  ##
+  for entity in scene.fList:
+    block check:
+      for tag in tags:
+        if not (tag in entity.tags):
+          break check
+      return entity
+  return nil
+
+
+proc findAll*(scene: Scene, tags: varargs[string]): seq[Entity] =
+  ##  ``Return`` a sequence of all entities with all ``tags`` in the ``scene``,
+  ##  or an empty sequence if no such entities are found.
+  ##
+  result = @[]
+  for entity in scene.fList:
+    block check:
+      for tag in tags:
+        if not (tag in entity.tags):
+          break check
+      result.add(entity)
+
+
 proc pop*(scene: Scene): Entity {.inline.} =
   ##  ``Return`` the top entity and remove it from the ``scene``.
   ##
