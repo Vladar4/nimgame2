@@ -200,6 +200,10 @@ proc newGame*(): Game =
   new result, free
 
 
+template flag(game: Game, flag: uint32): bool =
+  ((game.fWindow.getWindowFlags() and flag) != 0)
+
+
 proc title*(game: Game): string {.inline.} =
   $game.fWindow.getWindowTitle()
 
@@ -288,13 +292,6 @@ proc setResizable*(game: Game, enabled: bool) {.inline.} =
   game.fWindow.setWindowResizable(enabled)
 
 
-proc getFullscreen*(game: Game): bool {.inline.} =
-  ##  ``Return`` `true` if game is in fullscreen mode, or `false` otherwise.
-  ##
-  ((game.fWindow.getWindowFlags() and WindowFullscreen) != 0 or
-   (game.fWindow.getWindowFlags() and WindowFullscreenDesktop) != 0)
-
-
 proc setFullscreen*(
     game: Game, set: bool, desktop: bool = true): bool {.inline.} =
   ##  Set fullscreen mode.
@@ -313,24 +310,61 @@ proc setFullscreen*(
       0 == game.fWindow.setWindowFullscreen(0)
 
 
+proc fullscreen*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game is in fullscreen mode, or `false` otherwise.
+  ##
+  game.flag(WindowFullscreen) or
+  game.flag(WindowFullscreenDesktop)
+
+
 proc show*(game: Game) {.inline.} =
   game.fWindow.showWindow()
+
+
+proc shown*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game window is shown, or `false` otherwise.
+  ##
+  game.flag(WindowShown)
 
 
 proc hide*(game: Game) {.inline.} =
   game.fWindow.hideWindow()
 
 
+proc hidden*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game window is hidden, or `false` otherwise.
+  ##
+  game.flag(WindowHidden)
+
+
 proc focus*(game: Game) {.inline.} =
   game.fWindow.raiseWindow()
+
+
+proc focused*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game window has input focus, or `false` otherwise.
+  ##
+  game.flag(WindowInputFocus)
 
 
 proc maximize*(game: Game) {.inline.} =
   game.fWindow.maximizeWindow()
 
 
+proc maximized*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game window is maximized, or `false` otherwise.
+  ##
+  game.flag(WindowMaximized)
+
+
 proc minimize*(game: Game) {.inline.} =
   game.fWindow.minimizeWindow()
+
+
+proc minimized*(game: Game): bool {.inline.} =
+  ##  ``Return`` `true` if game window is minimized, or `false` otherwise.
+  ##
+  game.flag(WindowMinimized)
 
 
 proc restore*(game: Game) {.inline.} =
