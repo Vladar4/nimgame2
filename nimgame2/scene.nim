@@ -177,22 +177,51 @@ proc del*(scene: Scene, entity: Entity): bool =
   ##  ``Return`` `true` if ``entity`` was deleted,
   ##  or `false` if there is no such ``entity`` in the scene.
   ##
+  #[
   let idx = scene.fList.find(entity)
   if idx < 0:
     return false
   scene.delEntity(idx)
   return true
+  ]#
+  kill entity
 
 
 proc del*(scene: Scene, tag: string) =
   ##  Delete all entities with ``tag`` from the ``scene``.
   ##
+  #[
   var idx = 0
   while idx < scene.fList.len:
     if tag in scene.fList[idx].tags:
       scene.delEntity(idx)
       continue
     inc idx
+  ]#
+  for e in scene.fList:
+    if tag in e.tags:
+      kill e
+
+
+proc del*(scene: Scene, tags: varargs[string]) =
+  ##  Delete all entities with ``tags`` from the ``scene``.
+  ##
+  #[
+  var idx = 0
+  while idx < scene.fList.len:
+    block check:
+      for tag in tags:
+        if not (tag in scene.fList[idx].tags):
+          break check
+      scene.delEntity(idx)
+    inc idx
+  ]#
+  for e in scene.fList:
+    block check:
+      for tag in tags:
+        if not (tag in e.tags):
+          break check
+      kill e
 
 
 proc find*(scene: Scene, tag: string): Entity =
