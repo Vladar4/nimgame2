@@ -154,10 +154,13 @@ method release*(widget: GuiWidget) {.base.} =
 
 
 proc disable*(widget: GuiWidget) =
-  if widget.state.isUp:
-    widget.state = GuiState.disabledUp
+  if widget.toggled:
+    if widget.state.isUp:
+      widget.state = GuiState.disabledUp
+    else:
+      widget.state = GuiState.disabledDown
   else:
-    widget.state = GuiState.disabledDown
+    widget.state = GuiState.disabledUp
 
 
 proc enable*(widget: GuiWidget) =
