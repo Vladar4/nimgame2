@@ -29,7 +29,7 @@ import
 
 
 type
-  Animation* = object
+  Animation* = ref object
     # Public
     frames*: seq[int] ##  List of animation's frame indexes
     frameRate*: float ##  Frame rate (in seconds per frame)
@@ -202,34 +202,34 @@ template animationIndex*(entity: Entity, name: string): int =
   entity.sprite.animationIndex(name)
 
 
-proc animation*(sprite: Sprite, name: string): var Animation =
+proc animation*(sprite: Sprite, name: string): Animation =
   ##  ``Return`` the animation named ``name``.
   ##
   if sprite == nil:
-    return
+    return nil
   let index = sprite.animationIndex(name)
   if index < 0:
-    return
+    return nil
   sprite.animations[index]
 
 
-template animation*(entity: Entity, name: string): var Animation =
+template animation*(entity: Entity, name: string): Animation =
   ##  ``Return`` the animation named ``name``.
   ##
   entity.sprite.animation(name)
 
 
-proc animation*(sprite: Sprite, index: int): var Animation =
+proc animation*(sprite: Sprite, index: int): Animation =
   ##  ``Return`` the animation under given ``index``.
   ##
   if sprite == nil:
-    return
+    return nil
   if index < 0 or index >= sprite.animations.len:
-    return
+    return nil
   sprite.animations[index]
 
 
-template animation*(entity: Entity, index: int): var Animation =
+template animation*(entity: Entity, index: int): Animation =
   ##  ``Return`` the animation under given ``index``.
   ##
   entity.sprite.animation(index)
@@ -242,15 +242,15 @@ template currentAnimationIndex*(entity: Entity): int =
     entity.sprite.currentAnimationIndex
 
 
-proc currentAnimation*(sprite: Sprite): var Animation =
+proc currentAnimation*(sprite: Sprite): Animation =
   ##  ``Return`` the current animation.
   ##
   if sprite == nil:
-    return
+    return nil
   sprite.animation(sprite.currentAnimationIndex)
 
 
-template currentAnimation*(entity: Entity): var Animation =
+template currentAnimation*(entity: Entity): Animation =
   ##  ``Return`` the current animation.
   ##
   entity.sprite.currentAnimation()
@@ -338,6 +338,29 @@ template addAnimation*(entity: Entity,
   entity.sprite.addAnimation(name, frames, frameRate, flip)
 
 
+proc delAnimation*(sprite: Sprite, name: string, flip: Flip = Flip.none): bool =
+  ##  Delete an animation from the ``sprite``.
+  ##
+  ##  ``name`` name of the animation.
+  ##
+  result = true
+  if sprite == nil:
+    return false
+  let index = sprite.animationIndex(name)
+  if index < 0:
+    return false
+  sprite.animationKeys.delete(index)
+  sprite.animations.delete(index)
+
+
+template delAnimation*(entity: Entity, name: string): bool =
+  ##  Delete an animation from the ``entity``.
+  ##
+  ##  ``name`` name of the animation.
+  ##
+  entity.sprite.delAnimation(name)
+
+
 proc play*(sprite: Sprite, anim: string, cycles = -1,
            kill: bool = false, callback: AnimationCallback = nil) =
   ##  Start playing the animation.
@@ -379,8 +402,14 @@ template play*(entity: Entity, anim: string, cycles = -1,
   entity.sprite.play(anim, cycles, kill, callback)
 
 
-template stop*(entity: Entity) =
+template stop*(entity: Entity, reset: bool = false) =
+  ##  Stop current animation.
+  ##
+  ##  ``reset`` if `true`, set frame to the first one of current animation.
+  ##
   if not (entity.sprite == nil): entity.sprite.playing = false
+  if reset:
+    entity.sprite.currentFrame = 0
 
 
 proc update(sprite: Sprite, entity: Entity, elapsed: float) =
@@ -744,6 +773,18 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
   # collider adjustment
   if entity.collider != nil:
     entity.collider.pos += oldCenter - entity.center
+
+
+proc show*(entity: Entity) {.inline.} =
+  entity.visible = true
+
+
+proc hide*(entity: Entity) {.inline.} =
+  entity.visible = false
+
+
+proc kill*(entity: Entity) {.inline.} =
+  entity.dead = true
 
 
 method event*(entity: Entity, e: sdl.Event) {.base.} = discard
