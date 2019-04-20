@@ -753,6 +753,7 @@ proc intersect(a, b: seq[string]): bool =
 iterator collisions(entity: Entity, list: seq[Entity]): Entity =
   for target in list:
     if target.collider == nil: continue # no collider on target
+    if not target.colliderEnabled: continue # collider disabled
     if entity == target: continue # entity is target
     if target in entity.colliding: continue # already collided with target
     if entity.collider.tags.len == 0 or # no tags given

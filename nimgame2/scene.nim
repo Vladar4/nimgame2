@@ -88,7 +88,7 @@ proc renderScene*(scene: Scene) =
   # Should be in the scene level to be drawn on top of all entities
   if colliderOutline:
     for entity in scene.fList:
-      if entity.collider != nil:
+      if (entity.collider != nil) and (entity.colliderEnabled):
         entity.collider.render()
 
 
@@ -334,7 +334,7 @@ proc updateScene*(scene: Scene, elapsed: float) =
 
   # collisions
   for entity in scene.fList:
-    if entity.collider != nil:
+    if (entity.collider != nil) and (entity.colliderEnabled):
       entity.checkCollisions(scene.fList)
 
 

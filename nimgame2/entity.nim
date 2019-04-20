@@ -102,6 +102,7 @@ type
     collisionEnvironment*: seq[Entity]  ## List of collidable entites
                                         ## used in some physics procedures
     collider*: Collider
+    colliderEnabled*: bool        ##  collider state
     colliding*: seq[Entity]       ##  List of Entities currently colliding with
     pos*, vel*, acc*, drg*: Coord ##  Position, velocity, acceleration, drag
     rot*: Angle                   ##  Rotation angle in degrees
@@ -611,6 +612,7 @@ proc initEntity*(entity: Entity) =
   entity.logic = nil
   entity.physics = nil
   entity.collider = nil
+  entity.colliderEnabled = true
   entity.colliding = @[]
   entity.fastPhysics = false
   entity.collisionEnvironment = @[]
@@ -673,6 +675,7 @@ proc copy*(target, source: Entity) =
   target.logic    = source.logic
   target.physics  = source.physics
   target.collider = source.collider
+  target.colliderEnabled = source.colliderEnabled
   target.colliding = @[]
   for e in source.colliding:
     target.colliding.add(e)
@@ -777,10 +780,12 @@ proc centrify*(entity: Entity, hor = HAlign.center, ver = VAlign.center) =
 
 proc show*(entity: Entity) {.inline.} =
   entity.visible = true
+  entity.colliderEnabled = true
 
 
 proc hide*(entity: Entity) {.inline.} =
   entity.visible = false
+  entity.colliderEnabled = false
 
 
 proc kill*(entity: Entity) {.inline.} =
