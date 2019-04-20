@@ -62,10 +62,15 @@ proc add*(tw: Typewriter, line: string) {.inline.} =
   tw.fQueue.insert(reversed(line), 0)
 
 
-proc dump*(tw: Typewriter): seq[seq[char]] {.inline.} =
+proc queue*(tw: Typewriter): seq[seq[char]] {.inline.} =
   ##  ``Return`` the text awaiting in the typewriter's queue (backwards).
   ##
   tw.fQueue
+
+
+template dump*(tw: Typewriter): seq[seq[char]] {.
+    deprecated: "Use queue() instead".} =
+  queue(tw)
 
 
 proc queueLen*(tw: Typewriter): int {.inline.} =
