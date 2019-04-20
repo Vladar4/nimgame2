@@ -372,7 +372,7 @@ proc random*[T](max: T, exclude: seq[T]): T {.
     result = random(max)
 
 
-template random*[T](max: T, exclude: openArray[T]): T {.
+template random*[T](max: T, exclude: openArray[T] = []): T {.
     deprecated: "Use rand() instead".} =
   random(max, @exclude)
 
@@ -381,12 +381,12 @@ proc rand*[T](max: T, exclude: seq[T]): T =
   ##  ``Return`` a random number in the range `0`..``max``,
   ##  except values in the ``exclude``.
   ##
-  result = rand(max)
+  result = random.rand(max)
   while exclude.contains(result):
-    result = rand(max)
+    result = random.rand(max)
 
 
-proc rand*[T](max: T, exclude: openArray[T]): T {.inline.} =
+template rand*[T](max: T, exclude: openArray[T] = []): T =
   rand(max, @exclude)
 
 
@@ -402,7 +402,7 @@ proc random*[T](x, exclude: seq[T]): T {.
     result = random(x)
 
 
-template random*[T](x, exclude: openArray[T]): T {.
+template random*[T](x, exclude: openArray[T] = []): T {.
     deprecated: "Use rand() instead".} =
   random(@x, @exclude)
 
@@ -411,12 +411,12 @@ proc rand*[T](x, exclude: seq[T]): T =
   ##  ``Return`` a random number in the sequence ``x``,
   ##  except values in the ``exclude``.
   ##
-  result = rand(x)
+  result = random.rand(x)
   while exclude.contains(result):
-    result = rand(x)
+    result = random.rand(x)
 
 
-proc rand*[T](x, exclude: openArray[T]): T {.inline.} =
+template rand*[T](x, exclude: openArray[T] = []): T =
   rand(@x, @exclude)
 
 
@@ -432,7 +432,7 @@ proc random*[T](x: Slice[T], exclude: seq[T]): T {.
     result = random(x)
 
 
-template random*[T](x: Slice[T], exclude: openArray[T]): T {.
+template random*[T](x: Slice[T], exclude: openArray[T] = []): T {.
     deprecated: "Use rand() instead".} =
   random(x, @exclude)
 
@@ -441,12 +441,12 @@ proc rand*[T](x: Slice[T], exclude: seq[T]): T =
   ##  ``Return`` a random number in the range ``min``..``max``,
   ##  except values in the ``exclude``.
   ##
-  result = rand(x)
+  result = random.rand(x)
   while exclude.contains(result):
-    result = rand(x)
+    result = random.rand(x)
 
 
-proc rand*[T](x: Slice[T], exclude: openArray[T]): T {.inline.} =
+template rand*[T](x: Slice[T], exclude: openArray[T] = []): T =
   rand(x, @exclude)
 
 
