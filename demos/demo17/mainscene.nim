@@ -1,4 +1,5 @@
 import
+  math,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
@@ -11,6 +12,7 @@ import
   nimgame2/types,
   nimgame2/gui/widget,
   nimgame2/gui/radio,
+  nimgame2/gui/spinner,
   nimgame2/gui/textinput,
   nimgame2/gui/progressbar,
   btnSquare, btnCircle
@@ -18,13 +20,14 @@ import
 
 type
   MainScene = ref object of Scene
-    btnSquareG, btnCircleG, iconX, btnMosaicG, inputG: TextureGraphic
+    btnSquareG, btnCircleG, iconMinus, iconPlus, iconX, btnMosaicG, inputG, spinG: TextureGraphic
     btnsRadio: array[3, GuiRadioButton]
     radioGroup: GuiRadioGroup
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
     progressBar: GuiProgressBar
+    spinner: GuiSpinner
     font: TrueTypeFont
 
 
@@ -36,6 +39,10 @@ proc initMainScene*(scene: MainScene) =
   discard scene.btnSquareG.load("../assets/gfx/button_square.png")
   scene.btnCircleG = newTextureGraphic()
   discard scene.btnCircleG.load("../assets/gfx/button_circle.png")
+  scene.iconMinus = newTextureGraphic()
+  discard scene.iconMinus.load("../assets/gfx/icon_minus.png")
+  scene.iconPlus = newTextureGraphic()
+  discard scene.iconPlus.load("../assets/gfx/icon_plus.png")
   scene.iconX = newTextureGraphic()
   discard scene.iconX.load("../assets/gfx/icon_x.png")
   let mosaic = newMosaic("../assets/gfx/button_square.png", (8, 8))
@@ -85,7 +92,18 @@ proc initMainScene*(scene: MainScene) =
   scene.progressBar.outline = (1, 1)
   scene.progressBar.pos = (100, 250)
 
+  # Spinner
+  scene.spinG = newTextureGraphic()
+  discard scene.spinG.assignTexture inputmosaic.render(
+    patternStretchBorder(3, 1))
+  scene.spinner = newGuiSpinner(scene.spinG,
+    scene.btnSquareG, scene.iconPlus, scene.iconMinus, scene.font, border = (1, 1), style = GuiSpinnerStyle.leftAndRight)
+  scene.spinner.unit = "%"
+  scene.spinner.op = round
+  scene.spinner.pos = (300, 100)
+
   # add to scene
+  scene.add(scene.spinner)
   scene.add(scene.progressBar)
   scene.add(scene.radioGroup)
   for b in scene.btnsRadio:

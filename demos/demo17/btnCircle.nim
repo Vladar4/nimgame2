@@ -18,6 +18,11 @@ proc newCircleButton*(graphic: Graphic): CircleButton =
   result.initCircleButton(graphic)
 
 
-method onClick*(btn: CircleButton, mb: MouseButton) =
+proc clickCircleButton*(btn: CircleButton, mb: MouseButton) =
+  btn.clickGuiButton(mb)
   echo "clicked circle button, toggled " & (if btn.toggled: "on" else: "off")
+
+
+method click*(btn: CircleButton, mb: MouseButton) =
+  btn.clickCircleButton(mb)
 

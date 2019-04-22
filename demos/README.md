@@ -33,7 +33,7 @@ Nimgame 2 Demos
 
 * [demo16](demo16) Parallax
 
-* [demo17](demo17) GUI (Button, TextField)
+* [demo17](demo17) GUI (Button, TextField, Spinner)
 
 * [demo18](demo18) IndexedImage
 
