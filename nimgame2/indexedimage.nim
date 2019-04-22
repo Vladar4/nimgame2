@@ -59,9 +59,18 @@ proc ncolors*(palette: Palette): int =
     palette.ncolors
 
 
-proc `[]`*(palette: Palette, i: int): Color =
+template len*(palette: Palette): int =
+  ncolors(palette)
+
+
+template `^^`(s, i: untyped): untyped =
+  (when i is BackwardsIndex: s.len - int(i) else: int(i))
+
+
+proc `[]`*(palette: Palette, i: int | BackwardsIndex): Color =
   ##  Get the ``i``'th color from the ``palette``.
   ##
+  let i = palette ^^ i
   if (i < 0) or (i >= palette.ncolors):
     raise newException(IndexError,
       "Palette color index " & $i & " is out of bounds.")
@@ -69,9 +78,11 @@ proc `[]`*(palette: Palette, i: int): Color =
     return palette.colors[i]
 
 
-proc `[]=`*(palette: Palette, i: int, colors: openarray[Color]) =
+proc `[]=`*(palette: Palette,
+            i: int | BackwardsIndex, colors: openarray[Color]) =
   ##  Change ``colors`` in the ``palette`` starting with ``i``'th color.
   ##
+  let i = palette ^^ i
   if (i < 0) or ((i + colors.len) > palette.ncolors):
     raise newException(IndexError,
       "Palette color index range " & $i & ".." & $(i + colors.len - 1) &
@@ -83,9 +94,10 @@ proc `[]=`*(palette: Palette, i: int, colors: openarray[Color]) =
                     sdl.getError())
 
 
-proc `[]=`*(palette: Palette, i: int, color: Color) =
+proc `[]=`*(palette: Palette, i: int | BackwardsIndex, color: Color) =
   ##  Change ``i``'th color in the ``palette``.
   ##
+  let i = palette ^^ i
   if (i < 0) or (i >= palette.ncolors):
     raise newException(IndexError,
       "Palette color index " & $i & " is out of bounds.")
