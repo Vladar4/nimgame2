@@ -23,7 +23,7 @@
 # https://github.com/Vladar4
 
 import
-  entity, random, scene, types, utils
+  entity, scene, types, utils
 
 
 type

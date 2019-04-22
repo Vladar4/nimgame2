@@ -360,6 +360,8 @@ iterator atlasValues*(src: ptr RWops,
 # Random #
 #========#
 
+#== max ==#
+
 proc random*[T](max: T, exclude: seq[T]): T {.
     deprecated: "Use rand() instead".} =
   ##  ``Return`` a random number in the range `0`..<``max``,
@@ -367,9 +369,9 @@ proc random*[T](max: T, exclude: seq[T]): T {.
   ##
   ##  ``Deprecated:`` Use ``rand`` instead.
   ##
-  result = random(max)
+  result = random.random(max)
   while exclude.contains(result):
-    result = random(max)
+    result = random.random(max)
 
 
 template random*[T](max: T, exclude: openArray[T] = []): T {.
@@ -390,6 +392,8 @@ template rand*[T](max: T, exclude: openArray[T] = []): T =
   rand(max, @exclude)
 
 
+#== seq ==#
+
 proc random*[T](x, exclude: seq[T]): T {.
     deprecated: "Use rand() instead".} =
   ##  ``Return`` a random number in the sequence ``x``,
@@ -397,9 +401,9 @@ proc random*[T](x, exclude: seq[T]): T {.
   ##
   ##  ``Deprecated:`` use ``rand`` instaead.
   ##
-  result = random(x)
+  result = random.random(x)
   while exclude.contains(result):
-    result = random(x)
+    result = random.random(x)
 
 
 template random*[T](x, exclude: openArray[T] = []): T {.
@@ -420,35 +424,44 @@ template rand*[T](x, exclude: openArray[T] = []): T =
   rand(@x, @exclude)
 
 
-proc random*[T](x: Slice[T], exclude: seq[T]): T {.
+#== slice ==#
+
+proc random*[T](x: HSlice[T,T], exclude: seq[T]): T {.
     deprecated: "Use rand() instead".} =
   ##  ``Return`` a random number in the range ``min``..<``max``,
   ##  except values in the ``exclude``.
   ##
   ##  ``Deprecated:`` use ``rand`` instead.
   ##
-  result = random(x)
+  result = random.random(x)
   while exclude.contains(result):
-    result = random(x)
+    result = random.random(x)
 
 
-template random*[T](x: Slice[T], exclude: openArray[T] = []): T {.
+template random*[T](x: HSlice[T,T], exclude: openArray[T] = []): T {.
     deprecated: "Use rand() instead".} =
   random(x, @exclude)
 
 
-proc rand*[T](x: Slice[T], exclude: seq[T]): T =
+# internal
+template rand_internal[T](x: HSlice[T,T]): T =
+  T(rand(x.b - x.a) + x.a)
+
+
+proc rand*[T](x: HSlice[T,T], exclude: seq[T]): T =
   ##  ``Return`` a random number in the range ``min``..``max``,
   ##  except values in the ``exclude``.
   ##
-  result = random.rand(x)
+  result = rand_internal(x)
   while exclude.contains(result):
-    result = random.rand(x)
+    result = rand_internal(x)
 
 
-template rand*[T](x: Slice[T], exclude: openArray[T] = []): T =
+template rand*[T](x: HSlice[T,T], exclude: openArray[T] = []): T =
   rand(x, @exclude)
 
+
+#== set ==#
 
 proc random*[T](x: set[T]): T {.
     deprecated: "Use rand() instead".} =
