@@ -253,6 +253,14 @@ proc `==`*(c1, c2: Coord): bool {.inline.} =
   return (c1.x == c2.x) and (c1.y == c2.y)
 
 
+proc `==`*(c: Coord, v: float): bool {.inline.} =
+  return (c.x == v) and (c.y == v)
+
+
+template `==`*(v: float, c: Coord): bool =
+  (c == v)
+
+
 proc `-`*(c: Coord): Coord {.inline.} =
   return (-c.x, -c.y)
 
