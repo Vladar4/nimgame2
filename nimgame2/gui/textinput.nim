@@ -47,7 +47,7 @@ type
 proc initGuiTextInput*(input: GuiTextInput, graphic: Graphic, font: Font) =
   ##  GuiTextInput initialization.
   ##
-  ##  ``grapic`` 2x2 input field graphic:
+  ##  ``graphic`` 2x2 input field graphic:
   ##  default, focused, pressed (active), disabled.
   ##
   ##  ``font`` Font object for text rendering.
@@ -60,7 +60,7 @@ proc initGuiTextInput*(input: GuiTextInput, graphic: Graphic, font: Font) =
   input.keysRight = @[K_Right]
   input.keysToFirst = @[K_Home]
   input.keysToLast = @[K_End]
-  input.keysDone = @[K_Return, K_Escape]
+  input.keysDone = @[K_Return, K_KPEnter, K_Escape]
   input.graphic = graphic
   input.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   # Collider
@@ -90,6 +90,7 @@ proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
 
 
 proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
+  input.eventGuiWidget(e)
   if input.state.isEnabled:
     case e.kind:
     of KeyDown:
@@ -116,6 +117,7 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
         elif key in input.keysDone:
           input.text.deactivate()
           stopTextInput()
+          input.toggled = false
           input.release()
 
     of TextInput:
@@ -131,7 +133,6 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
 
 
 method event*(input: GuiTextInput, e: Event) =
-  input.eventGuiWidget(e)
   input.eventGuiTextInput(e)
 
 
@@ -143,16 +144,18 @@ method `state=`*(input: GuiTextInput, val: GuiState) =
 proc enter*(input: GuiTextInput) =
   ##  Start text entry mode.
   ##
+  input.toggled = true
   input.text.activate()
   startTextInput()
 
 
-proc click*(input: GuiTextInput, mb: MouseButton) {.inline.} =
+proc clickGuiTextInput*(input: GuiTextInput, mb: MouseButton) {.inline.} =
+  input.clickGuiWidget(mb)
   input.enter()
 
 
-method onClick*(input: GuiTextInput, mb: MouseButton) =
-  input.click(mb)
+method click*(input: GuiTextInput, mb: MouseButton) =
+  input.clickGuiTextInput(mb)
 
 
 proc renderGuiTextInput*(input: GuiTextInput) =

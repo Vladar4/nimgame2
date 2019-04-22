@@ -25,6 +25,7 @@
 import
   ../entity,
   ../graphic,
+  ../input,
   ../types,
   widget
 
@@ -98,6 +99,22 @@ method `state=`*(button: GuiButton, val: GuiState) =
   ##
   button.setState(val)
   button.sprite.currentFrame = val.int
+
+
+proc clickGuiButton*(button: GuiButton, mb: MouseButton) =
+  button.clickGuiWidget(mb)
+
+
+method click*(button: GuiButton, mb: MouseButton) =
+  button.clickGuiButton(mb)
+
+
+proc eventGuiButton*(button: GuiButton, e: Event) =
+  button.eventGuiWidget(e)
+
+
+method event*(button: GuiButton, e: Event) =
+  button.eventGuiButton(e)
 
 
 proc renderGuiButton*(button: GuiButton) =

@@ -30,7 +30,7 @@ import
 
 
 type
-  GuiAction* = proc(widget: GuiWidget)
+  GuiAction* = proc(widget: GuiWidget, mb: MouseButton)
 
   GuiState* {.pure.} = enum
     defaultUp
@@ -73,18 +73,14 @@ proc state*(widget: GuiWidget): GuiState {.inline.} =
   return widget.fState
 
 
-method onPress*(widget: GuiWidget) {.base.} =
-  discard
-
-
-proc clickAction*(widget: GuiWidget) =
+proc clickGuiWidget*(widget: GuiWidget, mb: MouseButton) =
   if not(widget.actions.len < 1):
     for action in widget.actions:
-      action(widget)
+      widget.action(mb)
 
 
-method onClick*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
-  widget.clickAction()
+method click*(widget: GuiWidget, mb = MouseButton.left) {.base.} =
+  widget.clickGuiWidget(mb)
 
 
 template isUp*(state: GuiState): bool =
@@ -130,27 +126,18 @@ proc setToggled*(widget: GuiWidget, val: bool) =
   else:
     if widget.state.isDown:
       dec widget.fState
-  widget.state = widget.state
 
 
 method `toggled=`*(widget: GuiWidget, val: bool) {.base.} =
   widget.setToggled(val)
 
 
-template pressWidget*(widget: GuiWidget) =
-  widget.toggled = true
-
-
 method press*(widget: GuiWidget) {.base.} =
-  widget.pressWidget()
-
-
-template releaseWidget*(widget: GuiWidget) =
-  widget.toggled = false
+  discard
 
 
 method release*(widget: GuiWidget) {.base.} =
-  widget.releaseWidget()
+  discard
 
 
 proc disable*(widget: GuiWidget) =
@@ -203,7 +190,7 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
         if btn.down(widget.mbAllow):
           widget.state = GuiState.focusedDown
           widget.fWasPressed.set(btn)
-          widget.onPress()
+          widget.press()
 
     of MouseButtonUp:
       let mouse: Coord = (e.button.x.float, e.button.y.float)
@@ -214,11 +201,12 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
           # toggle
           if widget.toggle:
             widget.toggled = not widget.toggled
-            widget.state = if widget.toggled:GuiState.focusedDown
+            widget.state = if widget.toggled: GuiState.focusedDown
                            else: GuiState.focusedUp
           #
           widget.fWasPressed.set(btn, false)
-          widget.onClick(btn)
+          widget.release()
+          widget.click(btn)
       else:
         if btn.down(widget.fWasPressed):
           widget.fWasPressed.set(btn, false)
