@@ -140,6 +140,18 @@ method release*(widget: GuiWidget) {.base.} =
   discard
 
 
+method enter*(widget: GuiWidget) {.base.} =
+  ##  Must define and call this manually if needed.
+  ##
+  discard
+
+
+method leave*(widget: GuiWidget) {.base.} =
+  ##  Must define and call this manually if needed.
+  ##
+  discard
+
+
 proc disable*(widget: GuiWidget) =
   if widget.toggled:
     if widget.state.isUp:
@@ -198,14 +210,15 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
       if widget.updateFocus(mouse):
         # check if button was pressed over this widget
         if btn.down(widget.fWasPressed):
-          # toggle
+          widget.fWasPressed.set(btn, false)
+          # 1 - release
+          widget.release()
+          # 2 - toggle
           if widget.toggle:
             widget.toggled = not widget.toggled
             widget.state = if widget.toggled: GuiState.focusedDown
                            else: GuiState.focusedUp
-          #
-          widget.fWasPressed.set(btn, false)
-          widget.release()
+          # 3 - click
           widget.click(btn)
       else:
         if btn.down(widget.fWasPressed):

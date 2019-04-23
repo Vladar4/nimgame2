@@ -48,7 +48,7 @@ proc initGuiButton*(
   ##  ``graphic`` 2x3 button graphic:
   ##  defaultUp, defaultDown, focusedUp, focusedDown, disabledUp, disabledDown.
   ##
-  ##  ``image`` The graphic to render on top of a butotn.
+  ##  ``image`` The graphic to render on top of a button.
   ##
   ##  ``circle`` Set to `true` if you want a circle shape instead of square one.
   ##

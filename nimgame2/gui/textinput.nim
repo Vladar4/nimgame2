@@ -89,6 +89,42 @@ proc newGuiTextInput*(graphic: Graphic, font: Font): GuiTextInput =
   result.initGuiTextInput(graphic, font)
 
 
+method `state=`*(input: GuiTextInput, val: GuiState) =
+  input.setState(val)
+  input.sprite.currentFrame = val.int
+
+
+proc enterGuiTextInput*(input: GuiTextInput) =
+  input.toggled = true
+  input.text.activate()
+  startTextInput()
+
+
+method enter*(input: GuiTextInput) =
+  ##  Start text entry mode.
+  ##
+  input.enterGuiTextInput()
+
+
+proc leaveGuiTextInput*(input: GuiTextInput) =
+  stopTextInput()
+  input.text.deactivate()
+  input.toggled = false
+
+
+method leave*(input: GuiTextInput) =
+  input.leaveGuiTextInput()
+
+
+proc clickGuiTextInput*(input: GuiTextInput, mb: MouseButton) {.inline.} =
+  input.clickGuiWidget(mb)
+  input.enter()
+
+
+method click*(input: GuiTextInput, mb: MouseButton) =
+  input.clickGuiTextInput(mb)
+
+
 proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
   input.eventGuiWidget(e)
   if input.state.isEnabled:
@@ -115,10 +151,11 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
           input.text.toLast()
 
         elif key in input.keysDone:
-          input.text.deactivate()
-          stopTextInput()
-          input.toggled = false
-          input.release()
+          input.leave()
+          #input.text.deactivate()
+          #stopTextInput()
+          #input.release()
+          #input.toggled = false
 
     of TextInput:
       if input.toggled:
@@ -134,28 +171,6 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
 
 method event*(input: GuiTextInput, e: Event) =
   input.eventGuiTextInput(e)
-
-
-method `state=`*(input: GuiTextInput, val: GuiState) =
-  input.setState(val)
-  input.sprite.currentFrame = val.int
-
-
-proc enter*(input: GuiTextInput) =
-  ##  Start text entry mode.
-  ##
-  input.toggled = true
-  input.text.activate()
-  startTextInput()
-
-
-proc clickGuiTextInput*(input: GuiTextInput, mb: MouseButton) {.inline.} =
-  input.clickGuiWidget(mb)
-  input.enter()
-
-
-method click*(input: GuiTextInput, mb: MouseButton) =
-  input.clickGuiTextInput(mb)
 
 
 proc renderGuiTextInput*(input: GuiTextInput) =

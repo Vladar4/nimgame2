@@ -23,6 +23,17 @@
 # https://github.com/Vladar4
 
 
+##  ``GuiSpinner``
+##  is a complex widget that consist of TextInput and two Buttons.
+##
+##  Buttons increase or decrease the value (``more`` or ``less`` buttons
+##  accordingly). Direct input (through TextInput) is also available.
+##
+##  Buttons' positioning (in realtion to the TextInput widget)
+##  is determined by ``style`` property.
+##
+
+
 import
   math, strutils,
   ../font,
@@ -63,6 +74,13 @@ type
     border*: Dim                ## empty space between the elements
 
 
+template format*(spinner: GuiSpinner): string =
+  formatEng(
+      spinner.value,
+      precision = spinner.precision,
+      decimalSep = spinner.decimalSep)
+
+
 proc initGuiSpinnerButton(button: GuiSpinnerButton,
                           graphic: Graphic,
                           image: Graphic = nil,
@@ -82,18 +100,18 @@ proc newGuiSpinnerButton(graphic: Graphic,
 
 proc clickGuiSpinnerMore*(widget: GuiWidget, mb: MouseButton) =
   let target = GuiSpinnerButton(widget).target
-  if not target.toggled:
-    target.value += target.step
-    if target.value > target.max:
-      target.value = target.max
+  target.value += target.step
+  if target.value > target.max:
+    target.value = target.max
+  target.text.text = target.format & target.unit
 
 
 proc clickGuiSpinnerLess*(widget: GuiWidget, mb: MouseButton) =
   let target = GuiSpinnerButton(widget).target
-  if not target.toggled:
-    target.value -= target.step
-    if target.value < target.min:
-      target.value = target.min
+  target.value -= target.step
+  if target.value < target.min:
+    target.value = target.min
+  target.text.text = target.format & target.unit
 
 
 proc style*(spinner: GuiSpinner): GuiSpinnerStyle {.inline.} =
@@ -139,13 +157,6 @@ proc `style=`*(spinner: GuiSpinner, val: GuiSpinnerStyle) =
                          text.h + border.h)
     spinner.fLess.pos = (middle.w - less.w - floor(border.w.float / 2).int,
                          text.h + border.h)
-
-
-template format*(spinner: GuiSpinner): string =
-  formatEng(
-      spinner.value,
-      precision = spinner.precision,
-      decimalSep = spinner.decimalSep)
 
 
 proc initGuiSpinner*(
@@ -195,31 +206,20 @@ proc newGuiSpinner*(
   result.initGuiSpinner(text, button, more, less, font, circle, border, style)
 
 
-proc renderGuiSpinner*(spinner: GuiSpinner) =
-  # text
-  if not spinner.toggled:
-    spinner.text.text = spinner.format & spinner.unit
-  spinner.renderGuiTextInput()
-  # buttons
-  spinner.fMore.render()
-  spinner.fLess.render()
+proc enterGuiSpinner*(spinner: GuiSpinner) =
+  if spinner.toggled:
+    spinner.text.text = ""
+    spinner.fLess.disable()
+    spinner.fMore.disable()
+  spinner.enterGuiTextInput()
 
 
-method render*(spinner: GuiSpinner) =
-  spinner.renderGuiSpinner()
+method enter*(spinner: GuiSpinner) =
+  spinner.enterGuiSpinner()
 
 
-proc eventGuiSpinner*(spinner: GuiSpinner, e: Event) =
-  spinner.eventGuiTextInput(e)
-  spinner.fMore.eventGuiButton(e)
-  spinner.fLess.eventGuiButton(e)
-
-
-method event*(spinner: GuiSpinner, e: Event) =
-  spinner.eventGuiSpinner(e)
-
-
-proc releaseGuiSpinner*(spinner: GuiSpinner) =
+proc leaveGuiSpinner*(spinner: GuiSpinner) =
+  spinner.leaveGuiTextInput()
   spinner.value = try:
     if spinner.op == nil:
       parseFloat(spinner.text.text)
@@ -233,17 +233,38 @@ proc releaseGuiSpinner*(spinner: GuiSpinner) =
   spinner.fMore.enable()
 
 
-method release*(spinner: GuiSpinner) =
-  spinner.releaseGuiSpinner()
+method leave*(spinner: GuiSpinner) =
+  spinner.leaveGuiSpinner()
 
 
 proc clickGuiSpinner*(spinner: GuiSpinner, mb: MouseButton) =
-  spinner.text.text = ""
-  spinner.fLess.disable()
-  spinner.fMore.disable()
   spinner.clickGuiTextInput(mb)
 
 
 method click*(spinner: GuiSpinner, mb: MouseButton) =
   spinner.clickGuiSpinner(mb)
+
+
+proc eventGuiSpinner*(spinner: GuiSpinner, e: Event) =
+  spinner.eventGuiTextInput(e)
+  spinner.fMore.eventGuiButton(e)
+  spinner.fLess.eventGuiButton(e)
+
+
+method event*(spinner: GuiSpinner, e: Event) =
+  spinner.eventGuiSpinner(e)
+
+
+proc renderGuiSpinner*(spinner: GuiSpinner) =
+  # text
+  if not spinner.toggled:
+    spinner.text.text = spinner.format & spinner.unit
+  spinner.renderGuiTextInput()
+  # buttons
+  spinner.fMore.render()
+  spinner.fLess.render()
+
+
+method render*(spinner: GuiSpinner) =
+  spinner.renderGuiSpinner()
 
