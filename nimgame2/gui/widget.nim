@@ -22,6 +22,21 @@
 # vladar4@gmail.com
 # https://github.com/Vladar4
 
+
+##  GUI events order:
+##  #################
+##
+##  On mouse button down:
+##
+##  * press
+##
+##  On mouse button up:
+##
+##  * release
+##  * click
+##  * enter or leave (depending on the "modal" state)
+##
+
 import
   ../entity,
   ../graphic,
@@ -133,21 +148,25 @@ method `toggled=`*(widget: GuiWidget, val: bool) {.base.} =
 
 
 method press*(widget: GuiWidget) {.base.} =
+  ##  Called automatically when the widget is pressed (mouse button down).
+  ##
   discard
 
 
 method release*(widget: GuiWidget) {.base.} =
+  ##  Called automatically when the widget is released (mouse button up).
+  ##
   discard
 
 
 method enter*(widget: GuiWidget) {.base.} =
-  ##  Must define and call this manually if needed.
+  ##  Called when the widget is entered (focused "modally").
   ##
   discard
 
 
 method leave*(widget: GuiWidget) {.base.} =
-  ##  Must define and call this manually if needed.
+  ##  Called when the widget is left, (unfocused "modally").
   ##
   discard
 
@@ -220,9 +239,15 @@ proc eventGuiWidget*(widget: GuiWidget, e: Event) =
                            else: GuiState.focusedUp
           # 3 - click
           widget.click(btn)
+          # 4 - enter
+          widget.enter()
       else:
+        # mouse isn't over the widget
+        if widget.toggled:
+          widget.leave()
         if btn.down(widget.fWasPressed):
           widget.fWasPressed.set(btn, false)
+
     else:
       discard
     widget.state = widget.state

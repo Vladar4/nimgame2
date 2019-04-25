@@ -97,7 +97,8 @@ method `state=`*(input: GuiTextInput, val: GuiState) =
 proc enterGuiTextInput*(input: GuiTextInput) =
   input.toggled = true
   input.text.activate()
-  startTextInput()
+  #sdl.startTextInput()
+
 
 
 method enter*(input: GuiTextInput) =
@@ -107,7 +108,7 @@ method enter*(input: GuiTextInput) =
 
 
 proc leaveGuiTextInput*(input: GuiTextInput) =
-  stopTextInput()
+  #sdl.stopTextInput()
   input.text.deactivate()
   input.toggled = false
 
@@ -118,7 +119,7 @@ method leave*(input: GuiTextInput) =
 
 proc clickGuiTextInput*(input: GuiTextInput, mb: MouseButton) {.inline.} =
   input.clickGuiWidget(mb)
-  input.enter()
+  #input.enter()
 
 
 method click*(input: GuiTextInput, mb: MouseButton) =
@@ -152,10 +153,6 @@ proc eventGuiTextInput*(input: GuiTextInput, e: Event) =
 
         elif key in input.keysDone:
           input.leave()
-          #input.text.deactivate()
-          #stopTextInput()
-          #input.release()
-          #input.toggled = false
 
     of TextInput:
       if input.toggled:

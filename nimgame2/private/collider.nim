@@ -1,4 +1,4 @@
-# nimgame2/collider.nim
+# nimgame2/private/collider.nim
 # Copyright (c) 2016-2019 Vladimir Arabadzhi (Vladar)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy

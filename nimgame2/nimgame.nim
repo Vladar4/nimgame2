@@ -484,6 +484,7 @@ proc run*(game: Game) =
   draw.setFont()
 
   # Init input devices
+  sdl.startTextInput() # for the GUI text input events
   initKeyboard()
   initMouse()
   initJoysticks()

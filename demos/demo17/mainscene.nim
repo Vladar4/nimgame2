@@ -101,6 +101,7 @@ proc initMainScene*(scene: MainScene) =
   scene.spinner.unit = "%"
   scene.spinner.op = round
   scene.spinner.pos = (300, 100)
+  scene.spinner.text.limit = 3
 
   # add to scene
   scene.add(scene.spinner)
