@@ -40,6 +40,18 @@ type
     imageShift*: Coord  ##  Image shift when button is pressed
 
 
+proc centrifyImage*(button: GuiButton) =
+  ##  Update imageOffset field to centrify the image.
+  ##
+  ##  Call it after you change the image to one with different dimensions.
+  ##
+  button.imageOffset =
+    if not (button.image == nil):
+      (button.sprite.dim / 2 - button.image.dim / 2)
+    else:
+      (0, 0)
+
+
 proc initGuiButton*(
     button: GuiButton,
     graphic: Graphic, image: Graphic = nil, circle: bool = false) =
@@ -56,10 +68,7 @@ proc initGuiButton*(
   button.graphic = graphic
   button.initSprite((graphic.dim.w / 2, graphic.dim.h / 3))
   button.image = image
-  button.imageOffset = if not (image == nil):
-                         (button.sprite.dim / 2 - image.dim / 2)
-                       else:
-                         (0, 0)
+  button.centrifyImage()
   button.imageShift = (1, 1)
   # Collider
   button.collider = if circle:
