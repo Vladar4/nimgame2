@@ -88,6 +88,10 @@ proc state*(widget: GuiWidget): GuiState {.inline.} =
   return widget.fState
 
 
+proc wasPressed*(widget: GuiWidget): MouseState {.inline.} =
+  return widget.fWasPressed
+
+
 proc clickGuiWidget*(widget: GuiWidget, mb: MouseButton) =
   if not(widget.actions.len < 1):
     for action in widget.actions:
