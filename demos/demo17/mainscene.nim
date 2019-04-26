@@ -11,6 +11,7 @@ import
   nimgame2/truetypefont,
   nimgame2/types,
   nimgame2/gui/widget,
+  nimgame2/gui/button,
   nimgame2/gui/radio,
   nimgame2/gui/spinner,
   nimgame2/gui/textinput,
@@ -26,7 +27,7 @@ type
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
-    progressBar: GuiProgressBar
+    progressBar, scrollBar: GuiProgressBar
     spinner: GuiSpinner
     font: TrueTypeFont
 
@@ -92,6 +93,20 @@ proc initMainScene*(scene: MainScene) =
   scene.progressBar.outline = (1, 1)
   scene.progressBar.pos = (100, 250)
 
+
+  # Scroll Bar
+  scene.scrollBar = newGuiProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
+    scene.font, button = newGuiButton(scene.btnSquareG, scene.iconX))
+  scene.scrollBar.min = 0
+  scene.scrollBar.max = 100
+  scene.scrollBar.value = 25
+  scene.scrollBar.direction = Direction.leftRight
+  scene.scrollBar.outline = (1, 1)
+  scene.scrollBar.pos = (100, 350)
+  scene.scrollBar.buttonText = true
+  scene.scrollBar.editable = true
+
+
   # Spinner
   scene.spinG = newTextureGraphic()
   discard scene.spinG.assignTexture inputmosaic.render(
@@ -106,6 +121,7 @@ proc initMainScene*(scene: MainScene) =
   # add to scene
   scene.add(scene.spinner)
   scene.add(scene.progressBar)
+  scene.add(scene.scrollBar)
   scene.add(scene.radioGroup)
   for b in scene.btnsRadio:
     scene.add(b)

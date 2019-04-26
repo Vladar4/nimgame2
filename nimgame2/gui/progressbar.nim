@@ -25,10 +25,13 @@
 import
   strutils,
   ../draw,
+  ../entity,
   ../font,
   ../textgraphic,
   ../texturegraphic,
   ../types,
+  ../utils,
+  button,
   widget
 
 type
@@ -40,18 +43,24 @@ type
     precision*: range[0..32]  ## value format precision (defaults to 0)
     unit*: string             ## value format unit (defaults to '%')
     decimalSep*: char       ## value format decimal separator (defaults to '.')
-    direction*: Direction
-    dim*: Dim
-    outline*: Dim            ## outline border size
+    direction*: Direction   ## value increase direction
+    dim*: Dim               ## bar dimensions
+    outline*: Dim           ## outline border size
     bgColor*, fgColor*: Color
     bgGraphic*, fgGraphic*: TextureGraphic
-    reverseX*, reverseY*: bool
+    reverseX*, reverseY*: bool  ## reverse options for bgGraphic and fgGraphic
+    showBg*, showFg*: bool      ## set to false to hide background or foreground
+    editable*: bool             ## set to true to be able to "drag" the value
+    button*: GuiButton          ## optional button for the bar
+    buttonText*: bool           ## set to `true` to replace button's image \
+                                ## with text showing bar's current value
 
 
 proc initGuiProgressBar*(
     bar: GuiProgressBar,
     dim: Dim, bgColor, fgColor: Color, font: Font,
-    bgGraphic, fgGraphic: TextureGraphic) =
+    bgGraphic: TextureGraphic = nil, fgGraphic: TextureGraphic = nil,
+    button: GuiButton = nil, buttonText: bool = false) =
   ##  GuiProgressBar initialization.
   ##
   ##  ``dim`` bar's dimensions.
@@ -72,6 +81,8 @@ proc initGuiProgressBar*(
   bar.decimalSep = '.'
   bar.direction = Direction.leftRight
   bar.dim = dim
+  # collider
+  bar.collider = bar.newBoxCollider(bar.dim / 2, bar.dim)
   bar.bgColor = bgColor
   bar.fgColor = fgColor
   if font == nil:
@@ -81,8 +92,15 @@ proc initGuiProgressBar*(
     bar.fText.setText("0%")
   bar.bgGraphic = bgGraphic
   bar.fgGraphic = fgGraphic
+
   bar.reverseX = false
   bar.reverseY = false
+  bar.showBg = true
+  bar.showFg = true
+  bar.editable = false
+
+  bar.button = button
+  bar.buttonText = buttonText
 
 
 template init*(bar: GuiProgressBar,
@@ -96,7 +114,9 @@ proc newGuiProgressBar*(dim: Dim,
                         bgColor: Color, fgColor: Color,
                         font: Font = nil,
                         bgGraphic: TextureGraphic = nil,
-                        fgGraphic: TextureGraphic = nil): GuiProgressBar =
+                        fgGraphic: TextureGraphic = nil,
+                        button: GuiButton = nil,
+                        buttonText: bool = false): GuiProgressBar =
   ##  Create a new GuiProgressBar.
   ##
   ##  ``dim`` bar's dimensions.
@@ -109,7 +129,8 @@ proc newGuiProgressBar*(dim: Dim,
   ##  textures that replace ``bgColor`` and ``fgColor`` if specified.
   ##
   result = new GuiProgressBar
-  result.initGuiProgressBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
+  result.initGuiProgressBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic,
+                            button, buttonText)
 
 
 template newProgressBar*(dim: Dim, bgColor: Color, fgColor: Color,
@@ -119,36 +140,95 @@ template newProgressBar*(dim: Dim, bgColor: Color, fgColor: Color,
   newGuiProgressBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
 
 
+proc eventGuiProgressBar*(bar: GuiProgressBar, e: Event) =
+  bar.eventGuiWidget(e)
+  if bar.button != nil:
+    bar.button.event(e)
+
+  # editing
+  if bar.editable and bar.state == focusedDown:
+
+    proc calcPart(bar: GuiProgressBar, pos: Coord): float =
+      return case bar.direction:
+      of Direction.leftRight:
+        pos.x - bar.pos.x
+      of Direction.rightLeft:
+        bar.pos.x + bar.dim.w.float - pos.x
+      of Direction.topBottom:
+        pos.y - bar.pos.y
+      of Direction.bottomTop:
+        bar.pos.y + bar.dim.h.float - pos.y
+
+    let maxPart = case bar.direction:
+    of Direction.leftRight, Direction.rightLeft:
+      bar.dim.w.float
+    of Direction.topBottom, Direction.bottomTop:
+      bar.dim.h.float
+
+    var
+      part: float
+      change: bool = false
+
+    if bar.button == nil:
+      if e.kind == MouseButtonDown:
+        let pos = (e.button.x.float, e.button.y.float)
+        if pos.pointInRect(bar.pos, bar.dim):
+          part = bar.calcPart(pos)
+          change = true
+      elif e.kind == MouseMotion:
+        let pos = (e.motion.x.float, e.motion.y.float)
+        if pos.pointInRect(bar.pos, bar.dim):
+          part = bar.calcPart(pos)
+          change = true
+
+    elif not(bar.button.wasPressed == 0):#if bar.button.state == focusedDown:
+      if e.kind == MouseMotion:
+        part = bar.calcPart((e.motion.x.float, e.motion.y.float))
+        change = true
+
+    if change:
+      if part < 0:
+        part = 0
+      elif part >= maxPart:
+        part = maxPart
+      bar.value = bar.min + (part / maxPart) * (bar.max - bar.min)
+
+
+method event*(bar: GuiProgressBar, e: Event) =
+  bar.eventGuiProgressBar(e)
+
+
 proc renderGuiProgressBar*(bar: GuiProgressBar) =
   ##  Default progress bar render procedure.
   ##
   ##  Call it from your progress bar render method.
   ##
   # background
-  if bar.bgGraphic == nil:
-    discard box(
-      bar.pos - Coord(bar.outline),
-      bar.pos + Coord(bar.dim - (1, 1) + bar.outline),
-      bar.bgColor)
-  else:
-    bar.bgGraphic.drawTiled(Rect(
-      x: bar.pos.x.cint - bar.outline.w.cint,
-      y: bar.pos.y.cint - bar.outline.h.cint,
-      w: bar.dim.w.cint + bar.outline.w.cint * 2,
-      h: bar.dim.h.cint + bar.outline.h.cint * 2),
-      reverseX = bar.reverseX,
-      reverseY = bar.reverseY)
+  if bar.showBg:
+    if bar.bgGraphic == nil:
+      discard box(
+        bar.pos - Coord(bar.outline),
+        bar.pos + Coord(bar.dim - (1, 1) + bar.outline),
+        bar.bgColor)
+    else:
+      bar.bgGraphic.drawTiled(Rect(
+        x: bar.pos.x.cint - bar.outline.w.cint,
+        y: bar.pos.y.cint - bar.outline.h.cint,
+        w: bar.dim.w.cint + bar.outline.w.cint * 2,
+        h: bar.dim.h.cint + bar.outline.h.cint * 2),
+        reverseX = bar.reverseX,
+        reverseY = bar.reverseY)
 
   # foreground
-  if bar.value > 0:
+  let
+    value = (bar.value - bar.min) / (bar.max - bar.min)
+    part: Coord = case bar.direction:
+    of Direction.leftRight, Direction.rightLeft:
+      (int(bar.dim.w.float * value), bar.dim.h)
+    of Direction.bottomTop, Direction.topBottom:
+      (bar.dim.w, int(bar.dim.h.float * value))
 
-    let value = (bar.value - bar.min) / (bar.max - bar.min)
-    var part: Coord = case bar.direction:
-      of Direction.leftRight, Direction.rightLeft:
-        (int(bar.dim.w.float * value), bar.dim.h)
-      of Direction.bottomTop, Direction.topBottom:
-        (bar.dim.w, int(bar.dim.h.float * value))
-
+  if bar.showFg and bar.value > 0:
     if bar.fgGraphic == nil:
       case bar.direction:
       of Direction.leftRight, Direction.topBottom:
@@ -194,14 +274,45 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
           reverseX = bar.reverseX,
           reverseY = bar.reverseY)
 
-  # text
+  # text and button
+
+  # update text
   if not(bar.fText == nil):
     bar.fText.setText(formatEng(
       bar.value,
       precision = bar.precision,
       decimalSep = bar.decimalSep) & bar.unit)
-    let offset = bar.dim / 2.0 - Coord(bar.fText.dim) / 2.0
-    bar.fText.draw(bar.pos + offset)
+
+  # no button
+  if bar.button == nil:
+
+    # text only
+    if not(bar.fText == nil):
+      let offset = bar.dim / 2.0 - Coord(bar.fText.dim) / 2.0
+      bar.fText.draw(bar.pos + offset)
+
+  # button
+  else:
+
+    # updated text on button
+    if bar.buttonText and not(bar.fText == nil):
+      bar.button.image = bar.fText
+      bar.button.centrifyImage()
+
+    # draw button
+    let buttonCenter: Coord = bar.button.sprite.dim / 2
+    bar.button.pos = case bar.direction:
+    of Direction.leftRight:
+      bar.pos - buttonCenter + part * (1.0, 0.5)
+    of Direction.rightLeft:
+      bar.pos - buttonCenter + part * (-1.0, 0.5) + (bar.dim.w.float, 0.0)
+    of Direction.topBottom:
+      bar.pos - buttonCenter + part * (0.5, 1.0)
+    of Direction.bottomTop:
+      bar.pos - buttonCenter + part * (0.5, -1.0) + (0.0, bar.dim.h.float)
+
+    bar.button.renderGuiButton()
+
 
 
 method render*(bar: GuiProgressBar) =
