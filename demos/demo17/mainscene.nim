@@ -117,6 +117,7 @@ proc initMainScene*(scene: MainScene) =
   scene.spinner.op = round
   scene.spinner.pos = (300, 100)
   scene.spinner.text.limit = 3
+  scene.spinner.stepRate = 0.1 # change 10 times per second when held down
 
   # add to scene
   scene.add(scene.spinner)

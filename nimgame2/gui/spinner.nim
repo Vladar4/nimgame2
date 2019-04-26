@@ -36,6 +36,7 @@
 
 import
   math, strutils,
+  ../entity,
   ../font,
   ../graphic,
   ../input,
@@ -59,13 +60,18 @@ type
   # Private
   GuiSpinnerButton = ref object of GuiButton
     target*: GuiSpinner
+    less*: bool
 
   GuiSpinner* = ref object of GuiTextInput
     # Private
     fMore, fLess: GuiButton
     fStyle*: GuiSpinnerStyle
+    fHolding*: float  ## how long the button was held down (see stepRate)
     # Public
     min*, max*, value*, step*: float
+    stepRate*: float          ## if not `0` - shows speed (in seconds) \
+                              ## of how often the value changes \
+                              ## when holding down the button
     precision*: range[0..32]  ## value format precision (defaults to 0)
     unit*: string             ## value format unit (defaults to " ")
     decimalSep*: char       ## value format decimal separator (defaults to '.')
@@ -81,38 +87,78 @@ template format*(spinner: GuiSpinner): string =
       decimalSep = spinner.decimalSep)
 
 
-proc initGuiSpinnerButton(button: GuiSpinnerButton,
-                          graphic: Graphic,
-                          image: Graphic = nil,
-                          circle: bool = false,
-                          target: GuiSpinner = nil) =
+proc change*(spinner: GuiSpinner, change: float) =
+  spinner.value += change
+  if spinner.value < spinner.min:
+    spinner.value = spinner.min
+  elif spinner.value > spinner.max:
+    spinner.value = spinner.max
+  spinner.text.text = spinner.format & spinner.unit
+
+
+proc initGuiSpinnerButton(
+    button: GuiSpinnerButton,
+    graphic: Graphic,
+    image: Graphic = nil,
+    circle: bool = false,
+    target: GuiSpinner = nil,
+    less: bool = false) =
   button.initGuiButton(graphic, image, circle)
   button.target = target
+  button.less = less
 
 
-proc newGuiSpinnerButton(graphic: Graphic,
-                         image: Graphic = nil,
-                         circle: bool = false,
-                         target: GuiSpinner = nil): GuiSpinnerButton =
+proc newGuiSpinnerButton(
+    graphic: Graphic,
+    image: Graphic = nil,
+    circle: bool = false,
+    target: GuiSpinner = nil,
+    less: bool = false): GuiSpinnerButton =
   result = new GuiSpinnerButton
-  result.initGuiSpinnerButton(graphic, image, circle, target)
+  result.initGuiSpinnerButton(graphic, image, circle, target, less)
 
 
-proc clickGuiSpinnerMore*(widget: GuiWidget, mb: MouseButton) =
+proc clickGuiSpinnerMore(widget: GuiWidget, mb: MouseButton) =
   let target = GuiSpinnerButton(widget).target
-  target.value += target.step
-  if target.value > target.max:
-    target.value = target.max
-  target.text.text = target.format & target.unit
+  target.change(target.step)
+  target.fHolding = 0.0
 
 
-proc clickGuiSpinnerLess*(widget: GuiWidget, mb: MouseButton) =
+proc clickGuiSpinnerLess(widget: GuiWidget, mb: MouseButton) =
   let target = GuiSpinnerButton(widget).target
-  target.value -= target.step
-  if target.value < target.min:
-    target.value = target.min
-  target.text.text = target.format & target.unit
+  target.change(-target.step)
+  target.fHolding = 0.0
 
+
+proc updateGuiSpinnerButton(button: GuiSpinnerButton, elapsed: float) =
+  button.updateEntity(elapsed)
+  # holding down change
+  if (button.target.stepRate > 0.0) and (button.state == GuiState.focusedDown):
+    button.target.fHolding += elapsed
+
+    if button.target.fHolding >= button.target.stepRate:
+      let
+        steps = floor(button.target.fHolding / button.target.stepRate)
+        change = steps * button.target.step
+      button.target.fHolding -= steps * button.target.stepRate
+      button.target.change((if button.less: -1.0 else: 1.0) * change)
+
+    #[ # looped version
+    var change: float
+    while button.target.fHolding >= button.target.stepRate:
+      change += button.target.step
+      button.target.fHolding -= button.target.stepRate
+    button.target.change((if button.less: -1.0 else: 1.0) * change)
+    ]#
+
+
+method update*(button: GuiSpinnerButton, elapsed: float) =
+  button.updateGuiSpinnerButton(elapsed)
+
+
+#============#
+# GuiSpinner #
+#============#
 
 proc style*(spinner: GuiSpinner): GuiSpinnerStyle {.inline.} =
   spinner.fStyle
@@ -179,6 +225,8 @@ proc initGuiSpinner*(
   spinner.max = 100
   spinner.value = 0
   spinner.step = 1
+  spinner.stepRate = 0.0
+  spinner.fHolding = 0.0
   spinner.precision = 0
   spinner.unit = " "
   spinner.decimalSep = '.'
@@ -189,7 +237,7 @@ proc initGuiSpinner*(
   spinner.fMore = newGuiSpinnerButton(button, more, circle, spinner)
   spinner.fMore.parent = spinner
   spinner.fMore.actions.add clickGuiSpinnerMore
-  spinner.fLess = newGuiSpinnerButton(button, less, circle, spinner)
+  spinner.fLess = newGuiSpinnerButton(button, less, circle, spinner, less=true)
   spinner.fLess.parent = spinner
   spinner.fLess.actions.add clickGuiSpinnerLess
 
@@ -253,6 +301,16 @@ proc eventGuiSpinner*(spinner: GuiSpinner, e: Event) =
 
 method event*(spinner: GuiSpinner, e: Event) =
   spinner.eventGuiSpinner(e)
+
+
+proc updateGuiSpinner*(spinner: GuiSpinner, elapsed: float) =
+  spinner.updateEntity(elapsed)
+  spinner.fMore.update(elapsed)
+  spinner.fLess.update(elapsed)
+
+
+method update*(spinner: GuiSpinner, elapsed: float) =
+  spinner.updateGuiSpinner(elapsed)
 
 
 proc renderGuiSpinner*(spinner: GuiSpinner) =
