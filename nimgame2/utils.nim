@@ -94,6 +94,16 @@ proc rotate*(point, offset: Coord, angle: Angle): Coord =
       (offset + point)
 
 
+export pointInRect  ##  From SDL2, returns true if sdl.Point is in sdl.Rect.
+
+proc pointInRect*(p, pos: Coord, dim: Dim): bool =
+  ##  ``Return`` `true` if ``p`` is contained in rect with ``pos`` and ``dim``,
+  ##  or `false` otherwise.
+  ##
+  ((p.x >= pos.x) and (p.x < (pos.x + dim.w.float)) and
+   (p.y >= pos.y) and (p.y < (pos.y + dim.h.float)))
+
+
 #==========#
 # Graphics #
 #==========#
