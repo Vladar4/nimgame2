@@ -35,7 +35,7 @@ import
   widget
 
 type
-  GuiProgressBar* = ref object of GuiWidget
+  GuiBar* = ref object of GuiWidget
     # Private
     fText: TextGraphic
     # Public
@@ -56,12 +56,14 @@ type
                                 ## with text showing bar's current value
 
 
-proc initGuiProgressBar*(
-    bar: GuiProgressBar,
-    dim: Dim, bgColor, fgColor: Color, font: Font,
+proc initGuiBar*(
+    bar: GuiBar,
+    dim: Dim,
+    bgColor, fgColor: Color,
+    font: Font,
     bgGraphic: TextureGraphic = nil, fgGraphic: TextureGraphic = nil,
     button: GuiButton = nil, buttonText: bool = false) =
-  ##  GuiProgressBar initialization.
+  ##  GuiBar initialization.
   ##
   ##  ``dim`` bar's dimensions.
   ##
@@ -103,21 +105,15 @@ proc initGuiProgressBar*(
   bar.buttonText = buttonText
 
 
-template init*(bar: GuiProgressBar,
-    dim: Dim, bgColor, fgColor: Color, font: Font,
-    bgGraphic, fgGraphic: TextureGraphic) {.
-    deprecated: "Use initGuiProgressBar() instead".} =
-  initGuiProgressBar(bar, dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
-
-
-proc newGuiProgressBar*(dim: Dim,
-                        bgColor: Color, fgColor: Color,
-                        font: Font = nil,
-                        bgGraphic: TextureGraphic = nil,
-                        fgGraphic: TextureGraphic = nil,
-                        button: GuiButton = nil,
-                        buttonText: bool = false): GuiProgressBar =
-  ##  Create a new GuiProgressBar.
+proc newGuiBar*(
+    dim: Dim,
+    bgColor: Color, fgColor: Color,
+    font: Font = nil,
+    bgGraphic: TextureGraphic = nil,
+    fgGraphic: TextureGraphic = nil,
+    button: GuiButton = nil,
+    buttonText: bool = false): GuiBar =
+  ##  Create a new GuiBar.
   ##
   ##  ``dim`` bar's dimensions.
   ##
@@ -128,19 +124,12 @@ proc newGuiProgressBar*(dim: Dim,
   ##  ``bgGraphic``, ``fgGraphic`` background (empty) and foreground (full)
   ##  textures that replace ``bgColor`` and ``fgColor`` if specified.
   ##
-  result = new GuiProgressBar
-  result.initGuiProgressBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic,
+  result = new GuiBar
+  result.initGuiBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic,
                             button, buttonText)
 
 
-template newProgressBar*(dim: Dim, bgColor: Color, fgColor: Color,
-    font: Font = nil, bgGraphic: TextureGraphic = nil,
-    fgGraphic: TextureGraphic = nil): GuiProgressBar {.
-    deprecated: "Use newGuiProgressBar() instead".} =
-  newGuiProgressBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
-
-
-proc eventGuiProgressBar*(bar: GuiProgressBar, e: Event) =
+proc eventGuiBar*(bar: GuiBar, e: Event) =
   bar.eventGuiWidget(e)
   if bar.button != nil:
     bar.button.event(e)
@@ -148,7 +137,7 @@ proc eventGuiProgressBar*(bar: GuiProgressBar, e: Event) =
   # editing
   if bar.editable and bar.state == focusedDown:
 
-    proc calcPart(bar: GuiProgressBar, pos: Coord): float =
+    proc calcPart(bar: GuiBar, pos: Coord): float =
       return case bar.direction:
       of Direction.leftRight:
         pos.x - bar.pos.x
@@ -181,7 +170,7 @@ proc eventGuiProgressBar*(bar: GuiProgressBar, e: Event) =
           part = bar.calcPart(pos)
           change = true
 
-    elif not(bar.button.wasPressed == 0):#if bar.button.state == focusedDown:
+    elif not(bar.button.wasPressed == 0):
       if e.kind == MouseMotion:
         part = bar.calcPart((e.motion.x.float, e.motion.y.float))
         change = true
@@ -194,11 +183,11 @@ proc eventGuiProgressBar*(bar: GuiProgressBar, e: Event) =
       bar.value = bar.min + (part / maxPart) * (bar.max - bar.min)
 
 
-method event*(bar: GuiProgressBar, e: Event) =
-  bar.eventGuiProgressBar(e)
+method event*(bar: GuiBar, e: Event) =
+  bar.eventGuiBar(e)
 
 
-proc renderGuiProgressBar*(bar: GuiProgressBar) =
+proc renderGuiBar*(bar: GuiBar) =
   ##  Default progress bar render procedure.
   ##
   ##  Call it from your progress bar render method.
@@ -315,6 +304,48 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
 
 
 
-method render*(bar: GuiProgressBar) =
-  bar.renderGuiProgressBar()
+method render*(bar: GuiBar) =
+  bar.renderGuiBar()
+
+
+# DEPRECATED
+
+type GuiProgressBar* {.deprecated: "Use GuiBar instead".} = GuiBar
+
+
+template initGuiProgressBar*(
+    bar: GuiBar, dim: Dim, bgColor, fgColor: Color, font: Font,
+    bgGraphic: TextureGraphic = nil, fgGraphic: TextureGraphic = nil,
+    button: GuiButton = nil, buttonText: bool = false) {.
+    deprecated: "Use initGuiBar() instead".} =
+  initGuiBar(bar, dim, bgColor, fgColor, font, bgGraphic, fgGraphic,
+             button, buttonText)
+
+
+template init*(bar: GuiBar,
+    dim: Dim, bgColor, fgColor: Color, font: Font,
+    bgGraphic, fgGraphic: TextureGraphic) {.
+    deprecated: "Use initGuiBar() instead".} =
+  initGuiBar(bar, dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
+
+
+template newGuiProgressBar*(
+    dim: Dim, bgColor: Color, fgColor: Color, font: Font = nil,
+    bgGraphic: TextureGraphic = nil, fgGraphic: TextureGraphic = nil,
+    button: GuiButton = nil, buttonText: bool = false): GuiBar {.
+      deprecated: "Use newGuiBar() instead".} =
+  newGuiBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic,
+            button, buttonText)
+
+
+template newProgressBar*(dim: Dim, bgColor: Color, fgColor: Color,
+    font: Font = nil, bgGraphic: TextureGraphic = nil,
+    fgGraphic: TextureGraphic = nil): GuiBar {.
+      deprecated: "Use newGuiBar() instead".} =
+  newGuiBar(dim, bgColor, fgColor, font, bgGraphic, fgGraphic)
+
+
+template renderGuiProgressBar*(bar: GuiBar) {.
+    deprecated: "Use renderGuiBar() instead".} =
+  renderGuiBar(bar)
 

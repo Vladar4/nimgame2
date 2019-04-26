@@ -15,7 +15,7 @@ import
   nimgame2/gui/radio,
   nimgame2/gui/spinner,
   nimgame2/gui/textinput,
-  nimgame2/gui/progressbar,
+  nimgame2/gui/bar,
   btnSquare, btnCircle
 
 
