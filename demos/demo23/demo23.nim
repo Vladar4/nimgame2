@@ -6,7 +6,7 @@ import
 
 
 game = newGame()
-if game.init(640, 480, "Nimgame 2: Demo 22 (Transform)"):
+if game.init(640, 480, "Nimgame 2: Demo 23 (Transform)"):
   game.scene = newMainScene()
   settings.updateInterval = 1000
   settings.showInfo = true
