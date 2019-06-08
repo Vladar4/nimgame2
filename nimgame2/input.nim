@@ -926,7 +926,7 @@ proc movement*(gi: GeneralInput): int =
       if id < 0: 0  # no such joystick opened
       else:
         case gi.joystick.kind:
-        of jAxis: joyAxis(id, gi.joystick.axis)
+        of jAxis: joyAxis(id, gi.joystick.axis).int
         of jBall:
           case gi.joystick.ballDirection:
           of dirX: joyBall(id, gi.joystick.ball).x
