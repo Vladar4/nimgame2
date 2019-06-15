@@ -40,8 +40,7 @@ proc initMainScene*(scene: MainScene) =
   scene.add(scene.ePoint)
 
   # Line emitter
-  scene.eLine = newEmitter(scene)
-  scene.eLine.area.kind = eaLine
+  scene.eLine = newEmitter(scene, eaLine)
   scene.eLine.area.length = 100.0
   scene.eLine.randomVel = (10.0, 10.0)
   scene.eLine.randomAcc = (5.0, 5.0)
@@ -51,8 +50,7 @@ proc initMainScene*(scene: MainScene) =
   scene.add(scene.eLine)
 
   # Circle emitter
-  scene.eCircle = newEmitter(scene)
-  scene.eCircle.area.kind = eaCircle
+  scene.eCircle = newEmitter(scene, eaCircle)
   scene.eCircle.area.radius = 100.0
   scene.eCircle.randomVel = (10.0, 10.0)
   scene.eCircle.randomAcc = (5.0, 5.0)
@@ -62,8 +60,7 @@ proc initMainScene*(scene: MainScene) =
   scene.add(scene.eCircle)
 
   # Box emitter
-  scene.eBox = newEmitter(scene)
-  scene.eBox.area.kind = eaBox
+  scene.eBox = newEmitter(scene, eaBox)
   scene.eBox.area.dim = (100.0, 50.0)
   scene.eBox.rotVel = -90.0
   scene.eBox.randomVel = (10.0, 10.0)

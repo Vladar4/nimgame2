@@ -92,20 +92,20 @@ method update*(particle: Particle, elapsed: float) =
 # Emitter #
 #=========#
 
-proc initEmitter*(emitter: Emitter, scene: Scene) =
+proc initEmitter*(emitter: Emitter, scene: Scene, area = eaPoint) =
   ##  Create a new ``Emitter`` for the ``scene``.
   ##
   emitter.initEntity()
   emitter.scene = scene
-  emitter.area = EmissionArea(kind: eaPoint)
+  emitter.area = EmissionArea(kind: area)
   emitter.particle = nil
 
 
-proc newEmitter*(scene: Scene): Emitter =
+proc newEmitter*(scene: Scene, area = eaPoint): Emitter =
   ##  Create a new Emitter in the ``scene``.
   ##
   result = new Emitter
-  result.initEmitter(scene)
+  result.initEmitter(scene, area)
 
 
 proc emit*(emitter: Emitter, amount: int = 1,

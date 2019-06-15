@@ -81,7 +81,10 @@ converter toUint32*(c: Color): uint32 =
 converter toColor*(u: uint32): Color =
   ##  0xRRGGBBAA to Color(r, g, b, a)
   ##
-  Color(r: uint8(u shr 24), g: uint8(u shr 16), b: uint8(u shr 8), a: uint8(u))
+  Color(r: cast[uint8](u shr 24),
+        g: cast[uint8](u shr 16),
+        b: cast[uint8](u shr 8),
+        a: cast[uint8](u))
 
 
 template neg*(c: Color): Color =  ##  \
