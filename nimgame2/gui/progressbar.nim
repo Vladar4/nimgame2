@@ -153,8 +153,6 @@ proc renderGuiProgressBar*(bar: GuiProgressBar) =
           (bar.pos.x, bar.pos.y + bar.dim.h.float - part.y),
           bar.pos + Coord(bar.dim) - (1.0, 1.0),
           bar.fgColor)
-      else:
-        discard
 
     else:
       case bar.direction:
