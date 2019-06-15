@@ -66,6 +66,9 @@ Links:
 Changelog:
 ----------
 
+### v0.6.1 alpha (2019-06-15)
+* Nim v0.20.0 transition
+
 ### v0.6 alpha (2019-01-21)
 * new modules: typewriter
 * new plugins: mpeggraphic (+demo22), tar, zzip
