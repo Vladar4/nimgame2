@@ -2,7 +2,6 @@ import
   nimgame2/nimgame,
   nimgame2/entity,
   nimgame2/texturegraphic,
-  nimgame2/input,
   nimgame2/perspectiveimage,
   nimgame2/scene,
   nimgame2/settings,

@@ -41,7 +41,6 @@ import
   ../graphic,
   ../input,
   ../textfield,
-  ../textgraphic,
   ../types,
   button,
   textinput,

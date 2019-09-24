@@ -1,5 +1,4 @@
 import
-  math,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
@@ -103,7 +102,7 @@ method render*(scene: MainScene) =
   scene.renderScene()
   let c = TextureGraphic(scene.s.graphic).colorMod
   let res = game.windowSize
-  let scale: Coord = (game.scale.x.round(2), game.scale.y.round(2))
+  let scale: Coord = (game.scale.x, game.scale.y)
   discard box((4, 60), (220, 124), 0x000000CC'u32)
   discard string(
     (8, 64), "Q/A - red mod: " & $c.r, 0xFF0000FF'u32)

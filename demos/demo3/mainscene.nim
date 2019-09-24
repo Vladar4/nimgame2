@@ -81,8 +81,9 @@ method render*(scene: MainScene) =
   if ScancodeA.down: wsad &= "A "
   if ScancodeD.down: wsad &= "D "
 
-  var mouse: string = "Abs(" & $mouse.abs.x.int & ":" & $mouse.abs.y.int &
-                      ") Rel(" & $mouse.rel.x.int & ":" & $mouse.rel.y.int & ")"
+  var mouseCoord: string =
+    "Abs(" & $mouse.abs.x.int & ":" & $mouse.abs.y.int &
+    ") Rel(" & $mouse.rel.x.int & ":" & $mouse.rel.y.int & ")"
 
   var buttons: string = ""
   if MouseButton.left.down: buttons &= "L "
@@ -98,7 +99,7 @@ method render*(scene: MainScene) =
   discard string(
     (8, 72), "WSAD: " & wsad, 0xFF0000FF'u32)
   discard string(
-    (8, 80), "Mouse: " & mouse, 0xFF0000FF'u32)
+    (8, 80), "Mouse: " & mouseCoord, 0xFF0000FF'u32)
   discard string(
     (8, 88), "Mouse buttons: " & buttons, 0xFF0000FF'u32)
   discard string(

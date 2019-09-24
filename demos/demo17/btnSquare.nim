@@ -1,7 +1,6 @@
 import
   nimgame2/graphic,
   nimgame2/input,
-  nimgame2/gui/widget,
   nimgame2/gui/button
 
 

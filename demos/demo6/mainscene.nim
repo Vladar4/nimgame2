@@ -1,5 +1,4 @@
 import
-  math,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,

@@ -1,6 +1,5 @@
 import
   nimgame2/nimgame,
-  nimgame2/settings,
   mainscene
 
 game = newGame()

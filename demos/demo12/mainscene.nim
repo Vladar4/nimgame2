@@ -1,6 +1,5 @@
 import
   nimgame2/nimgame,
-  nimgame2/draw,
   nimgame2/entity,
   nimgame2/emitter,
   nimgame2/texturegraphic,

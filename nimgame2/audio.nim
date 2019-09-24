@@ -25,7 +25,7 @@
 import
   sdl2/sdl,
   sdl2/sdl_mixer as mix,
-  types, settings, utils
+  types, utils
 
 
 type

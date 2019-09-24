@@ -3,7 +3,6 @@ import
   nimgame2/entity,
   nimgame2/textgraphic,
   nimgame2/texturegraphic,
-  nimgame2/font,
   nimgame2/bitmapfont,
   nimgame2/input,
   nimgame2/types

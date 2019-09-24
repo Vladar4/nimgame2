@@ -1,8 +1,6 @@
 import
   nimgame2 / [
-    truetypefont, textgraphic, entity,
-    nimgame, scene, types,
-    graphic, input, settings],
+    graphic, truetypefont, textgraphic, entity, scene, settings, types],
   nimgame2 / gui / widget,
   private / [
     circle_graphic,
@@ -93,4 +91,11 @@ proc initMainScene*(scene: MainScene) =
 proc newMainScene*(): MainScene =
   new result
   result.initMainScene()
+
+method event*(scene: MainScene, event: Event) =
+  if event.kind == KeyDown:
+    case event.key.keysym.sym:
+    of K_Escape:
+      gameRunning = false
+    else: discard
 

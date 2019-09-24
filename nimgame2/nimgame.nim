@@ -23,12 +23,12 @@
 # https://github.com/Vladar4
 
 import
-  math, parseutils, random,
+  random,
   sdl2/sdl,
   sdl2/sdl_image as img,
   sdl2/sdl_ttf as ttf,
   sdl2/sdl_mixer as mix,
-  audio, draw, input, entity, scene, settings, types, utils
+  audio, draw, input, scene, settings, types, utils
 
 
 type

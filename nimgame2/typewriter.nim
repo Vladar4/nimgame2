@@ -24,7 +24,7 @@
 
 import
   algorithm, strutils,
-  entity, textgraphic, types
+  entity, textgraphic
 
 
 type

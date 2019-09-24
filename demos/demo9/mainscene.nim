@@ -7,8 +7,7 @@ import sdl2/sdl,
   nimgame2/input,
   nimgame2/scene,
   nimgame2/settings,
-  nimgame2/types,
-  nimgame2/utils
+  nimgame2/types
 
 
 type

@@ -25,7 +25,7 @@
 import
   sdl2/sdl,
   sdl2/sdl_ttf as ttf,
-  font, settings, types
+  font, types
 
 
 type

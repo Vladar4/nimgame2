@@ -1,5 +1,5 @@
 import
-  random, strutils,
+  strutils,
   nimgame2/plugin/mpeggraphic,
   nimgame2/nimgame,
   nimgame2/draw,

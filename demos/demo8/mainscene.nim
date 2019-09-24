@@ -1,9 +1,8 @@
-import sdl2/sdl,
-  math,
+import
+  sdl2/sdl,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/graphic,
   nimgame2/input,
   nimgame2/procgraphic,
   nimgame2/scene,

@@ -1,9 +1,6 @@
 import
-  sdl2/sdl,
   nimgame2/nimgame,
   nimgame2/settings,
-  nimgame2/assets,
-  nimgame2/texturegraphic,
   mainscene
 
 game = newGame()

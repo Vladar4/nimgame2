@@ -1,6 +1,6 @@
 import
   nimgame2 / [
-    types, graphic, draw, utils
+    types, draw
   ],
   border_fill_graphic
 

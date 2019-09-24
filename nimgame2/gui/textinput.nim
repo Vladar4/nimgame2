@@ -23,14 +23,12 @@
 # https://github.com/Vladar4
 
 import
-  unicode,
   sdl2/sdl,
   ../entity,
   ../font,
   ../graphic,
   ../input,
   ../textfield,
-  ../textgraphic,
   ../types,
   widget
 

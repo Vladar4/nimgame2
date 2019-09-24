@@ -39,7 +39,6 @@
 
 import
   ../entity,
-  ../graphic,
   ../input,
   ../types
 

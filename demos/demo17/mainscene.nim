@@ -27,7 +27,7 @@ type
     btnSquare, btnMosaic: SquareButton
     btnCircle: CircleButton
     textInput: GuiTextInput
-    progressBar, scrollBar: GuiProgressBar
+    progressBar, scrollBar: GuiBar
     spinner: GuiSpinner
     font: TrueTypeFont
 
@@ -84,7 +84,7 @@ proc initMainScene*(scene: MainScene) =
   scene.btnsRadio[0].toggled = true
 
   # Progress Bar
-  scene.progressBar = newGuiProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
+  scene.progressBar = newGuiBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
     scene.font)
   scene.progressBar.min = 0
   scene.progressBar.max = 100
@@ -95,7 +95,7 @@ proc initMainScene*(scene: MainScene) =
 
 
   # Scroll Bar
-  scene.scrollBar = newGuiProgressBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
+  scene.scrollBar = newGuiBar((200, 50), 0xFF0000FF'u32, 0x00FF00FF'u32,
     scene.font, button = newGuiButton(scene.btnSquareG, scene.iconX))
   scene.scrollBar.min = 0
   scene.scrollBar.max = 100
