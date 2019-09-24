@@ -9,7 +9,7 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 
 All pull requests should be done into the **devel** branch.
 
-Status: v0.6.1 devel
+Status: v0.7.0 devel
 --------------------
 
 
@@ -65,6 +65,65 @@ Links:
 
 Changelog:
 ----------
+
+### v0.7.0 alpha (WIP)
+* GUI:
+  * spinner widget
+  * major refactoring and improvement of existing widgets
+* assets module: loadIter() procedures for the iterative resource loading
+* entity module:
+  * Entity.colliderEnabled flag
+  * delAnimation(), show(), stop(), hide(), kill() procedures
+* indexedimage module: BlackwardsIndex implementation
+* nimgame module:
+  * getFullscreen(), setFullscreen(), forceRender() procedures
+  * window flags procedures
+* scene module: del(), find(), findAll() procedures
+* tar plugin: stream() procedure
+* textgraphic module: len(), add(), append(), individual line access procedures
+* typewriter module redesign
+* utils module: pointInRect() procedure
+* various minor changes and upgrades
+* procedure renamings to match the style guide:
+```
+  Playlist.init()         ->  initPlaylist()
+  BitmapFont.init()       ->  initBitmapFont()
+  IndexedImage.init()     ->  initIndexedImage()
+  Mosaic.init()           ->  initMosaic()
+  PerspectiveImage.init() ->  initPerspectiveImage()
+  Scene.init()            ->  initScene()
+  TextField.init()        ->  initTextField()
+  TextGraphic.init()      ->  initTextGraphic()
+  TextureGraphic.init()   ->  initTextureGraphic()
+  TileMap.init()          ->  initTileMap()
+  TileCollider.init()     ->  initTileCollider()
+  TileMapCollider.init()  ->  initTileMapCollider()
+  TileMap.initCollider()  ->  createCollider()
+  TrueTypeFont.init()     ->  initTrueTypeFont()
+  Tween.init()            ->  initTween()
+
+  Collider.init()         ->  initCollider()
+  BoxCollider.init()      ->  initBoxCollider()
+  CircleCollider.init()   ->  initCircleCollider()
+  LineCollider.init()     ->  initLineCollider()
+  PolyCollider.init()     ->  initPolyCollider()
+  GroupCollider.init()    ->  initGroupCollider()
+
+  GuiProgressBar          ->  GuiBar
+  newProgressBar()        ->  newGuiBar()
+  eventGuiProgressBar()   ->  eventGuiBar()
+  renderGuiProgressBar()  ->  renderGuiBar()
+
+  GuiButton.init()        ->  initGuiButton()
+  GuiProgressBar.init()   ->  initGuiBar()
+  GuiRadioGroup.init()    ->  initGuiRadioGroup()
+  GuiRadioButton.init()   ->  initGuiRadioButton()
+  GuiTextInput.init()     ->  initGuiTextInput()
+  GuiWidget.init()        ->  initGuiWidget()
+```
+
+### v0.6.1 alpha (2019-06-15)
+* Nim v0.20.0 transition
 
 ### v0.6 alpha (2019-01-21)
 * new modules: typewriter
