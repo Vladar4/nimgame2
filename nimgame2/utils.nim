@@ -176,7 +176,7 @@ proc readAll*(src: ptr RWops): string =
   result = newString(BufferSize)
   var r = 0
   while true:
-    let readBytes = rwRead(src, addr(result[r]), sizeof(uint8), BufferSize)
+    let readBytes = int rwRead(src, addr(result[r]), csize sizeof(uint8), BufferSize)
     if readBytes < BufferSize:
       setLen(result, r+readBytes)
       break
