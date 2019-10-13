@@ -647,6 +647,7 @@ import
 
 type
   Ball* = ref object of Entity
+    radius: float
 
 
 proc reset*(ball: Ball) =
@@ -656,12 +657,13 @@ proc reset*(ball: Ball) =
 proc initBall*(ball: Ball) =
   ball.initEntity()
   ball.graphic = gfxData["ball"]
+  ball.radius = ball.graphic.dim.w / 2
   ball.centrify() # Set the center point offset
   ball.reset()
 
   # Collisions
   ball.tags.add "ball"
-  ball.collider = ball.newCircleCollider((0.0, 0.0), ball.graphic.dim.w / 2)
+  ball.collider = ball.newCircleCollider((0.0, 0.0), ball.radius)
   ball.collider.tags.add "paddle"
 
 
@@ -744,10 +746,7 @@ const
   Speed = 100.0 # Speed (in pixels per second)
   SpeedInc = 25.0 # Speed increase after each bounce
 
-type
-  Ball* = ref object of Entity
-    radius: float
-
+...
 
 proc reset*(ball: Ball) =
   ball.pos = game.size / 2  # place to the center of the screen
