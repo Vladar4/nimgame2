@@ -52,7 +52,8 @@ proc free*(sound: Sound) =
   if not (sound.fChunk == nil):
     # check if playing
     if sound.fChannel > -1:
-      if sound.fChannel.playing() > 0:
+      if sound.fChunk == sound.fChannel.getChunk() and
+          sound.fChannel.playing() > 0:
         # halt the channel
         discard sound.fChannel.haltChannel()
     # free
@@ -110,6 +111,11 @@ proc playing*(sound: Sound): bool =
   ##
   if not sound.available:
     return false
+  # Check if this sample is the most recent one that was played on the
+  # channel because a different sample may be currently playing on this
+  # channel instead
+  if sound.fChunk != sound.fChannel.getChunk():
+    return false
   return sound.fChannel.playing() > 0
 
 
@@ -148,6 +154,8 @@ proc paused*(sound: Sound): bool =
   ##  ``Return`` `true` if the ``sound`` is paused, or `false` otherwise.
   ##
   if not sound.available:
+    return false
+  if sound.fChunk != sound.fChannel.getChunk():
     return false
   return sound.fChannel.paused() > 0
 
