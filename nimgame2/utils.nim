@@ -25,7 +25,7 @@
 import
   math, random,
   sdl2/sdl,
-  texturegraphic, types
+  texturegraphic, settings, types
 
 
 #==========#
@@ -162,6 +162,68 @@ proc textureFormat*(renderer: Renderer, n: uint32 = 0): uint32 =
     sdl.logCritical(sdl.LogCategoryError,
                     "No such texture format (%d) in current renderer.", n)
     return
+
+
+proc createSurface*(texture: Texture): Surface =
+  ##  ``Return`` a surface created from a texture. Slow, so use wisely.
+  var
+    fmt: uint32
+    w, h: cint
+    target: Texture
+    pitch: cint
+    pixels: pointer
+
+  template reset(old: typed, success = false) =
+    if not (renderer.setRenderTarget(old) == 0):
+      sdl.logCritical(sdl.LogCategoryError,
+                      "Can't reset a render target.")
+    if not (target == nil):
+      destroyTexture(target)
+    if not (pixels == nil):
+      dealloc(pixels)
+    if not success:
+      if not (result == nil):
+        freeSurface(result)
+
+  # query
+  if not (queryTexture(texture, addr(fmt), nil, addr(w), addr(h)) == 0):
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't query a texture.")
+    return nil
+  pitch = fmt.bytesPerPixel * w
+  # create render target
+  target = renderer.createTexture(fmt, TextureAccessTarget, w, h)
+  let oldTarget = renderer.getRenderTarget()
+  # set render target
+  if not (renderer.setRenderTarget(target) == 0):
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't set a render target to a texture.")
+    reset(oldTarget)
+    return nil
+  # render
+  if not (renderer.renderCopy(texture, nil, nil) == 0):
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't renderCopy into a texture.")
+    reset(oldTarget)
+    return nil
+  # alloc pixels
+  pixels = alloc(pitch * h)
+  if pixels == nil:
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't allocate the pixels.")
+    reset(oldTarget)
+    return nil
+  # read pixels
+  if not (renderer.renderReadPixels(nil, fmt, pixels, pitch) == 0):
+    sdl.logCritical(sdl.LogCategoryError,
+                    "Can't read pixles from a texture.")
+    reset(oldTarget)
+    return nil
+  # create surface
+  result = createRGBSurfaceWithFormatFrom(pixels,
+    w, h, fmt.bitsPerPixel.cint, pitch, fmt)
+  # reset render target
+  reset(oldTarget, true)
 
 
 #=========#
@@ -411,9 +473,9 @@ proc random*[T](x, exclude: seq[T]): T {.
   ##
   ##  ``Deprecated:`` use ``rand`` instaead.
   ##
-  result = random.random(x)
+  result = random.sample(x)
   while exclude.contains(result):
-    result = random.random(x)
+    result = random.sample(x)
 
 
 template random*[T](x, exclude: openArray[T] = []): T {.
@@ -425,9 +487,9 @@ proc rand*[T](x, exclude: seq[T]): T =
   ##  ``Return`` a random number in the sequence ``x``,
   ##  except values in the ``exclude``.
   ##
-  result = random.rand(x)
+  result = random.sample(x)
   while exclude.contains(result):
-    result = random.rand(x)
+    result = random.sample(x)
 
 
 template rand*[T](x, exclude: openArray[T] = []): T =
@@ -443,9 +505,9 @@ proc random*[T](x: HSlice[T,T], exclude: seq[T]): T {.
   ##
   ##  ``Deprecated:`` use ``rand`` instead.
   ##
-  result = random.random(x)
+  result = random.sample(x)
   while exclude.contains(result):
-    result = random.random(x)
+    result = random.sample(x)
 
 
 template random*[T](x: HSlice[T,T], exclude: openArray[T] = []): T {.
@@ -527,7 +589,7 @@ proc randomWeighted*[T](weights: openArray[T]): int =
   for i in weights:
     total += i
 
-  total = rand(T(0)..total)
+  total = utils.rand(T(0)..total)
   for i in 0..weights.high:
     if total < weights[i]:
       result = i
