@@ -326,12 +326,12 @@ type
 
 
 # Play action procedure
-proc play(widget: GuiWidget) =
+proc play(widget: GuiWidget, mb: MouseButton) =
   game.scene = mainScene
 
 
 # Exit action procedure
-proc exit(widget: GuiWidget) =
+proc exit(widget: GuiWidget, mb: MouseButton) =
   gameRunning = false
 
 ...
