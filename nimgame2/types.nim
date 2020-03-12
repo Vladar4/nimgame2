@@ -32,6 +32,12 @@ export
   sdl.Surface, sdl.Texture
 
 
+# csize is deprecated in Nim v1.1
+# See Nim commit 99078d80d7abb1c47612bc70f7affbde8735066a
+when not declared(csize_t):
+  type csize_t* {.importc: "size_t", nodecl.} = uint
+
+
 type
   Coord* = tuple[x: float, y: float]  ##  Coordinates type
   Coord2* = tuple[abs, rel: Coord]    ##  Abs + Rel coordinates type
@@ -45,6 +51,7 @@ type
     blend = sdl.BlendModeBlend
     bAdd = sdl.BlendModeAdd
     bMod = sdl.BlendModeMod
+    bMul = sdl.BlendModeMul
 
   Flip* {.size: sizeof(cint), pure.} = enum
     none        = sdl.FlipNone,
