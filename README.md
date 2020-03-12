@@ -18,7 +18,7 @@ Requires:
 
 * [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.7.1 or newer).
 * Runtime libraries for:
-  * SDL 2.0.7 or newer
+  * SDL 2.0.12 or newer
   * SDL_gfx 1.0.1
   * SDL_image 2.0.2
   * SDL_mixer 2.0.2

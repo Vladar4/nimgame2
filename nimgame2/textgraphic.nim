@@ -25,7 +25,7 @@
 import
   strutils, unicode,
   sdl2/sdl,
-  font, texturegraphic, settings, types
+  font, texturegraphic, types
 
 
 type
