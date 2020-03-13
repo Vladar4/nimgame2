@@ -1,7 +1,7 @@
 Nimgame 2: Demo 17
 ==================
 
-First GUI demo. Demonstrates buttons and text field usage.
+First GUI demo. Demonstrates GUI usage.
 
 ![Screenshot](demo17.png)
 

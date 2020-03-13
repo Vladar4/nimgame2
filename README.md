@@ -68,6 +68,7 @@ Changelog:
 
 ### v0.7.0 alpha (WIP)
 * GUI:
+  * bar widget
   * spinner widget
   * major refactoring and improvement of existing widgets
 * assets module: loadIter() procedures for the iterative resource loading
@@ -82,7 +83,7 @@ Changelog:
 * tar plugin: stream() procedure
 * textgraphic module: len(), add(), append(), individual line access procedures
 * typewriter module redesign
-* utils module: pointInRect() procedure
+* utils module: createSurface(), pointInRect() procedures
 * various minor changes and upgrades
 * procedure renamings to match the style guide:
 ```
