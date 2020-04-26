@@ -468,7 +468,7 @@ proc randomBool*(chance: float = 0.5): bool {.deprecated.} =
   ##  ``Return`` `true` or `false`,
   ##  based on the ``chance`` value (from `0.0` to `1.0`).
   ##
-  return random(1.0) < chance.clamp(0.0, 1.0)
+  return rand(1.0) < chance.clamp(0.0, 1.0)
 
 
 proc randBool*(chance: float = 0.5): bool {.inline.} = randomBool(chance)
