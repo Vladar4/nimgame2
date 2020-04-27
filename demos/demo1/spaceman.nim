@@ -1,5 +1,4 @@
 import
-  random,
   nimgame2/nimgame,
   nimgame2/entity,
   nimgame2/graphic,
