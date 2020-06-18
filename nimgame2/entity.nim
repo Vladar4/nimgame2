@@ -890,7 +890,23 @@ template `transform=`*(entity: Entity, transform: Transform) =
 
 
 template rect*(entity: Entity): Rect =
-  entity.graphic.rect(entity.center * entity.scale)
+  ##  ``Return`` the Rect of ``entity``'s graphic.
+  ##  If entity has a sprite, the Rect of current frame is used instead.
+  let offset = entity.center * entity.scale
+  if entity.sprite == nil:
+    entity.graphic.rect(offset)
+  else: # entity.sprite != nil
+    template frameRect(frame: Rect, offset: Coord): Rect =
+      Rect( x: (frame.w.float - offset.x).cint,
+            y: (frame.h.float - offset.y).cint,
+            w: frame.w,
+            h: frame.h)
+    let frame = entity.sprite.currentFrame
+    if entity.sprite.currentAnimationIndex < 0:
+      entity.sprite.frames[frame].frameRect(offset)
+    else:
+      let anim = entity.currentAnimation()
+      entity.sprite.frames[anim.frames[frame]].frameRect(offset)
 
 
 template topleft*(entity: Entity): Coord =
