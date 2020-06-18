@@ -164,11 +164,16 @@ proc textureFormat*(renderer: Renderer, n: uint32 = 0): uint32 =
     return
 
 
-proc createSurface*(texture: Texture): Surface =
+proc createSurface*(texture: Texture,
+    rect = sdl.Rect(x:0, y:0, w:0, h:0)): Surface =
+  ##  ``rect`` Area of a source texture to create the surface from.
+  ##  Empty rect (default) uses the whole texture.
+  ##
   ##  ``Return`` a surface created from a texture. Slow, so use wisely.
   var
     fmt: uint32
     w, h: cint
+    srcRect, dstRect: sdl.Rect
     target: Texture
     pitch: cint
     pixels: pointer
@@ -190,9 +195,17 @@ proc createSurface*(texture: Texture): Surface =
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't query a texture.")
     return nil
-  pitch = fmt.bytesPerPixel * w
+  # srcRect
+  if rectEmpty(rect):
+    srcRect = Rect(x:0, y:0, w:w, h:h)
+  else:
+    srcRect = rect
+  # dstRect
+  dstRect = Rect(x:0, y:0, w:srcRect.w, h:srcRect.h)
+  pitch = fmt.bytesPerPixel * srcRect.w
   # create render target
-  target = renderer.createTexture(fmt, TextureAccessTarget, w, h)
+  target = renderer.createTexture(
+    fmt, TextureAccessTarget, dstRect.w, dstRect.h)
   let oldTarget = renderer.getRenderTarget()
   # set render target
   if not (renderer.setRenderTarget(target) == 0):
@@ -201,13 +214,13 @@ proc createSurface*(texture: Texture): Surface =
     reset(oldTarget)
     return nil
   # render
-  if not (renderer.renderCopy(texture, nil, nil) == 0):
+  if not (renderer.renderCopy(texture, addr(srcRect), addr(dstRect)) == 0):
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't renderCopy into a texture.")
     reset(oldTarget)
     return nil
   # alloc pixels
-  pixels = alloc(pitch * h)
+  pixels = alloc(pitch * dstRect.h)
   if pixels == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't allocate the pixels.")
@@ -221,7 +234,7 @@ proc createSurface*(texture: Texture): Surface =
     return nil
   # create surface
   result = createRGBSurfaceWithFormatFrom(pixels,
-    w, h, fmt.bitsPerPixel.cint, pitch, fmt)
+    dstRect.w, dstRect.h, fmt.bitsPerPixel.cint, pitch, fmt)
   # reset render target
   reset(oldTarget, true)
 
