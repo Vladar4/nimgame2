@@ -23,7 +23,6 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl,
   types
 
 
@@ -45,10 +44,10 @@ method draw*(graphic: Graphic,
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) {.base.} = discard
 
-template rect*(self: Graphic, offset: Coord): Rect =
+template rect*(graphic: Graphic, offset: Coord): Rect =
   Rect(
-    x: (self.dim.w.float - offset.x).cint,
-    y: (self.dim.h.float - offset.y).cint,
-    w: self.dim.w.cint,
-    h: self.dim.h.cint)
+    x: (graphic.dim.w.float - offset.x).cint,
+    y: (graphic.dim.h.float - offset.y).cint,
+    w: graphic.dim.w.cint,
+    h: graphic.dim.h.cint)
 

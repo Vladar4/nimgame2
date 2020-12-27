@@ -42,7 +42,8 @@ proc load[T](assets: Assets[T],
     let
       name = i.splitFile.name
       data = init(i)
-    assets.add(name, data)
+    #assets.add(name, data) # pre-nim1.4
+    assets[name] = data
 
 
 proc load[T](assets: Assets[T],
@@ -67,7 +68,8 @@ iterator loadIter*[T](assets: Assets[T],
     let
       name = i.splitFile.name
       data = init(i)
-    assets.add(name, data)
+    #assets.add(name, data) # pre-nim1.4
+    assets[name] = data
     inc count
     yield count
 

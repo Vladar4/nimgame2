@@ -72,7 +72,7 @@ proc `[]`*(palette: Palette, i: int | BackwardsIndex): Color =
   ##
   let i = palette ^^ i
   if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index " & $i & " is out of bounds.")
   ptrMath:
     return palette.colors[i]
@@ -84,7 +84,7 @@ proc `[]=`*(palette: Palette,
   ##
   let i = palette ^^ i
   if (i < 0) or ((i + colors.len) > palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index range " & $i & ".." & $(i + colors.len - 1) &
       " is out of bounds.")
   if palette.setPaletteColors(
@@ -99,7 +99,7 @@ proc `[]=`*(palette: Palette, i: int | BackwardsIndex, color: Color) =
   ##
   let i = palette ^^ i
   if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index " & $i & " is out of bounds.")
   palette[i] = [color]
 

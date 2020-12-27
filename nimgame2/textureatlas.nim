@@ -74,7 +74,8 @@ proc load(atlas: TextureAtlas, imagefile, mapfile: string): bool =
                     imagefile, img.getError())
     return
   for mapping in mapfile.atlasValues:
-    atlas.add(mapping.name, source.generate(mapping.rect))
+    #atlas.add(mapping.name, source.generate(mapping.rect)) # pre-nim1.4
+    atlas[mapping.name] = source.generate(mapping.rect)
 
 
 proc load(atlas: TextureAtlas, imageSrc, mapSrc: ptr RWops,
@@ -86,7 +87,8 @@ proc load(atlas: TextureAtlas, imageSrc, mapSrc: ptr RWops,
                     img.getError())
     return
   for mapping in mapSrc.atlasValues("", freeSrc = freeMapSrc):
-    atlas.add(mapping.name, source.generate(mapping.rect))
+    #atlas.add(mapping.name, source.generate(mapping.rect)) # pre nim1.4
+    atlas[mapping.name] = source.generate(mapping.rect)
 
 
 proc newTextureAtlas*(imagefile, mapfile: string,
