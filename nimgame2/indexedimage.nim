@@ -63,7 +63,7 @@ proc `[]`*(palette: Palette, i: int): Color =
   ##  Get the ``i``'th color from the ``palette``.
   ##
   if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index " & $i & " is out of bounds.")
   ptrMath:
     return palette.colors[i]
@@ -73,7 +73,7 @@ proc `[]=`*(palette: Palette, i: int, colors: openarray[Color]) =
   ##  Change ``colors`` in the ``palette`` starting with ``i``'th color.
   ##
   if (i < 0) or ((i + colors.len) > palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index range " & $i & ".." & $(i + colors.len - 1) &
       " is out of bounds.")
   if palette.setPaletteColors(
@@ -87,7 +87,7 @@ proc `[]=`*(palette: Palette, i: int, color: Color) =
   ##  Change ``i``'th color in the ``palette``.
   ##
   if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexError,
+    raise newException(IndexDefect,
       "Palette color index " & $i & " is out of bounds.")
   palette[i] = [color]
 

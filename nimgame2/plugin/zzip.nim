@@ -58,7 +58,7 @@ proc rwFromZZip*(file, mode: string = "r"): ptr RWops =
   result = allocRW()
   if result == nil:
     zzipClose(f)
-    raise newException(OutOfMemError, "allocRW(): out of memory")
+    raise newException(OutOfMemDefect, "allocRW(): out of memory")
   rwopsZzipData(result) = f
   result.read = zzipRead
   result.write = zzipWrite

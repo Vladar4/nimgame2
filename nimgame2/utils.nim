@@ -374,7 +374,7 @@ proc random*[T](max: T, exclude: seq[T]): T {.
     result = random.random(max)
 
 
-template random*[T](max: T, exclude: openArray[T] = []): T {.
+proc random*[T](max: T, exclude: openArray[T] = []): T {.
     deprecated: "Use rand() instead".} =
   random(max, @exclude)
 
