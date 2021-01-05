@@ -25,11 +25,11 @@
 import
   strutils, unicode,
   sdl2/sdl,
-  font, texturegraphic, types
+  font, surfacegraphic, types
 
 
 type
-  TextGraphic* = ref object of TextureGraphic
+  TextGraphic* = ref object of SurfaceGraphic
     # Private
     fLines: seq[string]
     fAlign: TextAlign
@@ -42,7 +42,7 @@ type
 #=============#
 
 proc free*(text: TextGraphic) =
-  TextureGraphic(text).free()
+  SurfaceGraphic(text).free()
   text.fLines = @[]
   text.fAlign = TextAlign.left
   text.fColor = DefaultFontColor
@@ -50,7 +50,7 @@ proc free*(text: TextGraphic) =
 
 
 proc initTextGraphic*(text: TextGraphic, font: Font) =
-  text.initTextureGraphic()
+  text.initSurfaceGraphic()
   text.fLines = @[]
   text.fAlign = TextAlign.left
   text.fColor = DefaultFontColor
@@ -71,12 +71,12 @@ proc update*(text: TextGraphic) =
     return
   let num = text.fLines.len
   if num < 1:
-    discard text.assignTexture(text.fFont.renderLine(""))
+    discard text.assignSurface(text.fFont.renderLine(""))
   elif num < 2:
-    discard text.assignTexture(
+    discard text.assignSurface(
       text.fFont.renderLine(text.fLines[0], text.fColor))
   else:
-    discard text.assignTexture(
+    discard text.assignSurface(
       text.fFont.renderText(text.fLines, text.fAlign, text.fColor))
 
 

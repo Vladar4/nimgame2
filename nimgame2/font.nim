@@ -52,25 +52,27 @@ method render*(font: Font,
 
 proc renderLineFont*(font: Font,
                      line: string,
-                     color: Color = DefaultFontColor): Texture =
+                     color: Color = DefaultFontColor): Surface =
   ##  Render a text ``line`` in ``font`` with given ``color``.
+  ##
+  ##  The result must be freed with ``freeSurface()`` afterwards.
   ##
   let
     line = if line.len < 1: " " else: line
-    lineSurface = font.render(line, color)
-  if lineSurface == nil:
+  result = font.render(line, color)
+  if result == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't render text line: %s",
                     font.getError())
     return nil
-  result = renderer.createTextureFromSurface(lineSurface)
-  lineSurface.freeSurface()
 
 
 method renderLine*(font: Font,
                    line: string,
-                   color: Color = DefaultFontColor): Texture {.base.} =
+                   color: Color = DefaultFontColor): Surface {.base.} =
   ##  Base ``renderLine()`` font method.
+  ##
+  ##  The result must be freed with ``freeSurface()`` afterwards.
   ##
   renderLineFont(font, line, color)
 
@@ -78,9 +80,11 @@ method renderLine*(font: Font,
 proc renderTextFont*(font: Font,
                      text: openarray[string],
                      align = TextAlign.left,
-                     color: Color = DefaultfontColor): Texture =
+                     color: Color = DefaultfontColor): Surface =
   ##  Render a multi-line ``text`` in ``font``
   ##  with given ``align`` and ``color``.
+  ##
+  ##  The result must be freed with ``freeSurface()`` afterwards.
   ##
   var text = @text
 
@@ -106,10 +110,11 @@ proc renderTextFont*(font: Font,
   let
     format = renderer.textureFormat(0)
     dim: Dim = (maxw, height * text.len)
-    textSurface = createRGBSurfaceWithFormat(
+
+  result = createRGBSurfaceWithFormat(
       0, dim.w, dim.h, format.bitsPerPixel.cint, format)
 
-  if textSurface == nil:
+  if result == nil:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't create font text surface: %s",
                     sdl.getError())
@@ -127,22 +132,21 @@ proc renderTextFont*(font: Font,
                 of TextAlign.center:  maxw2 - dstRect.w div 2
                 of TextAlign.right:   maxw - dstRect.w
     dstRect.y = i * height
-    discard ln.blitSurface(nil, textSurface, addr(dstRect))
-
-  result = renderer.createTextureFromSurface(textSurface)
-  textSurface.freeSurface()
-  if result == nil:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Can't render text: %s",
-                    sdl.getError())
-    return nil
+    if not(ln.blitSurface(nil, result, addr(dstRect)) == 0):
+      sdl.logCritical(sdl.LogCategoryError,
+                      "Can't render text: %s",
+                      sdl.getError())
+      result.freeSurface()
+      return nil
 
 
 method renderText*(font: Font,
                    text: openarray[string],
                    align = TextAlign.left,
-                   color: Color = DefaultfontColor): Texture {.base.} =
+                   color: Color = DefaultfontColor): Surface {.base.} =
   ##  Base ``renderText()`` font method.
+  ##
+  ##  The result must be freed with ``freeSurface()`` afterwards.
   ##
   renderTextFont(font, text, align, color)
 
