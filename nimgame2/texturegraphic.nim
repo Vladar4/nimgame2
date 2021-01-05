@@ -1,5 +1,5 @@
 # nimgame2/texturegraphic.nim
-# Copyright (c) 2016-2019 Vladimir Arabadzhi (Vladar)
+# Copyright (c) 2016-2021 Vladimir Arabadzhi (Vladar)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,17 @@ template init*(graphic: TextureGraphic) {.deprecated: "use initTextureGraphic() 
 
 
 proc updateTexture*(graphic: TextureGraphic): bool =
-  if graphic.fTexture == nil:
+  ##  Update format and dimensions of the texture.
+  ##
+  ##  ``load()``, ``assignTexture()``
+  ##  or any other proc that changes the texture, calls this on its own.
+  ##
+  ##  ``Return`` `true` on success (or if the texture is absent),
+  ##  or `false` otherwise.
+  ##
+  if graphic.fTexture == nil: # nothing to update
+    graphic.fFormat = 0
+    graphic.fSize = (0, 0)
     return true
   result = true
   var w, h: cint
@@ -120,7 +130,7 @@ proc load*(
 
 proc assignTexture*(
   graphic: TextureGraphic, texture: Texture, freeCurrent: bool = true): bool =
-  ##  Assign already created ``texture``.
+  ##  Assign already created ``texture`` and run ``updateTexture()`` afterwards.
   ##
   ##  ``freeCurrent`` Free the currently assigned texture.
   ##  Set to `false` if it used by other objects.
@@ -129,7 +139,7 @@ proc assignTexture*(
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
-  if freeCurrent:
+  if not(graphic.fTexture == nil) and freeCurrent:
     graphic.freeTexture()
   graphic.fTexture = texture
   result = graphic.updateTexture()
