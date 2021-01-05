@@ -2,9 +2,9 @@ import
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,
-  nimgame2/texturegraphic,
+  nimgame2/palette,
+  nimgame2/surfacegraphic,
   nimgame2/input,
-  nimgame2/indexedimage,
   nimgame2/scene,
   nimgame2/settings,
   nimgame2/types
@@ -12,18 +12,14 @@ import
 
 type
   MainScene = ref object of Scene
-    idximg: IndexedImage
-    knightG: TextureGraphic
+    knightG: SurfaceGraphic
     knight: Entity
 
 
 proc initMainScene*(scene: MainScene) =
   scene.initScene()
 
-  scene.idximg = newIndexedImage("../assets/gfx/knight.gif")
-
-  scene.knightG = newTextureGraphic()
-  discard scene.knightG.assignTexture scene.idximg.render()
+  scene.knightG = newSurfaceGraphic("../assets/gfx/knight.gif")
 
   scene.knight = newEntity()
   scene.knight.graphic = scene.knightG
@@ -63,9 +59,9 @@ method render*(scene: MainScene) =
   discard string(
     (8, 88), "GHJK - decrease RGBA values (2nd color)", 0xFFFFFFFF'u32)
   discard string(
-    (8, 96), "1st: " & $scene.idximg.palette[3], 0xFFFFFFFF'u32)
+    (8, 96), "1st: " & $scene.knightG.palette[3], 0xFFFFFFFF'u32)
   discard string(
-    (8, 104), "2nd: " & $scene.idximg.palette[11], 0xFFFFFFFF'u32)
+    (8, 104), "2nd: " & $scene.knightG.palette[11], 0xFFFFFFFF'u32)
 
 
 const
@@ -74,7 +70,7 @@ const
 
 method update*(scene: MainScene, elapsed: float) =
   scene.updateScene(elapsed)
-  let palette = scene.idximg.palette
+  let palette = scene.knightG.palette
   var
     upd = false
     color1 = palette[3]
@@ -133,7 +129,7 @@ method update*(scene: MainScene, elapsed: float) =
     upd = true
 
   if upd:
-    scene.idximg.palette[3] = color1
-    scene.idximg.palette[11] = color2
-    discard scene.knightG.assignTexture(scene.idximg.render())
+    scene.knightG.palette[3] = color1
+    scene.knightG.palette[11] = color2
+    discard scene.knightG.updateSurface()
 

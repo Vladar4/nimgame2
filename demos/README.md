@@ -35,7 +35,7 @@ Nimgame 2 Demos
 
 * [demo17](demo17) GUI (Button, TextField, Spinner)
 
-* [demo18](demo18) IndexedImage
+* [demo18](demo18) Palette
 
 * [demo19](demo19) PerspectiveImage
 

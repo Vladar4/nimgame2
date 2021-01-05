@@ -1,7 +1,7 @@
 Nimgame 2: Demo 18
 ==================
 
-IndexedImage. Demonstrates palette swapping in indexed images.
+Palette. Demonstrates palette swapping with SurfaceGraphic.
 
 ![Screenshot](demo18.png)
 
