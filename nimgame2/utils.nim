@@ -169,6 +169,9 @@ proc createSurface*(texture: Texture,
   ##  ``rect`` Area of a source texture to create the surface from.
   ##  Empty rect (default) uses the whole texture.
   ##
+  ##  ``WARNING:`` Potentially unstable, use at your own risk.
+  ##  If possible, usage of SurfaceGraphic is preferrable.
+  ##
   ##  ``Return`` a surface created from a texture. Slow, so use wisely.
   var
     fmt: uint32
@@ -243,7 +246,7 @@ proc createSurface*(texture: Texture,
 # Parsing #
 #=========#
 
-import parsecsv, streams
+import parsecsv, streams, strutils
 
 
 proc readAll*(src: ptr RWops): string =
@@ -310,83 +313,6 @@ proc loadCSV*[T](src: ptr RWops,
     freeRW(src)
 
 
-import
-  strutils, indexedimage
-
-
-proc loadPalette(palette: var indexedimage.Palette,
-                 parser: var CsvParser) =
-  var
-    ncolors = 0
-    colors: seq[Color] = @[]
-    r, g, b, a: int
-  while parser.readRow():
-    let cols = parser.row.len
-    if cols in {3, 4}:
-      r = parser.row[0].parseInt
-      g = parser.row[1].parseInt
-      b = parser.row[2].parseInt
-      a = if cols == 4: parser.row[3].parseInt
-          else: 255
-      inc ncolors
-    else:
-      continue
-  if ncolors > 0:
-    if not (palette == nil):
-      palette.free()
-    palette.init(ncolors)
-    palette[0] = colors
-
-
-proc loadPalette*(palette: var indexedimage.Palette,
-                  file: string,
-                  separator = ' ',
-                  quote = '\"',
-                  escape = '\0',
-                  skipInitialSpace = true) =
-  ##  Load palette color data from a ``file``.
-  ##
-  ##  ``palette`` Target palette. If ``palette`` is `nil`,
-  ##  allocates a new palette, otherwise the ``palette`` will be freed.
-  ##
-  ##  Data file should be in a format of:
-  ##
-  ##  .. code-block
-  ##    rrr ggg bbb aaa
-  ##    ...
-  ##
-  ##  or
-  ##
-  ##  .. code-block
-  ##    rrr ggg bbb
-  ##
-  ##  where `rrr`, `ggg`, `bbb`, and `aaa` is in `0`..`255` range.
-  ##
-  ##  Other types of lines are ignored.
-  ##
-  var parser: CsvParser
-  parser.open(file, separator, quote, escape, skipInitialSpace)
-  loadPalette(palette, parser)
-  parser.close()
-
-
-proc loadPalette*(palette: var indexedimage.Palette,
-                  src: ptr RWops,
-                  file: string,
-                  separator = ' ',
-                  quote = '\"',
-                  escape = '\0',
-                  skipInitialSpace = true,
-                  freeSrc = true) =
-  var
-    parser: CsvParser
-    stream = newStringStream(src.readAll())
-  parser.open(stream, file, separator, quote, escape, skipInitialSpace)
-  loadPalette(palette, parser)
-  parser.close()
-  stream.close()
-  if freeSrc:
-    freeRW(src)
 
 
 template atlasValues(parser: CsvParser): untyped =

@@ -25,83 +25,14 @@
 import
   sdl2/sdl,
   sdl2/sdl_image as img,
-  settings, types
+  palette, settings, types
 
 
 type
-  Palette* = ptr sdl.Palette
-
-  IndexedImage* = ref object of RootObj
+  IndexedImage* {.deprecated: "Use SurfaceGraphic instead".} =
+      ref object of RootObj
     # Private
     fSurface: Surface   ##  Source surface
-
-
-#=========#
-# Palette #
-#=========#
-
-proc free*(palette: Palette) =
-  if not (palette == nil):
-    palette.freePalette()
-
-
-proc init*(palette: var Palette, ncolors: int) =
-  palette.free()
-  palette = allocPalette(ncolors)
-
-
-proc ncolors*(palette: Palette): int =
-  ##  Get the number of colors in ``palette``.
-  ##
-  if palette == nil:
-    0
-  else:
-    palette.ncolors
-
-
-template len*(palette: Palette): int =
-  ncolors(palette)
-
-
-template `^^`(s, i: untyped): untyped =
-  (when i is BackwardsIndex: s.len - int(i) else: int(i))
-
-
-proc `[]`*(palette: Palette, i: int | BackwardsIndex): Color =
-  ##  Get the ``i``'th color from the ``palette``.
-  ##
-  let i = palette ^^ i
-  if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexDefect,
-      "Palette color index " & $i & " is out of bounds.")
-  ptrMath:
-    return palette.colors[i]
-
-
-proc `[]=`*(palette: Palette,
-            i: int | BackwardsIndex, colors: openarray[Color]) =
-  ##  Change ``colors`` in the ``palette`` starting with ``i``'th color.
-  ##
-  let i = palette ^^ i
-  if (i < 0) or ((i + colors.len) > palette.ncolors):
-    raise newException(IndexDefect,
-      "Palette color index range " & $i & ".." & $(i + colors.len - 1) &
-      " is out of bounds.")
-  if palette.setPaletteColors(
-      cast[ptr Color](colors[0].unsafeAddr), i, colors.len) != 0:
-    sdl.logCritical(sdl.LogCategoryError,
-                    "Error on setting palette colors: %s",
-                    sdl.getError())
-
-
-proc `[]=`*(palette: Palette, i: int | BackwardsIndex, color: Color) =
-  ##  Change ``i``'th color in the ``palette``.
-  ##
-  let i = palette ^^ i
-  if (i < 0) or (i >= palette.ncolors):
-    raise newException(IndexDefect,
-      "Palette color index " & $i & " is out of bounds.")
-  palette[i] = [color]
 
 
 #==============#
@@ -184,13 +115,13 @@ proc newIndexedImage*(src: ptr RWops, freeSrc: bool = true): IndexedImage =
   discard result.load(src, freeSrc)
 
 
-proc palette*(image: IndexedImage): Palette {.inline.} =
+proc palette*(image: IndexedImage): PalettePtr {.inline.} =
   ##  Get the current palette of the ``image``.
   ##
   image.fSurface.format.palette
 
 
-proc `palette=`*(image: IndexedImage, palette: Palette) {.inline.} =
+proc `palette=`*(image: IndexedImage, palette: PalettePtr) {.inline.} =
   ##  Assign a new palette to the ``image``.
   ##
   if image.fSurface.setSurfacePalette(palette) != 0:
