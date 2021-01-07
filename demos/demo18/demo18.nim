@@ -4,7 +4,7 @@ import
   mainscene
 
 game = newGame()
-if game.init(w = 320, h = 240, title = "Nimgame 2: Demo 18 (IndexedImage)"):
+if game.init(w = 320, h = 240, title = "Nimgame 2: Demo 18 (SurfaceGraphic)"):
   game.windowSize = (640, 480)
   showInfo = true
   game.scene = newMainScene()
