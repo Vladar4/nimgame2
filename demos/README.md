@@ -47,3 +47,5 @@ Nimgame 2 Demos
 
 * [demo23](demo23) Transform
 
+* [demo24](demo24) Outline
+
