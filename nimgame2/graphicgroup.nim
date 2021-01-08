@@ -83,7 +83,18 @@ method draw*(group: GraphicGroup,
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
   for e in group.list:
-    e.graphic.draw(
-      pos + e.offset,
-      angle, scale, center, flip, region)
+    # empty region
+    if region == Rect(x: 0, y: 0, w: 0, h: 0):
+      e.graphic.draw(
+        pos + e.offset,
+        angle,scale, center, flip)
+    # specified region
+    else:
+      e.graphic.draw(
+        pos, angle, scale, center, flip,
+        Rect(
+          x: region.x - e.offset.x.cint,
+          y: region.y - e.offset.y.cint,
+          w: region.w,
+          h: region.h))
 

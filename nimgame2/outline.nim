@@ -54,30 +54,15 @@ proc free*(outline: Outline) =
   outline.shadow = false
 
 
-proc initOutline*(
-    outline: Outline,
-    color: Color = DefaultOutlineColor,
-    thickness: Positive = DefaultOutlineThickness,
-    threshold: uint8 = DefaultOutlineThreshold,
-    shadow: bool = false) =
-  outline.initSurfaceGraphic()
-  outline.color = color
-  outline.thickness = thickness
-  outline.threshold = threshold
-  outline.shadow = shadow
-
-
-proc newOutline*(
-    color: Color = DefaultOutlineColor,
-    thickness: Positive = DefaultOutlineThickness,
-    threshold: uint8 = DefaultOutlineThreshold,
-    shadow: bool = false): Outline =
-  new result, free
-  result.initOutline(color, thickness, threshold, shadow)
-
-
 #TODO support for pixel formats other than 4-byte ones
 proc updateOutline*(outline: Outline, source: Surface): bool =
+  ##  Update ``outline`` with a new ``source`` Surface.
+  ##
+  ##  ``Return`` `true` on success, or `false` otherwise.
+  ##  If ``source`` is nil, `false` is returned as well.
+  ##
+  if source == nil:
+    return false
   let
     fmt = source.format
     pitch = source.pitch div fmt.BytesPerPixel
@@ -165,4 +150,29 @@ proc updateOutline*(outline: Outline, source: Surface): bool =
   unlockSurface(outline.surface)
 
   return outline.updateSurface()
+
+
+proc initOutline*(
+    outline: Outline,
+    color: Color = DefaultOutlineColor,
+    thickness: Positive = DefaultOutlineThickness,
+    threshold: uint8 = DefaultOutlineThreshold,
+    shadow: bool = false,
+    source: Surface = nil) =
+  outline.initSurfaceGraphic()
+  outline.color = color
+  outline.thickness = thickness
+  outline.threshold = threshold
+  outline.shadow = shadow
+  discard outline.updateOutline(source)
+
+
+proc newOutline*(
+    color: Color = DefaultOutlineColor,
+    thickness: Positive = DefaultOutlineThickness,
+    threshold: uint8 = DefaultOutlineThreshold,
+    shadow: bool = false,
+    source: Surface = nil): Outline =
+  new result, free
+  result.initOutline(color, thickness, threshold, shadow, source)
 
