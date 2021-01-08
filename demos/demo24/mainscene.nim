@@ -8,7 +8,6 @@ import sdl2/sdl,
   nimgame2/draw,
   nimgame2/entity,
   nimgame2/graphic,
-  #nimgame2/graphicgroup,
   nimgame2/textgraphic,
   nimgame2/surfacegraphic,
   nimgame2/texturegraphic,
@@ -19,11 +18,12 @@ import sdl2/sdl,
   nimgame2/types,
   nimgame2/utils,
   nimgame2/outline,
-  earth
+  dwarf, earth
 
 
 type
   MainScene = ref object of Scene
+    d: Dwarf
     earthG: TextureGraphic
     e: Earth
     bmFont: BitmapFont
@@ -42,6 +42,12 @@ type
 
 proc initMainScene*(scene: MainScene) =
   scene.initScene()
+
+  # Dwarf
+  scene.d = newDwarf()
+  scene.d.pos = (400.0, 200.0)
+  scene.d.play("all")
+  scene.add(scene.d)
 
   # Earth
   scene.e = newEarth()

@@ -11,39 +11,18 @@ import
 
 type
   MainScene = ref object of Scene
-    dG: TextureGraphic
     d: Dwarf
-
-
-const Framerate = 1/12
 
 
 proc initMainScene*(scene: MainScene) =
   scene.initScene()
-  # Dwarf
-  scene.dG = newTextureGraphic()
-  discard scene.dG.load("../assets/gfx/dwarf.png")
   scene.d = newDwarf()
-  scene.d.pos = (200, 100)
-  scene.d.graphic = scene.dG
-  scene.d.initSprite((24, 48))
-  discard scene.d.addAnimation(
-    "down", [0, 1, 2, 3, 4, 5], Framerate)
-  discard scene.d.addAnimation(
-    "up", [6, 7, 8, 9, 10, 11], Framerate)
-  discard scene.d.addAnimation(
-    "left", [12, 13, 14, 15, 16, 17], Framerate)
-  discard scene.d.addAnimation(
-    "right", [12, 13, 14, 15, 16, 17], Framerate, Flip.horizontal)
+  scene.d.pos = (200, 200)
   scene.add(scene.d)
 
 
-proc free*(scene: MainScene) =
-  scene.dG.free
-
-
 proc newMainScene*(): MainScene =
-  new result, free
+  new result
   result.initMainScene()
 
 

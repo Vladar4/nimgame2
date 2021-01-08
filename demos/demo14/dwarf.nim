@@ -25,7 +25,7 @@ proc initDwarf*(entity: Dwarf, graphic: TextureGraphic, map: TileMap) =
   entity.initEntity()
   entity.tags.add("dwarf")
   entity.graphic = graphic
-  entity.initSprite((24, 48))
+  entity.initSprite((26, 50))
   discard entity.addAnimation(
     "down", [0, 1, 2, 3, 4, 5], Framerate)
   discard entity.addAnimation(
@@ -36,7 +36,7 @@ proc initDwarf*(entity: Dwarf, graphic: TextureGraphic, map: TileMap) =
     "right", [12, 13, 14, 15, 16, 17], Framerate, Flip.horizontal)
   entity.pos = (44.0, 444.0)
   entity.virtualPos = (1, 18)
-  entity.center = (12.0, 36.0)
+  entity.center = (14.0, 38.0)
   entity.map = map
   entity.map.show = (
     x: (entity.virtualPos.x - 2)..(entity.virtualPos.x + 2),

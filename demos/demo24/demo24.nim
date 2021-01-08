@@ -5,7 +5,7 @@ import
   mainscene
 
 game = newGame()
-if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 24 (Outline)",
+if game.init(w = 640, h = 480, title = "Nimgame 2: Demo 24 (Outline, GroupGraphic)",
              scaleQuality = 0):
   showInfo = true
   game.windowSize = (1280, 960)
