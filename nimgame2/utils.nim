@@ -23,7 +23,7 @@
 # https://github.com/Vladar4
 
 import
-  math, random,
+  math,
   sdl2/sdl,
   texturegraphic, types
 
@@ -360,24 +360,10 @@ iterator atlasValues*(src: ptr RWops,
 # Random #
 #========#
 
+import random
+export random
+
 #== max ==#
-
-proc random*[T](max: T, exclude: seq[T]): T {.
-    deprecated: "Use rand() instead".} =
-  ##  ``Return`` a random number in the range `0`..<``max``,
-  ##  except values in the ``exclude``.
-  ##
-  ##  ``Deprecated:`` Use ``rand`` instead.
-  ##
-  result = random.random(max)
-  while exclude.contains(result):
-    result = random.random(max)
-
-
-proc random*[T](max: T, exclude: openArray[T] = []): T {.
-    deprecated: "Use rand() instead".} =
-  random(max, @exclude)
-
 
 proc rand*[T](max: T, exclude: seq[T]): T =
   ##  ``Return`` a random number in the range `0`..``max``,
@@ -387,29 +373,11 @@ proc rand*[T](max: T, exclude: seq[T]): T =
   while exclude.contains(result):
     result = random.rand(max)
 
-
-template rand*[T](max: T, exclude: openArray[T] = []): T =
+template rand*[T](max: T, exclude: openArray[T]): T =
   rand(max, @exclude)
 
 
 #== seq ==#
-
-proc random*[T](x, exclude: seq[T]): T {.
-    deprecated: "Use rand() instead".} =
-  ##  ``Return`` a random number in the sequence ``x``,
-  ##  except values in the ``exclude``.
-  ##
-  ##  ``Deprecated:`` use ``rand`` instaead.
-  ##
-  result = random.sample(x)
-  while exclude.contains(result):
-    result = random.sample(x)
-
-
-template random*[T](x, exclude: openArray[T] = []): T {.
-    deprecated: "Use rand() instead".} =
-  random(@x, @exclude)
-
 
 proc rand*[T](x, exclude: seq[T]): T =
   ##  ``Return`` a random number in the sequence ``x``,
@@ -419,94 +387,38 @@ proc rand*[T](x, exclude: seq[T]): T =
   while exclude.contains(result):
     result = random.sample(x)
 
-
-template rand*[T](x, exclude: openArray[T] = []): T =
+template rand*[T](x, exclude: openArray[T]): T =
   rand(@x, @exclude)
 
 
 #== slice ==#
 
-proc random*[T](x: HSlice[T,T], exclude: seq[T]): T {.
-    deprecated: "Use rand() instead".} =
-  ##  ``Return`` a random number in the range ``min``..<``max``,
-  ##  except values in the ``exclude``.
-  ##
-  ##  ``Deprecated:`` use ``rand`` instead.
-  ##
-  result = random.sample(x)
-  while exclude.contains(result):
-    result = random.sample(x)
-
-
-template random*[T](x: HSlice[T,T], exclude: openArray[T] = []): T {.
-    deprecated: "Use rand() instead".} =
-  random(x, @exclude)
-
-
-# internal
-template rand_internal[T](x: HSlice[T,T]): T =
-  T(rand(x.b - x.a) + x.a)
-
-
 proc rand*[T](x: HSlice[T,T], exclude: seq[T]): T =
   ##  ``Return`` a random number in the range ``min``..``max``,
   ##  except values in the ``exclude``.
   ##
-  result = rand_internal(x)
+  result = rand(x)
   while exclude.contains(result):
-    result = rand_internal(x)
+    result = rand(x)
 
-
-template rand*[T](x: HSlice[T,T], exclude: openArray[T] = []): T =
+template rand*[T](x: HSlice[T,T], exclude: openArray[T]): T =
   rand(x, @exclude)
 
 
-#== set ==#
-
-proc random*[T](x: set[T]): T {.
-    deprecated: "Use rand() instead".} =
-  ##  ``Return`` a random member of set ``x``.
-  ##
-  ##  ``Deprecated:`` use ``rand`` instead.
-  ##
-  var r: seq[T] = @[]
-  for i in x:
-    r.add(i)
-  return random(r)
-
-
-proc rand*[T](x: set[T]): T =
-  ##  ``Return`` a random member of set ``x``.
-  ##
-  var r: seq[T] = @[]
-  for i in x:
-    r.add(i)
-  return rand(r)
-
-
-proc randomBool*(chance: float = 0.5): bool {.
-    deprecated: "Use randBool() instead".} =
-  ##  ``Return`` `true` or `false`,
-  ##  based on the ``chance`` value (from `0.0` to `1.0`).
-  ##
-  return rand(1.0) < chance.clamp(0.0, 1.0)
-
+#== misc ==#
 
 proc randBool*(chance: float = 0.5): bool {.inline.} =
-  return rand(1.0) < chance.clamp(0.0, 1.0)
+  return random.rand(1.0) < chance.clamp(0.0, 1.0)
 
 
-proc randomSign*(chance: float = 0.5): int =
+proc randSign*(chance: float = 0.5): int =
   ##  ``Return`` `1` or `-1`,
   ##  based on the ``chance`` value (from `0.0` to `1.0`).
   ##
   return if randBool(chance): 1 else: -1
 
 
-proc randSign*(chance: float = 0.5): int {.inline.} = randomSign(chance)
-
-
-proc randomWeighted*[T](weights: openArray[T]): int =
+proc randWeighted*[T](weights: openArray[T]): int =
   ##  ``Return`` a random integer, based on the ``weights`` array.
   ##
   ##  E.g., call of randomWeighted([2, 3, 5])
@@ -517,16 +429,12 @@ proc randomWeighted*[T](weights: openArray[T]): int =
   for i in weights:
     total += i
 
-  total = utils.rand(T(0)..total)
+  total = rand(T(0)..total)
   for i in 0..weights.high:
     if total < weights[i]:
       result = i
       break
     total -= weights[i]
-
-
-proc randWeighted*[T](weights: openArray[T]): int {.inline.} =
-  randomWeighted(weights)
 
 
 #======#
