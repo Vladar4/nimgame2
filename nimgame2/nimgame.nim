@@ -74,7 +74,9 @@ proc init*(
     icon: string = "",
     imageFlags: cint = img.InitPNG,
     mixerFlags: cint = mix.InitOGG,
-    mixerChannels: int = 32
+    mixerChannels: int = 32,
+    randomize: bool = true,
+    seed: int64 = 0
     ): bool =
   ##  Init game.
   ##
@@ -100,7 +102,11 @@ proc init*(
   ##
   ##  ``mixerFlags``    sdl_mixer flags
   ##
-  ##  ``mixerChannels`` Number of channels to allocate for mixing.
+  ##  ``mixerChannels`` number of channels to allocate for mixing.
+  ##
+  ##  ``randomize``     initialize random number generator (`true` by default)
+  ##
+  ##  ``seed``          RNG seed, if `0` (default), uses the current time
   ##
   ##  ``Return`` `true` on success, `false` otherwise.
   ##
@@ -191,7 +197,11 @@ proc init*(
   discard renderer.renderSetIntegerScale(integerScale)
 
   # Initialize the random number generator
-  randomize()
+  if randomize:
+    if seed == 0:
+      randomize()
+    else:
+      randomize(seed)
 
   return true
 

@@ -25,7 +25,7 @@
 import
   math,
   sdl2/sdl,
-  texturegraphic, settings, types
+  settings, types
 
 
 #==========#
@@ -384,8 +384,19 @@ proc rand*[T](max: T, exclude: seq[T]): T =
   while exclude.contains(result):
     result = random.rand(max)
 
+
 template rand*[T](max: T, exclude: openArray[T]): T =
   rand(max, @exclude)
+
+
+proc rand*[T](r: var Rand, max: T, exclude: seq[T]): T =
+  result = random.rand(r, max)
+  while exclude.contains(result):
+    result = random.rand(r, max)
+
+
+template rand*[T](r: var Rand, max: T, exclude: openArray[T]): T =
+  rand(r, max, @exclude)
 
 
 #== seq ==#
@@ -398,8 +409,19 @@ proc rand*[T](x, exclude: seq[T]): T =
   while exclude.contains(result):
     result = random.sample(x)
 
+
 template rand*[T](x, exclude: openArray[T]): T =
   rand(@x, @exclude)
+
+
+proc rand*[T](r: var Rand, x, exclude: seq[T]): T =
+  result = random.sample(r, x)
+  while exclude.contains(result):
+    result = random.sample(r, x)
+
+
+template rand*[T](r: var Rand, x, exclude: openArray[T]): T =
+  rand(r, @x, @exclude)
 
 
 #== slice ==#
@@ -412,40 +434,73 @@ proc rand*[T](x: HSlice[T,T], exclude: seq[T]): T =
   while exclude.contains(result):
     result = rand(x)
 
+
 template rand*[T](x: HSlice[T,T], exclude: openArray[T]): T =
   rand(x, @exclude)
 
 
-#== misc ==#
+proc rand*[T](r: var Rand, x: HSlice[T,T], exclude: seq[T]): T =
+  result = rand(r, x)
+  while exclude.contains(result):
+    result = rand(r, x)
+
+
+template rand*[T](r: var Rand, x: HSlice[T,T], exclude: openArray[T]): T =
+  rand(r, x, @exclude)
+
+
+#== bool ==#
 
 proc randBool*(chance: float = 0.5): bool {.inline.} =
+  ##  ``Return`` `true` or `false`,
+  ##  based on the ``chance`` value (from `0.0` to `1.0`).
+  ##
   return random.rand(1.0) < chance.clamp(0.0, 1.0)
 
 
-proc randSign*(chance: float = 0.5): int =
+proc randBool*(r: var Rand, chance: float = 0.5): bool {.inline.} =
+  return random.rand(r, 1.0) < chance.clamp(0.0, 1.0)
+
+
+#== sign ==#
+
+template randSign*(chance: float = 0.5): int =
   ##  ``Return`` `1` or `-1`,
   ##  based on the ``chance`` value (from `0.0` to `1.0`).
   ##
-  return if randBool(chance): 1 else: -1
+  (if randBool(chance): 1 else: -1)
+
+
+template randSign*(r: var Rand, chance: float = 0.5): int =
+  (if randBool(r, chance): 1 else: -1)
+
+
+#== weighted ==#
+
+proc randWeighted_internal[T](rnd: var T, weights: openArray[T]): int =
+  for i in 0..weights.high:
+    if rnd < weights[i]:
+      result = i
+      break
+    rnd -= weights[i]
 
 
 proc randWeighted*[T](weights: openArray[T]): int =
   ##  ``Return`` a random integer, based on the ``weights`` array.
   ##
-  ##  E.g., call of randomWeighted([2, 3, 5])
+  ##  E.g., call of randomWeighted([20, 30, 50])
   ##  will have a 20% chance of returning `0`, 30% chance of returning `1`,
   ##  and 50% chance of returning `2`.
   ##
-  var total: T = 0
-  for i in weights:
-    total += i
+  ##  ``Note:`` Bigger weights numbers produce more accurate results.
+  ##
+  var rnd = rand(T(0)..sum(weights))
+  return randWeighted_internal(rnd, weights)
 
-  total = rand(T(0)..total)
-  for i in 0..weights.high:
-    if total < weights[i]:
-      result = i
-      break
-    total -= weights[i]
+
+proc randWeighted*[T](r: var Rand, weights: openArray[T]): int =
+  var rnd = rand(r, T(0)..sum(weights))
+  return randWeighted_internal(rnd, weights)
 
 
 #======#
