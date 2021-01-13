@@ -215,7 +215,10 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
   var
     size: Dim = if region == empty: graphic.dim
                 else: (region.w.int, region.h.int)
-    cntr = center
+    cntr =  if region == empty:
+              center - graphic.offset
+            else:
+              center
 
   if scale != 1.0:
     size.w = int(size.w.float * scale)
@@ -226,6 +229,12 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
     position = pos - cntr
     dstRect = sdl.Rect(
       x: position.x.cint, y: position.y.cint, w: size.w.cint, h: size.h.cint)
+    srcRect = region
+
+  if not (srcRect == empty):
+    srcRect.x -= graphic.offset.x.cint
+    srcRect.y -= graphic.offset.y.cint
+
 
   if (angle == 0.0) and flip == Flip.none:
 
@@ -234,7 +243,6 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
                                   nil,
                                   addr(dstRect))
     else:
-      var srcRect = region
       discard renderer.renderCopy(graphic.fTexture,
                                   addr(srcRect),
                                   addr(dstRect))
@@ -254,7 +262,6 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
                                     addr(anchor),
                                     flip.RendererFlip)
     else:
-      var srcRect = region
       discard renderer.renderCopyEx(graphic.fTexture,
                                     addr(srcRect),
                                     addr(dstRect),

@@ -28,6 +28,7 @@ import
 
 type
   Graphic* = ref object of RootObj
+    offset*: Coord  ##  Offset should be taken in account in draw() proc
 
 
 method w*(graphic: Graphic): int {.base.} = discard
@@ -46,8 +47,8 @@ method draw*(graphic: Graphic,
 
 template rect*(graphic: Graphic, offset: Coord): Rect =
   Rect(
-    x: (graphic.dim.w.float - offset.x).cint,
-    y: (graphic.dim.h.float - offset.y).cint,
+    x: (graphic.dim.w.float - offset.x - graphic.offset.x).cint,
+    y: (graphic.dim.h.float - offset.y - graphic.offset.y).cint,
     w: graphic.dim.w.cint,
     h: graphic.dim.h.cint)
 

@@ -28,12 +28,12 @@ import
 
 
 type
-  GraphicElement* = tuple[graphic: Graphic, offset: CoordInt]
+  #GraphicElement* = tuple[graphic: Graphic, offset: CoordInt]
 
   GraphicGroup* = ref object of Graphic ##  \
-    ##  Allows to combine multiple Graphic objects into a single one,
-    ##  specifying individual offsets and draw order in the ``list`` sequence.
-    list*: seq[GraphicElement]
+    ##  Allows to combine multiple Graphic objects into a single one.
+    ##  Specify individual offsets through graphic.offset field.
+    list*: seq[Graphic]
 
 
 proc initGraphicGroup*(group: GraphicGroup) =
@@ -47,28 +47,28 @@ proc newGraphicGroup*(): GraphicGroup =
 
 method w*(group: GraphicGroup): int =
   var
-    left = 0
-    right = 0
+    left = 0.0
+    right = 0.0
   for e in group.list:
     if left > e.offset.x:
       left = e.offset.x
-    let w = e.graphic.w + e.offset.x
+    let w = e.w.float + e.offset.x
     if right < w:
       right = w
-  right - left
+  int(right - left)
 
 
 method h*(group: GraphicGroup): int =
   var
-    top = 0
-    bottom = 0
+    top = 0.0
+    bottom = 0.0
   for e in group.list:
     if top > e.offset.y:
       top = e.offset.y
-    let h = e.graphic.h + e.offset.y
+    let h = e.h.float + e.offset.y
     if bottom < h:
       bottom = h
-  bottom - top
+  int(bottom - top)
 
 
 method dim*(group: GraphicGroup): Dim =
@@ -83,18 +83,5 @@ method draw*(group: GraphicGroup,
              flip: Flip = Flip.none,
              region: Rect = Rect(x: 0, y: 0, w: 0, h: 0)) =
   for e in group.list:
-    # empty region
-    if region == Rect(x: 0, y: 0, w: 0, h: 0):
-      e.graphic.draw(
-        pos + e.offset,
-        angle,scale, center, flip)
-    # specified region
-    else:
-      e.graphic.draw(
-        pos, angle, scale, center, flip,
-        Rect(
-          x: region.x - e.offset.x.cint,
-          y: region.y - e.offset.y.cint,
-          w: region.w,
-          h: region.h))
+    e.draw(pos, angle, scale, center, flip, region)
 

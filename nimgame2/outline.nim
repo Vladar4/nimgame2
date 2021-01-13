@@ -39,7 +39,7 @@ type
     color*: Color         ##  outline color
     thickness*: Positive  ##  outline thickness (in pixels)
     threshold*: uint8     ##  alpha threshold for edge detection
-    shadow*: bool         ##  if true - solid pixels are filled as well
+    fill*: bool           ##  if true - solid pixels are filled as well
 
 
 #=========#
@@ -51,7 +51,7 @@ proc free*(outline: Outline) =
   outline.color = DefaultOutlineColor
   outline.thickness = DefaultOutlineThickness
   outline.threshold = DefaultOutlineThreshold
-  outline.shadow = false
+  outline.fill = false
 
 
 #TODO support for pixel formats other than 4-byte ones
@@ -111,7 +111,7 @@ proc updateOutline*(outline: Outline, source: Surface): bool =
               if  srcPixels[n.x + n.y * source.w].
                   getRGBA(fmt).a >= outline.threshold: # non-transparent pixel
                 dstPixels[t + x + (t + y) * outline.surface.w] = color
-          elif outline.shadow:
+          elif outline.fill:
             dstPixels[t + x + (t + y) * outline.surface.w] = color
 
     else: # advanced algorithm for thickness > 1
@@ -136,7 +136,7 @@ proc updateOutline*(outline: Outline, source: Surface): bool =
                         srcPixels[xxx + yyy * source.w].getRGBA(fmt)
                       else:
                         0'u32 # transparent pixels outside of the source surface
-                  if outline.shadow or (px.a < outline.threshold):
+                  if outline.fill or (px.a < outline.threshold):
                     dstPixels[y0 + xxx + t] = color
           inc x
         # while x < source.w
@@ -157,13 +157,13 @@ proc initOutline*(
     color: Color = DefaultOutlineColor,
     thickness: Positive = DefaultOutlineThickness,
     threshold: uint8 = DefaultOutlineThreshold,
-    shadow: bool = false,
+    fill: bool = false,
     source: Surface = nil) =
   outline.initSurfaceGraphic()
   outline.color = color
   outline.thickness = thickness
   outline.threshold = threshold
-  outline.shadow = shadow
+  outline.fill = fill
   discard outline.updateOutline(source)
 
 
@@ -171,8 +171,8 @@ proc newOutline*(
     color: Color = DefaultOutlineColor,
     thickness: Positive = DefaultOutlineThickness,
     threshold: uint8 = DefaultOutlineThreshold,
-    shadow: bool = false,
+    fill: bool = false,
     source: Surface = nil): Outline =
   new result, free
-  result.initOutline(color, thickness, threshold, shadow, source)
+  result.initOutline(color, thickness, threshold, fill, source)
 

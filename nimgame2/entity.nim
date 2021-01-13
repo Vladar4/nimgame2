@@ -95,6 +95,9 @@ type
     dead*: bool                   ##  `true` if marked for removal
     updLayer*: bool               ##  `true` if entity's layer was changed
     graphic*: Graphic
+    graphicB*, graphicA*: Graphic ##  graphics to draw Before and After
+                                  ##  the main one, useful for various effects,
+                                  ##  outlines, and such
     sprite*: Sprite
     logic*: LogicProc
     physics*: PhysicsProc
@@ -608,6 +611,8 @@ proc initEntity*(entity: Entity) =
   entity.fBlinkTimer = 0.0
   entity.updLayer = false
   entity.graphic = nil
+  entity.graphicB = nil
+  entity.graphicA = nil
   entity.sprite = nil
   entity.logic = nil
   entity.physics = nil
@@ -669,6 +674,8 @@ proc copy*(target, source: Entity) =
   target.fBlinkTimer = source.fBlinkTimer
   target.updLayer = source.updLayer
   target.graphic  = source.graphic
+  target.graphicB = source.graphicB
+  target.graphicA = source.graphicA
   if not (source.sprite == nil):
     target.sprite = new Sprite
     target.sprite.copy(source.sprite)
@@ -800,31 +807,41 @@ proc renderEntity*(entity: Entity) =
   ##
   ##  Call it from your entity render method.
   ##
+  template draw_default(e: Entity, g: Graphic) =
+    g.draw(e.absPos, e.absRot, e.absScale, e.center, e.flip)
+
+  template draw_sprite(e: Entity, g: Graphic) =
+    g.draw(e.absPos, e.absRot, e.absScale, e.center, e.flip,
+           e.sprite.frames[e.sprite.currentFrame])
+
+  template draw_anim(e: Entity, g: Graphic) =
+    let anim = e.currentAnimation()
+    g.draw(e.absPos, e.absRot, e.absScale, e.center,
+           Flip(e.flip.cint xor anim.flip.cint),
+           e.sprite.frames[anim.frames[e.sprite.currentFrame]])
+
+
   if not (entity.graphic == nil) and entity.visible and
     ((entity.blinking and (entity.fBlinkTimer >= 0)) or (not entity.blinking)):
+
+    # no sprite
     if entity.sprite == nil:
-      entity.graphic.draw(entity.absPos,
-                          entity.absRot,
-                          entity.absScale,
-                          entity.center,
-                          entity.flip)
+      if not (entity.graphicB == nil): draw_default(entity, entity.graphicB)
+      draw_default(entity, entity.graphic)
+      if not (entity.graphicA == nil): draw_default(entity, entity.graphicA)
+
     else: # entity.sprite != nil
+      # no animation
       if entity.sprite.currentAnimationIndex < 0:
-        entity.graphic.draw(entity.absPos,
-                            entity.absRot,
-                            entity.absScale,
-                            entity.center,
-                            entity.flip,
-                            entity.sprite.frames[entity.sprite.currentFrame])
+        if not (entity.graphicB == nil): draw_sprite(entity, entity.graphicB)
+        draw_sprite(entity, entity.graphic)
+        if not (entity.graphicA == nil): draw_sprite(entity, entity.graphicA)
+
+      # animation
       else:
-        let anim = entity.currentAnimation()
-        entity.graphic.draw(entity.absPos,
-                            entity.absRot,
-                            entity.absScale,
-                            entity.center,
-                            Flip(entity.flip.cint xor anim.flip.cint),
-                            entity.sprite.frames[
-                              anim.frames[entity.sprite.currentFrame]])
+        if not (entity.graphicB == nil): draw_anim(entity, entity.graphicB)
+        draw_anim(entity, entity.graphic)
+        if not (entity.graphicA == nil): draw_anim(entity, entity.graphicA)
 
 
 method render*(entity: Entity) {.base.} =
