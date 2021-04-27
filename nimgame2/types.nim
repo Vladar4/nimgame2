@@ -284,7 +284,7 @@ proc `-`*(c1, c2: Coord): Coord {.inline.} =
 
 proc `-=`*(c1: var Coord, c2: Coord) {.inline.} =
   c1.x -= c2.x
-  c1.x -= c2.y
+  c1.y -= c2.y
 
 
 proc `*`*(c1, c2: Coord): Coord {.inline.} =
@@ -408,7 +408,7 @@ proc `-`*(c1, c2: CoordInt): CoordInt {.inline.} =
 
 proc `-=`*(c1: var CoordInt, c2: CoordInt) {.inline.} =
   c1.x -= c2.x
-  c1.x -= c2.y
+  c1.y -= c2.y
 
 
 proc `*`*(c1, c2: CoordInt): CoordInt {.inline.} =
@@ -533,7 +533,7 @@ proc `*=`*(d1: var Dim, d2: Dim) {.inline.} =
 
 proc `/`*(d1, d2: Dim): Dim {.inline.} =
   result.w = d1.w div d2.w
-  result.h= d1.h div d2.h
+  result.h = d1.h div d2.h
 
 
 proc `/=`*(d1: var Dim, d2: Dim) {.inline.} =
@@ -573,7 +573,7 @@ proc `*=`*(d: var Dim, v: int) {.inline.} =
 
 proc `/`*(d: Dim, v: int): Dim {.inline.} =
   result.w = d.w div v
-  result.h= d.h div v
+  result.h = d.h div v
 
 
 proc `/=`*(d: var Dim, v: int): Dim {.inline.} =
