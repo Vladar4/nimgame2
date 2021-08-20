@@ -9,14 +9,14 @@ For more information check [home page](https://vladar4.github.io/nimgame2/).
 
 All pull requests should be done into the **devel** branch.
 
-Status: v0.6.1 alpha
+Status: v0.6.2 alpha
 --------------------
 
 
 Requires:
 ---------
 
-* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.7.1 or newer).
+* [sdl2_nim](https://github.com/Vladar4/sdl2_nim) package (v2.0.14.2 or newer).
 * Runtime libraries for:
   * SDL 2.0.12 or newer
   * SDL_gfx 1.0.1
@@ -43,8 +43,8 @@ Optional dependencies:
 Installation through [Nimble](https://github.com/nim-lang/nimble):
 ------------------------------------------------------------------
 
-* For the Nim 0.17: `nimble install nimgame2@#head`
-* For the Nim 0.18 and newer: `nimble install nimgame2@#devel`
+* stable version: `nimble install nimgame2@#head`
+* development version: `nimble install nimgame2@#devel`
 
 
 Recommended compilation flags:
@@ -65,6 +65,9 @@ Links:
 
 Changelog:
 ----------
+
+### v0.6.2 alpha (2021-08-20)
+* Maintenance release to keep up with the current versions of Nim and sdl2_nim until v0.7 is ready
 
 ### v0.6.1 alpha (2019-06-15)
 * Nim v0.20.0 transition
