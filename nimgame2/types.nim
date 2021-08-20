@@ -24,7 +24,7 @@
 
 import
   math,
-  sdl2/sdl
+  sdl2_nim/sdl
 
 
 export

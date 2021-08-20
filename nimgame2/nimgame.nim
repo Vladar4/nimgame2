@@ -24,10 +24,10 @@
 
 import
   math, parseutils, random,
-  sdl2/sdl,
-  sdl2/sdl_image as img,
-  sdl2/sdl_ttf as ttf,
-  sdl2/sdl_mixer as mix,
+  sdl2_nim/sdl,
+  sdl2_nim/sdl_image as img,
+  sdl2_nim/sdl_ttf as ttf,
+  sdl2_nim/sdl_mixer as mix,
   audio, draw, input, entity, scene, settings, types, utils
 
 

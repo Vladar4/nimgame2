@@ -23,8 +23,8 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl,
-  sdl2/smpeg,
+  sdl2_nim/sdl,
+  sdl2_nim/smpeg,
   ../graphic, ../texturegraphic, ../settings, ../types
 
 ##  ``Note:`` mpg123 dynamic library should be available in the system.

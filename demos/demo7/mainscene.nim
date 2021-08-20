@@ -1,4 +1,4 @@
-import sdl2/sdl,
+import
   math,
   nimgame2/nimgame,
   nimgame2/font,

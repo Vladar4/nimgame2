@@ -23,7 +23,7 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl
+  sdl2_nim/sdl
 
 
 var

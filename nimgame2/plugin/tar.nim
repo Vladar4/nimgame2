@@ -124,7 +124,7 @@ proc dxTarContents(data: ptr uint8, dataSize: int): seq[tuple[name: cstring, siz
       break
   # while true
 
-import strutils, zip/zlib, sdl2/sdl
+import strutils, zip/zlib, sdl2_nim/sdl
 
 # PUBLIC
 

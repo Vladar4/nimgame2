@@ -1,4 +1,4 @@
-import sdl2/sdl,
+import
   math,
   nimgame2/assets,
   nimgame2/audio,

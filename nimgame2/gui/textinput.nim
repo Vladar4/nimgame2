@@ -24,7 +24,7 @@
 
 import
   unicode,
-  sdl2/sdl,
+  sdl2_nim/sdl,
   ../entity,
   ../font,
   ../graphic,

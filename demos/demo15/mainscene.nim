@@ -1,6 +1,5 @@
 import
   parseutils,
-  sdl2/sdl,
   nimgame2/nimgame,
   nimgame2/draw,
   nimgame2/entity,

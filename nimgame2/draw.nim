@@ -23,7 +23,7 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl, sdl2/sdl_gfx_primitives, sdl2/sdl_gfx_primitives_font,
+  sdl2_nim/sdl, sdl2_nim/sdl_gfx_primitives, sdl2_nim/sdl_gfx_primitives_font,
   settings, types
 
 

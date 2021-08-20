@@ -23,8 +23,8 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl,
-  sdl2/sdl_image as img,
+  sdl2_nim/sdl,
+  sdl2_nim/sdl_image as img,
   graphic, settings, types
 
 
@@ -238,7 +238,7 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
                                     addr(dstRect),
                                     angle,
                                     addr(anchor),
-                                    flip.RendererFlip)
+                                    flip.ord.RendererFlip)
     else:
       var srcRect = region
       discard renderer.renderCopyEx(graphic.fTexture,
@@ -246,7 +246,7 @@ proc drawTextureGraphic*(graphic: TextureGraphic,
                                     addr(dstRect),
                                     angle,
                                     addr(anchor),
-                                    flip.RendererFlip)
+                                    flip.ord.RendererFlip)
 
 
 method draw*(graphic: TextureGraphic,
@@ -383,13 +383,13 @@ proc blendMod*(graphic: TextureGraphic): Blend =
                     "Can't get texture blend mode: %s",
                     sdl.getError())
     return Blend.none
-  return Blend(blend)
+  return blend.ord.Blend
 
 
 proc `blendMod=`*(graphic: TextureGraphic, blend: Blend) =
   ##  Set a new blending mode.
   ##
-  if graphic.fTexture.setTextureBlendMode(sdl.BlendMode(blend)) != 0:
+  if graphic.fTexture.setTextureBlendMode(sdl.BlendMode(blend.ord)) != 0:
     sdl.logCritical(sdl.LogCategoryError,
                     "Can't set texture blend mode: %s",
                     sdl.getError())

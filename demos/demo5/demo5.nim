@@ -1,5 +1,5 @@
 import
-  sdl2/sdl,
+  sdl2_nim/sdl,
   nimgame2/nimgame,
   nimgame2/settings,
   mainscene

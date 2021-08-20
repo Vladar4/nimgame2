@@ -24,7 +24,7 @@
 
 import
   math,
-  sdl2/sdl,
+  sdl2_nim/sdl,
   texturegraphic, types
 
 
@@ -98,7 +98,7 @@ proc rotate*(point, offset: Coord, angle: Angle): Coord =
 # Graphics #
 #==========#
 
-import sdl2/sdl_image as img
+import sdl2_nim/sdl_image as img
 
 
 proc loadSurface*(file: string): Surface =

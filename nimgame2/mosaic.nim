@@ -23,8 +23,8 @@
 # https://github.com/Vladar4
 
 import
-  sdl2/sdl,
-  sdl2/sdl_image as img,
+  sdl2_nim/sdl,
+  sdl2_nim/sdl_image as img,
   settings, types
 
 

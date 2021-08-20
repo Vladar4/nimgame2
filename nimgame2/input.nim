@@ -24,7 +24,7 @@
 
 import
   strutils,
-  sdl2/sdl,
+  sdl2_nim/sdl,
   types, utils
 
 

@@ -16,7 +16,7 @@
 ##  ``Note:`` zzip dynamic library should be available in the system.
 
 import
-  sdl2/sdl, zip/zzip
+  sdl2_nim/sdl, zip/zzip
 
 
 # PRIVATE
