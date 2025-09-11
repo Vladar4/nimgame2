@@ -79,6 +79,10 @@ converter toSeq*[T](s: Slice[T]): seq[T] =
 # Color #
 #=======#
 
+proc `$`*(c: Color): string =
+  "(r: " & $int(c.r) & ", g: " & $int(c.g) & ", b: " & $int(c.b) & ", a:" & $int(c.a) & ")"
+
+
 converter toUint32*(c: Color): uint32 =
   ##  Color(r, g, b, a) to 0xRRGGBBAA
   ##
