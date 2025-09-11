@@ -82,6 +82,7 @@ Changelog:
 * scene module: del(), find(), findAll() procedures
 * tar plugin: stream() procedure
 * textgraphic module: len(), add(), append(), individual line access procedures
+* types module: `$` operator for Color type
 * typewriter module redesign
 * utils module: createSurface(), pointInRect() procedures
 * various minor changes and upgrades

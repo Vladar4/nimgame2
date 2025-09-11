@@ -37,7 +37,7 @@ const
 type
   Outline* = ref object of SurfaceGraphic
     color*: Color         ##  outline color
-    thickness*: Positive  ##  outline thickness (in pixels)
+    thickness*: Natural   ##  outline thickness (in pixels)
     threshold*: uint8     ##  alpha threshold for edge detection
     fill*: bool           ##  if true - solid pixels are filled as well
 
@@ -125,7 +125,7 @@ proc updateOutline*(outline: Outline, source: Surface): bool =
                 yy2 = yy * yy
                 y0 = (y + t + yy) * outline.surface.w
                 yyy = y + yy
-                yyy0 = yyy * outline.surface.w
+                # yyy0 = yyy * outline.surface.w
               for xx in -t..t:
                 if (yy2 + xx * xx <= tt): # inside the circle
                   # check for transparency
@@ -155,7 +155,7 @@ proc updateOutline*(outline: Outline, source: Surface): bool =
 proc initOutline*(
     outline: Outline,
     color: Color = DefaultOutlineColor,
-    thickness: Positive = DefaultOutlineThickness,
+    thickness: Natural = DefaultOutlineThickness,
     threshold: uint8 = DefaultOutlineThreshold,
     fill: bool = false,
     source: Surface = nil) =
@@ -169,7 +169,7 @@ proc initOutline*(
 
 proc newOutline*(
     color: Color = DefaultOutlineColor,
-    thickness: Positive = DefaultOutlineThickness,
+    thickness: Natural = DefaultOutlineThickness,
     threshold: uint8 = DefaultOutlineThreshold,
     fill: bool = false,
     source: Surface = nil): Outline =
