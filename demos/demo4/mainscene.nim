@@ -38,7 +38,7 @@ method render*(scene: MainScene) =
   scene.renderScene()
 
 
-const Speed = 50
+const Speed = 50.0
 
 
 method update*(scene: MainScene, elapsed: float) =

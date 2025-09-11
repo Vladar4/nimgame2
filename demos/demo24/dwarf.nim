@@ -21,12 +21,9 @@ proc initDwarf*(entity: Dwarf) =
   # GraphicGroup
   var
     gg = newGraphicGroup()
-  gg.list.add(
-    (newSurfaceGraphic("../assets/gfx/dwarf.png"), (0,0)))
-  gg.list.add(
-    (newOutline(color=ColorWhite,
-                source=SurfaceGraphic(gg.list[0].graphic).surface),
-    (-1, -1)))
+  gg.list.add(newSurfaceGraphic("../assets/gfx/dwarf.png"))
+  gg.list.add(newOutline(color=ColorWhite, source=SurfaceGraphic(gg.list[0]).surface))
+  gg.list[1].offset = (-1,-1)
 
   entity.graphic = gg
   entity.centrify()

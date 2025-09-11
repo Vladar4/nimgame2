@@ -105,17 +105,17 @@ method render*(scene: MainScene) =
   let scale: Coord = (game.scale.x, game.scale.y)
   discard box((4, 60), (220, 124), 0x000000CC'u32)
   discard string(
-    (8, 64), "Q/A - red mod: " & $c.r, 0xFF0000FF'u32)
+    (8, 64), "Q/A - red mod: " & $c.r.int, 0xFF0000FF'u32)
   discard string(
-    (8, 72), "W/S - green mod: " & $c.g, 0xFF0000FF'u32)
+    (8, 72), "W/S - green mod: " & $c.g.int, 0xFF0000FF'u32)
   discard string(
-    (8, 80), "E/D - blue mod: " & $c.b, 0xFF0000FF'u32)
+    (8, 80), "E/D - blue mod: " & $c.b.int, 0xFF0000FF'u32)
   discard string(
     (8, 88), "R/F - alpha mod: " &
-      $TextureGraphic(scene.s.graphic).alphaMod, 0xFF0000FF'u32)
+      $TextureGraphic(scene.s.graphic).alphaMod.int, 0xFF0000FF'u32)
   discard string(
     (8, 96), "T/G - blend mod: " &
-      $TextureGraphic(scene.s.graphic).blendMod, 0xFF0000FF'u32)
+      $TextureGraphic(scene.s.graphic).blendMod.int, 0xFF0000FF'u32)
   discard string(
     (8, 104), "Y/H - resolution: " & $res.w & "x" & $res.h, 0xFF0000FF'u32)
   discard string(

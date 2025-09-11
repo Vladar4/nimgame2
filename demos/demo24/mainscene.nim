@@ -103,7 +103,7 @@ proc initMainScene*(scene: MainScene) =
   scene.shadowedTextEntity.graphic = scene.shadowedText
   scene.textShadow = newOutline(color = ColorBlack,
                                 thickness = 2,
-                                shadow = true)
+                                fill = true)
   discard scene.textShadow.updateOutline(scene.shadowedText.surface)
   scene.textShadowEntity = newEntity()
   scene.textShadowEntity.graphic = scene.textShadow
